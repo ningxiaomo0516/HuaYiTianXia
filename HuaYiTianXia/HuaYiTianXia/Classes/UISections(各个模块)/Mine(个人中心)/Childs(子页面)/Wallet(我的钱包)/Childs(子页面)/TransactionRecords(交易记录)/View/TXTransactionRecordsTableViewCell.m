@@ -1,14 +1,14 @@
 //
-//  TXEarningsTableViewCell.m
+//  TXTransactionRecordsTableViewCell.m
 //  HuaYiTianXia
 //
-//  Created by 宁小陌 on 2019/3/20.
-//  Copyright © 2019 宁小陌. All rights reserved.
+//  Created by 宁小陌 on 2019/3/21.
+//  Copyright © 2019年 宁小陌. All rights reserved.
 //
 
-#import "TXEarningsTableViewCell.h"
+#import "TXTransactionRecordsTableViewCell.h"
 
-@implementation TXEarningsTableViewCell
+@implementation TXTransactionRecordsTableViewCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
@@ -25,7 +25,8 @@
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         self.contentView.backgroundColor = kWhiteColor;
         [self initView];
-        self.titleLabel.text = @"纵横矿机 ";
+        self.titleLabel.text = @"购买记录";
+        self.subtitleLabel.text = @"星级纵横矿机";
         self.priceLabel.text = @"50.40";
         self.dateLabel.text = @"2018/12/21";
     }
@@ -34,6 +35,7 @@
 
 - (void) initView{
     [self addSubview:self.titleLabel];
+    [self addSubview:self.subtitleLabel];
     [self addSubview:self.priceLabel];
     [self addSubview:self.dateLabel];
     
@@ -41,12 +43,16 @@
         make.left.equalTo(@(IPHONE6_W(15)));
         make.top.equalTo(@(IPHONE6_W(10)));
     }];
-    [self.dateLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.subtitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.titleLabel);
         make.bottom.equalTo(self.mas_bottom).offset(IPHONE6_W(-10));
     }];
+    [self.dateLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(self.priceLabel);
+        make.centerY.equalTo(self.subtitleLabel);
+    }];
     [self.priceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo(self);
+        make.centerY.equalTo(self.titleLabel);
         make.right.equalTo(self.mas_right).offset(IPHONE6_W(-15));
     }];
 }
@@ -56,6 +62,13 @@
         _titleLabel = [UILabel lz_labelWithTitle:@"" color:kTextColor102 font:kFontSizeMedium15];
     }
     return _titleLabel;
+}
+
+- (UILabel *)subtitleLabel{
+    if (!_subtitleLabel) {
+        _subtitleLabel = [UILabel lz_labelWithTitle:@"" color:kTextColor153 font:kFontSizeMedium12];
+    }
+    return _subtitleLabel;
 }
 
 - (UILabel *)dateLabel {

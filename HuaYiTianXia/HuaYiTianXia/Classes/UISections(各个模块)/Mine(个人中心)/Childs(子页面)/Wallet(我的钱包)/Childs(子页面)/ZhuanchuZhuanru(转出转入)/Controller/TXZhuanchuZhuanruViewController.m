@@ -1,23 +1,24 @@
 //
-//  TXOrderViewController.m
+//  TXZhuanchuZhuanruViewController.m
 //  HuaYiTianXia
 //
-//  Created by 宁小陌 on 2019/3/19.
-//  Copyright © 2019 宁小陌. All rights reserved.
+//  Created by 宁小陌 on 2019/3/21.
+//  Copyright © 2019年 宁小陌. All rights reserved.
 //
 
-#import "TXOrderViewController.h"
+#import "TXZhuanchuZhuanruViewController.h"
 #import "WMPageController.h"
 
-@interface TXOrderViewController ()<WMPageControllerDelegate>
+@interface TXZhuanchuZhuanruViewController ()<WMPageControllerDelegate>
 
 @end
 
-@implementation TXOrderViewController
+@implementation TXZhuanchuZhuanruViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+
     [self.view addSubview:self.setPageViewControllers];
 }
 
@@ -35,7 +36,7 @@
     pageController.progressWidth = 20;
     pageController.progressColor = HexString(@"#FF4163");
     pageController.menuBGColor = kClearColor;
-//    pageController.showOnNavigationBar = YES;
+    //    pageController.showOnNavigationBar = YES;
     
     [self addChildViewController:pageController];
     [pageController didMoveToParentViewController:self];
@@ -48,13 +49,12 @@
 }
 
 - (WMPageController *)p_defaultController {
-    NSArray *titles = @[@"产品详情",@"收益详情"];
-    NSArray *showClass = @[@"TXProductViewController",@"TXEarningsViewController"];
+    NSArray *titles = @[@"转出记录",@"转入记录"];
+    NSArray *showClass = @[@"TXEquityViewController",@"TXEquityViewController"];
     NSMutableArray *viewControllers = [[NSMutableArray alloc] init];
     for (int i=0; i<titles.count; i++) {
         NSString *className = [showClass lz_safeObjectAtIndex:i];
         Class controller = NSClassFromString(className);
-        
         //    id controller = [[NSClassFromString(className) alloc] init];
         if (controller &&  [controller isSubclassOfClass:[UIViewController class]]){
             UIViewController *vc = [[controller alloc] init];

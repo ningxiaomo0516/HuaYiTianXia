@@ -1,31 +1,33 @@
 //
-//  TXEarningsViewController.m
+//  TXEquityViewController.m
 //  HuaYiTianXia
 //
-//  Created by 宁小陌 on 2019/3/20.
-//  Copyright © 2019 宁小陌. All rights reserved.
+//  Created by 宁小陌 on 2019/3/21.
+//  Copyright © 2019年 宁小陌. All rights reserved.
 //
 
-#import "TXEarningsViewController.h"
+#import "TXEquityViewController.h"
 #import "TXEarningsTableViewCell.h"
 
 static NSString * const reuseIdentifier = @"TXEarningsTableViewCell";
 
-@interface TXEarningsViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface TXEquityViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) UITableView *tableView;
-@property (nonatomic, strong) NSMutableArray *itemModelArray;
+@property (nonatomic, strong) NSMutableArray *dataArray;
+
 @end
 
-
-@implementation TXEarningsViewController
+@implementation TXEquityViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.view.backgroundColor = kRandomColor;
     [self initView];
 }
 
 - (void) initView{
+    
     [Utils lz_setExtraCellLineHidden:self.tableView];
     [self.view addSubview:self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -41,16 +43,16 @@ static NSString * const reuseIdentifier = @"TXEarningsTableViewCell";
 
 // 多少个分组 section
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 20;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 1;
+    return 20;
 }
 
 #pragma mark -- 设置Header高度
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return 0.0f;
+    return 10.0;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -74,6 +76,13 @@ static NSString * const reuseIdentifier = @"TXEarningsTableViewCell";
         _tableView.backgroundColor = kTableViewInSectionColor;
     }
     return _tableView;
+}
+
+- (NSMutableArray *)dataArray{
+    if (!_dataArray) {
+        _dataArray = [[NSMutableArray alloc] init];
+    }
+    return _dataArray;
 }
 
 @end

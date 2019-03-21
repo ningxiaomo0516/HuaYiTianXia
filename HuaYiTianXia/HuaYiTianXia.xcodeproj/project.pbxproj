@@ -81,6 +81,16 @@
 		E78584042240C54300BBEA41 /* TYCyclePagerView.m in Sources */ = {isa = PBXBuildFile; fileRef = E78584002240C54200BBEA41 /* TYCyclePagerView.m */; };
 		E78584052240C54300BBEA41 /* TYCyclePagerTransformLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = E78584012240C54200BBEA41 /* TYCyclePagerTransformLayout.m */; };
 		E78584082240C68500BBEA41 /* TXMineBannerCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E78584072240C68500BBEA41 /* TXMineBannerCollectionViewCell.m */; };
+		E7AA9DAF2243353200C15483 /* TTBaseNavImagesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7AA9DAE2243353200C15483 /* TTBaseNavImagesTableViewController.m */; };
+		E7AA9DB7224338EA00C15483 /* TXWalletTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7AA9DB6224338EA00C15483 /* TXWalletTableViewCell.m */; };
+		E7AA9DBA22433A0200C15483 /* TXWalletCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7AA9DB922433A0200C15483 /* TXWalletCollectionViewCell.m */; };
+		E7AA9DCA22436DA700C15483 /* TXTransactionRecordsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7AA9DC922436DA700C15483 /* TXTransactionRecordsViewController.m */; };
+		E7AA9DCD22436F4D00C15483 /* TXTransactionRecordsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7AA9DCC22436F4D00C15483 /* TXTransactionRecordsTableViewCell.m */; };
+		E7AA9DD2224372B500C15483 /* TXZhuanchuZhuanruViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7AA9DD1224372B500C15483 /* TXZhuanchuZhuanruViewController.m */; };
+		E7AA9DD72243735A00C15483 /* TXEquityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7AA9DD62243735A00C15483 /* TXEquityViewController.m */; };
+		E7AA9DDA22437A1700C15483 /* TXTopupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7AA9DD922437A1700C15483 /* TXTopupViewController.m */; };
+		E7AA9DDF224392FB00C15483 /* TXRolloutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7AA9DDE224392FB00C15483 /* TXRolloutViewController.m */; };
+		E7AA9DE2224394A600C15483 /* TXRolloutTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7AA9DE1224394A600C15483 /* TXRolloutTableViewCell.m */; };
 		E7F1A7002241EF16003FA216 /* TXProductViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7F1A6FF2241EF16003FA216 /* TXProductViewController.m */; };
 		E7F1A7032241EF37003FA216 /* TXEarningsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7F1A7022241EF37003FA216 /* TXEarningsViewController.m */; };
 		E7F1A7062241F1D2003FA216 /* TTBaseTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7F1A7052241F1D2003FA216 /* TTBaseTableViewController.m */; };
@@ -251,6 +261,26 @@
 		E78584022240C54200BBEA41 /* TYPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TYPageControl.h; sourceTree = "<group>"; };
 		E78584062240C68500BBEA41 /* TXMineBannerCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXMineBannerCollectionViewCell.h; sourceTree = "<group>"; };
 		E78584072240C68500BBEA41 /* TXMineBannerCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXMineBannerCollectionViewCell.m; sourceTree = "<group>"; };
+		E7AA9DAD2243353200C15483 /* TTBaseNavImagesTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TTBaseNavImagesTableViewController.h; sourceTree = "<group>"; };
+		E7AA9DAE2243353200C15483 /* TTBaseNavImagesTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TTBaseNavImagesTableViewController.m; sourceTree = "<group>"; };
+		E7AA9DB5224338EA00C15483 /* TXWalletTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXWalletTableViewCell.h; sourceTree = "<group>"; };
+		E7AA9DB6224338EA00C15483 /* TXWalletTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXWalletTableViewCell.m; sourceTree = "<group>"; };
+		E7AA9DB822433A0200C15483 /* TXWalletCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXWalletCollectionViewCell.h; sourceTree = "<group>"; };
+		E7AA9DB922433A0200C15483 /* TXWalletCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXWalletCollectionViewCell.m; sourceTree = "<group>"; };
+		E7AA9DC822436DA700C15483 /* TXTransactionRecordsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXTransactionRecordsViewController.h; sourceTree = "<group>"; };
+		E7AA9DC922436DA700C15483 /* TXTransactionRecordsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXTransactionRecordsViewController.m; sourceTree = "<group>"; };
+		E7AA9DCB22436F4C00C15483 /* TXTransactionRecordsTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXTransactionRecordsTableViewCell.h; sourceTree = "<group>"; };
+		E7AA9DCC22436F4D00C15483 /* TXTransactionRecordsTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXTransactionRecordsTableViewCell.m; sourceTree = "<group>"; };
+		E7AA9DD0224372B500C15483 /* TXZhuanchuZhuanruViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXZhuanchuZhuanruViewController.h; sourceTree = "<group>"; };
+		E7AA9DD1224372B500C15483 /* TXZhuanchuZhuanruViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXZhuanchuZhuanruViewController.m; sourceTree = "<group>"; };
+		E7AA9DD52243735A00C15483 /* TXEquityViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXEquityViewController.h; sourceTree = "<group>"; };
+		E7AA9DD62243735A00C15483 /* TXEquityViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXEquityViewController.m; sourceTree = "<group>"; };
+		E7AA9DD822437A1700C15483 /* TXTopupViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXTopupViewController.h; sourceTree = "<group>"; };
+		E7AA9DD922437A1700C15483 /* TXTopupViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXTopupViewController.m; sourceTree = "<group>"; };
+		E7AA9DDD224392FB00C15483 /* TXRolloutViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXRolloutViewController.h; sourceTree = "<group>"; };
+		E7AA9DDE224392FB00C15483 /* TXRolloutViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXRolloutViewController.m; sourceTree = "<group>"; };
+		E7AA9DE0224394A600C15483 /* TXRolloutTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXRolloutTableViewCell.h; sourceTree = "<group>"; };
+		E7AA9DE1224394A600C15483 /* TXRolloutTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXRolloutTableViewCell.m; sourceTree = "<group>"; };
 		E7F1A6FE2241EF16003FA216 /* TXProductViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXProductViewController.h; sourceTree = "<group>"; };
 		E7F1A6FF2241EF16003FA216 /* TXProductViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXProductViewController.m; sourceTree = "<group>"; };
 		E7F1A7012241EF37003FA216 /* TXEarningsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXEarningsViewController.h; sourceTree = "<group>"; };
@@ -382,6 +412,8 @@
 				E7F1A73422427264003FA216 /* TTBaseNavImagesViewController.m */,
 				E7F1A7042241F1D2003FA216 /* TTBaseTableViewController.h */,
 				E7F1A7052241F1D2003FA216 /* TTBaseTableViewController.m */,
+				E7AA9DAD2243353200C15483 /* TTBaseNavImagesTableViewController.h */,
+				E7AA9DAE2243353200C15483 /* TTBaseNavImagesTableViewController.m */,
 				E7F1A70D224205A2003FA216 /* TTBaseSectionHeaderView.h */,
 				E7F1A70E224205A2003FA216 /* TTBaseSectionHeaderView.m */,
 			);
@@ -923,9 +955,10 @@
 		E78583DE2240C23D00BBEA41 /* Wallet(我的钱包) */ = {
 			isa = PBXGroup;
 			children = (
+				E7AA9DBB22436C2900C15483 /* Childs(子页面) */,
 				E78583DF2240C23D00BBEA41 /* Controller */,
+				E7AA9DB4224338C200C15483 /* View */,
 				E78583E02240C23D00BBEA41 /* Model */,
-				E78583E12240C23D00BBEA41 /* View */,
 			);
 			path = "Wallet(我的钱包)";
 			sourceTree = "<group>";
@@ -944,13 +977,6 @@
 			children = (
 			);
 			path = Model;
-			sourceTree = "<group>";
-		};
-		E78583E12240C23D00BBEA41 /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 		E78583E22240C23D00BBEA41 /* Setup(设置) */ = {
@@ -1031,6 +1057,182 @@
 				E78584022240C54200BBEA41 /* TYPageControl.h */,
 			);
 			path = TYCyclePagerView;
+			sourceTree = "<group>";
+		};
+		E7AA9DB4224338C200C15483 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E7AA9DB5224338EA00C15483 /* TXWalletTableViewCell.h */,
+				E7AA9DB6224338EA00C15483 /* TXWalletTableViewCell.m */,
+				E7AA9DB822433A0200C15483 /* TXWalletCollectionViewCell.h */,
+				E7AA9DB922433A0200C15483 /* TXWalletCollectionViewCell.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		E7AA9DBB22436C2900C15483 /* Childs(子页面) */ = {
+			isa = PBXGroup;
+			children = (
+				E7AA9DC422436C2900C15483 /* TransactionRecords(交易记录) */,
+				E7AA9DC222436C2900C15483 /* Topup(充值) */,
+				E7AA9DC522436C2900C15483 /* ZhuanchuZhuanru(转出转入) */,
+				E7AA9DBD22436C2900C15483 /* Equity(股权) */,
+				E7AA9DBE22436C2900C15483 /* MentionCash(提现) */,
+				E7AA9DC122436C2900C15483 /* Rollout(转出) */,
+				E7AA9DBF22436C2900C15483 /* RegisterCurrency(注册币) */,
+				E7AA9DC322436C2900C15483 /* Transaction(交易) */,
+				E7AA9DBC22436C2900C15483 /* Conversion(转换) */,
+				E7AA9DC022436C2900C15483 /* RepeatCast(复投) */,
+			);
+			path = "Childs(子页面)";
+			sourceTree = "<group>";
+		};
+		E7AA9DBC22436C2900C15483 /* Conversion(转换) */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Conversion(转换)";
+			sourceTree = "<group>";
+		};
+		E7AA9DBD22436C2900C15483 /* Equity(股权) */ = {
+			isa = PBXGroup;
+			children = (
+				E7AA9DD32243734700C15483 /* Controller */,
+				E7AA9DD42243734700C15483 /* View */,
+			);
+			path = "Equity(股权)";
+			sourceTree = "<group>";
+		};
+		E7AA9DBE22436C2900C15483 /* MentionCash(提现) */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "MentionCash(提现)";
+			sourceTree = "<group>";
+		};
+		E7AA9DBF22436C2900C15483 /* RegisterCurrency(注册币) */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "RegisterCurrency(注册币)";
+			sourceTree = "<group>";
+		};
+		E7AA9DC022436C2900C15483 /* RepeatCast(复投) */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "RepeatCast(复投)";
+			sourceTree = "<group>";
+		};
+		E7AA9DC122436C2900C15483 /* Rollout(转出) */ = {
+			isa = PBXGroup;
+			children = (
+				E7AA9DDC224392D900C15483 /* Controller */,
+				E7AA9DDB224392D900C15483 /* View */,
+			);
+			path = "Rollout(转出)";
+			sourceTree = "<group>";
+		};
+		E7AA9DC222436C2900C15483 /* Topup(充值) */ = {
+			isa = PBXGroup;
+			children = (
+				E7AA9DD822437A1700C15483 /* TXTopupViewController.h */,
+				E7AA9DD922437A1700C15483 /* TXTopupViewController.m */,
+			);
+			path = "Topup(充值)";
+			sourceTree = "<group>";
+		};
+		E7AA9DC322436C2900C15483 /* Transaction(交易) */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Transaction(交易)";
+			sourceTree = "<group>";
+		};
+		E7AA9DC422436C2900C15483 /* TransactionRecords(交易记录) */ = {
+			isa = PBXGroup;
+			children = (
+				E7AA9DC622436D8A00C15483 /* Controller */,
+				E7AA9DC722436D8A00C15483 /* View */,
+			);
+			path = "TransactionRecords(交易记录)";
+			sourceTree = "<group>";
+		};
+		E7AA9DC522436C2900C15483 /* ZhuanchuZhuanru(转出转入) */ = {
+			isa = PBXGroup;
+			children = (
+				E7AA9DCF2243723000C15483 /* Controller */,
+				E7AA9DCE2243722F00C15483 /* View */,
+			);
+			path = "ZhuanchuZhuanru(转出转入)";
+			sourceTree = "<group>";
+		};
+		E7AA9DC622436D8A00C15483 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				E7AA9DC822436DA700C15483 /* TXTransactionRecordsViewController.h */,
+				E7AA9DC922436DA700C15483 /* TXTransactionRecordsViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		E7AA9DC722436D8A00C15483 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E7AA9DCB22436F4C00C15483 /* TXTransactionRecordsTableViewCell.h */,
+				E7AA9DCC22436F4D00C15483 /* TXTransactionRecordsTableViewCell.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		E7AA9DCE2243722F00C15483 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		E7AA9DCF2243723000C15483 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				E7AA9DD0224372B500C15483 /* TXZhuanchuZhuanruViewController.h */,
+				E7AA9DD1224372B500C15483 /* TXZhuanchuZhuanruViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		E7AA9DD32243734700C15483 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				E7AA9DD52243735A00C15483 /* TXEquityViewController.h */,
+				E7AA9DD62243735A00C15483 /* TXEquityViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		E7AA9DD42243734700C15483 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		E7AA9DDB224392D900C15483 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E7AA9DE0224394A600C15483 /* TXRolloutTableViewCell.h */,
+				E7AA9DE1224394A600C15483 /* TXRolloutTableViewCell.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		E7AA9DDC224392D900C15483 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				E7AA9DDD224392FB00C15483 /* TXRolloutViewController.h */,
+				E7AA9DDE224392FB00C15483 /* TXRolloutViewController.m */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 		E7F1A71B2242382E003FA216 /* Childs(子页面) */ = {
@@ -1211,9 +1413,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				E78584082240C68500BBEA41 /* TXMineBannerCollectionViewCell.m in Sources */,
+				E7AA9DDA22437A1700C15483 /* TXTopupViewController.m in Sources */,
 				E72699E8223F7F58003A5043 /* UIView+Extension.m in Sources */,
 				E7F1A74122428A8F003FA216 /* TXMallCollectionViewCell.m in Sources */,
 				E7269915223F788E003A5043 /* TXMallViewController.m in Sources */,
+				E7AA9DE2224394A600C15483 /* TXRolloutTableViewCell.m in Sources */,
 				E7269908223F754B003A5043 /* LZRootViewController.m in Sources */,
 				E72699DC223F7F58003A5043 /* UITableView+SCExtension.m in Sources */,
 				E7F1A7032241EF37003FA216 /* TXEarningsViewController.m in Sources */,
@@ -1230,10 +1434,14 @@
 				E78584042240C54300BBEA41 /* TYCyclePagerView.m in Sources */,
 				E726997E223F7E4B003A5043 /* SCLoadingLabel.m in Sources */,
 				E7F1A7162242123A003FA216 /* TXRealNameViewController.m in Sources */,
+				E7AA9DB7224338EA00C15483 /* TXWalletTableViewCell.m in Sources */,
 				E726997F223F7E4B003A5043 /* SCActivityIndicatorView.m in Sources */,
+				E7AA9DDF224392FB00C15483 /* TXRolloutViewController.m in Sources */,
+				E7AA9DBA22433A0200C15483 /* TXWalletCollectionViewCell.m in Sources */,
 				E72699A6223F7ECC003A5043 /* NSString+URL.m in Sources */,
 				E72699E6223F7F58003A5043 /* UIScreen+Extension.m in Sources */,
 				E7269980223F7E4B003A5043 /* UIView+SCLoadingView.m in Sources */,
+				E7AA9DCA22436DA700C15483 /* TXTransactionRecordsViewController.m in Sources */,
 				E78583C1223F98A800BBEA41 /* TXNewTemplateTableViewCell.m in Sources */,
 				E72699E9223F7F58003A5043 /* UIScrollView+Extension.m in Sources */,
 				E78583F22240C29E00BBEA41 /* TXTeamViewController.m in Sources */,
@@ -1272,12 +1480,15 @@
 				E72699E4223F7F58003A5043 /* UIImage+SCExtension.m in Sources */,
 				E72699DB223F7F58003A5043 /* UINavigationBar+SCExtension.m in Sources */,
 				E78583CD22409E6D00BBEA41 /* TXMineBannerTableViewCell.m in Sources */,
+				E7AA9DAF2243353200C15483 /* TTBaseNavImagesTableViewController.m in Sources */,
 				E72699AA223F7ECC003A5043 /* NSArray+Extension.m in Sources */,
 				E72699DD223F7F58003A5043 /* UIImageView+SCExtension.m in Sources */,
+				E7AA9DD2224372B500C15483 /* TXZhuanchuZhuanruViewController.m in Sources */,
 				E72699DE223F7F58003A5043 /* UIBarButtonItem+Extension.m in Sources */,
 				E72699F8223F8298003A5043 /* WMPageController.m in Sources */,
 				E72699E1223F7F58003A5043 /* UILabel+SCExtension.m in Sources */,
 				E7F1A73822427A65003FA216 /* TXMallCollectionViewController.m in Sources */,
+				E7AA9DCD22436F4D00C15483 /* TXTransactionRecordsTableViewCell.m in Sources */,
 				E726990F223F786B003A5043 /* TXMineViewController.m in Sources */,
 				E78583F82240C2BE00BBEA41 /* TXSetupViewController.m in Sources */,
 				E72699D6223F7F58003A5043 /* UIView+IBExtension.m in Sources */,
@@ -1291,6 +1502,7 @@
 				E78583BE223F967D00BBEA41 /* SCTableViewSectionHeaderView.m in Sources */,
 				E72699FB223F8298003A5043 /* WMMenuView.m in Sources */,
 				E72699D5223F7F58003A5043 /* UIButton+MVImagePosition.m in Sources */,
+				E7AA9DD72243735A00C15483 /* TXEquityViewController.m in Sources */,
 				E7269A04223F8738003A5043 /* TXMainHeaderView.m in Sources */,
 				E78583D02240BD5A00BBEA41 /* TXPersonModel.m in Sources */,
 				E72699E5223F7F58003A5043 /* UITextField+Extension.m in Sources */,
@@ -1429,7 +1641,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = Y87R76ZG57;
+				DEVELOPMENT_TEAM = 9BX6WSFU2J;
 				GCC_PREFIX_HEADER = "HuaYiTianXia/Classes/Macro(宏定义类)/PrefixHeader.pch";
 				INFOPLIST_FILE = HuaYiTianXia/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -1449,7 +1661,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = Y87R76ZG57;
+				DEVELOPMENT_TEAM = 9BX6WSFU2J;
 				GCC_PREFIX_HEADER = "HuaYiTianXia/Classes/Macro(宏定义类)/PrefixHeader.pch";
 				INFOPLIST_FILE = HuaYiTianXia/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;

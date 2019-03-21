@@ -6,11 +6,11 @@
 //  Copyright © 2019 宁小陌. All rights reserved.
 //
 
-#import "TTBaseNavImagesViewController.h"
+#import "TTBaseNavImagesTableViewController.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface TXWalletViewController : TTBaseNavImagesViewController
+@interface TXWalletViewController : TTBaseNavImagesTableViewController
 
 @end
 

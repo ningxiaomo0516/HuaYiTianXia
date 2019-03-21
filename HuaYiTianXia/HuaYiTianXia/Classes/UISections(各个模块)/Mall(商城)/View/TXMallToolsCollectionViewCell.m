@@ -12,7 +12,7 @@
 
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self == [super initWithFrame:frame]) {
-        self.contentView.backgroundColor = [UIColor clearColor];
+        self.contentView.backgroundColor = kWhiteColor;
         [self setupUI];
     }
     return self;

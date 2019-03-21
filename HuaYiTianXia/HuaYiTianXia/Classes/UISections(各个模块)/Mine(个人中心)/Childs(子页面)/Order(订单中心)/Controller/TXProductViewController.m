@@ -31,8 +31,7 @@ static NSString * const reuseIdentifier = @"TXProductTableViewCell";
     [Utils lz_setExtraCellLineHidden:self.tableView];
     [self.view addSubview:self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(@(kLinerViewHeight));
-        make.left.bottom.right.equalTo(self.view);
+        make.top.left.bottom.right.equalTo(self.view);
     }];
 //    [self.view showLoadingViewWithText:@"加载中..."];
     

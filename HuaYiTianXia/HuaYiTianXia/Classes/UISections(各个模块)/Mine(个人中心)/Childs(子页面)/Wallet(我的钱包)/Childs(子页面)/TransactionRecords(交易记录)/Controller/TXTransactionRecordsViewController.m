@@ -1,23 +1,22 @@
 //
-//  TXEarningsViewController.m
+//  TXTransactionRecordsViewController.m
 //  HuaYiTianXia
 //
-//  Created by 宁小陌 on 2019/3/20.
-//  Copyright © 2019 宁小陌. All rights reserved.
+//  Created by 宁小陌 on 2019/3/21.
+//  Copyright © 2019年 宁小陌. All rights reserved.
 //
 
-#import "TXEarningsViewController.h"
-#import "TXEarningsTableViewCell.h"
+#import "TXTransactionRecordsViewController.h"
+#import "TXTransactionRecordsTableViewCell.h"
 
-static NSString * const reuseIdentifier = @"TXEarningsTableViewCell";
+static NSString * const reuseIdentifier = @"TXTransactionRecordsTableViewCell";
 
-@interface TXEarningsViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface TXTransactionRecordsViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *itemModelArray;
 @end
 
-
-@implementation TXEarningsViewController
+@implementation TXTransactionRecordsViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -26,6 +25,7 @@ static NSString * const reuseIdentifier = @"TXEarningsTableViewCell";
 }
 
 - (void) initView{
+    
     [Utils lz_setExtraCellLineHidden:self.tableView];
     [self.view addSubview:self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -35,7 +35,7 @@ static NSString * const reuseIdentifier = @"TXEarningsTableViewCell";
 
 #pragma mark - Table view data source
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    TXEarningsTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
+    TXTransactionRecordsTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
     return cell;
 }
 
@@ -66,7 +66,7 @@ static NSString * const reuseIdentifier = @"TXEarningsTableViewCell";
     if (!_tableView) {
         _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
         _tableView.showsVerticalScrollIndicator = false;
-        [_tableView registerClass:[TXEarningsTableViewCell class] forCellReuseIdentifier:reuseIdentifier];
+        [_tableView registerClass:[TXTransactionRecordsTableViewCell class] forCellReuseIdentifier:reuseIdentifier];
         [_tableView setSeparatorInset:UIEdgeInsetsMake(0,15,0,0)];
         _tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
         _tableView.delegate = self;
