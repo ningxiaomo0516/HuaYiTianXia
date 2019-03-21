@@ -89,7 +89,7 @@ static NSString * const reuseIdentifierHeader = @"TXMineHeaderTableViewCell";
 - (void)didSelectItemAtIndexPath:(NSIndexPath *)indexPath withTitle:(NSString *)title withShowClass:(NSString *)showClass {
     NSString *className = showClass;
     if ([className isEqualToString:@""]) {
-        
+        Toast(@"暂未开通");
     }else{
         Class controller = NSClassFromString(className);
         

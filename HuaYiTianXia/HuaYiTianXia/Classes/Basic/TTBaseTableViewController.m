@@ -19,6 +19,23 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+}
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    [self tapGesture];
+}
+
+#pragma mark 给当前view添加识别手势
+#pragma mark -- 当前tableView中带有输入框点击背景关闭键盘
+- (void) addGesture:(UITableView *) tableView{
+    UITapGestureRecognizer *tapGesture=[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGesture)];
+    [tableView addGestureRecognizer:tapGesture];
+    tapGesture.cancelsTouchesInView = NO;
+}
+
+-(void)tapGesture {
+    [kKeyWindow endEditing:YES];
 }
 
 #pragma mark - UITableViewDelegate

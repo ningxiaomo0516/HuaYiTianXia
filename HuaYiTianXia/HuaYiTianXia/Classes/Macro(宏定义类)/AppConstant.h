@@ -24,7 +24,7 @@
 
 #define MV(weakSelf)  __weak __typeof(&*self)weakSelf = self;
 
-#define Toast(tips) [self lz_make:tips]
+#define Toast(tips) [self tt_make:tips]
 
 // 1.RGBA
 #define kColorWithRGBA(r, g, b, a) [UIColor colorWithRed:(r)/255.0f green:(g)/255.0f blue:(b)/255.0f alpha:(a)]

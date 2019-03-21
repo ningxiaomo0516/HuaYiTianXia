@@ -83,7 +83,7 @@ static NSString * const reuseIdentifier = @"TXMineTableViewCell";
     TXPersonModel* model = self.dataArray[indexPath.section][indexPath.row];
     NSString *className = model.showClass;
     if ([model.showClass isEqualToString:@""]) {
-        
+        Toast(@"暂未开通");
     }else{
         Class controller = NSClassFromString(className);
         //    id controller = [[NSClassFromString(className) alloc] init];

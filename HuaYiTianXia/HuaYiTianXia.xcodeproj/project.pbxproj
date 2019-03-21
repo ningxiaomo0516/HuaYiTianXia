@@ -91,6 +91,9 @@
 		E7AA9DDA22437A1700C15483 /* TXTopupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7AA9DD922437A1700C15483 /* TXTopupViewController.m */; };
 		E7AA9DDF224392FB00C15483 /* TXRolloutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7AA9DDE224392FB00C15483 /* TXRolloutViewController.m */; };
 		E7AA9DE2224394A600C15483 /* TXRolloutTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7AA9DE1224394A600C15483 /* TXRolloutTableViewCell.m */; };
+		E7D07C622243C8B600E3FFAF /* NSObject+Toast.m in Sources */ = {isa = PBXBuildFile; fileRef = E7D07C612243C8B600E3FFAF /* NSObject+Toast.m */; };
+		E7D07C672243CCBE00E3FFAF /* LZActionSheet.bundle in Resources */ = {isa = PBXBuildFile; fileRef = E7D07C642243CCBE00E3FFAF /* LZActionSheet.bundle */; };
+		E7D07C682243CCBE00E3FFAF /* LZActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = E7D07C662243CCBE00E3FFAF /* LZActionSheet.m */; };
 		E7F1A7002241EF16003FA216 /* TXProductViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7F1A6FF2241EF16003FA216 /* TXProductViewController.m */; };
 		E7F1A7032241EF37003FA216 /* TXEarningsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7F1A7022241EF37003FA216 /* TXEarningsViewController.m */; };
 		E7F1A7062241F1D2003FA216 /* TTBaseTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7F1A7052241F1D2003FA216 /* TTBaseTableViewController.m */; };
@@ -281,6 +284,11 @@
 		E7AA9DDE224392FB00C15483 /* TXRolloutViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXRolloutViewController.m; sourceTree = "<group>"; };
 		E7AA9DE0224394A600C15483 /* TXRolloutTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXRolloutTableViewCell.h; sourceTree = "<group>"; };
 		E7AA9DE1224394A600C15483 /* TXRolloutTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXRolloutTableViewCell.m; sourceTree = "<group>"; };
+		E7D07C602243C8B600E3FFAF /* NSObject+Toast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Toast.h"; sourceTree = "<group>"; };
+		E7D07C612243C8B600E3FFAF /* NSObject+Toast.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Toast.m"; sourceTree = "<group>"; };
+		E7D07C642243CCBE00E3FFAF /* LZActionSheet.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = LZActionSheet.bundle; sourceTree = "<group>"; };
+		E7D07C652243CCBE00E3FFAF /* LZActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LZActionSheet.h; sourceTree = "<group>"; };
+		E7D07C662243CCBE00E3FFAF /* LZActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LZActionSheet.m; sourceTree = "<group>"; };
 		E7F1A6FE2241EF16003FA216 /* TXProductViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXProductViewController.h; sourceTree = "<group>"; };
 		E7F1A6FF2241EF16003FA216 /* TXProductViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXProductViewController.m; sourceTree = "<group>"; };
 		E7F1A7012241EF37003FA216 /* TXEarningsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXEarningsViewController.h; sourceTree = "<group>"; };
@@ -663,6 +671,8 @@
 		E72698E8223F737C003A5043 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				E7D07C632243CCBE00E3FFAF /* LZActionSheet */,
+				E7D07C5F2243C8B600E3FFAF /* Toast */,
 				E7269A01223F870C003A5043 /* Commons */,
 				E726991C223F7DEB003A5043 /* Category */,
 			);
@@ -1235,6 +1245,25 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
+		E7D07C5F2243C8B600E3FFAF /* Toast */ = {
+			isa = PBXGroup;
+			children = (
+				E7D07C602243C8B600E3FFAF /* NSObject+Toast.h */,
+				E7D07C612243C8B600E3FFAF /* NSObject+Toast.m */,
+			);
+			path = Toast;
+			sourceTree = "<group>";
+		};
+		E7D07C632243CCBE00E3FFAF /* LZActionSheet */ = {
+			isa = PBXGroup;
+			children = (
+				E7D07C642243CCBE00E3FFAF /* LZActionSheet.bundle */,
+				E7D07C652243CCBE00E3FFAF /* LZActionSheet.h */,
+				E7D07C662243CCBE00E3FFAF /* LZActionSheet.m */,
+			);
+			path = LZActionSheet;
+			sourceTree = "<group>";
+		};
 		E7F1A71B2242382E003FA216 /* Childs(子页面) */ = {
 			isa = PBXGroup;
 			children = (
@@ -1351,6 +1380,7 @@
 				E72698C2223F7167003A5043 /* LaunchScreen.storyboard in Resources */,
 				E72699FD223F8298003A5043 /* bg.jpg in Resources */,
 				E72698BF223F7167003A5043 /* Assets.xcassets in Resources */,
+				E7D07C672243CCBE00E3FFAF /* LZActionSheet.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1434,6 +1464,7 @@
 				E78584042240C54300BBEA41 /* TYCyclePagerView.m in Sources */,
 				E726997E223F7E4B003A5043 /* SCLoadingLabel.m in Sources */,
 				E7F1A7162242123A003FA216 /* TXRealNameViewController.m in Sources */,
+				E7D07C622243C8B600E3FFAF /* NSObject+Toast.m in Sources */,
 				E7AA9DB7224338EA00C15483 /* TXWalletTableViewCell.m in Sources */,
 				E726997F223F7E4B003A5043 /* SCActivityIndicatorView.m in Sources */,
 				E7AA9DDF224392FB00C15483 /* TXRolloutViewController.m in Sources */,
@@ -1450,6 +1481,7 @@
 				E7F1A73E2242835A003FA216 /* TXMallBannerCollectionViewCell.m in Sources */,
 				E7F1A7002241EF16003FA216 /* TXProductViewController.m in Sources */,
 				E726990C223F7844003A5043 /* TXNewsViewController.m in Sources */,
+				E7D07C682243CCBE00E3FFAF /* LZActionSheet.m in Sources */,
 				E7F1A73B22427DC0003FA216 /* TXMallToolsCollectionViewCell.m in Sources */,
 				E72699D8223F7F58003A5043 /* UIButton+Extension.m in Sources */,
 				E72699A1223F7ECC003A5043 /* NSString+MD5.m in Sources */,
@@ -1641,7 +1673,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 9BX6WSFU2J;
+				DEVELOPMENT_TEAM = 8RL8MGBZ32;
 				GCC_PREFIX_HEADER = "HuaYiTianXia/Classes/Macro(宏定义类)/PrefixHeader.pch";
 				INFOPLIST_FILE = HuaYiTianXia/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -1661,7 +1693,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 9BX6WSFU2J;
+				DEVELOPMENT_TEAM = 8RL8MGBZ32;
 				GCC_PREFIX_HEADER = "HuaYiTianXia/Classes/Macro(宏定义类)/PrefixHeader.pch";
 				INFOPLIST_FILE = HuaYiTianXia/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;

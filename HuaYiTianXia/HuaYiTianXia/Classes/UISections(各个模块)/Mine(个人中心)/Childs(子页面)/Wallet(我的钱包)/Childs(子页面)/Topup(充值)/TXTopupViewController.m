@@ -104,20 +104,12 @@
     for (NSInteger j = 0; j < [self.btnArray count]; j++) {
         UIButton *btn = self.btnArray[j] ;
         if (sender.tag == j) {
-            btn.selected = sender.selected;
+            btn.backgroundColor = HexString(@"#8ED9FC");
+            btn.selected = YES;
         } else {
             btn.selected = NO;
+            btn.backgroundColor = kClearColor;
         }
-        btn.backgroundColor = kClearColor;
-    }
-    
-    UIButton *btn = self.btnArray[sender.tag];
-    if (btn.selected) {
-        btn.backgroundColor = HexString(@"#8ED9FC");
-        btn.selected = NO;
-    } else {
-        btn.backgroundColor = kClearColor;
-        btn.selected = YES;
     }
 }
 

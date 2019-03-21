@@ -6,11 +6,11 @@
 //  Copyright © 2019 宁小陌. All rights reserved.
 //
 
-#import "TTBaseViewController.h"
+#import "TTBaseTableViewController.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface TXRealNameViewController : TTBaseViewController
+@interface TXRealNameViewController : TTBaseTableViewController
 
 @end
 

@@ -50,7 +50,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    
+    [self initView];
+    MV(weakSelf)
+    [self.addButton1 lz_handleControlEvent:UIControlEventTouchUpInside withBlock:^{
+        [weakSelf chooseCameraBtnClick:self.addButton1];
+    }];
+    [self.addButton2 lz_handleControlEvent:UIControlEventTouchUpInside withBlock:^{
+        [weakSelf chooseCameraBtnClick:self.addButton2];
+    }];
+}
+
+- (void) initView{
+    [self addGesture:self.tableView];
     // 隐藏多余分割线
     [Utils lz_setExtraCellLineHidden:self.tableView];
     [self.view addSubview:self.tableView];
@@ -81,9 +92,24 @@
                           value:kFontSizeMedium12
                           range:NSMakeRange(4, current.length-4)];
     self.idnumberLabel.attributedText = attributedStr;
-
+    
     self.idcardLabel1.attributedText = [self setupTextColor:self.idcardLabel1.text];
     self.idcardLabel2.attributedText = [self setupTextColor:self.idcardLabel2.text];
+    
+    self.addButton1.tag = 100;
+    self.addButton2.tag = 200;
+}
+
+- (void) chooseCameraBtnClick:(UIButton *)sender{
+    [self showSexActionSheet:@[@"拍照",@"从手机相册选择"] idx:sender.tag];
+}
+
+- (void) showSexActionSheet:(NSArray *)dataArray idx:(NSInteger)idx{
+    // 使用方式
+    LZActionSheet *actionSheet = [[LZActionSheet alloc] initWithTitle:nil cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:dataArray actionSheetBlock:^(NSInteger buttonIndex) {
+        [self clickedButtonAtIndex:buttonIndex idx:idx];
+    }];
+    [actionSheet showView];
 }
 
 - (NSMutableAttributedString *) setupTextColor:(NSString *)currentText{
@@ -97,7 +123,12 @@
 
 /** 保存 */
 - (void) saveBtnClick:(UIButton *) sender{
+    
+}
 
+/** 选择拍照还是从相册中选择 */
+- (void) clickedButtonAtIndex:(NSInteger)buttonIndex idx:(NSInteger)idx{
+    TTLog(@"buttonIndex -- %ld  idx=== %ld",buttonIndex,idx);
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -111,7 +142,6 @@
         return _nickNameCell;
     }
     if (row == 1) {
-        _sexCell.selectionStyle = UITableViewCellSelectionStyleNone;
         return _sexCell;
     }
     if (row == 2) {
@@ -142,12 +172,20 @@
     return IPHONE6_W(50);
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.row==1) {
+        [self showSexActionSheet:@[@"女",@"男"] idx:0];
+    }
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
 
 -(UITableView *)tableView{
     if (!_tableView) {
         _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
         _tableView.showsVerticalScrollIndicator = false;
         [_tableView setSeparatorInset:UIEdgeInsetsMake(0,0,0,0)];
+        // 拖动tableView时收起键盘
+        _tableView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.backgroundColor = kColorWithRGB(245, 244, 249);

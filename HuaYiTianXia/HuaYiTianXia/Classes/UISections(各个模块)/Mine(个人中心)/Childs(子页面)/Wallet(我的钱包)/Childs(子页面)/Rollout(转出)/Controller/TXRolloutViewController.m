@@ -18,6 +18,8 @@ static NSString * const reuseIdentifierHeader = @"TXMineHeaderTableViewCell";
 @property (nonatomic, strong) UITableView *tableView;
 @property (strong, nonatomic) UIButton *saveButton;
 @property (nonatomic, strong) NSMutableArray *dataArray;
+@property (strong, nonatomic) UIView *footerView;
+
 @end
 
 @implementation TXRolloutViewController
@@ -34,17 +36,26 @@ static NSString * const reuseIdentifierHeader = @"TXMineHeaderTableViewCell";
     
 }
 
-#pragma mark ---- 约束布局
-- (void) initViewConstraints{
-    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.right.bottom.equalTo(self.view);
-    }];
-}
 
 - (void) initView{
+    [self addGesture:self.tableView];
     [Utils lz_setExtraCellLineHidden:self.tableView];
     [self.view addSubview:self.tableView];
-    [self initViewConstraints];
+
+    [self.footerView addSubview:self.saveButton];
+    
+    self.tableView.tableFooterView = self.footerView;
+    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.bottom.left.right.equalTo(self.view);
+    }];
+    
+    [self.saveButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(@(30));
+        make.left.equalTo(@(15));
+        make.right.equalTo(self.view.mas_right).offset(-15);
+        make.height.equalTo(@(45));
+    }];
+
 }
 
 #pragma mark - Table view data source
@@ -57,6 +68,15 @@ static NSString * const reuseIdentifierHeader = @"TXMineHeaderTableViewCell";
         TXPersonModel* model = self.dataArray[indexPath.row];
         model.index = indexPath.item;
         tools.titleLabel.text = model.title;
+        if (indexPath.row==2) {
+            tools.subtitleLabel.text = model.imageText;
+            tools.subtitleLabel.hidden = NO;
+            tools.imagesArrow.hidden = NO;
+            tools.textField.hidden = YES;
+        }else{
+            tools.textField.placeholder = model.imageText;
+            tools.selectionStyle = UITableViewCellSelectionStyleNone;
+        }
         return tools;
     }
     return [UITableViewCell new];
@@ -81,6 +101,11 @@ static NSString * const reuseIdentifierHeader = @"TXMineHeaderTableViewCell";
     }
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
 #pragma mark ----- getter/setter
 -(UITableView *)tableView{
     if (!_tableView) {
@@ -99,13 +124,38 @@ static NSString * const reuseIdentifierHeader = @"TXMineHeaderTableViewCell";
     return _tableView;
 }
 
+- (UIView *)footerView{
+    if (!_footerView) {
+        _footerView = [UIView lz_viewWithColor:kClearColor];
+        _footerView.frame = CGRectMake(0, 0, kScreenWidth, 100);
+    }
+    return _footerView;
+}
+
+- (UIButton *)saveButton{
+    if (!_saveButton) {
+        _saveButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_saveButton setTitleColor:kWhiteColor forState:UIControlStateNormal];
+        _saveButton.titleLabel.font = kFontSizeMedium15;
+        [_saveButton setTitle:@"确认转账" forState:UIControlStateNormal];
+        [_saveButton setBackgroundImage:kGetImage(@"c31_denglu") forState:UIControlStateNormal];
+        MV(weakSelf);
+        [_saveButton lz_handleControlEvent:UIControlEventTouchUpInside withBlock:^{
+            [weakSelf saveBtnClick:self.saveButton];
+        }];
+    }
+    return _saveButton;
+}
+
 - (NSMutableArray *)dataArray{
     if (!_dataArray) {
         _dataArray = [[NSMutableArray alloc] init];
-        NSArray* titleArr = @[@"资产管理",@"实名认证",@"订单中心",@"我的钱包"];
+        NSArray* titleArr = @[@"账号",@"确认账号",@"币种",@"金额"];
+        NSArray* subtitleArr = @[@"请输入账号或ID",@"再次输入密码账号或ID",@"币种选择",@"请输入转账金额"];
         for (int i=0; i<titleArr.count; i++) {
             TXPersonModel* personModel = [[TXPersonModel alloc] init];
             personModel.title = [titleArr lz_safeObjectAtIndex:i];
+            personModel.imageText = [subtitleArr lz_safeObjectAtIndex:i];
             [_dataArray addObject:personModel];
         }
     }
