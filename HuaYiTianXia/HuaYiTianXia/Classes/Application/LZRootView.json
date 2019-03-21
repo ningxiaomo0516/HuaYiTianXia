@@ -1,0 +1,34 @@
+
+[
+    {
+        "title":"新闻",
+        "imageName":"tab_home_nor",
+        "imageSelectName":"tab_home_press",
+        "controllerName":"TXNewsViewController",
+    },
+    {
+        "title":"商城",
+        "imageName":"tab_business_nor",
+        "imageSelectName":"tab_business_press",
+        "controllerName":"TXMallViewController",
+    },
+    {
+        "title":"农用植保",
+        "imageName":"tab_tool_nor",
+        "imageSelectName":"tab_tool_press",
+        "controllerName":"TXAgriculturalViewController",
+     },
+    {
+        "title":"天合成员",
+        "imageName":"tab_tool_nor",
+        "imageSelectName":"tab_tool_press",
+        "controllerName":"TXMembersViewController",
+    },
+     {
+        "title":"个人中心",
+        "imageName":"tab_mine_nor",
+        "imageSelectName":"tab_mine_press",
+        "controllerName":"TXMineViewController",
+    }
+]
+
