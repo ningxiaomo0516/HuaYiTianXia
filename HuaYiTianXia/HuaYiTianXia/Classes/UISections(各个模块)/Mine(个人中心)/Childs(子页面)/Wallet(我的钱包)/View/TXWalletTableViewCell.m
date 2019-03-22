@@ -163,7 +163,8 @@ static NSString* reuseIdentifier = @"TXWalletCollectionViewCell";
         
         NSArray* classArr = @[@"TXTransactionRecordsViewController",@"TXTopupViewController",
                               @"TXZhuanchuZhuanruViewController",@"TXEquityViewController",
-                              @"",@"TXRolloutViewController",@"",@"",@"",@""];
+                              @"",@"TXRolloutViewController",@"",@"",
+                              @"TXConversionViewController",@"TXRepeatCastViewController"];
         
         for (int j = 0; j < titleArr.count; j ++) {
             TXPersonModel* templateModel = [[TXPersonModel alloc] init];

@@ -140,7 +140,7 @@ static NSString * const reuseIdentifier = @"TXMineTableViewCell";
         
         NSArray* titleArr = @[@[@"用户使用协议",@"隐私政策",@"账户与安全",@"地址管理",@"操作手册"]];
         NSArray* classArr = @[@[@"",@"",@"TXAccountSecurityViewController",
-                                @"",@""]];
+                                @"TXAddressViewController",@""]];
         for (int i=0; i<titleArr.count; i++) {
             NSArray *subTitlesArray = [titleArr lz_safeObjectAtIndex:i];
             NSArray *classArray = [classArr lz_safeObjectAtIndex:i];

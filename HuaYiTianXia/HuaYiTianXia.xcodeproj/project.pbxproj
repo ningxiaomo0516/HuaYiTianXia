@@ -64,6 +64,23 @@
 		E72699FD223F8298003A5043 /* bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E72699F7223F8297003A5043 /* bg.jpg */; };
 		E7269A00223F8472003A5043 /* TXNewTemplateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E72699FF223F8472003A5043 /* TXNewTemplateViewController.m */; };
 		E7269A04223F8738003A5043 /* TXMainHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = E7269A03223F8738003A5043 /* TXMainHeaderView.m */; };
+		E7759AAF22447ADA007DA6CF /* TXModifyUserInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7759AAE22447AD9007DA6CF /* TXModifyUserInfoViewController.m */; };
+		E7759AB522447DC0007DA6CF /* SCLocalCacheTool.m in Sources */ = {isa = PBXBuildFile; fileRef = E7759AB222447DC0007DA6CF /* SCLocalCacheTool.m */; };
+		E7759AB622447DC0007DA6CF /* SCSmallTools.m in Sources */ = {isa = PBXBuildFile; fileRef = E7759AB422447DC0007DA6CF /* SCSmallTools.m */; };
+		E7759AB922447E6B007DA6CF /* URLDefine.m in Sources */ = {isa = PBXBuildFile; fileRef = E7759AB722447E6A007DA6CF /* URLDefine.m */; };
+		E7759AC122447FD2007DA6CF /* TXRepeatCastViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7759AC022447FD2007DA6CF /* TXRepeatCastViewController.m */; };
+		E7759AC422448158007DA6CF /* TXRepeatCastTemplateTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7759AC322448158007DA6CF /* TXRepeatCastTemplateTableViewCell.m */; };
+		E7759AC722448DA3007DA6CF /* TXConversionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7759AC622448DA3007DA6CF /* TXConversionViewController.m */; };
+		E7759ACA224491BA007DA6CF /* TXResetPwdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7759AC9224491BA007DA6CF /* TXResetPwdViewController.m */; };
+		E7759AD022449507007DA6CF /* TXAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7759ACF22449507007DA6CF /* TXAddressViewController.m */; };
+		E7759AD322449557007DA6CF /* TXAddressTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7759AD222449557007DA6CF /* TXAddressTableViewCell.m */; };
+		E7759AD62244BB65007DA6CF /* TXAddressAddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7759AD52244BB65007DA6CF /* TXAddressAddViewController.m */; };
+		E7759ADC2244C0D7007DA6CF /* MVTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = E7759AD92244C0D7007DA6CF /* MVTextField.m */; };
+		E7759ADD2244C0D7007DA6CF /* SCTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = E7759ADB2244C0D7007DA6CF /* SCTextView.m */; };
+		E7759AE02244C59F007DA6CF /* TXAddressTextViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7759ADF2244C59F007DA6CF /* TXAddressTextViewCell.m */; };
+		E7759AE32244CDC3007DA6CF /* TXSwitchTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7759AE22244CDC3007DA6CF /* TXSwitchTableViewCell.m */; };
+		E7759AEA2244DD6C007DA6CF /* TXMembersBannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = E7759AE92244DD6C007DA6CF /* TXMembersBannerView.m */; };
+		E7759AED2244E8F9007DA6CF /* TXMembersbleViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7759AEC2244E8F9007DA6CF /* TXMembersbleViewCell.m */; };
 		E78583BA223F947600BBEA41 /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = E78583B8223F947500BBEA41 /* Utils.m */; };
 		E78583BE223F967D00BBEA41 /* SCTableViewSectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = E78583BC223F967C00BBEA41 /* SCTableViewSectionHeaderView.m */; };
 		E78583C1223F98A800BBEA41 /* TXNewTemplateTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E78583C0223F98A800BBEA41 /* TXNewTemplateTableViewCell.m */; };
@@ -230,6 +247,40 @@
 		E72699FF223F8472003A5043 /* TXNewTemplateViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXNewTemplateViewController.m; sourceTree = "<group>"; };
 		E7269A02223F8738003A5043 /* TXMainHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXMainHeaderView.h; sourceTree = "<group>"; };
 		E7269A03223F8738003A5043 /* TXMainHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXMainHeaderView.m; sourceTree = "<group>"; };
+		E7759AAD22447AD9007DA6CF /* TXModifyUserInfoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXModifyUserInfoViewController.h; sourceTree = "<group>"; };
+		E7759AAE22447AD9007DA6CF /* TXModifyUserInfoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXModifyUserInfoViewController.m; sourceTree = "<group>"; };
+		E7759AB122447DC0007DA6CF /* SCSmallTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCSmallTools.h; sourceTree = "<group>"; };
+		E7759AB222447DC0007DA6CF /* SCLocalCacheTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCLocalCacheTool.m; sourceTree = "<group>"; };
+		E7759AB322447DC0007DA6CF /* SCLocalCacheTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCLocalCacheTool.h; sourceTree = "<group>"; };
+		E7759AB422447DC0007DA6CF /* SCSmallTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCSmallTools.m; sourceTree = "<group>"; };
+		E7759AB722447E6A007DA6CF /* URLDefine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = URLDefine.m; sourceTree = "<group>"; };
+		E7759AB822447E6B007DA6CF /* URLDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = URLDefine.h; sourceTree = "<group>"; };
+		E7759ABF22447FD2007DA6CF /* TXRepeatCastViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXRepeatCastViewController.h; sourceTree = "<group>"; };
+		E7759AC022447FD2007DA6CF /* TXRepeatCastViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXRepeatCastViewController.m; sourceTree = "<group>"; };
+		E7759AC222448158007DA6CF /* TXRepeatCastTemplateTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXRepeatCastTemplateTableViewCell.h; sourceTree = "<group>"; };
+		E7759AC322448158007DA6CF /* TXRepeatCastTemplateTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXRepeatCastTemplateTableViewCell.m; sourceTree = "<group>"; };
+		E7759AC522448DA3007DA6CF /* TXConversionViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXConversionViewController.h; sourceTree = "<group>"; };
+		E7759AC622448DA3007DA6CF /* TXConversionViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXConversionViewController.m; sourceTree = "<group>"; };
+		E7759AC8224491BA007DA6CF /* TXResetPwdViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXResetPwdViewController.h; sourceTree = "<group>"; };
+		E7759AC9224491BA007DA6CF /* TXResetPwdViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXResetPwdViewController.m; sourceTree = "<group>"; };
+		E7759ACE22449507007DA6CF /* TXAddressViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXAddressViewController.h; sourceTree = "<group>"; };
+		E7759ACF22449507007DA6CF /* TXAddressViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXAddressViewController.m; sourceTree = "<group>"; };
+		E7759AD122449557007DA6CF /* TXAddressTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXAddressTableViewCell.h; sourceTree = "<group>"; };
+		E7759AD222449557007DA6CF /* TXAddressTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXAddressTableViewCell.m; sourceTree = "<group>"; };
+		E7759AD42244BB65007DA6CF /* TXAddressAddViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXAddressAddViewController.h; sourceTree = "<group>"; };
+		E7759AD52244BB65007DA6CF /* TXAddressAddViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXAddressAddViewController.m; sourceTree = "<group>"; };
+		E7759AD82244C0D7007DA6CF /* MVTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MVTextField.h; sourceTree = "<group>"; };
+		E7759AD92244C0D7007DA6CF /* MVTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MVTextField.m; sourceTree = "<group>"; };
+		E7759ADA2244C0D7007DA6CF /* SCTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCTextView.h; sourceTree = "<group>"; };
+		E7759ADB2244C0D7007DA6CF /* SCTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCTextView.m; sourceTree = "<group>"; };
+		E7759ADE2244C59F007DA6CF /* TXAddressTextViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXAddressTextViewCell.h; sourceTree = "<group>"; };
+		E7759ADF2244C59F007DA6CF /* TXAddressTextViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXAddressTextViewCell.m; sourceTree = "<group>"; };
+		E7759AE12244CDC3007DA6CF /* TXSwitchTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXSwitchTableViewCell.h; sourceTree = "<group>"; };
+		E7759AE22244CDC3007DA6CF /* TXSwitchTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXSwitchTableViewCell.m; sourceTree = "<group>"; };
+		E7759AE82244DD6C007DA6CF /* TXMembersBannerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXMembersBannerView.h; sourceTree = "<group>"; };
+		E7759AE92244DD6C007DA6CF /* TXMembersBannerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXMembersBannerView.m; sourceTree = "<group>"; };
+		E7759AEB2244E8F9007DA6CF /* TXMembersbleViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXMembersbleViewCell.h; sourceTree = "<group>"; };
+		E7759AEC2244E8F9007DA6CF /* TXMembersbleViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXMembersbleViewCell.m; sourceTree = "<group>"; };
 		E78583B8223F947500BBEA41 /* Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utils.m; sourceTree = "<group>"; };
 		E78583B9223F947600BBEA41 /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
 		E78583BC223F967C00BBEA41 /* SCTableViewSectionHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCTableViewSectionHeaderView.m; sourceTree = "<group>"; };
@@ -602,8 +653,8 @@
 			isa = PBXGroup;
 			children = (
 				E72698E1223F737C003A5043 /* Controller */,
+				E7759AE42244DCB1007DA6CF /* View */,
 				E72698E2223F737C003A5043 /* Model */,
-				E72698E3223F737C003A5043 /* View */,
 			);
 			path = "Members(天合成员)";
 			sourceTree = "<group>";
@@ -624,19 +675,14 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		E72698E3223F737C003A5043 /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
 		E72698E4223F737C003A5043 /* Macro(宏定义类) */ = {
 			isa = PBXGroup;
 			children = (
 				E7269909223F76DF003A5043 /* AppBaseColor.h */,
 				E72698EA223F73AD003A5043 /* PrefixHeader.pch */,
 				E72698EB223F73B9003A5043 /* AppConstant.h */,
+				E7759AB822447E6B007DA6CF /* URLDefine.h */,
+				E7759AB722447E6A007DA6CF /* URLDefine.m */,
 			);
 			path = "Macro(宏定义类)";
 			sourceTree = "<group>";
@@ -644,6 +690,7 @@
 		E72698E5223F737C003A5043 /* UnderlySection */ = {
 			isa = PBXGroup;
 			children = (
+				E7759AB022447DA0007DA6CF /* SmallTools */,
 				E72698E6223F737C003A5043 /* Tools */,
 				E72698E7223F737C003A5043 /* Libs */,
 				E72698E8223F737C003A5043 /* Utilities */,
@@ -671,6 +718,7 @@
 		E72698E8223F737C003A5043 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				E7759AD72244C0D7007DA6CF /* SCTextView */,
 				E7D07C632243CCBE00E3FFAF /* LZActionSheet */,
 				E7D07C5F2243C8B600E3FFAF /* Toast */,
 				E7269A01223F870C003A5043 /* Commons */,
@@ -828,6 +876,90 @@
 				E7269A03223F8738003A5043 /* TXMainHeaderView.m */,
 			);
 			path = Commons;
+			sourceTree = "<group>";
+		};
+		E7759AB022447DA0007DA6CF /* SmallTools */ = {
+			isa = PBXGroup;
+			children = (
+				E7759AB322447DC0007DA6CF /* SCLocalCacheTool.h */,
+				E7759AB222447DC0007DA6CF /* SCLocalCacheTool.m */,
+				E7759AB122447DC0007DA6CF /* SCSmallTools.h */,
+				E7759AB422447DC0007DA6CF /* SCSmallTools.m */,
+			);
+			path = SmallTools;
+			sourceTree = "<group>";
+		};
+		E7759ABA22447F80007DA6CF /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				E7759ABF22447FD2007DA6CF /* TXRepeatCastViewController.h */,
+				E7759AC022447FD2007DA6CF /* TXRepeatCastViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		E7759ABB22447F80007DA6CF /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E7759AC222448158007DA6CF /* TXRepeatCastTemplateTableViewCell.h */,
+				E7759AC322448158007DA6CF /* TXRepeatCastTemplateTableViewCell.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		E7759ACB224494E8007DA6CF /* Address(地址管理) */ = {
+			isa = PBXGroup;
+			children = (
+				E7759ACC224494E8007DA6CF /* Controller */,
+				E7759ACD224494E8007DA6CF /* View */,
+			);
+			path = "Address(地址管理)";
+			sourceTree = "<group>";
+		};
+		E7759ACC224494E8007DA6CF /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				E7759ACE22449507007DA6CF /* TXAddressViewController.h */,
+				E7759ACF22449507007DA6CF /* TXAddressViewController.m */,
+				E7759AD42244BB65007DA6CF /* TXAddressAddViewController.h */,
+				E7759AD52244BB65007DA6CF /* TXAddressAddViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		E7759ACD224494E8007DA6CF /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E7759AD122449557007DA6CF /* TXAddressTableViewCell.h */,
+				E7759AD222449557007DA6CF /* TXAddressTableViewCell.m */,
+				E7759ADE2244C59F007DA6CF /* TXAddressTextViewCell.h */,
+				E7759ADF2244C59F007DA6CF /* TXAddressTextViewCell.m */,
+				E7759AE12244CDC3007DA6CF /* TXSwitchTableViewCell.h */,
+				E7759AE22244CDC3007DA6CF /* TXSwitchTableViewCell.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		E7759AD72244C0D7007DA6CF /* SCTextView */ = {
+			isa = PBXGroup;
+			children = (
+				E7759AD82244C0D7007DA6CF /* MVTextField.h */,
+				E7759AD92244C0D7007DA6CF /* MVTextField.m */,
+				E7759ADA2244C0D7007DA6CF /* SCTextView.h */,
+				E7759ADB2244C0D7007DA6CF /* SCTextView.m */,
+			);
+			path = SCTextView;
+			sourceTree = "<group>";
+		};
+		E7759AE42244DCB1007DA6CF /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E7759AE82244DD6C007DA6CF /* TXMembersBannerView.h */,
+				E7759AE92244DD6C007DA6CF /* TXMembersBannerView.m */,
+				E7759AEB2244E8F9007DA6CF /* TXMembersbleViewCell.h */,
+				E7759AEC2244E8F9007DA6CF /* TXMembersbleViewCell.m */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		E78583BB223F967800BBEA41 /* Templet(模板) */ = {
@@ -1100,6 +1232,8 @@
 		E7AA9DBC22436C2900C15483 /* Conversion(转换) */ = {
 			isa = PBXGroup;
 			children = (
+				E7759AC522448DA3007DA6CF /* TXConversionViewController.h */,
+				E7759AC622448DA3007DA6CF /* TXConversionViewController.m */,
 			);
 			path = "Conversion(转换)";
 			sourceTree = "<group>";
@@ -1130,6 +1264,8 @@
 		E7AA9DC022436C2900C15483 /* RepeatCast(复投) */ = {
 			isa = PBXGroup;
 			children = (
+				E7759ABA22447F80007DA6CF /* Controller */,
+				E7759ABB22447F80007DA6CF /* View */,
 			);
 			path = "RepeatCast(复投)";
 			sourceTree = "<group>";
@@ -1267,9 +1403,9 @@
 		E7F1A71B2242382E003FA216 /* Childs(子页面) */ = {
 			isa = PBXGroup;
 			children = (
+				E7759ACB224494E8007DA6CF /* Address(地址管理) */,
 				E7F1A71C2242382E003FA216 /* Agreement(用户协议) */,
 				E7F1A71D2242382E003FA216 /* AccountSecurity(账户与安全) */,
-				E7F1A71E2242382E003FA216 /* Address(地址管理) */,
 			);
 			path = "Childs(子页面)";
 			sourceTree = "<group>";
@@ -1290,13 +1426,6 @@
 			path = "AccountSecurity(账户与安全)";
 			sourceTree = "<group>";
 		};
-		E7F1A71E2242382E003FA216 /* Address(地址管理) */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "Address(地址管理)";
-			sourceTree = "<group>";
-		};
 		E7F1A72522423F91003FA216 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
@@ -1304,6 +1433,10 @@
 				E7F1A72922423F91003FA216 /* TXAccountSecurityViewController.m */,
 				E7F1A72822423F91003FA216 /* TXPersonalInfoViewController.h */,
 				E7F1A72722423F91003FA216 /* TXPersonalInfoViewController.m */,
+				E7759AAD22447AD9007DA6CF /* TXModifyUserInfoViewController.h */,
+				E7759AAE22447AD9007DA6CF /* TXModifyUserInfoViewController.m */,
+				E7759AC8224491BA007DA6CF /* TXResetPwdViewController.h */,
+				E7759AC9224491BA007DA6CF /* TXResetPwdViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1442,9 +1575,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E7759AD322449557007DA6CF /* TXAddressTableViewCell.m in Sources */,
 				E78584082240C68500BBEA41 /* TXMineBannerCollectionViewCell.m in Sources */,
+				E7759AC722448DA3007DA6CF /* TXConversionViewController.m in Sources */,
 				E7AA9DDA22437A1700C15483 /* TXTopupViewController.m in Sources */,
 				E72699E8223F7F58003A5043 /* UIView+Extension.m in Sources */,
+				E7759AED2244E8F9007DA6CF /* TXMembersbleViewCell.m in Sources */,
 				E7F1A74122428A8F003FA216 /* TXMallCollectionViewCell.m in Sources */,
 				E7269915223F788E003A5043 /* TXMallViewController.m in Sources */,
 				E7AA9DE2224394A600C15483 /* TXRolloutTableViewCell.m in Sources */,
@@ -1468,7 +1604,9 @@
 				E7AA9DB7224338EA00C15483 /* TXWalletTableViewCell.m in Sources */,
 				E726997F223F7E4B003A5043 /* SCActivityIndicatorView.m in Sources */,
 				E7AA9DDF224392FB00C15483 /* TXRolloutViewController.m in Sources */,
+				E7759ADC2244C0D7007DA6CF /* MVTextField.m in Sources */,
 				E7AA9DBA22433A0200C15483 /* TXWalletCollectionViewCell.m in Sources */,
+				E7759AE02244C59F007DA6CF /* TXAddressTextViewCell.m in Sources */,
 				E72699A6223F7ECC003A5043 /* NSString+URL.m in Sources */,
 				E72699E6223F7F58003A5043 /* UIScreen+Extension.m in Sources */,
 				E7269980223F7E4B003A5043 /* UIView+SCLoadingView.m in Sources */,
@@ -1485,16 +1623,23 @@
 				E7F1A73B22427DC0003FA216 /* TXMallToolsCollectionViewCell.m in Sources */,
 				E72699D8223F7F58003A5043 /* UIButton+Extension.m in Sources */,
 				E72699A1223F7ECC003A5043 /* NSString+MD5.m in Sources */,
+				E7759ADD2244C0D7007DA6CF /* SCTextView.m in Sources */,
 				E7269A00223F8472003A5043 /* TXNewTemplateViewController.m in Sources */,
+				E7759AB922447E6B007DA6CF /* URLDefine.m in Sources */,
 				E7F1A71222420A1B003FA216 /* TXEarningsTableViewCell.m in Sources */,
+				E7759AB622447DC0007DA6CF /* SCSmallTools.m in Sources */,
 				E72698C5223F7167003A5043 /* main.m in Sources */,
 				E78583FB2240C2CC00BBEA41 /* TXRecommendedViewController.m in Sources */,
+				E7759AE32244CDC3007DA6CF /* TXSwitchTableViewCell.m in Sources */,
 				E7269912223F7881003A5043 /* TXAgriculturalViewController.m in Sources */,
 				E72698B7223F7165003A5043 /* AppDelegate.m in Sources */,
 				E72699DA223F7F58003A5043 /* UIFont+Extension.m in Sources */,
 				E726991B223F7D28003A5043 /* TTBaseViewController.m in Sources */,
+				E7759AD022449507007DA6CF /* TXAddressViewController.m in Sources */,
+				E7759ACA224491BA007DA6CF /* TXResetPwdViewController.m in Sources */,
 				E72699E3223F7F58003A5043 /* UITabBar+SCBadge.m in Sources */,
 				E72699A0223F7ECC003A5043 /* NSObject+SCValidation.m in Sources */,
+				E7759AC122447FD2007DA6CF /* TXRepeatCastViewController.m in Sources */,
 				E7269907223F754B003A5043 /* UIViewController+LZNavigationController.m in Sources */,
 				E72699E2223F7F58003A5043 /* UIImage+Extension.m in Sources */,
 				E7F1A7092241F298003FA216 /* TXProductTableViewCell.m in Sources */,
@@ -1504,6 +1649,7 @@
 				E7269906223F754B003A5043 /* LZNavigationController.m in Sources */,
 				E72699A8223F7ECC003A5043 /* NSDate+Extensions.m in Sources */,
 				E72699A2223F7ECC003A5043 /* NSString+SCExtension.m in Sources */,
+				E7759AC422448158007DA6CF /* TXRepeatCastTemplateTableViewCell.m in Sources */,
 				E7269918223F789F003A5043 /* TXMembersViewController.m in Sources */,
 				E7F1A72C22423F92003FA216 /* TXAccountSecurityViewController.m in Sources */,
 				E78583EF2240C29300BBEA41 /* TXOrderViewController.m in Sources */,
@@ -1515,6 +1661,7 @@
 				E7AA9DAF2243353200C15483 /* TTBaseNavImagesTableViewController.m in Sources */,
 				E72699AA223F7ECC003A5043 /* NSArray+Extension.m in Sources */,
 				E72699DD223F7F58003A5043 /* UIImageView+SCExtension.m in Sources */,
+				E7759AAF22447ADA007DA6CF /* TXModifyUserInfoViewController.m in Sources */,
 				E7AA9DD2224372B500C15483 /* TXZhuanchuZhuanruViewController.m in Sources */,
 				E72699DE223F7F58003A5043 /* UIBarButtonItem+Extension.m in Sources */,
 				E72699F8223F8298003A5043 /* WMPageController.m in Sources */,
@@ -1528,9 +1675,12 @@
 				E78584052240C54300BBEA41 /* TYCyclePagerTransformLayout.m in Sources */,
 				E72699A7223F7ECC003A5043 /* NSDictionary+Extension.m in Sources */,
 				E72699A4223F7ECC003A5043 /* NSDate+Relation.m in Sources */,
+				E7759AD62244BB65007DA6CF /* TXAddressAddViewController.m in Sources */,
 				E78583C722408F1F00BBEA41 /* TXMineHeaderTableViewCell.m in Sources */,
 				E78583BA223F947600BBEA41 /* Utils.m in Sources */,
 				E7F1A732224248D4003FA216 /* TXTeamTableViewCell.m in Sources */,
+				E7759AB522447DC0007DA6CF /* SCLocalCacheTool.m in Sources */,
+				E7759AEA2244DD6C007DA6CF /* TXMembersBannerView.m in Sources */,
 				E78583BE223F967D00BBEA41 /* SCTableViewSectionHeaderView.m in Sources */,
 				E72699FB223F8298003A5043 /* WMMenuView.m in Sources */,
 				E72699D5223F7F58003A5043 /* UIButton+MVImagePosition.m in Sources */,
@@ -1673,7 +1823,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 8RL8MGBZ32;
+				DEVELOPMENT_TEAM = 9BX6WSFU2J;
 				GCC_PREFIX_HEADER = "HuaYiTianXia/Classes/Macro(宏定义类)/PrefixHeader.pch";
 				INFOPLIST_FILE = HuaYiTianXia/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -1693,7 +1843,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 8RL8MGBZ32;
+				DEVELOPMENT_TEAM = 9BX6WSFU2J;
 				GCC_PREFIX_HEADER = "HuaYiTianXia/Classes/Macro(宏定义类)/PrefixHeader.pch";
 				INFOPLIST_FILE = HuaYiTianXia/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;

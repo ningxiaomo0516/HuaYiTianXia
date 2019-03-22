@@ -92,8 +92,8 @@ static NSString * const reuseIdentifier = @"TXMineTableViewCell";
 - (NSMutableArray *)dataArray{
     if (!_dataArray) {
         _dataArray = [[NSMutableArray alloc] init];
-        NSArray* titleArr = @[@"个人资料",@"认证资料",@"重置登录密码",@"设置交易密码"];
-        NSArray* classArr = @[@"TXPersonalInfoViewController",@"",@"",@""];
+        NSArray* titleArr = @[@"个人资料",@"认证资料",@"重置密码",@"设置交易密码"];
+        NSArray* classArr = @[@"TXPersonalInfoViewController",@"",@"TXResetPwdViewController",@""];
         for (int j = 0; j < titleArr.count; j ++) {
             TXPersonModel* personModel = [[TXPersonModel alloc] init];
             personModel.title = [titleArr lz_safeObjectAtIndex:j];

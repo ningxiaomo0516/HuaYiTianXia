@@ -65,7 +65,7 @@
 
 - (UITextField *)textField{
     if (!_textField) {
-        _textField = [UITextField lz_textFieldWithPlaceHolder:@"请输入充值金额"];
+        _textField = [UITextField lz_textFieldWithPlaceHolder:@""];
         _textField.returnKeyType = UIReturnKeyDone;
         _textField.keyboardType = UIKeyboardTypeNumberPad;
         _textField.clearButtonMode = UITextFieldViewModeAlways;

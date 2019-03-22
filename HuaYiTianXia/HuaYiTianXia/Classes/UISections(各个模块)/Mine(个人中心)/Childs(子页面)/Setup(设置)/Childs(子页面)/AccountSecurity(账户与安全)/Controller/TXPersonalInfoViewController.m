@@ -9,6 +9,7 @@
 #import "TXPersonalInfoViewController.h"
 #import "TXMineTableViewCell.h"
 #import "TXPersonModel.h"
+#import "TXModifyUserInfoViewController.h"
 
 static NSString * const reuseIdentifier = @"TXMineTableViewCell";
 
@@ -16,6 +17,7 @@ static NSString * const reuseIdentifier = @"TXMineTableViewCell";
 @interface TXPersonalInfoViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *dataArray;
+@property (nonatomic, copy) NSString *nicknameStr;
 @end
 
 @implementation TXPersonalInfoViewController
@@ -45,7 +47,9 @@ static NSString * const reuseIdentifier = @"TXMineTableViewCell";
         tools.imagesAvatar.image = kGetImage(@"user1");
         tools.imagesAvatar.hidden = NO;
     }else{
-        tools.subtitleLabel.text = indexPath.row==1?@"哇哈哈哈哈":@"12345";
+        tools.subtitleLabel.text = (indexPath.row==1)?@"哇哈哈哈哈":@"12345";
+        if (indexPath.row==1) self.nicknameStr = tools.subtitleLabel.text;
+        
         tools.subtitleLabel.hidden = NO;
     }
     return tools;
@@ -65,7 +69,22 @@ static NSString * const reuseIdentifier = @"TXMineTableViewCell";
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
+    if (indexPath.row==1) {
+        TXModifyUserInfoViewController *view = [[TXModifyUserInfoViewController alloc] init];
+        view.nickname = self.nicknameStr;
+        view.title = @"个人信息";
+        view.block = ^(NSString *text) {
+            self.nicknameStr = text;
+            //一个cell刷新
+            NSIndexPath *indexPath=[NSIndexPath indexPathForRow:2 inSection:0];
+            [tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationNone];
+            [kNotificationCenter postNotificationName:@"changeUserInfo" object:nil];
+        };
+        LZNavigationController *nav = [[LZNavigationController alloc] initWithRootViewController:view];
+        [self.navigationController presentViewController:nav animated:YES completion:^{
+            TTLog(@"个人信息修改");
+        }];
+    }
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 

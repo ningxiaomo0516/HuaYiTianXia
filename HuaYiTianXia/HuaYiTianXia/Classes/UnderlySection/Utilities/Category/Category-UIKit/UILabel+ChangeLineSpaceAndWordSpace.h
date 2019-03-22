@@ -23,5 +23,6 @@
  *  改变行间距和字间距
  */
 + (void)changeSpaceForLabel:(UILabel *)label withLineSpace:(float)lineSpace WordSpace:(float)wordSpace;
-
+/// 改变缩进距离
++ (NSAttributedString *) changeIndentationSpaceForLabel:(NSString *)labelText spaceWidth:(CGFloat) spaceWidth;
 @end

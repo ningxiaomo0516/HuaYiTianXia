@@ -44,4 +44,19 @@
     
 }
 
++ (NSAttributedString *) changeIndentationSpaceForLabel:(NSString *)labelText spaceWidth:(CGFloat) spaceWidth{
+    NSMutableParagraphStyle *paragraphStyle = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
+    // 对齐方式
+    paragraphStyle.alignment = NSTextAlignmentJustified;
+    paragraphStyle.lineSpacing = 5.0;
+    // 首行缩进
+    paragraphStyle.firstLineHeadIndent = spaceWidth;
+    // 头部缩进
+    //        style.headIndent = 10.0f;
+    // 尾部缩进
+    //        style.tailIndent = -10.0f;
+    NSAttributedString *attrText = [[NSAttributedString alloc] initWithString:labelText attributes:@{NSParagraphStyleAttributeName:paragraphStyle}];
+    return attrText;
+}
+
 @end
