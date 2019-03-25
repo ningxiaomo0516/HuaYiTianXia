@@ -81,6 +81,21 @@
 		E7759AE32244CDC3007DA6CF /* TXSwitchTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7759AE22244CDC3007DA6CF /* TXSwitchTableViewCell.m */; };
 		E7759AEA2244DD6C007DA6CF /* TXMembersBannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = E7759AE92244DD6C007DA6CF /* TXMembersBannerView.m */; };
 		E7759AED2244E8F9007DA6CF /* TXMembersbleViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7759AEC2244E8F9007DA6CF /* TXMembersbleViewCell.m */; };
+		E78333DB22487913005CAB91 /* TXLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E78333D922487913005CAB91 /* TXLoginViewController.m */; };
+		E78333DC22487913005CAB91 /* TXLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E78333DA22487913005CAB91 /* TXLoginViewController.xib */; };
+		E78333E0224884F1005CAB91 /* TXRegisteredViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E78333DE224884F1005CAB91 /* TXRegisteredViewController.m */; };
+		E78333E422489E6B005CAB91 /* TXRegisteredTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E78333E322489E6B005CAB91 /* TXRegisteredTableViewCell.m */; };
+		E78333E72248A963005CAB91 /* TXRegisterTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E78333E62248A963005CAB91 /* TXRegisterTableViewCell.m */; };
+		E78333EA2248AAD2005CAB91 /* TXRegisterPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E78333E92248AAD2005CAB91 /* TXRegisterPasswordViewController.m */; };
+		E78333F02248BFF1005CAB91 /* TXMallGoodsDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E78333EF2248BFF1005CAB91 /* TXMallGoodsDetailsViewController.m */; };
+		E78333F32248C691005CAB91 /* TXMallGoodsBannerTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E78333F22248C691005CAB91 /* TXMallGoodsBannerTableViewCell.m */; };
+		E78333F62248C7D4005CAB91 /* TXMallGoodsDetailsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E78333F52248C7D4005CAB91 /* TXMallGoodsDetailsTableViewCell.m */; };
+		E78333F92248CBB2005CAB91 /* TXMallGoodsSpecTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E78333F82248CBB2005CAB91 /* TXMallGoodsSpecTableViewCell.m */; };
+		E78333FC2248D0B1005CAB91 /* SCCustomMarginLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = E78333FB2248D0B1005CAB91 /* SCCustomMarginLabel.m */; };
+		E78333FF2248DDDC005CAB91 /* TXShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E78333FE2248DDDC005CAB91 /* TXShareViewController.m */; };
+		E78334072248DE2F005CAB91 /* FMMessagePopupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E78334022248DE2F005CAB91 /* FMMessagePopupViewController.m */; };
+		E78334082248DE2F005CAB91 /* TTPopupBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = E78334042248DE2F005CAB91 /* TTPopupBackgroundView.m */; };
+		E78334092248DE2F005CAB91 /* UIViewController+TTPopupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E78334062248DE2F005CAB91 /* UIViewController+TTPopupViewController.m */; };
 		E78583BA223F947600BBEA41 /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = E78583B8223F947500BBEA41 /* Utils.m */; };
 		E78583BE223F967D00BBEA41 /* SCTableViewSectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = E78583BC223F967C00BBEA41 /* SCTableViewSectionHeaderView.m */; };
 		E78583C1223F98A800BBEA41 /* TXNewTemplateTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E78583C0223F98A800BBEA41 /* TXNewTemplateTableViewCell.m */; };
@@ -281,6 +296,35 @@
 		E7759AE92244DD6C007DA6CF /* TXMembersBannerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXMembersBannerView.m; sourceTree = "<group>"; };
 		E7759AEB2244E8F9007DA6CF /* TXMembersbleViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXMembersbleViewCell.h; sourceTree = "<group>"; };
 		E7759AEC2244E8F9007DA6CF /* TXMembersbleViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXMembersbleViewCell.m; sourceTree = "<group>"; };
+		E78333D822487913005CAB91 /* TXLoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXLoginViewController.h; sourceTree = "<group>"; };
+		E78333D922487913005CAB91 /* TXLoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXLoginViewController.m; sourceTree = "<group>"; };
+		E78333DA22487913005CAB91 /* TXLoginViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TXLoginViewController.xib; sourceTree = "<group>"; };
+		E78333DD224884F1005CAB91 /* TXRegisteredViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXRegisteredViewController.h; sourceTree = "<group>"; };
+		E78333DE224884F1005CAB91 /* TXRegisteredViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXRegisteredViewController.m; sourceTree = "<group>"; };
+		E78333E222489E6B005CAB91 /* TXRegisteredTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXRegisteredTableViewCell.h; sourceTree = "<group>"; };
+		E78333E322489E6B005CAB91 /* TXRegisteredTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXRegisteredTableViewCell.m; sourceTree = "<group>"; };
+		E78333E52248A963005CAB91 /* TXRegisterTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXRegisterTableViewCell.h; sourceTree = "<group>"; };
+		E78333E62248A963005CAB91 /* TXRegisterTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXRegisterTableViewCell.m; sourceTree = "<group>"; };
+		E78333E82248AAD1005CAB91 /* TXRegisterPasswordViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXRegisterPasswordViewController.h; sourceTree = "<group>"; };
+		E78333E92248AAD2005CAB91 /* TXRegisterPasswordViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXRegisterPasswordViewController.m; sourceTree = "<group>"; };
+		E78333EE2248BFF1005CAB91 /* TXMallGoodsDetailsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXMallGoodsDetailsViewController.h; sourceTree = "<group>"; };
+		E78333EF2248BFF1005CAB91 /* TXMallGoodsDetailsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXMallGoodsDetailsViewController.m; sourceTree = "<group>"; };
+		E78333F12248C691005CAB91 /* TXMallGoodsBannerTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXMallGoodsBannerTableViewCell.h; sourceTree = "<group>"; };
+		E78333F22248C691005CAB91 /* TXMallGoodsBannerTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXMallGoodsBannerTableViewCell.m; sourceTree = "<group>"; };
+		E78333F42248C7D4005CAB91 /* TXMallGoodsDetailsTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXMallGoodsDetailsTableViewCell.h; sourceTree = "<group>"; };
+		E78333F52248C7D4005CAB91 /* TXMallGoodsDetailsTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXMallGoodsDetailsTableViewCell.m; sourceTree = "<group>"; };
+		E78333F72248CBB2005CAB91 /* TXMallGoodsSpecTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXMallGoodsSpecTableViewCell.h; sourceTree = "<group>"; };
+		E78333F82248CBB2005CAB91 /* TXMallGoodsSpecTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXMallGoodsSpecTableViewCell.m; sourceTree = "<group>"; };
+		E78333FA2248D0B1005CAB91 /* SCCustomMarginLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCCustomMarginLabel.h; sourceTree = "<group>"; };
+		E78333FB2248D0B1005CAB91 /* SCCustomMarginLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCCustomMarginLabel.m; sourceTree = "<group>"; };
+		E78333FD2248DDDC005CAB91 /* TXShareViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXShareViewController.h; sourceTree = "<group>"; };
+		E78333FE2248DDDC005CAB91 /* TXShareViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXShareViewController.m; sourceTree = "<group>"; };
+		E78334012248DE2F005CAB91 /* FMMessagePopupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMMessagePopupViewController.h; sourceTree = "<group>"; };
+		E78334022248DE2F005CAB91 /* FMMessagePopupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMMessagePopupViewController.m; sourceTree = "<group>"; };
+		E78334032248DE2F005CAB91 /* TTPopupBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTPopupBackgroundView.h; sourceTree = "<group>"; };
+		E78334042248DE2F005CAB91 /* TTPopupBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTPopupBackgroundView.m; sourceTree = "<group>"; };
+		E78334052248DE2F005CAB91 /* UIViewController+TTPopupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+TTPopupViewController.h"; sourceTree = "<group>"; };
+		E78334062248DE2F005CAB91 /* UIViewController+TTPopupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+TTPopupViewController.m"; sourceTree = "<group>"; };
 		E78583B8223F947500BBEA41 /* Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utils.m; sourceTree = "<group>"; };
 		E78583B9223F947600BBEA41 /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
 		E78583BC223F967C00BBEA41 /* SCTableViewSectionHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCTableViewSectionHeaderView.m; sourceTree = "<group>"; };
@@ -482,6 +526,7 @@
 		E72698CF223F737C003A5043 /* UISections(各个模块) */ = {
 			isa = PBXGroup;
 			children = (
+				E78333CE224874D9005CAB91 /* Other(登录注册) */,
 				E78583BB223F967800BBEA41 /* Templet(模板) */,
 				E72698D8223F737C003A5043 /* News(新闻) */,
 				E72698DC223F737C003A5043 /* Mall(商城) */,
@@ -611,6 +656,7 @@
 		E72698DC223F737C003A5043 /* Mall(商城) */ = {
 			isa = PBXGroup;
 			children = (
+				E78333EB2248BFAD005CAB91 /* Childs(子页面) */,
 				E72698DD223F737C003A5043 /* Controller */,
 				E72698DE223F737C003A5043 /* Model */,
 				E72698DF223F737C003A5043 /* View */,
@@ -718,6 +764,7 @@
 		E72698E8223F737C003A5043 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				E78334002248DE2F005CAB91 /* TTPopupView */,
 				E7759AD72244C0D7007DA6CF /* SCTextView */,
 				E7D07C632243CCBE00E3FFAF /* LZActionSheet */,
 				E7D07C5F2243C8B600E3FFAF /* Toast */,
@@ -881,6 +928,8 @@
 		E7759AB022447DA0007DA6CF /* SmallTools */ = {
 			isa = PBXGroup;
 			children = (
+				E78333FA2248D0B1005CAB91 /* SCCustomMarginLabel.h */,
+				E78333FB2248D0B1005CAB91 /* SCCustomMarginLabel.m */,
 				E7759AB322447DC0007DA6CF /* SCLocalCacheTool.h */,
 				E7759AB222447DC0007DA6CF /* SCLocalCacheTool.m */,
 				E7759AB122447DC0007DA6CF /* SCSmallTools.h */,
@@ -960,6 +1009,94 @@
 				E7759AEC2244E8F9007DA6CF /* TXMembersbleViewCell.m */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		E78333CE224874D9005CAB91 /* Other(登录注册) */ = {
+			isa = PBXGroup;
+			children = (
+				E78333CF224874D9005CAB91 /* Controller */,
+				E78333D0224874D9005CAB91 /* Model */,
+				E78333D1224874D9005CAB91 /* View */,
+			);
+			path = "Other(登录注册)";
+			sourceTree = "<group>";
+		};
+		E78333CF224874D9005CAB91 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				E78333D822487913005CAB91 /* TXLoginViewController.h */,
+				E78333D922487913005CAB91 /* TXLoginViewController.m */,
+				E78333DA22487913005CAB91 /* TXLoginViewController.xib */,
+				E78333DD224884F1005CAB91 /* TXRegisteredViewController.h */,
+				E78333DE224884F1005CAB91 /* TXRegisteredViewController.m */,
+				E78333E82248AAD1005CAB91 /* TXRegisterPasswordViewController.h */,
+				E78333E92248AAD2005CAB91 /* TXRegisterPasswordViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		E78333D0224874D9005CAB91 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		E78333D1224874D9005CAB91 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E78333E52248A963005CAB91 /* TXRegisterTableViewCell.h */,
+				E78333E62248A963005CAB91 /* TXRegisterTableViewCell.m */,
+				E78333E222489E6B005CAB91 /* TXRegisteredTableViewCell.h */,
+				E78333E322489E6B005CAB91 /* TXRegisteredTableViewCell.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		E78333EB2248BFAD005CAB91 /* Childs(子页面) */ = {
+			isa = PBXGroup;
+			children = (
+				E78333EC2248BFAD005CAB91 /* Controller */,
+				E78333ED2248BFAD005CAB91 /* View */,
+			);
+			path = "Childs(子页面)";
+			sourceTree = "<group>";
+		};
+		E78333EC2248BFAD005CAB91 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				E78333EE2248BFF1005CAB91 /* TXMallGoodsDetailsViewController.h */,
+				E78333EF2248BFF1005CAB91 /* TXMallGoodsDetailsViewController.m */,
+				E78333FD2248DDDC005CAB91 /* TXShareViewController.h */,
+				E78333FE2248DDDC005CAB91 /* TXShareViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		E78333ED2248BFAD005CAB91 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E78333F12248C691005CAB91 /* TXMallGoodsBannerTableViewCell.h */,
+				E78333F22248C691005CAB91 /* TXMallGoodsBannerTableViewCell.m */,
+				E78333F42248C7D4005CAB91 /* TXMallGoodsDetailsTableViewCell.h */,
+				E78333F52248C7D4005CAB91 /* TXMallGoodsDetailsTableViewCell.m */,
+				E78333F72248CBB2005CAB91 /* TXMallGoodsSpecTableViewCell.h */,
+				E78333F82248CBB2005CAB91 /* TXMallGoodsSpecTableViewCell.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		E78334002248DE2F005CAB91 /* TTPopupView */ = {
+			isa = PBXGroup;
+			children = (
+				E78334012248DE2F005CAB91 /* FMMessagePopupViewController.h */,
+				E78334022248DE2F005CAB91 /* FMMessagePopupViewController.m */,
+				E78334032248DE2F005CAB91 /* TTPopupBackgroundView.h */,
+				E78334042248DE2F005CAB91 /* TTPopupBackgroundView.m */,
+				E78334052248DE2F005CAB91 /* UIViewController+TTPopupViewController.h */,
+				E78334062248DE2F005CAB91 /* UIViewController+TTPopupViewController.m */,
+			);
+			path = TTPopupView;
 			sourceTree = "<group>";
 		};
 		E78583BB223F967800BBEA41 /* Templet(模板) */ = {
@@ -1513,6 +1650,7 @@
 				E72698C2223F7167003A5043 /* LaunchScreen.storyboard in Resources */,
 				E72699FD223F8298003A5043 /* bg.jpg in Resources */,
 				E72698BF223F7167003A5043 /* Assets.xcassets in Resources */,
+				E78333DC22487913005CAB91 /* TXLoginViewController.xib in Resources */,
 				E7D07C672243CCBE00E3FFAF /* LZActionSheet.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1582,11 +1720,13 @@
 				E72699E8223F7F58003A5043 /* UIView+Extension.m in Sources */,
 				E7759AED2244E8F9007DA6CF /* TXMembersbleViewCell.m in Sources */,
 				E7F1A74122428A8F003FA216 /* TXMallCollectionViewCell.m in Sources */,
+				E78333E0224884F1005CAB91 /* TXRegisteredViewController.m in Sources */,
 				E7269915223F788E003A5043 /* TXMallViewController.m in Sources */,
 				E7AA9DE2224394A600C15483 /* TXRolloutTableViewCell.m in Sources */,
 				E7269908223F754B003A5043 /* LZRootViewController.m in Sources */,
 				E72699DC223F7F58003A5043 /* UITableView+SCExtension.m in Sources */,
 				E7F1A7032241EF37003FA216 /* TXEarningsViewController.m in Sources */,
+				E78333FC2248D0B1005CAB91 /* SCCustomMarginLabel.m in Sources */,
 				E7F1A7062241F1D2003FA216 /* TTBaseTableViewController.m in Sources */,
 				E7F1A73522427264003FA216 /* TTBaseNavImagesViewController.m in Sources */,
 				E72699A3223F7ECC003A5043 /* NSString+LZPinYin.m in Sources */,
@@ -1594,12 +1734,14 @@
 				E72699D7223F7F58003A5043 /* UIColor+Extension.m in Sources */,
 				E78583F52240C2AF00BBEA41 /* TXWalletViewController.m in Sources */,
 				E72699F9223F8298003A5043 /* WMMenuItem.m in Sources */,
+				E78333F02248BFF1005CAB91 /* TXMallGoodsDetailsViewController.m in Sources */,
 				E78584032240C54300BBEA41 /* TYPageControl.m in Sources */,
 				E72699FC223F8298003A5043 /* WMProgressView.m in Sources */,
 				E72699FA223F8298003A5043 /* WMScrollView.m in Sources */,
 				E78584042240C54300BBEA41 /* TYCyclePagerView.m in Sources */,
 				E726997E223F7E4B003A5043 /* SCLoadingLabel.m in Sources */,
 				E7F1A7162242123A003FA216 /* TXRealNameViewController.m in Sources */,
+				E78333F62248C7D4005CAB91 /* TXMallGoodsDetailsTableViewCell.m in Sources */,
 				E7D07C622243C8B600E3FFAF /* NSObject+Toast.m in Sources */,
 				E7AA9DB7224338EA00C15483 /* TXWalletTableViewCell.m in Sources */,
 				E726997F223F7E4B003A5043 /* SCActivityIndicatorView.m in Sources */,
@@ -1608,6 +1750,7 @@
 				E7AA9DBA22433A0200C15483 /* TXWalletCollectionViewCell.m in Sources */,
 				E7759AE02244C59F007DA6CF /* TXAddressTextViewCell.m in Sources */,
 				E72699A6223F7ECC003A5043 /* NSString+URL.m in Sources */,
+				E78334082248DE2F005CAB91 /* TTPopupBackgroundView.m in Sources */,
 				E72699E6223F7F58003A5043 /* UIScreen+Extension.m in Sources */,
 				E7269980223F7E4B003A5043 /* UIView+SCLoadingView.m in Sources */,
 				E7AA9DCA22436DA700C15483 /* TXTransactionRecordsViewController.m in Sources */,
@@ -1623,10 +1766,12 @@
 				E7F1A73B22427DC0003FA216 /* TXMallToolsCollectionViewCell.m in Sources */,
 				E72699D8223F7F58003A5043 /* UIButton+Extension.m in Sources */,
 				E72699A1223F7ECC003A5043 /* NSString+MD5.m in Sources */,
+				E78333E72248A963005CAB91 /* TXRegisterTableViewCell.m in Sources */,
 				E7759ADD2244C0D7007DA6CF /* SCTextView.m in Sources */,
 				E7269A00223F8472003A5043 /* TXNewTemplateViewController.m in Sources */,
 				E7759AB922447E6B007DA6CF /* URLDefine.m in Sources */,
 				E7F1A71222420A1B003FA216 /* TXEarningsTableViewCell.m in Sources */,
+				E78333EA2248AAD2005CAB91 /* TXRegisterPasswordViewController.m in Sources */,
 				E7759AB622447DC0007DA6CF /* SCSmallTools.m in Sources */,
 				E72698C5223F7167003A5043 /* main.m in Sources */,
 				E78583FB2240C2CC00BBEA41 /* TXRecommendedViewController.m in Sources */,
@@ -1637,7 +1782,10 @@
 				E726991B223F7D28003A5043 /* TTBaseViewController.m in Sources */,
 				E7759AD022449507007DA6CF /* TXAddressViewController.m in Sources */,
 				E7759ACA224491BA007DA6CF /* TXResetPwdViewController.m in Sources */,
+				E78333FF2248DDDC005CAB91 /* TXShareViewController.m in Sources */,
+				E78333E422489E6B005CAB91 /* TXRegisteredTableViewCell.m in Sources */,
 				E72699E3223F7F58003A5043 /* UITabBar+SCBadge.m in Sources */,
+				E78333F32248C691005CAB91 /* TXMallGoodsBannerTableViewCell.m in Sources */,
 				E72699A0223F7ECC003A5043 /* NSObject+SCValidation.m in Sources */,
 				E7759AC122447FD2007DA6CF /* TXRepeatCastViewController.m in Sources */,
 				E7269907223F754B003A5043 /* UIViewController+LZNavigationController.m in Sources */,
@@ -1647,12 +1795,14 @@
 				E72699A5223F7ECC003A5043 /* NSFileManager+Paths.m in Sources */,
 				E72699DF223F7F58003A5043 /* UILabel+ChangeLineSpaceAndWordSpace.m in Sources */,
 				E7269906223F754B003A5043 /* LZNavigationController.m in Sources */,
+				E78333F92248CBB2005CAB91 /* TXMallGoodsSpecTableViewCell.m in Sources */,
 				E72699A8223F7ECC003A5043 /* NSDate+Extensions.m in Sources */,
 				E72699A2223F7ECC003A5043 /* NSString+SCExtension.m in Sources */,
 				E7759AC422448158007DA6CF /* TXRepeatCastTemplateTableViewCell.m in Sources */,
 				E7269918223F789F003A5043 /* TXMembersViewController.m in Sources */,
 				E7F1A72C22423F92003FA216 /* TXAccountSecurityViewController.m in Sources */,
 				E78583EF2240C29300BBEA41 /* TXOrderViewController.m in Sources */,
+				E78334092248DE2F005CAB91 /* UIViewController+TTPopupViewController.m in Sources */,
 				E78583CA22409D5A00BBEA41 /* TXMineTableViewCell.m in Sources */,
 				E78583C4223FA3C000BBEA41 /* TXMineHeaderView.m in Sources */,
 				E72699E4223F7F58003A5043 /* UIImage+SCExtension.m in Sources */,
@@ -1663,6 +1813,7 @@
 				E72699DD223F7F58003A5043 /* UIImageView+SCExtension.m in Sources */,
 				E7759AAF22447ADA007DA6CF /* TXModifyUserInfoViewController.m in Sources */,
 				E7AA9DD2224372B500C15483 /* TXZhuanchuZhuanruViewController.m in Sources */,
+				E78333DB22487913005CAB91 /* TXLoginViewController.m in Sources */,
 				E72699DE223F7F58003A5043 /* UIBarButtonItem+Extension.m in Sources */,
 				E72699F8223F8298003A5043 /* WMPageController.m in Sources */,
 				E72699E1223F7F58003A5043 /* UILabel+SCExtension.m in Sources */,
@@ -1684,6 +1835,7 @@
 				E78583BE223F967D00BBEA41 /* SCTableViewSectionHeaderView.m in Sources */,
 				E72699FB223F8298003A5043 /* WMMenuView.m in Sources */,
 				E72699D5223F7F58003A5043 /* UIButton+MVImagePosition.m in Sources */,
+				E78334072248DE2F005CAB91 /* FMMessagePopupViewController.m in Sources */,
 				E7AA9DD72243735A00C15483 /* TXEquityViewController.m in Sources */,
 				E7269A04223F8738003A5043 /* TXMainHeaderView.m in Sources */,
 				E78583D02240BD5A00BBEA41 /* TXPersonModel.m in Sources */,

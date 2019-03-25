@@ -11,6 +11,7 @@
 #import "TXPersonModel.h"
 #import "TXMallBannerCollectionViewCell.h"
 #import "TXMallCollectionViewCell.h"
+#import "TXMallGoodsDetailsViewController.h"
 
 static NSString* reuseIdentifier = @"TXMallToolsCollectionViewCell";
 static NSString* reuseIdentifierBanner = @"TXMallBannerCollectionViewCell";
@@ -56,7 +57,6 @@ static NSString* reuseIdentifierMall = @"TXMallCollectionViewCell";
     else if (section==3) return 19;
     else{
         NSArray *subArray = [self.dataArray lz_safeObjectAtIndex:section-1];
-        TTLog(@"self.dataArray.count -- %lu",(unsigned long)subArray.count);
         return subArray.count;
     }
 }
@@ -85,7 +85,8 @@ static NSString* reuseIdentifierMall = @"TXMallCollectionViewCell";
 
 /// 点击collectionViewCell
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-
+    TXMallGoodsDetailsViewController *vc = [[TXMallGoodsDetailsViewController alloc] init];
+    TTPushVC(vc);
 }
 
 /// 同一行的cell的间距

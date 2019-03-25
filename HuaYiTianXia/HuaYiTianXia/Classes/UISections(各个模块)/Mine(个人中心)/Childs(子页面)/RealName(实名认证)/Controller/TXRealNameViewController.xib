@@ -243,7 +243,7 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="c31_tianjia" width="22.5" height="22.5"/>
+        <image name="c31_tianjia" width="22" height="22"/>
         <image name="right_arrow" width="10" height="10"/>
     </resources>
 </document>

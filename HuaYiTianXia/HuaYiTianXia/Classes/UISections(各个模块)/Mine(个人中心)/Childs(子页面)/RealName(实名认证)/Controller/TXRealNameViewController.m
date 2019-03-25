@@ -7,6 +7,7 @@
 //
 
 #import "TXRealNameViewController.h"
+#import "TXLoginViewController.h"
 
 @interface TXRealNameViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (strong, nonatomic) UIButton *saveButton;
@@ -123,7 +124,11 @@
 
 /** 保存 */
 - (void) saveBtnClick:(UIButton *) sender{
-    
+    TXLoginViewController *view = [[TXLoginViewController alloc] init];
+    LZNavigationController *nav = [[LZNavigationController alloc] initWithRootViewController:view];
+    [self.navigationController presentViewController:nav animated:YES completion:^{
+        TTLog(@"个人信息修改");
+    }];
 }
 
 /** 选择拍照还是从相册中选择 */

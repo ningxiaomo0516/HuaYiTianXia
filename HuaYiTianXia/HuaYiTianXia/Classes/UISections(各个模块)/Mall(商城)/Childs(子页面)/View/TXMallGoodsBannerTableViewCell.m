@@ -1,27 +1,27 @@
 //
-//  TXMineBannerTableViewCell.m
+//  TXMallGoodsBannerTableViewCell.m
 //  HuaYiTianXia
 //
-//  Created by 宁小陌 on 2019/3/19.
-//  Copyright © 2019 宁小陌. All rights reserved.
+//  Created by 宁小陌 on 2019/3/25.
+//  Copyright © 2019年 宁小陌. All rights reserved.
 //
 
-#import "TXMineBannerTableViewCell.h"
+#import "TXMallGoodsBannerTableViewCell.h"
 #import "TYPageControl.h"
 #import "TYCyclePagerView.h"
 #import "TXMineBannerCollectionViewCell.h"
 
 static NSString* reuseIdentifiers = @"TXMineBannerCollectionViewCell";
 
-@interface TXMineBannerTableViewCell()<TYCyclePagerViewDataSource,TYCyclePagerViewDelegate>
+@interface TXMallGoodsBannerTableViewCell()<TYCyclePagerViewDataSource,TYCyclePagerViewDelegate>
 
 @property (nonatomic, strong) TYCyclePagerView *pagerView;
 @property (nonatomic, strong) TYPageControl *pageControl;
-@property (nonatomic, copy)TXMineBannerTableViewCellCallBlock callBlock;
+@property (nonatomic, copy)TXMallGoodsBannerTableViewCellCallBlock callBlock;
 
 @end
 
-@implementation TXMineBannerTableViewCell
+@implementation TXMallGoodsBannerTableViewCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
@@ -30,7 +30,7 @@ static NSString* reuseIdentifiers = @"TXMineBannerCollectionViewCell";
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
+    
     // Configure the view for the selected state
 }
 
@@ -43,38 +43,28 @@ static NSString* reuseIdentifiers = @"TXMineBannerCollectionViewCell";
     return self;
 }
 
-- (void)setImagesDidOnClickCallBlock:(TXMineBannerTableViewCellCallBlock)block{
+- (void)setImagesDidOnClickCallBlock:(TXMallGoodsBannerTableViewCellCallBlock)block{
     self.callBlock = block;
 }
 
 
 - (void) initView{
-    [self addSubview:self.boxView];
-    [self.boxView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(@(IPHONE6_W(15)));
-        make.top.equalTo(@(IPHONE6_W(8)));
-        make.right.equalTo(self.mas_right).offset(IPHONE6_W(-15));
-        make.bottom.equalTo(self.mas_bottom).offset(IPHONE6_W(-8));
-    }];
-    
     [self addPagerView];
-//    if (self.listModel.count>1) {
-        self.pagerView.autoScrollInterval = 3;//自动轮播时间
-//    }
+    //    if (self.listModel.count>1) {
+    self.pagerView.autoScrollInterval = 3;//自动轮播时间
+    //    }
     self.pageControl.numberOfPages = 5;//self.listModel.count;
     [self.pagerView reloadData];
 }
 
 - (void)addPagerView {
-
-    [self.boxView addSubview:self.pagerView];
+    
+    [self addSubview:self.pagerView];
     [self addPageControl];
     [self.pagerView lz_setCornerRadius:3.0];
     
     [self.pagerView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(self.boxView.mas_right).offset(-5);
-        make.bottom.equalTo(self.boxView.mas_bottom).offset(-5);
-        make.left.top.equalTo(@(5));
+        make.bottom.right.left.top.equalTo(self);
     }];
     
     [self.pageControl mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -131,21 +121,13 @@ static NSString* reuseIdentifiers = @"TXMineBannerCollectionViewCell";
     pageControl.pageIndicatorSize = CGSizeMake(6, 6);
     pageControl.currentPageIndicatorTintColor = kWhiteColor;
     pageControl.pageIndicatorTintColor = [kWhiteColor colorWithAlphaComponent:0.5];
-//    pageControl.pageIndicatorImage = kGetImage(@"live_gunlun_nor");
-//    pageControl.currentPageIndicatorImage = kGetImage(@"live_gunlun_press");
+    //    pageControl.pageIndicatorImage = kGetImage(@"live_gunlun_nor");
+    //    pageControl.currentPageIndicatorImage = kGetImage(@"live_gunlun_press");
     //    pageControl.contentInset = UIEdgeInsetsMake(0, 20, 0, 20);
     //    pageControl.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
     //    pageControl.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
     //    [pageControl addTarget:self action:@selector(pageControlValueChangeAction:) forControlEvents:UIControlEventValueChanged];
     [_pagerView addSubview:pageControl];
     _pageControl = pageControl;
-}
-
-- (UIView *)boxView{
-    if (!_boxView) {
-        _boxView = [UIView lz_viewWithColor:kWhiteColor];
-        [_boxView lz_setCornerRadius:5.0];
-    }
-    return _boxView;
 }
 @end

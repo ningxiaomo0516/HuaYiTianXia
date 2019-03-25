@@ -8,6 +8,7 @@
 
 #import "LZRootViewController.h"
 //#import "UITabBar+SCBadge.h"
+#import "TXLoginViewController.h"
 
 @interface LZRootViewController ()<UITabBarControllerDelegate,UINavigationControllerDelegate>
 @property (nonatomic, strong, nonnull)NSArray *arrayTab;
@@ -97,12 +98,12 @@
     
     childVc.tabBarItem.titlePositionAdjustment = UIOffsetMake(0, -2);
     childVc.tabBarItem.imageInsets = UIEdgeInsetsZero;
-    
     // 3.设置文字的样式
     [self setTabBarItemTextColor:childVc];
     
     // 添加为tabbar控制器的子控制器
     LZNavigationController *navigation = [[LZNavigationController alloc] initWithRootViewController:childVc];
+    navigation.tabBarItem = childVc.tabBarItem;
     navigation.isFullScreenPopGestureEnabled = YES;
     navigation.delegate = self;
     [self addChildViewController:navigation];
@@ -149,6 +150,20 @@
 #pragma mark- UITabBarControllerDelegate
 - (void) tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController{
     TTLog(@"tabBarController.selectedIndex --- %ld",tabBarController.selectedIndex);
+    if (tabBarController.selectedIndex==3) {
+        TXLoginViewController *view = [[TXLoginViewController alloc] init];
+        LZNavigationController *navigation = [[LZNavigationController alloc] initWithRootViewController:view];
+        [viewController presentViewController:navigation animated:YES completion:^{
+            TTLog(@"个人信息修改");
+        }];
+    }
+}
+
+//should选中viewController  return YES 可以本选中， NO不可以被选中
+- (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController{
+    TTLog(@"选中tabBarController.selectedIndex --- %ld--- %ld",tabBarController.selectedIndex,viewController.tabBarItem.tag);
+
+    return YES;
 }
 
 - (NSArray *)arrayTab{
