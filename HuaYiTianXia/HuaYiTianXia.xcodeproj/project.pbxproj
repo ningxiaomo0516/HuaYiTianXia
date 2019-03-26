@@ -64,6 +64,14 @@
 		E72699FD223F8298003A5043 /* bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E72699F7223F8297003A5043 /* bg.jpg */; };
 		E7269A00223F8472003A5043 /* TXNewTemplateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E72699FF223F8472003A5043 /* TXNewTemplateViewController.m */; };
 		E7269A04223F8738003A5043 /* TXMainHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = E7269A03223F8738003A5043 /* TXMainHeaderView.m */; };
+		E753D1F12249D3B200A2DD36 /* SCPopoverAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = E753D1EB2249D3B200A2DD36 /* SCPopoverAnimator.m */; };
+		E753D1F22249D3B200A2DD36 /* SCPresentationController.m in Sources */ = {isa = PBXBuildFile; fileRef = E753D1EE2249D3B200A2DD36 /* SCPresentationController.m */; };
+		E753D1F32249D3B200A2DD36 /* UIViewController+SCPopover.m in Sources */ = {isa = PBXBuildFile; fileRef = E753D1F02249D3B200A2DD36 /* UIViewController+SCPopover.m */; };
+		E753D1F6224A03A900A2DD36 /* TXShareToolsCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E753D1F5224A03A900A2DD36 /* TXShareToolsCollectionViewCell.m */; };
+		E753D1F9224A1A6300A2DD36 /* TXSubmitOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E753D1F8224A1A6300A2DD36 /* TXSubmitOrderViewController.m */; };
+		E753D1FC224A1D2000A2DD36 /* TXReceiveAddressTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E753D1FB224A1D2000A2DD36 /* TXReceiveAddressTableViewCell.m */; };
+		E753D1FF224A2A6800A2DD36 /* TXShoppingTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E753D1FE224A2A6800A2DD36 /* TXShoppingTableViewCell.m */; };
+		E753D202224A311D00A2DD36 /* TXChoosePayTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E753D201224A311D00A2DD36 /* TXChoosePayTableViewCell.m */; };
 		E7759AAF22447ADA007DA6CF /* TXModifyUserInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7759AAE22447AD9007DA6CF /* TXModifyUserInfoViewController.m */; };
 		E7759AB522447DC0007DA6CF /* SCLocalCacheTool.m in Sources */ = {isa = PBXBuildFile; fileRef = E7759AB222447DC0007DA6CF /* SCLocalCacheTool.m */; };
 		E7759AB622447DC0007DA6CF /* SCSmallTools.m in Sources */ = {isa = PBXBuildFile; fileRef = E7759AB422447DC0007DA6CF /* SCSmallTools.m */; };
@@ -93,7 +101,6 @@
 		E78333F92248CBB2005CAB91 /* TXMallGoodsSpecTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E78333F82248CBB2005CAB91 /* TXMallGoodsSpecTableViewCell.m */; };
 		E78333FC2248D0B1005CAB91 /* SCCustomMarginLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = E78333FB2248D0B1005CAB91 /* SCCustomMarginLabel.m */; };
 		E78333FF2248DDDC005CAB91 /* TXShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E78333FE2248DDDC005CAB91 /* TXShareViewController.m */; };
-		E78334072248DE2F005CAB91 /* FMMessagePopupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E78334022248DE2F005CAB91 /* FMMessagePopupViewController.m */; };
 		E78334082248DE2F005CAB91 /* TTPopupBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = E78334042248DE2F005CAB91 /* TTPopupBackgroundView.m */; };
 		E78334092248DE2F005CAB91 /* UIViewController+TTPopupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E78334062248DE2F005CAB91 /* UIViewController+TTPopupViewController.m */; };
 		E78583BA223F947600BBEA41 /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = E78583B8223F947500BBEA41 /* Utils.m */; };
@@ -262,6 +269,23 @@
 		E72699FF223F8472003A5043 /* TXNewTemplateViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXNewTemplateViewController.m; sourceTree = "<group>"; };
 		E7269A02223F8738003A5043 /* TXMainHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXMainHeaderView.h; sourceTree = "<group>"; };
 		E7269A03223F8738003A5043 /* TXMainHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXMainHeaderView.m; sourceTree = "<group>"; };
+		E753D1EA2249D3B200A2DD36 /* SCPopoverAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCPopoverAnimator.h; sourceTree = "<group>"; };
+		E753D1EB2249D3B200A2DD36 /* SCPopoverAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCPopoverAnimator.m; sourceTree = "<group>"; };
+		E753D1EC2249D3B200A2DD36 /* SCPopoverMacro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCPopoverMacro.h; sourceTree = "<group>"; };
+		E753D1ED2249D3B200A2DD36 /* SCPresentationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCPresentationController.h; sourceTree = "<group>"; };
+		E753D1EE2249D3B200A2DD36 /* SCPresentationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCPresentationController.m; sourceTree = "<group>"; };
+		E753D1EF2249D3B200A2DD36 /* UIViewController+SCPopover.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+SCPopover.h"; sourceTree = "<group>"; };
+		E753D1F02249D3B200A2DD36 /* UIViewController+SCPopover.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+SCPopover.m"; sourceTree = "<group>"; };
+		E753D1F4224A03A900A2DD36 /* TXShareToolsCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXShareToolsCollectionViewCell.h; sourceTree = "<group>"; };
+		E753D1F5224A03A900A2DD36 /* TXShareToolsCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXShareToolsCollectionViewCell.m; sourceTree = "<group>"; };
+		E753D1F7224A1A6300A2DD36 /* TXSubmitOrderViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXSubmitOrderViewController.h; sourceTree = "<group>"; };
+		E753D1F8224A1A6300A2DD36 /* TXSubmitOrderViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXSubmitOrderViewController.m; sourceTree = "<group>"; };
+		E753D1FA224A1D2000A2DD36 /* TXReceiveAddressTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXReceiveAddressTableViewCell.h; sourceTree = "<group>"; };
+		E753D1FB224A1D2000A2DD36 /* TXReceiveAddressTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXReceiveAddressTableViewCell.m; sourceTree = "<group>"; };
+		E753D1FD224A2A6800A2DD36 /* TXShoppingTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXShoppingTableViewCell.h; sourceTree = "<group>"; };
+		E753D1FE224A2A6800A2DD36 /* TXShoppingTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXShoppingTableViewCell.m; sourceTree = "<group>"; };
+		E753D200224A311D00A2DD36 /* TXChoosePayTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXChoosePayTableViewCell.h; sourceTree = "<group>"; };
+		E753D201224A311D00A2DD36 /* TXChoosePayTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXChoosePayTableViewCell.m; sourceTree = "<group>"; };
 		E7759AAD22447AD9007DA6CF /* TXModifyUserInfoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXModifyUserInfoViewController.h; sourceTree = "<group>"; };
 		E7759AAE22447AD9007DA6CF /* TXModifyUserInfoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXModifyUserInfoViewController.m; sourceTree = "<group>"; };
 		E7759AB122447DC0007DA6CF /* SCSmallTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCSmallTools.h; sourceTree = "<group>"; };
@@ -319,8 +343,6 @@
 		E78333FB2248D0B1005CAB91 /* SCCustomMarginLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCCustomMarginLabel.m; sourceTree = "<group>"; };
 		E78333FD2248DDDC005CAB91 /* TXShareViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXShareViewController.h; sourceTree = "<group>"; };
 		E78333FE2248DDDC005CAB91 /* TXShareViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXShareViewController.m; sourceTree = "<group>"; };
-		E78334012248DE2F005CAB91 /* FMMessagePopupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMMessagePopupViewController.h; sourceTree = "<group>"; };
-		E78334022248DE2F005CAB91 /* FMMessagePopupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMMessagePopupViewController.m; sourceTree = "<group>"; };
 		E78334032248DE2F005CAB91 /* TTPopupBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTPopupBackgroundView.h; sourceTree = "<group>"; };
 		E78334042248DE2F005CAB91 /* TTPopupBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTPopupBackgroundView.m; sourceTree = "<group>"; };
 		E78334052248DE2F005CAB91 /* UIViewController+TTPopupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+TTPopupViewController.h"; sourceTree = "<group>"; };
@@ -764,6 +786,7 @@
 		E72698E8223F737C003A5043 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				E753D1E92249D3B200A2DD36 /* SCPopover */,
 				E78334002248DE2F005CAB91 /* TTPopupView */,
 				E7759AD72244C0D7007DA6CF /* SCTextView */,
 				E7D07C632243CCBE00E3FFAF /* LZActionSheet */,
@@ -925,6 +948,20 @@
 			path = Commons;
 			sourceTree = "<group>";
 		};
+		E753D1E92249D3B200A2DD36 /* SCPopover */ = {
+			isa = PBXGroup;
+			children = (
+				E753D1EA2249D3B200A2DD36 /* SCPopoverAnimator.h */,
+				E753D1EB2249D3B200A2DD36 /* SCPopoverAnimator.m */,
+				E753D1EC2249D3B200A2DD36 /* SCPopoverMacro.h */,
+				E753D1ED2249D3B200A2DD36 /* SCPresentationController.h */,
+				E753D1EE2249D3B200A2DD36 /* SCPresentationController.m */,
+				E753D1EF2249D3B200A2DD36 /* UIViewController+SCPopover.h */,
+				E753D1F02249D3B200A2DD36 /* UIViewController+SCPopover.m */,
+			);
+			path = SCPopover;
+			sourceTree = "<group>";
+		};
 		E7759AB022447DA0007DA6CF /* SmallTools */ = {
 			isa = PBXGroup;
 			children = (
@@ -1069,6 +1106,8 @@
 				E78333EF2248BFF1005CAB91 /* TXMallGoodsDetailsViewController.m */,
 				E78333FD2248DDDC005CAB91 /* TXShareViewController.h */,
 				E78333FE2248DDDC005CAB91 /* TXShareViewController.m */,
+				E753D1F7224A1A6300A2DD36 /* TXSubmitOrderViewController.h */,
+				E753D1F8224A1A6300A2DD36 /* TXSubmitOrderViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1082,6 +1121,14 @@
 				E78333F52248C7D4005CAB91 /* TXMallGoodsDetailsTableViewCell.m */,
 				E78333F72248CBB2005CAB91 /* TXMallGoodsSpecTableViewCell.h */,
 				E78333F82248CBB2005CAB91 /* TXMallGoodsSpecTableViewCell.m */,
+				E753D1F4224A03A900A2DD36 /* TXShareToolsCollectionViewCell.h */,
+				E753D1F5224A03A900A2DD36 /* TXShareToolsCollectionViewCell.m */,
+				E753D1FA224A1D2000A2DD36 /* TXReceiveAddressTableViewCell.h */,
+				E753D1FB224A1D2000A2DD36 /* TXReceiveAddressTableViewCell.m */,
+				E753D1FD224A2A6800A2DD36 /* TXShoppingTableViewCell.h */,
+				E753D1FE224A2A6800A2DD36 /* TXShoppingTableViewCell.m */,
+				E753D200224A311D00A2DD36 /* TXChoosePayTableViewCell.h */,
+				E753D201224A311D00A2DD36 /* TXChoosePayTableViewCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1089,8 +1136,6 @@
 		E78334002248DE2F005CAB91 /* TTPopupView */ = {
 			isa = PBXGroup;
 			children = (
-				E78334012248DE2F005CAB91 /* FMMessagePopupViewController.h */,
-				E78334022248DE2F005CAB91 /* FMMessagePopupViewController.m */,
 				E78334032248DE2F005CAB91 /* TTPopupBackgroundView.h */,
 				E78334042248DE2F005CAB91 /* TTPopupBackgroundView.m */,
 				E78334052248DE2F005CAB91 /* UIViewController+TTPopupViewController.h */,
@@ -1746,6 +1791,7 @@
 				E7AA9DB7224338EA00C15483 /* TXWalletTableViewCell.m in Sources */,
 				E726997F223F7E4B003A5043 /* SCActivityIndicatorView.m in Sources */,
 				E7AA9DDF224392FB00C15483 /* TXRolloutViewController.m in Sources */,
+				E753D202224A311D00A2DD36 /* TXChoosePayTableViewCell.m in Sources */,
 				E7759ADC2244C0D7007DA6CF /* MVTextField.m in Sources */,
 				E7AA9DBA22433A0200C15483 /* TXWalletCollectionViewCell.m in Sources */,
 				E7759AE02244C59F007DA6CF /* TXAddressTextViewCell.m in Sources */,
@@ -1760,6 +1806,7 @@
 				E72699E0223F7F58003A5043 /* UIView+SCTapped.m in Sources */,
 				E72699A9223F7ECC003A5043 /* NSString+PinYin.m in Sources */,
 				E7F1A73E2242835A003FA216 /* TXMallBannerCollectionViewCell.m in Sources */,
+				E753D1F9224A1A6300A2DD36 /* TXSubmitOrderViewController.m in Sources */,
 				E7F1A7002241EF16003FA216 /* TXProductViewController.m in Sources */,
 				E726990C223F7844003A5043 /* TXNewsViewController.m in Sources */,
 				E7D07C682243CCBE00E3FFAF /* LZActionSheet.m in Sources */,
@@ -1786,11 +1833,13 @@
 				E78333E422489E6B005CAB91 /* TXRegisteredTableViewCell.m in Sources */,
 				E72699E3223F7F58003A5043 /* UITabBar+SCBadge.m in Sources */,
 				E78333F32248C691005CAB91 /* TXMallGoodsBannerTableViewCell.m in Sources */,
+				E753D1FC224A1D2000A2DD36 /* TXReceiveAddressTableViewCell.m in Sources */,
 				E72699A0223F7ECC003A5043 /* NSObject+SCValidation.m in Sources */,
 				E7759AC122447FD2007DA6CF /* TXRepeatCastViewController.m in Sources */,
 				E7269907223F754B003A5043 /* UIViewController+LZNavigationController.m in Sources */,
 				E72699E2223F7F58003A5043 /* UIImage+Extension.m in Sources */,
 				E7F1A7092241F298003FA216 /* TXProductTableViewCell.m in Sources */,
+				E753D1FF224A2A6800A2DD36 /* TXShoppingTableViewCell.m in Sources */,
 				E72699D9223F7F58003A5043 /* UILabel+Extension.m in Sources */,
 				E72699A5223F7ECC003A5043 /* NSFileManager+Paths.m in Sources */,
 				E72699DF223F7F58003A5043 /* UILabel+ChangeLineSpaceAndWordSpace.m in Sources */,
@@ -1811,6 +1860,7 @@
 				E7AA9DAF2243353200C15483 /* TTBaseNavImagesTableViewController.m in Sources */,
 				E72699AA223F7ECC003A5043 /* NSArray+Extension.m in Sources */,
 				E72699DD223F7F58003A5043 /* UIImageView+SCExtension.m in Sources */,
+				E753D1F6224A03A900A2DD36 /* TXShareToolsCollectionViewCell.m in Sources */,
 				E7759AAF22447ADA007DA6CF /* TXModifyUserInfoViewController.m in Sources */,
 				E7AA9DD2224372B500C15483 /* TXZhuanchuZhuanruViewController.m in Sources */,
 				E78333DB22487913005CAB91 /* TXLoginViewController.m in Sources */,
@@ -1819,6 +1869,7 @@
 				E72699E1223F7F58003A5043 /* UILabel+SCExtension.m in Sources */,
 				E7F1A73822427A65003FA216 /* TXMallCollectionViewController.m in Sources */,
 				E7AA9DCD22436F4D00C15483 /* TXTransactionRecordsTableViewCell.m in Sources */,
+				E753D1F12249D3B200A2DD36 /* SCPopoverAnimator.m in Sources */,
 				E726990F223F786B003A5043 /* TXMineViewController.m in Sources */,
 				E78583F82240C2BE00BBEA41 /* TXSetupViewController.m in Sources */,
 				E72699D6223F7F58003A5043 /* UIView+IBExtension.m in Sources */,
@@ -1828,6 +1879,7 @@
 				E72699A4223F7ECC003A5043 /* NSDate+Relation.m in Sources */,
 				E7759AD62244BB65007DA6CF /* TXAddressAddViewController.m in Sources */,
 				E78583C722408F1F00BBEA41 /* TXMineHeaderTableViewCell.m in Sources */,
+				E753D1F32249D3B200A2DD36 /* UIViewController+SCPopover.m in Sources */,
 				E78583BA223F947600BBEA41 /* Utils.m in Sources */,
 				E7F1A732224248D4003FA216 /* TXTeamTableViewCell.m in Sources */,
 				E7759AB522447DC0007DA6CF /* SCLocalCacheTool.m in Sources */,
@@ -1835,9 +1887,9 @@
 				E78583BE223F967D00BBEA41 /* SCTableViewSectionHeaderView.m in Sources */,
 				E72699FB223F8298003A5043 /* WMMenuView.m in Sources */,
 				E72699D5223F7F58003A5043 /* UIButton+MVImagePosition.m in Sources */,
-				E78334072248DE2F005CAB91 /* FMMessagePopupViewController.m in Sources */,
 				E7AA9DD72243735A00C15483 /* TXEquityViewController.m in Sources */,
 				E7269A04223F8738003A5043 /* TXMainHeaderView.m in Sources */,
+				E753D1F22249D3B200A2DD36 /* SCPresentationController.m in Sources */,
 				E78583D02240BD5A00BBEA41 /* TXPersonModel.m in Sources */,
 				E72699E5223F7F58003A5043 /* UITextField+Extension.m in Sources */,
 			);

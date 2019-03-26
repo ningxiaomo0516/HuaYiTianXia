@@ -10,7 +10,8 @@
 #import "TXMallGoodsBannerTableViewCell.h"
 #import "TXMallGoodsDetailsTableViewCell.h"
 #import "TXMallGoodsSpecTableViewCell.h"
-#import "FMMessagePopupViewController.h"
+#import "TXShareViewController.h"
+#import "TXSubmitOrderViewController.h"
 
 static NSString * const reuseIdentifierBanner = @"TXMallGoodsBannerTableViewCell";
 static NSString * const reuseIdentifierDetails = @"TXMallGoodsDetailsTableViewCell";
@@ -30,9 +31,24 @@ static NSString * const reuseIdentifierSpec = @"TXMallGoodsSpecTableViewCell";
     [self initView];
 }
 
+/// 立即投保
 - (void) saveBtnClick:(UIButton *)sender{
-    FMMessagePopupViewController *vc = [[FMMessagePopupViewController alloc] init];
-    [self presentPopupViewController:vc animationType:TTPopupViewAnimationFade];
+    TXSubmitOrderViewController *vc = [[TXSubmitOrderViewController alloc] init];
+    TTPushVC(vc);
+}
+
+/// 分享到第三方平台
+- (void)didTapShareButton:(UIBarButtonItem *)barButtonItem {
+    TXShareViewController *vc = [[TXShareViewController alloc] init];
+    //    [self presentPopupViewController:vc animationType:TTPopupViewAnimationSlideBottomBottom];
+    CGFloat height = IPHONE6_W(150)+kTabBarHeight;
+    [self sc_bottomPresentController:vc presentedHeight:height completeHandle:^(BOOL presented) {
+        if (presented) {
+            TTLog(@"弹出了");
+        }else{
+            TTLog(@"消失了");
+        }
+    }];
 }
 
 #pragma mark ---- 界面布局设置
@@ -66,10 +82,6 @@ static NSString * const reuseIdentifierSpec = @"TXMallGoodsSpecTableViewCell";
                                                                  target:self
                                                                  action:@selector(didTapShareButton:)];
     self.navigationItem.rightBarButtonItem = rightItem;
-}
-
-- (void)didTapShareButton:(UIBarButtonItem *)barButtonItem {
-    Toast(@"分享");
 }
 
 #pragma mark - Table view data source

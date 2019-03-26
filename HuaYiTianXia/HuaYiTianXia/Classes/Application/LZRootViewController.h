@@ -10,10 +10,9 @@
 
 /** 导航控制器基类 */
 @interface LZRootViewController : UITabBarController
-
-/** 是否为Json文件数据 */
-@property (nonatomic, assign)BOOL lz_isJson;
-
+{
+    NSInteger _tabbarIndex;
+}
 
 /**
  设置小红点

@@ -27,7 +27,21 @@ typedef enum {
 @property (nonatomic, retain) UIViewController *tt_popupViewController;
 @property (nonatomic, retain) TTPopupBackgroundView *tt_popupBackgroundView;
 
+
+/**
+ *  从当前屏幕中间弹出一个控制器
+ *
+ *  @param popupViewController 需要弹出的控制器
+ *  @param animationType 弹出的动画方式
+ */
 - (void)presentPopupViewController:(UIViewController*)popupViewController animationType:(TTPopupViewAnimation)animationType;
+/**
+ *  从当前屏幕中间弹出一个控制器
+ *
+ *  @param popupViewController 需要弹出的控制器
+ *  @param animationType 弹出的动画方式
+ *  @param dismissed 消失的回调
+ */
 - (void)presentPopupViewController:(UIViewController*)popupViewController animationType:(TTPopupViewAnimation)animationType dismissed:(void(^)(void))dismissed;
 - (void)dismissPopupViewControllerWithanimationType:(TTPopupViewAnimation)animationType;
 

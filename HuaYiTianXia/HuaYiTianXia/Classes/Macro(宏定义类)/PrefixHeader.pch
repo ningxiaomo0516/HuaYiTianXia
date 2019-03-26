@@ -34,7 +34,8 @@
 #import "UIViewController+LZNavigationController.h"
 /// 弹窗类
 #import "UIViewController+TTPopupViewController.h"
-
+/// 弹窗()
+#import "UIViewController+SCPopover.h"
 
 #import "UIImageView+WebCache.h"
 #import "UIView+WebCache.h"
