@@ -10,11 +10,14 @@
 #import "TXReceiveAddressTableViewCell.h"
 #import "TXShoppingTableViewCell.h"
 #import "TXChoosePayTableViewCell.h"
+#import "TXPurchaseQuantityTableViewCell.h"
+#import "TXPersonModel.h"
 
 
 static NSString * const reuseIdentifierReceiveAddress = @"TXReceiveAddressTableViewCell";
 static NSString * const reuseIdentifierShopping = @"TXShoppingTableViewCell";
 static NSString * const reuseIdentifierChoosePay = @"TXChoosePayTableViewCell";
+static NSString * const reuseIdentifierPurchase = @"TXPurchaseQuantityTableViewCell";
 
 @interface TXSubmitOrderViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) UITableView *tableView;
@@ -27,6 +30,8 @@ static NSString * const reuseIdentifierChoosePay = @"TXChoosePayTableViewCell";
 @property (nonatomic, strong) UILabel       *totalTitleLabel;
 /// 提交按钮
 @property (nonatomic, strong) UILabel       *totalAmountLabel;
+/// 付款方式数组
+@property (nonatomic, strong) NSMutableArray *paymentArray;
 
 @end
 
@@ -61,9 +66,12 @@ static NSString * const reuseIdentifierChoosePay = @"TXChoosePayTableViewCell";
     }];
     
     [self.submitButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        CGFloat height = IPHONE6_W(35);
+        CGFloat top = (kTabBarHeight-height-kSafeAreaBottomHeight)/2;
         make.right.equalTo(self.footerView.mas_right).offset(IPHONE6_W(-15));
-        make.height.equalTo(@(IPHONE6_W(35)));
+        make.height.equalTo(@(height));
         make.width.equalTo(@(IPHONE6_W(85)));
+        make.top.equalTo(@(top));
     }];
     
     [self.totalAmountLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -79,44 +87,64 @@ static NSString * const reuseIdentifierChoosePay = @"TXChoosePayTableViewCell";
 
 #pragma mark - Table view data source
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 0) {
-        TXReceiveAddressTableViewCell*tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierReceiveAddress forIndexPath:indexPath];
-        tools.nicknameLabel.text = @"李阿九";
-        tools.telphoneLabel.text = @"13566667888";
-        tools.addressLabel.text = @"四川 成都 高新区 环球中心W6区 1518室";
-        return tools;
-    }else if(indexPath.section==2){
-        TXShoppingTableViewCell *tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierShopping forIndexPath:indexPath];
-        tools.titleLabel.text = @"法国进口红酒 传奇波尔多干葡萄";
-        tools.imagesView.image = kGetImage(@"test_work");
-        tools.specLabel.text = @"规格:苏哈相机";
-        tools.subtitleLabel.text = @"Mavic 2带屏升级版火爆销售中，5.5寸高亮屏，高清图片上传会员减免优币抵现";
-        tools.priceLabel.text = @"¥399.00";
-        return tools;
-    }else{
-        TXChoosePayTableViewCell *tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierChoosePay forIndexPath:indexPath];
-//        tools.titleLabel.text = @"法国进口红酒 传奇波尔多干葡萄";
-//        tools.imagesView.image = kGetImage(@"test_work");
-//        tools.specLabel.text = @"规格:苏哈相机";
-//        tools.subtitleLabel.text = @"Mavic 2带屏升级版火爆销售中，5.5寸高亮屏，高清图片上传会员减免优币抵现";
-//        tools.priceLabel.text = @"¥399.00";
-        return tools;
+    switch (indexPath.section) {
+        case 0: {
+                TXReceiveAddressTableViewCell*tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierReceiveAddress forIndexPath:indexPath];
+                tools.nicknameLabel.text = @"李阿九";
+                tools.telphoneLabel.text = @"13566667888";
+                tools.addressLabel.text = @"四川 成都 高新区 环球中心W6区 1518室";
+                return tools;
+            }
+            break;
+        case 1: {
+            TXShoppingTableViewCell *tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierShopping forIndexPath:indexPath];
+            tools.titleLabel.text = @"法国进口红酒 传奇波尔多干葡萄";
+            tools.imagesView.image = kGetImage(@"test_work");
+            tools.specLabel.text = @"规格:苏哈相机";
+            tools.subtitleLabel.text = @"Mavic 2带屏升级版火爆销售中，5.5寸高亮屏，高清图片上传会员减免优币抵现";
+            tools.priceLabel.text = @"¥399.00";
+            return tools;
+        }
+            break;
+        case 2: {
+            TXPurchaseQuantityTableViewCell *tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierPurchase forIndexPath:indexPath];
+            return tools;
+        }
+            break;
+        case 3: {
+            TXPersonModel *model = self.paymentArray[indexPath.row];
+            TXChoosePayTableViewCell *tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierChoosePay forIndexPath:indexPath];
+            tools.titleLabel.text = model.title;
+            tools.imagesView.image = kGetImage(model.imageText);
+            tools.linerView.hidden = (indexPath.row!=self.paymentArray.count-1)?NO:YES;
+            return tools;
+        }
+            break;
     }
+    return [UITableViewCell new];
 }
 
 // 多少个分组 section
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 5;
+    return 4;
 }
 
 /// 返回多少
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    if (section==3) return self.paymentArray.count;
     return 1;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section==0) return IPHONE6_W(65);
-    return IPHONE6_W(120);
+    if (indexPath.section==1) return IPHONE6_W(120);
+    return IPHONE6_W(50);
+}
+
+#pragma mark -- 设置Header高度
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    if (section==0||section==2) return 0;
+    return 10;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -130,11 +158,13 @@ static NSString * const reuseIdentifierChoosePay = @"TXChoosePayTableViewCell";
         [_tableView registerClass:[TXReceiveAddressTableViewCell class] forCellReuseIdentifier:reuseIdentifierReceiveAddress];
         [_tableView registerClass:[TXShoppingTableViewCell class] forCellReuseIdentifier:reuseIdentifierShopping];
         [_tableView registerClass:[TXChoosePayTableViewCell class] forCellReuseIdentifier:reuseIdentifierChoosePay];
+        [_tableView registerClass:[TXPurchaseQuantityTableViewCell class] forCellReuseIdentifier:reuseIdentifierPurchase];
         
-        [_tableView setSeparatorInset:UIEdgeInsetsMake(0,IPHONE6_W(15),0,0)];
+        [_tableView setSeparatorInset:UIEdgeInsetsMake(0,0,0,0)];
+        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _tableView.delegate = self;
         _tableView.dataSource = self;
-        _tableView.backgroundColor = kWhiteColor;
+        _tableView.backgroundColor = kViewColorNormal;
     }
     return _tableView;
 }
@@ -182,6 +212,21 @@ static NSString * const reuseIdentifierChoosePay = @"TXChoosePayTableViewCell";
         _dataArray = [[NSMutableArray alloc] init];
     }
     return _dataArray;
+}
+
+- (NSMutableArray *)paymentArray{
+    if (!_paymentArray) {
+        _paymentArray = [[NSMutableArray alloc] init];
+        NSArray* titleArr = @[@"微信支付",@"支付宝"];
+        NSArray* classArr = @[@"c31_btn_wxzf",@"c31_btn_zfb"];
+        for (int j = 0; j < titleArr.count; j ++) {
+            TXPersonModel* personModel = [[TXPersonModel alloc] init];
+            personModel.title = [titleArr lz_safeObjectAtIndex:j];
+            personModel.imageText = [classArr lz_safeObjectAtIndex:j];
+            [_paymentArray addObject:personModel];
+        }
+    }
+    return _paymentArray;
 }
 
 

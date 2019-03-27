@@ -156,7 +156,6 @@ static NSString * const reuseIdentifierBanner = @"TXMineBannerTableViewCell";
 - (NSMutableArray *)itemModelArray{
     if (!_itemModelArray) {
         _itemModelArray = [[NSMutableArray alloc] init];
-        
         NSArray* titleArr = @[@[@"资产管理",@"实名认证",@"订单中心",@"我的钱包",
                                 @"推荐邀请",@"我的团队",@"设置"]];
         NSArray* classArr = @[@[@"",@"TXRealNameViewController",@"TXOrderViewController",

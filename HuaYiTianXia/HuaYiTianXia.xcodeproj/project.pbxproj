@@ -72,6 +72,7 @@
 		E753D1FC224A1D2000A2DD36 /* TXReceiveAddressTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E753D1FB224A1D2000A2DD36 /* TXReceiveAddressTableViewCell.m */; };
 		E753D1FF224A2A6800A2DD36 /* TXShoppingTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E753D1FE224A2A6800A2DD36 /* TXShoppingTableViewCell.m */; };
 		E753D202224A311D00A2DD36 /* TXChoosePayTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E753D201224A311D00A2DD36 /* TXChoosePayTableViewCell.m */; };
+		E7757A08224B17BC00B31E81 /* TXPurchaseQuantityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7757A07224B17BC00B31E81 /* TXPurchaseQuantityTableViewCell.m */; };
 		E7759AAF22447ADA007DA6CF /* TXModifyUserInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7759AAE22447AD9007DA6CF /* TXModifyUserInfoViewController.m */; };
 		E7759AB522447DC0007DA6CF /* SCLocalCacheTool.m in Sources */ = {isa = PBXBuildFile; fileRef = E7759AB222447DC0007DA6CF /* SCLocalCacheTool.m */; };
 		E7759AB622447DC0007DA6CF /* SCSmallTools.m in Sources */ = {isa = PBXBuildFile; fileRef = E7759AB422447DC0007DA6CF /* SCSmallTools.m */; };
@@ -286,6 +287,8 @@
 		E753D1FE224A2A6800A2DD36 /* TXShoppingTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXShoppingTableViewCell.m; sourceTree = "<group>"; };
 		E753D200224A311D00A2DD36 /* TXChoosePayTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXChoosePayTableViewCell.h; sourceTree = "<group>"; };
 		E753D201224A311D00A2DD36 /* TXChoosePayTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXChoosePayTableViewCell.m; sourceTree = "<group>"; };
+		E7757A06224B17BC00B31E81 /* TXPurchaseQuantityTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXPurchaseQuantityTableViewCell.h; sourceTree = "<group>"; };
+		E7757A07224B17BC00B31E81 /* TXPurchaseQuantityTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXPurchaseQuantityTableViewCell.m; sourceTree = "<group>"; };
 		E7759AAD22447AD9007DA6CF /* TXModifyUserInfoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXModifyUserInfoViewController.h; sourceTree = "<group>"; };
 		E7759AAE22447AD9007DA6CF /* TXModifyUserInfoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXModifyUserInfoViewController.m; sourceTree = "<group>"; };
 		E7759AB122447DC0007DA6CF /* SCSmallTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCSmallTools.h; sourceTree = "<group>"; };
@@ -1129,6 +1132,8 @@
 				E753D1FE224A2A6800A2DD36 /* TXShoppingTableViewCell.m */,
 				E753D200224A311D00A2DD36 /* TXChoosePayTableViewCell.h */,
 				E753D201224A311D00A2DD36 /* TXChoosePayTableViewCell.m */,
+				E7757A06224B17BC00B31E81 /* TXPurchaseQuantityTableViewCell.h */,
+				E7757A07224B17BC00B31E81 /* TXPurchaseQuantityTableViewCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1778,6 +1783,7 @@
 				E7F1A70F224205A2003FA216 /* TTBaseSectionHeaderView.m in Sources */,
 				E72699D7223F7F58003A5043 /* UIColor+Extension.m in Sources */,
 				E78583F52240C2AF00BBEA41 /* TXWalletViewController.m in Sources */,
+				E7757A08224B17BC00B31E81 /* TXPurchaseQuantityTableViewCell.m in Sources */,
 				E72699F9223F8298003A5043 /* WMMenuItem.m in Sources */,
 				E78333F02248BFF1005CAB91 /* TXMallGoodsDetailsViewController.m in Sources */,
 				E78584032240C54300BBEA41 /* TYPageControl.m in Sources */,
