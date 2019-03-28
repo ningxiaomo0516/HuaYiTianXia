@@ -8,7 +8,7 @@
 
 #import "TXAccountSecurityViewController.h"
 #import "TXMineTableViewCell.h"
-#import "TXPersonModel.h"
+#import "TXGeneralModel.h"
 
 static NSString * const reuseIdentifier = @"TXMineTableViewCell";
 
@@ -38,7 +38,7 @@ static NSString * const reuseIdentifier = @"TXMineTableViewCell";
 #pragma mark - Table view data source
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     TXMineTableViewCell* tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
-    TXPersonModel* model = self.dataArray[indexPath.row];
+    TXGeneralModel* model = self.dataArray[indexPath.row];
     model.index = indexPath.item;
     tools.titleLabel.text = model.title;
     return tools;
@@ -58,7 +58,7 @@ static NSString * const reuseIdentifier = @"TXMineTableViewCell";
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    TXPersonModel* model = self.dataArray[indexPath.row];
+    TXGeneralModel* model = self.dataArray[indexPath.row];
     NSString *className = model.showClass;
     if ([model.showClass isEqualToString:@""]) {
         
@@ -95,10 +95,10 @@ static NSString * const reuseIdentifier = @"TXMineTableViewCell";
         NSArray* titleArr = @[@"个人资料",@"认证资料",@"重置密码",@"设置交易密码"];
         NSArray* classArr = @[@"TXPersonalInfoViewController",@"",@"TXResetPwdViewController",@""];
         for (int j = 0; j < titleArr.count; j ++) {
-            TXPersonModel* personModel = [[TXPersonModel alloc] init];
-            personModel.title = [titleArr lz_safeObjectAtIndex:j];
-            personModel.showClass = [classArr lz_safeObjectAtIndex:j];
-            [_dataArray addObject:personModel];
+            TXGeneralModel *generalModel = [[TXGeneralModel alloc] init];
+            generalModel.title = [titleArr lz_safeObjectAtIndex:j];
+            generalModel.showClass = [classArr lz_safeObjectAtIndex:j];
+            [_dataArray addObject:generalModel];
         }
     }
     return _dataArray;

@@ -8,7 +8,7 @@
 
 #import "TXResetPwdViewController.h"
 #import "TXRolloutTableViewCell.h"
-#import "TXPersonModel.h"
+#import "TXGeneralModel.h"
 
 static NSString * const reuseIdentifier = @"TXRolloutTableViewCell";
 
@@ -60,7 +60,7 @@ static NSString * const reuseIdentifier = @"TXRolloutTableViewCell";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 
     TXRolloutTableViewCell* tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
-    TXPersonModel* model = self.dataArray[indexPath.row];
+    TXGeneralModel* model = self.dataArray[indexPath.row];
     model.index = indexPath.item;
     tools.titleLabel.text = model.title;
     tools.textField.placeholder = model.imageText;
@@ -133,10 +133,10 @@ static NSString * const reuseIdentifier = @"TXRolloutTableViewCell";
         NSArray* titleArr = @[@"旧密码",@"新密码",@"确认密码"];
         NSArray* subtitleArr = @[@"请输入登录旧密码",@"请输入登录新密码",@"请再次输入新密码"];
         for (int i=0; i<titleArr.count; i++) {
-            TXPersonModel* personModel = [[TXPersonModel alloc] init];
-            personModel.title = [titleArr lz_safeObjectAtIndex:i];
-            personModel.imageText = [subtitleArr lz_safeObjectAtIndex:i];
-            [_dataArray addObject:personModel];
+            TXGeneralModel *generalModel = [[TXGeneralModel alloc] init];
+            generalModel.title = [titleArr lz_safeObjectAtIndex:i];
+            generalModel.imageText = [subtitleArr lz_safeObjectAtIndex:i];
+            [_dataArray addObject:generalModel];
         }
     }
     return _dataArray;

@@ -28,9 +28,18 @@
         self.imagesView.image = kGetImage(@"default_images");
         self.titleLabel.text = @"民航局：明年1月1日，无人机飞...";
         self.subtitleLabel.text = @"农用植保农用植保农用植保农用植保农用植保农用植保农用植保农...";
-        self.dataTimeLabel.text = @"2017-06-04   10:55:24";
+        self.dataTimeLabel.text = @"2017-06-04   10:25:24";
     }
     return self;
+}
+
+- (void)setRecordsModel:(NewsRecordsModel *)recordsModel{
+    _recordsModel = recordsModel;
+    self.titleLabel.text = recordsModel.title;
+    self.subtitleLabel.text = recordsModel.content;
+    [self.imagesView sd_setImageWithURL:[NSURL URLWithString:recordsModel.img]
+                      placeholderImage:kGetImage(VERTICALMAPBITMAP)];
+    self.dataTimeLabel.text = [SCSmallTools timeStampConvertDateTime:recordsModel.time];
 }
 
 - (void) initView{
@@ -53,7 +62,7 @@
     }];
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.top.equalTo(@(12));
-        make.right.equalTo(self.mas_right).offset(-15);
+        make.right.equalTo(self.imagesView.mas_left).offset(-15);
     }];
     [self.subtitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.titleLabel);

@@ -11,7 +11,7 @@
 #import "TXMineHeaderTableViewCell.h"
 #import "TXMineTableViewCell.h"
 #import "TXMineBannerTableViewCell.h"
-#import "TXPersonModel.h"
+#import "TXGeneralModel.h"
 
 static NSString * const reuseIdentifier = @"TXMineTableViewCell";
 static NSString * const reuseIdentifierHeader = @"TXMineHeaderTableViewCell";
@@ -64,7 +64,7 @@ static NSString * const reuseIdentifierBanner = @"TXMineBannerTableViewCell";
             tools.subtitleLabel.text = @"未实名认证";
             tools.subtitleLabel.textColor = HexString(@"#FF9B9B");
         }
-        TXPersonModel* model = self.itemModelArray[0][indexPath.row];
+        TXGeneralModel* model = self.itemModelArray[0][indexPath.row];
         model.index = indexPath.item;
         tools.titleLabel.text = model.title;
 
@@ -94,7 +94,7 @@ static NSString * const reuseIdentifierBanner = @"TXMineBannerTableViewCell";
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    TXPersonModel* model = self.itemModelArray[0][indexPath.row];
+    TXGeneralModel* model = self.itemModelArray[0][indexPath.row];
     NSString *className = model.showClass;
     if ([model.showClass isEqualToString:@""]) {
         
@@ -166,10 +166,10 @@ static NSString * const reuseIdentifierBanner = @"TXMineBannerTableViewCell";
             NSArray *classArray = [classArr lz_safeObjectAtIndex:i];
             NSMutableArray *subArray = [NSMutableArray array];
             for (int j = 0; j < subTitlesArray.count; j ++) {
-                TXPersonModel* personModel = [[TXPersonModel alloc] init];
-                personModel.title = [subTitlesArray lz_safeObjectAtIndex:j];
-                personModel.showClass = [classArray lz_safeObjectAtIndex:j];
-                [subArray addObject:personModel];
+                TXGeneralModel *generalModel = [[TXGeneralModel alloc] init];
+                generalModel.title = [subTitlesArray lz_safeObjectAtIndex:j];
+                generalModel.showClass = [classArray lz_safeObjectAtIndex:j];
+                [subArray addObject:generalModel];
             }
             [_itemModelArray addObject:subArray];
         }

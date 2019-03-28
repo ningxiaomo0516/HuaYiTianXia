@@ -11,7 +11,7 @@
 #import "TXShoppingTableViewCell.h"
 #import "TXChoosePayTableViewCell.h"
 #import "TXPurchaseQuantityTableViewCell.h"
-#import "TXPersonModel.h"
+#import "TXGeneralModel.h"
 
 
 static NSString * const reuseIdentifierReceiveAddress = @"TXReceiveAddressTableViewCell";
@@ -112,7 +112,7 @@ static NSString * const reuseIdentifierPurchase = @"TXPurchaseQuantityTableViewC
         }
             break;
         case 3: {
-            TXPersonModel *model = self.paymentArray[indexPath.row];
+            TXGeneralModel *model = self.paymentArray[indexPath.row];
             TXChoosePayTableViewCell *tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierChoosePay forIndexPath:indexPath];
             tools.titleLabel.text = model.title;
             tools.imagesView.image = kGetImage(model.imageText);
@@ -220,10 +220,10 @@ static NSString * const reuseIdentifierPurchase = @"TXPurchaseQuantityTableViewC
         NSArray* titleArr = @[@"微信支付",@"支付宝"];
         NSArray* classArr = @[@"c31_btn_wxzf",@"c31_btn_zfb"];
         for (int j = 0; j < titleArr.count; j ++) {
-            TXPersonModel* personModel = [[TXPersonModel alloc] init];
-            personModel.title = [titleArr lz_safeObjectAtIndex:j];
-            personModel.imageText = [classArr lz_safeObjectAtIndex:j];
-            [_paymentArray addObject:personModel];
+            TXGeneralModel *generalModel = [[TXGeneralModel alloc] init];
+            generalModel.title = [titleArr lz_safeObjectAtIndex:j];
+            generalModel.imageText = [classArr lz_safeObjectAtIndex:j];
+            [_paymentArray addObject:generalModel];
         }
     }
     return _paymentArray;

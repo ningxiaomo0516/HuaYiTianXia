@@ -11,6 +11,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface TXMainHeaderView : UIView
+@property (nonatomic, strong) UIImageView *imagesView;
+@property (nonatomic, strong) UILabel *titlesLabel;
 
 @end
 

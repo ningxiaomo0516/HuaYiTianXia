@@ -16,6 +16,8 @@ typedef void(^TXMallGoodsBannerTableViewCellCallBlock)(NSInteger idx);
 
 - (void)setImagesDidOnClickCallBlock:(TXMallGoodsBannerTableViewCellCallBlock)block;
 
+@property (nonatomic, strong) NSMutableArray *bannerArray;
+
 @end
 
 NS_ASSUME_NONNULL_END

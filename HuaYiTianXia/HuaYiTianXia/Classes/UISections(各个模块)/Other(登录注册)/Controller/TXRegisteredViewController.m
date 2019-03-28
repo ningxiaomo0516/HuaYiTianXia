@@ -9,7 +9,7 @@
 #import "TXRegisteredViewController.h"
 #import "TXRegisteredTableViewCell.h"
 #import "TXRegisterTableViewCell.h"
-#import "TXPersonModel.h"
+#import "TXGeneralModel.h"
 #import "TXRegisterPasswordViewController.h"
 
 static NSString * const reuseIdentifier = @"TXRegisterTableViewCell";
@@ -68,7 +68,7 @@ static NSString * const reuseIdentifiers = @"TXRegisteredTableViewCell";
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    TXPersonModel *model = self.dataArray[indexPath.row];
+    TXGeneralModel *model = self.dataArray[indexPath.row];
     if (indexPath.row==0) {
         TXRegisterTableViewCell *tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
         tools.titleLabel.text = model.title;
@@ -76,7 +76,7 @@ static NSString * const reuseIdentifiers = @"TXRegisteredTableViewCell";
         return tools;
     }else{
         TXRegisteredTableViewCell* tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifiers forIndexPath:indexPath];
-        TXPersonModel *model = self.dataArray[indexPath.row];
+        TXGeneralModel *model = self.dataArray[indexPath.row];
         tools.titleLabel.text = model.title;
         tools.textField.placeholder = model.imageText;
         return tools;
@@ -139,10 +139,10 @@ static NSString * const reuseIdentifiers = @"TXRegisteredTableViewCell";
         NSArray* titleArr = @[@"手机号",@"验证码"];
         NSArray* classArr = @[@"请输入手机号码",@"请输入验证码"];
         for (int j = 0; j < titleArr.count; j ++) {
-            TXPersonModel* personModel = [[TXPersonModel alloc] init];
-            personModel.title = [titleArr lz_safeObjectAtIndex:j];
-            personModel.imageText = [classArr lz_safeObjectAtIndex:j];
-            [_dataArray addObject:personModel];
+            TXGeneralModel *generalModel = [[TXGeneralModel alloc] init];
+            generalModel.title = [titleArr lz_safeObjectAtIndex:j];
+            generalModel.imageText = [classArr lz_safeObjectAtIndex:j];
+            [_dataArray addObject:generalModel];
         }
     }
     return _dataArray;

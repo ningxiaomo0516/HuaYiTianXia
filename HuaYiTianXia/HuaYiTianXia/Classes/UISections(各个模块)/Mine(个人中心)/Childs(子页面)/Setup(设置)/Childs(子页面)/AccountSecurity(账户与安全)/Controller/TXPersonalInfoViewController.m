@@ -8,7 +8,7 @@
 
 #import "TXPersonalInfoViewController.h"
 #import "TXMineTableViewCell.h"
-#import "TXPersonModel.h"
+#import "TXGeneralModel.h"
 #import "TXModifyUserInfoViewController.h"
 
 static NSString * const reuseIdentifier = @"TXMineTableViewCell";
@@ -39,7 +39,7 @@ static NSString * const reuseIdentifier = @"TXMineTableViewCell";
 #pragma mark - Table view data source
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     TXMineTableViewCell* tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
-    TXPersonModel* model = self.dataArray[indexPath.row];
+    TXGeneralModel* model = self.dataArray[indexPath.row];
     model.index = indexPath.item;
     tools.titleLabel.text = model.title;
 
@@ -109,10 +109,10 @@ static NSString * const reuseIdentifier = @"TXMineTableViewCell";
         NSArray* titleArr = @[@"头像",@"昵称",@"用户ID"];
         NSArray* classArr = @[@"",@"",@""];
         for (int j = 0; j < titleArr.count; j ++) {
-            TXPersonModel* personModel = [[TXPersonModel alloc] init];
-            personModel.title = [titleArr lz_safeObjectAtIndex:j];
-            personModel.showClass = [classArr lz_safeObjectAtIndex:j];
-            [_dataArray addObject:personModel];
+            TXGeneralModel *generalModel = [[TXGeneralModel alloc] init];
+            generalModel.title = [titleArr lz_safeObjectAtIndex:j];
+            generalModel.showClass = [classArr lz_safeObjectAtIndex:j];
+            [_dataArray addObject:generalModel];
         }
     }
     return _dataArray;

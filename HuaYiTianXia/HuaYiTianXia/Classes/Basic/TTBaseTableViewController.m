@@ -59,8 +59,12 @@
 
 #pragma mark -- 设置Header高度
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    if (section==0) return 0;
-    return 10;
+    if (section==0) return 0.001f;
+    return 10.f;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    return 0.001f;
 }
 
 #pragma mark -- Section HearderView Title
@@ -70,6 +74,12 @@
     sectionView.section = section;
     sectionView.tableView = tableView;
     return sectionView;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+    UIView *footerView = [UIView lz_viewWithColor:kTableViewInSectionColor];
+    footerView.frame = CGRectMake(0, 0, kScreenWidth, 0.001f);
+    return footerView;
 }
 
 #pragma mark - Getters

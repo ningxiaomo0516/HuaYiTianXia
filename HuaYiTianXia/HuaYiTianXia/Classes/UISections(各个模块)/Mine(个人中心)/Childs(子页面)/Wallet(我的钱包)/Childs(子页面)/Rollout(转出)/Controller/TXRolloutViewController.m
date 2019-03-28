@@ -9,7 +9,7 @@
 #import "TXRolloutViewController.h"
 #import "TXMineHeaderTableViewCell.h"
 #import "TXRolloutTableViewCell.h"
-#import "TXPersonModel.h"
+#import "TXGeneralModel.h"
 
 static NSString * const reuseIdentifier = @"TXRolloutTableViewCell";
 static NSString * const reuseIdentifierHeader = @"TXMineHeaderTableViewCell";
@@ -65,16 +65,16 @@ static NSString * const reuseIdentifierHeader = @"TXMineHeaderTableViewCell";
         return tools;
     } else {
         TXRolloutTableViewCell* tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
-        TXPersonModel* model = self.dataArray[indexPath.row];
-        model.index = indexPath.item;
-        tools.titleLabel.text = model.title;
+        TXGeneralModel *generalModel = self.dataArray[indexPath.row];
+        generalModel.index = indexPath.item;
+        tools.titleLabel.text = generalModel.title;
         if (indexPath.row==2) {
-            tools.subtitleLabel.text = model.imageText;
+            tools.subtitleLabel.text = generalModel.imageText;
             tools.subtitleLabel.hidden = NO;
             tools.imagesArrow.hidden = NO;
             tools.textField.hidden = YES;
         }else{
-            tools.textField.placeholder = model.imageText;
+            tools.textField.placeholder = generalModel.imageText;
             tools.selectionStyle = UITableViewCellSelectionStyleNone;
         }
         return tools;
@@ -153,10 +153,10 @@ static NSString * const reuseIdentifierHeader = @"TXMineHeaderTableViewCell";
         NSArray* titleArr = @[@"账号",@"确认账号",@"币种",@"金额"];
         NSArray* subtitleArr = @[@"请输入账号或ID",@"再次输入密码账号或ID",@"币种选择",@"请输入转账金额"];
         for (int i=0; i<titleArr.count; i++) {
-            TXPersonModel* personModel = [[TXPersonModel alloc] init];
-            personModel.title = [titleArr lz_safeObjectAtIndex:i];
-            personModel.imageText = [subtitleArr lz_safeObjectAtIndex:i];
-            [_dataArray addObject:personModel];
+            TXGeneralModel *generalModel = [[TXGeneralModel alloc] init];
+            generalModel.title = [titleArr lz_safeObjectAtIndex:i];
+            generalModel.imageText = [subtitleArr lz_safeObjectAtIndex:i];
+            [_dataArray addObject:generalModel];
         }
     }
     return _dataArray;

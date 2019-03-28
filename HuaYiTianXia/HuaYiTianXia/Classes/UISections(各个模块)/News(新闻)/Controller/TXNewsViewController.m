@@ -10,10 +10,13 @@
 #import "WMPageController.h"
 #import "TXNewTemplateViewController.h"
 #import "TXMainHeaderView.h"
+#import "TXNewsModel.h"
 
 @interface TXNewsViewController ()<WMPageControllerDelegate>
 @property (nonatomic, strong) TXMainHeaderView *headerView;
-
+@property (nonatomic, assign) CGFloat menuHeight;
+//@property (nonatomic, strong) NSMutableArray *titlesArray;
+@property (nonatomic, strong) NSMutableArray<TXNewsTabModel *> *titlesArray;
 @end
 
 @implementation TXNewsViewController
@@ -21,9 +24,25 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [self.view addSubview:self.setPageViewControllers];
+    [self loadTabData];
+    self.menuHeight = 40;
     [self initView];
+}
 
+- (void) loadTabData{
+    [SCHttpTools getWithURLString:@"news/GetNewTab" parameter:nil success:^(id responseObject) {
+        NSDictionary *result = responseObject;
+        if ([result isKindOfClass:[NSDictionary class]]) {
+            TTLog(@"result -- %@",result);
+            TXNewsModel *tabModel = [TXNewsModel mj_objectWithKeyValues:result];
+            [self.titlesArray addObjectsFromArray:tabModel.data];
+            [self.view addSubview:self.setPageViewControllers];
+        }else{
+            Toast(@"获取城市数据失败");
+        }
+    } failure:^(NSError *error) {
+        TTLog(@" -- error -- %@",error);
+    }];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -33,12 +52,10 @@
 
 #pragma mark ---- 界面布局设置
 - (void)initView{
-    self.headerView.backgroundColor = kRandomColor;
     [self.view addSubview:self.headerView];
-
     [self.headerView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.right.equalTo(self.view);
-        make.height.equalTo(@(kNavBarHeight));
+        make.height.equalTo(@(kNavBarHeight+self.menuHeight));
     }];
 }
 
@@ -51,34 +68,35 @@
     pageController.menuViewStyle = WMMenuViewStyleLine;/// 样式
     pageController.menuViewLayoutMode = WMMenuViewLayoutModeCenter;//居中模式
     pageController.menuItemWidth = kScreenWidth/4;/// 宽度
-    pageController.titleColorSelected = HexString(@"#FF4163");
-    pageController.titleColorNormal = kTextColor12;
+    pageController.titleColorSelected = kWhiteColor;//HexString(@"#FF4163");
+    pageController.titleColorNormal = [kWhiteColor colorWithAlphaComponent:0.5];
     pageController.progressWidth = 20;
-    pageController.progressColor = HexString(@"#FF4163");
+    pageController.progressColor = kWhiteColor;
     pageController.menuBGColor = kClearColor;
+    pageController.view.backgroundColor = kClearColor;
     [self addChildViewController:pageController];
     [pageController didMoveToParentViewController:self];
     
-    
-    UIView *linerView = [UIView lz_viewWithColor:kTextColor238];
-    [pageController.view addSubview:linerView];
-    linerView.frame = CGRectMake(0, pageController.menuHeight+kNavBarHeight, kScreenWidth, 0.7);
     return pageController.view;
 }
 
 - (WMPageController *)p_defaultController {
-    NSArray *titles = @[@"行业动态",@"公司信息",@"关于我们",@"华翼天下"];
+//    NSArray *titles = @[@"行业动态",@"公司信息",@"关于我们",@"华翼天下"];
     NSMutableArray *viewControllers = [[NSMutableArray alloc] init];
-    for (int i=0; i<titles.count; i++) {
+    NSMutableArray *titles = [[NSMutableArray alloc] init];
+
+    for (int i=0; i<self.titlesArray.count; i++) {
+        TXNewsTabModel *model = self.titlesArray[i];
         TXNewTemplateViewController *vc  = [TXNewTemplateViewController new];
-        vc.view.backgroundColor = kRandomColor;
+        vc.title = model.kid;
+        [titles addObject:model.titleName];
         [viewControllers addObject:vc];
     }
     
     WMPageController *pageVC = [[WMPageController alloc] initWithViewControllerClasses:viewControllers andTheirTitles:titles];
     [pageVC setViewFrame:CGRectMake(0, kNavBarHeight, kScreenWidth, kScreenHeight-kNavBarHeight)];
     pageVC.delegate = self;
-    pageVC.menuHeight = 40;
+    pageVC.menuHeight = self.menuHeight;
     pageVC.postNotification = YES;
     pageVC.bounces = YES;
     return pageVC;
@@ -90,5 +108,13 @@
     }
     return _headerView;
 }
+
+- (NSMutableArray *)titlesArray{
+    if (!_titlesArray) {
+        _titlesArray = [[NSMutableArray alloc] init];
+    }
+    return _titlesArray;
+}
+
 
 @end

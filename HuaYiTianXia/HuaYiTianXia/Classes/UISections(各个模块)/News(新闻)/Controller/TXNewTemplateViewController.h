@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TTBaseTableViewController.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface TXNewTemplateViewController : UIViewController
+@interface TXNewTemplateViewController : TTBaseTableViewController
 
 @end
 

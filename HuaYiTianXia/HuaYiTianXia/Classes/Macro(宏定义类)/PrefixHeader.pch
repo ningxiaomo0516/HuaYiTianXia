@@ -40,5 +40,8 @@
 #import "UIImageView+WebCache.h"
 #import "UIView+WebCache.h"
 
+/// 网络请求工具
+#import "SCHttpTools.h"
+
 
 #endif /* PrefixHeader_pch */

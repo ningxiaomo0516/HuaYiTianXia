@@ -8,7 +8,7 @@
 
 #import "TXShareViewController.h"
 #import "TXShareToolsCollectionViewCell.h"
-#import "TXPersonModel.h"
+#import "TXGeneralModel.h"
 
 static NSString* reuseIdentifierShareTools = @"TXShareToolsCollectionViewCell";
 
@@ -87,7 +87,7 @@ static NSString* reuseIdentifierShareTools = @"TXShareToolsCollectionViewCell";
 
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     TXShareToolsCollectionViewCell *tools = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifierShareTools forIndexPath:indexPath];
-    TXPersonModel* templateModel = self.dataArray[indexPath.row];
+    TXGeneralModel* templateModel = self.dataArray[indexPath.row];
     tools.backgroundColor = kClearColor;
     tools.titleLabel.text = templateModel.title;
     tools.imagesView.image = kGetImage(templateModel.imageText);
@@ -161,10 +161,10 @@ static NSString* reuseIdentifierShareTools = @"TXShareToolsCollectionViewCell";
         NSArray* titleArr = @[@"微信",@"微博",@"QQ"];
         NSArray* imagesArr = @[@"live_btn_wechat",@"live_btn_weibo",@"live_btn_qq"];
         for (int i=0; i<titleArr.count; i++) {
-            TXPersonModel* personModel = [[TXPersonModel alloc] init];
-            personModel.title = [titleArr lz_safeObjectAtIndex:i];
-            personModel.imageText = [imagesArr lz_safeObjectAtIndex:i];
-            [_dataArray addObject:personModel];
+            TXGeneralModel *generalModel = [[TXGeneralModel alloc] init];
+            generalModel.title = [titleArr lz_safeObjectAtIndex:i];
+            generalModel.imageText = [imagesArr lz_safeObjectAtIndex:i];
+            [_dataArray addObject:generalModel];
         }
     }
     return _dataArray;

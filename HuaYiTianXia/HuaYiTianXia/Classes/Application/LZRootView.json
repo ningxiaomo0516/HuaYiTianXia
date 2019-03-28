@@ -14,14 +14,14 @@
     },
     {
         "title":"农用植保",
-        "imageName":"tab_tool_nor",
-        "imageSelectName":"tab_tool_press",
+        "imageName":"tab_coin_nor",
+        "imageSelectName":"tab_coin_press",
         "controllerName":"TXAgriculturalViewController",
      },
     {
         "title":"天合成员",
-        "imageName":"tab_tool_nor",
-        "imageSelectName":"tab_tool_press",
+        "imageName":"tab_flight_nor",
+        "imageSelectName":"tab_flight_press",
         "controllerName":"TXMembersViewController",
     },
      {

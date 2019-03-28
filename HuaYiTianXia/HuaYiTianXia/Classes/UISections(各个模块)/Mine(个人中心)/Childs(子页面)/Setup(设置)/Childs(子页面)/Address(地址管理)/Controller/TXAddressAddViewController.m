@@ -8,7 +8,7 @@
 
 #import "TXAddressAddViewController.h"
 #import "TXRolloutTableViewCell.h"
-#import "TXPersonModel.h"
+#import "TXGeneralModel.h"
 #import "TXAddressTextViewCell.h"
 #import "TXSwitchTableViewCell.h"
 
@@ -61,7 +61,7 @@ static NSString * const reuseIdentifierSwitch = @"TXSwitchTableViewCell";
 
 #pragma mark - Table view data source
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    TXPersonModel* model = self.dataArray[indexPath.section][indexPath.row];
+    TXGeneralModel* model = self.dataArray[indexPath.section][indexPath.row];
     model.index = indexPath.item;
     if (indexPath.section==0 && indexPath.row==3) {
         TXAddressTextViewCell *tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierTextView forIndexPath:indexPath];
@@ -174,10 +174,10 @@ static NSString * const reuseIdentifierSwitch = @"TXSwitchTableViewCell";
             NSArray *subtitleArray = [subtitleArr lz_safeObjectAtIndex:i];
             NSMutableArray *subArray = [NSMutableArray array];
             for (int j = 0; j < titlesArray.count; j ++) {
-                TXPersonModel* personModel = [[TXPersonModel alloc] init];
-                personModel.title = [titlesArray lz_safeObjectAtIndex:j];
-                personModel.imageText = [subtitleArray lz_safeObjectAtIndex:j];
-                [subArray addObject:personModel];
+                TXGeneralModel *generalModel = [[TXGeneralModel alloc] init];
+                generalModel.title = [titlesArray lz_safeObjectAtIndex:j];
+                generalModel.imageText = [subtitleArray lz_safeObjectAtIndex:j];
+                [subArray addObject:generalModel];
             }
             [_dataArray addObject:subArray];
         }

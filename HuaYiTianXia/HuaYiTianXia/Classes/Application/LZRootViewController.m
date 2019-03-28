@@ -40,7 +40,7 @@
     // Do any additional setup after loading the view.
     // 添加所有子控制器
     [self addAllChildVc];
-//    [self addObverser];
+    //    [self addObverser];
     self.delegate = self;
 }
 
@@ -48,7 +48,7 @@
  *  添加所有的子控制器
  */
 - (void)addAllChildVc {
-//    for (NSDictionary<NSString *, NSString *> *dicTab in self.arrayTab)
+    //    for (NSDictionary<NSString *, NSString *> *dicTab in self.arrayTab)
     for (int i=0; i<self.tabArray.count; i++) {
         NSDictionary *dicTab = self.tabArray[i];
         [self addChildVc:dicTab[@"controllerName"]
@@ -84,7 +84,6 @@
     UIViewController *childVc = [NSClassFromString(childName) new];
     childVc.title = title; // 同时设置tabbar和navigationBar的文字(可以根据需要单独设置)
     childVc.tabBarItem.title = title;
-    [childVc.view setBackgroundColor:kWhiteColor];
     
     // 2.设置子控制器的图片(默认图片)
     childVc.tabBarItem.image = [[UIImage imageNamed:normalImageNamed] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
@@ -129,7 +128,7 @@
         [viewController presentViewController:navigation animated:YES completion:^{
             TTLog(@"个人信息修改");
         }];
-        return NO;
+//        return NO;
     }
     return YES;
 }

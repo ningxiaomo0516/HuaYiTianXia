@@ -17,7 +17,7 @@
 /// 右边的副标题
 @property (nonatomic, strong) UILabel *subtitleLabel;
 /// 右边的箭头
-@property (nonatomic, strong) UIImageView *arrowImageView;
+@property (nonatomic, strong) UIImageView *imagesArrow;
 
 /// 分割线
 @property (nonatomic, strong) UIView *linerView;

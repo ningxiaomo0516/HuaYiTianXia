@@ -18,6 +18,16 @@
     return self;
 }
 
+- (void)setRecordsModel:(NewsRecordsModel *)recordsModel{
+    _recordsModel = recordsModel;
+    [self.imagesView sd_setImageWithURL:[NSURL URLWithString:recordsModel.coverimg]
+                       placeholderImage:kGetImage(VERTICALMAPBITMAP)];
+    self.titleLabel.text = recordsModel.title;
+    self.subtitleLabel.text = recordsModel.synopsis;
+    self.marketPriceLabel.text = [NSString stringWithFormat:@"￥%@.0",recordsModel.price];
+    self.currentPriceLabel.text = @"";
+}
+
 - (void)setupUI {
     [self addSubview:self.imagesView];
     [self addSubview:self.titleLabel];
@@ -73,7 +83,8 @@
 
 - (UILabel *)marketPriceLabel{
     if (!_marketPriceLabel) {
-        _marketPriceLabel = [UILabel lz_labelWithTitle:@"" color:kTextColor153 font:kFontSizeMedium13];
+//        _marketPriceLabel = [UILabel lz_labelWithTitle:@"" color:kTextColor153 font:kFontSizeMedium13];
+        _marketPriceLabel = [UILabel lz_labelWithTitle:@"" color:HexString(@"#2DAFF7") font:kFontSizeMedium13];
     }
     return _marketPriceLabel;
 }

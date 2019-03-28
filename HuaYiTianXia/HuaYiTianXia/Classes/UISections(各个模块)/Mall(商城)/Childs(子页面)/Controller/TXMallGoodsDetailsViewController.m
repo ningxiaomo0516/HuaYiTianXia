@@ -21,14 +21,42 @@ static NSString * const reuseIdentifierSpec = @"TXMallGoodsSpecTableViewCell";
 @property (nonatomic, strong) NSMutableArray *dataArray;
 @property (strong, nonatomic) UIButton *saveButton;
 @property (strong, nonatomic) UIView *footerView;
+@property (strong, nonatomic) NewsRecordsModel *productModel;
+/// 产品详情
+@property (strong, nonatomic) MallProductArrayModel *productDataModel;
 
 @end
 
 @implementation TXMallGoodsDetailsViewController
+- (id)initMallProductModel:(NewsRecordsModel *)productModel{
+    if ( self = [super init] ){
+        self.productModel = productModel;
+    }
+    return self;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"商品详情";
     [self initView];
+    [self loadMallGoodsDetailsData];
+}
+
+- (void) loadMallGoodsDetailsData{
+    NSMutableDictionary *parameter = [[NSMutableDictionary alloc] init];
+    [parameter setObject:@(self.productModel.status) forKey:@"status"];
+    [parameter setObject:@(self.productModel.kid) forKey:@"id"];  // 每页条数
+    
+    [SCHttpTools postWithURLString:@"shopproduct/GetShopDetails" parameter:parameter success:^(id responseObject) {
+        NSDictionary *result = responseObject;
+        if ([result isKindOfClass:[NSDictionary class]]) {
+            self.productDataModel = [MallProductArrayModel mj_objectWithKeyValues:result];
+            [self.tableView reloadData];
+        }else{
+            Toast(@"获取城市数据失败");
+        }
+    } failure:^(NSError *error) {
+        TTLog(@" -- error -- %@",error);
+    }];
 }
 
 /// 立即投保
@@ -89,6 +117,7 @@ static NSString * const reuseIdentifierSpec = @"TXMallGoodsSpecTableViewCell";
 
     if (indexPath.section==0) {
         TXMallGoodsBannerTableViewCell* tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierBanner forIndexPath:indexPath];
+        tools.bannerArray = self.productDataModel.banners;
         return tools;
 
     }else if(indexPath.section==1){

@@ -7,12 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "TXNewsModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface TXMineBannerCollectionViewCell : UICollectionViewCell
 @property (nonatomic, strong) UIImageView *imagesView;
 
+@property (nonatomic, strong) NewsBannerModel *bannerModel;
 @end
 
 NS_ASSUME_NONNULL_END

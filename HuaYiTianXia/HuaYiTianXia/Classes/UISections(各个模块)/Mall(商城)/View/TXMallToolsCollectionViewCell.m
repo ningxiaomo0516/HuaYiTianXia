@@ -23,11 +23,11 @@
     [self addSubview:self.titleLabel];
     [self.imagesView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self);
-        make.top.equalTo(@(IPHONE6_W(16)));
+        make.top.equalTo(@(IPHONE6_W(22)));
     }];
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self);
-        make.top.equalTo(self.imagesView.mas_bottom).offset(IPHONE6_W(9));
+        make.top.equalTo(self.imagesView.mas_bottom).offset(IPHONE6_W(10));
     }];
 }
 

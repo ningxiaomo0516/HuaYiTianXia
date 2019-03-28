@@ -26,6 +26,13 @@
     return self;
 }
 
+- (void)setBannerModel:(NewsBannerModel *)bannerModel{
+    _bannerModel = bannerModel;
+//    tools.imagesView.image = kGetImage(@"base_deprecated_activity");
+    [self.imagesView sd_setImageWithURL:[NSURL URLWithString:bannerModel.img]
+                       placeholderImage:kGetImage(VERTICALMAPBITMAP)];
+}
+
 - (void) initView {
     [self.contentView addSubview:self.imagesView];
     [self.imagesView mas_makeConstraints:^(MASConstraintMaker *make) {

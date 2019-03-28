@@ -44,13 +44,19 @@ static NSString* reuseIdentifiers = @"TXMineBannerCollectionViewCell";
     self.callBlock = block;
 }
 
+- (void)setBannerArray:(NSMutableArray *)bannerArray{
+    _bannerArray = bannerArray;
+    [self initView];
+}
+
 
 - (void) initView{
     [self addPagerView];
-    //    if (self.listModel.count>1) {
-    self.pagerView.autoScrollInterval = 3;//自动轮播时间
-    //    }
-    self.pageControl.numberOfPages = 5;//self.listModel.count;
+    if (self.bannerArray.count>1) {
+        self.pagerView.autoScrollInterval = 3;//自动轮播时间
+    }
+    TTLog(@"self.bannerArray.count -- %lu",(unsigned long)self.bannerArray.count);
+    self.pageControl.numberOfPages = self.bannerArray.count;
     [self.pagerView reloadData];
 }
 
@@ -58,7 +64,7 @@ static NSString* reuseIdentifiers = @"TXMineBannerCollectionViewCell";
     
     [self addSubview:self.pagerView];
     [self addPageControl];
-    [self.pagerView lz_setCornerRadius:3.0];
+//    [self.pagerView lz_setCornerRadius:3.0];
     
     [self.pagerView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.left.top.bottom.equalTo(self);
@@ -73,13 +79,13 @@ static NSString* reuseIdentifiers = @"TXMineBannerCollectionViewCell";
 #pragma mark - TYCyclePagerViewDataSource
 
 - (NSInteger)numberOfItemsInPagerView:(TYCyclePagerView *)pageView {
-    return 5;//self.listModel.count;
+    return self.bannerArray.count;
 }
 
 - (UICollectionViewCell *)pagerView:(TYCyclePagerView *)pagerView cellForItemAtIndex:(NSInteger)index {
-    TXMineBannerCollectionViewCell *cell = [pagerView dequeueReusableCellWithReuseIdentifier:reuseIdentifiers forIndex:index];
-    cell.imagesView.image = kGetImage(@"base_deprecated_activity");
-    return cell;
+    TXMineBannerCollectionViewCell *tools = [pagerView dequeueReusableCellWithReuseIdentifier:reuseIdentifiers forIndex:index];
+    tools.bannerModel = self.bannerArray[index];
+    return tools;
 }
 
 - (TYCyclePagerViewLayout *)layoutForPagerView:(TYCyclePagerView *)pageView {
@@ -115,9 +121,9 @@ static NSString* reuseIdentifiers = @"TXMineBannerCollectionViewCell";
     TYPageControl *pageControl = [[TYPageControl alloc]init];
     //pageControl.numberOfPages = _datas.count;
     pageControl.currentPageIndicatorSize = CGSizeMake(6, 6);
-    pageControl.pageIndicatorSize = CGSizeMake(12, 6);
-    pageControl.currentPageIndicatorTintColor = [UIColor redColor];
-    pageControl.pageIndicatorTintColor = [UIColor grayColor];
+    pageControl.pageIndicatorSize = CGSizeMake(6, 6);
+    pageControl.currentPageIndicatorTintColor = kWhiteColor;
+    pageControl.pageIndicatorTintColor = [kWhiteColor colorWithAlphaComponent:0.5];
     //    pageControl.pageIndicatorImage = kGetImage(@"live_gunlun_nor");
     //    pageControl.currentPageIndicatorImage = kGetImage(@"live_gunlun_press");
     //    pageControl.contentInset = UIEdgeInsetsMake(0, 20, 0, 20);

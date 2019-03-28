@@ -8,7 +8,7 @@
 
 #import "TXWalletTableViewCell.h"
 #import "TXWalletCollectionViewCell.h"
-#import "TXPersonModel.h"
+#import "TXGeneralModel.h"
 
 static NSString* reuseIdentifier = @"TXWalletCollectionViewCell";
 
@@ -65,7 +65,7 @@ static NSString* reuseIdentifier = @"TXWalletCollectionViewCell";
 
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     TXWalletCollectionViewCell *tools = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
-    TXPersonModel* templateModel = self.dataArray[indexPath.row];
+    TXGeneralModel* templateModel = self.dataArray[indexPath.row];
     
     tools.titleLabel.text = templateModel.title;
     tools.imagesView.image = kGetImage(templateModel.imageText);
@@ -78,7 +78,7 @@ static NSString* reuseIdentifier = @"TXWalletCollectionViewCell";
 /// 点击collectionViewCell
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     if (self.delegate && [self.delegate respondsToSelector:@selector(didSelectItemAtIndexPath:withTitle:withShowClass:)]) {
-        TXPersonModel* templateModel = self.dataArray[indexPath.row];
+        TXGeneralModel* templateModel = self.dataArray[indexPath.row];
         [self.delegate didSelectItemAtIndexPath:indexPath withTitle:templateModel.title withShowClass:templateModel.showClass];
     }
 }
@@ -167,7 +167,7 @@ static NSString* reuseIdentifier = @"TXWalletCollectionViewCell";
                               @"TXConversionViewController",@"TXRepeatCastViewController"];
         
         for (int j = 0; j < titleArr.count; j ++) {
-            TXPersonModel* templateModel = [[TXPersonModel alloc] init];
+            TXGeneralModel* templateModel = [[TXGeneralModel alloc] init];
             templateModel.title = [titleArr lz_safeObjectAtIndex:j];
             templateModel.imageText = [imagesArr lz_safeObjectAtIndex:j];
             templateModel.showClass = [classArr lz_safeObjectAtIndex:j];

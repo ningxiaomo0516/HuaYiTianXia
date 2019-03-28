@@ -14,7 +14,7 @@
     if (self = [super initWithReuseIdentifier:reuseIdentifier]) {
         [self initView];
         [self initConstraints];
-        self.backgroundColor = kWhiteColor;
+        self.contentView.backgroundColor = kWhiteColor;
     }
     return self;
 }
@@ -23,7 +23,7 @@
     [self addSubview:self.lineView];
     [self addSubview:self.titleLabel];
     [self addSubview:self.subtitleLabel];
-    [self addSubview:self.arrowImageView];
+    [self addSubview:self.imagesArrow];
     [self addSubview:self.linerView];
     [self addSubview:self.sectionButton];
     
@@ -41,14 +41,14 @@
         make.left.equalTo(self.lineView.mas_right).offset(14);
     }];
     
-    [self.arrowImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.imagesArrow mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self);
         make.right.equalTo(self).offset(-15);
     }];
     
     [self.subtitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self);
-        make.right.equalTo(self.arrowImageView.mas_left).offset(-6);
+        make.right.equalTo(self.imagesArrow.mas_left).offset(-6);
     }];
     [self.linerView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.height.equalTo(@(kLinerViewHeight));
@@ -63,7 +63,8 @@
 
 - (UIView *)lineView{
     if (!_lineView) {
-        _lineView = [UIView lz_viewWithColor:[UIColor lz_colorWithHexString:@"#FF4163"]];
+        _lineView = [UIView lz_viewWithColor:[UIColor lz_colorWithHexString:@"#26B9FE"]];
+        _lineView.hidden = YES;
     }
     return _lineView;
 }
@@ -83,12 +84,13 @@
     return _subtitleLabel;
 }
 
-- (UIImageView *)arrowImageView{
-    if (!_arrowImageView) {
-        _arrowImageView = [[UIImageView alloc] init];
-        _arrowImageView.image = kGetImage(@"right_arrow");
+- (UIImageView *)imagesArrow{
+    if (!_imagesArrow) {
+        _imagesArrow = [[UIImageView alloc] init];
+        _imagesArrow.image = kGetImage(@"right_arrow");
+        _imagesArrow.hidden = YES;
     }
-    return _arrowImageView;
+    return _imagesArrow;
 }
 
 - (UIButton *)sectionButton{

@@ -16,7 +16,18 @@
     NSString *dateTime=[formatter stringFromDate:[NSDate date]];
     
     return dateTime;
-    
+}
+
+/**
+ *   iOS 服务器返回的时间戳转换为时间
+ *
+ *  @param timeStamp 当前的时间戳
+ *  @return 返回已转的日期时间
+ */
++(NSString *)timeStampConvertDateTime:(NSInteger)timeStamp{
+    CGFloat timeStamp_ = timeStamp / 1000.0;
+    NSString *dateTime = [NSString stringWithFormat:@"%f",timeStamp_];
+    return [Utils lz_timeWithTimeIntervalString:dateTime];
 }
 
 + (NSMutableAttributedString *)attributed:(NSString *)text color1:(UIColor *)color1 color2:(UIColor *)color2 length:(NSUInteger)length {
@@ -35,10 +46,8 @@
     return attributedText;
 }
 
-+ (BOOL)checkTelNumber:(NSString *) telNumber
-{
-    if (telNumber.length != 11)
-    {
++ (BOOL)checkTelNumber:(NSString *) telNumber{
+    if (telNumber.length != 11) {
         return NO;
     }
     /**

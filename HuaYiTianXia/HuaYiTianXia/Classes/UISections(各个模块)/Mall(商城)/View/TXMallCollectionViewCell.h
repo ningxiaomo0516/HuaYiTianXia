@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TXNewsModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -21,6 +22,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) UILabel *marketPriceLabel;
 /// 当前价格
 @property (nonatomic, strong) UILabel *currentPriceLabel;
+
+@property (nonatomic, strong) NewsRecordsModel *recordsModel;
 
 @end
 

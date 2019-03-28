@@ -10,8 +10,6 @@
 
 @interface TXMainHeaderView ()
 
-@property (nonatomic, strong) UIImageView *imagesView;
-@property (nonatomic, strong) UILabel *titlesLabel;
 
 @end
 
@@ -28,12 +26,13 @@
     [self addSubview:self.imagesView];
     [self addSubview:self.titlesLabel];
     [self.imagesView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.top.right.equalTo(self);
-        make.height.equalTo(@(kNavBarHeight));
+        make.bottom.left.top.right.equalTo(self);
+//        make.height.equalTo(@(kNavBarHeight));
     }];
     [self.titlesLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.height.equalTo(@(44));
-        make.left.right.bottom.equalTo(self);
+        make.left.right.equalTo(self);
+        make.bottom.equalTo(self.mas_bottom).offset(-40);
     }];
 }
 

@@ -16,7 +16,7 @@
 
 /// TabBar 默认颜色和选择颜色
 #define kTabBarColorNormal kColorWithRGB(136,136,136)
-#define kTabBarColorSelected kColorWithRGB(255,65,99)
+#define kTabBarColorSelected kColorWithRGB(38, 185, 254)
 
 //#define kNavigationColorNormal kColorWithRGB(255,65,99)
 #define kNavigationColorNormal kColorWithRGB(255, 255, 255)

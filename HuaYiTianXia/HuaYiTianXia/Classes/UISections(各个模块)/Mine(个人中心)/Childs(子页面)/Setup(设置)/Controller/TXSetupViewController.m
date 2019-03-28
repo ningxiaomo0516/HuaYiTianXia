@@ -8,7 +8,7 @@
 
 #import "TXSetupViewController.h"
 #import "TXMineTableViewCell.h"
-#import "TXPersonModel.h"
+#import "TXGeneralModel.h"
 
 static NSString * const reuseIdentifier = @"TXMineTableViewCell";
 
@@ -53,7 +53,7 @@ static NSString * const reuseIdentifier = @"TXMineTableViewCell";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     TXMineTableViewCell* tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
     NSArray *subArray = [self.dataArray lz_safeObjectAtIndex:indexPath.section];
-    TXPersonModel* model = subArray[indexPath.row];
+    TXGeneralModel* model = subArray[indexPath.row];
     model.index = indexPath.item;
     tools.titleLabel.text = model.title;
     tools.subtitleLabel.hidden = NO;
@@ -80,7 +80,7 @@ static NSString * const reuseIdentifier = @"TXMineTableViewCell";
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    TXPersonModel* model = self.dataArray[indexPath.section][indexPath.row];
+    TXGeneralModel* model = self.dataArray[indexPath.section][indexPath.row];
     NSString *className = model.showClass;
     if ([model.showClass isEqualToString:@""]) {
         Toast(@"暂未开通");
@@ -146,10 +146,10 @@ static NSString * const reuseIdentifier = @"TXMineTableViewCell";
             NSArray *classArray = [classArr lz_safeObjectAtIndex:i];
             NSMutableArray *subArray = [NSMutableArray array];
             for (int j = 0; j < subTitlesArray.count; j ++) {
-                TXPersonModel* personModel = [[TXPersonModel alloc] init];
-                personModel.title = [subTitlesArray lz_safeObjectAtIndex:j];
-                personModel.showClass = [classArray lz_safeObjectAtIndex:j];
-                [subArray addObject:personModel];
+                TXGeneralModel *generalModel = [[TXGeneralModel alloc] init];
+                generalModel.title = [subTitlesArray lz_safeObjectAtIndex:j];
+                generalModel.showClass = [classArray lz_safeObjectAtIndex:j];
+                [subArray addObject:generalModel];
             }
             [_dataArray addObject:subArray];
         }

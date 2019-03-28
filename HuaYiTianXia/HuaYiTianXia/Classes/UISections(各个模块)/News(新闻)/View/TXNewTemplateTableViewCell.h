@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TXNewsModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -19,6 +20,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) UILabel *subtitleLabel;
 /// 日期时间
 @property (nonatomic, strong) UILabel *dataTimeLabel;
+
+@property (nonatomic, strong) NewsRecordsModel *recordsModel;
 
 @end
 
