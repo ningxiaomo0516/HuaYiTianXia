@@ -30,6 +30,9 @@
         [tagBtn setTitle:_dataArray[i] forState:UIControlStateNormal];
         tagBtn.titleLabel.font = kFontSizeMedium13;
         [tagBtn setTitleColor:HexString(@"#26B9FE") forState:UIControlStateNormal];
+        [tagBtn setTitleColor:kWhiteColor forState:UIControlStateSelected];
+        [tagBtn setBackgroundImage:imageColor(kClearColor) forState:UIControlStateNormal];
+        [tagBtn setBackgroundImage:imageHexString(@"#26B9FE") forState:UIControlStateSelected];
         [self makeCornerRadius:3.0 borderColor:HexString(@"#26B9FE") layer:tagBtn.layer borderWidth:.5];
         markBtn = tagBtn;
         
@@ -42,18 +45,29 @@
     self.frame = rect;
 }
 
+//// 单选
 - (void)onClickTo:(UIButton *)sender{
     if ([self.delegate respondsToSelector:@selector(handleSelectTag:)]) {
-        sender.selected = !sender.selected;
-        if (sender.selected){
-            [sender setBackgroundColor:HexString(@"#26B9FE")];
-            [sender setTitleColor:kWhiteColor forState:UIControlStateNormal];
+        if (!sender.isSelected) {
+            self.selectBtn.selected = !self.selectBtn.selected;
+//            self.selectBtn.backgroundColor = [UIColor clearColor];
+//            [self.selectBtn setTitleColor:HexString(@"#26B9FE") forState:UIControlStateNormal];
+            sender.selected = !sender.selected;
+//            sender.backgroundColor = HexString(@"#26B9FE");
+//            [sender setTitleColor:kWhiteColor forState:UIControlStateNormal];
+            self.selectBtn = sender;
         }
-        if (!sender.selected) [sender setBackgroundColor:[UIColor clearColor]];
         [self.delegate handleSelectTag:sender.titleLabel.text];
     }
 }
 
+//// 多选
+/*- (void)onClickTo:(UIButton *)sender{
+    if ([self.delegate respondsToSelector:@selector(handleSelectTag:)]) {
+        sender.selected = !sender.selected;
+        [self.delegate handleSelectTag:sender.titleLabel.text];
+    }
+}*/
 /// 圆角设置
 - (void)makeCornerRadius:(CGFloat)radius borderColor:(UIColor *)borderColor layer:(CALayer *)layer borderWidth:(CGFloat)borderWidth{
     layer.cornerRadius = radius;

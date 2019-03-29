@@ -32,7 +32,6 @@
 -(TTTagView *)tagView{
     if (!_tagView) {
         _tagView = [[TTTagView alloc]initWithFrame:CGRectMake(0, 100, kScreenWidth, 0)];
-        _tagView.backgroundColor = kRandomColor;
         _tagView.delegate = self;
     }
     return _tagView;

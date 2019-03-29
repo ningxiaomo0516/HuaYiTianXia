@@ -30,6 +30,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic ,strong) UIColor *borderWidth;
 /// 字体
 @property (nonatomic ,strong) UIFont *font;
+@property (nonatomic ,strong) UIButton *selectBtn;
 
 @end
 

@@ -112,17 +112,15 @@
 
 /// 字符串
 #define     TTNoNilString(str)          (str.length > 0 ? str : @"")
-/// 网络图片添加域名
-#define DomainName(imageURL) [NSString stringWithFormat:@"%@",imageURL];
 /// 读取本地图片资源
 #define kGetImage(imageName) [UIImage imageNamed:[NSString stringWithFormat:@"%@",imageName]]
 //#define kLoadImage(file,ext) [UIImage imageWithContentsOfFile:[NSBundle mainBundle] pathForResource:file ofType:ext］
 /// 定义UIImage对象
 //#define kImage(A) [UIImage imageWithContentsOfFile:[NSBundle mainBundle] pathForResource:A ofType:nil］
 /// 图片
-#define TTImage(imageName)          (imageName ? [UIImage imageNamed:imageName] : nil)
-#define TTPNG(X)                    [[UIImage alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:X ofType:@"png"]]
-#define TTJPG(X)                    [[UIImage alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:X ofType:@"jpg"]]
+#define TTImage(imageName)  (imageName ? [UIImage imageNamed:imageName] : nil)
+#define TTPNG(X)            [[UIImage alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:X ofType:@"png"]]
+#define TTJPG(X)             [[UIImage alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:X ofType:@"jpg"]]
 
 
 #define kNetworkProtocol @"http:"
