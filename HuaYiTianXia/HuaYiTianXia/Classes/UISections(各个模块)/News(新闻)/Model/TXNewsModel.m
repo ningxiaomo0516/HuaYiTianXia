@@ -37,8 +37,12 @@
 @end
 
 @implementation NewsModel
++ (NSDictionary *)replacedKeyFromPropertyName{
+    return @{@"data" : @"banner"};
+}
 + (NSDictionary *)objectClassInArray{
-    return @{@"records" : [NewsRecordsModel class]};
+    return @{@"records" : [NewsRecordsModel class],
+             @"data" : [NewsRecordsModel class]};
 }
 @end
 
@@ -46,21 +50,16 @@
 + (NSDictionary *)replacedKeyFromPropertyName{
     return @{@"kid" : @"id"};
 }
++ (NSDictionary *)objectClassInArray{
+    return @{@"banners" : [NewsBannerModel class]};
+}
 @end
 
 @implementation NewsBannerModel
 
 + (NSDictionary *)replacedKeyFromPropertyName{
-    return @{@"kid" : @"id"};
-}
-@end
-
-@implementation MallProductArrayModel
-+ (NSDictionary *)replacedKeyFromPropertyName{
-    return @{@"data" : @"banner"};
-}
-+ (NSDictionary *)objectClassInArray{
-    return @{@"banners" : [TXNewsTabModel class]};
+    return @{@"kid" : @"id",
+             @"imageText":@"url"};
 }
 @end
 

@@ -28,11 +28,6 @@
     [self initView];
     [self loadData];
     self.reloadButton.layer.zPosition = 2;
-    UILabel *label = [UILabel lz_labelWithTitle:@"我擦" color:kColorWithRGB(211, 0, 0) font:kFontSizeMedium14];
-    [self.view addSubview:label];
-    [label mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.centerX.equalTo(self.view);
-    }];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -56,11 +51,11 @@
         make.bottom.top.left.right.equalTo(self.view);
     }];
     
-//    [self.view addSubview:self.progress];
-//    [self.progress mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.top.left.right.mas_offset(0);
-//        make.height.mas_equalTo(1);
-//    }];
+    [self.view addSubview:self.progress];
+    [self.progress mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.left.right.mas_offset(0);
+        make.height.mas_equalTo(1);
+    }];
 }
 
 - (void) handleButtonTapped:(UIButton *)sender{
@@ -128,9 +123,9 @@
 - (UIProgressView *)progress {
     if (!_progress) {
         _progress = [[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleBar];
-        _progress.frame = CGRectMake(0, 0, self.wkWebView.width, 1);
-        _progress.progressTintColor= kColorWithRGB(27, 230, 71);//设置已过进度部分的颜色
-        _progress.trackTintColor= kColorWithRGB(210, 210, 210);//设置未过进度部分的颜色
+        _progress.frame = CGRectMake(0, 0, self.wkWebView.width, 0.7);
+        _progress.progressTintColor= kColorWithRGB(44, 248, 152);//设置已过进度部分的颜色
+        _progress.trackTintColor= [kWhiteColor colorWithAlphaComponent:0.5];//设置未过进度部分的颜色
         _progress.backgroundColor = [UIColor groupTableViewBackgroundColor];//设置背景色
         [self.view insertSubview:_progress aboveSubview:self.navigationController.navigationBar];
     }
@@ -146,7 +141,7 @@
         configuration.preferences = preferences;
         _wkWebView = [[WKWebView alloc] initWithFrame:CGRectZero configuration:configuration];
         _wkWebView.scrollView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
-        _wkWebView.backgroundColor = kColorWithRGB(211, 0, 0);
+        _wkWebView.backgroundColor = kClearColor;
         _wkWebView.scrollView.backgroundColor = [UIColor whiteColor];
         _wkWebView.scrollView.showsVerticalScrollIndicator = false;
         _wkWebView.scrollView.showsHorizontalScrollIndicator = false;

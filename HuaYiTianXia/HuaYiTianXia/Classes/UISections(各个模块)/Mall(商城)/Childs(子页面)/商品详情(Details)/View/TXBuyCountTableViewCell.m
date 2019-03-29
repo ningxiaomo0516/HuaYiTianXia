@@ -1,14 +1,14 @@
 //
-//  TXMallGoodsSpecTableViewCell.m
+//  TXBuyCountTableViewCell.m
 //  HuaYiTianXia
 //
-//  Created by 宁小陌 on 2019/3/25.
+//  Created by 宁小陌 on 2019/3/29.
 //  Copyright © 2019年 宁小陌. All rights reserved.
 //
 
-#import "TXMallGoodsSpecTableViewCell.h"
+#import "TXBuyCountTableViewCell.h"
 
-@implementation TXMallGoodsSpecTableViewCell
+@implementation TXBuyCountTableViewCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
@@ -47,7 +47,7 @@
 
 - (UILabel *)titleLabel{
     if (!_titleLabel) {
-        _titleLabel = [UILabel lz_labelWithTitle:@"" color:kTextColor102  font:kFontSizeMedium13];
+        _titleLabel = [UILabel lz_labelWithTitle:@"购买数量：" color:kTextColor102  font:kFontSizeMedium13];
     }
     return _titleLabel;
 }
@@ -55,16 +55,15 @@
 - (SCCustomMarginLabel *)subtitleLabel{
     if (!_subtitleLabel) {
         _subtitleLabel = [[SCCustomMarginLabel alloc] init];
+        _subtitleLabel.text = @"1";
         _subtitleLabel.textAlignment = NSTextAlignmentCenter;
-        _subtitleLabel.textColor = HexString(@"#26B9FE");
-        _subtitleLabel.font = kFontSizeMedium13;
-        _subtitleLabel.edgeInsets    = UIEdgeInsetsMake(6.f, 12.f, 6.f, 12.f); // 设置左内边距
-        _subtitleLabel.borderColor = HexString(@"#26B9FE");
-        _subtitleLabel.borderWidth = 0.5f;
+        _subtitleLabel.backgroundColor = kColorWithRGB(248, 248, 248);
+        _subtitleLabel.textColor = kTextColor102;
+        _subtitleLabel.font = kFontSizeMedium15;
+        _subtitleLabel.edgeInsets    = UIEdgeInsetsMake(6.f, 20.f, 6.f, 20.f); // 设置左内边距
         [_subtitleLabel lz_setCornerRadius:3.0];
         [_subtitleLabel sizeToFit]; // 重新计算尺寸
     }
     return _subtitleLabel;
 }
-
 @end

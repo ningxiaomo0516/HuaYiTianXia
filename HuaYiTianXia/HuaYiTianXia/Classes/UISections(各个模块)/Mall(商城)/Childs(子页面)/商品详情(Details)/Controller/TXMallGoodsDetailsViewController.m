@@ -10,21 +10,25 @@
 #import "TXMallGoodsBannerTableViewCell.h"
 #import "TXMallGoodsDetailsTableViewCell.h"
 #import "TXMallGoodsSpecTableViewCell.h"
+#import "TXBuyCountTableViewCell.h"
 #import "TXShareViewController.h"
 #import "TXSubmitOrderViewController.h"
 
 static NSString * const reuseIdentifierBanner = @"TXMallGoodsBannerTableViewCell";
 static NSString * const reuseIdentifierDetails = @"TXMallGoodsDetailsTableViewCell";
 static NSString * const reuseIdentifierSpec = @"TXMallGoodsSpecTableViewCell";
-@interface TXMallGoodsDetailsViewController ()<UITableViewDelegate,UITableViewDataSource>
+static NSString * const reuseIdentifierBuynum = @"TXBuyCountTableViewCell";
+@interface TXMallGoodsDetailsViewController ()<UITableViewDelegate,UITableViewDataSource,TXMallGoodsSpecTableViewCellDelegate>
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *dataArray;
 @property (strong, nonatomic) UIButton *saveButton;
 @property (strong, nonatomic) UIView *footerView;
 @property (strong, nonatomic) NewsRecordsModel *productModel;
 /// 产品详情
-@property (strong, nonatomic) MallProductArrayModel *productDataModel;
+@property (strong, nonatomic) NewsModel *productData;
 
+@property (nonatomic, strong) NSMutableDictionary *heightAtIndexPath;//缓存高度
+@property (nonatomic, assign) CGFloat sectionHeight;//缓存高度
 @end
 
 @implementation TXMallGoodsDetailsViewController
@@ -49,10 +53,10 @@ static NSString * const reuseIdentifierSpec = @"TXMallGoodsSpecTableViewCell";
     [SCHttpTools postWithURLString:@"shopproduct/GetShopDetails" parameter:parameter success:^(id responseObject) {
         NSDictionary *result = responseObject;
         if ([result isKindOfClass:[NSDictionary class]]) {
-            self.productDataModel = [MallProductArrayModel mj_objectWithKeyValues:result];
+            self.productData = [NewsModel mj_objectWithKeyValues:result];
             [self.tableView reloadData];
         }else{
-            Toast(@"获取城市数据失败");
+            Toast(@"获取产品详情数据失败");
         }
     } failure:^(NSError *error) {
         TTLog(@" -- error -- %@",error);
@@ -114,27 +118,27 @@ static NSString * const reuseIdentifierSpec = @"TXMallGoodsSpecTableViewCell";
 
 #pragma mark - Table view data source
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-
+    NewsRecordsModel *model = self.productData.data[0];
     if (indexPath.section==0) {
         TXMallGoodsBannerTableViewCell* tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierBanner forIndexPath:indexPath];
-        tools.bannerArray = self.productDataModel.banners;
+        tools.bannerArray = model.banners;
         return tools;
 
     }else if(indexPath.section==1){
         TXMallGoodsDetailsTableViewCell* tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierDetails forIndexPath:indexPath];
-        tools.titleLabel.text = @"星际纵横矿机（4T/72T) A0055";
-        tools.subtitleLabel.text = @"全球首款IPFS矿机收发功效低、性能高";
-        tools.priceLabel.text = @"起投价格：10000";
+
+        tools.model = model;
         return tools;
-    }else if(indexPath.section==2 || indexPath.section==3){
+    }else if(indexPath.section==2){
         TXMallGoodsSpecTableViewCell *tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierSpec forIndexPath:indexPath];
-        tools.titleLabel.text = (indexPath.section==2)?@"商品规格：":@"购买数量：";
-        tools.subtitleLabel.text = (indexPath.section==2)?@"4T矿机":@"1";
-        if (indexPath.section==3) {
-            tools.subtitleLabel.backgroundColor = kColorWithRGB(248, 248, 248);
-            tools.subtitleLabel.borderWidth = 0.0;
-            [tools.subtitleLabel lz_setCornerRadius:0.0];
-        }
+        tools.delegate = self;
+        tools.tagView.dataArray = model.prospec;
+        tools.indexPath = indexPath;
+//        tools.titleLabel.text = @"商品规格：";
+//        tools.subtitleLabel.text = @"4T矿机";
+        return tools;
+    }else if(indexPath.section==3){
+        TXMallGoodsSpecTableViewCell *tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierBuynum forIndexPath:indexPath];
         return tools;
     }else{
         return [UITableViewCell new];
@@ -154,9 +158,37 @@ static NSString * const reuseIdentifierSpec = @"TXMallGoodsSpecTableViewCell";
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section==0) return IPHONE6_W(212);
     if (indexPath.section==1) return IPHONE6_W(90);
-    if (indexPath.section==2||indexPath.section==3) return IPHONE6_W(60);
+    if (indexPath.section==2) {
+        if (self.heightAtIndexPath[indexPath]) {
+            NSNumber *num = self.heightAtIndexPath[indexPath];
+            /// collectionView 底部还有七个像素
+            TTLog(@"[num floatValue] --- %f",[num floatValue]);
+            return IPHONE6_W(60);
+        }else {
+            return UITableViewAutomaticDimension;
+        }
+    }
+    if (indexPath.section==3) return IPHONE6_W(60);
     return kScreenHeight-kTabBarHeight-kNavBarHeight;
 }
+
+#pragma mark ====== 更新规格的高度 ======
+- (void)updateTableViewCellHeight:(TXMallGoodsSpecTableViewCell *)cell andheight:(CGFloat)height {
+    self.sectionHeight = height;
+    TTLog(@"height -- %f",height);
+//    if (![self.heightAtIndexPath[indexPath] isEqualToNumber:@(height)]) {
+//        self.heightAtIndexPath[indexPath] = @(height);
+//        [self.tableView reloadData];
+        NSIndexSet *indexSet=[[NSIndexSet alloc]initWithIndex:2];
+        [self.tableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationAutomatic];
+//    }
+}
+
+- (void)didToolsSelectItemAtIndexPath:(nonnull NSIndexPath *)indexPath withContent:(nonnull NSString *)content {
+    TTLog(@"content --- %@",content);
+}
+
+
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
@@ -170,6 +202,7 @@ static NSString * const reuseIdentifierSpec = @"TXMallGoodsSpecTableViewCell";
         [_tableView registerClass:[TXMallGoodsBannerTableViewCell class] forCellReuseIdentifier:reuseIdentifierBanner];
         [_tableView registerClass:[TXMallGoodsDetailsTableViewCell class] forCellReuseIdentifier:reuseIdentifierDetails];
         [_tableView registerClass:[TXMallGoodsSpecTableViewCell class] forCellReuseIdentifier:reuseIdentifierSpec];
+        [_tableView registerClass:[TXBuyCountTableViewCell class] forCellReuseIdentifier:reuseIdentifierBuynum];
         
         [_tableView setSeparatorInset:UIEdgeInsetsMake(0,0,0,0)];
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -185,7 +218,7 @@ static NSString * const reuseIdentifierSpec = @"TXMallGoodsSpecTableViewCell";
         _saveButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [_saveButton setTitleColor:kWhiteColor forState:UIControlStateNormal];
         _saveButton.titleLabel.font = kFontSizeMedium15;
-        [_saveButton setTitle:@"立即投保" forState:UIControlStateNormal];
+        [_saveButton setTitle:@"立即购买" forState:UIControlStateNormal];
         [_saveButton setBackgroundImage:kGetImage(@"c31_btn_tb") forState:UIControlStateNormal];
         MV(weakSelf);
         [_saveButton lz_handleControlEvent:UIControlEventTouchUpInside withBlock:^{
@@ -202,8 +235,16 @@ static NSString * const reuseIdentifierSpec = @"TXMallGoodsSpecTableViewCell";
     return _footerView;
 }
 
+- (NSMutableDictionary *)heightAtIndexPath {
+    if (!_heightAtIndexPath) {
+        _heightAtIndexPath = [[NSMutableDictionary alloc] init];
+    }
+    return _heightAtIndexPath;
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 @end

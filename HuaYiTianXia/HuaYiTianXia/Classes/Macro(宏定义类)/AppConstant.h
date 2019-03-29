@@ -127,7 +127,7 @@
 
 #define kNetworkProtocol @"http:"
 
-#define kGetImageURL(imageURL) [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kNetworkProtocol,imageURL]]
+#define kGetImageURL(imageURL) [NSURL URLWithString:[NSString stringWithFormat:@"%@",imageURL]]
 #define kGetVideoURL(videoURL) [NSURL URLWithString:[NSString stringWithFormat:@"%@",videoURL]]
 
 #pragma mark - # 快捷方法

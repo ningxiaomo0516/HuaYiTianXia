@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// 标题
 @property (nonatomic, strong) UILabel       *titleLabel;
 /// 数量
-@property (nonatomic, strong) SCCustomMarginLabel       *quantityLabel;
+@property (nonatomic, strong) SCCustomMarginLabel   *quantityLabel;
 /// 减
 @property (nonatomic, strong) UIButton      *reductionBtn;
 /// 加

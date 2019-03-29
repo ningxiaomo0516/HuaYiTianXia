@@ -1,8 +1,8 @@
 //
-//  TXMallGoodsSpecTableViewCell.h
+//  TXBuyCountTableViewCell.h
 //  HuaYiTianXia
 //
-//  Created by 宁小陌 on 2019/3/25.
+//  Created by 宁小陌 on 2019/3/29.
 //  Copyright © 2019年 宁小陌. All rights reserved.
 //
 
@@ -11,7 +11,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface TXMallGoodsSpecTableViewCell : UITableViewCell
+@interface TXBuyCountTableViewCell : UITableViewCell
 /// 标题
 @property (nonatomic, strong) UILabel *titleLabel;
 /// 标题

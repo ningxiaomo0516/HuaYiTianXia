@@ -114,9 +114,13 @@ static NSString* reuseIdentifierMall = @"TXMallCollectionViewCell";
 
 /// 点击collectionViewCell
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    NewsRecordsModel *productModel = self.dataArray[indexPath.row];
-    TXMallGoodsDetailsViewController *vc = [[TXMallGoodsDetailsViewController alloc] initMallProductModel:productModel];
-    TTPushVC(vc);
+    if (indexPath.section==1) {
+        Toast(@"暂未开放");
+    }else if(indexPath.section==2){
+        NewsRecordsModel *productModel = self.dataArray[indexPath.row];
+        TXMallGoodsDetailsViewController *vc = [[TXMallGoodsDetailsViewController alloc] initMallProductModel:productModel];
+        TTPushVC(vc);
+    }
 }
 
 /// 同一行的cell的间距

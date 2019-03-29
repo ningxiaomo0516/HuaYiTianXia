@@ -67,12 +67,20 @@
 		E753D1F12249D3B200A2DD36 /* SCPopoverAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = E753D1EB2249D3B200A2DD36 /* SCPopoverAnimator.m */; };
 		E753D1F22249D3B200A2DD36 /* SCPresentationController.m in Sources */ = {isa = PBXBuildFile; fileRef = E753D1EE2249D3B200A2DD36 /* SCPresentationController.m */; };
 		E753D1F32249D3B200A2DD36 /* UIViewController+SCPopover.m in Sources */ = {isa = PBXBuildFile; fileRef = E753D1F02249D3B200A2DD36 /* UIViewController+SCPopover.m */; };
-		E753D1F6224A03A900A2DD36 /* TXShareToolsCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E753D1F5224A03A900A2DD36 /* TXShareToolsCollectionViewCell.m */; };
-		E753D1F9224A1A6300A2DD36 /* TXSubmitOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E753D1F8224A1A6300A2DD36 /* TXSubmitOrderViewController.m */; };
-		E753D1FC224A1D2000A2DD36 /* TXReceiveAddressTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E753D1FB224A1D2000A2DD36 /* TXReceiveAddressTableViewCell.m */; };
-		E753D1FF224A2A6800A2DD36 /* TXShoppingTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E753D1FE224A2A6800A2DD36 /* TXShoppingTableViewCell.m */; };
-		E753D202224A311D00A2DD36 /* TXChoosePayTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E753D201224A311D00A2DD36 /* TXChoosePayTableViewCell.m */; };
-		E7757A08224B17BC00B31E81 /* TXPurchaseQuantityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7757A07224B17BC00B31E81 /* TXPurchaseQuantityTableViewCell.m */; };
+		E75F2EC9224DC9FD0091C52E /* TXMallGoodsDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E75F2EB0224DC9FD0091C52E /* TXMallGoodsDetailsViewController.m */; };
+		E75F2ECA224DC9FD0091C52E /* TXShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E75F2EB2224DC9FD0091C52E /* TXShareViewController.m */; };
+		E75F2ECB224DC9FD0091C52E /* TXChoosePayTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E75F2EB5224DC9FD0091C52E /* TXChoosePayTableViewCell.m */; };
+		E75F2ECC224DC9FD0091C52E /* TXMallGoodsBannerTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E75F2EB7224DC9FD0091C52E /* TXMallGoodsBannerTableViewCell.m */; };
+		E75F2ECD224DC9FD0091C52E /* TXMallGoodsDetailsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E75F2EB9224DC9FD0091C52E /* TXMallGoodsDetailsTableViewCell.m */; };
+		E75F2ECE224DC9FD0091C52E /* TXMallGoodsSpecTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E75F2EBB224DC9FD0091C52E /* TXMallGoodsSpecTableViewCell.m */; };
+		E75F2ECF224DC9FD0091C52E /* TXShareToolsCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E75F2EBD224DC9FD0091C52E /* TXShareToolsCollectionViewCell.m */; };
+		E75F2ED0224DC9FD0091C52E /* TXSubmitOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E75F2EC1224DC9FD0091C52E /* TXSubmitOrderViewController.m */; };
+		E75F2ED1224DC9FD0091C52E /* TXPurchaseQuantityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E75F2EC4224DC9FD0091C52E /* TXPurchaseQuantityTableViewCell.m */; };
+		E75F2ED2224DC9FD0091C52E /* TXReceiveAddressTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E75F2EC6224DC9FD0091C52E /* TXReceiveAddressTableViewCell.m */; };
+		E75F2ED3224DC9FD0091C52E /* TXShoppingTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E75F2EC8224DC9FD0091C52E /* TXShoppingTableViewCell.m */; };
+		E75F2ED6224DCB5F0091C52E /* TXBuyCountTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E75F2ED5224DCB5F0091C52E /* TXBuyCountTableViewCell.m */; };
+		E75F2EDD224DEE680091C52E /* TTTagView.m in Sources */ = {isa = PBXBuildFile; fileRef = E75F2EDC224DEE680091C52E /* TTTagView.m */; };
+		E75F2EE0224E1BE30091C52E /* TTUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E75F2EDF224E1BE30091C52E /* TTUserModel.m */; };
 		E7759AAF22447ADA007DA6CF /* TXModifyUserInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7759AAE22447AD9007DA6CF /* TXModifyUserInfoViewController.m */; };
 		E7759AB522447DC0007DA6CF /* SCLocalCacheTool.m in Sources */ = {isa = PBXBuildFile; fileRef = E7759AB222447DC0007DA6CF /* SCLocalCacheTool.m */; };
 		E7759AB622447DC0007DA6CF /* SCSmallTools.m in Sources */ = {isa = PBXBuildFile; fileRef = E7759AB422447DC0007DA6CF /* SCSmallTools.m */; };
@@ -96,12 +104,7 @@
 		E78333E422489E6B005CAB91 /* TXRegisteredTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E78333E322489E6B005CAB91 /* TXRegisteredTableViewCell.m */; };
 		E78333E72248A963005CAB91 /* TXRegisterTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E78333E62248A963005CAB91 /* TXRegisterTableViewCell.m */; };
 		E78333EA2248AAD2005CAB91 /* TXRegisterPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E78333E92248AAD2005CAB91 /* TXRegisterPasswordViewController.m */; };
-		E78333F02248BFF1005CAB91 /* TXMallGoodsDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E78333EF2248BFF1005CAB91 /* TXMallGoodsDetailsViewController.m */; };
-		E78333F32248C691005CAB91 /* TXMallGoodsBannerTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E78333F22248C691005CAB91 /* TXMallGoodsBannerTableViewCell.m */; };
-		E78333F62248C7D4005CAB91 /* TXMallGoodsDetailsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E78333F52248C7D4005CAB91 /* TXMallGoodsDetailsTableViewCell.m */; };
-		E78333F92248CBB2005CAB91 /* TXMallGoodsSpecTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E78333F82248CBB2005CAB91 /* TXMallGoodsSpecTableViewCell.m */; };
 		E78333FC2248D0B1005CAB91 /* SCCustomMarginLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = E78333FB2248D0B1005CAB91 /* SCCustomMarginLabel.m */; };
-		E78333FF2248DDDC005CAB91 /* TXShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E78333FE2248DDDC005CAB91 /* TXShareViewController.m */; };
 		E78334082248DE2F005CAB91 /* TTPopupBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = E78334042248DE2F005CAB91 /* TTPopupBackgroundView.m */; };
 		E78334092248DE2F005CAB91 /* UIViewController+TTPopupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E78334062248DE2F005CAB91 /* UIViewController+TTPopupViewController.m */; };
 		E78583BA223F947600BBEA41 /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = E78583B8223F947500BBEA41 /* Utils.m */; };
@@ -284,18 +287,34 @@
 		E753D1EE2249D3B200A2DD36 /* SCPresentationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCPresentationController.m; sourceTree = "<group>"; };
 		E753D1EF2249D3B200A2DD36 /* UIViewController+SCPopover.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+SCPopover.h"; sourceTree = "<group>"; };
 		E753D1F02249D3B200A2DD36 /* UIViewController+SCPopover.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+SCPopover.m"; sourceTree = "<group>"; };
-		E753D1F4224A03A900A2DD36 /* TXShareToolsCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXShareToolsCollectionViewCell.h; sourceTree = "<group>"; };
-		E753D1F5224A03A900A2DD36 /* TXShareToolsCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXShareToolsCollectionViewCell.m; sourceTree = "<group>"; };
-		E753D1F7224A1A6300A2DD36 /* TXSubmitOrderViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXSubmitOrderViewController.h; sourceTree = "<group>"; };
-		E753D1F8224A1A6300A2DD36 /* TXSubmitOrderViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXSubmitOrderViewController.m; sourceTree = "<group>"; };
-		E753D1FA224A1D2000A2DD36 /* TXReceiveAddressTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXReceiveAddressTableViewCell.h; sourceTree = "<group>"; };
-		E753D1FB224A1D2000A2DD36 /* TXReceiveAddressTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXReceiveAddressTableViewCell.m; sourceTree = "<group>"; };
-		E753D1FD224A2A6800A2DD36 /* TXShoppingTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXShoppingTableViewCell.h; sourceTree = "<group>"; };
-		E753D1FE224A2A6800A2DD36 /* TXShoppingTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXShoppingTableViewCell.m; sourceTree = "<group>"; };
-		E753D200224A311D00A2DD36 /* TXChoosePayTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXChoosePayTableViewCell.h; sourceTree = "<group>"; };
-		E753D201224A311D00A2DD36 /* TXChoosePayTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXChoosePayTableViewCell.m; sourceTree = "<group>"; };
-		E7757A06224B17BC00B31E81 /* TXPurchaseQuantityTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXPurchaseQuantityTableViewCell.h; sourceTree = "<group>"; };
-		E7757A07224B17BC00B31E81 /* TXPurchaseQuantityTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXPurchaseQuantityTableViewCell.m; sourceTree = "<group>"; };
+		E75F2EAF224DC9FD0091C52E /* TXMallGoodsDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXMallGoodsDetailsViewController.h; sourceTree = "<group>"; };
+		E75F2EB0224DC9FD0091C52E /* TXMallGoodsDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TXMallGoodsDetailsViewController.m; sourceTree = "<group>"; };
+		E75F2EB1224DC9FD0091C52E /* TXShareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXShareViewController.h; sourceTree = "<group>"; };
+		E75F2EB2224DC9FD0091C52E /* TXShareViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TXShareViewController.m; sourceTree = "<group>"; };
+		E75F2EB4224DC9FD0091C52E /* TXChoosePayTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXChoosePayTableViewCell.h; sourceTree = "<group>"; };
+		E75F2EB5224DC9FD0091C52E /* TXChoosePayTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TXChoosePayTableViewCell.m; sourceTree = "<group>"; };
+		E75F2EB6224DC9FD0091C52E /* TXMallGoodsBannerTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXMallGoodsBannerTableViewCell.h; sourceTree = "<group>"; };
+		E75F2EB7224DC9FD0091C52E /* TXMallGoodsBannerTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TXMallGoodsBannerTableViewCell.m; sourceTree = "<group>"; };
+		E75F2EB8224DC9FD0091C52E /* TXMallGoodsDetailsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXMallGoodsDetailsTableViewCell.h; sourceTree = "<group>"; };
+		E75F2EB9224DC9FD0091C52E /* TXMallGoodsDetailsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TXMallGoodsDetailsTableViewCell.m; sourceTree = "<group>"; };
+		E75F2EBA224DC9FD0091C52E /* TXMallGoodsSpecTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXMallGoodsSpecTableViewCell.h; sourceTree = "<group>"; };
+		E75F2EBB224DC9FD0091C52E /* TXMallGoodsSpecTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TXMallGoodsSpecTableViewCell.m; sourceTree = "<group>"; };
+		E75F2EBC224DC9FD0091C52E /* TXShareToolsCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXShareToolsCollectionViewCell.h; sourceTree = "<group>"; };
+		E75F2EBD224DC9FD0091C52E /* TXShareToolsCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TXShareToolsCollectionViewCell.m; sourceTree = "<group>"; };
+		E75F2EC0224DC9FD0091C52E /* TXSubmitOrderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXSubmitOrderViewController.h; sourceTree = "<group>"; };
+		E75F2EC1224DC9FD0091C52E /* TXSubmitOrderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TXSubmitOrderViewController.m; sourceTree = "<group>"; };
+		E75F2EC3224DC9FD0091C52E /* TXPurchaseQuantityTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXPurchaseQuantityTableViewCell.h; sourceTree = "<group>"; };
+		E75F2EC4224DC9FD0091C52E /* TXPurchaseQuantityTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TXPurchaseQuantityTableViewCell.m; sourceTree = "<group>"; };
+		E75F2EC5224DC9FD0091C52E /* TXReceiveAddressTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXReceiveAddressTableViewCell.h; sourceTree = "<group>"; };
+		E75F2EC6224DC9FD0091C52E /* TXReceiveAddressTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TXReceiveAddressTableViewCell.m; sourceTree = "<group>"; };
+		E75F2EC7224DC9FD0091C52E /* TXShoppingTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXShoppingTableViewCell.h; sourceTree = "<group>"; };
+		E75F2EC8224DC9FD0091C52E /* TXShoppingTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TXShoppingTableViewCell.m; sourceTree = "<group>"; };
+		E75F2ED4224DCB5F0091C52E /* TXBuyCountTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXBuyCountTableViewCell.h; sourceTree = "<group>"; };
+		E75F2ED5224DCB5F0091C52E /* TXBuyCountTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXBuyCountTableViewCell.m; sourceTree = "<group>"; };
+		E75F2EDB224DEE680091C52E /* TTTagView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TTTagView.h; sourceTree = "<group>"; };
+		E75F2EDC224DEE680091C52E /* TTTagView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TTTagView.m; sourceTree = "<group>"; };
+		E75F2EDE224E1BE30091C52E /* TTUserModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TTUserModel.h; sourceTree = "<group>"; };
+		E75F2EDF224E1BE30091C52E /* TTUserModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TTUserModel.m; sourceTree = "<group>"; };
 		E7759AAD22447AD9007DA6CF /* TXModifyUserInfoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXModifyUserInfoViewController.h; sourceTree = "<group>"; };
 		E7759AAE22447AD9007DA6CF /* TXModifyUserInfoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXModifyUserInfoViewController.m; sourceTree = "<group>"; };
 		E7759AB122447DC0007DA6CF /* SCSmallTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCSmallTools.h; sourceTree = "<group>"; };
@@ -341,18 +360,8 @@
 		E78333E62248A963005CAB91 /* TXRegisterTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXRegisterTableViewCell.m; sourceTree = "<group>"; };
 		E78333E82248AAD1005CAB91 /* TXRegisterPasswordViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXRegisterPasswordViewController.h; sourceTree = "<group>"; };
 		E78333E92248AAD2005CAB91 /* TXRegisterPasswordViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXRegisterPasswordViewController.m; sourceTree = "<group>"; };
-		E78333EE2248BFF1005CAB91 /* TXMallGoodsDetailsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXMallGoodsDetailsViewController.h; sourceTree = "<group>"; };
-		E78333EF2248BFF1005CAB91 /* TXMallGoodsDetailsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXMallGoodsDetailsViewController.m; sourceTree = "<group>"; };
-		E78333F12248C691005CAB91 /* TXMallGoodsBannerTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXMallGoodsBannerTableViewCell.h; sourceTree = "<group>"; };
-		E78333F22248C691005CAB91 /* TXMallGoodsBannerTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXMallGoodsBannerTableViewCell.m; sourceTree = "<group>"; };
-		E78333F42248C7D4005CAB91 /* TXMallGoodsDetailsTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXMallGoodsDetailsTableViewCell.h; sourceTree = "<group>"; };
-		E78333F52248C7D4005CAB91 /* TXMallGoodsDetailsTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXMallGoodsDetailsTableViewCell.m; sourceTree = "<group>"; };
-		E78333F72248CBB2005CAB91 /* TXMallGoodsSpecTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXMallGoodsSpecTableViewCell.h; sourceTree = "<group>"; };
-		E78333F82248CBB2005CAB91 /* TXMallGoodsSpecTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXMallGoodsSpecTableViewCell.m; sourceTree = "<group>"; };
 		E78333FA2248D0B1005CAB91 /* SCCustomMarginLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCCustomMarginLabel.h; sourceTree = "<group>"; };
 		E78333FB2248D0B1005CAB91 /* SCCustomMarginLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCCustomMarginLabel.m; sourceTree = "<group>"; };
-		E78333FD2248DDDC005CAB91 /* TXShareViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXShareViewController.h; sourceTree = "<group>"; };
-		E78333FE2248DDDC005CAB91 /* TXShareViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXShareViewController.m; sourceTree = "<group>"; };
 		E78334032248DE2F005CAB91 /* TTPopupBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTPopupBackgroundView.h; sourceTree = "<group>"; };
 		E78334042248DE2F005CAB91 /* TTPopupBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTPopupBackgroundView.m; sourceTree = "<group>"; };
 		E78334052248DE2F005CAB91 /* UIViewController+TTPopupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+TTPopupViewController.h"; sourceTree = "<group>"; };
@@ -788,6 +797,7 @@
 		E72698E8223F737C003A5043 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				E75F2EDA224DEE5C0091C52E /* TTTagView */,
 				E753D1E92249D3B200A2DD36 /* SCPopover */,
 				E78334002248DE2F005CAB91 /* TTPopupView */,
 				E7759AD72244C0D7007DA6CF /* SCTextView */,
@@ -971,6 +981,85 @@
 			path = SCPopover;
 			sourceTree = "<group>";
 		};
+		E75F2EAD224DC9FD0091C52E /* 商品详情(Details) */ = {
+			isa = PBXGroup;
+			children = (
+				E75F2EAE224DC9FD0091C52E /* Controller */,
+				E75F2EB3224DC9FD0091C52E /* View */,
+			);
+			path = "商品详情(Details)";
+			sourceTree = "<group>";
+		};
+		E75F2EAE224DC9FD0091C52E /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				E75F2EAF224DC9FD0091C52E /* TXMallGoodsDetailsViewController.h */,
+				E75F2EB0224DC9FD0091C52E /* TXMallGoodsDetailsViewController.m */,
+				E75F2EB1224DC9FD0091C52E /* TXShareViewController.h */,
+				E75F2EB2224DC9FD0091C52E /* TXShareViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		E75F2EB3224DC9FD0091C52E /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E75F2EB4224DC9FD0091C52E /* TXChoosePayTableViewCell.h */,
+				E75F2EB5224DC9FD0091C52E /* TXChoosePayTableViewCell.m */,
+				E75F2EB6224DC9FD0091C52E /* TXMallGoodsBannerTableViewCell.h */,
+				E75F2EB7224DC9FD0091C52E /* TXMallGoodsBannerTableViewCell.m */,
+				E75F2EB8224DC9FD0091C52E /* TXMallGoodsDetailsTableViewCell.h */,
+				E75F2EB9224DC9FD0091C52E /* TXMallGoodsDetailsTableViewCell.m */,
+				E75F2EBA224DC9FD0091C52E /* TXMallGoodsSpecTableViewCell.h */,
+				E75F2EBB224DC9FD0091C52E /* TXMallGoodsSpecTableViewCell.m */,
+				E75F2EBC224DC9FD0091C52E /* TXShareToolsCollectionViewCell.h */,
+				E75F2EBD224DC9FD0091C52E /* TXShareToolsCollectionViewCell.m */,
+				E75F2ED4224DCB5F0091C52E /* TXBuyCountTableViewCell.h */,
+				E75F2ED5224DCB5F0091C52E /* TXBuyCountTableViewCell.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		E75F2EBE224DC9FD0091C52E /* 支付中心(PayCenter) */ = {
+			isa = PBXGroup;
+			children = (
+				E75F2EBF224DC9FD0091C52E /* Controller */,
+				E75F2EC2224DC9FD0091C52E /* View */,
+			);
+			path = "支付中心(PayCenter)";
+			sourceTree = "<group>";
+		};
+		E75F2EBF224DC9FD0091C52E /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				E75F2EC0224DC9FD0091C52E /* TXSubmitOrderViewController.h */,
+				E75F2EC1224DC9FD0091C52E /* TXSubmitOrderViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		E75F2EC2224DC9FD0091C52E /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E75F2EC3224DC9FD0091C52E /* TXPurchaseQuantityTableViewCell.h */,
+				E75F2EC4224DC9FD0091C52E /* TXPurchaseQuantityTableViewCell.m */,
+				E75F2EC5224DC9FD0091C52E /* TXReceiveAddressTableViewCell.h */,
+				E75F2EC6224DC9FD0091C52E /* TXReceiveAddressTableViewCell.m */,
+				E75F2EC7224DC9FD0091C52E /* TXShoppingTableViewCell.h */,
+				E75F2EC8224DC9FD0091C52E /* TXShoppingTableViewCell.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		E75F2EDA224DEE5C0091C52E /* TTTagView */ = {
+			isa = PBXGroup;
+			children = (
+				E75F2EDB224DEE680091C52E /* TTTagView.h */,
+				E75F2EDC224DEE680091C52E /* TTTagView.m */,
+			);
+			path = TTTagView;
+			sourceTree = "<group>";
+		};
 		E7759AB022447DA0007DA6CF /* SmallTools */ = {
 			isa = PBXGroup;
 			children = (
@@ -1084,6 +1173,8 @@
 		E78333D0224874D9005CAB91 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				E75F2EDE224E1BE30091C52E /* TTUserModel.h */,
+				E75F2EDF224E1BE30091C52E /* TTUserModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1102,46 +1193,10 @@
 		E78333EB2248BFAD005CAB91 /* Childs(子页面) */ = {
 			isa = PBXGroup;
 			children = (
-				E78333EC2248BFAD005CAB91 /* Controller */,
-				E78333ED2248BFAD005CAB91 /* View */,
+				E75F2EAD224DC9FD0091C52E /* 商品详情(Details) */,
+				E75F2EBE224DC9FD0091C52E /* 支付中心(PayCenter) */,
 			);
 			path = "Childs(子页面)";
-			sourceTree = "<group>";
-		};
-		E78333EC2248BFAD005CAB91 /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				E78333EE2248BFF1005CAB91 /* TXMallGoodsDetailsViewController.h */,
-				E78333EF2248BFF1005CAB91 /* TXMallGoodsDetailsViewController.m */,
-				E78333FD2248DDDC005CAB91 /* TXShareViewController.h */,
-				E78333FE2248DDDC005CAB91 /* TXShareViewController.m */,
-				E753D1F7224A1A6300A2DD36 /* TXSubmitOrderViewController.h */,
-				E753D1F8224A1A6300A2DD36 /* TXSubmitOrderViewController.m */,
-			);
-			path = Controller;
-			sourceTree = "<group>";
-		};
-		E78333ED2248BFAD005CAB91 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				E78333F12248C691005CAB91 /* TXMallGoodsBannerTableViewCell.h */,
-				E78333F22248C691005CAB91 /* TXMallGoodsBannerTableViewCell.m */,
-				E78333F42248C7D4005CAB91 /* TXMallGoodsDetailsTableViewCell.h */,
-				E78333F52248C7D4005CAB91 /* TXMallGoodsDetailsTableViewCell.m */,
-				E78333F72248CBB2005CAB91 /* TXMallGoodsSpecTableViewCell.h */,
-				E78333F82248CBB2005CAB91 /* TXMallGoodsSpecTableViewCell.m */,
-				E753D1F4224A03A900A2DD36 /* TXShareToolsCollectionViewCell.h */,
-				E753D1F5224A03A900A2DD36 /* TXShareToolsCollectionViewCell.m */,
-				E753D1FA224A1D2000A2DD36 /* TXReceiveAddressTableViewCell.h */,
-				E753D1FB224A1D2000A2DD36 /* TXReceiveAddressTableViewCell.m */,
-				E753D1FD224A2A6800A2DD36 /* TXShoppingTableViewCell.h */,
-				E753D1FE224A2A6800A2DD36 /* TXShoppingTableViewCell.m */,
-				E753D200224A311D00A2DD36 /* TXChoosePayTableViewCell.h */,
-				E753D201224A311D00A2DD36 /* TXChoosePayTableViewCell.m */,
-				E7757A06224B17BC00B31E81 /* TXPurchaseQuantityTableViewCell.h */,
-				E7757A07224B17BC00B31E81 /* TXPurchaseQuantityTableViewCell.m */,
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 		E78334002248DE2F005CAB91 /* TTPopupView */ = {
@@ -1825,6 +1880,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				E7759AD322449557007DA6CF /* TXAddressTableViewCell.m in Sources */,
+				E75F2ED0224DC9FD0091C52E /* TXSubmitOrderViewController.m in Sources */,
+				E75F2EDD224DEE680091C52E /* TTTagView.m in Sources */,
 				E78584082240C68500BBEA41 /* TXMineBannerCollectionViewCell.m in Sources */,
 				E7759AC722448DA3007DA6CF /* TXConversionViewController.m in Sources */,
 				E7AA9DDA22437A1700C15483 /* TXTopupViewController.m in Sources */,
@@ -1845,9 +1902,7 @@
 				E7F1A70F224205A2003FA216 /* TTBaseSectionHeaderView.m in Sources */,
 				E72699D7223F7F58003A5043 /* UIColor+Extension.m in Sources */,
 				E78583F52240C2AF00BBEA41 /* TXWalletViewController.m in Sources */,
-				E7757A08224B17BC00B31E81 /* TXPurchaseQuantityTableViewCell.m in Sources */,
 				E72699F9223F8298003A5043 /* WMMenuItem.m in Sources */,
-				E78333F02248BFF1005CAB91 /* TXMallGoodsDetailsViewController.m in Sources */,
 				E78584032240C54300BBEA41 /* TYPageControl.m in Sources */,
 				E72699FC223F8298003A5043 /* WMProgressView.m in Sources */,
 				E72699FA223F8298003A5043 /* WMScrollView.m in Sources */,
@@ -1856,18 +1911,18 @@
 				E726997E223F7E4B003A5043 /* SCLoadingLabel.m in Sources */,
 				E7F1A7162242123A003FA216 /* TXRealNameViewController.m in Sources */,
 				E7C42E80224B770200F3FB1A /* AFLoadDataManager.m in Sources */,
-				E78333F62248C7D4005CAB91 /* TXMallGoodsDetailsTableViewCell.m in Sources */,
 				E7D07C622243C8B600E3FFAF /* NSObject+Toast.m in Sources */,
 				E7AA9DB7224338EA00C15483 /* TXWalletTableViewCell.m in Sources */,
 				E726997F223F7E4B003A5043 /* SCActivityIndicatorView.m in Sources */,
+				E75F2ECB224DC9FD0091C52E /* TXChoosePayTableViewCell.m in Sources */,
 				E7AA9DDF224392FB00C15483 /* TXRolloutViewController.m in Sources */,
-				E753D202224A311D00A2DD36 /* TXChoosePayTableViewCell.m in Sources */,
 				E7759ADC2244C0D7007DA6CF /* MVTextField.m in Sources */,
 				E7AA9DBA22433A0200C15483 /* TXWalletCollectionViewCell.m in Sources */,
 				E7759AE02244C59F007DA6CF /* TXAddressTextViewCell.m in Sources */,
 				E72699A6223F7ECC003A5043 /* NSString+URL.m in Sources */,
 				E78334082248DE2F005CAB91 /* TTPopupBackgroundView.m in Sources */,
 				E72699E6223F7F58003A5043 /* UIScreen+Extension.m in Sources */,
+				E75F2ED6224DCB5F0091C52E /* TXBuyCountTableViewCell.m in Sources */,
 				E7269980223F7E4B003A5043 /* UIView+SCLoadingView.m in Sources */,
 				E7AA9DCA22436DA700C15483 /* TXTransactionRecordsViewController.m in Sources */,
 				E78583C1223F98A800BBEA41 /* TXNewTemplateTableViewCell.m in Sources */,
@@ -1876,19 +1931,21 @@
 				E72699E0223F7F58003A5043 /* UIView+SCTapped.m in Sources */,
 				E72699A9223F7ECC003A5043 /* NSString+PinYin.m in Sources */,
 				E7F1A73E2242835A003FA216 /* TXMallBannerCollectionViewCell.m in Sources */,
-				E753D1F9224A1A6300A2DD36 /* TXSubmitOrderViewController.m in Sources */,
 				E7F1A7002241EF16003FA216 /* TXProductViewController.m in Sources */,
 				E726990C223F7844003A5043 /* TXNewsViewController.m in Sources */,
 				E7D07C682243CCBE00E3FFAF /* LZActionSheet.m in Sources */,
 				E7F1A73B22427DC0003FA216 /* TXMallToolsCollectionViewCell.m in Sources */,
 				E72699D8223F7F58003A5043 /* UIButton+Extension.m in Sources */,
+				E75F2ED3224DC9FD0091C52E /* TXShoppingTableViewCell.m in Sources */,
 				E72699A1223F7ECC003A5043 /* NSString+MD5.m in Sources */,
+				E75F2EE0224E1BE30091C52E /* TTUserModel.m in Sources */,
 				E78333E72248A963005CAB91 /* TXRegisterTableViewCell.m in Sources */,
 				E7759ADD2244C0D7007DA6CF /* SCTextView.m in Sources */,
 				E7269A00223F8472003A5043 /* TXNewTemplateViewController.m in Sources */,
 				E7759AB922447E6B007DA6CF /* URLDefine.m in Sources */,
 				E7F1A71222420A1B003FA216 /* TXEarningsTableViewCell.m in Sources */,
 				E78333EA2248AAD2005CAB91 /* TXRegisterPasswordViewController.m in Sources */,
+				E75F2EC9224DC9FD0091C52E /* TXMallGoodsDetailsViewController.m in Sources */,
 				E7759AB622447DC0007DA6CF /* SCSmallTools.m in Sources */,
 				E72698C5223F7167003A5043 /* main.m in Sources */,
 				E78583FB2240C2CC00BBEA41 /* TXRecommendedViewController.m in Sources */,
@@ -1896,27 +1953,27 @@
 				E7269912223F7881003A5043 /* TXAgriculturalViewController.m in Sources */,
 				E72698B7223F7165003A5043 /* AppDelegate.m in Sources */,
 				E72699DA223F7F58003A5043 /* UIFont+Extension.m in Sources */,
+				E75F2ECE224DC9FD0091C52E /* TXMallGoodsSpecTableViewCell.m in Sources */,
 				E726991B223F7D28003A5043 /* TTBaseViewController.m in Sources */,
 				E7759AD022449507007DA6CF /* TXAddressViewController.m in Sources */,
 				E7759ACA224491BA007DA6CF /* TXResetPwdViewController.m in Sources */,
-				E78333FF2248DDDC005CAB91 /* TXShareViewController.m in Sources */,
+				E75F2ECA224DC9FD0091C52E /* TXShareViewController.m in Sources */,
 				E78333E422489E6B005CAB91 /* TXRegisteredTableViewCell.m in Sources */,
 				E72699E3223F7F58003A5043 /* UITabBar+SCBadge.m in Sources */,
-				E78333F32248C691005CAB91 /* TXMallGoodsBannerTableViewCell.m in Sources */,
-				E753D1FC224A1D2000A2DD36 /* TXReceiveAddressTableViewCell.m in Sources */,
+				E75F2ED2224DC9FD0091C52E /* TXReceiveAddressTableViewCell.m in Sources */,
 				E72699A0223F7ECC003A5043 /* NSObject+SCValidation.m in Sources */,
 				E7759AC122447FD2007DA6CF /* TXRepeatCastViewController.m in Sources */,
 				E7C42E87224B7EFA00F3FB1A /* TXNewsModel.m in Sources */,
 				E7269907223F754B003A5043 /* UIViewController+LZNavigationController.m in Sources */,
+				E75F2ECF224DC9FD0091C52E /* TXShareToolsCollectionViewCell.m in Sources */,
 				E72699E2223F7F58003A5043 /* UIImage+Extension.m in Sources */,
 				E7F1A7092241F298003FA216 /* TXProductTableViewCell.m in Sources */,
-				E753D1FF224A2A6800A2DD36 /* TXShoppingTableViewCell.m in Sources */,
 				E72699D9223F7F58003A5043 /* UILabel+Extension.m in Sources */,
 				E72699A5223F7ECC003A5043 /* NSFileManager+Paths.m in Sources */,
+				E75F2ECC224DC9FD0091C52E /* TXMallGoodsBannerTableViewCell.m in Sources */,
 				E7C42E81224B770200F3FB1A /* AFSessionManager.m in Sources */,
 				E72699DF223F7F58003A5043 /* UILabel+ChangeLineSpaceAndWordSpace.m in Sources */,
 				E7269906223F754B003A5043 /* LZNavigationController.m in Sources */,
-				E78333F92248CBB2005CAB91 /* TXMallGoodsSpecTableViewCell.m in Sources */,
 				E72699A8223F7ECC003A5043 /* NSDate+Extensions.m in Sources */,
 				E7C42E83224B770200F3FB1A /* NetWorkAnalysisTool.m in Sources */,
 				E72699A2223F7ECC003A5043 /* NSString+SCExtension.m in Sources */,
@@ -1927,13 +1984,13 @@
 				E78334092248DE2F005CAB91 /* UIViewController+TTPopupViewController.m in Sources */,
 				E78583CA22409D5A00BBEA41 /* TXMineTableViewCell.m in Sources */,
 				E78583C4223FA3C000BBEA41 /* TXMineHeaderView.m in Sources */,
+				E75F2ECD224DC9FD0091C52E /* TXMallGoodsDetailsTableViewCell.m in Sources */,
 				E72699E4223F7F58003A5043 /* UIImage+SCExtension.m in Sources */,
 				E72699DB223F7F58003A5043 /* UINavigationBar+SCExtension.m in Sources */,
 				E78583CD22409E6D00BBEA41 /* TXMineBannerTableViewCell.m in Sources */,
 				E7AA9DAF2243353200C15483 /* TTBaseNavImagesTableViewController.m in Sources */,
 				E72699AA223F7ECC003A5043 /* NSArray+Extension.m in Sources */,
 				E72699DD223F7F58003A5043 /* UIImageView+SCExtension.m in Sources */,
-				E753D1F6224A03A900A2DD36 /* TXShareToolsCollectionViewCell.m in Sources */,
 				E7759AAF22447ADA007DA6CF /* TXModifyUserInfoViewController.m in Sources */,
 				E7AA9DD2224372B500C15483 /* TXZhuanchuZhuanruViewController.m in Sources */,
 				E78333DB22487913005CAB91 /* TXLoginViewController.m in Sources */,
@@ -1942,6 +1999,7 @@
 				E72699F8223F8298003A5043 /* WMPageController.m in Sources */,
 				E72699E1223F7F58003A5043 /* UILabel+SCExtension.m in Sources */,
 				E7F1A73822427A65003FA216 /* TXMallCollectionViewController.m in Sources */,
+				E75F2ED1224DC9FD0091C52E /* TXPurchaseQuantityTableViewCell.m in Sources */,
 				E7AA9DCD22436F4D00C15483 /* TXTransactionRecordsTableViewCell.m in Sources */,
 				E753D1F12249D3B200A2DD36 /* SCPopoverAnimator.m in Sources */,
 				E726990F223F786B003A5043 /* TXMineViewController.m in Sources */,

@@ -55,7 +55,6 @@ static NSString* reuseIdentifiers = @"TXMineBannerCollectionViewCell";
     if (self.bannerArray.count>1) {
         self.pagerView.autoScrollInterval = 3;//自动轮播时间
     }
-    TTLog(@"self.bannerArray.count -- %lu",(unsigned long)self.bannerArray.count);
     self.pageControl.numberOfPages = self.bannerArray.count;
     [self.pagerView reloadData];
 }

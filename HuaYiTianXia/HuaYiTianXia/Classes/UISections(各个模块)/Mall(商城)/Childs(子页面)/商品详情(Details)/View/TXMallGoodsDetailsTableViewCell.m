@@ -30,6 +30,13 @@
     return self;
 }
 
+- (void)setModel:(NewsRecordsModel *)model{
+    _model = model;
+    self.titleLabel.text = model.title;
+    self.subtitleLabel.text = model.synopsis;
+    self.priceLabel.text = [NSString stringWithFormat:@"产品价格:%@.0",model.price];
+}
+
 - (void) initView{
     [self addSubview:self.titleLabel];
     [self addSubview:self.subtitleLabel];
@@ -61,6 +68,7 @@
 - (UILabel *)subtitleLabel{
     if (!_subtitleLabel) {
         _subtitleLabel = [UILabel lz_labelWithTitle:@"" color:kTextColor204  font:kFontSizeMedium13];
+        _subtitleLabel.numberOfLines = 1;
     }
     return _subtitleLabel;
 }

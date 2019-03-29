@@ -39,33 +39,34 @@
 
 #pragma mark - TODO:
 
-//网络地址转义
+/// 网络地址转义
 - (NSString *_Nullable)sc_urlString;
 
 //string为空的时候的处理
 
 + (NSString *_Nullable)sc_stringWhenNil:(NSString *_Nonnull)string;
 
-//存储
+/// 存储
 + (void)sc_setObject:(NSString *_Nonnull)string   key:(NSString *_Nonnull)keyString;
-//取值
+/// 取值
 + (NSString *_Nullable)sc_stringForKey:(NSString *_Nonnull)keyStrng;
-//删除
+/// 删除
 + (void)sc_removeObjectForKey:(NSString *_Nonnull)keyString;
-//点赞数，评论数上10000，转w
+/// 点赞数，评论数上10000，转w
 -(NSString*_Nullable)transformationStringToSimplify;
 
-//获取分页url
+/// 获取分页url
 - (NSString *_Nullable)sc_urlStringWithIndex:(NSInteger)pageIndex;
 
 - (NSString *_Nullable)sc_abandonCharacterWithCharacterArray:(NSArray *_Nullable)characterArray;
 
-//传入秒数得到hh:mm:ss
+/// 传入秒数得到hh:mm:ss
 + (NSString *_Nullable)getHHMMSSFromSS:(NSInteger)totalTime;
-//传入秒数得到mm:ss
+/// 传入秒数得到mm:ss
 + (NSString *_Nullable)getMMSSFromSS:(NSInteger)totalTime;
-//寻找document路径
+/// 寻找document路径
 + (NSString *_Nullable)finddocumentpath;
-//根据时：分：秒得到秒数
+/// 根据时：分：秒得到秒数
 + (NSString *_Nullable)getIntervalWithTimeStr:(NSString *_Nullable)timeStr;
+
 @end

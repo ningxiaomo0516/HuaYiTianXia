@@ -181,7 +181,6 @@
         zonghms = h*3600 + m*60 +s;
     }
     if (array.count == 2) {
-        
         NSString *MM= [array lz_safeObjectAtIndex:0];
         NSString *ss = [array lz_safeObjectAtIndex:1];
         
@@ -189,7 +188,6 @@
         NSInteger s = [ss integerValue];
         zonghms = m*60 +s;
     }
-    
     if (array.count == 1) {
         NSString *ss = [array lz_safeObjectAtIndex:0];
         NSInteger s = [ss integerValue];
@@ -206,4 +204,5 @@
     NSString *value = paths.lastObject;
     return value;
 }
+
 @end

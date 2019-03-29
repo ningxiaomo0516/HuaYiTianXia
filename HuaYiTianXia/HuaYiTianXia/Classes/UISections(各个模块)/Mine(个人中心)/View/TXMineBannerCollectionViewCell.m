@@ -28,8 +28,14 @@
 
 - (void)setBannerModel:(NewsBannerModel *)bannerModel{
     _bannerModel = bannerModel;
+    NSString *imageURL = @"";
+    if (kStringIsEmpty(bannerModel.img)) {
+        imageURL = bannerModel.imageText;
+    }else{
+        imageURL = bannerModel.img;
+    }
 //    tools.imagesView.image = kGetImage(@"base_deprecated_activity");
-    [self.imagesView sd_setImageWithURL:[NSURL URLWithString:bannerModel.img]
+    [self.imagesView sd_setImageWithURL:kGetImageURL(imageURL)
                        placeholderImage:kGetImage(VERTICALMAPBITMAP)];
 }
 

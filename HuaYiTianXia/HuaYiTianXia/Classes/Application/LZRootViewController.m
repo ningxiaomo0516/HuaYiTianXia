@@ -128,7 +128,7 @@
         [viewController presentViewController:navigation animated:YES completion:^{
             TTLog(@"个人信息修改");
         }];
-//        return NO;
+        return NO;
     }
     return YES;
 }

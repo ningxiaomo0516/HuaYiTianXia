@@ -7,8 +7,10 @@
 //
 
 #import "TXAgriculturalViewController.h"
+#import "TTTagView.h"
 
-@interface TXAgriculturalViewController ()
+@interface TXAgriculturalViewController ()<TTTagViewDelegate>
+@property (nonatomic ,strong)TTTagView * tagView;
 
 @end
 
@@ -17,20 +19,33 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    [self.view addSubview:self.tagView];
+     self.tagView.dataArray = @[@"锤子",@"见过",@"膜拜单车",@"微信支付",@"Q",@"王者荣耀",@"蓝淋网",@"阿珂",@"半生",@"猎场",@"QQ空间",@"王者荣耀助手",@"斯卡哈复健科",@"安抚",@"沙发上",@"日打的费",@"问问",@"无人区",@"阿斯废弃物人情味",@"沙发上",@"日打的费",@"问问",@"无人区",@"阿斯废弃物人情味",@"沙发上",@"日打的费",@"问问",@"无人区",@"阿斯废弃物人情味",@"沙发上",@"日打的费",@"问问",@"无人区",@"阿斯废弃物人情味"];
+    TTLog(@"----- %f",CGRectGetHeight(self.tagView.frame));
 }
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+-(TTTagView *)tagView{
+    if (!_tagView) {
+        _tagView = [[TTTagView alloc]initWithFrame:CGRectMake(0, 100, kScreenWidth, 0)];
+        _tagView.backgroundColor = kRandomColor;
+        _tagView.delegate = self;
+    }
+    return _tagView;
 }
-*/
+
+#pragma mark - CCTagViewDelegate
+- (void)handleSelectTag:(NSString *)keyWord{
+    TTLog(@"keyWord ---- %@",keyWord);
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
 
 @end
