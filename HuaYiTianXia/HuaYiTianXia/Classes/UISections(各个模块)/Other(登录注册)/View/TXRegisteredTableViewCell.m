@@ -61,6 +61,7 @@
     [self.codeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(self.mas_right).offset(IPHONE6_W(-15));
         make.centerY.equalTo(self);
+        make.width.equalTo(@(IPHONE6_W(100)));
     }];
 }
 
@@ -94,10 +95,10 @@
 - (UIButton *)codeBtn{
     if (!_codeBtn) {
         _codeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_codeBtn setTitleColor:kWhiteColor forState:UIControlStateNormal];
+        [_codeBtn setTitleColor:HexString(@"#26B9FE") forState:UIControlStateNormal];
         _codeBtn.titleLabel.font = kFontSizeMedium13;
-        [_codeBtn setTitle:@"获取" forState:UIControlStateNormal];
-        [_codeBtn setBackgroundImage:kGetImage(@"c31_btn_yzm") forState:UIControlStateNormal];
+        [_codeBtn setTitle:@"获取短信验证码" forState:UIControlStateNormal];
+//        [_codeBtn setBackgroundImage:kGetImage(@"c31_btn_yzm") forState:UIControlStateNormal];
     }
     return _codeBtn;
 }

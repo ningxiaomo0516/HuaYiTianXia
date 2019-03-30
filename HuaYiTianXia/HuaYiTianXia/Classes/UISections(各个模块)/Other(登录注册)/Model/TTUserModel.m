@@ -38,12 +38,15 @@ static NSString *upproxy        = @"upproxy";
 static NSString *vrcurrency     = @"vrcurrency";
 static NSString *stockRight     = @"stockRight";
 static NSString *balance        = @"balance";
+static NSString *totalAssets    = @"totalAssets";
 
 
 
 @implementation TTUserDataModel
 + (NSDictionary *)replacedKeyFromPropertyName{
-    return @{@"data" : @"obj"};
+    return @{@"data"        : @"obj",
+             @"errorcode"   : @"code",
+             @"message"     : @"msg"};
 }
 + (NSDictionary *)objectClassInArray{
     return @{@"data" : [TTUserModel class]};
@@ -52,15 +55,21 @@ static NSString *balance        = @"balance";
 @end
 
 @implementation TTUserModel
+
 + (NSDictionary *)replacedKeyFromPropertyName{
     return @{@"uid"     : @"id",
              @"username": @"nickName",
              @"realname": @"name",
-             @"headImg" : @"headImg",
+             @"avatar"  : @"headImg",
              @"registertime": @"time",
-             @"idnumber"    : @"code"
-             };
+             @"idnumber"    : @"code",
+             @"totalAssets": @"assets"};
 }
+
++ (NSDictionary *)objectClassInArray{
+    return @{@"banners" : [NewsBannerModel class]};
+}
+
 static TTUserModel *userModel = nil;
 + (instancetype)shared {
     static dispatch_once_t onceToken;
@@ -131,6 +140,7 @@ static TTUserModel *userModel = nil;
         [TTUserModel shared].mobile = [aDecoder decodeObjectForKey:mobile];
         [TTUserModel shared].phone = [aDecoder decodeObjectForKey:phone];
         [TTUserModel shared].pwd = [aDecoder decodeObjectForKey:pwd];
+        [TTUserModel shared].tranPwd = [aDecoder decodeObjectForKey:tranPwd];
         [TTUserModel shared].registertime = [aDecoder decodeObjectForKey:registertime];
         
         /// 解码并返回一个与给定键相关联的Bool类型的值
@@ -143,14 +153,15 @@ static TTUserModel *userModel = nil;
         [TTUserModel shared].ainvited = [aDecoder decodeObjectForKey:ainvited];
         [TTUserModel shared].arcurrency = [aDecoder decodeObjectForKey:arcurrency];
         [TTUserModel shared].inviteCode = [aDecoder decodeObjectForKey:inviteCode];
+        [TTUserModel shared].totalAssets = [aDecoder decodeObjectForKey:totalAssets];
+        [TTUserModel shared].balance = [aDecoder decodeObjectForKey:balance];
+        [TTUserModel shared].vrcurrency = [aDecoder decodeObjectForKey:vrcurrency];
+        [TTUserModel shared].suinvited = [aDecoder decodeObjectForKey:suinvited];
+        [TTUserModel shared].stockRight = [aDecoder decodeObjectForKey:stockRight];
         
         [TTUserModel shared].ispay = [aDecoder decodeIntegerForKey:ispay];
-        [TTUserModel shared].suinvited = [aDecoder decodeObjectForKey:suinvited];
         [TTUserModel shared].upproxy = [aDecoder decodeObjectForKey:upproxy];
-        [TTUserModel shared].vrcurrency = [aDecoder decodeObjectForKey:vrcurrency];
         [TTUserModel shared].type = [aDecoder decodeIntegerForKey:type];
-        [TTUserModel shared].stockRight = [aDecoder decodeObjectForKey:stockRight];
-        [TTUserModel shared].balance = [aDecoder decodeObjectForKey:balance];
     }
     return self;
 }
@@ -160,12 +171,33 @@ static TTUserModel *userModel = nil;
     /// 将Object类型编码，使其与字符串类型的键相关联
     [aCoder encodeObject:[TTUserModel shared].uid forKey:uid];
     [aCoder encodeObject:[TTUserModel shared].username forKey:username];
-    [aCoder encodeObject:[TTUserModel shared].mobile forKey:mobile];
     [aCoder encodeObject:[TTUserModel shared].realname forKey:realname];
+    [aCoder encodeObject:[TTUserModel shared].avatar forKey:avatar];
     [aCoder encodeInteger:[TTUserModel shared].sex forKey:sex];
+    [aCoder encodeObject:[TTUserModel shared].mobile forKey:mobile];
+    [aCoder encodeObject:[TTUserModel shared].phone forKey:phone];
+    [aCoder encodeObject:[TTUserModel shared].pwd forKey:pwd];
+    [aCoder encodeObject:[TTUserModel shared].tranPwd forKey:tranPwd];
+    [aCoder encodeObject:[TTUserModel shared].registertime forKey:registertime];
     /// 将BOOL类型编码，使其与字符串类型的键相关联
     [aCoder encodeBool:[NSNumber numberWithBool:[TTUserModel shared].isLogin] forKey:isLogin];
     
+    [aCoder encodeObject:[TTUserModel shared].idnumber forKey:idnumber];
+    [aCoder encodeObject:[TTUserModel shared].imgb forKey:imgb];
+    [aCoder encodeObject:[TTUserModel shared].imgz forKey:imgz];
+    
+    [aCoder encodeObject:[TTUserModel shared].ainvited forKey:ainvited];
+    [aCoder encodeObject:[TTUserModel shared].arcurrency forKey:arcurrency];
+    [aCoder encodeObject:[TTUserModel shared].inviteCode forKey:inviteCode];
+    [aCoder encodeObject:[TTUserModel shared].totalAssets forKey:totalAssets];
+    [aCoder encodeObject:[TTUserModel shared].balance forKey:balance];
+    [aCoder encodeObject:[TTUserModel shared].vrcurrency forKey:vrcurrency];
+    [aCoder encodeObject:[TTUserModel shared].suinvited forKey:suinvited];
+    [aCoder encodeObject:[TTUserModel shared].stockRight forKey:stockRight];
+    
+    [aCoder encodeInteger:[TTUserModel shared].ispay forKey:ispay];
+    [aCoder encodeObject:[TTUserModel shared].upproxy forKey:upproxy];
+    [aCoder encodeInteger:[TTUserModel shared].type forKey:type];
 }
 
 /**
@@ -174,8 +206,32 @@ static TTUserModel *userModel = nil;
 - (void)logout {
     [TTUserModel shared].uid = @"";
     [TTUserModel shared].username = @"";
-    [TTUserModel shared].mobile = @"";
     [TTUserModel shared].realname = @"";
     [TTUserModel shared].avatar = @"";
+    [TTUserModel shared].sex = 0;
+    [TTUserModel shared].mobile = @"";
+    [TTUserModel shared].phone = @"";
+    [TTUserModel shared].pwd = @"";
+    [TTUserModel shared].tranPwd = @"";
+    [TTUserModel shared].registertime = @"";
+    
+    [TTUserModel shared].isLogin = NO;
+    
+    [TTUserModel shared].idnumber = @"";
+    [TTUserModel shared].imgb = @"";
+    [TTUserModel shared].imgz = @"";
+    
+    [TTUserModel shared].ainvited = @"";
+    [TTUserModel shared].arcurrency = @"";
+    [TTUserModel shared].inviteCode = @"";
+    [TTUserModel shared].totalAssets = @"";
+    [TTUserModel shared].balance = @"";
+    [TTUserModel shared].vrcurrency = @"";
+    [TTUserModel shared].suinvited = @"";
+    [TTUserModel shared].stockRight = @"";
+    
+    [TTUserModel shared].ispay = 0;
+    [TTUserModel shared].upproxy = @"";
+    [TTUserModel shared].type = 0;
 }
 @end

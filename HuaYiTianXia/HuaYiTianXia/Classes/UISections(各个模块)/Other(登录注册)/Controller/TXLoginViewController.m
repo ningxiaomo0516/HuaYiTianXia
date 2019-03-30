@@ -8,6 +8,7 @@
 
 #import "TXLoginViewController.h"
 #import "TXRegisteredViewController.h"
+#import "TTUserModel.h"
 
 @interface TXLoginViewController ()
 @property (nonatomic, strong) IBOutlet UIButton *registerBtn;
@@ -30,9 +31,9 @@
         vc.pageType=0;
         TTPushVC(vc);
     }];
-    
+    MV(weakSelf)
     [self.loginBtn lz_handleControlEvent:UIControlEventTouchUpInside withBlock:^{
-        [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+        [weakSelf loginBtnClick:weakSelf.loginBtn];
     }];
     
     [self.forgetBtn lz_handleControlEvent:UIControlEventTouchUpInside withBlock:^{
@@ -47,6 +48,66 @@
                                                                 target:self
                                                                 action:@selector(didTapPopButton:)];
     self.navigationItem.leftBarButtonItem = leftItem;
+}
+
+- (void) loginBtnClick:(UIButton *)sender{
+    
+    if (self.telTextField.text.length == 0) {
+        Toast(@"请输入电话号码");
+        return;
+    }
+    
+    if (![SCSmallTools checkTelNumber:self.telTextField.text]) {
+        Toast(@"请输入正确的电话号码");
+        return;
+    }
+    if (self.pwdTextField.text.length == 0) {
+        Toast(@"请输入登录密码");
+        return;
+    }
+    
+    NSMutableDictionary *parameter = [[NSMutableDictionary alloc] init];
+    [parameter setObject:self.telTextField.text forKey:@"mobile"];
+    [parameter setObject:self.pwdTextField.text forKey:@"pwd"];
+    [SCHttpTools postWithURLString:@"customer/login" parameter:parameter success:^(id responseObject) {
+        if (responseObject){
+            id result = responseObject;
+            if (result) {
+                TTUserDataModel *model = [TTUserDataModel mj_objectWithKeyValues:result];
+                if (model.errorcode == 20000) {
+                    TTUserModel *userModel = [TTUserModel shared];
+                    NSMutableDictionary *dictionary = [[NSMutableDictionary alloc] init];
+                    NSDictionary *dataDic = [result lz_objectForKey:@"obj"];
+                    NSArray *dictKeysArray = [[result lz_objectForKey:@"obj"] allKeys];
+                    [dictionary setObject:model.data.uid forKey:@"uid"];
+                    [dictionary setObject:model.data.username forKey:@"username"];
+                    [dictionary setObject:model.data.realname forKey:@"realname"];
+                    [dictionary setObject:model.data.avatar forKey:@"avatar"];
+                    [dictionary setObject:model.data.registertime forKey:@"registertime"];
+                    [dictionary setObject:model.data.idnumber forKey:@"idnumber"];
+                    [dictionary setObject:model.data.totalAssets forKey:@"totalAssets"];
+                    for (int i = 0; i<dictKeysArray.count; i++) {
+                        NSString *key = dictKeysArray[i];
+                        NSString *obj = [dataDic objectForKey:key];
+                        NSArray *keyArray = @[@"id",@"nickName",@"name",@"headImg",@"time",@"code",@"assets"];
+                        for (NSString *keyArrStr in keyArray) {
+                            if ([key isEqualToString:keyArrStr]) {
+                                break ;
+                            }else{
+                                [dictionary setObject:obj forKey:key];
+                            }
+                        }
+                    }
+                    [userModel yy_modelSetWithDictionary:dictionary];
+                    [userModel dump];
+                    [self didTapPopButton:nil];
+                }
+                Toast(model.message);
+            }
+        }
+    } failure:^(NSError *error) {
+        TTLog(@"error --- %@",error);
+    }];
 }
 
 - (void)didTapPopButton:(UIBarButtonItem *)barButtonItem {

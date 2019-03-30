@@ -70,20 +70,9 @@
 + (NSAttributedString *) sc_initImageWithText:(NSString *) textStr imageName:(NSString *)imageName;
 
 /**
- *  裁剪图片
+ *  获取验证码倒计时
  *
- *  @param currentString 当前URL
- *  @param width 宽
- *  @param height 高
- *  @return 返回结果组合后的URL地址
+ *  @param sender 按钮
  */
-+ (NSString *)imageTailoring:(NSString *)currentString width:(NSInteger)width height:(NSInteger)height;
-
-/**
- *  去掉图片URL带有Beta.
- *
- *  @param currentString 当前URL
- *  @return 返回结果组合后的URL地址
- */
-+ (NSString *)imageURLBetaReplace:(NSString *)currentString;
++ (void) countdown:(UIButton *) sender;
 @end

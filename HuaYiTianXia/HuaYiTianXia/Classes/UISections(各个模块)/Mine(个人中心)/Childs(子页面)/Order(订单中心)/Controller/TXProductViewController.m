@@ -8,12 +8,17 @@
 
 #import "TXProductViewController.h"
 #import "TXProductTableViewCell.h"
+#import "TXOrderModel.h"
 
 static NSString * const reuseIdentifier = @"TXProductTableViewCell";
 
 @interface TXProductViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) UITableView *tableView;
-@property (nonatomic, strong) NSMutableArray *itemModelArray;
+@property (nonatomic, strong) NSMutableArray *dataArray;
+/// 每页多少数据
+@property (nonatomic, assign) NSInteger pageSize;
+/// 当前页
+@property (nonatomic, assign) NSInteger pageIndex;
 
 @end
 
@@ -23,7 +28,29 @@ static NSString * const reuseIdentifier = @"TXProductTableViewCell";
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = kRandomColor;
+    self.pageSize = 20;
+    self.pageIndex = 1;
     [self initView];
+    [self requestData];
+}
+
+/// 获取订单中心-产品列表数据
+- (void) requestData{
+    NSMutableDictionary *parameter = [[NSMutableDictionary alloc] init];
+    [parameter setObject:@(self.pageIndex) forKey:@"page"];     // 当前页
+    [parameter setObject:@(self.pageSize) forKey:@"pageSize"];  // 每页条数
+    [SCHttpTools postWithURLString:@"orderform/GetOrderPro" parameter:parameter success:^(id responseObject) {
+        NSDictionary *result = responseObject;
+        if ([result isKindOfClass:[NSDictionary class]]) {
+            TXOrderModel *model = [TXOrderModel mj_objectWithKeyValues:result];
+            if (model.errorcode == 20000) {
+                [self.dataArray addObjectsFromArray:model.data.records];
+                [self.tableView reloadData];
+            }
+        }
+    } failure:^(NSError *error) {
+        TTLog(@"error --- %@",error);
+    }];
 }
 
 - (void) initView{
@@ -52,12 +79,14 @@ static NSString * const reuseIdentifier = @"TXProductTableViewCell";
 #pragma mark - Table view data source
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     TXProductTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
+    OrderRecordsModel *model = self.dataArray[indexPath.section];
+    cell.titleLabel.text = model.title;
     return cell;
 }
 
 // 多少个分组 section
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 20;
+    return self.dataArray.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -108,11 +137,11 @@ static NSString * const reuseIdentifier = @"TXProductTableViewCell";
 //    return _noDataView;
 //}
 
-- (NSMutableArray *)itemModelArray{
-    if (!_itemModelArray) {
-        _itemModelArray = [[NSMutableArray alloc] init];
+- (NSMutableArray *)dataArray{
+    if (!_dataArray) {
+        _dataArray = [[NSMutableArray alloc] init];
     }
-    return _itemModelArray;
+    return _dataArray;
 }
 
 @end

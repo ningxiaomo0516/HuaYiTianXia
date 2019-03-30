@@ -20,15 +20,12 @@
     if (URLString.length < 1) {
         self.image = placeholderImage;
         return;
-    }else{
-        URLString = [kNetworkProtocol stringByAppendingString:URLString];
     }
     __weak typeof(self) weakSelf = self;
     SDWebImageOptions imageOption = SDWebImageLowPriority;
     if (isAvatar) {
         imageOption = SDWebImageRetryFailed;
     }
-    TTLog(@"kNetworkProtocol === %@",URLString);
     [self sd_setImageWithURL:[NSURL URLWithString:[URLString sc_urlString]] placeholderImage:placeholderImage options:imageOption completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
         if (image == nil) {
             weakSelf.image = placeholderImage;

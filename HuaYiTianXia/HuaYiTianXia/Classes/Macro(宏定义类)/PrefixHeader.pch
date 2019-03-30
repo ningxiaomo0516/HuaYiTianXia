@@ -20,9 +20,13 @@
 
 /// URL
 #import "URLDefine.h"
-
+#import "TXGeneralModel.h"
 #import "TTBaseViewController.h"
 #import "SCTextView.h"
+
+#import "YYModel.h"
+#import "TXNewsModel.h"
+#import "TTUserModel.h"
 
 /// 颜色类
 #import "AppBaseColor.h"

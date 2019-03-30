@@ -8,6 +8,7 @@
 
 #import "TXTeamViewController.h"
 #import "TXTeamTableViewCell.h"
+#import "TXTeamModel.h"
 
 static NSString * const reuseIdentifier = @"TXTeamTableViewCell";
 
@@ -23,6 +24,26 @@ static NSString * const reuseIdentifier = @"TXTeamTableViewCell";
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self initView];
+    [self requestPersonalCenterData];
+}
+
+- (void) requestPersonalCenterData{
+    [SCHttpTools getWithURLString:HttpURL(@"customer/MyTeam") parameter:nil success:^(id responseObject) {
+        NSDictionary *result = responseObject;
+        if ([result isKindOfClass:[NSDictionary class]]) {
+            TXTeamModel *model = [TXTeamModel mj_objectWithKeyValues:result];
+            if (model.errorcode == 20000) {
+                [self.dataArray addObjectsFromArray:model.data];
+                [self.tableView reloadData];
+            }else{
+                Toast(model.message);
+            }
+        }else{
+            Toast(@"个人中心数据获取失败");
+        }
+    } failure:^(NSError *error) {
+        TTLog(@" -- error -- %@",error);
+    }];
 }
 
 - (void) initView{
@@ -37,12 +58,13 @@ static NSString * const reuseIdentifier = @"TXTeamTableViewCell";
 #pragma mark - Table view data source
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     TXTeamTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
+    cell.teamModel = self.dataArray[indexPath.section];
     return cell;
 }
 
 // 多少个分组 section
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 20;
+    return self.dataArray.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {

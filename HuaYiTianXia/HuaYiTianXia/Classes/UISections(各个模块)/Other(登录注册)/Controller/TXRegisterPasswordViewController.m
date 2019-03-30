@@ -20,6 +20,12 @@ static NSString * const reuseIdentifiers = @"TXRegisteredTableViewCell";
 @property (strong, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) UIView *footerView;
 @property (strong, nonatomic) NSMutableArray *dataArray;
+/// 密码
+@property (copy, nonatomic) NSString *password;
+/// 确认密码
+@property (copy, nonatomic) NSString *passwords;
+/// 邀请码
+@property (copy, nonatomic) NSString *invitationCode;
 
 @end
 
@@ -30,6 +36,7 @@ static NSString * const reuseIdentifiers = @"TXRegisteredTableViewCell";
     // Do any additional setup after loading the view from its nib.
     [self addGesture:self.tableView];
     [self initView];
+    self.invitationCode = @"";
 }
 
 - (void) initView{
@@ -58,13 +65,49 @@ static NSString * const reuseIdentifiers = @"TXRegisteredTableViewCell";
 
 /** 保存 */
 - (void) saveBtnClick:(UIButton *) sender{
+    if (self.password.length == 0) {
+        Toast(@"请输入登录密码");
+        return;
+    }
+    if (self.password.length < 6) {
+        Toast(@"登录密码不能少于6位");
+        return;
+    }
+    if (self.passwords.length == 0) {
+        Toast(@"请输入确认密码");
+        return;
+    }
+    if (self.passwords != self.password) {
+        Toast(@"确认密码与密码不一致");
+        return;
+    }
     if (self.pageType==0) {
-        Toast(@"注册完成");
+        [self updatePasswordRequest];
     }else{
         Toast(@"修改密码完成");
     }
-    
-    [self.navigationController popToRootViewControllerAnimated:YES];
+}
+
+- (void) updatePasswordRequest{
+    NSMutableDictionary *parameter = [[NSMutableDictionary alloc] init];
+    [parameter setObject:self.telphone forKey:@"mobile"];
+    [parameter setObject:self.password forKey:@"pwd"];
+    [parameter setObject:self.passwords forKey:@"confirmpwd"];
+    [parameter setObject:self.invitationCode forKey:@"inviteCode"];
+    [SCHttpTools postWithURLString:@"customer/register" parameter:parameter success:^(id responseObject) {
+        if (responseObject){
+            id result = responseObject;
+            if (result) {
+                TXGeneralModel *generalModel = [TXGeneralModel mj_objectWithKeyValues:result];
+                if (generalModel.errorcode == 20000) {
+                    [self.navigationController popToRootViewControllerAnimated:YES];
+                }
+                Toast(generalModel.message);
+            }
+        }
+    } failure:^(NSError *error) {
+        TTLog(@"error --- %@",error);
+    }];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -72,6 +115,12 @@ static NSString * const reuseIdentifiers = @"TXRegisteredTableViewCell";
     TXRegisterTableViewCell *tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
     tools.titleLabel.text = model.title;
     tools.textField.placeholder = model.imageText;
+    tools.textField.tag = indexPath.row;
+    if (indexPath.row != 2) {
+        tools.textField.secureTextEntry = YES;
+        tools.textField.keyboardType = UIKeyboardTypeDefault;
+    }
+    [tools.textField addTarget:self action:@selector(textFieldWithText:) forControlEvents:UIControlEventEditingChanged];
     return tools;
 }
 
@@ -139,4 +188,21 @@ static NSString * const reuseIdentifiers = @"TXRegisteredTableViewCell";
     }
     return _dataArray;
 }
+
+- (void)textFieldWithText:(UITextField *)textField{
+    switch (textField.tag) {
+        case 0:
+            self.password = textField.text;
+            break;
+        case 1:
+            self.passwords = textField.text;
+            break;
+        case 2:
+            self.invitationCode = textField.text;
+            break;
+        default:
+            break;
+    }
+}
+
 @end

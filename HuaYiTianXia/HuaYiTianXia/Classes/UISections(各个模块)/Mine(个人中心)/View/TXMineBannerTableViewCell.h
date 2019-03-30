@@ -17,7 +17,7 @@ typedef void(^TXMineBannerTableViewCellCallBlock)(NSInteger idx);
 
 @property (nonatomic, strong) UIView *boxView;
 - (void)setImagesDidOnClickCallBlock:(TXMineBannerTableViewCellCallBlock)block;
-
+@property (nonatomic, strong) NSMutableArray *bannerArray;
 @end
 
 NS_ASSUME_NONNULL_END

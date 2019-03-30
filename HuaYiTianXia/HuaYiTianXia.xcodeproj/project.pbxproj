@@ -98,6 +98,8 @@
 		E7759AE32244CDC3007DA6CF /* TXSwitchTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7759AE22244CDC3007DA6CF /* TXSwitchTableViewCell.m */; };
 		E7759AEA2244DD6C007DA6CF /* TXMembersBannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = E7759AE92244DD6C007DA6CF /* TXMembersBannerView.m */; };
 		E7759AED2244E8F9007DA6CF /* TXMembersbleViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7759AEC2244E8F9007DA6CF /* TXMembersbleViewCell.m */; };
+		E77BC13B224F6A31008440C9 /* TXTeamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E77BC13A224F6A31008440C9 /* TXTeamModel.m */; };
+		E77BC13F224F7321008440C9 /* TXOrderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E77BC13E224F7321008440C9 /* TXOrderModel.m */; };
 		E78333DB22487913005CAB91 /* TXLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E78333D922487913005CAB91 /* TXLoginViewController.m */; };
 		E78333DC22487913005CAB91 /* TXLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E78333DA22487913005CAB91 /* TXLoginViewController.xib */; };
 		E78333E0224884F1005CAB91 /* TXRegisteredViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E78333DE224884F1005CAB91 /* TXRegisteredViewController.m */; };
@@ -349,6 +351,10 @@
 		E7759AE92244DD6C007DA6CF /* TXMembersBannerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXMembersBannerView.m; sourceTree = "<group>"; };
 		E7759AEB2244E8F9007DA6CF /* TXMembersbleViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXMembersbleViewCell.h; sourceTree = "<group>"; };
 		E7759AEC2244E8F9007DA6CF /* TXMembersbleViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXMembersbleViewCell.m; sourceTree = "<group>"; };
+		E77BC139224F6A31008440C9 /* TXTeamModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXTeamModel.h; sourceTree = "<group>"; };
+		E77BC13A224F6A31008440C9 /* TXTeamModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXTeamModel.m; sourceTree = "<group>"; };
+		E77BC13D224F7321008440C9 /* TXOrderModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXOrderModel.h; sourceTree = "<group>"; };
+		E77BC13E224F7321008440C9 /* TXOrderModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXOrderModel.m; sourceTree = "<group>"; };
 		E78333D822487913005CAB91 /* TXLoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXLoginViewController.h; sourceTree = "<group>"; };
 		E78333D922487913005CAB91 /* TXLoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXLoginViewController.m; sourceTree = "<group>"; };
 		E78333DA22487913005CAB91 /* TXLoginViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TXLoginViewController.xib; sourceTree = "<group>"; };
@@ -1146,6 +1152,24 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		E77BC138224F6A1B008440C9 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				E77BC139224F6A31008440C9 /* TXTeamModel.h */,
+				E77BC13A224F6A31008440C9 /* TXTeamModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		E77BC13C224F730D008440C9 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				E77BC13D224F7321008440C9 /* TXOrderModel.h */,
+				E77BC13E224F7321008440C9 /* TXOrderModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		E78333CE224874D9005CAB91 /* Other(登录注册) */ = {
 			isa = PBXGroup;
 			children = (
@@ -1270,7 +1294,7 @@
 			isa = PBXGroup;
 			children = (
 				E78583D72240C23D00BBEA41 /* Controller */,
-				E78583D82240C23D00BBEA41 /* Model */,
+				E77BC13C224F730D008440C9 /* Model */,
 				E78583D92240C23D00BBEA41 /* View */,
 			);
 			path = "Order(订单中心)";
@@ -1289,13 +1313,6 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
-		E78583D82240C23D00BBEA41 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
 		E78583D92240C23D00BBEA41 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -1311,7 +1328,7 @@
 			isa = PBXGroup;
 			children = (
 				E78583DB2240C23D00BBEA41 /* Controller */,
-				E78583DC2240C23D00BBEA41 /* Model */,
+				E77BC138224F6A1B008440C9 /* Model */,
 				E78583DD2240C23D00BBEA41 /* View */,
 			);
 			path = "Team(我的团队)";
@@ -1324,13 +1341,6 @@
 				E78583F12240C29E00BBEA41 /* TXTeamViewController.m */,
 			);
 			path = Controller;
-			sourceTree = "<group>";
-		};
-		E78583DC2240C23D00BBEA41 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		E78583DD2240C23D00BBEA41 /* View */ = {
@@ -2005,6 +2015,7 @@
 				E726990F223F786B003A5043 /* TXMineViewController.m in Sources */,
 				E78583F82240C2BE00BBEA41 /* TXSetupViewController.m in Sources */,
 				E72699D6223F7F58003A5043 /* UIView+IBExtension.m in Sources */,
+				E77BC13F224F7321008440C9 /* TXOrderModel.m in Sources */,
 				E7F1A72B22423F92003FA216 /* TXPersonalInfoViewController.m in Sources */,
 				E78584052240C54300BBEA41 /* TYCyclePagerTransformLayout.m in Sources */,
 				E72699A7223F7ECC003A5043 /* NSDictionary+Extension.m in Sources */,
@@ -2023,6 +2034,7 @@
 				E7269A04223F8738003A5043 /* TXMainHeaderView.m in Sources */,
 				E753D1F22249D3B200A2DD36 /* SCPresentationController.m in Sources */,
 				E78583D02240BD5A00BBEA41 /* TXGeneralModel.m in Sources */,
+				E77BC13B224F6A31008440C9 /* TXTeamModel.m in Sources */,
 				E72699E5223F7F58003A5043 /* UITextField+Extension.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2159,7 +2171,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 8RL8MGBZ32;
+				DEVELOPMENT_TEAM = 9BX6WSFU2J;
 				GCC_PREFIX_HEADER = "HuaYiTianXia/Classes/Macro(宏定义类)/PrefixHeader.pch";
 				INFOPLIST_FILE = HuaYiTianXia/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -2179,7 +2191,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 8RL8MGBZ32;
+				DEVELOPMENT_TEAM = 9BX6WSFU2J;
 				GCC_PREFIX_HEADER = "HuaYiTianXia/Classes/Macro(宏定义类)/PrefixHeader.pch";
 				INFOPLIST_FILE = HuaYiTianXia/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;

@@ -183,45 +183,39 @@
     return [mutableAttr copy];
 }
 
-+ (NSString *)imageTailoring:(NSString *)currentString width:(NSInteger)width height:(NSInteger)height{
-    NSString *totalUrl = imageBaseUrl;
-
-    //http://pic11.wed114.cn/pic6/20180514/2018051417220097963615x640_360_0.jpg
-    //http://pic11.wed114.cn/pic/20180521/2018052115293270585048x300_168_0.jpg
-    //http:// pic.wed114.cn/20180521//2018052115293270585048.jpg
-    
-    currentString = [currentString stringByReplacingOccurrencesOfString:@"beta." withString:@""];
-    /// 根据 / 分割字符串
-    NSArray *array = [currentString componentsSeparatedByString:@".net/"];
-    /// 得到 pic
-    NSArray *array1 = [array[0] componentsSeparatedByString:@"//"];
-    NSArray *array2 = [array1[1] componentsSeparatedByString:@"."];
-    /// 得到文件名字
-    NSArray *array3 = [array[1] componentsSeparatedByString:@"."];
-    
-    /// 拼接 pic
-    NSString *folder = [NSString stringWithFormat:@"%@/",array2[0]];
-    totalUrl = [totalUrl stringByAppendingString:folder];
-    /// 拼接 文件名字 20180521/2018052115293270585048
-    NSString *file = [NSString stringWithFormat:@"%@",array3[0]];
-    totalUrl = [totalUrl stringByAppendingString:file];
-    
-    NSString *suffix = [NSString stringWithFormat:@"x%ld_%ld_%@.jpg",(long)width*2,(long)height*2,environment];
-    totalUrl = [totalUrl stringByAppendingString:suffix];
-//    TTLog(@"%@ --- \n %@",totalUrl,currentString);
-    
-    return totalUrl;
-}
-
 /**
- *  去掉图片URL带有Beta.
+ *  点击获取验证码
  *
- *  @param currentString 当前URL
- *  @return 返回结果组合后的URL地址
+ *  倒计时
  */
-+ (NSString *)imageURLBetaReplace:(NSString *)currentString{
-    NSString *totalUrl = [currentString stringByReplacingOccurrencesOfString:@"//beta." withString:@"http://"];
-    return totalUrl;
++ (void) countdown:(UIButton *) sender {
+//    [self.pwdField becomeFirstResponder];
+    __block int timeout = 59; //倒计时时间
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_source_t _timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0,queue);
+    dispatch_source_set_timer(_timer,dispatch_walltime(NULL, 0),1.0*NSEC_PER_SEC, 0); //每秒执行
+    dispatch_source_set_event_handler(_timer, ^{
+        if(timeout<=0){ //倒计时结束，关闭
+            dispatch_source_cancel(_timer);
+            dispatch_async(dispatch_get_main_queue(), ^{
+                //设置界面的按钮显示 根据自己需求设置
+                [sender setTitle:@"重新获取" forState:UIControlStateNormal];
+                sender.userInteractionEnabled = YES;
+                //                [self.codeButton setBackgroundImage:[Utils imageWithColor:kColorWithRGB(107, 152, 254)] forState:UIControlStateNormal];
+            });
+        }else{
+            int seconds = timeout % 60;
+            NSString *strTime = [NSString stringWithFormat:@"%.2d", seconds];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                //设置界面的按钮显示 根据自己需求设置
+                [sender setTitle:[NSString stringWithFormat:@"%@秒后获取",strTime] forState:UIControlStateNormal];
+                sender.userInteractionEnabled = NO;
+            });
+            timeout--;
+            
+        }
+    });
+    dispatch_resume(_timer);
 }
 
 @end

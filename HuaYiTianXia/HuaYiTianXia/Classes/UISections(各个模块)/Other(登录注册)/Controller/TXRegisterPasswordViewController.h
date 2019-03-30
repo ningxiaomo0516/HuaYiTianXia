@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface TXRegisterPasswordViewController : TTBaseTableViewController
 @property (nonatomic, assign) NSInteger pageType;
+/// 手机号
+@property (copy, nonatomic) NSString *telphone;
 @end
 
 NS_ASSUME_NONNULL_END

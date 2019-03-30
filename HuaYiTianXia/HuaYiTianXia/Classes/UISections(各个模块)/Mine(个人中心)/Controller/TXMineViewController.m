@@ -21,6 +21,8 @@ static NSString * const reuseIdentifierBanner = @"TXMineBannerTableViewCell";
 @property (nonatomic, strong) TXMineHeaderView *headerView;
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *itemModelArray;
+@property (nonatomic, strong) TTUserModel *userModel;
+@property (nonatomic, strong) NSMutableArray *bannerArray;
 
 @end
 
@@ -30,6 +32,33 @@ static NSString * const reuseIdentifierBanner = @"TXMineBannerTableViewCell";
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self initView];
+    
+    [self requestPersonalCenterData];
+}
+
+- (void) requestPersonalCenterData{
+    [SCHttpTools getWithURLString:HttpURL(@"customer/Wallet") parameter:nil success:^(id responseObject) {
+        NSDictionary *result = responseObject;
+        if ([result isKindOfClass:[NSDictionary class]]) {
+            TTUserDataModel *model = [TTUserDataModel mj_objectWithKeyValues:result];
+            if (model.errorcode == 20000) {
+                self.userModel = model.data;
+                [self.headerView.imagesViewAvatar sc_setImageWithUrlString:model.data.avatar
+                                                          placeholderImage:kGetImage(@"mine_icon_avatar")
+                                                                  isAvatar:false];
+                self.headerView.nickNameLabel.text = model.data.username;
+                self.headerView.kidLabel.text = [NSString stringWithFormat:@"ID:%@",model.data.uid];
+                [self.bannerArray addObjectsFromArray:model.data.banners];
+                [self.tableView reloadData];
+            }else{
+                Toast(model.message);
+            }
+        }else{
+            Toast(@"个人中心数据获取失败");
+        }
+    } failure:^(NSError *error) {
+        TTLog(@" -- error -- %@",error);
+    }];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -42,15 +71,14 @@ static NSString * const reuseIdentifierBanner = @"TXMineBannerTableViewCell";
     
     if (indexPath.section == 0) {
         TXMineHeaderTableViewCell* tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierHeader forIndexPath:indexPath];
-        //    FMPersonModel* model = self.itemModelArray[indexPath.section][indexPath.row];
-        //    model.index = indexPath.item;
-        //    cell.personModel = model;
-        
-        
+        tools.totalAssetsLabel.text = self.userModel.totalAssets;
+        tools.vrAssetsLabel.text = self.userModel.vrcurrency;
+        tools.arAssetsLabel.text = self.userModel.arcurrency;
         return tools;
 
     }else if (indexPath.section == 1){
         TXMineBannerTableViewCell* tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierBanner forIndexPath:indexPath];
+        tools.bannerArray = self.bannerArray;
         return tools;
     }else{
         TXMineTableViewCell* tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
@@ -157,8 +185,8 @@ static NSString * const reuseIdentifierBanner = @"TXMineBannerTableViewCell";
     if (!_itemModelArray) {
         _itemModelArray = [[NSMutableArray alloc] init];
         NSArray* titleArr = @[@[@"资产管理",@"实名认证",@"订单中心",@"我的钱包",
-                                @"推荐邀请",@"我的团队",@"设置"]];
-        NSArray* classArr = @[@[@"",@"TXRealNameViewController",@"TXOrderViewController",
+                                @"推荐邀请",@"我的团队",@"设置"]];//TXOrderViewController
+        NSArray* classArr = @[@[@"",@"TXRealNameViewController",@"TXProductViewController",
                                 @"TXWalletViewController",@"TXRecommendedViewController",
                                 @"TXTeamViewController",@"TXSetupViewController"]];
         for (int i=0; i<titleArr.count; i++) {
@@ -175,6 +203,13 @@ static NSString * const reuseIdentifierBanner = @"TXMineBannerTableViewCell";
         }
     }
     return _itemModelArray;
+}
+
+- (NSMutableArray *)bannerArray{
+    if (!_bannerArray) {
+        _bannerArray = [[NSMutableArray alloc] init];
+    }
+    return _bannerArray;
 }
 
 

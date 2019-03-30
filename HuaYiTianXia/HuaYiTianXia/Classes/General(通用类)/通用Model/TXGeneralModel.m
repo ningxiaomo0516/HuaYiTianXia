@@ -9,5 +9,8 @@
 #import "TXGeneralModel.h"
 
 @implementation TXGeneralModel
-
++ (NSDictionary *)replacedKeyFromPropertyName{
+    return @{@"message"     : @"msg",
+             @"errorcode"   : @"code"};
+}
 @end

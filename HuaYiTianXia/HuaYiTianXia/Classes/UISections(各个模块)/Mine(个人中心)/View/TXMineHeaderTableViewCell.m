@@ -26,9 +26,6 @@
         self.contentView.backgroundColor = [UIColor clearColor];
         [self initView];
         self.selectionStyle = UITableViewCellSelectionStyleNone;
-        self.totalAssetsLabel.text = @"9999999";
-        self.vrAssetsLabel.text = @"9999999.00";
-        self.arAssetsLabel.text = @"9999999.00";
     }
     return self;
 }

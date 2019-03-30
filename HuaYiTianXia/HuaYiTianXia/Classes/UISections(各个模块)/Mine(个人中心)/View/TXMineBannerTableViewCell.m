@@ -47,6 +47,10 @@ static NSString* reuseIdentifiers = @"TXMineBannerCollectionViewCell";
     self.callBlock = block;
 }
 
+- (void)setBannerArray:(NSMutableArray *)bannerArray{
+    _bannerArray = bannerArray;
+    [self initView];
+}
 
 - (void) initView{
     [self addSubview:self.boxView];
@@ -58,10 +62,10 @@ static NSString* reuseIdentifiers = @"TXMineBannerCollectionViewCell";
     }];
     
     [self addPagerView];
-//    if (self.listModel.count>1) {
+    if (self.bannerArray.count>1) {
         self.pagerView.autoScrollInterval = 3;//自动轮播时间
-//    }
-    self.pageControl.numberOfPages = 5;//self.listModel.count;
+    }
+    self.pageControl.numberOfPages = self.bannerArray.count;
     [self.pagerView reloadData];
 }
 
@@ -86,12 +90,12 @@ static NSString* reuseIdentifiers = @"TXMineBannerCollectionViewCell";
 #pragma mark - TYCyclePagerViewDataSource
 
 - (NSInteger)numberOfItemsInPagerView:(TYCyclePagerView *)pageView {
-    return 5;//self.listModel.count;
+    return self.bannerArray.count;
 }
 
 - (UICollectionViewCell *)pagerView:(TYCyclePagerView *)pagerView cellForItemAtIndex:(NSInteger)index {
     TXMineBannerCollectionViewCell *cell = [pagerView dequeueReusableCellWithReuseIdentifier:reuseIdentifiers forIndex:index];
-    cell.imagesView.image = kGetImage(@"base_deprecated_activity");
+    cell.bannerModel = self.bannerArray[index];
     return cell;
 }
 

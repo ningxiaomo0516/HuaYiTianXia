@@ -37,7 +37,7 @@
     _recordsModel = recordsModel;
     self.titleLabel.text = recordsModel.title;
     self.subtitleLabel.text = recordsModel.content;
-    [self.imagesView sd_setImageWithURL:[NSURL URLWithString:recordsModel.img]
+    [self.imagesView sd_setImageWithURL:kGetImageURL(recordsModel.img)
                       placeholderImage:kGetImage(VERTICALMAPBITMAP)];
     self.dataTimeLabel.text = [SCSmallTools timeStampConvertDateTime:recordsModel.time];
 }

@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TXTeamModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -19,6 +20,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) UILabel *kidLabel;
 /// 手机号码
 @property (nonatomic, strong) UILabel *telLabel;
+@property (nonatomic, strong) TeamModel *teamModel;
+
+
 
 @end
 

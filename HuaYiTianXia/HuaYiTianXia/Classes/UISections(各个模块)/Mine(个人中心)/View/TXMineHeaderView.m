@@ -65,6 +65,7 @@
 - (UIImageView *)imagesViewAvatar{
     if (!_imagesViewAvatar) {
         _imagesViewAvatar = [[UIImageView alloc] init];
+        [_imagesViewAvatar lz_setCornerRadius:(IPHONE6_W(36))/2.0];
     }
     return _imagesViewAvatar;
 }

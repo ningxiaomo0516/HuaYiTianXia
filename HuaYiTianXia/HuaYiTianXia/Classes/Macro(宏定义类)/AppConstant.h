@@ -110,6 +110,10 @@
 
 #define NetworkReachabilityStatus @"NetworkReachabilityStatus"
 
+#define Header_Token @"_HeaderToken"
+
+#define HttpURL(URL) [NSString stringWithFormat:@"%@%@",URL,Header_Token]
+
 /// 字符串
 #define     TTNoNilString(str)          (str.length > 0 ? str : @"")
 /// 读取本地图片资源
@@ -121,9 +125,6 @@
 #define TTImage(imageName)  (imageName ? [UIImage imageNamed:imageName] : nil)
 #define TTPNG(X)            [[UIImage alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:X ofType:@"png"]]
 #define TTJPG(X)             [[UIImage alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:X ofType:@"jpg"]]
-
-
-#define kNetworkProtocol @"http:"
 
 #define kGetImageURL(imageURL) [NSURL URLWithString:[NSString stringWithFormat:@"%@",imageURL]]
 #define kGetVideoURL(videoURL) [NSURL URLWithString:[NSString stringWithFormat:@"%@",videoURL]]
@@ -176,7 +177,7 @@ cell.preservesSuperviewLayoutMargins = NO; \
 #define kUserDefaults       [NSUserDefaults standardUserDefaults]
 #define kNotificationCenter [NSNotificationCenter defaultCenter]
 
-#define kUserInfo [PVUserModel shared]
+#define kUserInfo [TTUserModel shared]
 
 /**
  取消自动适配 ScrollView 的 Insets 行为

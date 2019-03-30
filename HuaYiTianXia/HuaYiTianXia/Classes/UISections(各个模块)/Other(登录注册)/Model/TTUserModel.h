@@ -12,8 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class TTUserModel;
 @interface TTUserDataModel : NSObject
-@property (nonatomic, copy) NSString *msg;
-@property (nonatomic, assign) NSInteger code;
+@property (nonatomic, copy) NSString *message;
+@property (nonatomic, assign) NSInteger errorcode;
 @property (nonatomic, strong) TTUserModel *data;
 @end
 
@@ -26,7 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// AR币
 @property (nonatomic, copy) NSString *arcurrency;
 /// 总资产
-@property (nonatomic, copy) NSString *assets;
+@property (nonatomic, copy) NSString *totalAssets;
 /// 身份证号码
 @property (nonatomic, copy) NSString *idnumber;
 /// 头像
@@ -69,6 +69,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *balance;
 /// 0：未设置交易密码 1：已设置交易密码
 @property (nonatomic, copy) NSString *tranPwd;
+
+@property (nonatomic, strong) NSMutableArray<NewsBannerModel *> *banners;
 
 
 + (instancetype)shared;

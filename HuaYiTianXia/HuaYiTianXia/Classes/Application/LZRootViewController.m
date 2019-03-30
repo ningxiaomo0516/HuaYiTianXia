@@ -122,7 +122,8 @@
  */
 - (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController{
     _tabbarIndex = viewController.tabBarItem.tag;
-    if (_tabbarIndex==3||_tabbarIndex==4) {
+    TTLog(@" 真实姓名 --- %@",kUserInfo.realname);
+    if (!kUserInfo.isLogin&&(_tabbarIndex==3||_tabbarIndex==4)) {
         TXLoginViewController *view = [[TXLoginViewController alloc] init];
         LZNavigationController *navigation = [[LZNavigationController alloc] initWithRootViewController:view];
         [viewController presentViewController:navigation animated:YES completion:^{

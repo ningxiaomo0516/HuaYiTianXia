@@ -26,12 +26,16 @@
         self.contentView.backgroundColor = kWhiteColor;
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         [self initView];
-        self.imagesView.image = kGetImage(@"test_work");
-        self.titleLabel.text = @"昵称:哇哈哈哈哈 ";
-        self.kidLabel.text = @"UID:12345";;
-        self.telLabel.text = @"手机号码:137****4567";
     }
     return self;
+}
+
+- (void)setTeamModel:(TeamModel *)teamModel{
+    _teamModel = teamModel;
+    [self.imagesView sd_setImageWithURL:kGetImageURL(self.teamModel.avatar) placeholderImage:kGetImage(VERTICALMAPBITMAP)];
+    self.titleLabel.text = [NSString stringWithFormat:@"昵称:%@",self.teamModel.username];
+    self.kidLabel.text = [NSString stringWithFormat:@"UID:%@",self.teamModel.uid];
+    self.telLabel.text = [NSString stringWithFormat:@"手机号码:%@",self.teamModel.mobile];
 }
 
 - (void) initView{

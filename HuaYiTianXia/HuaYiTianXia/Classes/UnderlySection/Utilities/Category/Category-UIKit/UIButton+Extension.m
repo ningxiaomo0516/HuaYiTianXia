@@ -78,18 +78,14 @@
 static char overviewKey;
 
 @dynamic event;
-- (void)lz_handleControlEvent:(UIControlEvents)event withBlock:(LZActionBlock)block
-{
+- (void)lz_handleControlEvent:(UIControlEvents)event withBlock:(LZActionBlock)block{
     objc_setAssociatedObject(self, &overviewKey, block, OBJC_ASSOCIATION_COPY_NONATOMIC);
-    
     [self addTarget:self action:@selector(callActionBlock:) forControlEvents:event];
 }
 
 
-- (void)callActionBlock:(id)sender
-{
+- (void)callActionBlock:(id)sender{
     LZActionBlock block = (LZActionBlock)objc_getAssociatedObject(self, &overviewKey);
-    
     if (block) {
         block();
     }
