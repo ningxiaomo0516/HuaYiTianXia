@@ -31,10 +31,10 @@
     pageController.menuViewStyle = WMMenuViewStyleLine;/// 样式
     pageController.menuViewLayoutMode = WMMenuViewLayoutModeCenter;//居中模式
     pageController.menuItemWidth = kScreenWidth/3;/// 宽度
-    pageController.titleColorSelected = HexString(@"#FF4163");
-    pageController.titleColorNormal = kTextColor12;
+    pageController.titleColorSelected = HexString(@"#26B9FE");
+    pageController.titleColorNormal = kTextColor51;
     pageController.progressWidth = 20;
-    pageController.progressColor = HexString(@"#FF4163");
+    pageController.progressColor = HexString(@"#26B9FE");
     pageController.menuBGColor = kClearColor;
     //    pageController.showOnNavigationBar = YES;
     
@@ -58,7 +58,7 @@
         //    id controller = [[NSClassFromString(className) alloc] init];
         if (controller &&  [controller isSubclassOfClass:[UIViewController class]]){
             UIViewController *vc = [[controller alloc] init];
-            vc.view.backgroundColor = kRandomColor;
+            vc.title = [titles lz_safeObjectAtIndex:i];
             [viewControllers addObject:vc];
         }
     }

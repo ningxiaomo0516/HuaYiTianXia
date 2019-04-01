@@ -35,6 +35,16 @@
     return self;
 }
 
+- (void)setOrderModel:(OrderModel *)orderModel{
+    _orderModel = orderModel;
+    [self.imagesView sd_setImageWithURL:kGetImageURL(self.orderModel.coverimg)
+                       placeholderImage:kGetImage(VERTICALMAPBITMAP)];
+    self.titleLabel.text = self.orderModel.title;
+    self.contentLabel.text = self.orderModel.spec;
+    self.priceLabel.text = kStringFormat(@"￥", self.orderModel.totalMoney);
+    self.dateTimeLabel.text = self.orderModel.time;
+}
+
 - (void) initView{
     [self addSubview:self.imagesView];
     [self addSubview:self.titleLabel];

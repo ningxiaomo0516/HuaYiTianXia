@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TXOrderModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -21,6 +22,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) UILabel *priceLabel;
 /// 日期时间
 @property (nonatomic, strong) UILabel *dateTimeLabel;
+/// 订单数据
+@property (nonatomic, strong) OrderModel *orderModel;
 @end
 
 NS_ASSUME_NONNULL_END

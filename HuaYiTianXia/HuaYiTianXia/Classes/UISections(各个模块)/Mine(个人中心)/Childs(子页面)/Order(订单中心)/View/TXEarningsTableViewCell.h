@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TXWalletModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -17,6 +18,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) UILabel *dateLabel;
 /// 价钱
 @property (nonatomic, strong) UILabel *priceLabel;
+/// 价钱
+@property (nonatomic, strong) WalletModel *model;
 
 @end
 

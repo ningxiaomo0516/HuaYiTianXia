@@ -28,7 +28,7 @@ static NSString * const reuseIdentifier = @"TXTeamTableViewCell";
 }
 
 - (void) requestPersonalCenterData{
-    [SCHttpTools getWithURLString:HttpURL(@"customer/MyTeam") parameter:nil success:^(id responseObject) {
+    [SCHttpTools getWithURLString:kHttpURL(@"customer/MyTeam") parameter:nil success:^(id responseObject) {
         NSDictionary *result = responseObject;
         if ([result isKindOfClass:[NSDictionary class]]) {
             TXTeamModel *model = [TXTeamModel mj_objectWithKeyValues:result];

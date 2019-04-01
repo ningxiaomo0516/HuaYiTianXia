@@ -12,6 +12,7 @@
 #import "TXNewTemplateTableViewCell.h"
 #import "TXMallGoodsBannerTableViewCell.h"
 #import "TXNewsModel.h"
+#import "TXWebViewController.h"
 
 
 static NSString * const reuseIdentifier = @"TXNewTemplateTableViewCell";
@@ -44,7 +45,7 @@ static NSString * const reuseIdentifierSectionHeaderView = @"SCTableViewSectionH
 
 - (void) loadNewsData{
     NSMutableDictionary *parameter = [[NSMutableDictionary alloc] init];
-    [parameter setObject:@([self.title integerValue]) forKey:@"tabID"];
+    [parameter setObject:self.title forKey:@"tabID"];
     [parameter setObject:@(self.pageIndex) forKey:@"page"];     // 当前页
     [parameter setObject:@(self.pageSize) forKey:@"pageSize"];  // 每页条数
 
@@ -119,6 +120,11 @@ static NSString * const reuseIdentifierSectionHeaderView = @"SCTableViewSectionH
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    NewsRecordsModel *model = self.dataArray[indexPath.row];
+    TXWebViewController *vc = [[TXWebViewController alloc] init];
+    vc.title = @"新闻详情";
+    vc.webUrl = kStringFormat(DomainName, [@"/yq/" stringByAppendingString:model.kid]);
+    TTPushVC(vc);
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 

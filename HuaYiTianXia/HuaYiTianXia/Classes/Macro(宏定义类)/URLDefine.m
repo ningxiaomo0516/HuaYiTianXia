@@ -17,11 +17,15 @@
 NSString *const DynamicUrl = @"http://47.107.179.43:80/hytx/";
 
 
-NSString *const InvitationDomain = @"http://qingtie.wed114.co/";
+NSString *const DomainName = @"http://47.107.179.43:80";
 
 NSString *const imageBaseUrl = @"//pic11.wed114.cn/";
 
-NSString *const businessBooking = @"appointment/save";
+//NSString *const NewsDetails = @"yq/invation/newDetails.html?id=";
+//NSString *const NewsDetails = @"yq/invation/newDetails.html?id=";
+//NSString *const NewsDetails = @"yq/invation/newDetails.html?id=";
+//NSString *const NewsDetails = @"yq/invation/newDetails.html?id=";
+//NSString *const NewsDetails = @"yq/invation/newDetails.html?id=";
 
 /// 0:测试环境 1:生产环境
 NSString *const environment = @"1";

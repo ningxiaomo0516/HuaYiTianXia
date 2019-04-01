@@ -12,6 +12,7 @@
 #import "TXMineTableViewCell.h"
 #import "TXMineBannerTableViewCell.h"
 #import "TXGeneralModel.h"
+#import "TXRealNameViewController.h"
 
 static NSString * const reuseIdentifier = @"TXMineTableViewCell";
 static NSString * const reuseIdentifierHeader = @"TXMineHeaderTableViewCell";
@@ -37,12 +38,18 @@ static NSString * const reuseIdentifierBanner = @"TXMineBannerTableViewCell";
 }
 
 - (void) requestPersonalCenterData{
-    [SCHttpTools getWithURLString:HttpURL(@"customer/Wallet") parameter:nil success:^(id responseObject) {
+    [SCHttpTools getWithURLString:kHttpURL(@"customer/Wallet") parameter:nil success:^(id responseObject) {
         NSDictionary *result = responseObject;
         if ([result isKindOfClass:[NSDictionary class]]) {
             TTUserDataModel *model = [TTUserDataModel mj_objectWithKeyValues:result];
             if (model.errorcode == 20000) {
                 self.userModel = model.data;
+                kUserInfo.totalAssets = model.data.totalAssets;
+                kUserInfo.arcurrency = model.data.arcurrency;
+                kUserInfo.vrcurrency = model.data.vrcurrency;
+                kUserInfo.username = model.data.username;
+                kUserInfo.avatar = model.data.avatar;
+                [kUserInfo dump];
                 [self.headerView.imagesViewAvatar sc_setImageWithUrlString:model.data.avatar
                                                           placeholderImage:kGetImage(@"mine_icon_avatar")
                                                                   isAvatar:false];
@@ -124,23 +131,23 @@ static NSString * const reuseIdentifierBanner = @"TXMineBannerTableViewCell";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     TXGeneralModel* model = self.itemModelArray[0][indexPath.row];
     NSString *className = model.showClass;
-    if ([model.showClass isEqualToString:@""]) {
-        
+    if ([model.showClass isEqualToString:@"TXRealNameViewController"]) {
+        TXRealNameViewController *vc = [[TXRealNameViewController alloc] init];
+        vc.typePage = 0;
+        TTPushVC(vc);
     }else{
         Class controller = NSClassFromString(className);
-        
         //    id controller = [[NSClassFromString(className) alloc] init];
         if (controller &&  [controller isSubclassOfClass:[UIViewController class]]){
-            UIViewController *view = [[controller alloc] init];
-            view.title = model.title;
-            [view setHidesBottomBarWhenPushed:YES];
-            [self.navigationController pushViewController:view animated:YES];
+            UIViewController *vc = [[controller alloc] init];
+            vc.title = model.title;
+            TTPushVC(vc);
         }
     }    
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
--(UITableView *)tableView{
+- (UITableView *)tableView{
     if (!_tableView) {
         _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
         _tableView.showsVerticalScrollIndicator = false;

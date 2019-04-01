@@ -112,7 +112,8 @@
 
 #define Header_Token @"_HeaderToken"
 
-#define HttpURL(URL) [NSString stringWithFormat:@"%@%@",URL,Header_Token]
+#define kStringFormat(title,subtitle) [NSString stringWithFormat:@"%@%@",title,subtitle];
+#define kHttpURL(URL) [NSString stringWithFormat:@"%@%@",URL,Header_Token]
 
 /// 字符串
 #define     TTNoNilString(str)          (str.length > 0 ? str : @"")

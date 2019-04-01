@@ -9,6 +9,7 @@
 #import "TXAddressViewController.h"
 #import "TXAddressTableViewCell.h"
 #import "TXAddressAddViewController.h"
+#import "TXAddressModel.h"
 
 static NSString * const reuseIdentifier = @"TXAddressTableViewCell";
 
@@ -27,6 +28,27 @@ static NSString * const reuseIdentifier = @"TXAddressTableViewCell";
     
     // 添加右边保存按钮
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"新增地址" style:UIBarButtonItemStylePlain target:self action:@selector(addBtnClick)];
+    [self requestAddressData];
+}
+
+/// 获取收货地址
+- (void) requestAddressData{
+    [SCHttpTools getWithURLString:kHttpURL(@"address/GetAddress") parameter:nil success:^(id responseObject) {
+        NSDictionary *result = responseObject;
+        if ([result isKindOfClass:[NSDictionary class]]) {
+            TXAddressModel *model = [TXAddressModel mj_objectWithKeyValues:result];
+            if (model.errorcode == 20000) {
+                [self.dataArray addObjectsFromArray:model.data];
+                [self.tableView reloadData];
+            }else{
+                Toast(model.message);
+            }
+        }else{
+            Toast(@"收货地址数据获取失败");
+        }
+    } failure:^(NSError *error) {
+        TTLog(@" -- error -- %@",error);
+    }];
 }
 
 - (void) addBtnClick{
@@ -52,26 +74,13 @@ static NSString * const reuseIdentifier = @"TXAddressTableViewCell";
 #pragma mark - Table view data source
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     TXAddressTableViewCell* tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
-    tools.titleLabel.text = @"佐伊";
-    tools.telLabel.text = @"13512340987";
-    NSString *labelText = @"四川省 成都市 双流县 华阳镇街道 比海运的一单元54564";
-    if (indexPath.section==0) {
-        tools.defaultLabel.hidden = NO;
-        tools.addressLabel.attributedText = [UILabel changeIndentationSpaceForLabel:labelText spaceWidth:IPHONE6_W(35.0)];
-    }else{
-        if (indexPath.section==1) {
-            labelText = @"四川省 成都市 武侯区 天和东街29号";
-        }else{
-            labelText = @"四川省 成都市 武侯区 桂溪街道 天和东街29号 22栋27楼48号 如奔赴古城道路上阳光温柔灿烂不用时刻联系";
-        }
-        tools.addressLabel.text = labelText;
-    }
+    tools.addressModel = self.dataArray[indexPath.section];
     return tools;
 }
 
 // 多少个分组 section
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 20;
+    return self.dataArray.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {

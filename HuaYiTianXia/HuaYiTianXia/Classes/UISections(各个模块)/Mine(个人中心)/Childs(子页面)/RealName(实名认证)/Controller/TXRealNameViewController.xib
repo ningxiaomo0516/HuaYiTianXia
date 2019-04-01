@@ -25,6 +25,7 @@
                 <outlet property="nickNameCell" destination="HGW-Dy-Dca" id="Yxo-Mi-n39"/>
                 <outlet property="nickNameTextField" destination="wQX-dl-W2R" id="XtT-rj-jex"/>
                 <outlet property="sexCell" destination="pwq-4R-skx" id="DlS-ql-uZH"/>
+                <outlet property="sexLabel" destination="Shc-Vs-hdw" id="8MM-Qq-DyY"/>
                 <outlet property="telCell" destination="5zX-Sh-1g7" id="U4g-Ri-QWF"/>
                 <outlet property="telTextField" destination="u4q-sW-NMl" id="aZL-ue-OwD"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -201,6 +202,7 @@
                     </button>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="CG4-8y-6GL">
                         <rect key="frame" x="198" y="20" width="162" height="95"/>
+                        <color key="backgroundColor" red="0.92156862750000001" green="0.92156862750000001" blue="0.92156862745098034" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="95" id="5zt-vk-iiP"/>
                         </constraints>

@@ -75,4 +75,12 @@
  *  @param sender 按钮
  */
 + (void) countdown:(UIButton *) sender;
+/**
+ *  为保护用户隐私，身份证号码中间用（*）号替换
+ *
+ *  @param idCardNumber 完整的身份证号码串 （idCard）
+ *
+ *  @return 隐私身份证号码
+ */
++ (NSString *)idCardNumber:(NSString *)idCardNumber;
 @end

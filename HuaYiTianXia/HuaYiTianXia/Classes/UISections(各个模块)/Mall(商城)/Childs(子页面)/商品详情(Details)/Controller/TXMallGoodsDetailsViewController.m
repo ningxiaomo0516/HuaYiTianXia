@@ -48,7 +48,7 @@ static NSString * const reuseIdentifierBuynum = @"TXBuyCountTableViewCell";
 - (void) loadMallGoodsDetailsData{
     NSMutableDictionary *parameter = [[NSMutableDictionary alloc] init];
     [parameter setObject:@(self.productModel.status) forKey:@"status"];
-    [parameter setObject:@(self.productModel.kid) forKey:@"id"];  // 每页条数
+    [parameter setObject:self.productModel.kid forKey:@"id"];  // 每页条数
     
     [SCHttpTools postWithURLString:@"shopproduct/GetShopDetails" parameter:parameter success:^(id responseObject) {
         NSDictionary *result = responseObject;

@@ -26,6 +26,7 @@
 @property (strong, nonatomic) IBOutlet UITableViewCell *idcardCell;
 
 @property (strong, nonatomic) IBOutlet UILabel *idnumberLabel;
+@property (strong, nonatomic) IBOutlet UILabel *sexLabel;
 @property (strong, nonatomic) IBOutlet UITextField *nickNameTextField;
 @property (strong, nonatomic) IBOutlet UITextField *idnumberTextField;
 @property (strong, nonatomic) IBOutlet UITextField *telTextField;
@@ -53,11 +54,44 @@
     // Do any additional setup after loading the view from its nib.
     [self initView];
     MV(weakSelf)
-    [self.addButton1 lz_handleControlEvent:UIControlEventTouchUpInside withBlock:^{
-        [weakSelf chooseCameraBtnClick:self.addButton1];
-    }];
-    [self.addButton2 lz_handleControlEvent:UIControlEventTouchUpInside withBlock:^{
-        [weakSelf chooseCameraBtnClick:self.addButton2];
+    if (self.typePage==0) {
+        [self.addButton1 lz_handleControlEvent:UIControlEventTouchUpInside withBlock:^{
+            [weakSelf chooseCameraBtnClick:self.addButton1];
+        }];
+        [self.addButton2 lz_handleControlEvent:UIControlEventTouchUpInside withBlock:^{
+            [weakSelf chooseCameraBtnClick:self.addButton2];
+        }];
+    }else{
+        self.addButton1.hidden = YES;
+        self.addButton2.hidden = YES;
+        self.nickNameTextField.enabled = NO;
+        self.idnumberTextField.enabled = NO;
+        self.saveButton.hidden = YES;
+        [self requestRealNameData];
+    }
+}
+
+- (void) requestRealNameData{
+    [SCHttpTools getWithURLString:kHttpURL(@"customer/UserData") parameter:nil success:^(id responseObject) {
+        NSDictionary *result = responseObject;
+        if ([result isKindOfClass:[NSDictionary class]]) {
+            TTUserDataModel *model = [TTUserDataModel mj_objectWithKeyValues:result];
+            TTUserModel *userModel = model.data;
+            if (model.errorcode == 20000) {
+                self.nickNameTextField.text = userModel.username;
+                self.idnumberTextField.text = [SCSmallTools idCardNumber:userModel.idnumber];
+                self.sexLabel.text = (userModel.sex==0)?@"男":@"女";
+                [self.imageView1 sd_setImageWithURL:kGetImageURL(userModel.imgz) placeholderImage:kGetImage(VERTICALMAPBITMAP)];
+                [self.imageView2 sd_setImageWithURL:kGetImageURL(userModel.imgb) placeholderImage:kGetImage(VERTICALMAPBITMAP)];
+                [self.tableView reloadData];
+            }else{
+                Toast(model.message);
+            }
+        }else{
+            Toast(@"认证数据获取失败");
+        }
+    } failure:^(NSError *error) {
+        TTLog(@" -- error -- %@",error);
     }];
 }
 
@@ -153,10 +187,22 @@
         _idnumberCell.selectionStyle = UITableViewCellSelectionStyleNone;
         return _idnumberCell;
     }
-    if (row == 3) {
-        _idcardCell.selectionStyle = UITableViewCellSelectionStyleNone;
-        return _idcardCell;
+    if (self.typePage==0) {
+        if (row == 3) {
+            _telCell.selectionStyle = UITableViewCellSelectionStyleNone;
+            return _telCell;
+        }
+        if (row == 4) {
+            _idcardCell.selectionStyle = UITableViewCellSelectionStyleNone;
+            return _idcardCell;
+        }
+    }else{
+        if (row == 3) {
+            _idcardCell.selectionStyle = UITableViewCellSelectionStyleNone;
+            return _idcardCell;
+        }
     }
+    
     return cell;
 }
 
@@ -167,18 +213,22 @@
 
 /// 返回多少
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    if (self.typePage==0) return 5;
     return 4;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row==3) {
-        return IPHONE6_W(160);
+    if (self.typePage==0) {
+        if (indexPath.row==4) return IPHONE6_W(160);
+    }else{
+        if (indexPath.row==3) return IPHONE6_W(160);
     }
+    
     return IPHONE6_W(50);
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.row==1) {
+    if (indexPath.row==1&&self.typePage==0) {
         [self showSexActionSheet:@[@"女",@"男"] idx:0];
     }
     [tableView deselectRowAtIndexPath:indexPath animated:YES];

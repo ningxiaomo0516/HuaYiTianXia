@@ -8,12 +8,21 @@
 
 #import "TXEquityViewController.h"
 #import "TXEarningsTableViewCell.h"
+#import "TXWalletModel.h"
 
 static NSString * const reuseIdentifier = @"TXEarningsTableViewCell";
 
 @interface TXEquityViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *dataArray;
+/// 每页多少数据
+@property (nonatomic, assign) NSInteger pageSize;
+/// 当前页
+@property (nonatomic, assign) NSInteger pageIndex;
+/// 当前页
+@property (nonatomic, copy) NSString *stringURL;
+/// 当前页
+@property (nonatomic, assign) NSInteger pageType;
 
 @end
 
@@ -22,8 +31,43 @@ static NSString * const reuseIdentifier = @"TXEarningsTableViewCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.view.backgroundColor = kRandomColor;
+    self.pageSize = 20;
+    self.pageIndex = 1;
+    if ([self.title isEqualToString:@"股权"]) { /// 股权
+        self.stringURL = @"stockdeal/UserStockdeal";
+        self.pageType = 0;
+    }else if ([self.title isEqualToString:@"转出记录"]){/// 转出记录
+        self.stringURL = @"transaction/UserTransOut";
+        self.pageType = 1;
+    }else if ([self.title isEqualToString:@"转入记录"]){/// 转入记录
+        self.stringURL = @"transaction/UserTransInit";
+        self.pageType = 2;
+    }
     [self initView];
+    [self loadEquityData];
+}
+
+/// 获取股权记录
+- (void) loadEquityData{
+    NSMutableDictionary *parameter = [[NSMutableDictionary alloc] init];
+    [parameter setObject:@(self.pageIndex) forKey:@"page"];     // 当前页
+    [parameter setObject:@(self.pageSize) forKey:@"pageSize"];  // 每页条数
+    [SCHttpTools postWithURLString:kHttpURL(self.stringURL) parameter:parameter success:^(id responseObject) {
+        NSDictionary *result = responseObject;
+        if ([result isKindOfClass:[NSDictionary class]]) {
+            TXWalletModel *model = [TXWalletModel mj_objectWithKeyValues:result];
+            if (model.errorcode == 20000) {
+                [self.dataArray addObjectsFromArray:model.data.list];
+                [self.tableView reloadData];
+            }else{
+                Toast(model.message);
+            }
+        }else{
+            Toast(@"收货地址数据获取失败");
+        }
+    } failure:^(NSError *error) {
+        TTLog(@" -- error -- %@",error);
+    }];
 }
 
 - (void) initView{
@@ -38,6 +82,9 @@ static NSString * const reuseIdentifier = @"TXEarningsTableViewCell";
 #pragma mark - Table view data source
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     TXEarningsTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
+    WalletModel *model = self.dataArray[indexPath.row];
+    model.pageType = self.pageType;
+    cell.model = model;
     return cell;
 }
 
@@ -47,7 +94,7 @@ static NSString * const reuseIdentifier = @"TXEarningsTableViewCell";
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 20;
+    return self.dataArray.count;
 }
 
 #pragma mark -- 设置Header高度

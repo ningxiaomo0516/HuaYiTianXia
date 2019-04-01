@@ -51,7 +51,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *phone;
 /// 密码
 @property (nonatomic, copy) NSString *pwd;
-/// 性别
+/// 性别(0:男 1：女)
 @property (nonatomic, assign) NSInteger sex;
 /// 邀请成功人数
 @property (nonatomic, copy) NSString *suinvited;

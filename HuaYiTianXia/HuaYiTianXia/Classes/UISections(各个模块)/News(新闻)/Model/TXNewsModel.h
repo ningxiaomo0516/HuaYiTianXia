@@ -62,7 +62,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 //// --------------- new model --------------- ////
 /// 新闻ID(产品id)
-@property (nonatomic, assign) NSInteger kid;
+@property (nonatomic, copy) NSString *kid;
 /// 新闻 图片地址
 @property (nonatomic, copy) NSString *img;
 /// 新闻 发布的时间戳

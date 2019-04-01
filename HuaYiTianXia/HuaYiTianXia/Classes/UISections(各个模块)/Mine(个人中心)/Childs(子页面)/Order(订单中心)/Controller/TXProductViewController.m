@@ -39,7 +39,7 @@ static NSString * const reuseIdentifier = @"TXProductTableViewCell";
     NSMutableDictionary *parameter = [[NSMutableDictionary alloc] init];
     [parameter setObject:@(self.pageIndex) forKey:@"page"];     // 当前页
     [parameter setObject:@(self.pageSize) forKey:@"pageSize"];  // 每页条数
-    [SCHttpTools postWithURLString:@"orderform/GetOrderPro" parameter:parameter success:^(id responseObject) {
+    [SCHttpTools postWithURLString:kHttpURL(@"orderform/GetOrderPro") parameter:parameter success:^(id responseObject) {
         NSDictionary *result = responseObject;
         if ([result isKindOfClass:[NSDictionary class]]) {
             TXOrderModel *model = [TXOrderModel mj_objectWithKeyValues:result];
@@ -79,8 +79,7 @@ static NSString * const reuseIdentifier = @"TXProductTableViewCell";
 #pragma mark - Table view data source
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     TXProductTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
-    OrderRecordsModel *model = self.dataArray[indexPath.section];
-    cell.titleLabel.text = model.title;
+    cell.orderModel = self.dataArray[indexPath.section];
     return cell;
 }
 

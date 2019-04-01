@@ -9,6 +9,7 @@
 #import "TXAccountSecurityViewController.h"
 #import "TXMineTableViewCell.h"
 #import "TXGeneralModel.h"
+#import "TXRealNameViewController.h"
 
 static NSString * const reuseIdentifier = @"TXMineTableViewCell";
 
@@ -60,16 +61,18 @@ static NSString * const reuseIdentifier = @"TXMineTableViewCell";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     TXGeneralModel* model = self.dataArray[indexPath.row];
     NSString *className = model.showClass;
-    if ([model.showClass isEqualToString:@""]) {
-        
+    if ([model.showClass isEqualToString:@"TXRealNameViewController"]) {
+        TXRealNameViewController *vc = [[TXRealNameViewController alloc] init];
+        vc.title = model.title;
+        vc.typePage = 1;
+        TTPushVC(vc);
     }else{
         Class controller = NSClassFromString(className);
         //    id controller = [[NSClassFromString(className) alloc] init];
         if (controller &&  [controller isSubclassOfClass:[UIViewController class]]){
-            UIViewController *view = [[controller alloc] init];
-            view.title = model.title;
-            [view setHidesBottomBarWhenPushed:YES];
-            [self.navigationController pushViewController:view animated:YES];
+            UIViewController *vc = [[controller alloc] init];
+            vc.title = model.title;
+            TTPushVC(vc);
         }
     }
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
@@ -93,7 +96,7 @@ static NSString * const reuseIdentifier = @"TXMineTableViewCell";
     if (!_dataArray) {
         _dataArray = [[NSMutableArray alloc] init];
         NSArray* titleArr = @[@"个人资料",@"认证资料",@"重置密码",@"设置交易密码"];
-        NSArray* classArr = @[@"TXPersonalInfoViewController",@"",@"TXResetPwdViewController",@""];
+        NSArray* classArr = @[@"TXPersonalInfoViewController",@"TXRealNameViewController",@"TXResetPwdViewController",@""];
         for (int j = 0; j < titleArr.count; j ++) {
             TXGeneralModel *generalModel = [[TXGeneralModel alloc] init];
             generalModel.title = [titleArr lz_safeObjectAtIndex:j];

@@ -9,6 +9,7 @@
 #import "TXWalletViewController.h"
 #import "TXMineHeaderTableViewCell.h"
 #import "TXWalletTableViewCell.h"
+#import "TXEquityViewController.h"
 
 static NSString * const reuseIdentifier = @"TXWalletTableViewCell";
 static NSString * const reuseIdentifierHeader = @"TXMineHeaderTableViewCell";
@@ -95,10 +96,9 @@ static NSString * const reuseIdentifierHeader = @"TXMineHeaderTableViewCell";
         
         //    id controller = [[NSClassFromString(className) alloc] init];
         if (controller &&  [controller isSubclassOfClass:[UIViewController class]]){
-            UIViewController *view = [[controller alloc] init];
-            view.title = title;
-            [view setHidesBottomBarWhenPushed:YES];
-            [self.navigationController pushViewController:view animated:YES];
+            UIViewController *vc = [[controller alloc] init];
+            vc.title = title;
+            TTPushVC(vc);
         }
     }
 }

@@ -11,7 +11,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface TXRealNameViewController : TTBaseTableViewController
-
+/// typePage 0:实名认证 1:认证资料
+@property (nonatomic,assign) NSInteger typePage;
 @end
 
 NS_ASSUME_NONNULL_END

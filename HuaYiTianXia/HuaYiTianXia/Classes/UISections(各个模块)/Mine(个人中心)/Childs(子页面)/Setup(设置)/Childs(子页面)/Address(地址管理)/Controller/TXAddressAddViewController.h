@@ -19,7 +19,7 @@ typedef NS_ENUM(NSInteger, AddressType){
 @interface TXAddressAddViewController : TTBaseTableViewController
 
 
-///
+/// 0:添加地址 1:编辑地址
 @property (nonatomic, assign) AddressType currentType;
 
 @end

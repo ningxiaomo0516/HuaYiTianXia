@@ -218,4 +218,20 @@
     dispatch_resume(_timer);
 }
 
+/**
+ *  为保护用户隐私，身份证号码中间用（*）号替换
+ *
+ *  @param idCardNumber 完整的身份证号码串 （idCard）
+ *
+ *  @return 隐私身份证号码
+ */
++ (NSString *)idCardNumber:(NSString *)idCardNumber {
+    NSString *tempStr = @"";
+    for (int i  = 0; i < idCardNumber.length - 7; i++) {
+        tempStr = [tempStr stringByAppendingString:@"*"];
+    }
+    //身份证号取前三位和后四位 中间拼接 tempSt（*）
+    idCardNumber = [NSString stringWithFormat:@"%@%@%@", [idCardNumber substringToIndex:3], tempStr, [idCardNumber substringFromIndex:idCardNumber.length - 4]];
+    return idCardNumber;
+}
 @end

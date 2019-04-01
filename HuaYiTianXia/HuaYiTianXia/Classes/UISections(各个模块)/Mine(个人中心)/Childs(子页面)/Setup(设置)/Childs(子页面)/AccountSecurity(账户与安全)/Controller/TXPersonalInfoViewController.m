@@ -44,12 +44,13 @@ static NSString * const reuseIdentifier = @"TXMineTableViewCell";
     tools.titleLabel.text = model.title;
 
     if (indexPath.row==0) {
-        tools.imagesAvatar.image = kGetImage(@"user1");
+//        tools.imagesAvatar.image = kGetImage(@"user1");
+        [tools.imagesAvatar sd_setImageWithURL:kGetImageURL(kUserInfo.avatar)
+                              placeholderImage:kGetImage(VERTICALMAPBITMAP)];
         tools.imagesAvatar.hidden = NO;
     }else{
-        tools.subtitleLabel.text = (indexPath.row==1)?@"哇哈哈哈哈":@"12345";
+        tools.subtitleLabel.text = (indexPath.row==1)?kUserInfo.username:kUserInfo.uid;
         if (indexPath.row==1) self.nicknameStr = tools.subtitleLabel.text;
-        
         tools.subtitleLabel.hidden = NO;
     }
     return tools;

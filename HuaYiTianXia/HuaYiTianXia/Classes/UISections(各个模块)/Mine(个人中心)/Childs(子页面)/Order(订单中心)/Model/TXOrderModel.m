@@ -15,17 +15,17 @@
              @"message"     : @"msg"};
 }
 + (NSDictionary *)objectClassInArray{
-    return @{@"data" : [OrderModel class]};
-}
-@end
-
-@implementation OrderModel
-+ (NSDictionary *)objectClassInArray{
-    return @{@"records" : [OrderRecordsModel class]};
+    return @{@"data" : [OrderRecordsModel class]};
 }
 @end
 
 @implementation OrderRecordsModel
++ (NSDictionary *)objectClassInArray{
+    return @{@"records" : [OrderModel class]};
+}
+@end
+
+@implementation OrderModel
 + (NSDictionary *)replacedKeyFromPropertyName{
     return @{@"kid"        : @"id"};
 }

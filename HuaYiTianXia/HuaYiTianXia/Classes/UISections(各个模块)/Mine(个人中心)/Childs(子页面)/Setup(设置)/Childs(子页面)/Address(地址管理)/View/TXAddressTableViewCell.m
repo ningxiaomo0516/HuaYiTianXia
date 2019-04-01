@@ -25,8 +25,35 @@
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         self.contentView.backgroundColor = [UIColor clearColor];
         [self initView];
+//        self.titleLabel.text = @"佐伊";
+//        self.telLabel.text = @"13512340987";
+//        NSString *labelText = @"四川省 成都市 双流县 华阳镇街道 比海运的一单元54564";
+//        if (addressModel.isDefault) {
+//            self.defaultLabel.hidden = NO;
+//            self.addressLabel.attributedText = [UILabel changeIndentationSpaceForLabel:labelText spaceWidth:IPHONE6_W(35.0)];
+//        }else{
+//            if (addressModel.isDefault) {
+//                labelText = @"四川省 成都市 武侯区 天和东街29号";
+//            }else{
+//                labelText = @"四川省 成都市 武侯区 桂溪街道 天和东街29号 22栋27楼48号 如奔赴古城道路上阳光温柔灿烂不用时刻联系";
+//            }
+//            self.addressLabel.text = labelText;
+//        }
     }
     return self;
+}
+
+- (void)setAddressModel:(AddressModel *)addressModel{
+    _addressModel = addressModel;
+    self.titleLabel.text = addressModel.username;
+    self.telLabel.text = addressModel.telphone;
+    NSString *labelText = addressModel.address;
+    if (addressModel.isDefault) {
+        self.defaultLabel.hidden = NO;
+        self.addressLabel.attributedText = [UILabel changeIndentationSpaceForLabel:labelText spaceWidth:IPHONE6_W(35.0)];
+    }else{
+        self.addressLabel.text = labelText;
+    }
 }
 
 - (void) initView{

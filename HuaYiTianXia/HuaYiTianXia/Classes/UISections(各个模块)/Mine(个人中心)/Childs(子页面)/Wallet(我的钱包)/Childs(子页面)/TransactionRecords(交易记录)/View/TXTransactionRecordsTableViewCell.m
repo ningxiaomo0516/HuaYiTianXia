@@ -27,10 +27,18 @@
         [self initView];
         self.titleLabel.text = @"购买记录";
         self.subtitleLabel.text = @"星级纵横矿机";
+        self.subtitleLabel.textColor = kClearColor;
         self.priceLabel.text = @"50.40";
         self.dateLabel.text = @"2018/12/21";
     }
     return self;
+}
+
+- (void)setModel:(WalletModel *)model{
+    self.titleLabel.text = model.typeName;
+//    self.subtitleLabel.text = model.title;
+    self.priceLabel.text = model.price;
+    self.dateLabel.text = model.date;
 }
 
 - (void) initView{

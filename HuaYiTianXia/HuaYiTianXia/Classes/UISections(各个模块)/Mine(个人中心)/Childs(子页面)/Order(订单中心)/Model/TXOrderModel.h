@@ -10,31 +10,31 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class OrderModel,OrderRecordsModel;
+@class OrderRecordsModel,OrderModel;
 @interface TXOrderModel : NSObject
 /// 状态 21000统一异常情况,22000登录超时，23000账号冻结，20000请求成功，另外的状态请直接输出msg
 @property (nonatomic, copy) NSString *message;
 /// 错误码
 @property (nonatomic, assign) NSInteger errorcode;
-@property (nonatomic, strong) OrderModel *data;
+@property (nonatomic, strong) OrderRecordsModel *data;
 @end
 
-@interface OrderModel : NSObject
+@interface OrderRecordsModel : NSObject
 /// 页码
 @property (nonatomic, copy) NSString *current;
 /// 总页数
 @property (nonatomic, copy) NSString *pages;
 /// 产品详情Model数据
-@property (nonatomic, strong) NSMutableArray<OrderRecordsModel *> *records;
+@property (nonatomic, strong) NSMutableArray<OrderModel *> *records;
 @end
 
-@interface OrderRecordsModel : NSObject
+@interface OrderModel : NSObject
 /// 订单id
 @property (nonatomic, copy) NSString *kid;
 /// 时间
 @property (nonatomic, copy) NSString *housTime;
 /// 金额
-@property (nonatomic, copy) NSString *money;
+@property (nonatomic, copy) NSString *totalMoney;
 /// 时间(数据库时间)
 @property (nonatomic, copy) NSString *time;
 /// 标题

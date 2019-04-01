@@ -10,7 +10,7 @@
 #define URLDefine_h
 
 extern NSString *const DynamicUrl;
-extern NSString *const InvitationDomain;
+extern NSString *const DomainName;
 
 extern NSString *const imageBaseUrl;
 

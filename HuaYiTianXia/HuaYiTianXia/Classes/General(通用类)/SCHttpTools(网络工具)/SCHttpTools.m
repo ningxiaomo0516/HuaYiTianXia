@@ -79,8 +79,9 @@ static AFHTTPSessionManager* manager_ = nil;
 +(void)postWithURLString:(NSString *)URLString parameter:(NSDictionary *)parameter success:(void(^)(id responseObject))success failure:(void(^)(NSError *error))failure{
     
     if(URLString.length == 0)return;
-    
-    URLString = [NSString stringWithFormat:@"%@%@",DynamicUrl,URLString];
+    /// 根据 / 分割字符串
+    NSArray *arrayURL = [URLString componentsSeparatedByString:Header_Token];
+    URLString = [NSString stringWithFormat:@"%@%@",DynamicUrl,arrayURL[0]];
     TTLog(@"postUrl -- %@",URLString);
     URLString = [URLString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     URLString = [URLString stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
@@ -93,6 +94,11 @@ static AFHTTPSessionManager* manager_ = nil;
     manager.requestSerializer.cachePolicy = NSURLRequestReloadIgnoringLocalAndRemoteCacheData;
     [[NSURLCache sharedURLCache] removeAllCachedResponses];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",@"text/plain", @"text/json", @"text/javascript",@"text/html",nil];
+    
+    // 判断是否登录并且带有HTTP请求头
+    if (arrayURL.count>1&&kUserInfo.isLogin) {
+        [manager.requestSerializer setValue:kUserInfo.mobile forHTTPHeaderField:@"token"];
+    }
     
     [manager POST:URLString parameters:parameter progress:^(NSProgress * _Nonnull downloadProgress) {
         

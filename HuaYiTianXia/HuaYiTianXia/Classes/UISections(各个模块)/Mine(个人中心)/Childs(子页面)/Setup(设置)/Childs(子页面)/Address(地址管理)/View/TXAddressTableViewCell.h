@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TXAddressModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -23,6 +24,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) UILabel *defaultLabel;
 /// 昵称
 @property (nonatomic, strong) UILabel *addressLabel;
+
+@property (nonatomic, strong) AddressModel *addressModel;
 
 @end
 

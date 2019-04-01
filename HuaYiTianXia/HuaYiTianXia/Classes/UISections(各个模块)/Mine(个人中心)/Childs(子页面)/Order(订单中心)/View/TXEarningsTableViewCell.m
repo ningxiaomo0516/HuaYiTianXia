@@ -32,6 +32,20 @@
     return self;
 }
 
+- (void)setModel:(WalletModel *)model{
+    _model = model;
+    if (model.pageType==0) {
+        self.titleLabel.text = self.model.title;
+        self.priceLabel.text = self.model.stockRight;
+    }else{
+        self.titleLabel.text = kStringFormat(@"ID:", self.model.mobile);
+        NSString *priceText = model.pageType==1?@"+":@"-";
+        self.priceLabel.text = kStringFormat(priceText, self.model.price);
+    }
+    
+    self.dateLabel.text = self.model.date;
+}
+
 - (void) initView{
     [self addSubview:self.titleLabel];
     [self addSubview:self.priceLabel];
