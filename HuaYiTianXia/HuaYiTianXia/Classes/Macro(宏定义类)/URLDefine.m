@@ -17,15 +17,41 @@
 NSString *const DynamicUrl = @"http://47.107.179.43:80/hytx/";
 
 
-NSString *const DomainName = @"http://47.107.179.43:80";
+NSString *const DomainName = @"http://47.107.179.43:80/";
 
 NSString *const imageBaseUrl = @"//pic11.wed114.cn/";
+/*
+新闻详情:http://47.107.179.43/yq/invation/newDetails.html?id=78
+商品详情 ：http://47.107.179.43/yq/invation/goodsDetails.html?id=59&status=1
+id为商品id，status为商品类型（（1：无人机商城产品（消费）；2：农用植保产品（购买）；3：VR产品（购买）；4：纵横矿机产品（购买）；5：共享飞行产品（购买）；6：生态农业商城产品（消费）））
+推荐邀请： http://47.107.179.43/yq/invation/invataion.html?id=1064    id为该会员账号的id
+用户协议：http://47.107.179.43/userHelp/userAgree.html
+操作手册： http://47.107.179.43/userHelp
+一县一代理： http://47.107.179.43/agencyCompany/
+合同协议 ： http://47.107.179.43/yq/invation/vrAgreement.html
+民航共享： http://47.107.179.43/yq/invation/ndex.html
+合作协议：http://47.107.179.43/yq/invation/cooperationAgreement.html
+*/
 
-//NSString *const NewsDetails = @"yq/invation/newDetails.html?id=";
-//NSString *const NewsDetails = @"yq/invation/newDetails.html?id=";
-//NSString *const NewsDetails = @"yq/invation/newDetails.html?id=";
-//NSString *const NewsDetails = @"yq/invation/newDetails.html?id=";
-//NSString *const NewsDetails = @"yq/invation/newDetails.html?id=";
+/// 新闻详情
+NSString *const NewsDetailsH5 = @"yq/invation/newDetails.html?id=";
+/// 商品详情
+NSString *const GoodsDetailsH5 = @"yq/invation/goodsDetails.html?id=";
+/// 推荐邀请
+NSString *const InvataionH5 = @"yq/invation/invataion.html?id=";
+/// 用户协议
+NSString *const UserAgreeH5 = @"userHelp/userAgree.html";
+/// 操作手册
+NSString *const UserHelpH5 = @"userHelp";
+/// 一县一代理
+NSString *const AgencyCompanyH5 = @"agencyCompany";
+/// 合同协议
+NSString *const vrAgreementH5 = @"yq/invation/vrAgreement.html";
+/// 民航共享
+NSString *const AviationShareH5 = @"yq/invation/ndex.html";
+/// 合作协议
+NSString *const CooperationAgreementH5 = @"yq/invation/cooperationAgreement.html";
+
 
 /// 0:测试环境 1:生产环境
 NSString *const environment = @"1";

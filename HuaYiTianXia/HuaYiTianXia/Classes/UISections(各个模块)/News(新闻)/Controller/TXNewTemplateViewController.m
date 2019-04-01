@@ -123,7 +123,7 @@ static NSString * const reuseIdentifierSectionHeaderView = @"SCTableViewSectionH
     NewsRecordsModel *model = self.dataArray[indexPath.row];
     TXWebViewController *vc = [[TXWebViewController alloc] init];
     vc.title = @"新闻详情";
-    vc.webUrl = kStringFormat(DomainName, [@"/yq/" stringByAppendingString:model.kid]);
+    vc.webUrl = kAppendH5URL(DomainName, NewsDetailsH5, model.kid)
     TTPushVC(vc);
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }

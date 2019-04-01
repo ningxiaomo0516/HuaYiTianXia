@@ -113,6 +113,7 @@
 #define Header_Token @"_HeaderToken"
 
 #define kStringFormat(title,subtitle) [NSString stringWithFormat:@"%@%@",title,subtitle];
+#define kAppendH5URL(domain,url,parameter) [NSString stringWithFormat:@"%@%@%@",domain,url,parameter];
 #define kHttpURL(URL) [NSString stringWithFormat:@"%@%@",URL,Header_Token]
 
 /// 字符串

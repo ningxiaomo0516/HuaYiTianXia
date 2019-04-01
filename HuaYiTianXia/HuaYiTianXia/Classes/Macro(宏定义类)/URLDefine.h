@@ -9,17 +9,32 @@
 #ifndef URLDefine_h
 #define URLDefine_h
 
+///
 extern NSString *const DynamicUrl;
+/// 域名
 extern NSString *const DomainName;
 
-extern NSString *const imageBaseUrl;
+/// 新闻详情(已做)
+extern NSString *const NewsDetailsH5;
+/// 商品详情
+extern NSString *const GoodsDetailsH5;
+/// 推荐邀请(已做)
+extern NSString *const InvataionH5;
+/// 用户协议(已做)
+extern NSString *const UserAgreeH5;
+/// 操作手册(已做)
+extern NSString *const UserHelpH5;
+/// 一县一代理()
+extern NSString *const AgencyCompanyH5;
+/// 合同协议()
+extern NSString *const vrAgreementH5;
+/// 民航共享()
+extern NSString *const AviationShareH5;
+/// 合作协议()
+extern NSString *const CooperationAgreementH5;
 
 /// 0:测试环境 1:生产环境
 extern NSString *const environment;
-
-extern NSString *const businessBooking;
-
-extern NSString *const indexSetting;
 
 /// 更改头像
 extern NSString *const updateAvatar;

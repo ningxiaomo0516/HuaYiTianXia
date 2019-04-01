@@ -9,6 +9,7 @@
 #import "TXSetupViewController.h"
 #import "TXMineTableViewCell.h"
 #import "TXGeneralModel.h"
+#import "TXWebViewController.h"
 
 static NSString * const reuseIdentifier = @"TXMineTableViewCell";
 
@@ -84,14 +85,24 @@ static NSString * const reuseIdentifier = @"TXMineTableViewCell";
     NSString *className = model.showClass;
     if ([model.showClass isEqualToString:@""]) {
         Toast(@"暂未开通");
+    }else if(model.index==0||model.index==1||model.index==4){
+        TXWebViewController *vc = [[TXWebViewController alloc] init];
+        vc.title = model.title;
+        if (model.index==0) {
+            vc.webUrl = kAppendH5URL(DomainName, UserAgreeH5,@"");
+        }else if(model.index==1){
+            vc.webUrl = kAppendH5URL(DomainName, UserAgreeH5,@"");
+        }else if(model.index==4){
+            vc.webUrl = kAppendH5URL(DomainName, UserHelpH5,@"");
+        }
+        TTPushVC(vc);
     }else{
         Class controller = NSClassFromString(className);
         //    id controller = [[NSClassFromString(className) alloc] init];
         if (controller &&  [controller isSubclassOfClass:[UIViewController class]]){
-            UIViewController *view = [[controller alloc] init];
-            view.title = model.title;
-            [view setHidesBottomBarWhenPushed:YES];
-            [self.navigationController pushViewController:view animated:YES];
+            UIViewController *vc = [[controller alloc] init];
+            vc.title = model.title;
+            TTPushVC(vc);
         }
     }
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
@@ -139,16 +150,19 @@ static NSString * const reuseIdentifier = @"TXMineTableViewCell";
         _dataArray = [[NSMutableArray alloc] init];
         
         NSArray* titleArr = @[@[@"用户使用协议",@"隐私政策",@"账户与安全",@"地址管理",@"操作手册"]];
-        NSArray* classArr = @[@[@"",@"",@"TXAccountSecurityViewController",
+        NSArray* indexArr = @[@[@"0",@"1",@"2",@"3",@"4"]];
+        NSArray* classArr = @[@[@"TXWebViewController",@"",@"TXAccountSecurityViewController",
                                 @"TXAddressViewController",@""]];
         for (int i=0; i<titleArr.count; i++) {
             NSArray *subTitlesArray = [titleArr lz_safeObjectAtIndex:i];
-            NSArray *classArray = [classArr lz_safeObjectAtIndex:i];
+            NSArray *classArray     = [classArr lz_safeObjectAtIndex:i];
+            NSArray *indexArray     = [indexArr lz_safeObjectAtIndex:i];
             NSMutableArray *subArray = [NSMutableArray array];
             for (int j = 0; j < subTitlesArray.count; j ++) {
                 TXGeneralModel *generalModel = [[TXGeneralModel alloc] init];
-                generalModel.title = [subTitlesArray lz_safeObjectAtIndex:j];
-                generalModel.showClass = [classArray lz_safeObjectAtIndex:j];
+                generalModel.title      = [subTitlesArray lz_safeObjectAtIndex:j];
+                generalModel.showClass  = [classArray lz_safeObjectAtIndex:j];
+                generalModel.index      = [[indexArray lz_safeObjectAtIndex:j] integerValue];
                 [subArray addObject:generalModel];
             }
             [_dataArray addObject:subArray];

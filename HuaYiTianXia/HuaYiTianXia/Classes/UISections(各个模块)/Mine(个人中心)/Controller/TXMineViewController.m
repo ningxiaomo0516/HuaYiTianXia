@@ -13,6 +13,7 @@
 #import "TXMineBannerTableViewCell.h"
 #import "TXGeneralModel.h"
 #import "TXRealNameViewController.h"
+#import "TXWebViewController.h"
 
 static NSString * const reuseIdentifier = @"TXMineTableViewCell";
 static NSString * const reuseIdentifierHeader = @"TXMineHeaderTableViewCell";
@@ -135,6 +136,11 @@ static NSString * const reuseIdentifierBanner = @"TXMineBannerTableViewCell";
         TXRealNameViewController *vc = [[TXRealNameViewController alloc] init];
         vc.typePage = 0;
         TTPushVC(vc);
+    }else if([model.showClass isEqualToString:@"TXWebViewController"]){
+        TXWebViewController *vc = [[TXWebViewController alloc] init];
+        vc.title = model.title;
+        vc.webUrl = kAppendH5URL(DomainName, InvataionH5,@"");
+        TTPushVC(vc);
     }else{
         Class controller = NSClassFromString(className);
         //    id controller = [[NSClassFromString(className) alloc] init];
@@ -194,7 +200,7 @@ static NSString * const reuseIdentifierBanner = @"TXMineBannerTableViewCell";
         NSArray* titleArr = @[@[@"资产管理",@"实名认证",@"订单中心",@"我的钱包",
                                 @"推荐邀请",@"我的团队",@"设置"]];//TXOrderViewController
         NSArray* classArr = @[@[@"",@"TXRealNameViewController",@"TXProductViewController",
-                                @"TXWalletViewController",@"TXRecommendedViewController",
+                                @"TXWalletViewController",@"TXWebViewController",
                                 @"TXTeamViewController",@"TXSetupViewController"]];
         for (int i=0; i<titleArr.count; i++) {
             NSArray *subTitlesArray = [titleArr lz_safeObjectAtIndex:i];
