@@ -29,6 +29,8 @@
 /// TableView in Section background color
 #define kTableViewInSectionColor kColorWithRGB(245, 244, 249)
 
+/// 主题颜色
+#define kThemeColor HexString(@"#26B9FE")
 
 
 #define kFontWithNameMedium     @"PingFang-SC-Medium"

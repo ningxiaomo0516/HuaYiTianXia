@@ -51,6 +51,7 @@
     [self addSubview:self.contentLabel];
     [self addSubview:self.priceLabel];
     [self addSubview:self.dateTimeLabel];
+    [self addSubview:self.lookContractBtn];
     
     
     [self.imagesView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -76,6 +77,13 @@
     [self.dateTimeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(self.mas_bottom).offset(IPHONE6_W(-15));
         make.left.equalTo(self.titleLabel);
+    }];
+    
+    [self.lookContractBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(self);
+        make.right.equalTo(self.mas_right).offset(IPHONE6_W(-15));
+        make.height.equalTo(@(IPHONE6_W(27)));
+        make.width.equalTo(@(IPHONE6_W(65)));
     }];
 }
 
@@ -113,6 +121,19 @@
         _priceLabel = [UILabel lz_labelWithTitle:@"" color:HexString(@"2DAFF7") font:kFontSizeMedium12];
     }
     return _priceLabel;
+}
+
+- (UIButton *)lookContractBtn{
+    if (!_lookContractBtn) {
+        _lookContractBtn = [UIButton buttonWithType:UIButtonTypeSystem];
+        [_lookContractBtn setTitleColor:kThemeColor forState:UIControlStateNormal];
+        [_lookContractBtn setTitle:@"查看合同" forState:UIControlStateNormal];
+        _lookContractBtn.titleLabel.font = kFontSizeMedium12;
+        [_lookContractBtn setBorderColor:kThemeColor];
+        [_lookContractBtn setBorderWidth:0.7];
+        [_lookContractBtn lz_setCornerRadius:IPHONE6_W(5.0)];
+    }
+    return _lookContractBtn;
 }
 
 @end

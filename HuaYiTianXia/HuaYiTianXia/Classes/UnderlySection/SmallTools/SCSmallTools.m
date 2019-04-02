@@ -234,4 +234,13 @@
     idCardNumber = [NSString stringWithFormat:@"%@%@%@", [idCardNumber substringToIndex:3], tempStr, [idCardNumber substringFromIndex:idCardNumber.length - 4]];
     return idCardNumber;
 }
+
++ (BOOL)tt_simpleVerifyIdentityCardNum:(NSString *)idCardNumber{
+    if (idCardNumber.length <= 0) {
+        return NO;
+    }
+    NSString *regex2 = @"^(\\d{14}|\\d{17})(\\d|[xX])$";
+    NSPredicate *identityCardPredicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",regex2];
+    return [identityCardPredicate evaluateWithObject:idCardNumber];
+}
 @end

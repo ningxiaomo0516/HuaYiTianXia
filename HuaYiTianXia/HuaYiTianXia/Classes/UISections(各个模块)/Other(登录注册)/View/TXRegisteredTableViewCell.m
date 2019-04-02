@@ -95,7 +95,7 @@
 - (UIButton *)codeBtn{
     if (!_codeBtn) {
         _codeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_codeBtn setTitleColor:HexString(@"#26B9FE") forState:UIControlStateNormal];
+        [_codeBtn setTitleColor:kThemeColor forState:UIControlStateNormal];
         _codeBtn.titleLabel.font = kFontSizeMedium13;
         [_codeBtn setTitle:@"获取短信验证码" forState:UIControlStateNormal];
 //        [_codeBtn setBackgroundImage:kGetImage(@"c31_btn_yzm") forState:UIControlStateNormal];

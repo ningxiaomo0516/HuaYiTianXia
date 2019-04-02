@@ -31,10 +31,10 @@
     pageController.menuViewStyle = WMMenuViewStyleLine;/// 样式
     pageController.menuViewLayoutMode = WMMenuViewLayoutModeCenter;//居中模式
     pageController.menuItemWidth = kScreenWidth/3;/// 宽度
-    pageController.titleColorSelected = HexString(@"#26B9FE");
+    pageController.titleColorSelected = kThemeColor;
     pageController.titleColorNormal = kTextColor51;
     pageController.progressWidth = 20;
-    pageController.progressColor = HexString(@"#26B9FE");
+    pageController.progressColor = kThemeColor;
     pageController.menuBGColor = kClearColor;
     //    pageController.showOnNavigationBar = YES;
     

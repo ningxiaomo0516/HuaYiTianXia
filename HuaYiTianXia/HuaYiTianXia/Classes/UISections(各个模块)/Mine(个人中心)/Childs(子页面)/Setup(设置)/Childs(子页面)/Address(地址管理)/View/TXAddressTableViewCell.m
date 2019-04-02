@@ -114,7 +114,7 @@
 
 - (UILabel *)defaultLabel{
     if (!_defaultLabel) {
-        _defaultLabel = [UILabel lz_labelWithTitle:@"默认" color:HexString(@"#26B9FE") font:kFontSizeMedium12];
+        _defaultLabel = [UILabel lz_labelWithTitle:@"默认" color:kThemeColor font:kFontSizeMedium12];
         _defaultLabel.backgroundColor = HexString(@"#CEECFA");
         _defaultLabel.hidden = YES;
         _defaultLabel.textAlignment = NSTextAlignmentCenter;

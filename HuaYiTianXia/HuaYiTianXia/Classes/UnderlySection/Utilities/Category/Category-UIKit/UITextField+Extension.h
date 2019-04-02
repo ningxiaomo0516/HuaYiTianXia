@@ -13,6 +13,9 @@
  */
 @interface UITextField (Extension)
 
+- (NSRange)tt_selectedRange;
+- (void)tt_setSelectedRange:(NSRange) range;
+
 /**
  * 实例化 UITextField
  *

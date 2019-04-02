@@ -30,7 +30,22 @@ static NSString * const reuseIdentifier = @"TXMineTableViewCell";
 
 /** 退出 */
 - (void) exitBtnClick:(UIButton *) sender{
-    
+    [SCHttpTools getWithURLString:kHttpURL(@"customer/outlogin") parameter:nil success:^(id responseObject) {
+        NSDictionary *result = responseObject;
+        TTLog(@"result ---- %@",[Utils lz_dataWithJSONObject:result]);
+        if ([result isKindOfClass:[NSDictionary class]]) {
+            TTUserDataModel *model = [TTUserDataModel mj_objectWithKeyValues:result];
+            if (model.errorcode == 20000) {
+                
+            }else{
+                Toast(model.message);
+            }
+        }else{
+            Toast(@"个人中心数据获取失败");
+        }
+    } failure:^(NSError *error) {
+        TTLog(@" -- error -- %@",error);
+    }];
 }
 
 - (void) initView{
@@ -125,7 +140,7 @@ static NSString * const reuseIdentifier = @"TXMineTableViewCell";
 - (UIButton *)exitButton{
     if (!_exitButton) {
         _exitButton = [UIButton buttonWithType:UIButtonTypeSystem];
-        [_exitButton setTitleColor:HexString(@"#26B9FE") forState:UIControlStateNormal];
+        [_exitButton setTitleColor:kThemeColor forState:UIControlStateNormal];
         _exitButton.titleLabel.font = kFontSizeMedium15;
         [_exitButton setTitle:@"退出登录" forState:UIControlStateNormal];
         [_exitButton setBackgroundColor:kWhiteColor];
@@ -148,7 +163,6 @@ static NSString * const reuseIdentifier = @"TXMineTableViewCell";
 - (NSMutableArray *)dataArray{
     if (!_dataArray) {
         _dataArray = [[NSMutableArray alloc] init];
-        
         NSArray* titleArr = @[@[@"用户使用协议",@"隐私政策",@"账户与安全",@"地址管理",@"操作手册"]];
         NSArray* indexArr = @[@[@"0",@"1",@"2",@"3",@"4"]];
         NSArray* classArr = @[@[@"TXWebViewController",@"",@"TXAccountSecurityViewController",

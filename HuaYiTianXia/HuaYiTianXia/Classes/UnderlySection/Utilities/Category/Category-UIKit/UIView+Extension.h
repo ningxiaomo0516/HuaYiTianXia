@@ -169,11 +169,18 @@
 - (void)lz_removeAllSubviews;
 
 /**
- 获取指定视图在window根控制器中的位置
- 
- @param view 指定View
- @return 返回在window根控制器中的位置
+ *  获取指定视图在window根控制器中的位置
+ *
+ *  @param view 指定View
+ *  @return 返回在window根控制器中的位置
  */
 + (CGRect)lz_getFrameInWindow:(UIView * _Nonnull)view;
-
+/*
+ *  查找子视图且不会保存
+ *  @param view      要查找的视图
+ *  @param clazzName 子控件类名
+ *
+ *  @return 找到的第一个子视图
+ */
++ (UIView *)tt_foundViewInView:(UIView *)view clazzName:(NSString *)clazzName;
 @end

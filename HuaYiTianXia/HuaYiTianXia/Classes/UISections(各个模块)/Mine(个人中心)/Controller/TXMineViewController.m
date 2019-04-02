@@ -41,6 +41,7 @@ static NSString * const reuseIdentifierBanner = @"TXMineBannerTableViewCell";
 - (void) requestPersonalCenterData{
     [SCHttpTools getWithURLString:kHttpURL(@"customer/Wallet") parameter:nil success:^(id responseObject) {
         NSDictionary *result = responseObject;
+        TTLog(@"result ---- %@",[Utils lz_dataWithJSONObject:result]);
         if ([result isKindOfClass:[NSDictionary class]]) {
             TTUserDataModel *model = [TTUserDataModel mj_objectWithKeyValues:result];
             if (model.errorcode == 20000) {
@@ -96,9 +97,17 @@ static NSString * const reuseIdentifierBanner = @"TXMineBannerTableViewCell";
             tools.imagesArrow.hidden = YES;
             tools.selectionStyle = UITableViewCellSelectionStyleNone;
         }else if(indexPath.row==1){
-            tools.subtitleLabel.hidden = NO;
-            tools.subtitleLabel.text = @"未实名认证";
             tools.subtitleLabel.textColor = HexString(@"#FF9B9B");
+            if (kUserInfo.type==2) {
+                tools.subtitleLabel.textColor = kTextColor153;
+                tools.subtitleLabel.text = @"已认证";
+                tools.imagesArrow.hidden = YES;
+            }else if (kUserInfo.type==1) {
+                tools.subtitleLabel.text = @"认证中";
+            }else{
+                tools.subtitleLabel.text = @"未实名认证";
+            }
+            tools.subtitleLabel.hidden = NO;
         }
         TXGeneralModel* model = self.itemModelArray[0][indexPath.row];
         model.index = indexPath.item;
@@ -133,9 +142,12 @@ static NSString * const reuseIdentifierBanner = @"TXMineBannerTableViewCell";
     TXGeneralModel* model = self.itemModelArray[0][indexPath.row];
     NSString *className = model.showClass;
     if ([model.showClass isEqualToString:@"TXRealNameViewController"]) {
-        TXRealNameViewController *vc = [[TXRealNameViewController alloc] init];
-        vc.typePage = 0;
-        TTPushVC(vc);
+        if (kUserInfo.type==0) {
+            TXRealNameViewController *vc = [[TXRealNameViewController alloc] init];
+            vc.title = model.title;
+            vc.typePage = 0;
+            TTPushVC(vc);
+        }
     }else if([model.showClass isEqualToString:@"TXWebViewController"]){
         TXWebViewController *vc = [[TXWebViewController alloc] init];
         vc.title = model.title;

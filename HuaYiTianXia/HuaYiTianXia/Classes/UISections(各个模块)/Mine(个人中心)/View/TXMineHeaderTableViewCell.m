@@ -132,7 +132,7 @@
 
 - (UILabel *)vrAssetsTipsLabel{
     if (!_vrAssetsTipsLabel) {
-        _vrAssetsTipsLabel = [UILabel lz_labelWithTitle:@"VR资产" color:kWhiteColor font:kFontSizeMedium14];
+        _vrAssetsTipsLabel = [UILabel lz_labelWithTitle:@"VH资产" color:kWhiteColor font:kFontSizeMedium14];
     }
     return _vrAssetsTipsLabel;
 }
@@ -153,7 +153,7 @@
 
 - (UILabel *)arAssetsTipsLabel {
     if (!_arAssetsTipsLabel) {
-        _arAssetsTipsLabel = [UILabel lz_labelWithTitle:@"AR资产" color:kWhiteColor font:kFontSizeMedium14];
+        _arAssetsTipsLabel = [UILabel lz_labelWithTitle:@"AH资产" color:kWhiteColor font:kFontSizeMedium14];
     }
     return _arAssetsTipsLabel;
 }

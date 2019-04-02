@@ -13,12 +13,16 @@
 #import "TXBuyCountTableViewCell.h"
 #import "TXShareViewController.h"
 #import "TXSubmitOrderViewController.h"
+#import "TXWebViewController.h"
+#import "TXGoodsH5TableViewCell.h"
 
-static NSString * const reuseIdentifierBanner = @"TXMallGoodsBannerTableViewCell";
-static NSString * const reuseIdentifierDetails = @"TXMallGoodsDetailsTableViewCell";
-static NSString * const reuseIdentifierSpec = @"TXMallGoodsSpecTableViewCell";
-static NSString * const reuseIdentifierBuynum = @"TXBuyCountTableViewCell";
-@interface TXMallGoodsDetailsViewController ()<UITableViewDelegate,UITableViewDataSource,TXMallGoodsSpecTableViewCellDelegate>
+static NSString * const reuseIdentifierBanner   = @"TXMallGoodsBannerTableViewCell";
+static NSString * const reuseIdentifierDetails  = @"TXMallGoodsDetailsTableViewCell";
+static NSString * const reuseIdentifierSpec     = @"TXMallGoodsSpecTableViewCell";
+static NSString * const reuseIdentifierBuynum   = @"TXBuyCountTableViewCell";
+static NSString * const reuseIdentifierGoodsH5  = @"TXGoodsH5TableViewCell";
+@interface TXMallGoodsDetailsViewController ()<UITableViewDelegate,UITableViewDataSource,
+TXMallGoodsSpecTableViewCellDelegate>
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *dataArray;
 @property (strong, nonatomic) UIButton *saveButton;
@@ -29,6 +33,7 @@ static NSString * const reuseIdentifierBuynum = @"TXBuyCountTableViewCell";
 
 @property (nonatomic, strong) NSMutableDictionary *heightAtIndexPath;//缓存高度
 @property (nonatomic, assign) CGFloat sectionHeight;//缓存高度
+@property (nonatomic, assign) CGFloat webH5Height;// WebView_H5_高度
 @end
 
 @implementation TXMallGoodsDetailsViewController
@@ -141,7 +146,39 @@ static NSString * const reuseIdentifierBuynum = @"TXBuyCountTableViewCell";
         TXMallGoodsSpecTableViewCell *tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierBuynum forIndexPath:indexPath];
         return tools;
     }else{
-        return [UITableViewCell new];
+        TXGoodsH5TableViewCell *tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierGoodsH5 forIndexPath:indexPath];
+
+        //http://47.107.179.43/yq/invation/goodsDetails.html?id=59&status=1
+        NSString *parameter = [NSString stringWithFormat:@"%@&status=%ld",
+                               self.productModel.kid,(long)self.productModel.status];
+        tools.webUrl = kAppendH5URL(DomainName, GoodsDetailsH5, parameter);
+        MV(weakSelf)
+        tools.refreshWebViewHeightBlock = ^(CGFloat height) {
+            TTLog(@"========= %f",height);
+            self.webH5Height = height;
+            if (weakSelf.webH5Height < height) {//当缓存的高度小于返回的高度时，更新缓存高度，刷新tableview
+                weakSelf.webH5Height = height;
+                [weakSelf.tableView beginUpdates];
+                [weakSelf.tableView endUpdates];
+//                NSIndexSet *indexSet=[[NSIndexSet alloc] initWithIndex:4];
+//                [self.tableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationAutomatic];
+                [self.tableView reloadData];
+            }
+        };
+        tools.indexPath = indexPath;
+        return tools;
+    }
+    return [UITableViewCell new];
+}
+
+//去除web页底部空白
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView { // 判断webView所在的cell是否可见，如果可见就layout
+    NSArray *cells = self.tableView.visibleCells;
+    for (UITableViewCell *cell in cells) {
+        if ([cell isKindOfClass:[TXGoodsH5TableViewCell class]]) {
+            TXGoodsH5TableViewCell *webCell = (TXGoodsH5TableViewCell *)cell;
+            [webCell.wkWebView setNeedsLayout];
+        }
     }
 }
 
@@ -158,18 +195,13 @@ static NSString * const reuseIdentifierBuynum = @"TXBuyCountTableViewCell";
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section==0) return IPHONE6_W(212);
     if (indexPath.section==1) return IPHONE6_W(90);
-    if (indexPath.section==2) {
-        if (self.heightAtIndexPath[indexPath]) {
-            NSNumber *num = self.heightAtIndexPath[indexPath];
-            /// collectionView 底部还有七个像素
-            TTLog(@"[num floatValue] --- %f",[num floatValue]);
-            return IPHONE6_W(60);
-        }else {
-            return UITableViewAutomaticDimension;
-        }
-    }
+    if (indexPath.section==2) return IPHONE6_W(60);
     if (indexPath.section==3) return IPHONE6_W(60);
-    return kScreenHeight-kTabBarHeight-kNavBarHeight;
+    if (indexPath.section==4){
+        TTLog(@" return self.webH5Height; --- %f", self.webH5Height);
+        return self.webH5Height;
+    }
+    return UITableViewAutomaticDimension;
 }
 
 #pragma mark ====== 更新规格的高度 ======
@@ -179,7 +211,7 @@ static NSString * const reuseIdentifierBuynum = @"TXBuyCountTableViewCell";
 //    if (![self.heightAtIndexPath[indexPath] isEqualToNumber:@(height)]) {
 //        self.heightAtIndexPath[indexPath] = @(height);
 //        [self.tableView reloadData];
-        NSIndexSet *indexSet=[[NSIndexSet alloc]initWithIndex:2];
+        NSIndexSet *indexSet=[[NSIndexSet alloc] initWithIndex:2];
         [self.tableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationAutomatic];
 //    }
 }
@@ -203,6 +235,7 @@ static NSString * const reuseIdentifierBuynum = @"TXBuyCountTableViewCell";
         [_tableView registerClass:[TXMallGoodsDetailsTableViewCell class] forCellReuseIdentifier:reuseIdentifierDetails];
         [_tableView registerClass:[TXMallGoodsSpecTableViewCell class] forCellReuseIdentifier:reuseIdentifierSpec];
         [_tableView registerClass:[TXBuyCountTableViewCell class] forCellReuseIdentifier:reuseIdentifierBuynum];
+        [_tableView registerClass:[TXGoodsH5TableViewCell class] forCellReuseIdentifier:reuseIdentifierGoodsH5];
         
         [_tableView setSeparatorInset:UIEdgeInsetsMake(0,0,0,0)];
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;

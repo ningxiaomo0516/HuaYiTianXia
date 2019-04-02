@@ -53,7 +53,7 @@
     // Do any additional setup after loading the view.
     [self.contentView addSubview:self.tagView];
 //    self.tagView.dataArray = @[@"锤子",@"见过",@"膜拜单车",@"微信支付",@"Q",@"王者荣耀",@"蓝淋网",@"阿珂",@"半生",@"猎场",@"QQ空间",@"王者荣耀助手",@"斯卡哈复健科",@"安抚",@"沙发上",@"日打的费",@"问问",@"无人区",@"阿斯废弃物人情味",@"沙发上",@"日打的费",@"问问",@"无人区",@"阿斯废弃物人情味",@"沙发上",@"日打的费",@"问问",@"无人区",@"阿斯废弃物人情味",@"沙发上",@"日打的费",@"问问",@"无人区",@"阿斯废弃物人情味"];
-    TTLog(@"----- %f",CGRectGetHeight(self.tagView.frame));
+//    TTLog(@"----- %f",CGRectGetHeight(self.tagView.frame));
 //    [self updateCollectionViewHeight:CGRectGetHeight(self.tagView.frame)+self.headerHeight];
     
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {

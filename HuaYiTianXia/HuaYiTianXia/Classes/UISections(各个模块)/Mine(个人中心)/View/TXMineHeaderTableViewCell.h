@@ -17,15 +17,15 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) UILabel *totalAssetsLabel;
 /// 总资产提示
 @property (nonatomic, strong) UILabel *totalAssetsTipsLabel;
-/// VR资产
+/// VH资产
 @property (nonatomic, strong) UILabel *vrAssetsLabel;
-/// VR资产提示
+/// VH资产提示
 @property (nonatomic, strong) UILabel *vrAssetsTipsLabel;
 /// 竖线
 @property (nonatomic, strong) UIView *linerView;
-/// AR资产
+/// AH资产
 @property (nonatomic, strong) UILabel *arAssetsLabel;
-/// AR资产提示
+/// AH资产提示
 @property (nonatomic, strong) UILabel *arAssetsTipsLabel;
 
 

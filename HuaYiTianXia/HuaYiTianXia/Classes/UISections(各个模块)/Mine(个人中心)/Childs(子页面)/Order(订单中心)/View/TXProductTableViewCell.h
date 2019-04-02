@@ -22,6 +22,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) UILabel *priceLabel;
 /// 日期时间
 @property (nonatomic, strong) UILabel *dateTimeLabel;
+/// 日期时间
+@property (nonatomic, strong) UIButton *lookContractBtn;
 /// 订单数据
 @property (nonatomic, strong) OrderModel *orderModel;
 @end

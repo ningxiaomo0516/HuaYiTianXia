@@ -9,6 +9,7 @@
 #import "TXProductViewController.h"
 #import "TXProductTableViewCell.h"
 #import "TXOrderModel.h"
+#import "TXWebViewController.h"
 
 static NSString * const reuseIdentifier = @"TXProductTableViewCell";
 
@@ -53,6 +54,14 @@ static NSString * const reuseIdentifier = @"TXProductTableViewCell";
     }];
 }
 
+//// 跳转查看合同
+- (void) jumpWebViewController{
+    TXWebViewController *vc = [[TXWebViewController alloc] init];
+    vc.title = @"农用植保合作协议";
+    vc.webUrl = kAppendH5URL(DomainName, CooperationAgreementH5, @"");
+    TTPushVC(vc);
+}
+
 - (void) initView{
     
     [Utils lz_setExtraCellLineHidden:self.tableView];
@@ -80,6 +89,11 @@ static NSString * const reuseIdentifier = @"TXProductTableViewCell";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     TXProductTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
     cell.orderModel = self.dataArray[indexPath.section];
+    cell.lookContractBtn.tag = indexPath.section;
+    [cell.lookContractBtn lz_handleControlEvent:UIControlEventTouchUpInside withBlock:^{
+        /// 查看合同
+        [self jumpWebViewController];
+    }];
     return cell;
 }
 

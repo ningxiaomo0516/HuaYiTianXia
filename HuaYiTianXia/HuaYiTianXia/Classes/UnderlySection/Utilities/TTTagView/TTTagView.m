@@ -29,11 +29,11 @@
         }
         [tagBtn setTitle:_dataArray[i] forState:UIControlStateNormal];
         tagBtn.titleLabel.font = kFontSizeMedium13;
-        [tagBtn setTitleColor:HexString(@"#26B9FE") forState:UIControlStateNormal];
+        [tagBtn setTitleColor:kThemeColor forState:UIControlStateNormal];
         [tagBtn setTitleColor:kWhiteColor forState:UIControlStateSelected];
         [tagBtn setBackgroundImage:imageColor(kClearColor) forState:UIControlStateNormal];
-        [tagBtn setBackgroundImage:imageHexString(@"#26B9FE") forState:UIControlStateSelected];
-        [self makeCornerRadius:3.0 borderColor:HexString(@"#26B9FE") layer:tagBtn.layer borderWidth:.5];
+        [tagBtn setBackgroundImage:imageColor(kThemeColor) forState:UIControlStateSelected];
+        [self makeCornerRadius:3.0 borderColor:kThemeColor layer:tagBtn.layer borderWidth:.5];
         markBtn = tagBtn;
         
         [tagBtn addTarget:self action:@selector(onClickTo:) forControlEvents:UIControlEventTouchUpInside];
@@ -51,9 +51,9 @@
         if (!sender.isSelected) {
             self.selectBtn.selected = !self.selectBtn.selected;
 //            self.selectBtn.backgroundColor = [UIColor clearColor];
-//            [self.selectBtn setTitleColor:HexString(@"#26B9FE") forState:UIControlStateNormal];
+//            [self.selectBtn setTitleColor:kThemeColor forState:UIControlStateNormal];
             sender.selected = !sender.selected;
-//            sender.backgroundColor = HexString(@"#26B9FE");
+//            sender.backgroundColor = kThemeColor;
 //            [sender setTitleColor:kWhiteColor forState:UIControlStateNormal];
             self.selectBtn = sender;
         }

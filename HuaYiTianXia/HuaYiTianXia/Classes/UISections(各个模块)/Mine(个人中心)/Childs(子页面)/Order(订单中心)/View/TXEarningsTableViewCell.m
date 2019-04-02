@@ -39,7 +39,7 @@
         self.priceLabel.text = self.model.stockRight;
     }else{
         self.titleLabel.text = kStringFormat(@"ID:", self.model.mobile);
-        NSString *priceText = model.pageType==1?@"+":@"-";
+        NSString *priceText = model.pageType==1?@"-":@"+";
         self.priceLabel.text = kStringFormat(priceText, self.model.price);
     }
     

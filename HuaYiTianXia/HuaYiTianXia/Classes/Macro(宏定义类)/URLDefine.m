@@ -71,8 +71,8 @@ NSString *const bindAccount = @"/bindAccount";
 NSString *const getVerifyCode = @"/getVerifyCode";
 /// token登陆
 NSString *const tokenLogin = @"/tokenLogin";
-/// 上传文件接口
-NSString *const uploadFile = @"file/upload";
+/// 图片上传接口
+NSString *const uploadFile = @"upload/codeImage";
 /// 版本信息
 NSString *const versionManage = @"http://pandafile.sctv.com:42086/System/VersionManage/VersionManage.json";
 /// 引导页

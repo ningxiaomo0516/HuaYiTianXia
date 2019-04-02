@@ -12,8 +12,7 @@
 static SCLoadingLabel *_loadingLabel = nil;
 @implementation SCLoadingLabel
 
-- (id)initWithFrame:(CGRect)frame
-{
+- (id)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code

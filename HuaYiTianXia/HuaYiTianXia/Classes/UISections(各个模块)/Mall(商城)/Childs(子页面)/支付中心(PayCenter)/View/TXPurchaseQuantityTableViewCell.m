@@ -74,7 +74,7 @@
         _quantityLabel.textColor = kTextColor51;
         _quantityLabel.font = kFontSizeMedium15;
         _quantityLabel.edgeInsets    = UIEdgeInsetsMake(6.f, 12.f, 6.f, 12.f); // 设置左内边距
-        _quantityLabel.borderColor = HexString(@"#26B9FE");
+        _quantityLabel.borderColor = kThemeColor;
         _quantityLabel.borderWidth = 0.5f;
         [_quantityLabel lz_setCornerRadius:3.0];
         [_quantityLabel sizeToFit]; // 重新计算尺寸

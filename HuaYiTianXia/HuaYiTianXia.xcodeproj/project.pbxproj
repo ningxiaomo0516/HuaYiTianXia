@@ -128,6 +128,10 @@
 		E78584042240C54300BBEA41 /* TYCyclePagerView.m in Sources */ = {isa = PBXBuildFile; fileRef = E78584002240C54200BBEA41 /* TYCyclePagerView.m */; };
 		E78584052240C54300BBEA41 /* TYCyclePagerTransformLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = E78584012240C54200BBEA41 /* TYCyclePagerTransformLayout.m */; };
 		E78584082240C68500BBEA41 /* TXMineBannerCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E78584072240C68500BBEA41 /* TXMineBannerCollectionViewCell.m */; };
+		E7923C9F2253022D0094D0C3 /* TXGoodsH5TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7923C9E2253022D0094D0C3 /* TXGoodsH5TableViewCell.m */; };
+		E7923CA5225341C40094D0C3 /* SCImagePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = E7923CA2225341C40094D0C3 /* SCImagePicker.m */; };
+		E7923CA6225341C40094D0C3 /* SCUploadImageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E7923CA4225341C40094D0C3 /* SCUploadImageModel.m */; };
+		E7923CAA22535CF30094D0C3 /* SCTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = E7923CA922535CF30094D0C3 /* SCTextField.m */; };
 		E7AA9DAF2243353200C15483 /* TTBaseNavImagesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7AA9DAE2243353200C15483 /* TTBaseNavImagesTableViewController.m */; };
 		E7AA9DB7224338EA00C15483 /* TXWalletTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7AA9DB6224338EA00C15483 /* TXWalletTableViewCell.m */; };
 		E7AA9DBA22433A0200C15483 /* TXWalletCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7AA9DB922433A0200C15483 /* TXWalletCollectionViewCell.m */; };
@@ -412,6 +416,14 @@
 		E78584022240C54200BBEA41 /* TYPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TYPageControl.h; sourceTree = "<group>"; };
 		E78584062240C68500BBEA41 /* TXMineBannerCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXMineBannerCollectionViewCell.h; sourceTree = "<group>"; };
 		E78584072240C68500BBEA41 /* TXMineBannerCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXMineBannerCollectionViewCell.m; sourceTree = "<group>"; };
+		E7923C9D2253022D0094D0C3 /* TXGoodsH5TableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXGoodsH5TableViewCell.h; sourceTree = "<group>"; };
+		E7923C9E2253022D0094D0C3 /* TXGoodsH5TableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXGoodsH5TableViewCell.m; sourceTree = "<group>"; };
+		E7923CA1225341C40094D0C3 /* SCImagePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCImagePicker.h; sourceTree = "<group>"; };
+		E7923CA2225341C40094D0C3 /* SCImagePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCImagePicker.m; sourceTree = "<group>"; };
+		E7923CA3225341C40094D0C3 /* SCUploadImageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCUploadImageModel.h; sourceTree = "<group>"; };
+		E7923CA4225341C40094D0C3 /* SCUploadImageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCUploadImageModel.m; sourceTree = "<group>"; };
+		E7923CA822535CF30094D0C3 /* SCTextField.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SCTextField.h; sourceTree = "<group>"; };
+		E7923CA922535CF30094D0C3 /* SCTextField.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SCTextField.m; sourceTree = "<group>"; };
 		E7AA9DAD2243353200C15483 /* TTBaseNavImagesTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TTBaseNavImagesTableViewController.h; sourceTree = "<group>"; };
 		E7AA9DAE2243353200C15483 /* TTBaseNavImagesTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TTBaseNavImagesTableViewController.m; sourceTree = "<group>"; };
 		E7AA9DB5224338EA00C15483 /* TXWalletTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXWalletTableViewCell.h; sourceTree = "<group>"; };
@@ -803,6 +815,8 @@
 		E72698E8223F737C003A5043 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				E7923CA722535CE00094D0C3 /* SCTextField(身份证键盘) */,
+				E7923CA0225341C40094D0C3 /* SCImagePicker(选择头像) */,
 				E75F2EDA224DEE5C0091C52E /* TTTagView */,
 				E753D1E92249D3B200A2DD36 /* SCPopover */,
 				E78334002248DE2F005CAB91 /* TTPopupView */,
@@ -1056,6 +1070,8 @@
 				E75F2EBD224DC9FD0091C52E /* TXShareToolsCollectionViewCell.m */,
 				E75F2ED4224DCB5F0091C52E /* TXBuyCountTableViewCell.h */,
 				E75F2ED5224DCB5F0091C52E /* TXBuyCountTableViewCell.m */,
+				E7923C9D2253022D0094D0C3 /* TXGoodsH5TableViewCell.h */,
+				E7923C9E2253022D0094D0C3 /* TXGoodsH5TableViewCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1451,6 +1467,26 @@
 				E78584022240C54200BBEA41 /* TYPageControl.h */,
 			);
 			path = TYCyclePagerView;
+			sourceTree = "<group>";
+		};
+		E7923CA0225341C40094D0C3 /* SCImagePicker(选择头像) */ = {
+			isa = PBXGroup;
+			children = (
+				E7923CA1225341C40094D0C3 /* SCImagePicker.h */,
+				E7923CA2225341C40094D0C3 /* SCImagePicker.m */,
+				E7923CA3225341C40094D0C3 /* SCUploadImageModel.h */,
+				E7923CA4225341C40094D0C3 /* SCUploadImageModel.m */,
+			);
+			path = "SCImagePicker(选择头像)";
+			sourceTree = "<group>";
+		};
+		E7923CA722535CE00094D0C3 /* SCTextField(身份证键盘) */ = {
+			isa = PBXGroup;
+			children = (
+				E7923CA822535CF30094D0C3 /* SCTextField.h */,
+				E7923CA922535CF30094D0C3 /* SCTextField.m */,
+			);
+			path = "SCTextField(身份证键盘)";
 			sourceTree = "<group>";
 		};
 		E7AA9DB4224338C200C15483 /* View */ = {
@@ -1890,6 +1926,7 @@
 				E7759AC722448DA3007DA6CF /* TXConversionViewController.m in Sources */,
 				E7AA9DDA22437A1700C15483 /* TXTopupViewController.m in Sources */,
 				E72699E8223F7F58003A5043 /* UIView+Extension.m in Sources */,
+				E7923C9F2253022D0094D0C3 /* TXGoodsH5TableViewCell.m in Sources */,
 				E7759AED2244E8F9007DA6CF /* TXMembersbleViewCell.m in Sources */,
 				E7F1A74122428A8F003FA216 /* TXMallCollectionViewCell.m in Sources */,
 				E756989D225202AE0022EC49 /* TXWebViewController.m in Sources */,
@@ -1942,6 +1979,7 @@
 				E7F1A73B22427DC0003FA216 /* TXMallToolsCollectionViewCell.m in Sources */,
 				E72699D8223F7F58003A5043 /* UIButton+Extension.m in Sources */,
 				E75F2ED3224DC9FD0091C52E /* TXShoppingTableViewCell.m in Sources */,
+				E7923CAA22535CF30094D0C3 /* SCTextField.m in Sources */,
 				E72699A1223F7ECC003A5043 /* NSString+MD5.m in Sources */,
 				E75F2EE0224E1BE30091C52E /* TTUserModel.m in Sources */,
 				E78333E72248A963005CAB91 /* TXRegisterTableViewCell.m in Sources */,
@@ -1960,6 +1998,7 @@
 				E75F2ECE224DC9FD0091C52E /* TXMallGoodsSpecTableViewCell.m in Sources */,
 				E726991B223F7D28003A5043 /* TTBaseViewController.m in Sources */,
 				E7759AD022449507007DA6CF /* TXAddressViewController.m in Sources */,
+				E7923CA6225341C40094D0C3 /* SCUploadImageModel.m in Sources */,
 				E7759ACA224491BA007DA6CF /* TXResetPwdViewController.m in Sources */,
 				E75F2ECA224DC9FD0091C52E /* TXShareViewController.m in Sources */,
 				E78333E422489E6B005CAB91 /* TXRegisteredTableViewCell.m in Sources */,
@@ -2000,6 +2039,7 @@
 				E7759AAF22447ADA007DA6CF /* TXModifyUserInfoViewController.m in Sources */,
 				E7AA9DD2224372B500C15483 /* TXZhuanchuZhuanruViewController.m in Sources */,
 				E78333DB22487913005CAB91 /* TXLoginViewController.m in Sources */,
+				E7923CA5225341C40094D0C3 /* SCImagePicker.m in Sources */,
 				E72699DE223F7F58003A5043 /* UIBarButtonItem+Extension.m in Sources */,
 				E7C42E7F224B770200F3FB1A /* SCHttpToolsModel.m in Sources */,
 				E72699F8223F8298003A5043 /* WMPageController.m in Sources */,

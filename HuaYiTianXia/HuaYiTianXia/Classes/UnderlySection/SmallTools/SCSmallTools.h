@@ -83,4 +83,9 @@
  *  @return 隐私身份证号码
  */
 + (NSString *)idCardNumber:(NSString *)idCardNumber;
+/**
+ *  简单的身份证有效性
+ *
+ */
++ (BOOL)tt_simpleVerifyIdentityCardNum:(NSString *)idCardNumber;
 @end

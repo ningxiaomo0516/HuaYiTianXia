@@ -404,10 +404,27 @@
 }
 
 // 获取指定视图在window中的位置
-+ (CGRect)lz_getFrameInWindow:(UIView *)view
-{
++ (CGRect)lz_getFrameInWindow:(UIView *)view{
     // 改用[UIApplication sharedApplication].keyWindow.rootViewController.view，防止present新viewController坐标转换不准问题
     return [view.superview convertRect:view.frame toView:[UIApplication sharedApplication].keyWindow.rootViewController.view];
+}
+
+/**
+ *  输出所有子控件
+ */
++ (UIView *)tt_foundViewInView:(UIView *)view clazzName:(NSString *)clazzName {
+    // 递归出口
+    if ([view isKindOfClass:NSClassFromString(clazzName)]) {
+        return view;
+    }
+    // 遍历所有子视图
+    for (UIView *subView in view.subviews) {
+        UIView *foundView = [self tt_foundViewInView:subView clazzName:clazzName];
+        if (foundView) {
+            return foundView;
+        }
+    }
+    return nil;
 }
 
 @end

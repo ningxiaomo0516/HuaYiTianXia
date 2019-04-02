@@ -36,7 +36,7 @@
         make.centerX.centerY.equalTo(self);
     }];
     
-    NSAttributedString *commentAttr = [SCSmallTools sc_initImageWithText:@"VR资产余额：300000" imageName:@"mine_ft_jinbi"];
+    NSAttributedString *commentAttr = [SCSmallTools sc_initImageWithText:@"VH资产余额：300000" imageName:@"mine_ft_jinbi"];
     
 //    NSMutableAttributedString *attributedStr = [[NSMutableAttributedString alloc]initWithString:commentAttr];
 //    /// 前面文字颜色

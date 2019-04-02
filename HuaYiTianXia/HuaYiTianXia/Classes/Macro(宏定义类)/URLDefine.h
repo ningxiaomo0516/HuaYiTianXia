@@ -18,19 +18,19 @@ extern NSString *const DomainName;
 extern NSString *const NewsDetailsH5;
 /// 商品详情
 extern NSString *const GoodsDetailsH5;
-/// 推荐邀请(已做)
+/// 推荐邀请
 extern NSString *const InvataionH5;
-/// 用户协议(已做)
+/// 用户协议
 extern NSString *const UserAgreeH5;
-/// 操作手册(已做)
+/// 操作手册
 extern NSString *const UserHelpH5;
-/// 一县一代理()
+/// 一县一代理
 extern NSString *const AgencyCompanyH5;
-/// 合同协议()
+/// 合同协议(暂时没地方用)
 extern NSString *const vrAgreementH5;
-/// 民航共享()
+/// 民航共享
 extern NSString *const AviationShareH5;
-/// 合作协议()
+/// 合作协议
 extern NSString *const CooperationAgreementH5;
 
 /// 0:测试环境 1:生产环境
