@@ -10,6 +10,7 @@
 #import "TXMineHeaderTableViewCell.h"
 #import "TXRolloutTableViewCell.h"
 #import "TXGeneralModel.h"
+#import "TXRolloutTypeViewController.h"
 
 static NSString * const reuseIdentifier = @"TXRolloutTableViewCell";
 static NSString * const reuseIdentifierHeader = @"TXMineHeaderTableViewCell";
@@ -19,6 +20,14 @@ static NSString * const reuseIdentifierHeader = @"TXMineHeaderTableViewCell";
 @property (strong, nonatomic) UIButton *saveButton;
 @property (nonatomic, strong) NSMutableArray *dataArray;
 @property (strong, nonatomic) UIView *footerView;
+/// 货币类型
+@property (copy, nonatomic) NSString *currencyText;
+/// 收款账户
+@property (copy, nonatomic) NSString *accountText;
+/// 确认收款账户
+@property (copy, nonatomic) NSString *accountsText;
+/// 金额
+@property (copy, nonatomic) NSString *amountText;
 
 @end
 
@@ -31,9 +40,25 @@ static NSString * const reuseIdentifierHeader = @"TXMineHeaderTableViewCell";
     [self initView];
 }
 
-/** 保存 */
+/** 确认转账 */
 - (void) saveBtnClick:(UIButton *) sender{
-    
+    NSMutableDictionary *parameter = [[NSMutableDictionary alloc] init];
+    [parameter setObject:self.accountText forKey:@"mobile"];
+    [parameter setObject:self.accountsText forKey:@"confirmMobile"];
+    [parameter setObject:self.currencyText forKey:@"currency"];
+    [parameter setObject:self.amountText forKey:@"money"];
+    [SCHttpTools postWithURLString:kHttpURL(@"customer/TurnOut") parameter:parameter success:^(id responseObject) {
+        NSDictionary *result = responseObject;
+        if ([result isKindOfClass:[NSDictionary class]]) {
+            TTLog(@"result -- %@",result);
+            TXNewsArrayModel *model = [TXNewsArrayModel mj_objectWithKeyValues:result];
+            [self.dataArray addObjectsFromArray:model.data.records];
+        }else{
+            Toast(@"获取城市数据失败");
+        }
+    } failure:^(NSError *error) {
+        TTLog(@"error --- %@",error);
+    }];
 }
 
 
@@ -68,6 +93,8 @@ static NSString * const reuseIdentifierHeader = @"TXMineHeaderTableViewCell";
         TXGeneralModel *generalModel = self.dataArray[indexPath.row];
         generalModel.index = indexPath.item;
         tools.titleLabel.text = generalModel.title;
+        tools.textField.tag = indexPath.row;
+        [tools.textField addTarget:self action:@selector(textFieldWithText:) forControlEvents:UIControlEventEditingChanged];
         if (indexPath.row==2) {
             tools.subtitleLabel.text = generalModel.imageText;
             tools.subtitleLabel.hidden = NO;
@@ -102,8 +129,38 @@ static NSString * const reuseIdentifierHeader = @"TXMineHeaderTableViewCell";
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-
+    if (indexPath.row==2) {
+        TXRolloutTypeViewController *vc = [[TXRolloutTypeViewController alloc] init];
+        MV(weakSelf)
+        vc.typeBlock = ^(NSString * _Nonnull text) {
+            weakSelf.currencyText = text;
+        };
+        CGFloat height = kiPhoneX_T(IPHONE6_W(110));
+        [self sc_bottomPresentController:vc presentedHeight:height completeHandle:^(BOOL presented) {
+            if (presented) {
+                TTLog(@"弹出了");
+            }else{
+                TTLog(@"消失了");
+            }
+        }];
+    }
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+- (void)textFieldWithText:(UITextField *)textField{
+    switch (textField.tag) {
+        case 0:
+            self.accountText = textField.text;
+            break;
+        case 1:
+            self.accountsText = textField.text;
+            break;
+        case 3:
+            self.amountText = textField.text;
+            break;
+        default:
+            break;
+    }
 }
 
 #pragma mark ----- getter/setter
@@ -150,8 +207,8 @@ static NSString * const reuseIdentifierHeader = @"TXMineHeaderTableViewCell";
 - (NSMutableArray *)dataArray{
     if (!_dataArray) {
         _dataArray = [[NSMutableArray alloc] init];
-        NSArray* titleArr = @[@"账号",@"确认账号",@"币种",@"金额"];
-        NSArray* subtitleArr = @[@"请输入账号或ID",@"再次输入密码账号或ID",@"币种选择",@"请输入转账金额"];
+        NSArray* titleArr = @[@"账号",@"确认账号",@"类型",@"金额"];
+        NSArray* subtitleArr = @[@"请输入账号或ID",@"再次输入账号或ID",@"请选择类型",@"请输入转账金额"];
         for (int i=0; i<titleArr.count; i++) {
             TXGeneralModel *generalModel = [[TXGeneralModel alloc] init];
             generalModel.title = [titleArr lz_safeObjectAtIndex:i];

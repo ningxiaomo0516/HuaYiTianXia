@@ -84,6 +84,11 @@
 		E75F2ED6224DCB5F0091C52E /* TXBuyCountTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E75F2ED5224DCB5F0091C52E /* TXBuyCountTableViewCell.m */; };
 		E75F2EDD224DEE680091C52E /* TTTagView.m in Sources */ = {isa = PBXBuildFile; fileRef = E75F2EDC224DEE680091C52E /* TTTagView.m */; };
 		E75F2EE0224E1BE30091C52E /* TTUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E75F2EDF224E1BE30091C52E /* TTUserModel.m */; };
+		E773264C2254552200FD665A /* TTAlertManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E773264B2254552200FD665A /* TTAlertManager.m */; };
+		E773264F22545BE400FD665A /* UIAlertController+SCExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = E773264E22545BE400FD665A /* UIAlertController+SCExtension.m */; };
+		E77326522254A03100FD665A /* TXWalletHeaderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E77326512254A03100FD665A /* TXWalletHeaderTableViewCell.m */; };
+		E77326552254A87D00FD665A /* TXRolloutTypeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E77326542254A87D00FD665A /* TXRolloutTypeViewController.m */; };
+		E77326582254A99900FD665A /* TXRolloutTypeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E77326572254A99900FD665A /* TXRolloutTypeTableViewCell.m */; };
 		E7759AAF22447ADA007DA6CF /* TXModifyUserInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7759AAE22447AD9007DA6CF /* TXModifyUserInfoViewController.m */; };
 		E7759AB522447DC0007DA6CF /* SCLocalCacheTool.m in Sources */ = {isa = PBXBuildFile; fileRef = E7759AB222447DC0007DA6CF /* SCLocalCacheTool.m */; };
 		E7759AB622447DC0007DA6CF /* SCSmallTools.m in Sources */ = {isa = PBXBuildFile; fileRef = E7759AB422447DC0007DA6CF /* SCSmallTools.m */; };
@@ -329,6 +334,16 @@
 		E75F2EDC224DEE680091C52E /* TTTagView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TTTagView.m; sourceTree = "<group>"; };
 		E75F2EDE224E1BE30091C52E /* TTUserModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TTUserModel.h; sourceTree = "<group>"; };
 		E75F2EDF224E1BE30091C52E /* TTUserModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TTUserModel.m; sourceTree = "<group>"; };
+		E773264A2254552200FD665A /* TTAlertManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TTAlertManager.h; sourceTree = "<group>"; };
+		E773264B2254552200FD665A /* TTAlertManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TTAlertManager.m; sourceTree = "<group>"; };
+		E773264D22545BE300FD665A /* UIAlertController+SCExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertController+SCExtension.h"; sourceTree = "<group>"; };
+		E773264E22545BE400FD665A /* UIAlertController+SCExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertController+SCExtension.m"; sourceTree = "<group>"; };
+		E77326502254A03100FD665A /* TXWalletHeaderTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXWalletHeaderTableViewCell.h; sourceTree = "<group>"; };
+		E77326512254A03100FD665A /* TXWalletHeaderTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXWalletHeaderTableViewCell.m; sourceTree = "<group>"; };
+		E77326532254A87D00FD665A /* TXRolloutTypeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXRolloutTypeViewController.h; sourceTree = "<group>"; };
+		E77326542254A87D00FD665A /* TXRolloutTypeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXRolloutTypeViewController.m; sourceTree = "<group>"; };
+		E77326562254A99900FD665A /* TXRolloutTypeTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXRolloutTypeTableViewCell.h; sourceTree = "<group>"; };
+		E77326572254A99900FD665A /* TXRolloutTypeTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXRolloutTypeTableViewCell.m; sourceTree = "<group>"; };
 		E7759AAD22447AD9007DA6CF /* TXModifyUserInfoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXModifyUserInfoViewController.h; sourceTree = "<group>"; };
 		E7759AAE22447AD9007DA6CF /* TXModifyUserInfoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXModifyUserInfoViewController.m; sourceTree = "<group>"; };
 		E7759AB122447DC0007DA6CF /* SCSmallTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCSmallTools.h; sourceTree = "<group>"; };
@@ -815,6 +830,7 @@
 		E72698E8223F737C003A5043 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				E77326492254550900FD665A /* TTAlertManager(AlertView) */,
 				E7923CA722535CE00094D0C3 /* SCTextField(身份证键盘) */,
 				E7923CA0225341C40094D0C3 /* SCImagePicker(选择头像) */,
 				E75F2EDA224DEE5C0091C52E /* TTTagView */,
@@ -885,6 +901,8 @@
 		E726992E223F7DEB003A5043 /* Category-UIKit */ = {
 			isa = PBXGroup;
 			children = (
+				E773264D22545BE300FD665A /* UIAlertController+SCExtension.h */,
+				E773264E22545BE400FD665A /* UIAlertController+SCExtension.m */,
 				E72699CA223F7F56003A5043 /* UIBarButtonItem+Extension.h */,
 				E72699BE223F7F54003A5043 /* UIBarButtonItem+Extension.m */,
 				E72699B6223F7F53003A5043 /* UIButton+Extension.h */,
@@ -932,12 +950,12 @@
 		E7269977223F7E4B003A5043 /* SCLoadingView */ = {
 			isa = PBXGroup;
 			children = (
-				E7269978223F7E4B003A5043 /* UIView+SCLoadingView.h */,
-				E7269979223F7E4B003A5043 /* SCLoadingLabel.m */,
-				E726997A223F7E4B003A5043 /* SCActivityIndicatorView.m */,
 				E726997B223F7E4B003A5043 /* SCLoadingLabel.h */,
+				E7269979223F7E4B003A5043 /* SCLoadingLabel.m */,
+				E7269978223F7E4B003A5043 /* UIView+SCLoadingView.h */,
 				E726997C223F7E4B003A5043 /* UIView+SCLoadingView.m */,
 				E726997D223F7E4B003A5043 /* SCActivityIndicatorView.h */,
+				E726997A223F7E4B003A5043 /* SCActivityIndicatorView.m */,
 			);
 			path = SCLoadingView;
 			sourceTree = "<group>";
@@ -1114,6 +1132,15 @@
 				E75F2EDC224DEE680091C52E /* TTTagView.m */,
 			);
 			path = TTTagView;
+			sourceTree = "<group>";
+		};
+		E77326492254550900FD665A /* TTAlertManager(AlertView) */ = {
+			isa = PBXGroup;
+			children = (
+				E773264A2254552200FD665A /* TTAlertManager.h */,
+				E773264B2254552200FD665A /* TTAlertManager.m */,
+			);
+			path = "TTAlertManager(AlertView)";
 			sourceTree = "<group>";
 		};
 		E7759AB022447DA0007DA6CF /* SmallTools */ = {
@@ -1496,6 +1523,8 @@
 				E7AA9DB6224338EA00C15483 /* TXWalletTableViewCell.m */,
 				E7AA9DB822433A0200C15483 /* TXWalletCollectionViewCell.h */,
 				E7AA9DB922433A0200C15483 /* TXWalletCollectionViewCell.m */,
+				E77326502254A03100FD665A /* TXWalletHeaderTableViewCell.h */,
+				E77326512254A03100FD665A /* TXWalletHeaderTableViewCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1503,7 +1532,6 @@
 		E7AA9DBB22436C2900C15483 /* Childs(子页面) */ = {
 			isa = PBXGroup;
 			children = (
-				E7AA9DBF22436C2900C15483 /* RegisterCurrency(注册币) */,
 				E7AA9DC422436C2900C15483 /* TransactionRecords(交易记录) */,
 				E7AA9DC222436C2900C15483 /* Topup(充值) */,
 				E7AA9DC522436C2900C15483 /* ZhuanchuZhuanru(转出转入) */,
@@ -1540,13 +1568,6 @@
 			children = (
 			);
 			path = "MentionCash(提现)";
-			sourceTree = "<group>";
-		};
-		E7AA9DBF22436C2900C15483 /* RegisterCurrency(注册币) */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "RegisterCurrency(注册币)";
 			sourceTree = "<group>";
 		};
 		E7AA9DC022436C2900C15483 /* RepeatCast(复投) */ = {
@@ -1656,6 +1677,8 @@
 			children = (
 				E7AA9DE0224394A600C15483 /* TXRolloutTableViewCell.h */,
 				E7AA9DE1224394A600C15483 /* TXRolloutTableViewCell.m */,
+				E77326562254A99900FD665A /* TXRolloutTypeTableViewCell.h */,
+				E77326572254A99900FD665A /* TXRolloutTypeTableViewCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1665,6 +1688,8 @@
 			children = (
 				E7AA9DDD224392FB00C15483 /* TXRolloutViewController.h */,
 				E7AA9DDE224392FB00C15483 /* TXRolloutViewController.m */,
+				E77326532254A87D00FD665A /* TXRolloutTypeViewController.h */,
+				E77326542254A87D00FD665A /* TXRolloutTypeViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1992,6 +2017,7 @@
 				E7759AB622447DC0007DA6CF /* SCSmallTools.m in Sources */,
 				E72698C5223F7167003A5043 /* main.m in Sources */,
 				E7759AE32244CDC3007DA6CF /* TXSwitchTableViewCell.m in Sources */,
+				E77326522254A03100FD665A /* TXWalletHeaderTableViewCell.m in Sources */,
 				E7269912223F7881003A5043 /* TXAgriculturalViewController.m in Sources */,
 				E72698B7223F7165003A5043 /* AppDelegate.m in Sources */,
 				E72699DA223F7F58003A5043 /* UIFont+Extension.m in Sources */,
@@ -2031,6 +2057,7 @@
 				E75698982251EBA30022EC49 /* TXWalletModel.m in Sources */,
 				E75F2ECD224DC9FD0091C52E /* TXMallGoodsDetailsTableViewCell.m in Sources */,
 				E72699E4223F7F58003A5043 /* UIImage+SCExtension.m in Sources */,
+				E77326552254A87D00FD665A /* TXRolloutTypeViewController.m in Sources */,
 				E72699DB223F7F58003A5043 /* UINavigationBar+SCExtension.m in Sources */,
 				E78583CD22409E6D00BBEA41 /* TXMineBannerTableViewCell.m in Sources */,
 				E7AA9DAF2243353200C15483 /* TTBaseNavImagesTableViewController.m in Sources */,
@@ -2038,6 +2065,7 @@
 				E72699DD223F7F58003A5043 /* UIImageView+SCExtension.m in Sources */,
 				E7759AAF22447ADA007DA6CF /* TXModifyUserInfoViewController.m in Sources */,
 				E7AA9DD2224372B500C15483 /* TXZhuanchuZhuanruViewController.m in Sources */,
+				E77326582254A99900FD665A /* TXRolloutTypeTableViewCell.m in Sources */,
 				E78333DB22487913005CAB91 /* TXLoginViewController.m in Sources */,
 				E7923CA5225341C40094D0C3 /* SCImagePicker.m in Sources */,
 				E72699DE223F7F58003A5043 /* UIBarButtonItem+Extension.m in Sources */,
@@ -2060,6 +2088,7 @@
 				E78583C722408F1F00BBEA41 /* TXMineHeaderTableViewCell.m in Sources */,
 				E753D1F32249D3B200A2DD36 /* UIViewController+SCPopover.m in Sources */,
 				E78583BA223F947600BBEA41 /* Utils.m in Sources */,
+				E773264F22545BE400FD665A /* UIAlertController+SCExtension.m in Sources */,
 				E7F1A732224248D4003FA216 /* TXTeamTableViewCell.m in Sources */,
 				E7759AB522447DC0007DA6CF /* SCLocalCacheTool.m in Sources */,
 				E7759AEA2244DD6C007DA6CF /* TXMembersBannerView.m in Sources */,
@@ -2069,6 +2098,7 @@
 				E7AA9DD72243735A00C15483 /* TXEquityViewController.m in Sources */,
 				E7269A04223F8738003A5043 /* TXMainHeaderView.m in Sources */,
 				E753D1F22249D3B200A2DD36 /* SCPresentationController.m in Sources */,
+				E773264C2254552200FD665A /* TTAlertManager.m in Sources */,
 				E78583D02240BD5A00BBEA41 /* TXGeneralModel.m in Sources */,
 				E77BC13B224F6A31008440C9 /* TXTeamModel.m in Sources */,
 				E72699E5223F7F58003A5043 /* UITextField+Extension.m in Sources */,

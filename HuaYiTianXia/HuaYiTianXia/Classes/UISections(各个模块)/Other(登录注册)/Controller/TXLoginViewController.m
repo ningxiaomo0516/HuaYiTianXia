@@ -9,6 +9,7 @@
 #import "TXLoginViewController.h"
 #import "TXRegisteredViewController.h"
 #import "TTUserModel.h"
+#import "TXWebViewController.h"
 
 @interface TXLoginViewController ()
 @property (nonatomic, strong) IBOutlet UIButton *registerBtn;
@@ -24,6 +25,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title = @"登录";
     // Do any additional setup after loading the view from its nib.
     [self.registerBtn lz_handleControlEvent:UIControlEventTouchUpInside withBlock:^{
         TXRegisteredViewController *vc = [[TXRegisteredViewController alloc] init];
@@ -33,13 +35,21 @@
     }];
     MV(weakSelf)
     [self.loginBtn lz_handleControlEvent:UIControlEventTouchUpInside withBlock:^{
+        [self tapGesture];
         [weakSelf loginBtnClick:weakSelf.loginBtn];
     }];
     
     [self.forgetBtn lz_handleControlEvent:UIControlEventTouchUpInside withBlock:^{
+        [self tapGesture];
         TXRegisteredViewController *vc = [[TXRegisteredViewController alloc] init];
         vc.title = @"找回密码";
         vc.pageType = 1;                                                                                
+        TTPushVC(vc);
+    }];
+    
+    [self.protocolButton lz_handleControlEvent:UIControlEventTouchUpInside withBlock:^{
+       TXWebViewController *vc = [[TXWebViewController alloc] init];
+        vc.webUrl = kAppendH5URL(DomainName, UserAgreeH5,@"");
         TTPushVC(vc);
     }];
     
@@ -100,6 +110,7 @@
                     }
                     [userModel yy_modelSetWithDictionary:dictionary];
                     [userModel dump];
+                    [kNotificationCenter postNotificationName:@"reloadMineData" object:nil];
                     [self didTapPopButton:nil];
                 }
                 Toast(model.message);

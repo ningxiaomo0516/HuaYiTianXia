@@ -10,6 +10,7 @@
 #import "TXMineTableViewCell.h"
 #import "TXGeneralModel.h"
 #import "TXModifyUserInfoViewController.h"
+#import "SCImagePicker.h"
 
 static NSString * const reuseIdentifier = @"TXMineTableViewCell";
 
@@ -17,7 +18,8 @@ static NSString * const reuseIdentifier = @"TXMineTableViewCell";
 @interface TXPersonalInfoViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *dataArray;
-@property (nonatomic, copy) NSString *nicknameStr;
+@property (nonatomic, strong) SCImagePicker *imagePicker;
+@property (nonatomic, copy) NSString *imageText;
 @end
 
 @implementation TXPersonalInfoViewController
@@ -36,13 +38,49 @@ static NSString * const reuseIdentifier = @"TXMineTableViewCell";
     }];
 }
 
+/// 更新x上传的图片地址
+- (void) imageURLReload{
+    MV(weakSelf)
+    [self.imagePicker sc_pickWithTarget:self completionHandler:^(UIImage *image, NSString *imageURL) {
+        TTLog(@"image -- %@",image);
+        weakSelf.imageText = imageURL;
+        [weakSelf saveAvatarData];
+    }];
+}
+
+- (void) saveAvatarData{
+    NSMutableDictionary *parameter = [[NSMutableDictionary alloc] init];
+    [parameter setObject:kUserInfo.username forKey:@"nickName"];
+    [parameter setObject:self.imageText forKey:@"headImg"];
+    //    [MBProgressHUD showMessage:@"" toView:self.view];
+    [SCHttpTools postWithURLString:kHttpURL(@"customer/UpdateUserData") parameter:parameter success:^(id responseObject) {
+        NSDictionary *result  = responseObject;
+        //        [MBProgressHUD hideHUDForView:self.view];
+        TTLog(@" result --- %@",[Utils lz_dataWithJSONObject:result]);
+        if (result){
+            TXGeneralModel *model = [TXGeneralModel mj_objectWithKeyValues:result];
+            if (model.errorcode==20000) {
+                kUserInfo.avatar = self.imageText;
+                [kUserInfo dump];
+                [self.tableView reloadData];
+                [kNotificationCenter postNotificationName:@"reloadUserName" object:nil];
+                Toast(@"头像修改成功");
+            }else{
+                Toast(model.message);
+            }
+        }
+    } failure:^(NSError *error) {
+        //        [MBProgressHUD hideHUDForView:self.view];
+        TTLog(@"修改头像信息 -- %@", error);
+    }];
+}
+
 #pragma mark - Table view data source
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     TXMineTableViewCell* tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
     TXGeneralModel* model = self.dataArray[indexPath.row];
     model.index = indexPath.item;
     tools.titleLabel.text = model.title;
-
     if (indexPath.row==0) {
 //        tools.imagesAvatar.image = kGetImage(@"user1");
         [tools.imagesAvatar sd_setImageWithURL:kGetImageURL(kUserInfo.avatar)
@@ -50,7 +88,6 @@ static NSString * const reuseIdentifier = @"TXMineTableViewCell";
         tools.imagesAvatar.hidden = NO;
     }else{
         tools.subtitleLabel.text = (indexPath.row==1)?kUserInfo.username:kUserInfo.uid;
-        if (indexPath.row==1) self.nicknameStr = tools.subtitleLabel.text;
         tools.subtitleLabel.hidden = NO;
     }
     return tools;
@@ -70,16 +107,18 @@ static NSString * const reuseIdentifier = @"TXMineTableViewCell";
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.row==1) {
+    if (indexPath.row==0) {
+        [self imageURLReload];
+    }else if (indexPath.row==1) {
         TXModifyUserInfoViewController *view = [[TXModifyUserInfoViewController alloc] init];
-        view.nickname = self.nicknameStr;
         view.title = @"个人信息";
         view.block = ^(NSString *text) {
-            self.nicknameStr = text;
+            kUserInfo.username = text;
+            [kUserInfo dump];
             //一个cell刷新
-            NSIndexPath *indexPath=[NSIndexPath indexPathForRow:2 inSection:0];
+            NSIndexPath *indexPath=[NSIndexPath indexPathForRow:1 inSection:0];
             [tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationNone];
-            [kNotificationCenter postNotificationName:@"changeUserInfo" object:nil];
+            [kNotificationCenter postNotificationName:@"reloadUserName" object:nil];
         };
         LZNavigationController *nav = [[LZNavigationController alloc] initWithRootViewController:view];
         [self.navigationController presentViewController:nav animated:YES completion:^{
@@ -89,7 +128,7 @@ static NSString * const reuseIdentifier = @"TXMineTableViewCell";
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
--(UITableView *)tableView{
+- (UITableView *)tableView{
     if (!_tableView) {
         _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
         _tableView.showsVerticalScrollIndicator = false;
@@ -119,5 +158,12 @@ static NSString * const reuseIdentifier = @"TXMineTableViewCell";
     return _dataArray;
 }
 
+- (SCImagePicker *)imagePicker{
+    if (!_imagePicker) {
+        _imagePicker = [[SCImagePicker alloc] init];
+        _imagePicker.isEditor = YES;
+    }
+    return _imagePicker;
+}
 
 @end

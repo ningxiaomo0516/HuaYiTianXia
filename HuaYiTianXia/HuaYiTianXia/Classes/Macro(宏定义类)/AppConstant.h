@@ -181,6 +181,9 @@ cell.preservesSuperviewLayoutMargins = NO; \
 
 #define kUserInfo [TTUserModel shared]
 
+/// 系统
+#define kVersion [[[UIDevice currentDevice] systemVersion] floatValue]
+
 /**
  取消自动适配 ScrollView 的 Insets 行为
  @param scrollView 滑动视图

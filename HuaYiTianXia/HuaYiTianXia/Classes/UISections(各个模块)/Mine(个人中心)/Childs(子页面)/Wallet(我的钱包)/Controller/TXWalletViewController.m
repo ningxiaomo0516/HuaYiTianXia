@@ -7,12 +7,12 @@
 //
 
 #import "TXWalletViewController.h"
-#import "TXMineHeaderTableViewCell.h"
+#import "TXWalletHeaderTableViewCell.h"
 #import "TXWalletTableViewCell.h"
 #import "TXEquityViewController.h"
 
 static NSString * const reuseIdentifier = @"TXWalletTableViewCell";
-static NSString * const reuseIdentifierHeader = @"TXMineHeaderTableViewCell";
+static NSString * const reuseIdentifierHeader = @"TXWalletHeaderTableViewCell";
 
 @interface TXWalletViewController ()<UITableViewDelegate,UITableViewDataSource,TXWalletTableViewCellDelegate>
 @property (nonatomic, strong) UITableView *tableView;
@@ -25,6 +25,7 @@ static NSString * const reuseIdentifierHeader = @"TXMineHeaderTableViewCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    TTLog(@"kUserInfo.balance -- %@",kUserInfo.balance);
     [self initView];
 }
 
@@ -44,12 +45,9 @@ static NSString * const reuseIdentifierHeader = @"TXMineHeaderTableViewCell";
 #pragma mark - Table view data source
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
-        TXMineHeaderTableViewCell* tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierHeader forIndexPath:indexPath];
-        //    FMPersonModel* model = self.itemModelArray[indexPath.section][indexPath.row];
-        //    model.index = indexPath.item;
-        //    cell.personModel = model;
+        TXWalletHeaderTableViewCell* tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierHeader forIndexPath:indexPath];
+        tools.balanceLabel.text = kUserInfo.balance;
         return tools;
-        
     } else {
         TXWalletTableViewCell* tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
         tools.delegate = self;
@@ -110,7 +108,7 @@ static NSString * const reuseIdentifierHeader = @"TXMineHeaderTableViewCell";
         _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
         _tableView.showsVerticalScrollIndicator = false;
         [_tableView registerClass:[TXWalletTableViewCell class] forCellReuseIdentifier:reuseIdentifier];
-        [_tableView registerClass:[TXMineHeaderTableViewCell class] forCellReuseIdentifier:reuseIdentifierHeader];
+        [_tableView registerClass:[TXWalletHeaderTableViewCell class] forCellReuseIdentifier:reuseIdentifierHeader];
         [_tableView setSeparatorInset:UIEdgeInsetsMake(0, 0, 0, 0)];
         //1 禁用系统自带的分割线
         _tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;

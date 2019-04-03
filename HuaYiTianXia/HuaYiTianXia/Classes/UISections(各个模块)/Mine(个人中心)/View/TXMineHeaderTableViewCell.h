@@ -17,20 +17,29 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) UILabel *totalAssetsLabel;
 /// 总资产提示
 @property (nonatomic, strong) UILabel *totalAssetsTipsLabel;
-/// VH资产
+/// V积分产
 @property (nonatomic, strong) UILabel *vrAssetsLabel;
-/// VH资产提示
+/// VH积分提示
 @property (nonatomic, strong) UILabel *vrAssetsTipsLabel;
 /// 竖线
 @property (nonatomic, strong) UIView *linerView;
-/// AH资产
+/// AH积分
 @property (nonatomic, strong) UILabel *arAssetsLabel;
-/// AH资产提示
+/// AH积分提示
 @property (nonatomic, strong) UILabel *arAssetsTipsLabel;
 
-
+/// VR View
 @property (nonatomic, strong) UIView *vrBoxView;
+/// AR View
 @property (nonatomic, strong) UIView *arBoxView;
+/// 股权 View
+@property (nonatomic, strong) UIView *eqBoxView;
+/// 竖线
+@property (nonatomic, strong) UIView *linersView;
+/// AH积分
+@property (nonatomic, strong) UILabel *eqAssetsLabel;
+/// AH积分提示
+@property (nonatomic, strong) UILabel *eqAssetsTipsLabel;
 
 @end
 

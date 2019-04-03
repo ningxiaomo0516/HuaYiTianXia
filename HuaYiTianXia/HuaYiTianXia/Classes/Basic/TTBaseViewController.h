@@ -14,7 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 给当前view添加识别手势,点击tableView中带有输入框点击背景关闭键盘
 - (void) addGesture:(UITableView *) tableView;
-
+/// 点击View关闭 输入框
+- (void) tapGesture;
 
 @end
 

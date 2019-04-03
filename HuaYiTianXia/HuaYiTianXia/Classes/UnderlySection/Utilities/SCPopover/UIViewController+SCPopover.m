@@ -37,8 +37,11 @@ static const char popoverAnimatorKey;
     
     vc.modalPresentationStyle = UIModalPresentationCustom;
     vc.transitioningDelegate = self.popoverAnimator;
-    
     [self presentViewController:vc animated:YES completion:nil];
+}
+
+- (void) sc_dismissVC{
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

@@ -31,5 +31,6 @@
  *  @param completion completion 弹出消失的回调
  */
 - (void)sc_centerPresentController:(UIViewController *)vc presentedSize:(CGSize)size completeHandle:(SCCompleteHandle)completion;
-
+/// 关闭VC
+- (void)sc_dismissVC;
 @end

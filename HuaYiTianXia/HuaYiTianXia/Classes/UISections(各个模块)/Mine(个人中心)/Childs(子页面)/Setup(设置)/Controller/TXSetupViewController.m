@@ -10,6 +10,8 @@
 #import "TXMineTableViewCell.h"
 #import "TXGeneralModel.h"
 #import "TXWebViewController.h"
+#import "TTAlertManager.h"
+#import "AppDelegate.h"
 
 static NSString * const reuseIdentifier = @"TXMineTableViewCell";
 
@@ -30,13 +32,29 @@ static NSString * const reuseIdentifier = @"TXMineTableViewCell";
 
 /** 退出 */
 - (void) exitBtnClick:(UIButton *) sender{
+    // 退出登录提示
+    UIAlertController *alerController = [UIAlertController addAlertReminderText:@"退出登录"
+                                                                        message:@"您确定要退出登录吗?"
+                                                                    cancelTitle:@"取消"
+                                                                        doTitle:@"确定"
+                                                                 preferredStyle:UIAlertControllerStyleAlert
+                                                                    cancelBlock:nil doBlock:^{
+        [self logoutUserRequest];
+    }];
+    [self presentViewController:alerController animated:YES completion:nil];
+}
+
+- (void) logoutUserRequest{
     [SCHttpTools getWithURLString:kHttpURL(@"customer/outlogin") parameter:nil success:^(id responseObject) {
         NSDictionary *result = responseObject;
         TTLog(@"result ---- %@",[Utils lz_dataWithJSONObject:result]);
         if ([result isKindOfClass:[NSDictionary class]]) {
             TTUserDataModel *model = [TTUserDataModel mj_objectWithKeyValues:result];
             if (model.errorcode == 20000) {
-                
+                [self.navigationController popToRootViewControllerAnimated:YES];
+                [[AppDelegate appDelegate] jumpMainVC];
+                [kUserInfo logout];
+                [kUserInfo dump];
             }else{
                 Toast(model.message);
             }
@@ -46,6 +64,7 @@ static NSString * const reuseIdentifier = @"TXMineTableViewCell";
     } failure:^(NSError *error) {
         TTLog(@" -- error -- %@",error);
     }];
+
 }
 
 - (void) initView{

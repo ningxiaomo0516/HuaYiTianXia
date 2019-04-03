@@ -9,8 +9,7 @@
 #import <UIKit/UIKit.h>
 
 /** 导航控制器基类 */
-@interface LZRootViewController : UITabBarController
-{
+@interface LZRootViewController : UITabBarController{
     NSInteger _tabbarIndex;
 }
 

@@ -7,6 +7,7 @@
 //
 
 #import "TXModifyUserInfoViewController.h"
+#import "TXGeneralModel.h"
 
 @interface TXModifyUserInfoViewController ()<UIScrollViewDelegate,UITextFieldDelegate>
 
@@ -26,7 +27,7 @@
     
     [self addGesture];
     [self initView];
-    self.textField.text = self.nickname;
+    self.textField.text = kUserInfo.username;
     
     // 添加右边保存按钮
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"保存" style:UIBarButtonItemStylePlain target:self action:@selector(saveBtnClick)];
@@ -68,38 +69,35 @@
     if (self.block) {
         self.block(self.textField.text);
     }
-    [self dismissViewControllerAnimated:YES completion:nil];
-//    [self updateUserInfoDataRequest];
+    [self updateUserInfoDataRequest];
 }
 
 - (void) updateUserInfoDataRequest{
     
-//    NSMutableDictionary *parameter = [[NSMutableDictionary alloc] init];
-//    [parameter setObject:self.textField.text forKey:@"username"];
+    NSMutableDictionary *parameter = [[NSMutableDictionary alloc] init];
+    [parameter setObject:self.textField.text forKey:@"nickName"];
+    [parameter setObject:kUserInfo.avatar forKey:@"headImg"];
 //    [MBProgressHUD showMessage:@"" toView:self.view];
-//    [SCHttpTools getWithURLString:@"user/saveinfo" parameter:parameter success:^(id responseObject) {
-//        NSDictionary *result  = responseObject;
+    [SCHttpTools postWithURLString:kHttpURL(@"customer/UpdateUserData") parameter:parameter success:^(id responseObject) {
+        NSDictionary *result  = responseObject;
 //        [MBProgressHUD hideHUDForView:self.view];
-//
-//        TTLog(@" result --- %@",[Utils lz_dataWithJSONObject:result]);
-//        if (result){
-//            if ([[result lz_objectForKey:@"errcode"] integerValue]==0) {
-//                Toast(@"信息修改成功");
-//                kUserInfo.username = self.textField.text;
-//                [kUserInfo dump];
-//                if (self.block) {
-//                    self.block(self.textField.text);
-//                }
-//                [self dismissViewControllerAnimated:YES completion:nil];
-//            }else{
-//                NSString *message = [result lz_objectForKey:@"message"];
-//                Toast(message);
-//            }
-//        }
-//    } failure:^(NSError *error) {
+        TTLog(@" result --- %@",[Utils lz_dataWithJSONObject:result]);
+        if (result){
+            TXGeneralModel *model = [TXGeneralModel mj_objectWithKeyValues:result];
+            if (model.errorcode==20000) {
+                Toast(@"信息修改成功");
+                if (self.block) {
+                    self.block(self.textField.text);
+                }
+                [self dismissViewControllerAnimated:YES completion:nil];
+            }else{
+                Toast(model.message);
+            }
+        }
+    } failure:^(NSError *error) {
 //        [MBProgressHUD hideHUDForView:self.view];
-//        TTLog(@"修改信息 -- %@", error);
-//    }];
+        TTLog(@"修改信息 -- %@", error);
+    }];
 }
 
 - (void) initView{

@@ -154,16 +154,15 @@ static NSString* reuseIdentifier = @"TXWalletCollectionViewCell";
 - (NSMutableArray *)dataArray{
     if (!_dataArray) {
         _dataArray = [[NSMutableArray alloc] init];
-        NSArray* titleArr = @[@"交易记录",@"充值",@"转出转入",@"股权",@"提现",@"转出",@"注册币",@"交易",@"转换",@"复投"];
+        NSArray* titleArr = @[@"交易记录",@"充值",@"转出转入",@"股权",@"分红",@"转出",@"交易",@"转换",@"复投"];
         
         NSArray* imagesArr = @[@"wallet_btn_jiaoyijilu",@"wallet_btn_chongzhi",@"wallet_btn_zhuanchuzhuanru",
                                @"wallet_btn_guquan",@"wallet_btn_tixian",@"wallet_btn_zhuanchu",
-                               @"wallet_btn_zhucebi",@"wallet_btn_jiaoyi",
-                               @"wallet_btn_zhuanhuan",@"wallet_btn_futou"];
+                               @"wallet_btn_jiaoyi",@"wallet_btn_zhuanhuan",@"wallet_btn_futou"];
         
         NSArray* classArr = @[@"TXTransactionRecordsViewController",@"TXTopupViewController",
                               @"TXZhuanchuZhuanruViewController",@"TXEquityViewController",
-                              @"",@"TXRolloutViewController",@"",@"",
+                              @"",@"TXRolloutViewController",@"",
                               @"TXConversionViewController",@"TXRepeatCastViewController"];
         
         for (int j = 0; j < titleArr.count; j ++) {

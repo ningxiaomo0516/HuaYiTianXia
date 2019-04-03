@@ -34,8 +34,23 @@ static NSString * const reuseIdentifierBanner = @"TXMineBannerTableViewCell";
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self initView];
-    
+    if (kUserInfo.isLogin) {
+        [self requestPersonalCenterData];
+    }
+    // 注册通知
+    [kNotificationCenter addObserver:self selector:@selector(reloadUserName) name:@"reloadUserName" object:nil];
+}
+
+/// 登录成功之后再获取数据
+- (void) reloadData{
     [self requestPersonalCenterData];
+}
+
+- (void) reloadUserName{
+    self.headerView.nickNameLabel.text = kUserInfo.username;
+    [self.headerView.imagesViewAvatar sc_setImageWithUrlString:kUserInfo.avatar
+                                              placeholderImage:kGetImage(@"mine_icon_avatar")
+                                                      isAvatar:false];
 }
 
 - (void) requestPersonalCenterData{
@@ -49,7 +64,9 @@ static NSString * const reuseIdentifierBanner = @"TXMineBannerTableViewCell";
                 kUserInfo.totalAssets = model.data.totalAssets;
                 kUserInfo.arcurrency = model.data.arcurrency;
                 kUserInfo.vrcurrency = model.data.vrcurrency;
+                kUserInfo.stockRight = model.data.stockRight;
                 kUserInfo.username = model.data.username;
+                kUserInfo.balance = model.data.balance;
                 kUserInfo.avatar = model.data.avatar;
                 [kUserInfo dump];
                 [self.headerView.imagesViewAvatar sc_setImageWithUrlString:model.data.avatar
@@ -83,6 +100,7 @@ static NSString * const reuseIdentifierBanner = @"TXMineBannerTableViewCell";
         tools.totalAssetsLabel.text = self.userModel.totalAssets;
         tools.vrAssetsLabel.text = self.userModel.vrcurrency;
         tools.arAssetsLabel.text = self.userModel.arcurrency;
+        tools.eqAssetsLabel.text = self.userModel.stockRight;
         return tools;
 
     }else if (indexPath.section == 1){
@@ -237,5 +255,8 @@ static NSString * const reuseIdentifierBanner = @"TXMineBannerTableViewCell";
     return _bannerArray;
 }
 
+- (void)dealloc{
+    [kNotificationCenter removeObserver:self];
+}
 
 @end
