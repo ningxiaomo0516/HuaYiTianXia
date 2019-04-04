@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SCTextField.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -16,6 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) UILabel *subtitleLabel;
 @property (nonatomic, strong) UITextField *textField;
 @property (nonatomic, strong) UIImageView *imagesArrow;
+@property (nonatomic, strong) SCTextField *sc_textField;
 
 @end
 

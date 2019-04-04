@@ -58,6 +58,10 @@ static AFHTTPSessionManager* manager_ = nil;
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         if (responseObject) {
             NSDictionary *result = responseObject;
+            TXGeneralModel *model = [TXGeneralModel mj_objectWithKeyValues:result];
+            if (model.errorcode==22000) {
+                [kUserInfo logout];
+            }
             success(result);
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -104,7 +108,12 @@ static AFHTTPSessionManager* manager_ = nil;
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         if (responseObject) {
-            success(responseObject);
+            NSDictionary *result = responseObject;
+            TXGeneralModel *model = [TXGeneralModel mj_objectWithKeyValues:result];
+            if (model.errorcode==22000) {
+                [kUserInfo logout];
+            }
+            success(result);
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         if (error && failure) {

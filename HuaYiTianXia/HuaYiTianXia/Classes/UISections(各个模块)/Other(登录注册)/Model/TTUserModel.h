@@ -68,7 +68,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// 余额
 @property (nonatomic, copy) NSString *balance;
 /// 0：未设置交易密码 1：已设置交易密码
-@property (nonatomic, copy) NSString *tranPwd;
+@property (nonatomic, assign) NSInteger tranPwd;
 
 @property (nonatomic, strong) NSMutableArray<NewsBannerModel *> *banners;
 

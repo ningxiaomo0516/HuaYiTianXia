@@ -140,7 +140,7 @@ static TTUserModel *userModel = nil;
         [TTUserModel shared].mobile = [aDecoder decodeObjectForKey:mobile];
         [TTUserModel shared].phone = [aDecoder decodeObjectForKey:phone];
         [TTUserModel shared].pwd = [aDecoder decodeObjectForKey:pwd];
-        [TTUserModel shared].tranPwd = [aDecoder decodeObjectForKey:tranPwd];
+        [TTUserModel shared].tranPwd = [aDecoder decodeIntegerForKey:tranPwd];
         [TTUserModel shared].registertime = [aDecoder decodeObjectForKey:registertime];
         
         /// 解码并返回一个与给定键相关联的Bool类型的值
@@ -177,7 +177,7 @@ static TTUserModel *userModel = nil;
     [aCoder encodeObject:[TTUserModel shared].mobile forKey:mobile];
     [aCoder encodeObject:[TTUserModel shared].phone forKey:phone];
     [aCoder encodeObject:[TTUserModel shared].pwd forKey:pwd];
-    [aCoder encodeObject:[TTUserModel shared].tranPwd forKey:tranPwd];
+    [aCoder encodeInteger:[TTUserModel shared].tranPwd forKey:tranPwd];
     [aCoder encodeObject:[TTUserModel shared].registertime forKey:registertime];
     /// 将BOOL类型编码，使其与字符串类型的键相关联
     [aCoder encodeBool:[NSNumber numberWithBool:[TTUserModel shared].isLogin] forKey:isLogin];
@@ -212,7 +212,7 @@ static TTUserModel *userModel = nil;
     [TTUserModel shared].mobile = @"";
     [TTUserModel shared].phone = @"";
     [TTUserModel shared].pwd = @"";
-    [TTUserModel shared].tranPwd = @"";
+    [TTUserModel shared].tranPwd = 0;
     [TTUserModel shared].registertime = @"";
     
     [TTUserModel shared].isLogin = NO;

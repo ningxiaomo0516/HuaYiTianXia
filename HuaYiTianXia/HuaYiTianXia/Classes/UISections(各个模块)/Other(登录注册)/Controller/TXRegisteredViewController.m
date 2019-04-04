@@ -74,15 +74,18 @@ static NSString * const reuseIdentifiers = @"TXRegisteredTableViewCell";
         Toast(@"请输入验证码");
         return;
     }
-    
-    [self checkCodeisCorrect];
+    if (self.pageType==0) {
+        [self checkCodeisCorrect:@"customer/SMSContrast"];
+    }else if(self.pageType==1){
+        [self checkCodeisCorrect:@"customer/FindPwdSMS"];
+    }
 }
 
-- (void) checkCodeisCorrect{
+- (void) checkCodeisCorrect:(NSString *)URLString{
     NSMutableDictionary *parameter = [[NSMutableDictionary alloc] init];
     [parameter setObject:self.telphone forKey:@"mobile"];
     [parameter setObject:self.validationCode forKey:@"smsCode"];
-    [SCHttpTools postWithURLString:@"customer/SMSContrast" parameter:parameter success:^(id responseObject) {
+    [SCHttpTools postWithURLString:URLString parameter:parameter success:^(id responseObject) {
         if (responseObject){
             id result = responseObject;
             if (result) {
@@ -95,7 +98,7 @@ static NSString * const reuseIdentifiers = @"TXRegisteredTableViewCell";
                     if (self.pageType==0) {
                         vc.title = @"设置密码";
                     }else{
-                        vc.title = @"设置密码2";
+                        vc.title = @"设置密码";
                     }
                     TTPushVC(vc);
                 }else{
@@ -137,6 +140,7 @@ static NSString * const reuseIdentifiers = @"TXRegisteredTableViewCell";
 //                [MBProgressHUD hideHUDForView:self.view];
                 TXGeneralModel *generalModel = [TXGeneralModel mj_objectWithKeyValues:result];
                 if (generalModel.errorcode == 20000) {
+                    Toast(@"验证码已发送至您的手机,请注意查收!");
                     [SCSmallTools countdown:sender];
                 }else{
                     Toast(generalModel.message);
@@ -168,6 +172,7 @@ static NSString * const reuseIdentifiers = @"TXRegisteredTableViewCell";
         tools.titleLabel.text = model.title;
         tools.textField.placeholder = model.imageText;
         tools.textField.tag = indexPath.row;
+        tools.codeBtn.titleLabel.textAlignment = NSTextAlignmentRight;
         MV(weakSelf)
         [tools.codeBtn lz_handleControlEvent:UIControlEventTouchUpInside withBlock:^{
             [weakSelf obtainVerificationCode:tools.codeBtn];
@@ -184,6 +189,16 @@ static NSString * const reuseIdentifiers = @"TXRegisteredTableViewCell";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return IPHONE6_W(55);
+}
+
+//// 现在code最大长度
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    if (textField.tag==1) {
+        if (range.location + string.length > 4) {
+            return NO;
+        }
+    }
+    return YES;
 }
 
 -(UITableView *)tableView{

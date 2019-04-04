@@ -81,25 +81,37 @@ static NSString * const reuseIdentifiers = @"TXRegisteredTableViewCell";
         Toast(@"确认密码与密码不一致");
         return;
     }
-    if (self.pageType==0) {
-        [self updatePasswordRequest];
-    }else{
-        Toast(@"修改密码完成");
-    }
-}
-
-- (void) updatePasswordRequest{
+    
+    
     NSMutableDictionary *parameter = [[NSMutableDictionary alloc] init];
     [parameter setObject:self.telphone forKey:@"mobile"];
     [parameter setObject:self.password forKey:@"pwd"];
     [parameter setObject:self.passwords forKey:@"confirmpwd"];
-    [parameter setObject:self.invitationCode forKey:@"inviteCode"];
-    [SCHttpTools postWithURLString:@"customer/register" parameter:parameter success:^(id responseObject) {
+    if (self.pageType==0) {
+        [parameter setObject:self.invitationCode forKey:@"inviteCode"];
+        [self setupPasswordRequest:@"customer/register" parameter:parameter];
+    }else{
+        [self setupPasswordRequest:@"customer/FindPwd" parameter:parameter];
+    }
+}
+
+- (void) updatePasswordRequest{
+    
+}
+
+/// 设置密码
+- (void) setupPasswordRequest:(NSString *)URLString parameter:(NSDictionary *)parameter{
+    [SCHttpTools postWithURLString:URLString parameter:parameter success:^(id responseObject) {
         if (responseObject){
             id result = responseObject;
             if (result) {
                 TXGeneralModel *generalModel = [TXGeneralModel mj_objectWithKeyValues:result];
                 if (generalModel.errorcode == 20000) {
+                    if (self.pageType==0) {
+                        TTLog(@"密码设置成功");
+                    }else if(self.pageType==1){
+                        TTLog(@"新密码密码设置成功");
+                    }
                     [self.navigationController popToRootViewControllerAnimated:YES];
                 }
                 Toast(generalModel.message);

@@ -70,7 +70,7 @@
         _textField = [UITextField lz_textFieldWithPlaceHolder:@""];
         _textField.returnKeyType = UIReturnKeyDone;
         _textField.keyboardType = UIKeyboardTypeNumberPad;
-        _textField.clearButtonMode = UITextFieldViewModeAlways;
+        _textField.clearButtonMode = UITextFieldViewModeWhileEditing;
         _textField.borderStyle = UITextBorderStyleNone;
         _textField.delegate = self;
         _textField.font = kFontSizeMedium15;

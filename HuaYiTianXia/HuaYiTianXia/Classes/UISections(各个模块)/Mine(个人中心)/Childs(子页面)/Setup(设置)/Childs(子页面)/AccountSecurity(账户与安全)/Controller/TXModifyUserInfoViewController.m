@@ -150,7 +150,7 @@
     if (!_textField) {
         _textField = [UITextField lz_textFieldWithPlaceHolder:@"请输入昵称"];
         _textField.returnKeyType = UIReturnKeyDone;
-        _textField.clearButtonMode = UITextFieldViewModeAlways;
+        _textField.clearButtonMode = UITextFieldViewModeWhileEditing;
         _textField.borderStyle = UITextBorderStyleNone;
         _textField.delegate = self;
         _textField.text = self.nickname;

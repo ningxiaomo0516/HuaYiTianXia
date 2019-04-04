@@ -1,96 +1,81 @@
 //
-//  TXResetPwdViewController.m
+//  TXSetupTradingViewController.m
 //  HuaYiTianXia
 //
-//  Created by 宁小陌 on 2019/3/22.
+//  Created by 宁小陌 on 2019/4/4.
 //  Copyright © 2019年 宁小陌. All rights reserved.
 //
 
-#import "TXResetPwdViewController.h"
-#import "TXRolloutTableViewCell.h"
-#import "TXGeneralModel.h"
+#import "TXSetupTradingViewController.h"
+#import "TXResetTradingViewController.h"
 
-static NSString * const reuseIdentifier = @"TXRolloutTableViewCell";
-
-@interface TXResetPwdViewController ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>
+@interface TXSetupTradingViewController ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *dataArray;
 @property (strong, nonatomic) UIButton *saveButton;
 @property (strong, nonatomic) UIView *footerView;
 
-/// 新密码
-@property (copy, nonatomic) NSString *password;
-/// 旧密码
-@property (copy, nonatomic) NSString *oldPassword;
-/// 重复密码
-@property (copy, nonatomic) NSString *repeatPassword;
+@property (strong, nonatomic) IBOutlet UITableViewCell *realnameCell;
+@property (strong, nonatomic) IBOutlet UITableViewCell *idnumberCell;
+
+@property (strong, nonatomic) IBOutlet UITextField *realnameTextField;
+@property (strong, nonatomic) IBOutlet UITextField *idnumberTextField;
 
 @end
 
-@implementation TXResetPwdViewController
+@implementation TXSetupTradingViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    
+    // Do any additional setup after loading the view from its nib.
+    self.title = @"身份校验";
     [self initView];
 }
 
-/** 确认修改密码 */
+/** 身份校验过程 */
 - (void) saveBtnClick:(UIButton *) sender{
-    if (self.oldPassword.length == 0) {
-        Toast(@"请输入旧密码");
+    NSString *realname = self.realnameTextField.text;
+    NSString *idnumber = self.idnumberTextField.text;
+    if (realname.length==0) {
+        Toast(@"请输入真实姓名");
+    }
+    
+    if (idnumber.length==0) {
+        Toast(@"请输入身份证号");
         return;
     }
     
-    if (self.password.length == 0) {
-        Toast(@"请输入新密码");
+    if (![SCSmallTools tt_simpleVerifyIdentityCardNum:idnumber]) {
+        Toast(@"请输入正确的身份证号码");
         return;
     }
     
-    if (self.password.length < 6) {
-        Toast(@"新密码不能少于6位");
-        return;
-    }
-    
-    if (self.repeatPassword.length == 0) {
-        Toast(@"请输入确认密码");
-        return;
-    }
-    
-    if (self.repeatPassword != self.password) {
-        Toast(@"确认密码与新密码不一致");
-        return;
-    }
-    
-    [self resetPasswordReuqest];
+    NSMutableDictionary *parameter = [[NSMutableDictionary alloc] init];
+    [parameter setObject:realname forKey:@"name"];
+    [parameter setObject:idnumber forKey:@"code"];
+    [self validationIdentityInfo:parameter];
 }
 
-/** 确认修改密码 */
-- (void) resetPasswordReuqest{
-    NSMutableDictionary *parameter = [[NSMutableDictionary alloc] init];
-    [parameter setObject:self.oldPassword forKey:@"oldpwd"];
-    [parameter setObject:self.password forKey:@"pwd"];
-    [parameter setObject:self.repeatPassword forKey:@"confirmpwd"];
-    [SCHttpTools postWithURLString:kHttpURL(@"customer/UpdatePwd") parameter:parameter success:^(id responseObject) {
+- (void) validationIdentityInfo:(NSMutableDictionary *)parameter{
+    [SCHttpTools postWithURLString:kHttpURL(@"customer/VerifTranPwd") parameter:parameter success:^(id responseObject) {
         NSDictionary *result = responseObject;
         if ([result isKindOfClass:[NSDictionary class]]) {
-            TTLog(@"result -- %@",result);
             TXGeneralModel *model = [TXGeneralModel mj_objectWithKeyValues:result];
-            if (model.errorcode==20000) {
-                Toast(@"重置密码成功");
-                [self.navigationController popViewControllerAnimated:YES];
+            if (model.errorcode == 20000) {
+                Toast(@"身份验证成功");
+                TXResetTradingViewController *vc = [[TXResetTradingViewController alloc] init];
+                vc.pageType = 0;
+                TTPushVC(vc);
             }else{
-                Toast(@"重置密码失败");
+                Toast(model.message);
             }
         }else{
-            Toast(@"重置密码失败");
+            Toast(@"身份验证失败");
         }
     } failure:^(NSError *error) {
-        TTLog(@"error --- %@",error);
+        TTLog(@" -- error -- %@",error);
     }];
 }
-
 
 - (void) initView{
     [self addGesture:self.tableView];
@@ -110,26 +95,23 @@ static NSString * const reuseIdentifier = @"TXRolloutTableViewCell";
         make.right.equalTo(self.view.mas_right).offset(-15);
         make.height.equalTo(@(45));
     }];
-    
 }
 
 #pragma mark - Table view data source
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-
-    TXRolloutTableViewCell* tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
-    TXGeneralModel* model = self.dataArray[indexPath.row];
-    model.index = indexPath.item;
-    tools.textField.tag = indexPath.item;
-    tools.titleLabel.text = model.title;
-    tools.textField.placeholder = model.imageText;
-    tools.selectionStyle = UITableViewCellSelectionStyleNone;
-    tools.textField.keyboardType = UIKeyboardTypeDefault;
-    tools.textField.secureTextEntry = YES;
-    tools.textField.delegate = self;
-    tools.textField.returnKeyType = UIReturnKeyDone;
-    [tools.textField addTarget:self action:@selector(textFieldWithText:) forControlEvents:UIControlEventEditingChanged];
-
-    return tools;
+    
+    NSUInteger row = [indexPath row];
+    static NSString *CellIdentifier = @"TXRealNameViewController";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (row == 0) {
+        _realnameCell.selectionStyle = UITableViewCellSelectionStyleNone;
+        return _realnameCell;
+    }
+    if (row == 1) {
+        _idnumberCell.selectionStyle = UITableViewCellSelectionStyleNone;
+        return _idnumberCell;
+    }
+    return cell;
 }
 
 // 多少个分组 section
@@ -151,21 +133,13 @@ static NSString * const reuseIdentifier = @"TXRolloutTableViewCell";
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
-#pragma mark ----- textField 输入处理
-- (void)textFieldWithText:(UITextField *)textField{
-    switch (textField.tag) {
-        case 0:
-            self.oldPassword = textField.text;
-            break;
-        case 1:
-            self.password = textField.text;
-            break;
-        case 2:
-            self.repeatPassword = textField.text;
-            break;
-        default:
-            break;
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    if (textField.tag==1) {
+        if (range.location + string.length > 18) {
+            return NO;
+        }
     }
+    return YES;
 }
 
 #pragma mark ---- UITextFieldDelegate
@@ -179,7 +153,6 @@ static NSString * const reuseIdentifier = @"TXRolloutTableViewCell";
     if (!_tableView) {
         _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
         _tableView.showsVerticalScrollIndicator = false;
-        [_tableView registerClass:[TXRolloutTableViewCell class] forCellReuseIdentifier:reuseIdentifier];
         [_tableView setSeparatorInset:UIEdgeInsetsMake(0, 0, 0, 0)];
         //1 禁用系统自带的分割线
         _tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
@@ -204,7 +177,7 @@ static NSString * const reuseIdentifier = @"TXRolloutTableViewCell";
         _saveButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [_saveButton setTitleColor:kWhiteColor forState:UIControlStateNormal];
         _saveButton.titleLabel.font = kFontSizeMedium15;
-        [_saveButton setTitle:@"完成" forState:UIControlStateNormal];
+        [_saveButton setTitle:@"下一步" forState:UIControlStateNormal];
         [_saveButton setBackgroundImage:kGetImage(@"c31_denglu") forState:UIControlStateNormal];
         MV(weakSelf);
         [_saveButton lz_handleControlEvent:UIControlEventTouchUpInside withBlock:^{
@@ -217,8 +190,8 @@ static NSString * const reuseIdentifier = @"TXRolloutTableViewCell";
 - (NSMutableArray *)dataArray{
     if (!_dataArray) {
         _dataArray = [[NSMutableArray alloc] init];
-        NSArray* titleArr = @[@"旧密码",@"新密码",@"确认密码"];
-        NSArray* subtitleArr = @[@"请输入登录旧密码",@"请输入登录新密码",@"请再次输入新密码"];
+        NSArray* titleArr = @[@"真实姓名",@"身份证号"];
+        NSArray* subtitleArr = @[@"请输入身份证姓名",@"请输入身份证号"];
         for (int i=0; i<titleArr.count; i++) {
             TXGeneralModel *generalModel = [[TXGeneralModel alloc] init];
             generalModel.title = [titleArr lz_safeObjectAtIndex:i];

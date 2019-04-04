@@ -86,7 +86,11 @@
             TTUserModel *userModel = model.data;
             if (model.errorcode == 20000) {
                 self.nickNameTextField.text = userModel.username;
-                self.idnumberTextField.text = [SCSmallTools idCardNumber:userModel.idnumber];
+                if (userModel.idnumber.length<15) {
+                    self.idnumberTextField.text = @"未填写";
+                }else{
+                    self.idnumberTextField.text = [SCSmallTools idCardNumber:userModel.idnumber];
+                }
                 self.sexLabel.text = (userModel.sex==0)?@"男":@"女";
                 [self.imageView1 sd_setImageWithURL:kGetImageURL(userModel.imgz) placeholderImage:kGetImage(VERTICALMAPBITMAP)];
                 [self.imageView2 sd_setImageWithURL:kGetImageURL(userModel.imgb) placeholderImage:kGetImage(VERTICALMAPBITMAP)];
@@ -121,20 +125,7 @@
         make.height.equalTo(@(45));
     }];
     
-    
-    NSString *current = self.idnumberLabel.text;
-    /// 修改身份证号提示文字颜色
-    NSMutableAttributedString *attributedStr = [[NSMutableAttributedString alloc] initWithString:current];
-    /// 后面文字颜色
-    [attributedStr addAttribute:NSForegroundColorAttributeName
-                          value:HexString(@"#FA7C7C")
-                          range:NSMakeRange(4, current.length-4)];
-    // 后面文字大小
-    [attributedStr addAttribute:NSFontAttributeName
-                          value:kFontSizeMedium12
-                          range:NSMakeRange(4, current.length-4)];
-    self.idnumberLabel.attributedText = attributedStr;
-    
+    /// 设置身份证照片提示的富文本
     self.idcardLabel1.attributedText = [self setupTextColor:self.idcardLabel1.text];
     self.idcardLabel2.attributedText = [self setupTextColor:self.idcardLabel2.text];
     
@@ -160,6 +151,11 @@
     
     if ([self.sexLabel.text isEqualToString:@"请选择"]) {
         Toast(@"请选择性别");
+        return;
+    }
+    
+    if (idnumber.length == 0) {
+        Toast(@"清输入身份证号");
         return;
     }
     
@@ -207,7 +203,9 @@
             TTUserModel *userModel = model.data;
             if (model.errorcode == 20000) {
                 self.nickNameTextField.text = userModel.username;
-                self.idnumberTextField.text = [SCSmallTools idCardNumber:userModel.idnumber];
+                if (userModel.idnumber.length>14) {
+                    self.idnumberTextField.text = [SCSmallTools idCardNumber:userModel.idnumber];
+                }
                 self.sexLabel.text = (userModel.sex==0)?@"男":@"女";
                 [self.imageView1 sd_setImageWithURL:kGetImageURL(userModel.imgz) placeholderImage:kGetImage(VERTICALMAPBITMAP)];
                 [self.imageView2 sd_setImageWithURL:kGetImageURL(userModel.imgb) placeholderImage:kGetImage(VERTICALMAPBITMAP)];

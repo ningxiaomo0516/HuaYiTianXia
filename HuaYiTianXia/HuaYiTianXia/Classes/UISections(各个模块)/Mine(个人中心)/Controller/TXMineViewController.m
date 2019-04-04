@@ -68,6 +68,7 @@ static NSString * const reuseIdentifierBanner = @"TXMineBannerTableViewCell";
                 kUserInfo.username = model.data.username;
                 kUserInfo.balance = model.data.balance;
                 kUserInfo.avatar = model.data.avatar;
+                kUserInfo.type = model.data.type;
                 [kUserInfo dump];
                 [self.headerView.imagesViewAvatar sc_setImageWithUrlString:model.data.avatar
                                                           placeholderImage:kGetImage(@"mine_icon_avatar")

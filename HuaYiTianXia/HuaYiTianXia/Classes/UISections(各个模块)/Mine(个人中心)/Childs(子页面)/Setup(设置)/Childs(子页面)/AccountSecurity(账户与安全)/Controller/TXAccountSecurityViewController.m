@@ -95,8 +95,20 @@ static NSString * const reuseIdentifier = @"TXMineTableViewCell";
 - (NSMutableArray *)dataArray{
     if (!_dataArray) {
         _dataArray = [[NSMutableArray alloc] init];
-        NSArray* titleArr = @[@"个人资料",@"认证资料",@"重置密码",@"设置交易密码"];
-        NSArray* classArr = @[@"TXPersonalInfoViewController",@"TXRealNameViewController",@"TXResetPwdViewController",@""];
+        /// 0：未设置交易密码 1：已设置交易密码
+        NSArray* titleArr = [NSArray new];
+        NSArray* classArr = [NSArray new];
+        if (kUserInfo.tranPwd==0) {
+            titleArr = @[@"个人资料",@"认证资料",@"重置登录密码",@"设置交易密码"];
+            classArr = @[@"TXPersonalInfoViewController",@"TXRealNameViewController",@"TXResetPwdViewController",@"TXSetupTradingViewController"];
+        }else if(kUserInfo.tranPwd==1){
+            titleArr = @[@"个人资料",@"认证资料",@"重置登录密码",@"重置交易密码",@"忘记交易密码"];
+            classArr = @[@"TXPersonalInfoViewController",@"TXRealNameViewController",
+                         @"TXResetPwdViewController",@"TXResetTradingViewController",@"TXForgetTradingViewController"];
+        }else{
+            titleArr = @[@"个人资料",@"认证资料"];
+            classArr = @[@"TXPersonalInfoViewController",@"TXRealNameViewController"];
+        }
         for (int j = 0; j < titleArr.count; j ++) {
             TXGeneralModel *generalModel = [[TXGeneralModel alloc] init];
             generalModel.title = [titleArr lz_safeObjectAtIndex:j];

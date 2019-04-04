@@ -10,7 +10,6 @@
 #import "TXMineTableViewCell.h"
 #import "TXGeneralModel.h"
 #import "TXWebViewController.h"
-#import "TTAlertManager.h"
 #import "AppDelegate.h"
 
 static NSString * const reuseIdentifier = @"TXMineTableViewCell";
@@ -184,8 +183,8 @@ static NSString * const reuseIdentifier = @"TXMineTableViewCell";
         _dataArray = [[NSMutableArray alloc] init];
         NSArray* titleArr = @[@[@"用户使用协议",@"隐私政策",@"账户与安全",@"地址管理",@"操作手册"]];
         NSArray* indexArr = @[@[@"0",@"1",@"2",@"3",@"4"]];
-        NSArray* classArr = @[@[@"TXWebViewController",@"",@"TXAccountSecurityViewController",
-                                @"TXAddressViewController",@""]];
+        NSArray* classArr = @[@[@"TXWebViewController",@"TXWebViewController",@"TXAccountSecurityViewController",
+                                @"TXAddressViewController",@"TXWebViewController"]];
         for (int i=0; i<titleArr.count; i++) {
             NSArray *subTitlesArray = [titleArr lz_safeObjectAtIndex:i];
             NSArray *classArray     = [classArr lz_safeObjectAtIndex:i];

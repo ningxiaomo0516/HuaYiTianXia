@@ -37,6 +37,7 @@
     [self addSubview:self.titleLabel];
     [self addSubview:self.subtitleLabel];
     [self addSubview:self.textField];
+    [self addSubview:self.sc_textField];
     [self addSubview:self.imagesArrow];
 
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -53,6 +54,11 @@
         make.left.equalTo(@(IPHONE6_W(100)));
         make.right.equalTo(self.mas_right).offset(-20);
     }];
+    
+    [self.sc_textField mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.left.right.equalTo(self.textField);
+    }];
+    
     [self.subtitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.center.left.right.equalTo(self.textField);
     }];
@@ -68,7 +74,7 @@
         _textField = [UITextField lz_textFieldWithPlaceHolder:@""];
         _textField.returnKeyType = UIReturnKeyDone;
         _textField.keyboardType = UIKeyboardTypeNumberPad;
-        _textField.clearButtonMode = UITextFieldViewModeAlways;
+        _textField.clearButtonMode = UITextFieldViewModeWhileEditing;
         _textField.borderStyle = UITextBorderStyleNone;
         _textField.delegate = self;
         _textField.font = kFontSizeMedium15;
@@ -98,6 +104,16 @@
         _imagesArrow.hidden = YES;
     }
     return _imagesArrow;
+}
+
+- (SCTextField *)sc_textField{
+    if (!_sc_textField) {
+        _sc_textField = [[SCTextField alloc] init];
+        _sc_textField.placeholder = @"请输入身份证号";
+        _sc_textField.font = kFontSizeMedium15;
+        _sc_textField.hidden = YES;
+    }
+    return _sc_textField;
 }
 
 @end

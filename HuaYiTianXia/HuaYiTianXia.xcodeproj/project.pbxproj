@@ -84,7 +84,14 @@
 		E75F2ED6224DCB5F0091C52E /* TXBuyCountTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E75F2ED5224DCB5F0091C52E /* TXBuyCountTableViewCell.m */; };
 		E75F2EDD224DEE680091C52E /* TTTagView.m in Sources */ = {isa = PBXBuildFile; fileRef = E75F2EDC224DEE680091C52E /* TTTagView.m */; };
 		E75F2EE0224E1BE30091C52E /* TTUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E75F2EDF224E1BE30091C52E /* TTUserModel.m */; };
-		E773264C2254552200FD665A /* TTAlertManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E773264B2254552200FD665A /* TTAlertManager.m */; };
+		E7691ED52255A809006A94D9 /* TXResetTradingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7691ED42255A809006A94D9 /* TXResetTradingViewController.m */; };
+		E7691EDC2255D3FA006A94D9 /* TXSetupTradingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7691EDA2255D3FA006A94D9 /* TXSetupTradingViewController.m */; };
+		E7691EDD2255D3FA006A94D9 /* TXSetupTradingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7691EDB2255D3FA006A94D9 /* TXSetupTradingViewController.xib */; };
+		E7691EE32255DC4E006A94D9 /* SCVerCodeInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = E7691EE02255DC4E006A94D9 /* SCVerCodeInputView.m */; };
+		E7691EE42255DC4E006A94D9 /* UIView+SCValidation.m in Sources */ = {isa = PBXBuildFile; fileRef = E7691EE22255DC4E006A94D9 /* UIView+SCValidation.m */; };
+		E7691EE72255E3E5006A94D9 /* TTPasswordView.m in Sources */ = {isa = PBXBuildFile; fileRef = E7691EE62255E3E5006A94D9 /* TTPasswordView.m */; };
+		E7691EEE2255F8C4006A94D9 /* TXForgetTradingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7691EEC2255F8C4006A94D9 /* TXForgetTradingViewController.m */; };
+		E7691EEF2255F8C4006A94D9 /* TXForgetTradingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7691EED2255F8C4006A94D9 /* TXForgetTradingViewController.xib */; };
 		E773264F22545BE400FD665A /* UIAlertController+SCExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = E773264E22545BE400FD665A /* UIAlertController+SCExtension.m */; };
 		E77326522254A03100FD665A /* TXWalletHeaderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E77326512254A03100FD665A /* TXWalletHeaderTableViewCell.m */; };
 		E77326552254A87D00FD665A /* TXRolloutTypeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E77326542254A87D00FD665A /* TXRolloutTypeViewController.m */; };
@@ -334,8 +341,20 @@
 		E75F2EDC224DEE680091C52E /* TTTagView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TTTagView.m; sourceTree = "<group>"; };
 		E75F2EDE224E1BE30091C52E /* TTUserModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TTUserModel.h; sourceTree = "<group>"; };
 		E75F2EDF224E1BE30091C52E /* TTUserModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TTUserModel.m; sourceTree = "<group>"; };
-		E773264A2254552200FD665A /* TTAlertManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TTAlertManager.h; sourceTree = "<group>"; };
-		E773264B2254552200FD665A /* TTAlertManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TTAlertManager.m; sourceTree = "<group>"; };
+		E7691ED32255A809006A94D9 /* TXResetTradingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXResetTradingViewController.h; sourceTree = "<group>"; };
+		E7691ED42255A809006A94D9 /* TXResetTradingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXResetTradingViewController.m; sourceTree = "<group>"; };
+		E7691ED92255D3FA006A94D9 /* TXSetupTradingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXSetupTradingViewController.h; sourceTree = "<group>"; };
+		E7691EDA2255D3FA006A94D9 /* TXSetupTradingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXSetupTradingViewController.m; sourceTree = "<group>"; };
+		E7691EDB2255D3FA006A94D9 /* TXSetupTradingViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TXSetupTradingViewController.xib; sourceTree = "<group>"; };
+		E7691EDF2255DC4E006A94D9 /* SCVerCodeInputView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCVerCodeInputView.h; sourceTree = "<group>"; };
+		E7691EE02255DC4E006A94D9 /* SCVerCodeInputView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCVerCodeInputView.m; sourceTree = "<group>"; };
+		E7691EE12255DC4E006A94D9 /* UIView+SCValidation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+SCValidation.h"; sourceTree = "<group>"; };
+		E7691EE22255DC4E006A94D9 /* UIView+SCValidation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+SCValidation.m"; sourceTree = "<group>"; };
+		E7691EE52255E3E5006A94D9 /* TTPasswordView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TTPasswordView.h; sourceTree = "<group>"; };
+		E7691EE62255E3E5006A94D9 /* TTPasswordView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TTPasswordView.m; sourceTree = "<group>"; };
+		E7691EEB2255F8C4006A94D9 /* TXForgetTradingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXForgetTradingViewController.h; sourceTree = "<group>"; };
+		E7691EEC2255F8C4006A94D9 /* TXForgetTradingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXForgetTradingViewController.m; sourceTree = "<group>"; };
+		E7691EED2255F8C4006A94D9 /* TXForgetTradingViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TXForgetTradingViewController.xib; sourceTree = "<group>"; };
 		E773264D22545BE300FD665A /* UIAlertController+SCExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertController+SCExtension.h"; sourceTree = "<group>"; };
 		E773264E22545BE400FD665A /* UIAlertController+SCExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertController+SCExtension.m"; sourceTree = "<group>"; };
 		E77326502254A03100FD665A /* TXWalletHeaderTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXWalletHeaderTableViewCell.h; sourceTree = "<group>"; };
@@ -830,7 +849,7 @@
 		E72698E8223F737C003A5043 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				E77326492254550900FD665A /* TTAlertManager(AlertView) */,
+				E7691EDE2255DC4E006A94D9 /* SCVerViewInputView(验证码界面) */,
 				E7923CA722535CE00094D0C3 /* SCTextField(身份证键盘) */,
 				E7923CA0225341C40094D0C3 /* SCImagePicker(选择头像) */,
 				E75F2EDA224DEE5C0091C52E /* TTTagView */,
@@ -1134,13 +1153,17 @@
 			path = TTTagView;
 			sourceTree = "<group>";
 		};
-		E77326492254550900FD665A /* TTAlertManager(AlertView) */ = {
+		E7691EDE2255DC4E006A94D9 /* SCVerViewInputView(验证码界面) */ = {
 			isa = PBXGroup;
 			children = (
-				E773264A2254552200FD665A /* TTAlertManager.h */,
-				E773264B2254552200FD665A /* TTAlertManager.m */,
+				E7691EDF2255DC4E006A94D9 /* SCVerCodeInputView.h */,
+				E7691EE02255DC4E006A94D9 /* SCVerCodeInputView.m */,
+				E7691EE12255DC4E006A94D9 /* UIView+SCValidation.h */,
+				E7691EE22255DC4E006A94D9 /* UIView+SCValidation.m */,
+				E7691EE52255E3E5006A94D9 /* TTPasswordView.h */,
+				E7691EE62255E3E5006A94D9 /* TTPasswordView.m */,
 			);
-			path = "TTAlertManager(AlertView)";
+			path = "SCVerViewInputView(验证码界面)";
 			sourceTree = "<group>";
 		};
 		E7759AB022447DA0007DA6CF /* SmallTools */ = {
@@ -1177,8 +1200,8 @@
 		E7759ACB224494E8007DA6CF /* Address(地址管理) */ = {
 			isa = PBXGroup;
 			children = (
-				E756988A2251BE320022EC49 /* Model */,
 				E7759ACC224494E8007DA6CF /* Controller */,
+				E756988A2251BE320022EC49 /* Model */,
 				E7759ACD224494E8007DA6CF /* View */,
 			);
 			path = "Address(地址管理)";
@@ -1805,6 +1828,14 @@
 				E7759AAE22447AD9007DA6CF /* TXModifyUserInfoViewController.m */,
 				E7759AC8224491BA007DA6CF /* TXResetPwdViewController.h */,
 				E7759AC9224491BA007DA6CF /* TXResetPwdViewController.m */,
+				E7691ED92255D3FA006A94D9 /* TXSetupTradingViewController.h */,
+				E7691EDA2255D3FA006A94D9 /* TXSetupTradingViewController.m */,
+				E7691EDB2255D3FA006A94D9 /* TXSetupTradingViewController.xib */,
+				E7691ED32255A809006A94D9 /* TXResetTradingViewController.h */,
+				E7691ED42255A809006A94D9 /* TXResetTradingViewController.m */,
+				E7691EEB2255F8C4006A94D9 /* TXForgetTradingViewController.h */,
+				E7691EEC2255F8C4006A94D9 /* TXForgetTradingViewController.m */,
+				E7691EED2255F8C4006A94D9 /* TXForgetTradingViewController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1880,8 +1911,10 @@
 				E7F1A7172242123A003FA216 /* TXRealNameViewController.xib in Resources */,
 				E72698C2223F7167003A5043 /* LaunchScreen.storyboard in Resources */,
 				E72699FD223F8298003A5043 /* bg.jpg in Resources */,
+				E7691EDD2255D3FA006A94D9 /* TXSetupTradingViewController.xib in Resources */,
 				E72698BF223F7167003A5043 /* Assets.xcassets in Resources */,
 				E78333DC22487913005CAB91 /* TXLoginViewController.xib in Resources */,
+				E7691EEF2255F8C4006A94D9 /* TXForgetTradingViewController.xib in Resources */,
 				E7D07C672243CCBE00E3FFAF /* LZActionSheet.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1993,6 +2026,7 @@
 				E7269980223F7E4B003A5043 /* UIView+SCLoadingView.m in Sources */,
 				E7AA9DCA22436DA700C15483 /* TXTransactionRecordsViewController.m in Sources */,
 				E78583C1223F98A800BBEA41 /* TXNewTemplateTableViewCell.m in Sources */,
+				E7691EE72255E3E5006A94D9 /* TTPasswordView.m in Sources */,
 				E72699E9223F7F58003A5043 /* UIScrollView+Extension.m in Sources */,
 				E78583F22240C29E00BBEA41 /* TXTeamViewController.m in Sources */,
 				E72699E0223F7F58003A5043 /* UIView+SCTapped.m in Sources */,
@@ -2004,6 +2038,7 @@
 				E7F1A73B22427DC0003FA216 /* TXMallToolsCollectionViewCell.m in Sources */,
 				E72699D8223F7F58003A5043 /* UIButton+Extension.m in Sources */,
 				E75F2ED3224DC9FD0091C52E /* TXShoppingTableViewCell.m in Sources */,
+				E7691EE42255DC4E006A94D9 /* UIView+SCValidation.m in Sources */,
 				E7923CAA22535CF30094D0C3 /* SCTextField.m in Sources */,
 				E72699A1223F7ECC003A5043 /* NSString+MD5.m in Sources */,
 				E75F2EE0224E1BE30091C52E /* TTUserModel.m in Sources */,
@@ -2031,6 +2066,7 @@
 				E72699E3223F7F58003A5043 /* UITabBar+SCBadge.m in Sources */,
 				E75F2ED2224DC9FD0091C52E /* TXReceiveAddressTableViewCell.m in Sources */,
 				E756988D2251BE460022EC49 /* TXAddressModel.m in Sources */,
+				E7691EEE2255F8C4006A94D9 /* TXForgetTradingViewController.m in Sources */,
 				E72699A0223F7ECC003A5043 /* NSObject+SCValidation.m in Sources */,
 				E7759AC122447FD2007DA6CF /* TXRepeatCastViewController.m in Sources */,
 				E7C42E87224B7EFA00F3FB1A /* TXNewsModel.m in Sources */,
@@ -2038,6 +2074,7 @@
 				E75F2ECF224DC9FD0091C52E /* TXShareToolsCollectionViewCell.m in Sources */,
 				E72699E2223F7F58003A5043 /* UIImage+Extension.m in Sources */,
 				E7F1A7092241F298003FA216 /* TXProductTableViewCell.m in Sources */,
+				E7691EE32255DC4E006A94D9 /* SCVerCodeInputView.m in Sources */,
 				E72699D9223F7F58003A5043 /* UILabel+Extension.m in Sources */,
 				E72699A5223F7ECC003A5043 /* NSFileManager+Paths.m in Sources */,
 				E75F2ECC224DC9FD0091C52E /* TXMallGoodsBannerTableViewCell.m in Sources */,
@@ -2084,9 +2121,11 @@
 				E78584052240C54300BBEA41 /* TYCyclePagerTransformLayout.m in Sources */,
 				E72699A7223F7ECC003A5043 /* NSDictionary+Extension.m in Sources */,
 				E72699A4223F7ECC003A5043 /* NSDate+Relation.m in Sources */,
+				E7691EDC2255D3FA006A94D9 /* TXSetupTradingViewController.m in Sources */,
 				E7759AD62244BB65007DA6CF /* TXAddressAddViewController.m in Sources */,
 				E78583C722408F1F00BBEA41 /* TXMineHeaderTableViewCell.m in Sources */,
 				E753D1F32249D3B200A2DD36 /* UIViewController+SCPopover.m in Sources */,
+				E7691ED52255A809006A94D9 /* TXResetTradingViewController.m in Sources */,
 				E78583BA223F947600BBEA41 /* Utils.m in Sources */,
 				E773264F22545BE400FD665A /* UIAlertController+SCExtension.m in Sources */,
 				E7F1A732224248D4003FA216 /* TXTeamTableViewCell.m in Sources */,
@@ -2098,7 +2137,6 @@
 				E7AA9DD72243735A00C15483 /* TXEquityViewController.m in Sources */,
 				E7269A04223F8738003A5043 /* TXMainHeaderView.m in Sources */,
 				E753D1F22249D3B200A2DD36 /* SCPresentationController.m in Sources */,
-				E773264C2254552200FD665A /* TTAlertManager.m in Sources */,
 				E78583D02240BD5A00BBEA41 /* TXGeneralModel.m in Sources */,
 				E77BC13B224F6A31008440C9 /* TXTeamModel.m in Sources */,
 				E72699E5223F7F58003A5043 /* UITextField+Extension.m in Sources */,
