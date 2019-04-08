@@ -13,8 +13,8 @@
 
 static NSString * const reuseIdentifier = @"TXAddressTableViewCell";
 
-@interface TXAddressViewController ()<UITableViewDelegate,UITableViewDataSource>
-@property (nonatomic, strong) UITableView *tableView;
+@interface TXAddressViewController ()<UITableViewDelegate,UITableViewDataSource,TTTableViewRequestDelegate>
+@property (nonatomic, strong) TTBaseTableView *tableView;
 @property (nonatomic, strong) NSMutableArray *dataArray;
 @end
 
@@ -31,24 +31,33 @@ static NSString * const reuseIdentifier = @"TXAddressTableViewCell";
     [self requestAddressData];
 }
 
-/// 获取收货地址
-- (void) requestAddressData{
-    [SCHttpTools getWithURLString:kHttpURL(@"address/GetAddress") parameter:nil success:^(id responseObject) {
-        NSDictionary *result = responseObject;
-        if ([result isKindOfClass:[NSDictionary class]]) {
-            TXAddressModel *model = [TXAddressModel mj_objectWithKeyValues:result];
+- (void)tt_tableView:(TTBaseTableView *)tt_tableView requestFailed:(NSError *)error{
+    TTLog(@"error --- %@",error);
+}
+
+/// 处理接口返回数据
+- (void)tt_tableView:(TTBaseTableView *)tt_tableView isPullDown:(BOOL)PullDown result:(id)results{
+    if (self.dataArray.count >0) {
+        self.dataArray = @[].mutableCopy;
+    }else{
+        if ([results isKindOfClass:[NSDictionary class]]) {
+            TXAddressModel *model = [TXAddressModel mj_objectWithKeyValues:results];
             if (model.errorcode == 20000) {
-                [self.dataArray addObjectsFromArray:model.data];
+                [self.dataArray addObjectsFromArray:model.data.mutableCopy];
                 [self.tableView reloadData];
             }else{
                 Toast(model.message);
             }
-        }else{
-            Toast(@"收货地址数据获取失败");
         }
-    } failure:^(NSError *error) {
-        TTLog(@" -- error -- %@",error);
-    }];
+    }
+    //处理返回的SuccessData 数据之后刷新table
+    [self.tableView reloadData];
+}
+
+/// 获取收货地址
+- (void) requestAddressData{
+    NSMutableDictionary *parameter = [[NSMutableDictionary alloc] init];
+    [self.tableView setUpWithURLString:kHttpURL(@"address/GetAddress") parameter:parameter tempVC:self];
 }
 
 - (void) addBtnClick{
@@ -93,19 +102,20 @@ static NSString * const reuseIdentifier = @"TXAddressTableViewCell";
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    [self jumpAddressEditVC:AddInfo vcTitle:@"修改收货地址"];
+//    [self jumpAddressEditVC:AddInfo vcTitle:@"修改收货地址"];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
--(UITableView *)tableView{
+- (TTBaseTableView *)tableView{
     if (!_tableView) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
+        _tableView = [[TTBaseTableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
         _tableView.showsVerticalScrollIndicator = false;
         [_tableView registerClass:[TXAddressTableViewCell class] forCellReuseIdentifier:reuseIdentifier];
         [_tableView setSeparatorInset:UIEdgeInsetsMake(0,0,0,0)];
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _tableView.delegate = self;
         _tableView.dataSource = self;
+        _tableView.requestDelegate = self;
         _tableView.backgroundColor = kTableViewInSectionColor;
     }
     return _tableView;

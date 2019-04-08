@@ -55,6 +55,7 @@
     if (!_textView) {
         _textView = [[SCTextView alloc] init];
         _textView.font = kFontSizeMedium15;
+        _textView.textColor = kTextColor102;
         _textView.placeholder = @"街道、楼牌号等";
     }
     return _textView;

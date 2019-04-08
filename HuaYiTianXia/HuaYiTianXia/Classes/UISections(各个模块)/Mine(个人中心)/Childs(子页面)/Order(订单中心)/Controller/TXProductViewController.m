@@ -13,8 +13,8 @@
 
 static NSString * const reuseIdentifier = @"TXProductTableViewCell";
 
-@interface TXProductViewController ()<UITableViewDelegate,UITableViewDataSource>
-@property (nonatomic, strong) UITableView *tableView;
+@interface TXProductViewController ()<UITableViewDelegate,UITableViewDataSource,TTTableViewRequestDelegate>
+@property (nonatomic, strong) TTBaseTableView *tableView;
 @property (nonatomic, strong) NSMutableArray *dataArray;
 /// 每页多少数据
 @property (nonatomic, assign) NSInteger pageSize;
@@ -35,23 +35,34 @@ static NSString * const reuseIdentifier = @"TXProductTableViewCell";
     [self requestData];
 }
 
+
+- (void)tt_tableView:(TTBaseTableView *)tt_tableView requestFailed:(NSError *)error{
+    TTLog(@"error --- %@",error);
+}
+
+/// 处理接口返回数据
+- (void)tt_tableView:(TTBaseTableView *)tt_tableView isPullDown:(BOOL)PullDown result:(id)result{
+    if (self.dataArray.count >0) {
+        self.dataArray = @[].mutableCopy;
+    }else{
+        if ([result isKindOfClass:[NSDictionary class]]) {
+            TXOrderModel *model = [TXOrderModel mj_objectWithKeyValues:result];
+            if (model.errorcode == 20000) {
+                [self.dataArray addObjectsFromArray:model.data.records.mutableCopy];
+            }
+        }
+    }
+    //处理返回的SuccessData 数据之后刷新table
+    [self.tableView reloadData];
+}
+
 /// 获取订单中心-产品列表数据
 - (void) requestData{
     NSMutableDictionary *parameter = [[NSMutableDictionary alloc] init];
     [parameter setObject:@(self.pageIndex) forKey:@"page"];     // 当前页
     [parameter setObject:@(self.pageSize) forKey:@"pageSize"];  // 每页条数
-    [SCHttpTools postWithURLString:kHttpURL(@"orderform/GetOrderPro") parameter:parameter success:^(id responseObject) {
-        NSDictionary *result = responseObject;
-        if ([result isKindOfClass:[NSDictionary class]]) {
-            TXOrderModel *model = [TXOrderModel mj_objectWithKeyValues:result];
-            if (model.errorcode == 20000) {
-                [self.dataArray addObjectsFromArray:model.data.records];
-                [self.tableView reloadData];
-            }
-        }
-    } failure:^(NSError *error) {
-        TTLog(@"error --- %@",error);
-    }];
+    //请求数据
+    [self.tableView setUpWithURLString:kHttpURL(@"orderform/GetOrderPro") parameter:parameter tempVC:self];
 }
 
 //// 跳转查看合同
@@ -69,20 +80,7 @@ static NSString * const reuseIdentifier = @"TXProductTableViewCell";
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.bottom.right.equalTo(self.view);
     }];
-//    [self.view showLoadingViewWithText:@"加载中..."];
-    
-//    // 下拉刷新
-//    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-//        //将页码重新置为1
-//        self.pageIndex = 1;
-//        [self getDataRequest];
-//    }];
-//    /// 上拉加载
-//    self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
-//        self.pageIndex++;// 页码+1
-//        [self getDataRequest];
-//        [self.tableView.mj_footer endRefreshing];
-//    }];
+    //    [self.view showLoadingViewWithText:@"加载中..."];
 }
 
 #pragma mark - Table view data source
@@ -120,35 +118,20 @@ static NSString * const reuseIdentifier = @"TXProductTableViewCell";
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
--(UITableView *)tableView{
+- (TTBaseTableView *)tableView{
     if (!_tableView) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
+        _tableView = [[TTBaseTableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
         _tableView.showsVerticalScrollIndicator = false;
         [_tableView registerClass:[TXProductTableViewCell class] forCellReuseIdentifier:reuseIdentifier];
         [_tableView setSeparatorInset:UIEdgeInsetsMake(0,0,0,0)];
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _tableView.delegate = self;
         _tableView.dataSource = self;
+        _tableView.requestDelegate = self;
         _tableView.backgroundColor = kTableViewInSectionColor;
     }
     return _tableView;
 }
-
-//- (SCNoDataView *)noDataView {
-//    if (!_noDataView) {
-//        _noDataView = [[SCNoDataView alloc] initWithFrame:self.view.bounds
-//                                                imageName:@"live_k_yuyue"
-//                                            tipsLabelText:@"没有预约的商家哦~"];
-//        _noDataView.userInteractionEnabled = YES;
-//        [self.view insertSubview:_noDataView aboveSubview:self.tableView];
-//        [self.noDataView mas_makeConstraints:^(MASConstraintMaker *make) {
-//            make.left.right.mas_offset(0);
-//            make.centerY.mas_equalTo(self.view.mas_centerY);
-//            make.height.mas_equalTo(150);
-//        }];
-//    }
-//    return _noDataView;
-//}
 
 - (NSMutableArray *)dataArray{
     if (!_dataArray) {

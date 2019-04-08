@@ -140,6 +140,14 @@
 		E78584042240C54300BBEA41 /* TYCyclePagerView.m in Sources */ = {isa = PBXBuildFile; fileRef = E78584002240C54200BBEA41 /* TYCyclePagerView.m */; };
 		E78584052240C54300BBEA41 /* TYCyclePagerTransformLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = E78584012240C54200BBEA41 /* TYCyclePagerTransformLayout.m */; };
 		E78584082240C68500BBEA41 /* TXMineBannerCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E78584072240C68500BBEA41 /* TXMineBannerCollectionViewCell.m */; };
+		E78B8F6F225AE53E0052852C /* TTBaseTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = E78B8F6E225AE53E0052852C /* TTBaseTableView.m */; };
+		E78B8F7D225B32BC0052852C /* addr.json in Resources */ = {isa = PBXBuildFile; fileRef = E78B8F71225B32BC0052852C /* addr.json */; };
+		E78B8F7E225B32BC0052852C /* c31_btn_close@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E78B8F72225B32BC0052852C /* c31_btn_close@2x.png */; };
+		E78B8F7F225B32BC0052852C /* TTPickerHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = E78B8F74225B32BC0052852C /* TTPickerHeaderView.m */; };
+		E78B8F80225B32BC0052852C /* TTPickerListView.m in Sources */ = {isa = PBXBuildFile; fileRef = E78B8F76225B32BC0052852C /* TTPickerListView.m */; };
+		E78B8F81225B32BC0052852C /* TTPickerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E78B8F78225B32BC0052852C /* TTPickerModel.m */; };
+		E78B8F82225B32BC0052852C /* TTPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = E78B8F7A225B32BC0052852C /* TTPickerView.m */; };
+		E78B8F83225B32BC0052852C /* MyCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E78B8F7C225B32BC0052852C /* MyCollectionViewCell.m */; };
 		E7923C9F2253022D0094D0C3 /* TXGoodsH5TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7923C9E2253022D0094D0C3 /* TXGoodsH5TableViewCell.m */; };
 		E7923CA5225341C40094D0C3 /* SCImagePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = E7923CA2225341C40094D0C3 /* SCImagePicker.m */; };
 		E7923CA6225341C40094D0C3 /* SCUploadImageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E7923CA4225341C40094D0C3 /* SCUploadImageModel.m */; };
@@ -450,6 +458,20 @@
 		E78584022240C54200BBEA41 /* TYPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TYPageControl.h; sourceTree = "<group>"; };
 		E78584062240C68500BBEA41 /* TXMineBannerCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXMineBannerCollectionViewCell.h; sourceTree = "<group>"; };
 		E78584072240C68500BBEA41 /* TXMineBannerCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXMineBannerCollectionViewCell.m; sourceTree = "<group>"; };
+		E78B8F6D225AE53E0052852C /* TTBaseTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TTBaseTableView.h; sourceTree = "<group>"; };
+		E78B8F6E225AE53E0052852C /* TTBaseTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TTBaseTableView.m; sourceTree = "<group>"; };
+		E78B8F71225B32BC0052852C /* addr.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = addr.json; sourceTree = "<group>"; };
+		E78B8F72225B32BC0052852C /* c31_btn_close@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "c31_btn_close@2x.png"; sourceTree = "<group>"; };
+		E78B8F73225B32BC0052852C /* TTPickerHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTPickerHeaderView.h; sourceTree = "<group>"; };
+		E78B8F74225B32BC0052852C /* TTPickerHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTPickerHeaderView.m; sourceTree = "<group>"; };
+		E78B8F75225B32BC0052852C /* TTPickerListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTPickerListView.h; sourceTree = "<group>"; };
+		E78B8F76225B32BC0052852C /* TTPickerListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTPickerListView.m; sourceTree = "<group>"; };
+		E78B8F77225B32BC0052852C /* TTPickerModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTPickerModel.h; sourceTree = "<group>"; };
+		E78B8F78225B32BC0052852C /* TTPickerModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTPickerModel.m; sourceTree = "<group>"; };
+		E78B8F79225B32BC0052852C /* TTPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTPickerView.h; sourceTree = "<group>"; };
+		E78B8F7A225B32BC0052852C /* TTPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTPickerView.m; sourceTree = "<group>"; };
+		E78B8F7B225B32BC0052852C /* MyCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCollectionViewCell.h; sourceTree = "<group>"; };
+		E78B8F7C225B32BC0052852C /* MyCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCollectionViewCell.m; sourceTree = "<group>"; };
 		E7923C9D2253022D0094D0C3 /* TXGoodsH5TableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXGoodsH5TableViewCell.h; sourceTree = "<group>"; };
 		E7923C9E2253022D0094D0C3 /* TXGoodsH5TableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXGoodsH5TableViewCell.m; sourceTree = "<group>"; };
 		E7923CA1225341C40094D0C3 /* SCImagePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCImagePicker.h; sourceTree = "<group>"; };
@@ -849,6 +871,7 @@
 		E72698E8223F737C003A5043 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				E78B8F70225B32BC0052852C /* TTPicker(城市选择器) */,
 				E7691EDE2255DC4E006A94D9 /* SCVerViewInputView(验证码界面) */,
 				E7923CA722535CE00094D0C3 /* SCTextField(身份证键盘) */,
 				E7923CA0225341C40094D0C3 /* SCImagePicker(选择头像) */,
@@ -1068,6 +1091,8 @@
 		E756989A2252028B0022EC49 /* Example */ = {
 			isa = PBXGroup;
 			children = (
+				E78B8F6D225AE53E0052852C /* TTBaseTableView.h */,
+				E78B8F6E225AE53E0052852C /* TTBaseTableView.m */,
 			);
 			path = Example;
 			sourceTree = "<group>";
@@ -1519,6 +1544,25 @@
 			path = TYCyclePagerView;
 			sourceTree = "<group>";
 		};
+		E78B8F70225B32BC0052852C /* TTPicker(城市选择器) */ = {
+			isa = PBXGroup;
+			children = (
+				E78B8F71225B32BC0052852C /* addr.json */,
+				E78B8F72225B32BC0052852C /* c31_btn_close@2x.png */,
+				E78B8F73225B32BC0052852C /* TTPickerHeaderView.h */,
+				E78B8F74225B32BC0052852C /* TTPickerHeaderView.m */,
+				E78B8F75225B32BC0052852C /* TTPickerListView.h */,
+				E78B8F76225B32BC0052852C /* TTPickerListView.m */,
+				E78B8F77225B32BC0052852C /* TTPickerModel.h */,
+				E78B8F78225B32BC0052852C /* TTPickerModel.m */,
+				E78B8F79225B32BC0052852C /* TTPickerView.h */,
+				E78B8F7A225B32BC0052852C /* TTPickerView.m */,
+				E78B8F7B225B32BC0052852C /* MyCollectionViewCell.h */,
+				E78B8F7C225B32BC0052852C /* MyCollectionViewCell.m */,
+			);
+			path = "TTPicker(城市选择器)";
+			sourceTree = "<group>";
+		};
 		E7923CA0225341C40094D0C3 /* SCImagePicker(选择头像) */ = {
 			isa = PBXGroup;
 			children = (
@@ -1915,7 +1959,9 @@
 				E72698BF223F7167003A5043 /* Assets.xcassets in Resources */,
 				E78333DC22487913005CAB91 /* TXLoginViewController.xib in Resources */,
 				E7691EEF2255F8C4006A94D9 /* TXForgetTradingViewController.xib in Resources */,
+				E78B8F7D225B32BC0052852C /* addr.json in Resources */,
 				E7D07C672243CCBE00E3FFAF /* LZActionSheet.bundle in Resources */,
+				E78B8F7E225B32BC0052852C /* c31_btn_close@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1986,6 +2032,7 @@
 				E72699E8223F7F58003A5043 /* UIView+Extension.m in Sources */,
 				E7923C9F2253022D0094D0C3 /* TXGoodsH5TableViewCell.m in Sources */,
 				E7759AED2244E8F9007DA6CF /* TXMembersbleViewCell.m in Sources */,
+				E78B8F7F225B32BC0052852C /* TTPickerHeaderView.m in Sources */,
 				E7F1A74122428A8F003FA216 /* TXMallCollectionViewCell.m in Sources */,
 				E756989D225202AE0022EC49 /* TXWebViewController.m in Sources */,
 				E7C42E7E224B770200F3FB1A /* SCHttpTools.m in Sources */,
@@ -2002,6 +2049,7 @@
 				E7F1A70F224205A2003FA216 /* TTBaseSectionHeaderView.m in Sources */,
 				E72699D7223F7F58003A5043 /* UIColor+Extension.m in Sources */,
 				E78583F52240C2AF00BBEA41 /* TXWalletViewController.m in Sources */,
+				E78B8F82225B32BC0052852C /* TTPickerView.m in Sources */,
 				E72699F9223F8298003A5043 /* WMMenuItem.m in Sources */,
 				E78584032240C54300BBEA41 /* TYPageControl.m in Sources */,
 				E72699FC223F8298003A5043 /* WMProgressView.m in Sources */,
@@ -2021,6 +2069,7 @@
 				E7759AE02244C59F007DA6CF /* TXAddressTextViewCell.m in Sources */,
 				E72699A6223F7ECC003A5043 /* NSString+URL.m in Sources */,
 				E78334082248DE2F005CAB91 /* TTPopupBackgroundView.m in Sources */,
+				E78B8F81225B32BC0052852C /* TTPickerModel.m in Sources */,
 				E72699E6223F7F58003A5043 /* UIScreen+Extension.m in Sources */,
 				E75F2ED6224DCB5F0091C52E /* TXBuyCountTableViewCell.m in Sources */,
 				E7269980223F7E4B003A5043 /* UIView+SCLoadingView.m in Sources */,
@@ -2028,6 +2077,7 @@
 				E78583C1223F98A800BBEA41 /* TXNewTemplateTableViewCell.m in Sources */,
 				E7691EE72255E3E5006A94D9 /* TTPasswordView.m in Sources */,
 				E72699E9223F7F58003A5043 /* UIScrollView+Extension.m in Sources */,
+				E78B8F80225B32BC0052852C /* TTPickerListView.m in Sources */,
 				E78583F22240C29E00BBEA41 /* TXTeamViewController.m in Sources */,
 				E72699E0223F7F58003A5043 /* UIView+SCTapped.m in Sources */,
 				E72699A9223F7ECC003A5043 /* NSString+PinYin.m in Sources */,
@@ -2096,6 +2146,7 @@
 				E72699E4223F7F58003A5043 /* UIImage+SCExtension.m in Sources */,
 				E77326552254A87D00FD665A /* TXRolloutTypeViewController.m in Sources */,
 				E72699DB223F7F58003A5043 /* UINavigationBar+SCExtension.m in Sources */,
+				E78B8F83225B32BC0052852C /* MyCollectionViewCell.m in Sources */,
 				E78583CD22409E6D00BBEA41 /* TXMineBannerTableViewCell.m in Sources */,
 				E7AA9DAF2243353200C15483 /* TTBaseNavImagesTableViewController.m in Sources */,
 				E72699AA223F7ECC003A5043 /* NSArray+Extension.m in Sources */,
@@ -2111,6 +2162,7 @@
 				E72699E1223F7F58003A5043 /* UILabel+SCExtension.m in Sources */,
 				E7F1A73822427A65003FA216 /* TXMallCollectionViewController.m in Sources */,
 				E75F2ED1224DC9FD0091C52E /* TXPurchaseQuantityTableViewCell.m in Sources */,
+				E78B8F6F225AE53E0052852C /* TTBaseTableView.m in Sources */,
 				E7AA9DCD22436F4D00C15483 /* TXTransactionRecordsTableViewCell.m in Sources */,
 				E753D1F12249D3B200A2DD36 /* SCPopoverAnimator.m in Sources */,
 				E726990F223F786B003A5043 /* TXMineViewController.m in Sources */,

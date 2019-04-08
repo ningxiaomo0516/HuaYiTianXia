@@ -12,8 +12,8 @@
 
 static NSString * const reuseIdentifier = @"TXEarningsTableViewCell";
 
-@interface TXEquityViewController ()<UITableViewDelegate,UITableViewDataSource>
-@property (nonatomic, strong) UITableView *tableView;
+@interface TXEquityViewController ()<UITableViewDelegate,UITableViewDataSource,TTTableViewRequestDelegate>
+@property (nonatomic, strong) TTBaseTableView *tableView;
 @property (nonatomic, strong) NSMutableArray *dataArray;
 /// 每页多少数据
 @property (nonatomic, assign) NSInteger pageSize;
@@ -38,36 +38,48 @@ static NSString * const reuseIdentifier = @"TXEarningsTableViewCell";
         self.pageType = 0;
     }else if ([self.title isEqualToString:@"转出记录"]){/// 转出记录
         self.stringURL = @"transaction/UserTransOut";
+        self.tableView.emptyViewHeight = 40;
         self.pageType = 1;
     }else if ([self.title isEqualToString:@"转入记录"]){/// 转入记录
         self.stringURL = @"transaction/UserTransInit";
+        self.tableView.emptyViewHeight = 40;
         self.pageType = 2;
     }
     [self initView];
     [self loadEquityData];
 }
 
+- (void)tt_tableView:(TTBaseTableView *)tt_tableView requestFailed:(NSError *)error{
+    TTLog(@"error --- %@",error);
+}
+
+/// 处理接口返回数据
+- (void)tt_tableView:(TTBaseTableView *)tt_tableView isPullDown:(BOOL)PullDown result:(id)result{
+    if (self.dataArray.count >0) {
+        self.dataArray = @[].mutableCopy;
+    }else{
+        if ([result isKindOfClass:[NSDictionary class]]) {
+            TXWalletModel *model = [TXWalletModel mj_objectWithKeyValues:result];
+            if (model.errorcode == 20000) {
+                [self.dataArray addObjectsFromArray:model.data.list.mutableCopy];
+                [self.tableView reloadData];
+            }else{
+                Toast(model.message);
+            }
+        }
+    }
+    //处理返回的SuccessData 数据之后刷新table
+    [self.tableView reloadData];
+}
+
+
 /// 获取股权记录
 - (void) loadEquityData{
     NSMutableDictionary *parameter = [[NSMutableDictionary alloc] init];
     [parameter setObject:@(self.pageIndex) forKey:@"page"];     // 当前页
     [parameter setObject:@(self.pageSize) forKey:@"pageSize"];  // 每页条数
-    [SCHttpTools postWithURLString:kHttpURL(self.stringURL) parameter:parameter success:^(id responseObject) {
-        NSDictionary *result = responseObject;
-        if ([result isKindOfClass:[NSDictionary class]]) {
-            TXWalletModel *model = [TXWalletModel mj_objectWithKeyValues:result];
-            if (model.errorcode == 20000) {
-                [self.dataArray addObjectsFromArray:model.data.list];
-                [self.tableView reloadData];
-            }else{
-                Toast(model.message);
-            }
-        }else{
-            Toast(@"收货地址数据获取失败");
-        }
-    } failure:^(NSError *error) {
-        TTLog(@" -- error -- %@",error);
-    }];
+    self.tableView.requestType = kHttpPost;
+    [self.tableView setUpWithURLString:kHttpURL(self.stringURL) parameter:parameter tempVC:self];
 }
 
 - (void) initView{
@@ -111,15 +123,16 @@ static NSString * const reuseIdentifier = @"TXEarningsTableViewCell";
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
--(UITableView *)tableView{
+- (TTBaseTableView *)tableView{
     if (!_tableView) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
+        _tableView = [[TTBaseTableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
         _tableView.showsVerticalScrollIndicator = false;
         [_tableView registerClass:[TXEarningsTableViewCell class] forCellReuseIdentifier:reuseIdentifier];
         [_tableView setSeparatorInset:UIEdgeInsetsMake(0,15,0,0)];
         _tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
         _tableView.delegate = self;
         _tableView.dataSource = self;
+        _tableView.requestDelegate = self;
         _tableView.backgroundColor = kTableViewInSectionColor;
     }
     return _tableView;

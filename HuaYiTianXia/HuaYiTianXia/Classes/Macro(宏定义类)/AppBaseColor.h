@@ -46,7 +46,7 @@
 #define kFontSizeDisplayRegular12 [UIFont fontWithName:kFontWithNameDisplayRegular size:12]
 #define kFontSizeDisplayMedium22 [UIFont fontWithName:kFontWithNameDisplayMedium size:22]
 #define kFontSizeDisplayMedium36 [UIFont fontWithName:kFontWithNameDisplayMedium size:36]
-
+//[UIFont systemFontOfSize:14 weight:UIFontWeightRegular]
 
 #define kFontWithNameSc12 [UIFont fontWithName:kFontWithNameSc size:12]
 

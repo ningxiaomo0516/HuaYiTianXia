@@ -60,7 +60,8 @@
     }];
     
     [self.subtitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.center.left.right.equalTo(self.textField);
+        make.centerY.left.equalTo(self.textField);
+        make.right.equalTo(self.mas_right).offset(IPHONE6_W(-30));
     }];
 
     [self.imagesArrow mas_makeConstraints:^(MASConstraintMaker *make) {
