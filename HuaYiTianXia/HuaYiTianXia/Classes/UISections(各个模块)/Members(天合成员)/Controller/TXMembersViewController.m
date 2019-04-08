@@ -9,14 +9,15 @@
 #import "TXMembersViewController.h"
 #import "TXMembersBannerView.h"
 #import "TXMembersbleViewCell.h"
+#import "TXWebHeaderView.h"
 
 static NSString * const reuseIdentifier = @"TXMembersbleViewCell";
 
 @interface TXMembersViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *dataArray;
-
-@property (nonatomic, strong) TXMembersBannerView *headerView;
+@property (strong, nonatomic) TXWebHeaderView *headerView;
+@property (nonatomic, strong) TXMembersBannerView *bannerView;
 @end
 
 @implementation TXMembersViewController
@@ -32,18 +33,39 @@ static NSString * const reuseIdentifier = @"TXMembersbleViewCell";
     [super viewWillAppear:animated];
 }
 
+/** 保存 */
+- (void) saveBtnClick:(UIButton *) sender{
+    
+}
+
 - (void) initView{
-    [self.view addSubview:self.headerView];
-    [self.headerView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.top.right.equalTo(self.view);
-        make.height.equalTo(@(IPHONE6_W(150)));
-    }];
-    [Utils lz_setExtraCellLineHidden:self.tableView];
+    
+    self.headerView.titleLabel.text = @"欢迎激活共享飞行";
+    self.headerView.subtitleLabel.text = @"优享品质生活";
+    self.headerView.imagesView.image = kGetImage(@"c41_live_jinka");
+    [self.headerView.saveButton setTitle:@"系统审核中" forState:UIControlStateNormal];
     [self.view addSubview:self.tableView];
+    [Utils lz_setExtraCellLineHidden:self.tableView];
+    self.tableView.tableHeaderView = self.headerView;
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.bottom.right.equalTo(self.view);
-        make.top.equalTo(self.headerView.mas_bottom);
+        make.top.bottom.left.right.equalTo(self.view);
+        make.bottom.equalTo(self.view).offset(-kTabBarHeight);
     }];
+    MV(weakSelf);
+    [self.headerView.saveButton lz_handleControlEvent:UIControlEventTouchUpInside withBlock:^{
+        [weakSelf saveBtnClick:self.headerView.saveButton];
+    }];
+    
+//    [self.view addSubview:self.bannerView];
+//    [self.bannerView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.top.right.equalTo(self.view);
+//        make.height.equalTo(@(IPHONE6_W(150)));
+//    }];
+//    [self.view addSubview:self.tableView];
+//    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.bottom.right.equalTo(self.view);
+//        make.top.equalTo(self.bannerView.mas_bottom);
+//    }];
 }
 
 #pragma mark - Table view data source
@@ -89,9 +111,17 @@ static NSString * const reuseIdentifier = @"TXMembersbleViewCell";
     return _tableView;
 }
 
-- (TXMembersBannerView *)headerView{
+- (TXMembersBannerView *)bannerView{
+    if (!_bannerView) {
+        _bannerView = [[TXMembersBannerView alloc] init];
+    }
+    return _bannerView;
+}
+
+- (TXWebHeaderView *)headerView{
     if (!_headerView) {
-        _headerView = [[TXMembersBannerView alloc] init];
+        _headerView = [[TXWebHeaderView alloc] init];
+        _headerView.frame = CGRectMake(0, 0, kScreenWidth, IPHONE6_W(330));
     }
     return _headerView;
 }

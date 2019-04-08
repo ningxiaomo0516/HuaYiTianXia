@@ -74,6 +74,7 @@
 #define kFontSizeMedium25 [UIFont fontWithName:kFontWithNameMedium size:25]
 #define kFontSizeMedium27 [UIFont fontWithName:kFontWithNameMedium size:27]
 #define kFontSizeMedium30 [UIFont fontWithName:kFontWithNameMedium size:30]
+#define kFontSizeMedium34 [UIFont fontWithName:kFontWithNameMedium size:34]
 
 
 //#define kFontSizeMedium15 [UIFont fontWithName:kFontWithNameMedium size:15*kScaleFit]

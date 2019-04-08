@@ -64,6 +64,7 @@
 		E72699FD223F8298003A5043 /* bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E72699F7223F8297003A5043 /* bg.jpg */; };
 		E7269A00223F8472003A5043 /* TXNewTemplateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E72699FF223F8472003A5043 /* TXNewTemplateViewController.m */; };
 		E7269A04223F8738003A5043 /* TXMainHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = E7269A03223F8738003A5043 /* TXMainHeaderView.m */; };
+		E74C952E225B8F61000CBAF0 /* TXWebHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = E74C952D225B8F61000CBAF0 /* TXWebHeaderView.m */; };
 		E753D1F12249D3B200A2DD36 /* SCPopoverAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = E753D1EB2249D3B200A2DD36 /* SCPopoverAnimator.m */; };
 		E753D1F22249D3B200A2DD36 /* SCPresentationController.m in Sources */ = {isa = PBXBuildFile; fileRef = E753D1EE2249D3B200A2DD36 /* SCPresentationController.m */; };
 		E753D1F32249D3B200A2DD36 /* UIViewController+SCPopover.m in Sources */ = {isa = PBXBuildFile; fileRef = E753D1F02249D3B200A2DD36 /* UIViewController+SCPopover.m */; };
@@ -308,6 +309,8 @@
 		E72699FF223F8472003A5043 /* TXNewTemplateViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXNewTemplateViewController.m; sourceTree = "<group>"; };
 		E7269A02223F8738003A5043 /* TXMainHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXMainHeaderView.h; sourceTree = "<group>"; };
 		E7269A03223F8738003A5043 /* TXMainHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXMainHeaderView.m; sourceTree = "<group>"; };
+		E74C952C225B8F61000CBAF0 /* TXWebHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXWebHeaderView.h; sourceTree = "<group>"; };
+		E74C952D225B8F61000CBAF0 /* TXWebHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXWebHeaderView.m; sourceTree = "<group>"; };
 		E753D1EA2249D3B200A2DD36 /* SCPopoverAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCPopoverAnimator.h; sourceTree = "<group>"; };
 		E753D1EB2249D3B200A2DD36 /* SCPopoverAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCPopoverAnimator.m; sourceTree = "<group>"; };
 		E753D1EC2249D3B200A2DD36 /* SCPopoverMacro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCPopoverMacro.h; sourceTree = "<group>"; };
@@ -707,9 +710,9 @@
 		E72698D4223F737C003A5043 /* Agricultural(农用植保) */ = {
 			isa = PBXGroup;
 			children = (
+				E74C952B225B8567000CBAF0 /* View */,
 				E72698D5223F737C003A5043 /* Controller */,
 				E72698D6223F737C003A5043 /* Model */,
-				E72698D7223F737C003A5043 /* View */,
 			);
 			path = "Agricultural(农用植保)";
 			sourceTree = "<group>";
@@ -728,13 +731,6 @@
 			children = (
 			);
 			path = Model;
-			sourceTree = "<group>";
-		};
-		E72698D7223F737C003A5043 /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 		E72698D8223F737C003A5043 /* News(新闻) */ = {
@@ -1038,6 +1034,15 @@
 				E7269A03223F8738003A5043 /* TXMainHeaderView.m */,
 			);
 			path = Commons;
+			sourceTree = "<group>";
+		};
+		E74C952B225B8567000CBAF0 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E74C952C225B8F61000CBAF0 /* TXWebHeaderView.h */,
+				E74C952D225B8F61000CBAF0 /* TXWebHeaderView.m */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		E7525138224CBE8D005E0556 /* Model */ = {
@@ -2099,6 +2104,7 @@
 				E7F1A71222420A1B003FA216 /* TXEarningsTableViewCell.m in Sources */,
 				E78333EA2248AAD2005CAB91 /* TXRegisterPasswordViewController.m in Sources */,
 				E75F2EC9224DC9FD0091C52E /* TXMallGoodsDetailsViewController.m in Sources */,
+				E74C952E225B8F61000CBAF0 /* TXWebHeaderView.m in Sources */,
 				E7759AB622447DC0007DA6CF /* SCSmallTools.m in Sources */,
 				E72698C5223F7167003A5043 /* main.m in Sources */,
 				E7759AE32244CDC3007DA6CF /* TXSwitchTableViewCell.m in Sources */,
@@ -2328,7 +2334,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 9BX6WSFU2J;
+				DEVELOPMENT_TEAM = 8RL8MGBZ32;
 				GCC_PREFIX_HEADER = "HuaYiTianXia/Classes/Macro(宏定义类)/PrefixHeader.pch";
 				INFOPLIST_FILE = HuaYiTianXia/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -2350,7 +2356,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 9BX6WSFU2J;
+				DEVELOPMENT_TEAM = 8RL8MGBZ32;
 				GCC_PREFIX_HEADER = "HuaYiTianXia/Classes/Macro(宏定义类)/PrefixHeader.pch";
 				INFOPLIST_FILE = HuaYiTianXia/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;

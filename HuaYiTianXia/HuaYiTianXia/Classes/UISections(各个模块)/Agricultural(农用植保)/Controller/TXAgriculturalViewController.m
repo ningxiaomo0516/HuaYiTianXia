@@ -7,10 +7,14 @@
 //
 
 #import "TXAgriculturalViewController.h"
-#import "TTTagView.h"
+#import "TXRegisterTableViewCell.h"
+#import "TXWebHeaderView.h"
 
-@interface TXAgriculturalViewController ()<TTTagViewDelegate>
-@property (nonatomic ,strong)TTTagView * tagView;
+static NSString * const reuseIdentifier = @"TXRegisterTableViewCell";
+
+@interface TXAgriculturalViewController ()<UITableViewDelegate,UITableViewDataSource>
+@property (strong, nonatomic) TXWebHeaderView *headerView;
+@property (strong, nonatomic) UITableView *tableView;
 
 @end
 
@@ -19,28 +23,77 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [self.view addSubview:self.tagView];
-     self.tagView.dataArray = @[@"锤子",@"见过",@"膜拜单车",@"微信支付",@"Q",@"王者荣耀",@"蓝淋网",@"阿珂",@"半生",@"猎场",@"QQ空间",@"王者荣耀助手",@"斯卡哈复健科",@"安抚",@"沙发上",@"日打的费",@"问问",@"无人区",@"阿斯废弃物人情味",@"沙发上",@"日打的费",@"问问",@"无人区",@"阿斯废弃物人情味",@"沙发上",@"日打的费",@"问问",@"无人区",@"阿斯废弃物人情味",@"沙发上",@"日打的费",@"问问",@"无人区",@"阿斯废弃物人情味"];
-    TTLog(@"----- %f",CGRectGetHeight(self.tagView.frame));
+    [self initView];
+}
+
+- (void) initView{
+    
+    self.headerView.titleLabel.text = @"一县一代理独家经营";
+    self.headerView.subtitleLabel.text = @"农用科技化、现代化";
+    self.headerView.imagesView.image = kGetImage(@"c41_live_jinka");
+    [self.headerView.saveButton setTitle:@"农用植保" forState:UIControlStateNormal];
+    [self.view addSubview:self.tableView];
+    [Utils lz_setExtraCellLineHidden:self.tableView];
+    self.tableView.tableHeaderView = self.headerView;
+    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.bottom.left.right.equalTo(self.view);
+    }];
+    MV(weakSelf);
+    [self.headerView.saveButton lz_handleControlEvent:UIControlEventTouchUpInside withBlock:^{
+        [weakSelf saveBtnClick:self.headerView.saveButton];
+    }];
+
 }
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
 }
 
+/** 保存 */
+- (void) saveBtnClick:(UIButton *) sender{
 
--(TTTagView *)tagView{
-    if (!_tagView) {
-        _tagView = [[TTTagView alloc]initWithFrame:CGRectMake(0, 100, kScreenWidth, 0)];
-        _tagView.delegate = self;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    TXRegisterTableViewCell *tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
+    tools.titleLabel.text = @"12";
+    return tools;
+}
+
+/// 返回多少
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 1;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return IPHONE6_W(55);
+}
+
+-(UITableView *)tableView{
+    if (!_tableView) {
+        _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
+        _tableView.showsVerticalScrollIndicator = false;
+        [_tableView setSeparatorInset:UIEdgeInsetsMake(0,15,0,15)];
+        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        [_tableView registerClass:[TXRegisterTableViewCell class] forCellReuseIdentifier:reuseIdentifier];
+        // 拖动tableView时收起键盘
+        _tableView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
+        _tableView.delegate = self;
+        _tableView.dataSource = self;
+        _tableView.backgroundColor = kClearColor;
     }
-    return _tagView;
+    return _tableView;
 }
 
-#pragma mark - CCTagViewDelegate
-- (void)handleSelectTag:(NSString *)keyWord{
-    TTLog(@"keyWord ---- %@",keyWord);
+- (TXWebHeaderView *)headerView{
+    if (!_headerView) {
+        _headerView = [[TXWebHeaderView alloc] init];
+        _headerView.frame = CGRectMake(0, 0, kScreenWidth, IPHONE6_W(330));
+    }
+    return _headerView;
 }
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
