@@ -15,6 +15,7 @@ static NSString * const reuseIdentifier = @"TXTeamTableViewCell";
 @interface TXTeamViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *dataArray;
+@property (nonatomic, strong) SCNoDataView *noDataView;
 @end
 
 
@@ -24,7 +25,12 @@ static NSString * const reuseIdentifier = @"TXTeamTableViewCell";
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self initView];
+    [self.view showLoadingViewWithText:@"加载中..."];
     [self requestPersonalCenterData];
+    // 下拉刷新
+    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        [self requestPersonalCenterData];
+    }];
 }
 
 - (void) requestPersonalCenterData{
@@ -34,20 +40,32 @@ static NSString * const reuseIdentifier = @"TXTeamTableViewCell";
             TXTeamModel *model = [TXTeamModel mj_objectWithKeyValues:result];
             if (model.errorcode == 20000) {
                 [self.dataArray addObjectsFromArray:model.data];
-                [self.tableView reloadData];
             }else{
                 Toast(model.message);
             }
+            [self analysisData];
+            [self.tableView reloadData];
+            [self.tableView.mj_header endRefreshing];
         }else{
             Toast(@"个人中心数据获取失败");
         }
+        [self.view dismissLoadingView];
     } failure:^(NSError *error) {
         TTLog(@" -- error -- %@",error);
+        [self.tableView.mj_header endRefreshing];
+        [self.view dismissLoadingView];
     }];
 }
 
+- (void)analysisData {
+    if (self.dataArray.count == 0) {
+        self.noDataView.hidden = NO;
+    }else {
+        self.noDataView.hidden = YES;
+    }
+}
+
 - (void) initView{
-    
     [Utils lz_setExtraCellLineHidden:self.tableView];
     [self.view addSubview:self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -99,21 +117,21 @@ static NSString * const reuseIdentifier = @"TXTeamTableViewCell";
     return _tableView;
 }
 
-//- (SCNoDataView *)noDataView {
-//    if (!_noDataView) {
-//        _noDataView = [[SCNoDataView alloc] initWithFrame:self.view.bounds
-//                                                imageName:@"live_k_yuyue"
-//                                            tipsLabelText:@"没有预约的商家哦~"];
-//        _noDataView.userInteractionEnabled = YES;
-//        [self.view insertSubview:_noDataView aboveSubview:self.tableView];
-//        [self.noDataView mas_makeConstraints:^(MASConstraintMaker *make) {
-//            make.left.right.mas_offset(0);
-//            make.centerY.mas_equalTo(self.view.mas_centerY);
-//            make.height.mas_equalTo(150);
-//        }];
-//    }
-//    return _noDataView;
-//}
+- (SCNoDataView *)noDataView {
+    if (!_noDataView) {
+        _noDataView = [[SCNoDataView alloc] initWithFrame:self.view.bounds
+                                                imageName:@"live_k_yuyue"
+                                            tipsLabelText:@"没有预约的商家哦~"];
+        _noDataView.userInteractionEnabled = NO;
+        [self.view insertSubview:_noDataView aboveSubview:self.tableView];
+        [self.noDataView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.mas_offset(0);
+            make.centerY.mas_equalTo(self.view.mas_centerY);
+            make.height.mas_equalTo(150);
+        }];
+    }
+    return _noDataView;
+}
 
 - (NSMutableArray *)dataArray{
     if (!_dataArray) {

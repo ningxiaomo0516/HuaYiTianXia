@@ -126,6 +126,7 @@ static NSString * const pageIndex = @"pageIndex";//获取第几页的根据自�
         [self.requestDelegate tt_tableView:self isPullDown:isPullDown result:@[]];
     }
     self->_hasNetError = NO;
+    [self showLoadingViewWithText:@"加载中..."];
     [self tt_endRefrseh];
     MV(weakSelf)
     //// YES:POST 1:GET(网络数据接口请求)
@@ -133,15 +134,19 @@ static NSString * const pageIndex = @"pageIndex";//获取第几页的根据自�
         [SCHttpTools getWithURLString:_requestURL parameter:paramter success:^(id responseObject) {
 
             [weakSelf dealwithSuccess:isPullDown result:responseObject];
+            [self dismissLoadingView];
         } failure:^(NSError *error) {
             [weakSelf dealwithFailure:isPullDown error:error];
+            [self dismissLoadingView];
         }];
     }else if(self.requestType == kHttpPost){
         [SCHttpTools postWithURLString:_requestURL parameter:paramter success:^(id responseObject) {
             
             [weakSelf dealwithSuccess:isPullDown result:responseObject];
+            [self dismissLoadingView];
         } failure:^(NSError *error) {
             [weakSelf dealwithFailure:isPullDown error:error];
+            [self dismissLoadingView];
         }];
     }else{
         TTLog(@"请设置网络请求类型 --- 参数为 requestType");

@@ -65,6 +65,7 @@
 		E7269A00223F8472003A5043 /* TXNewTemplateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E72699FF223F8472003A5043 /* TXNewTemplateViewController.m */; };
 		E7269A04223F8738003A5043 /* TXMainHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = E7269A03223F8738003A5043 /* TXMainHeaderView.m */; };
 		E74C952E225B8F61000CBAF0 /* TXWebHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = E74C952D225B8F61000CBAF0 /* TXWebHeaderView.m */; };
+		E74C9532225CEA18000CBAF0 /* SCNoDataView.m in Sources */ = {isa = PBXBuildFile; fileRef = E74C9531225CEA18000CBAF0 /* SCNoDataView.m */; };
 		E753D1F12249D3B200A2DD36 /* SCPopoverAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = E753D1EB2249D3B200A2DD36 /* SCPopoverAnimator.m */; };
 		E753D1F22249D3B200A2DD36 /* SCPresentationController.m in Sources */ = {isa = PBXBuildFile; fileRef = E753D1EE2249D3B200A2DD36 /* SCPresentationController.m */; };
 		E753D1F32249D3B200A2DD36 /* UIViewController+SCPopover.m in Sources */ = {isa = PBXBuildFile; fileRef = E753D1F02249D3B200A2DD36 /* UIViewController+SCPopover.m */; };
@@ -316,6 +317,8 @@
 		E7269A03223F8738003A5043 /* TXMainHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXMainHeaderView.m; sourceTree = "<group>"; };
 		E74C952C225B8F61000CBAF0 /* TXWebHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXWebHeaderView.h; sourceTree = "<group>"; };
 		E74C952D225B8F61000CBAF0 /* TXWebHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXWebHeaderView.m; sourceTree = "<group>"; };
+		E74C9530225CEA18000CBAF0 /* SCNoDataView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCNoDataView.h; sourceTree = "<group>"; };
+		E74C9531225CEA18000CBAF0 /* SCNoDataView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCNoDataView.m; sourceTree = "<group>"; };
 		E753D1EA2249D3B200A2DD36 /* SCPopoverAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCPopoverAnimator.h; sourceTree = "<group>"; };
 		E753D1EB2249D3B200A2DD36 /* SCPopoverAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCPopoverAnimator.m; sourceTree = "<group>"; };
 		E753D1EC2249D3B200A2DD36 /* SCPopoverMacro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCPopoverMacro.h; sourceTree = "<group>"; };
@@ -863,6 +866,7 @@
 		E72698E6223F737C003A5043 /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				E74C952F225CEA18000CBAF0 /* 无数据 */,
 				E7269977223F7E4B003A5043 /* SCLoadingView */,
 			);
 			path = Tools;
@@ -1057,6 +1061,15 @@
 				E74C952D225B8F61000CBAF0 /* TXWebHeaderView.m */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		E74C952F225CEA18000CBAF0 /* 无数据 */ = {
+			isa = PBXGroup;
+			children = (
+				E74C9530225CEA18000CBAF0 /* SCNoDataView.h */,
+				E74C9531225CEA18000CBAF0 /* SCNoDataView.m */,
+			);
+			path = "无数据";
 			sourceTree = "<group>";
 		};
 		E7525138224CBE8D005E0556 /* Model */ = {
@@ -2208,6 +2221,7 @@
 				E72699F8223F8298003A5043 /* WMPageController.m in Sources */,
 				E72699E1223F7F58003A5043 /* UILabel+SCExtension.m in Sources */,
 				E7F1A73822427A65003FA216 /* TXMallCollectionViewController.m in Sources */,
+				E74C9532225CEA18000CBAF0 /* SCNoDataView.m in Sources */,
 				E75F2ED1224DC9FD0091C52E /* TXPurchaseQuantityTableViewCell.m in Sources */,
 				E78B8F6F225AE53E0052852C /* TTBaseTableView.m in Sources */,
 				E7AA9DCD22436F4D00C15483 /* TXTransactionRecordsTableViewCell.m in Sources */,
@@ -2376,7 +2390,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 32AGX7UB6B;
+				DEVELOPMENT_TEAM = 8RL8MGBZ32;
 				GCC_PREFIX_HEADER = "HuaYiTianXia/Classes/Macro(宏定义类)/PrefixHeader.pch";
 				INFOPLIST_FILE = HuaYiTianXia/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -2398,7 +2412,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 32AGX7UB6B;
+				DEVELOPMENT_TEAM = 8RL8MGBZ32;
 				GCC_PREFIX_HEADER = "HuaYiTianXia/Classes/Macro(宏定义类)/PrefixHeader.pch";
 				INFOPLIST_FILE = HuaYiTianXia/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
