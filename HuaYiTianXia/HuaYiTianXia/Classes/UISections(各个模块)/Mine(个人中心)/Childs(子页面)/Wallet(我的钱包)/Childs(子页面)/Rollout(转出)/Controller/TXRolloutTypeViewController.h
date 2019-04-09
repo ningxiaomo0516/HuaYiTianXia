@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 // 这里要定义一个block的别名(申明) 类型 ----> void (^) (NSString *text)
-typedef void(^RolloutTypeBlock) (NSString *text);
+typedef void(^RolloutTypeBlock) (NSString *text,NSString *kid);
 
 @interface TXRolloutTypeViewController : TTBaseTableViewController
 //定义一个block

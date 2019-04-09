@@ -39,7 +39,6 @@ static NSString * const reuseIdentifier = @"TXMembersbleViewCell";
 }
 
 - (void) initView{
-    
     self.headerView.titleLabel.text = @"欢迎激活共享飞行";
     self.headerView.subtitleLabel.text = @"优享品质生活";
     self.headerView.imagesView.image = kGetImage(@"c41_live_jinka");

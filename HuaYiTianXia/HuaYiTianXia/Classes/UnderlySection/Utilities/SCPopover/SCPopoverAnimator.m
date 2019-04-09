@@ -20,6 +20,7 @@
 @property(nonatomic,strong)SCPresentationController  *presentationController;
 @property(nonatomic,copy)  SCCompleteHandle           completeHandle;
 @property(nonatomic,assign)SCPopoverType              popoverType;
+@property(nonatomic,assign)BOOL                       presentedTop;
 @property(nonatomic,assign)CGFloat                    presentedHeight;
 
 
@@ -29,6 +30,7 @@
     SCPopoverAnimator *popoverAnimator = [[SCPopoverAnimator alloc] init];
     popoverAnimator.popoverType = popoverType;
     popoverAnimator.completeHandle = completeHandle;
+    popoverAnimator.presentedTop = YES;
     return popoverAnimator;
 }
 
@@ -36,6 +38,7 @@
 - (nullable UIPresentationController *)presentationControllerForPresentedViewController:(UIViewController *)presented presentingViewController:(nullable UIViewController *)presenting sourceViewController:(UIViewController *)source{
     SCPresentationController *presentation = [[SCPresentationController alloc] initWithPresentedViewController:presented presentingViewController:presenting];
     presentation.popoverType = self.popoverType;
+    presentation.presentedTop = self.presentedTop;
     if (_popoverType == SCPopoverTypeAlert) {
         presentation.presentedSize = _presentedSize;
     }else{
@@ -134,4 +137,5 @@
 - (void)setCenterViewSize:(CGSize)size{
     _presentedSize = size;
 }
+
 @end

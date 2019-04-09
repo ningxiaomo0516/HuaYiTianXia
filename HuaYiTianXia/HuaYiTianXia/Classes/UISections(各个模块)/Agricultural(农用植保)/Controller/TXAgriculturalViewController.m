@@ -30,7 +30,7 @@ static NSString * const reuseIdentifier = @"TXRegisterTableViewCell";
     
     self.headerView.titleLabel.text = @"一县一代理独家经营";
     self.headerView.subtitleLabel.text = @"农用科技化、现代化";
-    self.headerView.imagesView.image = kGetImage(@"c41_live_jinka");
+    self.headerView.imagesView.image = kGetImage(@"c41_live_nongbao");
     [self.headerView.saveButton setTitle:@"农用植保" forState:UIControlStateNormal];
     [self.view addSubview:self.tableView];
     [Utils lz_setExtraCellLineHidden:self.tableView];

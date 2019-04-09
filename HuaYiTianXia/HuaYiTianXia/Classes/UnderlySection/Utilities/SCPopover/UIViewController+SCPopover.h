@@ -22,7 +22,6 @@
  *  @param completion 弹出消失的回调
  */
 - (void)sc_bottomPresentController:(UIViewController *)vc presentedHeight:(CGFloat)height completeHandle:(SCCompleteHandle)completion;
-
 /**
  *  从当前屏幕中间弹出一个控制器
  *
@@ -31,6 +30,16 @@
  *  @param completion completion 弹出消失的回调
  */
 - (void)sc_centerPresentController:(UIViewController *)vc presentedSize:(CGSize)size completeHandle:(SCCompleteHandle)completion;
+
+/**
+ *  从当前屏幕三分之二的位置弹出一个控制器(主要用于有输入的地方)
+ *
+ *  @param vc 需要弹出的控制器
+ *  @param size 设置size大小
+ *  @param isCenter 视图是否居中
+ *  @param completion completion 弹出消失的回调
+ */
+- (void)sc_topPresentController:(UIViewController *)vc presentedSize:(CGSize)size isCenter:(BOOL)isCenter completeHandle:(SCCompleteHandle)completion;
 /// 关闭VC
 - (void)sc_dismissVC;
 @end

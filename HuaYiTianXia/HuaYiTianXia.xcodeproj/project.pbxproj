@@ -116,6 +116,11 @@
 		E7759AED2244E8F9007DA6CF /* TXMembersbleViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7759AEC2244E8F9007DA6CF /* TXMembersbleViewCell.m */; };
 		E77BC13B224F6A31008440C9 /* TXTeamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E77BC13A224F6A31008440C9 /* TXTeamModel.m */; };
 		E77BC13F224F7321008440C9 /* TXOrderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E77BC13E224F7321008440C9 /* TXOrderModel.m */; };
+		E77F6539225C3A0E0017B4C8 /* TTNumbeKeyboard.bundle in Resources */ = {isa = PBXBuildFile; fileRef = E77F6533225C3A0E0017B4C8 /* TTNumbeKeyboard.bundle */; };
+		E77F653A225C3A0E0017B4C8 /* RYNumberKeyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = E77F6535225C3A0E0017B4C8 /* RYNumberKeyboard.m */; };
+		E77F653B225C3A0E0017B4C8 /* RYNumberKeyboard.xib in Resources */ = {isa = PBXBuildFile; fileRef = E77F6536225C3A0E0017B4C8 /* RYNumberKeyboard.xib */; };
+		E77F653C225C3A0E0017B4C8 /* UITextField+RYNumberKeyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = E77F6538225C3A0E0017B4C8 /* UITextField+RYNumberKeyboard.m */; };
+		E77F6540225C48150017B4C8 /* TXPayPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E77F653F225C48150017B4C8 /* TXPayPasswordViewController.m */; };
 		E78333DB22487913005CAB91 /* TXLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E78333D922487913005CAB91 /* TXLoginViewController.m */; };
 		E78333DC22487913005CAB91 /* TXLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E78333DA22487913005CAB91 /* TXLoginViewController.xib */; };
 		E78333E0224884F1005CAB91 /* TXRegisteredViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E78333DE224884F1005CAB91 /* TXRegisteredViewController.m */; };
@@ -412,6 +417,14 @@
 		E77BC13A224F6A31008440C9 /* TXTeamModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXTeamModel.m; sourceTree = "<group>"; };
 		E77BC13D224F7321008440C9 /* TXOrderModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXOrderModel.h; sourceTree = "<group>"; };
 		E77BC13E224F7321008440C9 /* TXOrderModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXOrderModel.m; sourceTree = "<group>"; };
+		E77F6533225C3A0E0017B4C8 /* TTNumbeKeyboard.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = TTNumbeKeyboard.bundle; sourceTree = "<group>"; };
+		E77F6534225C3A0E0017B4C8 /* RYNumberKeyboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYNumberKeyboard.h; sourceTree = "<group>"; };
+		E77F6535225C3A0E0017B4C8 /* RYNumberKeyboard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYNumberKeyboard.m; sourceTree = "<group>"; };
+		E77F6536225C3A0E0017B4C8 /* RYNumberKeyboard.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RYNumberKeyboard.xib; sourceTree = "<group>"; };
+		E77F6537225C3A0E0017B4C8 /* UITextField+RYNumberKeyboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+RYNumberKeyboard.h"; sourceTree = "<group>"; };
+		E77F6538225C3A0E0017B4C8 /* UITextField+RYNumberKeyboard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+RYNumberKeyboard.m"; sourceTree = "<group>"; };
+		E77F653E225C48150017B4C8 /* TXPayPasswordViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXPayPasswordViewController.h; sourceTree = "<group>"; };
+		E77F653F225C48150017B4C8 /* TXPayPasswordViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXPayPasswordViewController.m; sourceTree = "<group>"; };
 		E78333D822487913005CAB91 /* TXLoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXLoginViewController.h; sourceTree = "<group>"; };
 		E78333D922487913005CAB91 /* TXLoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXLoginViewController.m; sourceTree = "<group>"; };
 		E78333DA22487913005CAB91 /* TXLoginViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TXLoginViewController.xib; sourceTree = "<group>"; };
@@ -710,8 +723,8 @@
 		E72698D4223F737C003A5043 /* Agricultural(农用植保) */ = {
 			isa = PBXGroup;
 			children = (
-				E74C952B225B8567000CBAF0 /* View */,
 				E72698D5223F737C003A5043 /* Controller */,
+				E74C952B225B8567000CBAF0 /* View */,
 				E72698D6223F737C003A5043 /* Model */,
 			);
 			path = "Agricultural(农用植保)";
@@ -867,6 +880,7 @@
 		E72698E8223F737C003A5043 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				E77F6532225C3A0E0017B4C8 /* TTNumberkeyboard */,
 				E78B8F70225B32BC0052852C /* TTPicker(城市选择器) */,
 				E7691EDE2255DC4E006A94D9 /* SCVerViewInputView(验证码界面) */,
 				E7923CA722535CE00094D0C3 /* SCTextField(身份证键盘) */,
@@ -1055,9 +1069,9 @@
 		E753D1E92249D3B200A2DD36 /* SCPopover */ = {
 			isa = PBXGroup;
 			children = (
+				E753D1EC2249D3B200A2DD36 /* SCPopoverMacro.h */,
 				E753D1EA2249D3B200A2DD36 /* SCPopoverAnimator.h */,
 				E753D1EB2249D3B200A2DD36 /* SCPopoverAnimator.m */,
-				E753D1EC2249D3B200A2DD36 /* SCPopoverMacro.h */,
 				E753D1ED2249D3B200A2DD36 /* SCPresentationController.h */,
 				E753D1EE2249D3B200A2DD36 /* SCPresentationController.m */,
 				E753D1EF2249D3B200A2DD36 /* UIViewController+SCPopover.h */,
@@ -1299,6 +1313,28 @@
 				E77BC13E224F7321008440C9 /* TXOrderModel.m */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		E77F6532225C3A0E0017B4C8 /* TTNumberkeyboard */ = {
+			isa = PBXGroup;
+			children = (
+				E77F6533225C3A0E0017B4C8 /* TTNumbeKeyboard.bundle */,
+				E77F6534225C3A0E0017B4C8 /* RYNumberKeyboard.h */,
+				E77F6535225C3A0E0017B4C8 /* RYNumberKeyboard.m */,
+				E77F6536225C3A0E0017B4C8 /* RYNumberKeyboard.xib */,
+				E77F6537225C3A0E0017B4C8 /* UITextField+RYNumberKeyboard.h */,
+				E77F6538225C3A0E0017B4C8 /* UITextField+RYNumberKeyboard.m */,
+			);
+			path = TTNumberkeyboard;
+			sourceTree = "<group>";
+		};
+		E77F653D225C47DD0017B4C8 /* PayPasswordVC(支付密码) */ = {
+			isa = PBXGroup;
+			children = (
+				E77F653E225C48150017B4C8 /* TXPayPasswordViewController.h */,
+				E77F653F225C48150017B4C8 /* TXPayPasswordViewController.m */,
+			);
+			path = "PayPasswordVC(支付密码)";
 			sourceTree = "<group>";
 		};
 		E78333CE224874D9005CAB91 /* Other(登录注册) */ = {
@@ -1769,6 +1805,7 @@
 		E7C42E6D224B586C00F3FB1A /* General(通用类) */ = {
 			isa = PBXGroup;
 			children = (
+				E77F653D225C47DD0017B4C8 /* PayPasswordVC(支付密码) */,
 				E7C42E6F224B770200F3FB1A /* SCHttpTools(网络工具) */,
 				E7C42E6E224B586C00F3FB1A /* 通用Model */,
 			);
@@ -1957,8 +1994,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				E7269905223F754B003A5043 /* LZRootView.json in Resources */,
+				E77F6539225C3A0E0017B4C8 /* TTNumbeKeyboard.bundle in Resources */,
 				E7F1A7172242123A003FA216 /* TXRealNameViewController.xib in Resources */,
 				E72698C2223F7167003A5043 /* LaunchScreen.storyboard in Resources */,
+				E77F653B225C3A0E0017B4C8 /* RYNumberKeyboard.xib in Resources */,
 				E72699FD223F8298003A5043 /* bg.jpg in Resources */,
 				E7691EDD2255D3FA006A94D9 /* TXSetupTradingViewController.xib in Resources */,
 				E72698BF223F7167003A5043 /* Assets.xcassets in Resources */,
@@ -2076,6 +2115,7 @@
 				E78334082248DE2F005CAB91 /* TTPopupBackgroundView.m in Sources */,
 				E78B8F81225B32BC0052852C /* TTPickerModel.m in Sources */,
 				E72699E6223F7F58003A5043 /* UIScreen+Extension.m in Sources */,
+				E77F653C225C3A0E0017B4C8 /* UITextField+RYNumberKeyboard.m in Sources */,
 				E75F2ED6224DCB5F0091C52E /* TXBuyCountTableViewCell.m in Sources */,
 				E7269980223F7E4B003A5043 /* UIView+SCLoadingView.m in Sources */,
 				E7AA9DCA22436DA700C15483 /* TXTransactionRecordsViewController.m in Sources */,
@@ -2117,6 +2157,7 @@
 				E7759AD022449507007DA6CF /* TXAddressViewController.m in Sources */,
 				E7923CA6225341C40094D0C3 /* SCUploadImageModel.m in Sources */,
 				E7759ACA224491BA007DA6CF /* TXResetPwdViewController.m in Sources */,
+				E77F6540225C48150017B4C8 /* TXPayPasswordViewController.m in Sources */,
 				E75F2ECA224DC9FD0091C52E /* TXShareViewController.m in Sources */,
 				E78333E422489E6B005CAB91 /* TXRegisteredTableViewCell.m in Sources */,
 				E72699E3223F7F58003A5043 /* UITabBar+SCBadge.m in Sources */,
@@ -2185,6 +2226,7 @@
 				E753D1F32249D3B200A2DD36 /* UIViewController+SCPopover.m in Sources */,
 				E7691ED52255A809006A94D9 /* TXResetTradingViewController.m in Sources */,
 				E78583BA223F947600BBEA41 /* Utils.m in Sources */,
+				E77F653A225C3A0E0017B4C8 /* RYNumberKeyboard.m in Sources */,
 				E773264F22545BE400FD665A /* UIAlertController+SCExtension.m in Sources */,
 				E7F1A732224248D4003FA216 /* TXTeamTableViewCell.m in Sources */,
 				E7759AB522447DC0007DA6CF /* SCLocalCacheTool.m in Sources */,
@@ -2334,7 +2376,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 8RL8MGBZ32;
+				DEVELOPMENT_TEAM = 32AGX7UB6B;
 				GCC_PREFIX_HEADER = "HuaYiTianXia/Classes/Macro(宏定义类)/PrefixHeader.pch";
 				INFOPLIST_FILE = HuaYiTianXia/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -2356,7 +2398,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 8RL8MGBZ32;
+				DEVELOPMENT_TEAM = 32AGX7UB6B;
 				GCC_PREFIX_HEADER = "HuaYiTianXia/Classes/Macro(宏定义类)/PrefixHeader.pch";
 				INFOPLIST_FILE = HuaYiTianXia/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;

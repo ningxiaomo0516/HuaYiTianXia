@@ -11,6 +11,7 @@
 #import "TXRolloutTableViewCell.h"
 #import "TXGeneralModel.h"
 #import "TXRolloutTypeViewController.h"
+#import "TXPayPasswordViewController.h"
 
 static NSString * const reuseIdentifier = @"TXRolloutTableViewCell";
 static NSString * const reuseIdentifierHeader = @"TXMineHeaderTableViewCell";
@@ -22,6 +23,7 @@ static NSString * const reuseIdentifierHeader = @"TXMineHeaderTableViewCell";
 @property (strong, nonatomic) UIView *footerView;
 /// 货币类型
 @property (copy, nonatomic) NSString *currencyText;
+@property (copy, nonatomic) NSString *kid;
 /// 收款账户
 @property (copy, nonatomic) NSString *accountText;
 /// 确认收款账户
@@ -36,28 +38,70 @@ static NSString * const reuseIdentifierHeader = @"TXMineHeaderTableViewCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-
+    self.currencyText = @"";
+    self.amountText = @"";
     [self initView];
+    // 注册通知
+    [kNotificationCenter addObserver:self selector:@selector(transferRequest) name:@"transferRequest" object:nil];
 }
 
-/** 确认转账 */
-- (void) saveBtnClick:(UIButton *) sender{
+/// 转账请求
+- (void) transferRequest{
+
+    NSInteger currency = [self.currencyText integerValue];
     NSMutableDictionary *parameter = [[NSMutableDictionary alloc] init];
     [parameter setObject:self.accountText forKey:@"mobile"];
     [parameter setObject:self.accountsText forKey:@"confirmMobile"];
-    [parameter setObject:self.currencyText forKey:@"currency"];
+    [parameter setObject:@(currency) forKey:@"currency"];
     [parameter setObject:self.amountText forKey:@"money"];
     [SCHttpTools postWithURLString:kHttpURL(@"customer/TurnOut") parameter:parameter success:^(id responseObject) {
         NSDictionary *result = responseObject;
         if ([result isKindOfClass:[NSDictionary class]]) {
             TTLog(@"result -- %@",result);
-            TXNewsArrayModel *model = [TXNewsArrayModel mj_objectWithKeyValues:result];
-            [self.dataArray addObjectsFromArray:model.data.records];
+            TXGeneralModel *model = [TXGeneralModel mj_objectWithKeyValues:result];
+            if (model.errorcode==20000) {
+                Toast(model.message);
+                [self.navigationController popViewControllerAnimated:YES];
+            }else{
+                Toast(model.message);
+            }
         }else{
             Toast(@"获取城市数据失败");
         }
     } failure:^(NSError *error) {
         TTLog(@"error --- %@",error);
+    }];
+}
+
+/** 确认转账 */
+- (void) saveBtnClick:(UIButton *) sender{
+    if (self.accountText.length == 0) {
+        Toast(@"请输入账号或ID");
+        return;
+    }
+    if (self.accountsText.length == 0) {
+        Toast(@"请再次输入账号或ID");
+        return;
+    }
+    if (self.currencyText.length == 0) {
+        Toast(@"请选择类型");
+        return;
+    }
+    if (self.amountText.length == 0) {
+        Toast(@"请输入转账金额");
+        return;
+    }
+    
+    TXPayPasswordViewController *vc = [[TXPayPasswordViewController alloc] init];
+    vc.tipsText = self.currencyText;
+    vc.integralText = self.amountText;
+    CGSize size = CGSizeMake(IPHONE6_W(280), IPHONE6_W(230));
+    [self sc_centerPresentController:vc presentedSize:size completeHandle:^(BOOL presented) {
+        if (presented) {
+            TTLog(@"弹出了");
+        }else{
+            TTLog(@"消失了");
+        }
     }];
 }
 
@@ -87,6 +131,10 @@ static NSString * const reuseIdentifierHeader = @"TXMineHeaderTableViewCell";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
         TXMineHeaderTableViewCell* tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierHeader forIndexPath:indexPath];
+        tools.totalAssetsLabel.text = kUserInfo.totalAssets;
+        tools.vrAssetsLabel.text = kUserInfo.vrcurrency;
+        tools.arAssetsLabel.text = kUserInfo.arcurrency;
+        tools.eqAssetsLabel.text = kUserInfo.stockRight;
         return tools;
     } else {
         TXRolloutTableViewCell* tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
@@ -96,10 +144,18 @@ static NSString * const reuseIdentifierHeader = @"TXMineHeaderTableViewCell";
         tools.textField.tag = indexPath.row;
         [tools.textField addTarget:self action:@selector(textFieldWithText:) forControlEvents:UIControlEventEditingChanged];
         if (indexPath.row==2) {
-            tools.subtitleLabel.text = generalModel.imageText;
+            if (self.currencyText.length==0) {
+                tools.subtitleLabel.text = generalModel.imageText;
+            }else{
+                tools.subtitleLabel.text = self.currencyText;
+            }
             tools.subtitleLabel.hidden = NO;
             tools.imagesArrow.hidden = NO;
             tools.textField.hidden = YES;
+        }else if(indexPath.row == 3){
+            tools.textField.ry_inputType = RYFloatInputType;
+            tools.textField.placeholder = generalModel.imageText;
+            tools.selectionStyle = UITableViewCellSelectionStyleNone;
         }else{
             tools.textField.placeholder = generalModel.imageText;
             tools.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -132,10 +188,13 @@ static NSString * const reuseIdentifierHeader = @"TXMineHeaderTableViewCell";
     if (indexPath.row==2) {
         TXRolloutTypeViewController *vc = [[TXRolloutTypeViewController alloc] init];
         MV(weakSelf)
-        vc.typeBlock = ^(NSString * _Nonnull text) {
+        vc.typeBlock = ^(NSString * _Nonnull text, NSString * _Nonnull kid) {
             weakSelf.currencyText = text;
+            weakSelf.kid = kid;
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:2 inSection:1];
+            [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
         };
-        CGFloat height = kiPhoneX_T(IPHONE6_W(110));
+        CGFloat height = kiPhoneX_T(IPHONE6_W(310));
         [self sc_bottomPresentController:vc presentedHeight:height completeHandle:^(BOOL presented) {
             if (presented) {
                 TTLog(@"弹出了");
@@ -217,6 +276,10 @@ static NSString * const reuseIdentifierHeader = @"TXMineHeaderTableViewCell";
         }
     }
     return _dataArray;
+}
+
+- (void)dealloc{
+    [kNotificationCenter removeObserver:self];
 }
 
 @end

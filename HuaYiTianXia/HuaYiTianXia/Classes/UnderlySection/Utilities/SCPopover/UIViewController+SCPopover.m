@@ -40,6 +40,15 @@ static const char popoverAnimatorKey;
     [self presentViewController:vc animated:YES completion:nil];
 }
 
+- (void)sc_topPresentController:(UIViewController *)vc presentedSize:(CGSize)size isCenter:(BOOL)isCenter completeHandle:(SCCompleteHandle)completion{
+    self.popoverAnimator = [SCPopoverAnimator popoverAnimatorWithStyle:SCPopoverTypeAlert completeHandle:completion];
+    [self.popoverAnimator setCenterViewSize:size];
+    
+    vc.modalPresentationStyle = UIModalPresentationCustom;
+    vc.transitioningDelegate = self.popoverAnimator;
+    [self presentViewController:vc animated:YES completion:nil];
+}
+
 - (void) sc_dismissVC{
     [self dismissViewControllerAnimated:YES completion:nil];
 }

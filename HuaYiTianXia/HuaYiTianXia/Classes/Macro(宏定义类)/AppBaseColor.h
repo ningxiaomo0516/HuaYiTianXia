@@ -59,6 +59,7 @@
 #define kFontSizeScBold17 [UIFont fontWithName:kFontWithNameScBold size:17]
 #define kFontSizeScBold20 [UIFont fontWithName:kFontWithNameScBold size:20]
 #define kFontSizeScBold22 [UIFont fontWithName:kFontWithNameScBold size:22]
+#define kFontSizeScBold33 [UIFont fontWithName:kFontWithNameScBold size:33]
 
 
 #define kFontSizeMedium10 [UIFont fontWithName:kFontWithNameMedium size:10]

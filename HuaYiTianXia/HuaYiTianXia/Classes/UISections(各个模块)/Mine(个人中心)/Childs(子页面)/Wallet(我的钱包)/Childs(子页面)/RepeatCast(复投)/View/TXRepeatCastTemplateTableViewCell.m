@@ -36,20 +36,16 @@
         make.centerX.centerY.equalTo(self);
     }];
     
-    NSAttributedString *commentAttr = [SCSmallTools sc_initImageWithText:@"VH资产余额：300000" imageName:@"mine_ft_jinbi"];
-    
-//    NSMutableAttributedString *attributedStr = [[NSMutableAttributedString alloc]initWithString:commentAttr];
-//    /// 前面文字颜色
-//    [attributedStr addAttribute:NSForegroundColorAttributeName
-//                          value:kWhiteColor
-//                          range:NSMakeRange(0, 5)];
-
+    NSAttributedString *commentAttr = [SCSmallTools sc_initImageWithText:self.integralText imageName:@"mine_ft_jinbi"];
+    NSTextAttachment *attachment = [[NSTextAttachment alloc] init];
+    attachment.image = [UIImage imageNamed:@"mine_ft_jinbi"];
+    attachment.bounds = CGRectMake(0,0,[UIFont systemFontOfSize:30].ascender,[UIFont systemFontOfSize:30].ascender);
     self.titlelabel.attributedText = commentAttr;
 }
 
 - (UILabel *)titlelabel{
     if (!_titlelabel) {
-        _titlelabel = [UILabel lz_labelWithTitle:@"" color:HexString(@"#26B5FE") font:kFontSizeMedium16];
+        _titlelabel = [UILabel lz_labelWithTitle:@"0" color:HexString(@"#26B5FE") font:kFontSizeMedium16];
     }
     return _titlelabel;
 }

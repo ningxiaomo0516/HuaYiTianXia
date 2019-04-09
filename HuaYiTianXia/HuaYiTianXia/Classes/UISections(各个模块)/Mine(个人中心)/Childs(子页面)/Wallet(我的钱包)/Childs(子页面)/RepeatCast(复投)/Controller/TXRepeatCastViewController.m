@@ -9,6 +9,7 @@
 #import "TXRepeatCastViewController.h"
 #import "TXRepeatCastTemplateTableViewCell.h"
 #import "TXRolloutTableViewCell.h"
+#import "TXPayPasswordViewController.h"
 
 static NSString * const reuseIdentifier = @"TXRepeatCastTemplateTableViewCell";
 static NSString * const reuseIdentifierRollout = @"TXRolloutTableViewCell";
@@ -19,6 +20,8 @@ static NSString * const reuseIdentifierRollout = @"TXRolloutTableViewCell";
 @property (nonatomic, strong) UIButton *doneButton;
 @property (nonatomic, strong) UIView *footerView;
 @property (strong, nonatomic) UILabel *titlelabel;
+/// 复投金额
+@property (copy, nonatomic) NSString *amountText;
 
 @end
 
@@ -29,9 +32,24 @@ static NSString * const reuseIdentifierRollout = @"TXRolloutTableViewCell";
     [self initView];
 }
 
-/** 退出 */
+/** 完成按钮 */
 - (void) doneBtnClick:(UIButton *) sender{
+    if (self.amountText.length == 0) {
+        Toast(@"请输入转账金额");
+        return;
+    }
     
+    TXPayPasswordViewController *vc = [[TXPayPasswordViewController alloc] init];
+    vc.tipsText = @"VH";
+    vc.integralText = self.amountText;
+    CGSize size = CGSizeMake(IPHONE6_W(280), IPHONE6_W(230));
+    [self sc_centerPresentController:vc presentedSize:size completeHandle:^(BOOL presented) {
+        if (presented) {
+            TTLog(@"弹出了");
+        }else{
+            TTLog(@"消失了");
+        }
+    }];
 }
 
 - (void) initView{
@@ -60,11 +78,16 @@ static NSString * const reuseIdentifierRollout = @"TXRolloutTableViewCell";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section==0) {
         TXRepeatCastTemplateTableViewCell* tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
+        tools.integralText = kStringFormat(@"VH资产余额：", kUserInfo.vrcurrency);
         return tools;
     }else{
         TXRolloutTableViewCell* tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierRollout forIndexPath:indexPath];
         tools.selectionStyle = UITableViewCellSelectionStyleNone;
         tools.titleLabel.text = @"复投金额";
+        tools.textField.placeholder = @"请输入复投金额";
+        tools.textField.ry_inputType = RYFloatInputType;
+        [tools.textField addTarget:self action:@selector(textFieldWithText:) forControlEvents:UIControlEventEditingChanged];
+
         return tools;
     }
     return [UITableViewCell new];
@@ -92,6 +115,10 @@ static NSString * const reuseIdentifierRollout = @"TXRolloutTableViewCell";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+- (void)textFieldWithText:(UITextField *)textField{
+    self.amountText = textField.text;
 }
 
 -(UITableView *)tableView{

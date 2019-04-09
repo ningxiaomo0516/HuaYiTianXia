@@ -60,16 +60,17 @@ static NSString * const reuseIdentifier = @"TXRolloutTypeTableViewCell";
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    NSString *title = [NSString stringWithFormat:@"%ld",(long)indexPath.row];
+    NSString *kid = [NSString stringWithFormat:@"%ld",(long)indexPath.row];
+    TXGeneralModel *model = self.dataArray[indexPath.row];
     if (self.typeBlock) {
-        self.typeBlock(title);
+        self.typeBlock(model.title,kid);
     }
     [self dismissViewControllerAnimated:YES completion:nil];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 #pragma mark ----- getter/setter
--(UITableView *)tableView{
+- (UITableView *)tableView{
     if (!_tableView) {
         _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
         _tableView.showsVerticalScrollIndicator = false;

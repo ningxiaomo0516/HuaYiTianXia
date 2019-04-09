@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface TXRepeatCastTemplateTableViewCell : UITableViewCell
 
 @property (nonatomic, strong) UILabel *titlelabel;
+@property (nonatomic, copy) NSString *integralText;
 
 @end
 

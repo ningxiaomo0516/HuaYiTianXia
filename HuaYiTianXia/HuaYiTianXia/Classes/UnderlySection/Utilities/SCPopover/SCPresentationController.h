@@ -13,6 +13,8 @@
 
 @property(nonatomic,assign)CGSize           presentedSize;
 @property(nonatomic,assign)CGFloat          presentedHeight;
+/// 是否不需要居中(默认居中)
+@property(nonatomic,assign)BOOL             presentedTop;
 
 /// 蒙版
 @property(nonatomic,strong)UIView           *coverView;
