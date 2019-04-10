@@ -138,6 +138,11 @@ THE SOFTWARE.
 
 
 
+## WechatOpenSDK
+
+Copyright 2019 tencent.com. All rights reserved.
+
+
 ## YYModel
 
 The MIT License (MIT)

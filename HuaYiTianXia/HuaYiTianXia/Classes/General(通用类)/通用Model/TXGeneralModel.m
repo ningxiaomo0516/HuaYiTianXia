@@ -14,3 +14,8 @@
              @"errorcode"   : @"code"};
 }
 @end
+
+
+@implementation OrderData
+
+@end

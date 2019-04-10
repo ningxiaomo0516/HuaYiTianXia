@@ -240,12 +240,31 @@
  */
 + (NSString *)sortedDictionarybyCaseConversion:(NSMutableDictionary *)dictionary;
 
+/** 随机数生成 */
++ (int) getRandomNumber:(int)from to:(int)to;
+/** 以逗号隔开 */
++ (NSString *)seperateNumberByComma:(NSInteger)number;
 /**
- *  根据状态 转换 类型
+ *  两个时间差
  *
- *  @param status 状态 0:待审核 1:已通过 2:拒绝 3:管理员关闭 4:已过期 5:待上线 9:回收站 10:草稿 11:修改后提交 12:结束 13:商家关闭 21:商家的商铺关闭
- *
- *  @return 返回字符串格式时间
+ *  @param startTime 开始时间
+ *  @param endTime 结束时间
+ *  @return 时间差
  */
-+ (NSString *)lz_conversionState :(NSInteger) status;
++ (NSString *)dateTimeDifferenceWithStartTime:(NSString *)startTime endTime:(NSString *)endTime;
+
+/**
+ *  判断当前时间是否处于某个时间段内
+ *
+ *  @param startTime        开始时间
+ *  @param expireTime       结束时间
+ */
++ (BOOL)judgeTimeByStartTime:(NSString *)startTime endTime:(NSString *)expireTime;
+
+/**
+ *  解析字符串为字典
+ *
+ *  @param jsonString        开始时间
+ */
++ (NSDictionary *)dictionaryWithJsonString:(NSString *)jsonString;
 @end

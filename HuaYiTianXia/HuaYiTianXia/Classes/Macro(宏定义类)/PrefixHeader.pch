@@ -53,6 +53,7 @@
 
 /// 网络请求工具
 #import "SCHttpTools.h"
-
-
+#import "AppDefine.h"
+/// 分享
+#import "WXApi.h"
 #endif /* PrefixHeader_pch */

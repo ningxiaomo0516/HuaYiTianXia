@@ -21,8 +21,22 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, copy)NSString* message;
 /// 错误Code
 @property(nonatomic, assign)NSInteger errorcode;
+/// 错误Code
+@property(nonatomic, copy)NSString *obj;
 
 
+@end
+
+@interface OrderData : NSObject
+/// 消息提示
+@property(nonatomic, copy)NSString* code;
+@property(nonatomic, copy)NSString* appid;
+@property(nonatomic, copy)NSString* sign;
+@property(nonatomic, copy)NSString* prepayid;
+@property(nonatomic, copy)NSString* partnerid;
+@property(nonatomic, copy)NSString* info;
+@property(nonatomic, copy)NSString* timestamp;
+@property(nonatomic, copy)NSString* noncestr;
 @end
 
 NS_ASSUME_NONNULL_END

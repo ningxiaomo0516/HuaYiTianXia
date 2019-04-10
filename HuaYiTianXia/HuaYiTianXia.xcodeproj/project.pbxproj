@@ -210,6 +210,7 @@
 		E7089EF8225D7EFA00A7EF27 /* TXEppoTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXEppoTableViewCell.m; sourceTree = "<group>"; };
 		E7089EFB225DB8E400A7EF27 /* TXChoosePayViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXChoosePayViewController.h; sourceTree = "<group>"; };
 		E7089EFC225DB8E400A7EF27 /* TXChoosePayViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXChoosePayViewController.m; sourceTree = "<group>"; };
+		E7089F0C225DC8B000A7EF27 /* AppDefine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDefine.h; sourceTree = "<group>"; };
 		E72698B2223F7165003A5043 /* HuaYiTianXia.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HuaYiTianXia.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E72698B5223F7165003A5043 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		E72698B6223F7165003A5043 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -863,6 +864,7 @@
 		E72698E4223F737C003A5043 /* Macro(宏定义类) */ = {
 			isa = PBXGroup;
 			children = (
+				E7089F0C225DC8B000A7EF27 /* AppDefine.h */,
 				E7269909223F76DF003A5043 /* AppBaseColor.h */,
 				E72698EA223F73AD003A5043 /* PrefixHeader.pch */,
 				E72698EB223F73B9003A5043 /* AppConstant.h */,
@@ -2072,7 +2074,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-HuaYiTianXia/Pods-HuaYiTianXia-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-HuaYiTianXia/Pods-HuaYiTianXia-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
 				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/MJExtension/MJExtension.framework",
@@ -2093,7 +2095,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-HuaYiTianXia/Pods-HuaYiTianXia-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-HuaYiTianXia/Pods-HuaYiTianXia-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */

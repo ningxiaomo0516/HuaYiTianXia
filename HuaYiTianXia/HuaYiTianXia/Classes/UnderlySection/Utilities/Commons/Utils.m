@@ -614,54 +614,129 @@
     return segmentationAfterstr;
 }
 
-/**
- *  根据状态 转换 类型
- *
- *  @param status 状态 0:待审核 1:已通过 2:拒绝 3:管理员关闭 4:已过期 5:待上线 9:回收站 10:草稿 11:修改后提交 12:结束 13:商家关闭 21:商家的商铺关闭
- *
- *  @return 返回字符串格式时间
- */
-+ (NSString *)lz_conversionState :(NSInteger) status{
-    NSString *statusStr = @"";
-    switch (status) {
-        case 0:
-            statusStr = @"待审核";
+
+/** 随机数生成 */
++(int)getRandomNumber:(int)from to:(int)to{
+    return (int)(from + (arc4random() % (to - from + 1)));
+}
+
+/** 以逗号隔开 */
++ (NSString *) seperateNumberByComma:(NSInteger)number{
+    
+    //提取正数部分
+    BOOL negative = number<0;
+    NSInteger num = labs(number);
+    NSString *numStr = [NSString stringWithFormat:@"%ld",num];
+    
+    //根据数据长度判断所需逗号个数
+    NSInteger length = numStr.length;
+    NSInteger count = numStr.length/3;
+    
+    //在适合的位置插入逗号
+    for (int i=1; i<=count; i++) {
+        NSInteger location = length - i*3;
+        if (location <= 0) {
             break;
-        case 1:
-            statusStr = @"已通过";
-            break;
-        case 2:
-            statusStr = @"未通过";
-            break;
-        case 3:
-            statusStr = @"管理员关闭";
-            break;
-        case 4:
-            statusStr = @"已过期";
-            break;
-        case 5:
-            statusStr = @"待上线";
-            break;
-        case 9:
-            statusStr = @"回收站";
-            break;
-        case 10:
-            statusStr = @"草稿";
-            break;
-        case 11:
-            statusStr = @"修改后提交";
-            break;
-        case 12:
-            statusStr = @"结束";
-            break;
-        case 13:
-            statusStr = @"商家关闭";
-            break;
-        case 21:
-            statusStr = @"商家的商铺关闭";
-            break;
+        }
+        //插入逗号拆分数据
+        numStr = [numStr stringByReplacingCharactersInRange:NSMakeRange(location, 0) withString:@","];
     }
-    return statusStr;
+    
+    //别忘给负数加上符号
+    if (negative) {
+        numStr = [NSString stringWithFormat:@"-%@",numStr];
+    }
+    return numStr;
+}
+
+
+
+/**
+ *  两个时间差
+ *
+ *  @param startTime 开始时间
+ *  @param endTime 结束时间
+ *  @return 时间差
+ */
++ (NSString *)dateTimeDifferenceWithStartTime:(NSString *)startTime endTime:(NSString *)endTime{
+    
+    
+    // 1.确定时间
+    //    NSString *time1 = @"2017-11-22 12:18:15";
+    //    NSString *time2 = @"2017-11-22 10:10:10";
+    // 2.将时间转换为date
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    formatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
+    NSDate *date1 = [formatter dateFromString:startTime];
+    NSDate *date2 = [formatter dateFromString:endTime];
+    // 3.创建日历
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSCalendarUnit type = NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond;
+    // 4.利用日历对象比较两个时间的差值
+    NSDateComponents *cmps = [calendar components:type fromDate:date1 toDate:date2 options:0];
+    // 5.输出结果
+    //    YYLog(@"两个时间相差%ld年%ld月%ld日%ld小时%ld分钟%ld秒", cmps.year, cmps.month, cmps.day, cmps.hour, cmps.minute, cmps.second);
+    NSString *str;
+    if (cmps.day != 0) {
+        //        str = [NSString stringWithFormat:@"%ld天%ld小时%ld分%ld秒",cmps.day,cmps.hour,cmps.minute,cmps.second];
+        NSInteger time = cmps.day*60*60;
+        str = [NSString stringWithFormat:@"%ld:%ld",time,cmps.second];
+    }else if (cmps.hour != 0) {
+        //        str = [NSString stringWithFormat:@"%ld小时%ld分%ld秒",cmps.hour,cmps.minute,cmps.second];
+        NSInteger time = cmps.hour*60;
+        str = [NSString stringWithFormat:@"%ld:%ld",time,cmps.second];
+    }else if (cmps.minute != 0){
+        //        str = [NSString stringWithFormat:@"%ld分%ld秒",cmps.minute,cmps.second];
+        NSInteger time = cmps.minute;
+        str = [NSString stringWithFormat:@"%ld:%ld",time,cmps.second];
+    }else
+        if (cmps.second != 0){
+            str = [NSString stringWithFormat:@"%ld",cmps.second];
+        }
+    return str;
+}
+
+
+/**
+ *  判断当前时间是否处于某个时间段内
+ *
+ *  @param startTime        开始时间
+ *  @param expireTime       结束时间
+ */
++(BOOL)judgeTimeByStartTime:(NSString *)startTime endTime:(NSString *)expireTime{
+    // 当前时间是否在时间段内 (完整时间)
+    //获取当前时间
+    NSDate *today = [NSDate date];
+    
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    // 时间格式,建议大写    HH 使用 24 小时制；hh 12小时制
+    [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    NSString *todayStr=[dateFormat stringFromDate:today];//将日期转换成字符串
+    today=[dateFormat dateFromString:todayStr];//转换成NSDate类型。日期置为方法默认日期
+    //start end 格式 "2016-05-18 9:00:00"
+    NSDate *start = [dateFormat dateFromString:startTime];
+    NSDate *expire = [dateFormat dateFromString:expireTime];
+    
+    if ([today compare:start] == NSOrderedDescending && [today compare:expire] == NSOrderedAscending) {
+        return YES;
+    }
+    return NO;
+}
+
++ (NSDictionary *)dictionaryWithJsonString:(NSString *)jsonString{
+    if (jsonString == nil) {
+        return nil;
+    }
+    NSData *jsonData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
+    NSError *err;
+    NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:jsonData
+                                                        options:NSJSONReadingMutableContainers
+                                                          error:&err];
+    if(err){
+        TTLog(@"解析活动json解析失败：%@",err);
+        return nil;
+    }
+    return dic;
 }
 
 @end
