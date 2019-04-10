@@ -9,6 +9,7 @@
 #import "TXAgriculturalViewController.h"
 #import "TXRegisterTableViewCell.h"
 #import "TXWebHeaderView.h"
+#import "TXMallEppoViewController.h"
 
 static NSString * const reuseIdentifier = @"TXRegisterTableViewCell";
 
@@ -51,7 +52,8 @@ static NSString * const reuseIdentifier = @"TXRegisterTableViewCell";
 
 /** 保存 */
 - (void) saveBtnClick:(UIButton *) sender{
-
+    TXMallEppoViewController *vc = [[TXMallEppoViewController alloc] init];
+    TTPushVC(vc);
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{

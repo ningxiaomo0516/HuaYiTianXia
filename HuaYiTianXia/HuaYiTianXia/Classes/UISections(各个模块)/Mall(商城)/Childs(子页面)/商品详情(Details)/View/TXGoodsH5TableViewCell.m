@@ -61,9 +61,9 @@
 - (void) initView{
     [self addSubview:self.wkWebView];
     [self addSubview:self.reloadButton];
-//    [self.wkWebView mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.top.bottom.left.right.equalTo(self);
-//    }];
+    [self.wkWebView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.bottom.left.right.equalTo(self);
+    }];
     
     [self.reloadButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.centerX.equalTo(self);
@@ -91,6 +91,7 @@
     [webView evaluateJavaScript:@"document.body.offsetHeight" completionHandler:^(id _Nullable result,NSError * _Nullable error) {
         // 此处js字符串采用scrollHeight而不是offsetHeight是因为后者并获取不到高度，看参考资料说是对于加载html字符串的情况下使用后者可以，但如果是和我一样直接加载原站内容使用前者更合适
         //获取页面高度，并重置webview的frame
+        //因为WKWebView的contentSize在加载的时候是不断变化的，可能高度已经获取出来了但是还在刷新，然后又获取到相同的高度，所以当高度相同的时候我们不刷新tableview，高度不相同的时候我们刷新tableView获取最新值
         webViewHeight = [result floatValue];
         NSLog(@"wwowowowowowwowowoo ----- %f",webViewHeight);
         dispatch_async(dispatch_get_main_queue(), ^{

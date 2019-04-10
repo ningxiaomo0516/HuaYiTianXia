@@ -27,7 +27,7 @@
 #define kLinerViewHeight 0.5
 
 /// TableView in Section background color
-#define kTableViewInSectionColor kColorWithRGB(245, 244, 249)
+#define kTableViewInSectionColor kColorWithRGB(244, 244, 244)
 
 /// 主题颜色
 #define kThemeColor HexString(@"#26B9FE")

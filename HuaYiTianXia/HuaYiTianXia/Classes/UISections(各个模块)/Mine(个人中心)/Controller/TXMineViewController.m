@@ -39,6 +39,8 @@ static NSString * const reuseIdentifierBanner = @"TXMineBannerTableViewCell";
     }
     // 注册通知
     [kNotificationCenter addObserver:self selector:@selector(reloadUserName) name:@"reloadUserName" object:nil];
+    [kNotificationCenter addObserver:self selector:@selector(reloadData) name:@"reloadMineData" object:nil];
+    
 }
 
 /// 登录成功之后再获取数据

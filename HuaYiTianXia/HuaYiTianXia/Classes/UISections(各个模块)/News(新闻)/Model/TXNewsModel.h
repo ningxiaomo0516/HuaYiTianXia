@@ -13,9 +13,9 @@ NS_ASSUME_NONNULL_BEGIN
 @class TXNewsTabModel,NewsModel,NewsRecordsModel,NewsBannerModel;
 @interface TXNewsModel : NSObject
 /// 状态 21000统一异常情况,22000登录超时，23000账号冻结，20000请求成功，另外的状态请直接输出msg
-@property (nonatomic, copy) NSString *msg;
+@property (nonatomic, copy) NSString *message;
 /// 错误码
-@property (nonatomic, assign) NSInteger code;
+@property (nonatomic, assign) NSInteger errorcode;
 @property (nonatomic, strong) NSMutableArray<TXNewsTabModel *> *data;
 @end
 
@@ -28,9 +28,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface TXNewsArrayModel : NSObject
 /// 状态 21000统一异常情况,22000登录超时，23000账号冻结，20000请求成功，另外的状态请直接输出msg
-@property (nonatomic, copy) NSString *msg;
+@property (nonatomic, copy) NSString *message;
 /// 错误码
-@property (nonatomic, assign) NSInteger code;
+@property (nonatomic, assign) NSInteger errorcode;
 @property (nonatomic, strong) NewsModel *data;
 /// banner 集合
 @property (nonatomic, strong) NSMutableArray<NewsBannerModel *> *banners;
@@ -51,9 +51,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 //// 详情接口
 /// 状态 21000统一异常情况,22000登录超时，23000账号冻结，20000请求成功，另外的状态请直接输出msg
-@property (nonatomic, copy) NSString *msg;
+@property (nonatomic, copy) NSString *message;
 /// 错误码
-@property (nonatomic, assign) NSInteger code;
+@property (nonatomic, assign) NSInteger errorcode;
 /// 产品详情Model数据
 @property (nonatomic, strong) NSMutableArray<NewsRecordsModel *> *data;
 @end

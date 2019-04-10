@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		7137FC69930FD658EE126BC7 /* Pods_HuaYiTianXia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C62B83054FB57102771D140E /* Pods_HuaYiTianXia.framework */; };
+		E7089EF6225D7C6C00A7EF27 /* TXMallEppoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7089EF5225D7C6C00A7EF27 /* TXMallEppoViewController.m */; };
+		E7089EF9225D7EFA00A7EF27 /* TXEppoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7089EF8225D7EFA00A7EF27 /* TXEppoTableViewCell.m */; };
+		E7089EFD225DB8E400A7EF27 /* TXChoosePayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7089EFC225DB8E400A7EF27 /* TXChoosePayViewController.m */; };
 		E72698B7223F7165003A5043 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E72698B6223F7165003A5043 /* AppDelegate.m */; };
 		E72698BF223F7167003A5043 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E72698BE223F7167003A5043 /* Assets.xcassets */; };
 		E72698C2223F7167003A5043 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E72698C0223F7167003A5043 /* LaunchScreen.storyboard */; };
@@ -201,6 +204,12 @@
 		7BDC34BA99E71AF550F8F19E /* Pods-HuaYiTianXia.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HuaYiTianXia.release.xcconfig"; path = "Pods/Target Support Files/Pods-HuaYiTianXia/Pods-HuaYiTianXia.release.xcconfig"; sourceTree = "<group>"; };
 		C62B83054FB57102771D140E /* Pods_HuaYiTianXia.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HuaYiTianXia.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8A40D1AA3A1C66C50E33D9F /* Pods-HuaYiTianXia.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HuaYiTianXia.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HuaYiTianXia/Pods-HuaYiTianXia.debug.xcconfig"; sourceTree = "<group>"; };
+		E7089EF4225D7C6C00A7EF27 /* TXMallEppoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXMallEppoViewController.h; sourceTree = "<group>"; };
+		E7089EF5225D7C6C00A7EF27 /* TXMallEppoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXMallEppoViewController.m; sourceTree = "<group>"; };
+		E7089EF7225D7EFA00A7EF27 /* TXEppoTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXEppoTableViewCell.h; sourceTree = "<group>"; };
+		E7089EF8225D7EFA00A7EF27 /* TXEppoTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXEppoTableViewCell.m; sourceTree = "<group>"; };
+		E7089EFB225DB8E400A7EF27 /* TXChoosePayViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXChoosePayViewController.h; sourceTree = "<group>"; };
+		E7089EFC225DB8E400A7EF27 /* TXChoosePayViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXChoosePayViewController.m; sourceTree = "<group>"; };
 		E72698B2223F7165003A5043 /* HuaYiTianXia.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HuaYiTianXia.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E72698B5223F7165003A5043 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		E72698B6223F7165003A5043 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -601,6 +610,15 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		E7089EFA225DB89E00A7EF27 /* (支付选择) */ = {
+			isa = PBXGroup;
+			children = (
+				E7089EFB225DB8E400A7EF27 /* TXChoosePayViewController.h */,
+				E7089EFC225DB8E400A7EF27 /* TXChoosePayViewController.m */,
+			);
+			path = "(支付选择)";
+			sourceTree = "<group>";
+		};
 		E72698A9223F7165003A5043 = {
 			isa = PBXGroup;
 			children = (
@@ -738,6 +756,8 @@
 			children = (
 				E7269910223F7881003A5043 /* TXAgriculturalViewController.h */,
 				E7269911223F7881003A5043 /* TXAgriculturalViewController.m */,
+				E7089EF4225D7C6C00A7EF27 /* TXMallEppoViewController.h */,
+				E7089EF5225D7C6C00A7EF27 /* TXMallEppoViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1059,6 +1079,8 @@
 			children = (
 				E74C952C225B8F61000CBAF0 /* TXWebHeaderView.h */,
 				E74C952D225B8F61000CBAF0 /* TXWebHeaderView.m */,
+				E7089EF7225D7EFA00A7EF27 /* TXEppoTableViewCell.h */,
+				E7089EF8225D7EFA00A7EF27 /* TXEppoTableViewCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1818,6 +1840,7 @@
 		E7C42E6D224B586C00F3FB1A /* General(通用类) */ = {
 			isa = PBXGroup;
 			children = (
+				E7089EFA225DB89E00A7EF27 /* (支付选择) */,
 				E77F653D225C47DD0017B4C8 /* PayPasswordVC(支付密码) */,
 				E7C42E6F224B770200F3FB1A /* SCHttpTools(网络工具) */,
 				E7C42E6E224B586C00F3FB1A /* 通用Model */,
@@ -2099,6 +2122,7 @@
 				E7269908223F754B003A5043 /* LZRootViewController.m in Sources */,
 				E72699DC223F7F58003A5043 /* UITableView+SCExtension.m in Sources */,
 				E7F1A7032241EF37003FA216 /* TXEarningsViewController.m in Sources */,
+				E7089EF9225D7EFA00A7EF27 /* TXEppoTableViewCell.m in Sources */,
 				E78333FC2248D0B1005CAB91 /* SCCustomMarginLabel.m in Sources */,
 				E7F1A7062241F1D2003FA216 /* TTBaseTableViewController.m in Sources */,
 				E7F1A73522427264003FA216 /* TTBaseNavImagesViewController.m in Sources */,
@@ -2113,8 +2137,10 @@
 				E72699FA223F8298003A5043 /* WMScrollView.m in Sources */,
 				E7C42E82224B770200F3FB1A /* HttpModel.m in Sources */,
 				E78584042240C54300BBEA41 /* TYCyclePagerView.m in Sources */,
+				E7089EFD225DB8E400A7EF27 /* TXChoosePayViewController.m in Sources */,
 				E726997E223F7E4B003A5043 /* SCLoadingLabel.m in Sources */,
 				E7F1A7162242123A003FA216 /* TXRealNameViewController.m in Sources */,
+				E7089EF6225D7C6C00A7EF27 /* TXMallEppoViewController.m in Sources */,
 				E7C42E80224B770200F3FB1A /* AFLoadDataManager.m in Sources */,
 				E7D07C622243C8B600E3FFAF /* NSObject+Toast.m in Sources */,
 				E7AA9DB7224338EA00C15483 /* TXWalletTableViewCell.m in Sources */,
@@ -2390,7 +2416,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 8RL8MGBZ32;
+				DEVELOPMENT_TEAM = 32AGX7UB6B;
 				GCC_PREFIX_HEADER = "HuaYiTianXia/Classes/Macro(宏定义类)/PrefixHeader.pch";
 				INFOPLIST_FILE = HuaYiTianXia/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -2412,7 +2438,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 8RL8MGBZ32;
+				DEVELOPMENT_TEAM = 32AGX7UB6B;
 				GCC_PREFIX_HEADER = "HuaYiTianXia/Classes/Macro(宏定义类)/PrefixHeader.pch";
 				INFOPLIST_FILE = HuaYiTianXia/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;

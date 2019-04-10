@@ -33,13 +33,17 @@ static NSString* reuseIdentifiers = @"TXMineBannerCollectionViewCell";
     self.callBlock = block;
 }
 
+- (void)setBannerArray:(NSMutableArray *)bannerArray{
+    _bannerArray = bannerArray;
+    [self initView];
+}
 
 - (void) initView{
     [self addPagerView];
-    //    if (self.listModel.count>1) {
-    self.pagerView.autoScrollInterval = 3;//自动轮播时间
-    //    }
-    self.pageControl.numberOfPages = 5;//self.listModel.count;
+    if (self.bannerArray.count>1) {
+        self.pagerView.autoScrollInterval = 3;//自动轮播时间
+    }
+    self.pageControl.numberOfPages = self.bannerArray.count;
     [self.pagerView reloadData];
 }
 
@@ -47,7 +51,6 @@ static NSString* reuseIdentifiers = @"TXMineBannerCollectionViewCell";
     self.backgroundColor = kColorWithRGB(222, 222, 222);
     [self addSubview:self.pagerView];
     [self addPageControl];
-    [self.pagerView lz_setCornerRadius:3.0];
     
     [self.pagerView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.left.top.bottom.equalTo(self);
@@ -60,14 +63,13 @@ static NSString* reuseIdentifiers = @"TXMineBannerCollectionViewCell";
 }
 
 #pragma mark - TYCyclePagerViewDataSource
-
 - (NSInteger)numberOfItemsInPagerView:(TYCyclePagerView *)pageView {
-    return 5;//self.listModel.count;
+    return self.bannerArray.count;
 }
 
 - (UICollectionViewCell *)pagerView:(TYCyclePagerView *)pagerView cellForItemAtIndex:(NSInteger)index {
     TXMineBannerCollectionViewCell *cell = [pagerView dequeueReusableCellWithReuseIdentifier:reuseIdentifiers forIndex:index];
-    cell.imagesView.image = kGetImage(@"base_deprecated_activity");
+    cell.bannerModel = self.bannerArray[index];
     return cell;
 }
 
@@ -105,8 +107,8 @@ static NSString* reuseIdentifiers = @"TXMineBannerCollectionViewCell";
     //pageControl.numberOfPages = _datas.count;
     pageControl.currentPageIndicatorSize = CGSizeMake(6, 6);
     pageControl.pageIndicatorSize = CGSizeMake(6, 6);
-    pageControl.currentPageIndicatorTintColor = [UIColor redColor];
-    pageControl.pageIndicatorTintColor = [UIColor grayColor];
+    pageControl.currentPageIndicatorTintColor = kWhiteColor;
+    pageControl.pageIndicatorTintColor = [kWhiteColor colorWithAlphaComponent:0.5];
     //    pageControl.pageIndicatorImage = kGetImage(@"live_gunlun_nor");
     //    pageControl.currentPageIndicatorImage = kGetImage(@"live_gunlun_press");
     //    pageControl.contentInset = UIEdgeInsetsMake(0, 20, 0, 20);

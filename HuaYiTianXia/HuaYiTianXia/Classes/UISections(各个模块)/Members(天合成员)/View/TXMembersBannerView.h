@@ -15,6 +15,7 @@ typedef void(^TXMembersBannerViewCallBlock)(NSInteger idx);
 @interface TXMembersBannerView : UIView
 
 - (void)setBannerImagesDidOnClickCallBlock:(TXMembersBannerViewCallBlock)block;
+@property (nonatomic, strong) NSMutableArray *bannerArray;
 @end
 
 NS_ASSUME_NONNULL_END

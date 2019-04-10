@@ -10,7 +10,9 @@
 
 @implementation TXNewsModel
 + (NSDictionary *)replacedKeyFromPropertyName{
-    return @{@"data" : @"obj"};
+    return @{@"data"        : @"obj",
+             @"errorcode"   : @"code",
+             @"message"     : @"msg",};
 }
 + (NSDictionary *)objectClassInArray{
     return @{@"data" : [TXNewsTabModel class]};
@@ -27,8 +29,10 @@
 
 @implementation TXNewsArrayModel
 + (NSDictionary *)replacedKeyFromPropertyName{
-    return @{@"data" : @"obj",
-             @"banners":@"banner"};
+    return @{@"data"        : @"obj",
+             @"errorcode"   : @"code",
+             @"message"     : @"msg",
+             @"banners"     : @"banner"};
 }
 + (NSDictionary *)objectClassInArray{
     return @{@"data" : [NewsModel class],
@@ -38,7 +42,9 @@
 
 @implementation NewsModel
 + (NSDictionary *)replacedKeyFromPropertyName{
-    return @{@"data" : @"banner"};
+    return @{@"data"        : @"banner",
+             @"errorcode"   : @"code",
+             @"message"     : @"msg"};
 }
 + (NSDictionary *)objectClassInArray{
     return @{@"records" : [NewsRecordsModel class],

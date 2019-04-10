@@ -186,7 +186,7 @@ static NSString * const pageIndex = @"pageIndex";//获取第几页的根据自�
 
 - (void)tt_requestData{
     if (_requestURL.length ==0) {
-        TTLog(@"QQTablView:请输入下载网址");
+        TTLog(@"TablView:请输入下载网址");
         [self.mj_header endRefreshing];
         return;
     }
@@ -231,7 +231,7 @@ static NSString * const pageIndex = @"pageIndex";//获取第几页的根据自�
     _requestURL = requestURL;
 }
 
-- (void)setRequestType:(BOOL)requestType{
+- (void)setRequestType:(kRequestType)requestType{
     _requestType = requestType;
 }
 
