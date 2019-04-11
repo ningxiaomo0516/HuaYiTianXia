@@ -8,8 +8,9 @@
 
 #import "AppDelegate.h"
 #import "LZRootViewController.h"
+#import "IQKeyboardManager.h"
 
-@interface AppDelegate ()
+@interface AppDelegate ()<WXApiDelegate>
 
 @end
 
@@ -21,6 +22,8 @@
     if (@available(iOS 11.0, *)) {
         [[UIScrollView appearance] setContentInsetAdjustmentBehavior:UIScrollViewContentInsetAdjustmentNever];
     }
+    //配置键盘
+    [IQKeyboardManager sharedManager];
     [WXApi registerApp:kWechatAppId enableMTA:YES];
     ///初始化登陆信息
     [[TTUserModel shared] load];

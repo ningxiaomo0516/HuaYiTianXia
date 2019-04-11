@@ -78,9 +78,8 @@ TXMallGoodsSpecTableViewCellDelegate>
         TTPushVC(vc);
     }else if(self.pageType == 1){
         
-        MV(weakSelf)
         TXPayOrderViewController *vc = [[TXPayOrderViewController alloc] init];
-        [self sc_bottomPresentController:vc presentedHeight:IPHONE6_W(340) completeHandle:^(BOOL presented) {
+        [self sc_bottomPresentController:vc presentedHeight:IPHONE6_W(kiPhoneX_T(340)) completeHandle:^(BOOL presented) {
             if (presented) {
                 TTLog(@"弹出了");
             }else{

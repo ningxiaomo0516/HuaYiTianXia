@@ -11,7 +11,7 @@
 #define kDotCount 6  //密码个数
 @interface TTPasswordView ()
 
-@property (nonatomic, strong) UITextField *textField;
+@property (nonatomic, strong) TTTextFeild *textField;
 @property (nonatomic, strong) NSMutableArray *dotArray; //用于存放黑色的点点
 
 @end
@@ -108,10 +108,9 @@
 }
 
 #pragma mark - init
-
-- (UITextField *)textField{
+- (TTTextFeild *)textField{
     if (!_textField) {
-        _textField = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, self.width, self.height)];
+        _textField = [[TTTextFeild alloc] initWithFrame:CGRectMake(0, 0, self.width, self.height)];
         _textField.backgroundColor = kWhiteColor;
         //输入的文字颜色为白色
         _textField.textColor = kWhiteColor;
@@ -126,6 +125,28 @@
         [self addSubview:_textField];
     }
     return _textField;
+}
+
+@end
+
+
+@implementation TTTextFeild
+
+- (id)initWithFrame:(CGRect)frame{
+    self = [super initWithFrame:frame];
+    if (self) {
+        
+        // Initialization code
+    }
+    return self;
+}
+
+- (BOOL)canPerformAction:(SEL)action withSender:(id)sender{
+    UIMenuController *menuController = [UIMenuController sharedMenuController];
+    if (menuController) {
+        [UIMenuController sharedMenuController].menuVisible = NO;
+    }
+    return NO;
 }
 
 @end

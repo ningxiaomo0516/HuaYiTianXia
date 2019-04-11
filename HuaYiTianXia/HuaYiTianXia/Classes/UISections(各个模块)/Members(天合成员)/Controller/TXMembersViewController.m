@@ -120,7 +120,7 @@ static NSString * const reuseIdentifier = @"TXMembersbleViewCell";
 - (TXWebHeaderView *)headerView{
     if (!_headerView) {
         _headerView = [[TXWebHeaderView alloc] init];
-        _headerView.frame = CGRectMake(0, 0, kScreenWidth, IPHONE6_W(330));
+        _headerView.frame = CGRectMake(0, 0, kScreenWidth, IPHONE6_W(340));
     }
     return _headerView;
 }

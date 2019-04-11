@@ -11,7 +11,6 @@
 #import "NSImage+WebCache.h"
 #import <ImageIO/ImageIO.h>
 #import "NSData+ImageContentType.h"
-#import "UIImage+MultiFormat.h"
 
 #if SD_UIKIT || SD_WATCH
 static const size_t kBytesPerPixel = 4;
@@ -74,9 +73,6 @@ static const CGFloat kDestSeemOverlap = 2.0f;   // the numbers of pixels to over
         case SDImageFormatHEIC:
             // Check HEIC decoding compatibility
             return [[self class] canDecodeFromHEICFormat];
-        case SDImageFormatHEIF:
-            // Check HEIF decoding compatibility
-            return [[self class] canDecodeFromHEIFFormat];
         default:
             return YES;
     }
@@ -90,9 +86,6 @@ static const CGFloat kDestSeemOverlap = 2.0f;   // the numbers of pixels to over
         case SDImageFormatHEIC:
             // Check HEIC decoding compatibility
             return [[self class] canDecodeFromHEICFormat];
-        case SDImageFormatHEIF:
-            // Check HEIF decoding compatibility
-            return [[self class] canDecodeFromHEIFFormat];
         default:
             return YES;
     }
@@ -104,7 +97,6 @@ static const CGFloat kDestSeemOverlap = 2.0f;   // the numbers of pixels to over
     }
     
     UIImage *image = [[UIImage alloc] initWithData:data];
-    image.sd_imageFormat = [NSData sd_imageFormatForImageData:data];
     
     return image;
 }
@@ -154,7 +146,6 @@ static const CGFloat kDestSeemOverlap = 2.0f;   // the numbers of pixels to over
             image = [[UIImage alloc] initWithCGImage:partialImageRef size:NSZeroSize];
 #endif
             CGImageRelease(partialImageRef);
-            image.sd_imageFormat = [NSData sd_imageFormatForImageData:data];
         }
     }
     
@@ -267,14 +258,14 @@ static const CGFloat kDestSeemOverlap = 2.0f;   // the numbers of pixels to over
         CGSize sourceResolution = CGSizeZero;
         sourceResolution.width = CGImageGetWidth(sourceImageRef);
         sourceResolution.height = CGImageGetHeight(sourceImageRef);
-        CGFloat sourceTotalPixels = sourceResolution.width * sourceResolution.height;
+        float sourceTotalPixels = sourceResolution.width * sourceResolution.height;
         // Determine the scale ratio to apply to the input image
         // that results in an output image of the defined size.
         // see kDestImageSizeMB, and how it relates to destTotalPixels.
-        CGFloat imageScale = sqrt(kDestTotalPixels / sourceTotalPixels);
+        float imageScale = kDestTotalPixels / sourceTotalPixels;
         CGSize destResolution = CGSizeZero;
-        destResolution.width = (int)(sourceResolution.width * imageScale);
-        destResolution.height = (int)(sourceResolution.height * imageScale);
+        destResolution.width = (int)(sourceResolution.width*imageScale);
+        destResolution.height = (int)(sourceResolution.height*imageScale);
         
         // device color space
         CGColorSpaceRef colorspaceRef = SDCGColorSpaceGetDeviceRGB();
@@ -378,9 +369,6 @@ static const CGFloat kDestSeemOverlap = 2.0f;   // the numbers of pixels to over
         case SDImageFormatHEIC:
             // Check HEIC encoding compatibility
             return [[self class] canEncodeToHEICFormat];
-        case SDImageFormatHEIF:
-            // Check HEIF encoding compatibility
-            return [[self class] canEncodeToHEIFFormat];
         default:
             return YES;
     }
@@ -413,7 +401,7 @@ static const CGFloat kDestSeemOverlap = 2.0f;   // the numbers of pixels to over
     NSMutableDictionary *properties = [NSMutableDictionary dictionary];
 #if SD_UIKIT || SD_WATCH
     NSInteger exifOrientation = [SDWebImageCoderHelper exifOrientationFromImageOrientation:image.imageOrientation];
-    [properties setValue:@(exifOrientation) forKey:(__bridge NSString *)kCGImagePropertyOrientation];
+    [properties setValue:@(exifOrientation) forKey:(__bridge_transfer NSString *)kCGImagePropertyOrientation];
 #endif
     
     // Add your image to the destination.
@@ -449,24 +437,28 @@ static const CGFloat kDestSeemOverlap = 2.0f;   // the numbers of pixels to over
     static BOOL canDecode = NO;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        CFStringRef imageUTType = [NSData sd_UTTypeFromSDImageFormat:SDImageFormatHEIC];
-        NSArray *imageUTTypes = (__bridge_transfer NSArray *)CGImageSourceCopyTypeIdentifiers();
-        if ([imageUTTypes containsObject:(__bridge NSString *)(imageUTType)]) {
-            canDecode = YES;
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wunguarded-availability"
+#if TARGET_OS_SIMULATOR || SD_WATCH
+        canDecode = NO;
+#elif SD_MAC
+        NSProcessInfo *processInfo = [NSProcessInfo processInfo];
+        if ([processInfo respondsToSelector:@selector(operatingSystemVersion)]) {
+            // macOS 10.13+
+            canDecode = processInfo.operatingSystemVersion.minorVersion >= 13;
+        } else {
+            canDecode = NO;
         }
-    });
-    return canDecode;
-}
-
-+ (BOOL)canDecodeFromHEIFFormat {
-    static BOOL canDecode = NO;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        CFStringRef imageUTType = [NSData sd_UTTypeFromSDImageFormat:SDImageFormatHEIF];
-        NSArray *imageUTTypes = (__bridge_transfer NSArray *)CGImageSourceCopyTypeIdentifiers();
-        if ([imageUTTypes containsObject:(__bridge NSString *)(imageUTType)]) {
-            canDecode = YES;
+#elif SD_UIKIT
+        NSProcessInfo *processInfo = [NSProcessInfo processInfo];
+        if ([processInfo respondsToSelector:@selector(operatingSystemVersion)]) {
+            // iOS 11+ && tvOS 11+
+            canDecode = processInfo.operatingSystemVersion.majorVersion >= 11;
+        } else {
+            canDecode = NO;
         }
+#endif
+#pragma clang diagnostic pop
     });
     return canDecode;
 }
@@ -485,27 +477,6 @@ static const CGFloat kDestSeemOverlap = 2.0f;   // the numbers of pixels to over
             canEncode = NO;
         } else {
             // Can encode to HEIC
-            CFRelease(imageDestination);
-            canEncode = YES;
-        }
-    });
-    return canEncode;
-}
-
-+ (BOOL)canEncodeToHEIFFormat {
-    static BOOL canEncode = NO;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        NSMutableData *imageData = [NSMutableData data];
-        CFStringRef imageUTType = [NSData sd_UTTypeFromSDImageFormat:SDImageFormatHEIF];
-        
-        // Create an image destination.
-        CGImageDestinationRef imageDestination = CGImageDestinationCreateWithData((__bridge CFMutableDataRef)imageData, imageUTType, 1, NULL);
-        if (!imageDestination) {
-            // Can't encode to HEIF
-            canEncode = NO;
-        } else {
-            // Can encode to HEIF
             CFRelease(imageDestination);
             canEncode = YES;
         }

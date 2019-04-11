@@ -8,6 +8,7 @@ target 'HuaYiTianXia' do
     pod 'SDWebImage'
     pod 'MBProgressHUD'
     pod 'WechatOpenSDK'
+    pod 'IQKeyboardManager'
   use_frameworks!
 end
 

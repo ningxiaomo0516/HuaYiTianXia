@@ -25,15 +25,15 @@
     [self addSubview:self.imagesView];
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self);
-        make.top.equalTo(@(IPHONE6_W(25)));
+        make.top.equalTo(@(IPHONE6_W(20)));
     }];
     
     [self.subtitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self);
-        make.top.equalTo(self.titleLabel.mas_bottom).offset(IPHONE6_W(15));
+        make.top.equalTo(self.titleLabel.mas_bottom).offset(IPHONE6_W(10));
     }];
     [self.saveButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.subtitleLabel.mas_bottom).offset(IPHONE6_W(20));
+        make.top.equalTo(self.subtitleLabel.mas_bottom).offset(IPHONE6_W(15));
         make.left.equalTo(@(15));
         make.right.equalTo(self.mas_right).offset(-15);
         make.height.equalTo(@(45));
