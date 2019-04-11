@@ -15,7 +15,7 @@
 #import "TXSubmitOrderViewController.h"
 #import "TXWebViewController.h"
 #import "TXGoodsH5TableViewCell.h"
-#import "TXChoosePayViewController.h"
+#import "TXPayOrderViewController.h"
 
 static NSString * const reuseIdentifierBanner   = @"TXMallGoodsBannerTableViewCell";
 static NSString * const reuseIdentifierDetails  = @"TXMallGoodsDetailsTableViewCell";
@@ -69,13 +69,6 @@ TXMallGoodsSpecTableViewCellDelegate>
     }];
 }
 
-- (void) dealwithPayJump:(NSInteger) kid{
-    if (kid==0) {
-        
-    }else{
-        
-    }
-}
 
 /// 立即投保
 - (void) saveBtnClick:(UIButton *)sender{
@@ -84,12 +77,10 @@ TXMallGoodsSpecTableViewCellDelegate>
         TXSubmitOrderViewController *vc = [[TXSubmitOrderViewController alloc] init];
         TTPushVC(vc);
     }else if(self.pageType == 1){
+        
         MV(weakSelf)
-        TXChoosePayViewController *vc = [[TXChoosePayViewController alloc] init];
-        vc.typeBlock = ^(NSString * _Nonnull text, NSInteger kid) {
-            [weakSelf dealwithPayJump:kid];
-        };
-        [self sc_bottomPresentController:vc presentedHeight:IPHONE6_W(200) completeHandle:^(BOOL presented) {
+        TXPayOrderViewController *vc = [[TXPayOrderViewController alloc] init];
+        [self sc_bottomPresentController:vc presentedHeight:IPHONE6_W(340) completeHandle:^(BOOL presented) {
             if (presented) {
                 TTLog(@"弹出了");
             }else{

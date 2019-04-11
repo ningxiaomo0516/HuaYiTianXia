@@ -8,6 +8,7 @@
 
 #import "TXChoosePayViewController.h"
 #import "TXChoosePayTableViewCell.h"
+#import "AlipayManager.h"
 
 static NSString * const reuseIdentifier = @"TXChoosePayTableViewCell";
 
@@ -89,7 +90,7 @@ static NSString * const reuseIdentifier = @"TXChoosePayTableViewCell";
     return IPHONE6_W(55);
 }
 
-- (void) submitOrderData{
+- (void) submitOrderData:(NSInteger) idx{
     NSMutableDictionary *parameter = [[NSMutableDictionary alloc] init];
     
     //    title    是    String    标题（当purchaseType=0时可传入固定值“会员充值”，purchaseType=6时可传入固定值“天合成员充值”，另外的情况请传入商品标题）
@@ -113,36 +114,23 @@ static NSString * const reuseIdentifier = @"TXChoosePayTableViewCell";
     [parameter setObject:@"" forKey:@"spec"];
     [parameter setObject:@"" forKey:@"color"];
     [parameter setObject:@"" forKey:@"remarks"];
-    [parameter setObject:@(1) forKey:@"payType"];
+    [parameter setObject:@(idx) forKey:@"payType"];
     [parameter setObject:@"" forKey:@"currency"];
     [SCHttpTools postWithURLString:kHttpURL(@"orderform/PayFrom") parameter:parameter success:^(id responseObject) {
         NSDictionary *result = responseObject;
         if ([result isKindOfClass:[NSDictionary class]]) {
-            NSString *str = [Utils lz_dataWithJSONObject:result];
-            TTLog(@"str == %@",str);
             TXGeneralModel *model = [TXGeneralModel mj_objectWithKeyValues:result];
             if (model.errorcode == 20000) {
 //                [self sc_dismissVC];
-                NSDictionary *dict = [Utils dictionaryWithJsonString:model.obj];
-                OrderData *o = [OrderData mj_objectWithKeyValues:dict];
-                //调起微信支付
-                PayReq* req             = [[PayReq alloc] init];
-//                req.openID = o.appid;
-                /** 商家向财付通申请的商家id */
-                req.partnerId           = [dict lz_objectForKey:@"partnerid"];
-                /** 预支付订单 */
-                req.prepayId            = [dict lz_objectForKey:@"prepayid"];
-                /** 随机串，防重发 */
-                req.nonceStr            = [dict lz_objectForKey:@"noncestr"];
-                /** 时间戳，防重发 */
-                req.timeStamp           = [[dict lz_objectForKey:@"timestamp"] intValue];
-                /** 商家根据财付通文档填写的数据和签名(//这个比较特殊，是固定的，只能是即req.package = Sign=WXPay)*/
-                req.package             = @"Sign=WXPay";
-                /** 商家根据微信开放平台文档对数据做的签名 */
-                req.sign                = [dict lz_objectForKey:@"sign"];
-                [WXApi sendReq:req];
-                //日志输出
-                TTLog(@"appid=%@\npartid=%@\nprepayid=%@\nnoncestr=%@\ntimestamp=%ld\npackage=%@\nsign=%@",o.appid,req.partnerId,req.prepayId,req.nonceStr,(long)req.timeStamp,req.package,req.sign );
+                if (idx==0) {/// 支付宝支付
+                    [AlipayManager doAlipayPay:model];
+                }else if(idx==1){/// 微信支付
+                    NSString *str = [Utils lz_dataWithJSONObject:result];
+                    TTLog(@"str == %@",str);
+                    [AlipayManager doWechatPay:model];
+                }else{
+                    Toast(@"未知支付");
+                }
             }else{
                 Toast(model.message);
             }
@@ -154,7 +142,7 @@ static NSString * const reuseIdentifier = @"TXChoosePayTableViewCell";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    [self submitOrderData];
+    [self submitOrderData:indexPath.row];
     
 //    return @"";
 //    TXGeneralModel *model = self.dataArray[indexPath.row];
@@ -164,6 +152,7 @@ static NSString * const reuseIdentifier = @"TXChoosePayTableViewCell";
 //    [self dismissViewControllerAnimated:YES completion:nil];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
+
 
 #pragma mark ----- getter/setter
 - (UITableView *)tableView{
@@ -213,8 +202,8 @@ static NSString * const reuseIdentifier = @"TXChoosePayTableViewCell";
 - (NSMutableArray *)dataArray{
     if (!_dataArray) {
         _dataArray = [[NSMutableArray alloc] init];
-        NSArray* titleArr = @[@"微信支付",@"支付宝"];
-        NSArray* classArr = @[@"c31_btn_wxzf",@"c31_btn_zfb"];
+        NSArray* titleArr = @[@"支付宝",@"微信支付"];
+        NSArray* classArr = @[@"c31_btn_zfb",@"c31_btn_wxzf"];
         for (int j = 0; j < titleArr.count; j ++) {
             TXGeneralModel *generalModel = [[TXGeneralModel alloc] init];
             generalModel.title = [titleArr lz_safeObjectAtIndex:j];

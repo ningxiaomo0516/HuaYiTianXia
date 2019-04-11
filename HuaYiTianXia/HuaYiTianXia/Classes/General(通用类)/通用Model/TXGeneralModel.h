@@ -21,12 +21,14 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, copy)NSString* message;
 /// 错误Code
 @property(nonatomic, assign)NSInteger errorcode;
-/// 错误Code
+/// 支付宝支付的时候取所需签名,微信支付时需要将字符串转为字典后在使用
 @property(nonatomic, copy)NSString *obj;
 
 
 @end
 
+
+/// 微信支付的时候使用的订单Model
 @interface OrderData : NSObject
 /// 消息提示
 @property(nonatomic, copy)NSString* code;

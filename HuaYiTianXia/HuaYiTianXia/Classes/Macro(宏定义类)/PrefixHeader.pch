@@ -54,6 +54,8 @@
 /// 网络请求工具
 #import "SCHttpTools.h"
 #import "AppDefine.h"
-/// 分享
+/// 分享(微信)
 #import "WXApi.h"
+/// 支付宝
+#import <AlipaySDK/AlipaySDK.h>
 #endif /* PrefixHeader_pch */

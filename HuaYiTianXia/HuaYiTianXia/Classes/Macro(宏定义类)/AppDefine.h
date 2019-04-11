@@ -16,12 +16,20 @@ static NSString * const PurchaseURL=@"https://sandbox.itunes.apple.com/verifyRec
 #else
 static NSString * const PurchaseURL=@"https://buy.itunes.apple.com/verifyReceipt";  //其他
 #endif
+//支付宝支付接口
+#define kAlipayUrl       @"alipay.trade.app.pay"
+#define kAppScheme       @"HuaYiTianXia"
+
+#pragma mark -----------------------------支付宝支付签名-----------------------------------
 
 
 ////////// 百度地图 /////////////EajhH8NSUg96kUYjxPhKz8eq
 #define kBaiDuAppKey @"EajhH8NSUg96kUYjxPhKz8eq"//百度地图的key
 #define kTencentAppKey @"UBSBZ-4ENCU-CSUVT-BYK5N-DAWRK-GYFX5"//腾讯地图的key
 
+////////// 支付宝支付Key /////////////
+#define kAlipayAppId  @"2019010362704914"
+#define kAlipayAppKey @"eqb84UMcbFWN4JIZ"
 
 ////////// QQ分享功能Key /////////////
 #define kQQAppId  @"1105999352"
