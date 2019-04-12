@@ -67,7 +67,7 @@
  *  @param imageName 需要设置的图标
  *  @return 返回已经设置好的富文本
  */
-+ (NSAttributedString *) sc_initImageWithText:(NSString *) textStr imageName:(NSString *)imageName;
++ (NSAttributedString *) sc_initImageWithText:(NSString *) textStr imageName:(NSString *)imageName fontWithSize:(UIFont *)fontSize;
 
 /**
  *  获取验证码倒计时

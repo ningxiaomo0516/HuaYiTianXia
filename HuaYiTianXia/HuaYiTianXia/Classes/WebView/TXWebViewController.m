@@ -23,6 +23,14 @@
     [self initView];
 //    self.webUrl = @"http://www.baidu.com";
     [self loadData];
+    
+    if ([self.title isEqualToString:@"农保电子协议"]) {
+        UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithImage:kGetImage(@"all_btn_close_grey")
+                                                                     style:UIBarButtonItemStylePlain
+                                                                    target:self
+                                                                    action:@selector(didTapPopButton:)];
+        self.navigationItem.leftBarButtonItem = leftItem;
+    }
 }
 
 //// 加载数据
@@ -41,6 +49,10 @@
     self.wkWebView.hidden = NO;
     self.reloadButton.hidden = YES;
     [self.wkWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.webUrl]]];
+}
+
+- (void)didTapPopButton:(UIBarButtonItem *)barButtonItem {
+    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
 
 

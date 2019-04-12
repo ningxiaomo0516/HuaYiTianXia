@@ -15,6 +15,10 @@ typedef void(^RolloutTypeBlock) (NSString *text,NSString *kid);
 @interface TXRolloutTypeViewController : TTBaseTableViewController
 //定义一个block
 @property (nonatomic, copy) RolloutTypeBlock typeBlock;
+
+
+//// 0:转换 1:转出
+@property (nonatomic, assign) NSInteger pageType;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -2,284 +2,155 @@
 //  TXPayOrderViewController.m
 //  HuaYiTianXia
 //
-//  Created by 宁小陌 on 2019/4/11.
+//  Created by 宁小陌 on 2019/4/12.
 //  Copyright © 2019年 宁小陌. All rights reserved.
 //
 
 #import "TXPayOrderViewController.h"
+#import "SCCustomMarginLabel.h"
+#import "TXPayOrderVC.h"
+#import "TXWebViewController.h"
 #import "TXChoosePayViewController.h"
 
 @interface TXPayOrderViewController ()
-
-
+/// 关闭按钮
+@property (weak, nonatomic) IBOutlet UIButton *closeButton;
+/// 价格
+@property (weak, nonatomic) IBOutlet UILabel *totalPriceLabel;
+/// 规格
+@property (weak, nonatomic) IBOutlet UILabel *specLabel;
+/// 累加金额
+@property (weak, nonatomic) IBOutlet SCCustomMarginLabel *priceLabel;
+/// 减少按钮
+@property (weak, nonatomic) IBOutlet UIButton *minusBtn;
+/// 增加按钮
+@property (weak, nonatomic) IBOutlet UIButton *increaseBtn;
+/// 提交按钮
+@property (weak, nonatomic) IBOutlet UIButton *saveButton;
+/// 勾选按钮
+@property (weak, nonatomic) IBOutlet UIButton *checkButton;
+/// 协议按钮
+@property (weak, nonatomic) IBOutlet UIButton *protocolButton;
+/// 产品Model
+@property (strong, nonatomic)  NewsRecordsModel *model;
 @end
 
 @implementation TXPayOrderViewController
-
+- (id) initNewsRecordsModel:(NewsRecordsModel *)model{
+    if ( self = [super init] ){
+        self.model = model;
+    }
+    return self;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    [self initView];
-    self.totalPriceLabel.text = @"3000";
-    self.priceLabel.text = @"3000";
-    self.specLabel.text = @"4T";
+    // Do any additional setup after loading the view from its nib.
+    self.priceLabel.edgeInsets    = UIEdgeInsetsMake(0.f, 20.f, 0.f, 20.f); // 设置左内边距
+    if (self.model.prospec.count>0) {
+        self.specLabel.text = self.model.prospec[0];
+    }else{
+        self.specLabel.text = @"";
+    }
+    
+    
+    // 注册通知(支付成功之后的处理)
+    [kNotificationCenter addObserver:self selector:@selector(AlipaySuccessfulBlock) name:@"AlipaySuccessful" object:nil];
 }
 
+- (void)AlipaySuccessfulBlock{
+    [self sc_dismissVC];
+    [self.navigationController popToRootViewControllerAnimated:YES];
+//    [self.navigationController.tabBarController setSelectedIndex:4];
+}
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     self.view.backgroundColor = kWhiteColor;
 }
 
+/**
+ *  点击关闭按钮
+ *
+ *  @param sender 当前按钮
+ */
+- (IBAction)closelBtnClick:(id)sender {
+    [self sc_dismissVC];
+}
 
-- (void) onClick:(UIButton *)sender{
-    if (sender.tag==0) {
-        
-    }else if (sender.tag==1){
-        
-    }else if (sender.tag==2){
-        TXChoosePayViewController *vc = [[TXChoosePayViewController alloc] init];
-        [self sc_bottomPresentController:vc presentedHeight:IPHONE6_W(kiPhoneX_T(200)) completeHandle:^(BOOL presented) {
-            if (presented) {
-                TTLog(@"弹出了");
-            }else{
-                TTLog(@"消失了");
-            }
-        }];
+/**
+ *  是否同意协议
+ *
+ @param sender 协议按钮
+ */
+- (IBAction)agreeProtocolButtonClick:(id)sender {
+    self.checkButton.selected = !self.checkButton.selected;
+}
+
+/**
+ *  点击协议按钮
+ *
+ *  @param sender 当前按钮
+ */
+- (IBAction)protocolBtnClick:(id)sender {
+    TXWebViewController *vc = [[TXWebViewController alloc] init];
+    vc.title = @"农保电子协议";
+    vc.webUrl = kAppendH5URL(DomainName, NBElectronicAgreementH5,@"");
+    LZNavigationController *navigation = [[LZNavigationController alloc] initWithRootViewController:vc];
+    [self presentViewController:navigation animated:YES completion:^{
+        TTLog(@"个人信息修改");
+    }];
+
+}
+
+/**
+ *  点击增加按钮
+ *
+ *  @param sender 当前按钮
+ */
+- (IBAction)increaseBtnClick:(id)sender {
+    NSInteger price = [self.priceLabel.text integerValue];
+    NSInteger i = 3000*1000;
+    NSInteger total = price + i;
+    self.priceLabel.text = [NSString stringWithFormat:@"%ld",total];
+}
+
+/**
+ *  点击减少按钮
+ *
+ *  @param sender 当前按钮
+ */
+- (IBAction)minusBtnClick:(id)sender {
+    NSInteger price = [self.priceLabel.text integerValue];
+    NSInteger i = 3000*1000;
+    if (price<=3000) {
+        Toast(@"已是最低投保金额");
+        return;
     }else{
-        Toast(@"未知按钮的点击");
+        NSInteger total = price - i;
+        self.priceLabel.text = [NSString stringWithFormat:@"%ld",total];
     }
 }
 
+/**
+ *  点击提交按钮
+ *
+ *  @param sender 当前按钮
+ */
+- (IBAction)saveBtnClick:(id)sender {
+    self.model.price = self.priceLabel.text;
+//    [self sc_dismissVC];
+    int64_t delayInSeconds = 0.5;      // 延迟的时间
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        self.model.purchaseType = 2;
+        TXChoosePayViewController *vc = [[TXChoosePayViewController alloc]initNewsRecordsModel:self.model];
+        [self sc_bottomPresentController:vc presentedHeight:IPHONE6_W(400) completeHandle:^(BOOL presented) {
 
-- (void) initView{
-    [self.view addSubview:self.boxView];
-    [self.boxView addSubview:self.titleLabel];
-    [self.boxView addSubview:self.closeButton];
-    [self.boxView addSubview:self.totalPriceLabel];
-    
-    [self.view addSubview:self.specTipsLabel];
-    [self.view addSubview:self.specLabel];
-    
-    [self.view addSubview:self.priceTipsLabel];
-    [self.view addSubview:self.priceLabel];
-    
-    [self.view addSubview:self.minusBtn];
-    [self.view addSubview:self.increaseBtn];
-    
-    [self.view addSubview:self.linerView1];
-    [self.view addSubview:self.linerView2];
-    
-    [self.view addSubview:self.saveButton];
-    [self.view addSubview:self.tipsLabel];
-
-    
-    [self.boxView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.top.right.equalTo(self.view);
-        make.height.equalTo(@(IPHONE6_W(105)));
-    }];
-    
-    [self.closeButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.top.equalTo(@(10));
-        make.height.width.equalTo(@(44));
-    }];
-    
-    [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.top.equalTo(self.boxView);
-        make.centerY.equalTo(self.closeButton);
-    }];
-    
-    [self.totalPriceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.view);
-        make.top.equalTo(@(IPHONE6_W(55)));
-    }];
-    
-    [self.linerView1 mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.equalTo(self.view);
-        make.height.equalTo(@(0.5));
-        make.top.equalTo(self.boxView.mas_bottom).offset(IPHONE6_W(50));
-    }];
-    
-    [self.specTipsLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(@(10));
-        make.top.equalTo(self.boxView.mas_bottom);
-        make.bottom.equalTo(self.linerView1);
-    }];
-
-    [self.specLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.bottom.equalTo(self.specTipsLabel);
-        make.right.equalTo(self.view.mas_right).offset(-15);
-    }];
-
-    [self.linerView2 mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.height.right.left.equalTo(self.linerView1);
-        make.top.equalTo(self.linerView1.mas_bottom).offset(IPHONE6_W(50));
-    }];
-
-    [self.priceTipsLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.specTipsLabel);
-        make.top.equalTo(self.linerView1.mas_bottom);
-        make.bottom.equalTo(self.linerView2);
-    }];
-
-    [self.increaseBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(self.specLabel);
-        make.centerY.equalTo(self.priceTipsLabel);
-        make.height.width.equalTo(@(30));
-    }];
-
-    [self.priceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(self.increaseBtn.mas_left).offset(-5);
-        make.centerY.equalTo(self.increaseBtn);
-    }];
-
-    [self.minusBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(self.priceLabel.mas_left).offset(-5);
-        make.centerY.equalTo(self.priceLabel);
-        make.height.width.equalTo(self.increaseBtn);
-    }];
-
-    [self.tipsLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.view);
-        make.top.equalTo(self.linerView2.mas_bottom).offset(12);
-    }];
-
-    [self.saveButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.view);
-        make.height.equalTo(@(IPHONE6_W(45)));
-        make.left.equalTo(@(15));
-        make.right.equalTo(self.view.mas_right).offset(-15);
-//        make.bottom.equalTo(self.view.mas_bottom).offset(-kiPhoneX_T(34));
-        make.top.equalTo(self.tipsLabel.mas_bottom).offset(15);
-    }];
-}
-
-- (UIButton *)closeButton{
-    if (!_closeButton) {
-        _closeButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_closeButton setImage:kGetImage(@"c12_btn_o_close") forState:UIControlStateNormal];
-        MV(weakSelf);
-        [_closeButton lz_handleControlEvent:UIControlEventTouchUpInside withBlock:^{
-            [weakSelf dismissViewControllerAnimated:YES completion:nil];
         }];
-    }
-    return _closeButton;
+    });
 }
 
-- (UILabel *)titleLabel{
-    if (!_titleLabel) {
-        _titleLabel = [UILabel lz_labelWithTitle:@"起投金额（元）" color:kWhiteColor font:kFontSizeMedium16];
-        _titleLabel.textAlignment = NSTextAlignmentCenter;
-    }
-    return _titleLabel;
-}
-
-- (UILabel *)totalPriceLabel{
-    if (!_totalPriceLabel) {
-        _totalPriceLabel = [UILabel lz_labelWithTitle:@"" color:kWhiteColor font:kFontSizeMedium16];
-        _totalPriceLabel.textAlignment = NSTextAlignmentCenter;
-    }
-    return _totalPriceLabel;
-}
-
-- (UILabel *)specTipsLabel{
-    if (!_specTipsLabel) {
-        _specTipsLabel = [UILabel lz_labelWithTitle:@"商品规格" color:kTextColor51 font:kFontSizeMedium14];
-    }
-    return _specTipsLabel;
-}
-
-- (UILabel *)priceTipsLabel{
-    if (!_priceTipsLabel) {
-        _priceTipsLabel = [UILabel lz_labelWithTitle:@"加入货币" color:kTextColor51 font:kFontSizeMedium14];
-    }
-    return _priceTipsLabel;
-}
-
-- (UILabel *)specLabel{
-    if (!_specLabel) {
-        _specLabel = [UILabel lz_labelWithTitle:@"" color:kTextColor51 font:kFontSizeMedium14];
-    }
-    return _specLabel;
-}
-
-- (UILabel *)priceLabel{
-    if (!_priceLabel) {
-        _priceLabel = [UILabel lz_labelWithTitle:@"" color:kTextColor51 font:kFontSizeMedium14];
-    }
-    return _priceLabel;
-}
-
-- (UIButton *)minusBtn{
-    if (!_minusBtn) {
-        _minusBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_minusBtn setImage:kGetImage(@"c11_btn_minus") forState:UIControlStateNormal];
-        _minusBtn.tag = 0;
-        MV(weakSelf);
-        [_minusBtn lz_handleControlEvent:UIControlEventTouchUpInside withBlock:^{
-            [weakSelf onClick:weakSelf.minusBtn];
-        }];
-
-    }
-    return _minusBtn;
-}
-
-- (UIButton *)increaseBtn{
-    if (!_increaseBtn) {
-        _increaseBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_increaseBtn setImage:kGetImage(@"c11_btn_increase") forState:UIControlStateNormal];
-        _increaseBtn.tag = 1;
-        MV(weakSelf);
-        [_increaseBtn lz_handleControlEvent:UIControlEventTouchUpInside withBlock:^{
-            [weakSelf onClick:weakSelf.increaseBtn];
-        }];
-
-    }
-    return _increaseBtn;
-}
-
-- (UIView *)linerView1{
-    if (!_linerView1) {
-        _linerView1 = [UIView lz_viewWithColor:kLinerViewColor];
-    }
-    return _linerView1;
-}
-
-- (UIView *)linerView2 {
-    if (!_linerView2) {
-        _linerView2 = [UIView lz_viewWithColor:kLinerViewColor];
-    }
-    return _linerView2;
-}
-
-- (UIButton *)saveButton{
-    if (!_saveButton) {
-        _saveButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_saveButton setTitleColor:kWhiteColor forState:UIControlStateNormal];
-        _saveButton.titleLabel.font = kFontSizeMedium15;
-        _saveButton.tag = 2;
-        [_saveButton setTitle:@"下一步" forState:UIControlStateNormal];
-        [_saveButton setBackgroundImage:kGetImage(@"c31_denglu") forState:UIControlStateNormal];
-        MV(weakSelf);
-        [_saveButton lz_handleControlEvent:UIControlEventTouchUpInside withBlock:^{
-            [weakSelf onClick:self.saveButton];
-        }];
-    }
-    return _saveButton;
-}
-
-- (UILabel *)tipsLabel{
-    if (!_tipsLabel) {
-        _tipsLabel = [UILabel lz_labelWithTitle:@"" color:kTextColor204 font:kFontSizeMedium14];
-        _tipsLabel.text = @"最低起投金额3000元,每次追加或减少1000的倍数";
-    }
-    return _tipsLabel;
-}
-
-- (UIView *)boxView{
-    if (!_boxView) {
-        _boxView = [UIView lz_viewWithColor:HexString(@"#2DACF7")];
-    }
-    return _boxView;
+- (void)dealloc{
+    [kNotificationCenter removeObserver:self];
 }
 
 @end

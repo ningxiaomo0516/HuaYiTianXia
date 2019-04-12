@@ -52,7 +52,7 @@ static NSString * const reuseIdentifier = @"TXRolloutTypeTableViewCell";
 
 /// 返回多少行
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.dataArray.count;
+    return (self.pageType==0)?1:self.dataArray.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -90,8 +90,8 @@ static NSString * const reuseIdentifier = @"TXRolloutTypeTableViewCell";
 - (NSMutableArray *)dataArray{
     if (!_dataArray) {
         _dataArray = [[NSMutableArray alloc] init];
-        NSArray* titleArr = @[@"AH积分",@"VH积分"];
-        NSArray* subtitleArr = @[kUserInfo.arcurrency,kUserInfo.vrcurrency];
+        NSArray* titleArr = @[@"VH积分",@"AH积分"];
+        NSArray* subtitleArr = @[kUserInfo.vrcurrency,kUserInfo.arcurrency];
         for (int i=0; i<titleArr.count; i++) {
             TXGeneralModel *generalModel = [[TXGeneralModel alloc] init];
             generalModel.title = [titleArr lz_safeObjectAtIndex:i];

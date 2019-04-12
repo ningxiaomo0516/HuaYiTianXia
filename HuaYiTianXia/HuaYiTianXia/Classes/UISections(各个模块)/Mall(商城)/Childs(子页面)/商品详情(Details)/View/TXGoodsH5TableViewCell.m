@@ -30,12 +30,16 @@
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         self.contentView.backgroundColor = [UIColor clearColor];
         self.selectionStyle = UITableViewCellSelectionStyleNone;
-        self.webUrl = @"http://47.107.179.43:80/yq/invation/goodsDetails.html?id=61&status=1";
-        [self initView];
 //        self.webUrl = @"http://www.baidu.com";
-        [self loadData];
+//        [self loadData];
     }
     return self;
+}
+
+- (void)setWebUrl:(NSString *)webUrl{
+    _webUrl = webUrl;
+    [self initView];
+    [self loadData];
 }
 
 //// 加载数据
@@ -161,7 +165,7 @@
         _wkWebView.scrollView.showsHorizontalScrollIndicator = false;
         _wkWebView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
         _wkWebView.scrollView.decelerationRate = UIScrollViewDecelerationRateNormal;
-        _wkWebView.scrollView.scrollEnabled = NO;//禁止滚动，防止与UITableView冲突
+//        _wkWebView.scrollView.scrollEnabled = NO;//禁止滚动，防止与UITableView冲突
         //监听webView.scrollView的contentSize属性
 //        [_wkWebView.scrollView addObserver:self forKeyPath:@"contentSize" options:NSKeyValueObservingOptionNew context:nil];
         _wkWebView.navigationDelegate = self;

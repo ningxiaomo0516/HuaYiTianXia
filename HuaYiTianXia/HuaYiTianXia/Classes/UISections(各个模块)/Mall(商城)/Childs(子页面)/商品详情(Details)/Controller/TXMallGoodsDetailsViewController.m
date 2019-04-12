@@ -16,6 +16,7 @@
 #import "TXWebViewController.h"
 #import "TXGoodsH5TableViewCell.h"
 #import "TXPayOrderViewController.h"
+#import "TXChoosePayViewController.h"
 
 static NSString * const reuseIdentifierBanner   = @"TXMallGoodsBannerTableViewCell";
 static NSString * const reuseIdentifierDetails  = @"TXMallGoodsDetailsTableViewCell";
@@ -77,9 +78,12 @@ TXMallGoodsSpecTableViewCellDelegate>
         TXSubmitOrderViewController *vc = [[TXSubmitOrderViewController alloc] init];
         TTPushVC(vc);
     }else if(self.pageType == 1){
-        
-        TXPayOrderViewController *vc = [[TXPayOrderViewController alloc] init];
-        [self sc_bottomPresentController:vc presentedHeight:IPHONE6_W(kiPhoneX_T(340)) completeHandle:^(BOOL presented) {
+        NewsRecordsModel *model = self.productData.data[0];
+        TXPayOrderViewController *vc = [[TXPayOrderViewController alloc] initNewsRecordsModel:model];
+        vc.totalPriceBlock = ^(NSString * _Nonnull totalPrice) {
+//            model.price = totalPrice;
+        };
+        [self sc_bottomPresentController:vc presentedHeight:IPHONE6_W(kiPhoneX_T(420)) completeHandle:^(BOOL presented) {
             if (presented) {
                 TTLog(@"弹出了");
             }else{
@@ -156,8 +160,6 @@ TXMallGoodsSpecTableViewCellDelegate>
         tools.delegate = self;
         tools.tagView.dataArray = model.prospec;
         tools.indexPath = indexPath;
-//        tools.titleLabel.text = @"商品规格：";
-//        tools.subtitleLabel.text = @"4T矿机";
         return tools;
     }else if(indexPath.section==3){
         TXMallGoodsSpecTableViewCell *tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierBuynum forIndexPath:indexPath];
@@ -216,7 +218,7 @@ TXMallGoodsSpecTableViewCellDelegate>
     if (indexPath.section==3) return IPHONE6_W(60);
     if (indexPath.section==4){
         TTLog(@" return self.webH5Height; --- %f", self.webH5Height);
-        return self.webH5Height;
+        return kScreenHeight-kNavBarHeight-kTabBarHeight;//self.webH5Height;
     }
     return UITableViewAutomaticDimension;
 }

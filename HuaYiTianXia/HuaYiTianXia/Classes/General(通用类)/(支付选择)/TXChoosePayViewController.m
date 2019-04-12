@@ -21,14 +21,50 @@ static NSString * const reuseIdentifier = @"TXChoosePayTableViewCell";
 @property (nonatomic, strong) UILabel *titleLabel;
 /// 分割线
 @property (nonatomic, strong) UIView *linerView;
+/// 产品Model
+@property (strong, nonatomic)  NewsRecordsModel *recordsModel;
 @end
 
 @implementation TXChoosePayViewController
-
+- (id) initNewsRecordsModel:(NewsRecordsModel *)recordsModel{
+    if ( self = [super init] ){
+        self.recordsModel = recordsModel;
+    }
+    return self;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self initView];
+    
+    
+    // 注册通知
+    [kNotificationCenter addObserver:self selector:@selector(AlipayStatusBlock:) name:@"AlipayStatus" object:nil];
+}
+
+- (void)AlipayStatusBlock:(NSNotification *)notification{
+    NSDictionary *resultDic = [notification object];
+    // 这样就得到了我们在发送通知时候传入的字典了
+    TTLog(@"result = %@",[Utils lz_dataWithJSONObject:resultDic]);
+    TTLog(@"%@",[resultDic lz_objectForKey:@"memo"]);
+    // 解析 auth code
+    NSInteger resultCode = [resultDic[@"resultStatus"] integerValue];
+    if (resultCode == 9000) {
+        Toast(@"订单支付成功!");
+        [kNotificationCenter postNotificationName:@"AlipaySuccessful" object:nil];
+    }else if (resultCode == 4000){
+        Toast(@"订单支付失败!");
+    }else if (resultCode == 5000){
+        Toast(@"重复请求!");
+    }else if (resultCode == 6001){
+        Toast(@"取消支付!");
+    }else if (resultCode == 6002){
+        Toast(@"网络连接出错!");
+    }else if (resultCode == 6004){
+        Toast(@"未知支付结果");
+    }else{
+        Toast(@"未知操作");
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -90,7 +126,8 @@ static NSString * const reuseIdentifier = @"TXChoosePayTableViewCell";
     return IPHONE6_W(55);
 }
 
-- (void) submitOrderData:(NSInteger) idx{
+//// 生成订单且支付
+- (void) GenerateOrderData:(NSInteger) idx{
     NSMutableDictionary *parameter = [[NSMutableDictionary alloc] init];
     
     //    title    是    String    标题（当purchaseType=0时可传入固定值“会员充值”，purchaseType=6时可传入固定值“天合成员充值”，另外的情况请传入商品标题）
@@ -105,23 +142,23 @@ static NSString * const reuseIdentifier = @"TXChoosePayTableViewCell";
     //    payType    是    int    0:支付宝 1:微信 2：余额支付
     //    currency    是    Double    vr币数量
     
-    [parameter setObject:@"农用植保产品" forKey:@"title"];
-    [parameter setObject:@(2) forKey:@"purchaseType"];
-    [parameter setObject:@(100) forKey:@"priceMoney"];
-    [parameter setObject:@"1" forKey:@"number"];
-    [parameter setObject:@(59) forKey:@"proID"];
+    [parameter setObject:self.recordsModel.title forKey:@"title"];
+    [parameter setObject:@(self.recordsModel.purchaseType) forKey:@"purchaseType"];
+    [parameter setObject:@([self.recordsModel.price doubleValue]) forKey:@"priceMoney"];
+    [parameter setObject:@(1) forKey:@"number"];
+    [parameter setObject:@([self.recordsModel.kid integerValue]) forKey:@"proID"];
     [parameter setObject:@"" forKey:@"addressID"];
     [parameter setObject:@"" forKey:@"spec"];
     [parameter setObject:@"" forKey:@"color"];
     [parameter setObject:@"" forKey:@"remarks"];
-    [parameter setObject:@(idx) forKey:@"payType"];
+    [parameter setObject:@(idx) forKey:@"payType"];/// 支付方式  0:支付宝 1:微信 2：余额支付
     [parameter setObject:@"" forKey:@"currency"];
+    [self sc_dismissVC];
     [SCHttpTools postWithURLString:kHttpURL(@"orderform/PayFrom") parameter:parameter success:^(id responseObject) {
         NSDictionary *result = responseObject;
         if ([result isKindOfClass:[NSDictionary class]]) {
             TXGeneralModel *model = [TXGeneralModel mj_objectWithKeyValues:result];
             if (model.errorcode == 20000) {
-//                [self sc_dismissVC];
                 if (idx==0) {/// 支付宝支付
                     [AlipayManager doAlipayPay:model];
                 }else if(idx==1){/// 微信支付
@@ -142,14 +179,7 @@ static NSString * const reuseIdentifier = @"TXChoosePayTableViewCell";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    [self submitOrderData:indexPath.row];
-    
-//    return @"";
-//    TXGeneralModel *model = self.dataArray[indexPath.row];
-//    if (self.typeBlock) {
-//        self.typeBlock(model.title,indexPath.row);
-//    }
-//    [self dismissViewControllerAnimated:YES completion:nil];
+    [self GenerateOrderData:indexPath.row];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
@@ -214,5 +244,7 @@ static NSString * const reuseIdentifier = @"TXChoosePayTableViewCell";
     return _dataArray;
 }
 
-
+- (void)dealloc{
+    [kNotificationCenter removeObserver:self];
+}
 @end

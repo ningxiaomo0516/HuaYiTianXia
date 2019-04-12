@@ -10,8 +10,10 @@
 #import "TXMembersBannerView.h"
 #import "TXMembersbleViewCell.h"
 #import "TXWebHeaderView.h"
+#import "TXGoodsH5TableViewCell.h"
 
 static NSString * const reuseIdentifier = @"TXMembersbleViewCell";
+static NSString * const reuseIdentifierGoodsH5 = @"TXGoodsH5TableViewCell";
 
 @interface TXMembersViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) UITableView *tableView;
@@ -26,7 +28,7 @@ static NSString * const reuseIdentifier = @"TXMembersbleViewCell";
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self initView];
-    
+    [self.tableView reloadData];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -69,8 +71,15 @@ static NSString * const reuseIdentifier = @"TXMembersbleViewCell";
 
 #pragma mark - Table view data source
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    TXMembersbleViewCell* cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
-    return cell;
+//    TXMembersbleViewCell* cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
+//    return cell;
+    TXGoodsH5TableViewCell *tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierGoodsH5 forIndexPath:indexPath];
+    tools.webUrl = kAppendH5URL(DomainName, AviationShareH5, @"");
+    tools.refreshWebViewHeightBlock = ^(CGFloat height) {
+        [self.tableView reloadData];
+    };
+    tools.indexPath = indexPath;
+    return tools;
 }
 
 // 多少个分组 section
@@ -88,7 +97,7 @@ static NSString * const reuseIdentifier = @"TXMembersbleViewCell";
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return IPHONE6_W(90);
+    return kScreenHeight;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -101,6 +110,7 @@ static NSString * const reuseIdentifier = @"TXMembersbleViewCell";
         _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
         _tableView.showsVerticalScrollIndicator = false;
         [_tableView registerClass:[TXMembersbleViewCell class] forCellReuseIdentifier:reuseIdentifier];
+        [_tableView registerClass:[TXGoodsH5TableViewCell class] forCellReuseIdentifier:reuseIdentifierGoodsH5];
         [_tableView setSeparatorInset:UIEdgeInsetsMake(0,0,0,0)];
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _tableView.delegate = self;

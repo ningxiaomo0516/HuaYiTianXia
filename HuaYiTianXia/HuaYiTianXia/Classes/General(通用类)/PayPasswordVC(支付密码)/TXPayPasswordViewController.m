@@ -71,7 +71,16 @@
             TXGeneralModel *model = [TXGeneralModel mj_objectWithKeyValues:result];
             if (model.errorcode == 20000) {
                 [self sc_dismissVC];
-                [kNotificationCenter postNotificationName:@"transferRequest" object:nil];
+                TTLog(@"self.pageType -- %ld",self.pageType);
+                if (self.pageType == 0 ) {  //// 转出
+                    [kNotificationCenter postNotificationName:@"transferRequest" object:nil];
+                }else if (self.pageType == 1 ) { //// 复投
+                    [kNotificationCenter postNotificationName:@"repeatcCastRequest" object:nil];
+                }else if (self.pageType == 2 ) { /// 转换
+                    [kNotificationCenter postNotificationName:@"conversionRequest" object:nil];
+                }else{
+                    Toast(@"未知页面");
+                }
             }else{
                 Toast(@"密码错误");
             }

@@ -10,9 +10,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 // 这里要定义一个block的别名(申明) 类型 ----> void (^) (NSString *text)
-typedef void(^ChoosePayTypeBlock) (NSString *text,NSInteger kid);
+typedef void(^ChoosePayTypeBlock) (NewsRecordsModel *recordsModel);
 @interface TXChoosePayViewController : TTBaseViewController
-
+- (id) initNewsRecordsModel:(NewsRecordsModel *)recordsModel;
 //定义一个block
 @property (nonatomic, copy) ChoosePayTypeBlock typeBlock;
 @end

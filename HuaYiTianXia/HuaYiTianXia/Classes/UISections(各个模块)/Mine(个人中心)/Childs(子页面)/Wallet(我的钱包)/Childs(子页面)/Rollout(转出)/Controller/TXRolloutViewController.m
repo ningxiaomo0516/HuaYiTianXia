@@ -93,6 +93,7 @@ static NSString * const reuseIdentifierHeader = @"TXMineHeaderTableViewCell";
     }
     
     TXPayPasswordViewController *vc = [[TXPayPasswordViewController alloc] init];
+    vc.pageType = 0;
     vc.tipsText = self.currencyText;
     vc.integralText = self.amountText;
     CGSize size = CGSizeMake(IPHONE6_W(280), IPHONE6_W(230));
@@ -187,6 +188,7 @@ static NSString * const reuseIdentifierHeader = @"TXMineHeaderTableViewCell";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.row==2) {
         TXRolloutTypeViewController *vc = [[TXRolloutTypeViewController alloc] init];
+        vc.pageType = 1;
         MV(weakSelf)
         vc.typeBlock = ^(NSString * _Nonnull text, NSString * _Nonnull kid) {
             weakSelf.currencyText = text;
@@ -194,7 +196,7 @@ static NSString * const reuseIdentifierHeader = @"TXMineHeaderTableViewCell";
             NSIndexPath *indexPath = [NSIndexPath indexPathForRow:2 inSection:1];
             [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
         };
-        CGFloat height = kiPhoneX_T(IPHONE6_W(310));
+        CGFloat height = kiPhoneX_T(IPHONE6_W(110));
         [self sc_bottomPresentController:vc presentedHeight:height completeHandle:^(BOOL presented) {
             if (presented) {
                 TTLog(@"弹出了");

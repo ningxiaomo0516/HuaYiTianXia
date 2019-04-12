@@ -25,6 +25,7 @@
     //配置键盘
     [IQKeyboardManager sharedManager];
     [WXApi registerApp:kWechatAppId enableMTA:YES];
+    
     ///初始化登陆信息
     [[TTUserModel shared] load];
     TTLog(@" --- %@ --- %@, --- %@ --- %@",kUserInfo.username,kUserInfo.realname,kUserInfo.uid,kUserInfo.inviteCode);
@@ -69,9 +70,11 @@
     if ([url.host isEqualToString:@"safepay"]) {
         //跳转支付宝钱包进行支付，处理支付结果
         [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic) {
-            NSLog(@"result = %@",resultDic);
+            TTLog(@"result = %@",resultDic);
         }];
     }
+    
+    
     return YES;
 }
 
@@ -82,10 +85,8 @@
     if ([url.host isEqualToString:@"safepay"]) {
         //跳转支付宝钱包进行支付，处理支付结果
         [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic) {
-            TTLog(@"result = %@",[Utils lz_dataWithJSONObject:resultDic]);
-            TTLog(@"%@",[resultDic lz_objectForKey:@"memo"]);
             //发送支付成功通知
-//            [[NSNotificationCenter defaultCenter] postNotificationName:ReturnSucceedPayNotification object:nil];
+            [kNotificationCenter postNotificationName:@"AlipayStatus" object:resultDic];
         }];
     }
     if ([url.host isEqualToString:@"platformapi"]){//支付宝钱包快登授权返回authCode
@@ -96,6 +97,12 @@
 //            [[NSNotificationCenter defaultCenter] postNotificationName:ReturnSucceedPayNotification object:nil];
         }];
     };
+    
+    /// 设置微信支付代理
+    if ([url.host isEqualToString:@"pay"]) {
+//        [WXApi handleOpenURL:url delegate:[WXApiManager sharedManager]];
+        [WXApi handleOpenURL:url delegate:(id<WXApiDelegate>)self];
+    }
     return YES;
 }
 
@@ -114,18 +121,31 @@
     //微信支付的类
     if([resp isKindOfClass:[PayResp class]]){
         //支付返回结果，实际支付结果需要去微信服务器端查询
-        NSString *strMsg,*strTitle = [NSString stringWithFormat:@"支付结果"];
-        if (resp.errCode == 0) {
+        NSString *strMsg = [NSString stringWithFormat:@"支付结果"];
+        if (resp.errCode == WXSuccess) {
             strMsg = @"支付结果：成功！";
-            NSLog(@"支付成功－PaySuccess，retcode = %d", resp.errCode);
+            TTLog(@"支付成功－PaySuccess，retcode = %d", resp.errCode);
 //            PaySucceedViewController *vc = [[PaySucceedViewController alloc] init];
 //            vc.backStr = @"1";
 //            UINavigationController *navi = [[UINavigationController alloc] initWithRootViewController:vc];
 //            AppDelegate *appDelegate =(AppDelegate *)[[UIApplication sharedApplication] delegate];
 //            [appDelegate.window.rootViewController presentViewController:navi animated:NO completion:nil];
-        }else{
+        }/**else if(resp.errCode == WXErrCodeCommon){
+            strMsg = @"普通错误类型！";
+            TTLog(@"普通错误类型，retcode = %d", resp.errCode);
+        }*/else if(resp.errCode == WXErrCodeUserCancel){
+            strMsg = @"取消支付！";
+            TTLog(@"用户点击取消并返回，retcode = %d", resp.errCode);
+        }/**else if(resp.errCode == WXErrCodeSentFail){
+            strMsg = @"发送失败！";
+            TTLog(@"发送失败，retcode = %d", resp.errCode);
+        }else if(resp.errCode == WXErrCodeSentFail){
+            strMsg = @"授权失败！";
+            TTLog(@"授权失败，retcode = %d", resp.errCode);
+        }*/else{
+//            strMsg = @"微信不支持";
             strMsg = [NSString stringWithFormat:@"支付结果：失败！"];
-            NSLog(@"错误，retcode = %d, retstr = %@", resp.errCode,resp.errStr);
+            TTLog(@"错误，retcode = %d, retstr = %@", resp.errCode,resp.errStr);
 //            PayFailedViewController *vc = [[PayFailedViewController alloc] init];
 //            vc.backStr = @"1";
 //            UINavigationController *navi = [[UINavigationController alloc] initWithRootViewController:vc];
@@ -133,9 +153,7 @@
 //            (AppDelegate *)[[UIApplication sharedApplication] delegate];
 //            [appDelegate.window.rootViewController presentViewController:navi animated:NO completion:nil];
         }
-        
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:strTitle message:strMsg delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-        //        [alert show];
+        Toast(strMsg);
     }
     
     //微信登录的类
@@ -147,9 +165,7 @@
 //                [_delegate loginSuccessByCode:resp2.code];
 //            }
         }else{ //失败
-            NSLog(@"error %@",resp.errStr);
-            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"登录失败" message:[NSString stringWithFormat:@"reason : %@",resp.errStr] delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
-            [alert show];
+            TTLog(@"登录失败 --- error %@",resp.errStr);
         }
     }
     
@@ -164,9 +180,7 @@
 //                [_delegate shareSuccessByCode:response.errCode];
 //            }
         }else{ //失败
-            NSLog(@"error %@",resp.errStr);
-            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"分享失败" message:[NSString stringWithFormat:@"reason : %@",resp.errStr] delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
-            [alert show];
+            TTLog(@"分享失败 --- error %@",resp.errStr);
         }
     }
 }

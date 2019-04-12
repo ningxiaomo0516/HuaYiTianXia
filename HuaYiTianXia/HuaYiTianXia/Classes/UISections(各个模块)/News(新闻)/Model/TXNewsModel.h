@@ -59,6 +59,14 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 @interface NewsRecordsModel : NSObject
+//    purchaseType    是    int    支付类型 0：充值； 1：无人机商城产品；2：农用植保产品； 3：VR产品 4：纵横矿机产品 5：共享飞行产品; 6：天合成员充值；7：生态农业商城产品（消费）
+
+/**
+ *  purchaseType 参数说明
+ *  0:充值; 1:无人机商城产品; 2:农用植保产品; 3:VR产品
+ *  4:纵横矿机产品 5:共享飞行产品; 6:天合成员充值;7:生态农业商城产品（消费）
+ */
+@property (nonatomic, assign) NSInteger purchaseType;
 
 //// --------------- new model --------------- ////
 /// 新闻ID(产品id)

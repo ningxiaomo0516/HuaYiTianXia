@@ -7,6 +7,9 @@
 //
 
 #import "TXTopupViewController.h"
+#import "TTPasswordView.h"
+#import "AlipayManager.h"
+#import "TXChoosePayViewController.h"
 
 @interface TXTopupViewController ()<UIScrollViewDelegate,UITextFieldDelegate>
 @property (nonatomic, strong) UIScrollView *scrollView;
@@ -21,7 +24,7 @@
 /// 标题文字
 @property (strong, nonatomic) UILabel *titlelabel;
 /// 输入框
-@property (nonatomic, strong) UITextField *textField;
+@property (nonatomic, strong) TTTextFeild *textField;
 @property (nonatomic, strong) UIView *btnsBgView;
 @end
 
@@ -32,6 +35,16 @@
     // Do any additional setup after loading the view.
     [self initView];
     self.view.backgroundColor = kWhiteColor;
+    [self addGesture];
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self.textField becomeFirstResponder];
+}
+
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
     [self addGesture];
 }
 
@@ -65,7 +78,19 @@
 
 /** 保存 */
 - (void) saveBtnClick:(UIButton *) sender{
-    
+    NSString *amountText = self.textField.text;
+    if (amountText.length==0) {
+        Toast(@"请输入或选择充值金额");
+        return;
+    }
+    NewsRecordsModel *model = [[NewsRecordsModel alloc] init];
+    model.purchaseType = 0;
+    model.price = amountText;
+    model.title = @"充值";
+    TXChoosePayViewController *vc = [[TXChoosePayViewController alloc]initNewsRecordsModel:model];
+    [self sc_bottomPresentController:vc presentedHeight:IPHONE6_W(400) completeHandle:^(BOOL presented) {
+        
+    }];
 }
 
 - (void) initView{
@@ -175,14 +200,15 @@
     return _scrollView;
 }
 
-- (UITextField *)textField{
+- (TTTextFeild *)textField{
     if (!_textField) {
-        _textField = [UITextField lz_textFieldWithPlaceHolder:@"请输入充值金额"];
+        _textField = [TTTextFeild lz_textFieldWithPlaceHolder:@"请输入充值金额"];
         _textField.returnKeyType = UIReturnKeyDone;
         _textField.keyboardType = UIKeyboardTypeNumberPad;
         _textField.clearButtonMode = UITextFieldViewModeWhileEditing;
         _textField.borderStyle = UITextBorderStyleNone;
         _textField.delegate = self;
+        _textField.ry_inputType = RYIntInputType;
         _textField.font = kFontSizeMedium15;
     }
     return _textField;

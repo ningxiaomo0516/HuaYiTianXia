@@ -32,6 +32,9 @@ extern NSString *const vrAgreementH5;
 extern NSString *const AviationShareH5;
 /// 合作协议
 extern NSString *const CooperationAgreementH5;
+/// 农保电子协议
+extern NSString *const NBElectronicAgreementH5;
+
 
 /// 0:测试环境 1:生产环境
 extern NSString *const environment;

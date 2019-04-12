@@ -30,6 +30,31 @@ static NSString * const reuseIdentifierRollout = @"TXRolloutTableViewCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self initView];
+    // 注册通知
+    [kNotificationCenter addObserver:self selector:@selector(dealwithNotice) name:@"repeatcCastRequest" object:nil];
+}
+
+- (void) dealwithNotice{
+    NSMutableDictionary *parameter = [[NSMutableDictionary alloc] init];
+    [parameter setObject:self.amountText forKey:@"money"];
+    [SCHttpTools postWithURLString:kHttpURL(@"customer/DoubleThrow") parameter:parameter success:^(id responseObject) {
+        NSDictionary *result = responseObject;
+        if ([result isKindOfClass:[NSDictionary class]]) {
+            TTLog(@"result -- %@",result);
+            TXGeneralModel *model = [TXGeneralModel mj_objectWithKeyValues:result];
+            if (model.errorcode==20000) {
+                Toast(@"复投成功");
+                [kNotificationCenter addObserver:self selector:@selector(reloadData) name:@"reloadMineData" object:nil];
+                [self.navigationController popViewControllerAnimated:YES];
+            }else{
+                Toast(model.message);
+            }
+        }else{
+            Toast(@"获取城市数据失败");
+        }
+    } failure:^(NSError *error) {
+        TTLog(@"error --- %@",error);
+    }];
 }
 
 /** 完成按钮 */
@@ -40,6 +65,7 @@ static NSString * const reuseIdentifierRollout = @"TXRolloutTableViewCell";
     }
     
     TXPayPasswordViewController *vc = [[TXPayPasswordViewController alloc] init];
+    vc.pageType = 1;
     vc.tipsText = @"VH";
     vc.integralText = self.amountText;
     CGSize size = CGSizeMake(IPHONE6_W(280), IPHONE6_W(230));
@@ -78,7 +104,7 @@ static NSString * const reuseIdentifierRollout = @"TXRolloutTableViewCell";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section==0) {
         TXRepeatCastTemplateTableViewCell* tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
-        tools.integralText = kStringFormat(@"VH资产余额：", kUserInfo.vrcurrency);
+        tools.integralText = kStringFormat(@"VH资产余额:", kUserInfo.vrcurrency);
         return tools;
     }else{
         TXRolloutTableViewCell* tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierRollout forIndexPath:indexPath];
@@ -86,6 +112,7 @@ static NSString * const reuseIdentifierRollout = @"TXRolloutTableViewCell";
         tools.titleLabel.text = @"复投金额";
         tools.textField.placeholder = @"请输入复投金额";
         tools.textField.ry_inputType = RYFloatInputType;
+        [tools.textField becomeFirstResponder];
         [tools.textField addTarget:self action:@selector(textFieldWithText:) forControlEvents:UIControlEventEditingChanged];
 
         return tools;
@@ -165,5 +192,9 @@ static NSString * const reuseIdentifierRollout = @"TXRolloutTableViewCell";
         _footerView.frame = CGRectMake(0, 0, kScreenWidth, 100);
     }
     return _footerView;
+}
+
+- (void)dealloc{
+    [kNotificationCenter removeObserver:self];
 }
 @end

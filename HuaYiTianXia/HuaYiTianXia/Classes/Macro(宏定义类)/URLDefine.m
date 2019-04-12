@@ -43,7 +43,7 @@ NSString *const InvataionH5 = @"yq/invation/invataion.html?id=";
 NSString *const UserAgreeH5 = @"userHelp/userAgree.html";
 /// 操作手册
 NSString *const UserHelpH5 = @"userHelp";
-/// 一县一代理
+/// 一县一代理(农用植保)
 NSString *const AgencyCompanyH5 = @"agencyCompany";
 /// 合同协议
 NSString *const vrAgreementH5 = @"yq/invation/vrAgreement.html";
@@ -51,7 +51,8 @@ NSString *const vrAgreementH5 = @"yq/invation/vrAgreement.html";
 NSString *const AviationShareH5 = @"yq/invation/ndex.html";
 /// 合作协议
 NSString *const CooperationAgreementH5 = @"yq/invation/cooperationAgreement.html";
-
+/// 农保电子协议
+NSString *const NBElectronicAgreementH5 = @"userHelp/nyzbAgrement.html";
 
 /// 0:测试环境 1:生产环境
 NSString *const environment = @"1";

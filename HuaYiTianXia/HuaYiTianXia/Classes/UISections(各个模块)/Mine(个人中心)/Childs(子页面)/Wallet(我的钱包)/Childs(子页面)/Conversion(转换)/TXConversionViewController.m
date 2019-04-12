@@ -9,6 +9,8 @@
 #import "TXConversionViewController.h"
 #import "TXRepeatCastTemplateTableViewCell.h"
 #import "TXRolloutTableViewCell.h"
+#import "TXRolloutTypeViewController.h"
+#import "TXPayPasswordViewController.h"
 
 static NSString * const reuseIdentifier = @"TXRepeatCastTemplateTableViewCell";
 static NSString * const reuseIdentifierRollout = @"TXRolloutTableViewCell";
@@ -19,6 +21,11 @@ static NSString * const reuseIdentifierRollout = @"TXRolloutTableViewCell";
 @property (nonatomic, strong) UIButton *doneButton;
 @property (nonatomic, strong) UIView *footerView;
 @property (strong, nonatomic) UILabel *titlelabel;
+/// 复投金额
+@property (copy, nonatomic) NSString *amountText;
+/// 货币类型
+@property (copy, nonatomic) NSString *currencyText;
+@property (copy, nonatomic) NSString *kid;
 
 @end
 
@@ -27,11 +34,63 @@ static NSString * const reuseIdentifierRollout = @"TXRolloutTableViewCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self initView];
+    self.title = @"AH转换";
+    // 注册通知
+    [kNotificationCenter addObserver:self selector:@selector(dealwithNotice) name:@"conversionRequest" object:nil];
 }
 
-/** 退出 */
+- (void) dealwithNotice{
+    NSString *URLString = [NSString new];
+    if (self.kid==0) {
+        URLString = kHttpURL(@"customer/ARToStock");
+    }else{
+        URLString = kHttpURL(@"customer/ARToStock");
+    }
+    NSMutableDictionary *parameter = [[NSMutableDictionary alloc] init];
+    [parameter setObject:self.amountText forKey:@"arcurrency"];
+    [SCHttpTools postWithURLString:URLString parameter:parameter success:^(id responseObject) {
+        NSDictionary *result = responseObject;
+        if ([result isKindOfClass:[NSDictionary class]]) {
+            TTLog(@"result -- %@",result);
+            TXGeneralModel *model = [TXGeneralModel mj_objectWithKeyValues:result];
+            if (model.errorcode==20000) {
+                Toast(@"复投成功");
+                [kNotificationCenter addObserver:self selector:@selector(reloadData) name:@"reloadMineData" object:nil];
+                [self.navigationController popViewControllerAnimated:YES];
+            }else{
+                Toast(model.message);
+            }
+        }else{
+            Toast(@"获取城市数据失败");
+        }
+    } failure:^(NSError *error) {
+        TTLog(@"error --- %@",error);
+    }];
+}
+
+
+/** 完成转换按钮 */
 - (void) doneBtnClick:(UIButton *) sender{
-    
+    if (self.currencyText.length == 0) {
+        Toast(@"请选择类型");
+        return;
+    }
+    if (self.amountText.length == 0) {
+        Toast(@"请输入转账金额");
+        return;
+    }
+    TXPayPasswordViewController *vc = [[TXPayPasswordViewController alloc] init];
+    vc.pageType = 1;
+    vc.tipsText = @"VH";
+    vc.integralText = self.amountText;
+    CGSize size = CGSizeMake(IPHONE6_W(280), IPHONE6_W(230));
+    [self sc_centerPresentController:vc presentedSize:size completeHandle:^(BOOL presented) {
+        if (presented) {
+            TTLog(@"弹出了");
+        }else{
+            TTLog(@"消失了");
+        }
+    }];
 }
 
 - (void) initView{
@@ -60,11 +119,26 @@ static NSString * const reuseIdentifierRollout = @"TXRolloutTableViewCell";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section==0) {
         TXRepeatCastTemplateTableViewCell* tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
+        tools.integralText = kStringFormat(@"AH资产余额:", kUserInfo.arcurrency);
         return tools;
     }else{
         TXRolloutTableViewCell* tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierRollout forIndexPath:indexPath];
         tools.selectionStyle = UITableViewCellSelectionStyleNone;
-        tools.titleLabel.text = @"复投金额";
+        if (indexPath.row==0) {
+            if (self.currencyText.length==0) {
+                tools.subtitleLabel.text = @"选择转换资产";
+            }else{
+                tools.subtitleLabel.text = self.currencyText;
+            }
+            tools.subtitleLabel.hidden = NO;
+            tools.imagesArrow.hidden = NO;
+            tools.textField.hidden = YES;
+            tools.titleLabel.text = @"转换类型";
+        }else{
+            tools.titleLabel.text = @"转换金额";
+            tools.textField.placeholder = @"请输入转换金额";
+            tools.textField.ry_inputType = RYFloatInputType;
+        }
         return tools;
     }
     return [UITableViewCell new];
@@ -76,6 +150,7 @@ static NSString * const reuseIdentifierRollout = @"TXRolloutTableViewCell";
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    if (section==1) return 2;
     return 1;
 }
 
@@ -90,7 +165,25 @@ static NSString * const reuseIdentifierRollout = @"TXRolloutTableViewCell";
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
+    if (indexPath.section==1 && indexPath.row==0) {
+        TXRolloutTypeViewController *vc = [[TXRolloutTypeViewController alloc] init];
+        vc.pageType = 0;
+        MV(weakSelf)
+        vc.typeBlock = ^(NSString * _Nonnull text, NSString * _Nonnull kid) {
+            weakSelf.kid = kid;
+            weakSelf.currencyText = text;
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:1];
+            [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+        };
+        CGFloat height = kiPhoneX_T(IPHONE6_W(70));
+        [self sc_bottomPresentController:vc presentedHeight:height completeHandle:^(BOOL presented) {
+            if (presented) {
+                TTLog(@"弹出了");
+            }else{
+                TTLog(@"消失了");
+            }
+        }];
+    }
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
@@ -138,5 +231,9 @@ static NSString * const reuseIdentifierRollout = @"TXRolloutTableViewCell";
         _footerView.frame = CGRectMake(0, 0, kScreenWidth, 100);
     }
     return _footerView;
+}
+
+- (void)dealloc{
+    [kNotificationCenter removeObserver:self];
 }
 @end

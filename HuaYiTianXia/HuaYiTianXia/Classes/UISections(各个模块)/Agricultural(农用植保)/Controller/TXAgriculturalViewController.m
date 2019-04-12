@@ -7,11 +7,11 @@
 //
 
 #import "TXAgriculturalViewController.h"
-#import "TXRegisterTableViewCell.h"
+#import "TXGoodsH5TableViewCell.h"
 #import "TXWebHeaderView.h"
 #import "TXMallEppoViewController.h"
 
-static NSString * const reuseIdentifier = @"TXRegisterTableViewCell";
+static NSString * const reuseIdentifierGoodsH5 = @"TXGoodsH5TableViewCell";
 
 @interface TXAgriculturalViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (strong, nonatomic) TXWebHeaderView *headerView;
@@ -57,8 +57,12 @@ static NSString * const reuseIdentifier = @"TXRegisterTableViewCell";
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    TXRegisterTableViewCell *tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
-    tools.titleLabel.text = @"12";
+    TXGoodsH5TableViewCell *tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierGoodsH5 forIndexPath:indexPath];
+    tools.webUrl = kAppendH5URL(DomainName, AgencyCompanyH5, @"");
+    tools.refreshWebViewHeightBlock = ^(CGFloat height) {
+        [self.tableView reloadData];
+    };
+    tools.indexPath = indexPath;
     return tools;
 }
 
@@ -68,7 +72,7 @@ static NSString * const reuseIdentifier = @"TXRegisterTableViewCell";
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return IPHONE6_W(55);
+    return kScreenHeight;
 }
 
 -(UITableView *)tableView{
@@ -77,7 +81,7 @@ static NSString * const reuseIdentifier = @"TXRegisterTableViewCell";
         _tableView.showsVerticalScrollIndicator = false;
         [_tableView setSeparatorInset:UIEdgeInsetsMake(0,15,0,15)];
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-        [_tableView registerClass:[TXRegisterTableViewCell class] forCellReuseIdentifier:reuseIdentifier];
+        [_tableView registerClass:[TXGoodsH5TableViewCell class] forCellReuseIdentifier:reuseIdentifierGoodsH5];
         // 拖动tableView时收起键盘
         _tableView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
         _tableView.delegate = self;

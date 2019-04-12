@@ -162,7 +162,7 @@
 
 
 // 实现图文混排的方法
-+ (NSAttributedString *) sc_initImageWithText:(NSString *) textStr imageName:(NSString *)imageName{
++ (NSAttributedString *) sc_initImageWithText:(NSString *) textStr imageName:(NSString *)imageName fontWithSize:(UIFont *)fontSize{
     
     // NSTextAttachment可以将图片转换为富文本内容
     NSTextAttachment *attachment = [[NSTextAttachment alloc] init];
@@ -172,7 +172,7 @@
     NSAttributedString *imageAttr = [NSAttributedString attributedStringWithAttachment:attachment];
     
     // 文字的富文本
-    NSAttributedString *textAttr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@" %@",textStr] attributes:@{NSFontAttributeName:kFontSizeMedium12}];
+    NSAttributedString *textAttr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@" %@",textStr] attributes:@{NSFontAttributeName:fontSize}];
     
     NSMutableAttributedString *mutableAttr = [[NSMutableAttributedString alloc] init];
     // 将图片、文字拼接
