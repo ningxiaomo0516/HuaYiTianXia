@@ -36,12 +36,14 @@ TXMallGoodsSpecTableViewCellDelegate>
 @property (nonatomic, strong) NSMutableDictionary *heightAtIndexPath;//缓存高度
 @property (nonatomic, assign) CGFloat sectionHeight;//缓存高度
 @property (nonatomic, assign) CGFloat webH5Height;// WebView_H5_高度
+@property (nonatomic, assign) BOOL isload;// WebView_H5_高度
 @end
 
 @implementation TXMallGoodsDetailsViewController
 - (id)initMallProductModel:(NewsRecordsModel *)productModel{
     if ( self = [super init] ){
         self.productModel = productModel;
+        self.isload = NO;
     }
     return self;
 }
@@ -61,6 +63,7 @@ TXMallGoodsSpecTableViewCellDelegate>
         NSDictionary *result = responseObject;
         if ([result isKindOfClass:[NSDictionary class]]) {
             self.productData = [NewsModel mj_objectWithKeyValues:result];
+            self.isload = YES;
             [self.tableView reloadData];
         }else{
             Toast(@"获取产品详情数据失败");
@@ -171,17 +174,25 @@ TXMallGoodsSpecTableViewCellDelegate>
         NSString *parameter = [NSString stringWithFormat:@"%@&status=%ld",
                                self.productModel.kid,(long)self.productModel.status];
         tools.webUrl = kAppendH5URL(DomainName, GoodsDetailsH5, parameter);
+//        tools.wkWebView.navigationDelegate = self;
         MV(weakSelf)
+        
         tools.refreshWebViewHeightBlock = ^(CGFloat height) {
             TTLog(@"========= %f",height);
-            self.webH5Height = height;
+//            weakSelf.webH5Height = height;
             if (weakSelf.webH5Height < height) {//当缓存的高度小于返回的高度时，更新缓存高度，刷新tableview
                 weakSelf.webH5Height = height;
                 [weakSelf.tableView beginUpdates];
                 [weakSelf.tableView endUpdates];
+//            if (self.isload) {
+                TTLog(@"执行一次");
+//                self.isload = NO;
 //                NSIndexSet *indexSet=[[NSIndexSet alloc] initWithIndex:4];
 //                [self.tableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationAutomatic];
-                [self.tableView reloadData];
+//            }
+//                [self.tableView reloadData];
+            }else{
+                TTLog(@"劳资已经够了");
             }
         };
         tools.indexPath = indexPath;
@@ -191,15 +202,16 @@ TXMallGoodsSpecTableViewCellDelegate>
 }
 
 //去除web页底部空白
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView { // 判断webView所在的cell是否可见，如果可见就layout
-    NSArray *cells = self.tableView.visibleCells;
-    for (UITableViewCell *cell in cells) {
-        if ([cell isKindOfClass:[TXGoodsH5TableViewCell class]]) {
-            TXGoodsH5TableViewCell *webCell = (TXGoodsH5TableViewCell *)cell;
-            [webCell.wkWebView setNeedsLayout];
-        }
-    }
-}
+//- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+//    // 判断webView所在的cell是否可见，如果可见就layout
+//    NSArray *cells = self.tableView.visibleCells;
+//    for (UITableViewCell *cell in cells) {
+//        if ([cell isKindOfClass:[TXGoodsH5TableViewCell class]]) {
+//            TXGoodsH5TableViewCell *webCell = (TXGoodsH5TableViewCell *)cell;
+//            [webCell.wkWebView setNeedsLayout];
+//        }
+//    }
+//}
 
 // 多少个分组 section
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -218,7 +230,7 @@ TXMallGoodsSpecTableViewCellDelegate>
     if (indexPath.section==3) return IPHONE6_W(60);
     if (indexPath.section==4){
         TTLog(@" return self.webH5Height; --- %f", self.webH5Height);
-        return kScreenHeight-kNavBarHeight-kTabBarHeight;//self.webH5Height;
+        return self.webH5Height;
     }
     return UITableViewAutomaticDimension;
 }

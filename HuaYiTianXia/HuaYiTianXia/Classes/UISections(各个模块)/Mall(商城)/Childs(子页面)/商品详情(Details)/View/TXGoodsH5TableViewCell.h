@@ -16,6 +16,7 @@ typedef void(^RefreshWebViewCellHeightBlock) (CGFloat height);
 @property (nonatomic, strong) NSIndexPath *indexPath;
 @property (nonatomic, copy) NSString *webUrl;
 @property (nonatomic, strong) WKWebView *wkWebView;
+@property (nonatomic, strong) UIScrollView *scrollView;
 
 //定义一个block
 @property (nonatomic, copy) RefreshWebViewCellHeightBlock refreshWebViewHeightBlock;

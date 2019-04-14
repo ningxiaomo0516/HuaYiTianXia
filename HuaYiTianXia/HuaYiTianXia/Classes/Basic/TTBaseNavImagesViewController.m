@@ -58,6 +58,13 @@
     self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName:kWhiteColor};
     self.navigationController.navigationBar.translucent = NO;// NavigationBar 是否透明
     self.navigationController.navigationBar.barStyle = UIBarStyleBlackTranslucent;
+    
+    //设置Navigation Bar背景图片
+    UIImage *title_bg = kGetImage(@"main_header_bg");  //获取图片
+    CGSize titleSize = self.navigationController.navigationBar.bounds.size;  //获取Navigation Bar的位置和大小
+    title_bg = [Utils lz_scaleToSize:title_bg size:titleSize];//设置图片的大小与Navigation Bar相同
+    [self.navigationController.navigationBar setBackgroundImage:title_bg forBarMetrics:UIBarMetricsDefault];  //设置背景
+
 }
 
 @end

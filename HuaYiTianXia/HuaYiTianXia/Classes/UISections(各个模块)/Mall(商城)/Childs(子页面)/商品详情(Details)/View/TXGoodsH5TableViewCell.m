@@ -49,8 +49,8 @@
         return;
     }
     NSURL* url = [NSURL URLWithString:self.webUrl];
-    NSURLRequest *request = [[NSURLRequest alloc]initWithURL:url];
-//    NSURLRequest* request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:15];
+//    NSURLRequest *request = [[NSURLRequest alloc]initWithURL:url];
+    NSURLRequest* request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:15];
     [self.wkWebView loadRequest:request];
     
 }
@@ -63,7 +63,8 @@
 
 
 - (void) initView{
-    [self addSubview:self.wkWebView];
+    [self.contentView addSubview:self.scrollView];
+    [self.scrollView addSubview:self.wkWebView];
     [self addSubview:self.reloadButton];
     [self.wkWebView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.bottom.left.right.equalTo(self);
@@ -87,27 +88,7 @@
 }
 /// 5 页面加载完成之后调用(此方法会调用多次)
 - (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation {
-    /// 获取网页正文全文高，刷新cell
-//    MV(weakSelf)
-    __block CGFloat webViewHeight;
-    self.height = webView.frame.size.height;//  document.body.scrollHeight
-    //获取内容实际高度（像素）@"document.getElementById(\"content\").offsetHeight;"
-    [webView evaluateJavaScript:@"document.body.offsetHeight" completionHandler:^(id _Nullable result,NSError * _Nullable error) {
-        // 此处js字符串采用scrollHeight而不是offsetHeight是因为后者并获取不到高度，看参考资料说是对于加载html字符串的情况下使用后者可以，但如果是和我一样直接加载原站内容使用前者更合适
-        //获取页面高度，并重置webview的frame
-        //因为WKWebView的contentSize在加载的时候是不断变化的，可能高度已经获取出来了但是还在刷新，然后又获取到相同的高度，所以当高度相同的时候我们不刷新tableview，高度不相同的时候我们刷新tableView获取最新值
-        webViewHeight = [result floatValue];
-        NSLog(@"wwowowowowowwowowoo ----- %f",webViewHeight);
-        dispatch_async(dispatch_get_main_queue(), ^{
-            if (webViewHeight != self.height) {
-                webView.frame = CGRectMake(0, 0, self.width, webViewHeight);
-//                [self.tableView reloadData];
-                
-            }
-        });
-    }];
-    
-    NSLog(@"结束加载");
+    TTLog(@"结束加载");
 }
 
 
@@ -146,6 +127,14 @@
 - (WKWebView *)wkWebView {
     if (!_wkWebView) {
         WKWebViewConfiguration *configuration = [[WKWebViewConfiguration alloc] init];
+        WKUserContentController *wkUController = [[WKUserContentController alloc] init];
+        configuration.userContentController = wkUController;
+
+        NSString *jSString = @"var meta = document.createElement('meta'); meta.setAttribute('name', 'viewport'); meta.setAttribute('content', 'width=device-width'); document.getElementsByTagName('head')[0].appendChild(meta);";
+        WKUserScript *wkUserScript = [[WKUserScript alloc] initWithSource:jSString injectionTime:WKUserScriptInjectionTimeAtDocumentEnd forMainFrameOnly:YES];
+        // 添加js调用
+        [wkUController addUserScript:wkUserScript];
+
         /// 创建网页配置对象
         WKPreferences *preferences = [WKPreferences new];
         /// 在没有用户交互的情况下，是否JavaScript可以打开windows
@@ -165,32 +154,46 @@
         _wkWebView.scrollView.showsHorizontalScrollIndicator = false;
         _wkWebView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
         _wkWebView.scrollView.decelerationRate = UIScrollViewDecelerationRateNormal;
-//        _wkWebView.scrollView.scrollEnabled = NO;//禁止滚动，防止与UITableView冲突
+        _wkWebView.scrollView.scrollEnabled = NO;//禁止滚动，防止与UITableView冲突
         //监听webView.scrollView的contentSize属性
-//        [_wkWebView.scrollView addObserver:self forKeyPath:@"contentSize" options:NSKeyValueObservingOptionNew context:nil];
+        // 对webView中的scrollView设置KVO
+        [_wkWebView.scrollView addObserver:self forKeyPath:@"contentSize" options:NSKeyValueObservingOptionNew context:nil];
+
         _wkWebView.navigationDelegate = self;
         [_wkWebView sizeToFit];
     }
     return _wkWebView;
 }
 
+- (UIScrollView *)scrollView{
+    if (!_scrollView) {
+        _scrollView = [[UIScrollView alloc] init];
+        _scrollView.frame = CGRectMake(0, 0, kScreenWidth, 1);
+    }
+    return _scrollView;
+}
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context{
     if ([keyPath isEqualToString:@"contentSize"]) {
         MV(weakSelf);
-        //执行js方法"document.body.offsetHeight" ，获取webview内容高度
-        [_wkWebView evaluateJavaScript:@"document.body.offsetHeight" completionHandler:^(id _Nullable result, NSError * _Nullable error) {
-            CGFloat contentHeight = [result floatValue];
-            TTLog(@"计算后的高度  -- %f",contentHeight);
-            if (weakSelf.refreshWebViewHeightBlock) {
-                weakSelf.refreshWebViewHeightBlock(contentHeight);
-            }
-        }];
+        // 方法一
+        UIScrollView *scrollView = (UIScrollView *)object;
+        CGFloat height = scrollView.contentSize.height;
+        CGFloat contentHeight = height;
+        self.wkWebView.frame = CGRectMake(0, 0, self.frame.size.width, height);
+        self.scrollView.frame = CGRectMake(0, 0, self.frame.size.width, height);
+        self.scrollView.contentSize =CGSizeMake(self.frame.size.width, height);
+        TTLog(@"计算后的高度  -- %f",contentHeight);
+        if (weakSelf.refreshWebViewHeightBlock) {
+            weakSelf.refreshWebViewHeightBlock(contentHeight);
+        }
     }
 }
 
+// 注销kvo
 - (void)dealloc{
     [_wkWebView.scrollView removeObserver:self forKeyPath:@"contentSize"];
 }
+
 
 @end
