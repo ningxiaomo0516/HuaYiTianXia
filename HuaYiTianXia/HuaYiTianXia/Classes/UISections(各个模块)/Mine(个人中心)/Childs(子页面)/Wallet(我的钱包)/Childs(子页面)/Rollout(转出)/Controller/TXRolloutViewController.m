@@ -7,14 +7,14 @@
 //
 
 #import "TXRolloutViewController.h"
-#import "TXMineHeaderTableViewCell.h"
+#import "TXRolloutHeaderTableViewCell.h"
 #import "TXRolloutTableViewCell.h"
 #import "TXGeneralModel.h"
 #import "TXRolloutTypeViewController.h"
 #import "TXPayPasswordViewController.h"
 
 static NSString * const reuseIdentifier = @"TXRolloutTableViewCell";
-static NSString * const reuseIdentifierHeader = @"TXMineHeaderTableViewCell";
+static NSString * const reuseIdentifierHeader = @"TXRolloutHeaderTableViewCell";
 
 @interface TXRolloutViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) UITableView *tableView;
@@ -131,11 +131,10 @@ static NSString * const reuseIdentifierHeader = @"TXMineHeaderTableViewCell";
 #pragma mark - Table view data source
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
-        TXMineHeaderTableViewCell* tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierHeader forIndexPath:indexPath];
+        TXRolloutHeaderTableViewCell* tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierHeader forIndexPath:indexPath];
         tools.totalAssetsLabel.text = kUserInfo.totalAssets;
         tools.vrAssetsLabel.text = kUserInfo.vrcurrency;
         tools.arAssetsLabel.text = kUserInfo.arcurrency;
-        tools.eqAssetsLabel.text = kUserInfo.stockRight;
         return tools;
     } else {
         TXRolloutTableViewCell* tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
@@ -230,7 +229,7 @@ static NSString * const reuseIdentifierHeader = @"TXMineHeaderTableViewCell";
         _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
         _tableView.showsVerticalScrollIndicator = false;
         [_tableView registerClass:[TXRolloutTableViewCell class] forCellReuseIdentifier:reuseIdentifier];
-        [_tableView registerClass:[TXMineHeaderTableViewCell class] forCellReuseIdentifier:reuseIdentifierHeader];
+        [_tableView registerClass:[TXRolloutHeaderTableViewCell class] forCellReuseIdentifier:reuseIdentifierHeader];
         [_tableView setSeparatorInset:UIEdgeInsetsMake(0, 0, 0, 0)];
         //1 禁用系统自带的分割线
         _tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
@@ -268,8 +267,8 @@ static NSString * const reuseIdentifierHeader = @"TXMineHeaderTableViewCell";
 - (NSMutableArray *)dataArray{
     if (!_dataArray) {
         _dataArray = [[NSMutableArray alloc] init];
-        NSArray* titleArr = @[@"账号",@"确认账号",@"类型",@"金额"];
-        NSArray* subtitleArr = @[@"请输入账号或ID",@"再次输入账号或ID",@"请选择类型",@"请输入转账金额"];
+        NSArray* titleArr = @[@"账号",@"确认账号",@"类型",@"积分"];
+        NSArray* subtitleArr = @[@"请输入账号或ID",@"再次输入账号或ID",@"请选择类型",@"请输入转账积分"];
         for (int i=0; i<titleArr.count; i++) {
             TXGeneralModel *generalModel = [[TXGeneralModel alloc] init];
             generalModel.title = [titleArr lz_safeObjectAtIndex:i];

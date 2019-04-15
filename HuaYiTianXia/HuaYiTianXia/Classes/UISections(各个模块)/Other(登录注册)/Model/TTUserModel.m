@@ -20,7 +20,7 @@ static NSString *sex            = @"sex";
 static NSString *registertime   = @"registertime";
 static NSString *pwd            = @"pwd";
 static NSString *tranPwd        = @"tranPwd";
-static NSString *type           = @"type";
+static NSString *isValidation   = @"isValidation";
 
 static NSString *idnumber       = @"idnumber";
 static NSString *imgb           = @"imgb";
@@ -40,6 +40,12 @@ static NSString *stockRight     = @"stockRight";
 static NSString *balance        = @"balance";
 static NSString *totalAssets    = @"totalAssets";
 
+/// 收货地址信息
+static NSString *receivedGoodsAddr  = @"receivedGoodsAddr";
+static NSString *receivedUserName   = @"receivedUserName";
+static NSString *receivedTelphone   = @"receivedTelphone";
+
+
 
 
 @implementation TTUserDataModel
@@ -57,13 +63,14 @@ static NSString *totalAssets    = @"totalAssets";
 @implementation TTUserModel
 
 + (NSDictionary *)replacedKeyFromPropertyName{
-    return @{@"uid"     : @"id",
-             @"username": @"nickName",
-             @"realname": @"name",
-             @"avatar"  : @"headImg",
+    return @{@"uid"         : @"id",
+             @"username"    : @"nickName",
+             @"realname"    : @"name",
+             @"avatar"      : @"headImg",
              @"registertime": @"time",
              @"idnumber"    : @"code",
-             @"totalAssets": @"assets"};
+             @"totalAssets" : @"assets",
+             @"type"        : @"isValidation"};
 }
 
 + (NSDictionary *)objectClassInArray{
@@ -161,7 +168,13 @@ static TTUserModel *userModel = nil;
         
         [TTUserModel shared].ispay = [aDecoder decodeIntegerForKey:ispay];
         [TTUserModel shared].upproxy = [aDecoder decodeObjectForKey:upproxy];
-        [TTUserModel shared].type = [aDecoder decodeIntegerForKey:type];
+        [TTUserModel shared].isValidation = [aDecoder decodeIntegerForKey:isValidation];
+        
+        
+        [TTUserModel shared].receivedGoodsAddr = [aDecoder decodeObjectForKey:receivedGoodsAddr];
+        [TTUserModel shared].receivedUserName = [aDecoder decodeObjectForKey:receivedUserName];
+        [TTUserModel shared].receivedTelphone = [aDecoder decodeObjectForKey:receivedTelphone];
+        
     }
     return self;
 }
@@ -197,7 +210,12 @@ static TTUserModel *userModel = nil;
     
     [aCoder encodeInteger:[TTUserModel shared].ispay forKey:ispay];
     [aCoder encodeObject:[TTUserModel shared].upproxy forKey:upproxy];
-    [aCoder encodeInteger:[TTUserModel shared].type forKey:type];
+    [aCoder encodeInteger:[TTUserModel shared].isValidation forKey:isValidation];
+    
+    
+    [aCoder encodeObject:[TTUserModel shared].receivedGoodsAddr forKey:receivedGoodsAddr];
+    [aCoder encodeObject:[TTUserModel shared].receivedUserName forKey:receivedUserName];
+    [aCoder encodeObject:[TTUserModel shared].receivedTelphone forKey:receivedTelphone];
 }
 
 /**
@@ -232,6 +250,10 @@ static TTUserModel *userModel = nil;
     
     [TTUserModel shared].ispay = 0;
     [TTUserModel shared].upproxy = @"";
-    [TTUserModel shared].type = 0;
+    [TTUserModel shared].isValidation = 0;
+    
+    [TTUserModel shared].receivedGoodsAddr = @"";
+    [TTUserModel shared].receivedTelphone = @"";
+    [TTUserModel shared].receivedUserName = @"";
 }
 @end

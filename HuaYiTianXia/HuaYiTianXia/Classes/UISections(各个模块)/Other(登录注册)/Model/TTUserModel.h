@@ -62,7 +62,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// VR币
 @property (nonatomic, copy) NSString *vrcurrency;
 /// 0：未认证 1：认证中 2：已认证
-@property (nonatomic, assign) NSInteger type;
+@property (nonatomic, assign) NSInteger isValidation;
 /// 股权总数
 @property (nonatomic, copy) NSString *stockRight;
 /// 余额
@@ -72,6 +72,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) NSMutableArray<NewsBannerModel *> *banners;
 
+/// 默认收货地址
+@property (nonatomic, copy) NSString *receivedGoodsAddr;
+/// 收货人姓名
+@property (nonatomic, copy) NSString *receivedUserName;
+/// 收货人电话
+@property (nonatomic, copy) NSString *receivedTelphone;
 
 + (instancetype)shared;
 /**

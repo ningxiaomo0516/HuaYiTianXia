@@ -1,17 +1,16 @@
 //
-//  TXMineHeaderTableViewCell.h
+//  TXRolloutHeaderTableViewCell.h
 //  HuaYiTianXia
 //
-//  Created by 宁小陌 on 2019/3/19.
-//  Copyright © 2019 宁小陌. All rights reserved.
+//  Created by 宁小陌 on 2019/4/15.
+//  Copyright © 2019年 宁小陌. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface TXMineHeaderTableViewCell : UITableViewCell
-
+@interface TXRolloutHeaderTableViewCell : UITableViewCell
 @property (nonatomic, strong) UIImageView *imagesViewBG;
 /// 总资产
 @property (nonatomic, strong) UILabel *totalAssetsLabel;
@@ -32,15 +31,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) UIView *vrBoxView;
 /// AR View
 @property (nonatomic, strong) UIView *arBoxView;
-/// 股权 View
-@property (nonatomic, strong) UIView *eqBoxView;
-/// 竖线
-@property (nonatomic, strong) UIView *linersView;
-/// 股权
-@property (nonatomic, strong) UILabel *eqAssetsLabel;
-/// 股权提示
-@property (nonatomic, strong) UILabel *eqAssetsTipsLabel;
-
 @end
 
 NS_ASSUME_NONNULL_END

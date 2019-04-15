@@ -112,8 +112,10 @@
                     [userModel dump];
                     [kNotificationCenter postNotificationName:@"reloadMineData" object:nil];
                     [self didTapPopButton:nil];
+                    Toast(@"登录成功");
+                }else{
+                    Toast(model.message);
                 }
-                Toast(model.message);
             }
         }
     } failure:^(NSError *error) {

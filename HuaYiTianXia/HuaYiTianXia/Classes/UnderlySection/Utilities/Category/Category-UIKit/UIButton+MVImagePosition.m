@@ -23,7 +23,7 @@
     CGFloat labelHeight = [self.titleLabel.text sizeWithFont:self.titleLabel.font].height;
 #pragma clang diagnostic pop
     
-    CGFloat imageOffsetX = (imageWidth + labelWidth) / 2 - imageWidth / 2;//image中心移动的x距离
+    CGFloat imageOffsetX = labelWidth / 2;//(imageWidth + labelWidth) / 2 - imageWidth / 2;//image中心移动的x距离
     CGFloat imageOffsetY = imageHeight / 2 + spacing / 2;//image中心移动的y距离
     CGFloat labelOffsetX = (imageWidth + labelWidth / 2) - (imageWidth + labelWidth) / 2;//label中心移动的x距离
     CGFloat labelOffsetY = labelHeight / 2 + spacing / 2;//label中心移动的y距离
@@ -47,7 +47,7 @@
             break;
             
         case kMVImagePositionTop:
-            self.imageEdgeInsets = UIEdgeInsetsMake(-imageOffsetY, imageOffsetX, imageOffsetY, -imageOffsetX);
+            self.imageEdgeInsets = UIEdgeInsetsMake(-imageOffsetY, -imageOffsetX, imageOffsetY, -imageOffsetX);
             self.titleEdgeInsets = UIEdgeInsetsMake(labelOffsetY, -labelOffsetX, -labelOffsetY, labelOffsetX);
             self.contentEdgeInsets = UIEdgeInsetsMake(imageOffsetY, -changedWidth/2, changedHeight-imageOffsetY, -changedWidth/2);
             break;

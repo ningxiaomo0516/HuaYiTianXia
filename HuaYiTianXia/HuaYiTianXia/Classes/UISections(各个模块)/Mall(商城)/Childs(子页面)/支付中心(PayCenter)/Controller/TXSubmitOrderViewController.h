@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface TXSubmitOrderViewController : TTBaseTableViewController
-
+- (id) initNewsRecordsModel:(NewsRecordsModel *)model;
 @end
 
 NS_ASSUME_NONNULL_END

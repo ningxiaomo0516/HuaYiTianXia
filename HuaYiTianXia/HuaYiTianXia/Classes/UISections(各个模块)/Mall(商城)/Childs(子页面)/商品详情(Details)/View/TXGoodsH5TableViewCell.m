@@ -32,6 +32,7 @@
         self.selectionStyle = UITableViewCellSelectionStyleNone;
 //        self.webUrl = @"http://www.baidu.com";
 //        [self loadData];
+        [self initView];
     }
     return self;
 }

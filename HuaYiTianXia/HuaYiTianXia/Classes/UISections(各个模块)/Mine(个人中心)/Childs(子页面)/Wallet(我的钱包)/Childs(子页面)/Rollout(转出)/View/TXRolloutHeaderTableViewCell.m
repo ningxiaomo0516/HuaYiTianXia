@@ -1,14 +1,14 @@
 //
-//  TXMineHeaderTableViewCell.m
+//  TXRolloutHeaderTableViewCell.m
 //  HuaYiTianXia
 //
-//  Created by 宁小陌 on 2019/3/19.
-//  Copyright © 2019 宁小陌. All rights reserved.
+//  Created by 宁小陌 on 2019/4/15.
+//  Copyright © 2019年 宁小陌. All rights reserved.
 //
 
-#import "TXMineHeaderTableViewCell.h"
+#import "TXRolloutHeaderTableViewCell.h"
 
-@implementation TXMineHeaderTableViewCell
+@implementation TXRolloutHeaderTableViewCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
@@ -42,19 +42,15 @@
     
     [self addSubview:self.vrBoxView];
     [self addSubview:self.arBoxView];
-    [self addSubview:self.eqBoxView];
     
     [self.vrBoxView addSubview:self.vrAssetsLabel];
     [self.vrBoxView addSubview:self.vrAssetsTipsLabel];
     
     [self.vrBoxView addSubview:self.linerView];
-    [self.eqBoxView addSubview:self.linersView];
     
     [self.arBoxView addSubview:self.arAssetsLabel];
     [self.arBoxView addSubview:self.arAssetsTipsLabel];
     
-    [self.eqBoxView addSubview:self.eqAssetsLabel];
-    [self.eqBoxView addSubview:self.eqAssetsTipsLabel];
     
     [self.totalAssetsLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self);
@@ -73,31 +69,26 @@
         make.right.equalTo(self.arBoxView.mas_left);
     }];
     [self.arBoxView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(self);
-        make.right.equalTo(self.eqBoxView.mas_left);
-        make.width.equalTo(self.eqBoxView.mas_width);
-        make.height.equalTo(self.vrBoxView);
-    }];
-    [self.eqBoxView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.bottom.equalTo(self);
         make.width.equalTo(self.vrBoxView.mas_width);
         make.height.equalTo(self.vrBoxView);
     }];
+    
     [self.vrAssetsLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.vrBoxView);
         make.bottom.equalTo(self.vrAssetsTipsLabel.mas_top).offset(-5);
     }];
-
+    
     [self.vrAssetsTipsLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.vrBoxView);
         make.bottom.equalTo(self.vrBoxView.mas_bottom).offset(-8);
     }];
-
+    
     [self.arAssetsLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.arBoxView);
         make.bottom.equalTo(self.arAssetsTipsLabel.mas_top).offset(-5);
     }];
-
+    
     [self.arAssetsTipsLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.arBoxView);
         make.bottom.equalTo(self.arBoxView.mas_bottom).offset(-8);
@@ -108,19 +99,6 @@
         make.height.equalTo(@(IPHONE6_W(37)));
         make.width.equalTo(@(IPHONE6_W(0.7)));
         make.bottom.equalTo(self.mas_bottom).offset(-12);
-    }];
-    [self.linersView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.eqBoxView);
-        make.bottom.height.width.equalTo(self.linerView);
-    }];
-    [self.eqAssetsLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.eqBoxView);
-        make.bottom.equalTo(self.eqAssetsTipsLabel.mas_top).offset(-5);
-    }];
-    
-    [self.eqAssetsTipsLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.eqBoxView);
-        make.bottom.equalTo(self.eqBoxView.mas_bottom).offset(-8);
     }];
 }
 
@@ -182,28 +160,6 @@
     return _arAssetsTipsLabel;
 }
 
-- (UIView *)linersView {
-    if (!_linersView) {
-        _linersView = [UIView lz_viewWithColor:kWhiteColor];
-    }
-    return _linersView;
-}
-
-- (UILabel *)eqAssetsLabel{
-    if (!_eqAssetsLabel) {
-        _eqAssetsLabel = [UILabel lz_labelWithTitle:@"0" color:kWhiteColor font:kFontSizeScBold20];
-    }
-    return _eqAssetsLabel;
-}
-
-- (UILabel *)eqAssetsTipsLabel {
-    if (!_eqAssetsTipsLabel) {
-        _eqAssetsTipsLabel = [UILabel lz_labelWithTitle:@"股权数" color:[kWhiteColor colorWithAlphaComponent:0.5] font:kFontSizeMedium14];
-    }
-    return _eqAssetsTipsLabel;
-}
-
-
 - (UIView *)vrBoxView{
     if (!_vrBoxView) {
         _vrBoxView = [UIView lz_viewWithColor:kClearColor];
@@ -218,10 +174,4 @@
     return _arBoxView;
 }
 
-- (UIView *)eqBoxView{
-    if (!_eqBoxView) {
-        _eqBoxView = [UIView lz_viewWithColor:kClearColor];
-    }
-    return _eqBoxView;
-}
 @end

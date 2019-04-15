@@ -108,9 +108,7 @@
  */
 - (IBAction)increaseBtnClick:(id)sender {
     NSInteger price = [self.priceLabel.text integerValue];
-    NSInteger i = 3000*1000;
-    NSInteger total = price + i;
-    self.priceLabel.text = [NSString stringWithFormat:@"%ld",total];
+    self.priceLabel.text = [NSString stringWithFormat:@"%ld",price += 1000];
 }
 
 /**
@@ -120,13 +118,11 @@
  */
 - (IBAction)minusBtnClick:(id)sender {
     NSInteger price = [self.priceLabel.text integerValue];
-    NSInteger i = 3000*1000;
-    if (price<=3000) {
+    if (price<=1000) {
         Toast(@"已是最低投保金额");
         return;
     }else{
-        NSInteger total = price - i;
-        self.priceLabel.text = [NSString stringWithFormat:@"%ld",total];
+        self.priceLabel.text = [NSString stringWithFormat:@"%ld",price -= 1000];
     }
 }
 

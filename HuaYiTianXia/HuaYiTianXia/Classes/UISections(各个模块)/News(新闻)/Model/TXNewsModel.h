@@ -99,6 +99,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) NSInteger spec;
 /// banner 集合
 @property (nonatomic, strong) NSMutableArray<NewsBannerModel *> *banners;
+/// 支付中心需要的购买数量
+@property (nonatomic, assign) NSInteger buyCount;
 
 @end
 

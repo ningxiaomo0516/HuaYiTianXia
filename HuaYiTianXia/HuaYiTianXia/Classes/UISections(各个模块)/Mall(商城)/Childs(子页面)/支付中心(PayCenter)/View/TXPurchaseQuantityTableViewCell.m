@@ -85,6 +85,7 @@
 - (UIButton *)reductionBtn {
     if (!_reductionBtn) {
         _reductionBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        _reductionBtn.tag = 1;
         [_reductionBtn setImage:kGetImage(@"mine_btn_reduction") forState:UIControlStateNormal];
     }
     return _reductionBtn;
@@ -93,6 +94,7 @@
 - (UIButton *)increaseBtn{
     if (!_increaseBtn) {
         _increaseBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        _increaseBtn.tag = 0;
         [_increaseBtn setImage:kGetImage(@"mine_btn_increase") forState:UIControlStateNormal];
     }
     return _increaseBtn;

@@ -69,10 +69,6 @@
         _chooseBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         [_chooseBtn setImage:kGetImage(@"mine_btn_normal") forState:UIControlStateNormal];
         [_chooseBtn setImage:kGetImage(@"mine_btn_selected") forState:UIControlStateSelected];
-        MV(weakSelf);
-        [_chooseBtn lz_handleControlEvent:UIControlEventTouchUpInside withBlock:^{
-            //            [weakSelf saveBtnClick:self._submitButton];
-        }];
     }
     return _chooseBtn;
 }

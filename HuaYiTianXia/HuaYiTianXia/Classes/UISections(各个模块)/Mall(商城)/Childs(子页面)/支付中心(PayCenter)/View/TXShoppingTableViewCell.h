@@ -22,6 +22,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) UILabel *subtitleLabel;
 /// 产品价格
 @property (nonatomic, strong) UILabel *priceLabel;
+
+@property (nonatomic, strong) NewsRecordsModel *model;
 @end
 
 NS_ASSUME_NONNULL_END

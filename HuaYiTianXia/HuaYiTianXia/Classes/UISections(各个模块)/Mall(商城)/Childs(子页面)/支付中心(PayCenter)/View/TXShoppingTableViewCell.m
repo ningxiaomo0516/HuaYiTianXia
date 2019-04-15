@@ -26,8 +26,31 @@
         self.contentView.backgroundColor = [UIColor clearColor];
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         [self initView];
+//        self.titleLabel.text = @"法国进口红酒 传奇波尔多干葡萄";
+//        self.imagesView.image = kGetImage(@"test_work");
+//        self.specLabel.text = @"规格:苏哈相机";
+//        self.subtitleLabel.text = @"Mavic 2带屏升级版火爆销售中，5.5寸高亮屏，高清图片上传会员减免优币抵现";
+//        self.priceLabel.text = @"¥399.00";
     }
     return self;
+}
+
+- (void)setModel:(NewsRecordsModel *)model{
+    _model = model;
+    [self.imagesView sd_setImageWithURL:[NSURL URLWithString:self.model.coverimg]
+                       placeholderImage:kGetImage(VERTICALMAPBITMAP)];
+    
+    self.titleLabel.text = self.model.title;
+    [self.imagesView sd_setImageWithURL:[NSURL URLWithString:self.model.coverimg]
+                        placeholderImage:kGetImage(VERTICALMAPBITMAP)];
+    if (self.model.prospec.count>0) {
+        self.specLabel.text =  self.model.prospec[0];
+    }else{
+        self.specLabel.hidden = YES;
+    }
+    
+    self.subtitleLabel.text = self.model.synopsis;
+    self.priceLabel.text = [NSString stringWithFormat:@"￥%@.00",model.price];
 }
 
 - (void) initView{

@@ -29,6 +29,8 @@ static NSString * const reuseIdentifier = @"TXAddressTableViewCell";
     // 添加右边保存按钮
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"新增地址" style:UIBarButtonItemStylePlain target:self action:@selector(addBtnClick)];
     [self requestAddressData];
+    // 注册通知
+    [kNotificationCenter addObserver:self selector:@selector(requestAddressData) name:@"reloadAddressData" object:nil];
 }
 
 - (void)tt_tableView:(TTBaseTableView *)tt_tableView requestFailed:(NSError *)error{
@@ -83,7 +85,15 @@ static NSString * const reuseIdentifier = @"TXAddressTableViewCell";
 #pragma mark - Table view data source
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     TXAddressTableViewCell* tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
-    tools.addressModel = self.dataArray[indexPath.section];
+    AddressModel *model = self.dataArray[indexPath.section];
+    tools.addressModel = model;
+    if (model.isDefault) {
+        kUserInfo.receivedGoodsAddr = model.address;
+        kUserInfo.receivedUserName = model.username;
+        kUserInfo.receivedTelphone = model.telphone;
+        
+        [kUserInfo dump];
+    }
     return tools;
 }
 
@@ -102,7 +112,15 @@ static NSString * const reuseIdentifier = @"TXAddressTableViewCell";
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-//    [self jumpAddressEditVC:AddInfo vcTitle:@"修改收货地址"];
+    if (self.pageType==0) {
+        AddressModel *model = self.dataArray[indexPath.section];
+        if (self.selectedAddressBlock) {
+            self.selectedAddressBlock(model);
+        }
+        [self.navigationController popViewControllerAnimated:YES];
+    }else{
+        //    [self jumpAddressEditVC:AddInfo vcTitle:@"修改收货地址"];
+    }
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
@@ -116,6 +134,7 @@ static NSString * const reuseIdentifier = @"TXAddressTableViewCell";
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.requestDelegate = self;
+        _tableView.requestType = kHttpGet;
         _tableView.backgroundColor = kTableViewInSectionColor;
     }
     return _tableView;
@@ -126,6 +145,10 @@ static NSString * const reuseIdentifier = @"TXAddressTableViewCell";
         _dataArray = [[NSMutableArray alloc] init];
     }
     return _dataArray;
+}
+
+- (void)dealloc{
+    [kNotificationCenter removeObserver:self];
 }
 
 @end

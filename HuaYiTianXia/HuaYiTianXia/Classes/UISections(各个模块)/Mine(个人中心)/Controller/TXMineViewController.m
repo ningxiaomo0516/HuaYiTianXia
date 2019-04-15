@@ -40,7 +40,6 @@ static NSString * const reuseIdentifierBanner = @"TXMineBannerTableViewCell";
     // 注册通知
     [kNotificationCenter addObserver:self selector:@selector(reloadUserName) name:@"reloadUserName" object:nil];
     [kNotificationCenter addObserver:self selector:@selector(reloadData) name:@"reloadMineData" object:nil];
-    
 }
 
 /// 登录成功之后再获取数据
@@ -70,7 +69,7 @@ static NSString * const reuseIdentifierBanner = @"TXMineBannerTableViewCell";
                 kUserInfo.username = model.data.username;
                 kUserInfo.balance = model.data.balance;
                 kUserInfo.avatar = model.data.avatar;
-                kUserInfo.type = model.data.type;
+                kUserInfo.isValidation = model.data.isValidation;
                 [kUserInfo dump];
                 [self.headerView.imagesViewAvatar sc_setImageWithUrlString:model.data.avatar
                                                           placeholderImage:kGetImage(@"mine_icon_avatar")
@@ -119,11 +118,11 @@ static NSString * const reuseIdentifierBanner = @"TXMineBannerTableViewCell";
             tools.selectionStyle = UITableViewCellSelectionStyleNone;
         }else if(indexPath.row==1){
             tools.subtitleLabel.textColor = HexString(@"#FF9B9B");
-            if (kUserInfo.type==2) {
+            if (kUserInfo.isValidation==2) {
                 tools.subtitleLabel.textColor = kTextColor153;
                 tools.subtitleLabel.text = @"已认证";
                 tools.imagesArrow.hidden = YES;
-            }else if (kUserInfo.type==1) {
+            }else if (kUserInfo.isValidation==1) {
                 tools.subtitleLabel.text = @"认证中";
             }else{
                 tools.subtitleLabel.text = @"未实名认证";
@@ -163,7 +162,7 @@ static NSString * const reuseIdentifierBanner = @"TXMineBannerTableViewCell";
     TXGeneralModel* model = self.itemModelArray[0][indexPath.row];
     NSString *className = model.showClass;
     if ([model.showClass isEqualToString:@"TXRealNameViewController"]) {
-        if (kUserInfo.type==0) {
+        if (kUserInfo.isValidation==0) {
             TXRealNameViewController *vc = [[TXRealNameViewController alloc] init];
             vc.title = model.title;
             vc.typePage = 0;

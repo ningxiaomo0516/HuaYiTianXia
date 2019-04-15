@@ -480,8 +480,6 @@
  *  @param spacing 间距
  */
 + (void)lz_setButtonTitleWithImageEdgeInsets:(UIButton *)button postition:(MVImagePosition)postition spacing:(CGFloat)spacing{
-    button.imageEdgeInsets = UIEdgeInsetsMake(0, -spacing/2, 0, spacing/2);
-    button.titleEdgeInsets = UIEdgeInsetsMake(0, spacing/2, 0, -spacing/2);
     [button setImagePosition:postition spacing:spacing];
 }
 

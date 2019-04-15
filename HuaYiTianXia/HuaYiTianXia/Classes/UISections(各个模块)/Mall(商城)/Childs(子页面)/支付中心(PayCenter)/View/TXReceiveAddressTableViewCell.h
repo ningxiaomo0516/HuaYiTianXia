@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TTImageButton.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -21,6 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) UILabel *addressLabel;
 /// 图标
 @property (nonatomic, strong) UIImageView *imagesArrow;
+@property (nonatomic, strong) TTImageButton *addButton;
 @end
 
 NS_ASSUME_NONNULL_END

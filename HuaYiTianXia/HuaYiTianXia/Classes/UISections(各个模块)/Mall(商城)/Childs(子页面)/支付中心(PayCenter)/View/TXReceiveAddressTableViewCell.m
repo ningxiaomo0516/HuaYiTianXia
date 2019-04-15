@@ -35,9 +35,10 @@
     [self addSubview:self.telphoneLabel];
     [self addSubview:self.addressLabel];
     [self addSubview:self.imagesArrow];
+    [self addSubview:self.addButton];
     
     [self.nicknameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(@(IPHONE6_W(28)));
+        make.left.equalTo(@(IPHONE6_W(35)));
         make.top.equalTo(@(IPHONE6_W(15)));
     }];
     
@@ -47,18 +48,23 @@
     }];
     
     [self.imagesView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(@(IPHONE6_W(11)));
+        make.left.equalTo(@(IPHONE6_W(13)));
         make.bottom.equalTo(@(IPHONE6_W(-15)));
     }];
     
     [self.addressLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self.imagesView);
-        make.left.equalTo(self.imagesView.mas_right).offset(IPHONE6_W(6));
+        make.left.equalTo(self.nicknameLabel);
     }];
     
     [self.imagesArrow mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(self.mas_right).offset(IPHONE6_W(-15));
         make.centerY.equalTo(self);
+    }];
+    
+    [self.addButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.centerX.top.bottom.equalTo(self);
+        make.width.equalTo(@(IPHONE6_W(120)));
     }];
 }
 
@@ -99,4 +105,16 @@
     return _imagesArrow;
 }
 
+- (TTImageButton *)addButton{
+    if (!_addButton) {
+        _addButton = [[TTImageButton alloc] init];
+        [_addButton setImage:kGetImage(@"c31_tianjia") forState:UIControlStateNormal];
+        [_addButton setTitleColor:kTextColor128 forState:UIControlStateNormal];
+        [_addButton setTitle:@"添加收货地址" forState:UIControlStateNormal];
+        _addButton.style = kTTButtonStyleTop;
+        _addButton.titleLabel.font = kFontSizeMedium15;
+        _addButton.hidden = YES;
+    }
+    return _addButton;
+}
 @end

@@ -62,10 +62,14 @@ static NSString * const reuseIdentifier = @"TXMineTableViewCell";
     TXGeneralModel* model = self.dataArray[indexPath.row];
     NSString *className = model.showClass;
     if ([model.showClass isEqualToString:@"TXRealNameViewController"]) {
-        TXRealNameViewController *vc = [[TXRealNameViewController alloc] init];
-        vc.title = model.title;
-        vc.typePage = 1;
-        TTPushVC(vc);
+        if (kUserInfo.isValidation != 2) {
+            Toast(@"请先实名认证");
+        }else{
+            TXRealNameViewController *vc = [[TXRealNameViewController alloc] init];
+            vc.title = model.title;
+            vc.typePage = 1;
+            TTPushVC(vc);
+        }
     }else{
         Class controller = NSClassFromString(className);
         //    id controller = [[NSClassFromString(className) alloc] init];

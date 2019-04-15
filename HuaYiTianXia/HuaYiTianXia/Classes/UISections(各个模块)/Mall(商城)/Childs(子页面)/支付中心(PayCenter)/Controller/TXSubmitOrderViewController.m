@@ -12,6 +12,8 @@
 #import "TXChoosePayTableViewCell.h"
 #import "TXPurchaseQuantityTableViewCell.h"
 #import "TXGeneralModel.h"
+#import "TXAddressViewController.h"
+#import "TXAddressModel.h"
 
 
 static NSString * const reuseIdentifierReceiveAddress = @"TXReceiveAddressTableViewCell";
@@ -32,18 +34,66 @@ static NSString * const reuseIdentifierPurchase = @"TXPurchaseQuantityTableViewC
 @property (nonatomic, strong) UILabel       *totalAmountLabel;
 /// 付款方式数组
 @property (nonatomic, strong) NSMutableArray *paymentArray;
+@property (nonatomic, strong) AddressModel  *addressModel;
+@property (nonatomic, assign) NSInteger  addressNum;
+/// 产品Model
+@property (strong, nonatomic)  NewsRecordsModel *model;
+/// 2:默认没选择支付方式 0:微信 1:支付宝
+@property (assign, nonatomic)  NSInteger payType;
 
 @end
 
 @implementation TXSubmitOrderViewController
+- (id) initNewsRecordsModel:(NewsRecordsModel *)model{
+    if ( self = [super init] ){
+        self.model = model;
+        self.payType = 2;
+    }
+    return self;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.title = @"支付中心";
     [self initView];
-    
-    self.totalAmountLabel.text = @"10000.00";
+    self.addressModel = [[AddressModel alloc] init];
+    NSInteger totalAmount = self.model.buyCount*[self.model.price integerValue];
+    self.totalAmountLabel.text = [NSString stringWithFormat:@"%ld.00",(long)totalAmount];
+    /// 通知得到默认收货地址
+//    [kNotificationCenter postNotificationName:@"reloadAddressData" object:nil];
+    [self getAddressModel];
+}
+
+- (void) submitBtnClick:(UIButton *)sender{
+    if (self.payType==2) {
+        Toast(@"请选择支付方式");
+        return;
+    }
+}
+
+- (void) getAddressModel{
+    [SCHttpTools getWithURLString:kHttpURL(@"address/GetAddress") parameter:nil success:^(id responseObject) {
+        NSDictionary *results = responseObject;
+        if ([results isKindOfClass:[NSDictionary class]]) {
+            TXAddressModel *addressModel = [TXAddressModel mj_objectWithKeyValues:results];
+            if (addressModel.errorcode == 20000) {
+                self.addressNum = addressModel.data.count;
+                for (AddressModel *model in addressModel.data) {
+                    if (model.isDefault) {
+                        self.addressModel = model;
+                        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+                        [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationFade];
+                    }
+                }
+                [self.tableView reloadData];
+            }else{
+                Toast(addressModel.message);
+            }
+        }
+    } failure:^(NSError *error) {
+        TTLog(@"error --- %@",error);
+    }];
 }
 
 #pragma mark ---- 界面布局设置
@@ -85,29 +135,56 @@ static NSString * const reuseIdentifierPurchase = @"TXPurchaseQuantityTableViewC
     }];
 }
 
+/**
+ *  点击增加按钮
+ *  tag:0 增加 tag:1 减少
+ *  @param sender 当前按钮
+ */
+- (void)onClickBtn:(UIButton *)sender {
+    if (sender.tag==0) {
+        self.model.buyCount += 1;
+    }else{
+        self.model.buyCount = (self.model.buyCount<2) ? 1 : (self.model.buyCount-= 1);
+    }
+    NSInteger totalAmount = self.model.buyCount*[self.model.price integerValue];
+    self.totalAmountLabel.text = [NSString stringWithFormat:@"%ld.00",(long)totalAmount];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:2];
+    [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationFade];
+}
+
+
 #pragma mark - Table view data source
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     switch (indexPath.section) {
         case 0: {
-                TXReceiveAddressTableViewCell*tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierReceiveAddress forIndexPath:indexPath];
-                tools.nicknameLabel.text = @"李阿九";
-                tools.telphoneLabel.text = @"13566667888";
-                tools.addressLabel.text = @"四川 成都 高新区 环球中心W6区 1518室";
-                return tools;
+            TXReceiveAddressTableViewCell*tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierReceiveAddress forIndexPath:indexPath];
+            tools.nicknameLabel.text = self.addressModel.username;//@"李阿九";
+            tools.telphoneLabel.text = self.addressModel.telphone;//@"13566667888";
+            tools.addressLabel.text = self.addressModel.address;//@"四川 成都 高新区 环球中心W6区 1518室";
+            tools.addButton.userInteractionEnabled = NO;
+            if ((self.addressNum==0)&&(!self.addressModel.isDefault)) {
+                tools.imagesView.hidden = YES;
+                tools.imagesView.hidden = NO;
             }
+            return tools;
+        }
             break;
         case 1: {
             TXShoppingTableViewCell *tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierShopping forIndexPath:indexPath];
-            tools.titleLabel.text = @"法国进口红酒 传奇波尔多干葡萄";
-            tools.imagesView.image = kGetImage(@"test_work");
-            tools.specLabel.text = @"规格:苏哈相机";
-            tools.subtitleLabel.text = @"Mavic 2带屏升级版火爆销售中，5.5寸高亮屏，高清图片上传会员减免优币抵现";
-            tools.priceLabel.text = @"¥399.00";
+            tools.model = self.model;
             return tools;
         }
             break;
         case 2: {
             TXPurchaseQuantityTableViewCell *tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierPurchase forIndexPath:indexPath];
+            MV(weakSelf)
+            [tools.reductionBtn lz_handleControlEvent:UIControlEventTouchUpInside withBlock:^{
+                [weakSelf onClickBtn:tools.reductionBtn];
+            }];
+            [tools.increaseBtn lz_handleControlEvent:UIControlEventTouchUpInside withBlock:^{
+                [weakSelf onClickBtn:tools.increaseBtn];
+            }];
+            tools.quantityLabel.text = [NSString stringWithFormat:@"%ld",(long)self.model.buyCount];
             return tools;
         }
             break;
@@ -115,6 +192,8 @@ static NSString * const reuseIdentifierPurchase = @"TXPurchaseQuantityTableViewC
             TXGeneralModel *model = self.paymentArray[indexPath.row];
             TXChoosePayTableViewCell *tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierChoosePay forIndexPath:indexPath];
             tools.titleLabel.text = model.title;
+            tools.chooseBtn.tag = indexPath.row;
+            tools.chooseBtn.selected = indexPath.row ==0?YES:NO;
             tools.imagesView.image = kGetImage(model.imageText);
             tools.linerView.hidden = (indexPath.row!=self.paymentArray.count-1)?NO:YES;
             return tools;
@@ -136,7 +215,7 @@ static NSString * const reuseIdentifierPurchase = @"TXPurchaseQuantityTableViewC
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section==0) return IPHONE6_W(65);
+    if (indexPath.section==0) return IPHONE6_W(70);
     if (indexPath.section==1) return IPHONE6_W(120);
     return IPHONE6_W(50);
 }
@@ -148,6 +227,22 @@ static NSString * const reuseIdentifierPurchase = @"TXPurchaseQuantityTableViewC
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+
+    if (indexPath.section == 0) {
+        TXAddressViewController *vc = [[TXAddressViewController alloc] init];
+        MV(weakSelf)
+        vc.selectedAddressBlock = ^(AddressModel * _Nonnull model) {
+            weakSelf.addressModel = model;
+            NSIndexSet *indexSet=[[NSIndexSet alloc] initWithIndex:0];
+            [self.tableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationAutomatic];
+        };
+        TTPushVC(vc);
+    }else if (indexPath.section==3){
+        self.payType = indexPath.row;
+        TXChoosePayTableViewCell *currentCell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierChoosePay];
+        UIButton *tmpBtn = (UIButton *)[currentCell viewWithTag:indexPath.row];
+        TTLog(@"labelType -- %ld",(long)tmpBtn.tag);
+    }
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
@@ -187,7 +282,7 @@ static NSString * const reuseIdentifierPurchase = @"TXPurchaseQuantityTableViewC
         [_submitButton lz_setCornerRadius:3.0];
         MV(weakSelf);
         [_submitButton lz_handleControlEvent:UIControlEventTouchUpInside withBlock:^{
-            //            [weakSelf saveBtnClick:self._submitButton];
+                [weakSelf submitBtnClick:self.submitButton];
         }];
     }
     return _submitButton;
