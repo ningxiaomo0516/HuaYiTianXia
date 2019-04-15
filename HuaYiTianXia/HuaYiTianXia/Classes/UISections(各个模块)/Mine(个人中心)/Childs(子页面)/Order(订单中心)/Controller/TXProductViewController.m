@@ -42,14 +42,10 @@ static NSString * const reuseIdentifier = @"TXProductTableViewCell";
 
 /// 处理接口返回数据
 - (void)tt_tableView:(TTBaseTableView *)tt_tableView isPullDown:(BOOL)PullDown result:(id)result{
-    if (self.dataArray.count >0) {
-        self.dataArray = @[].mutableCopy;
-    }else{
-        if ([result isKindOfClass:[NSDictionary class]]) {
-            TXOrderModel *model = [TXOrderModel mj_objectWithKeyValues:result];
-            if (model.errorcode == 20000) {
-                [self.dataArray addObjectsFromArray:model.data.records.mutableCopy];
-            }
+    if ([result isKindOfClass:[NSDictionary class]]) {
+        TXOrderModel *model = [TXOrderModel mj_objectWithKeyValues:result];
+        if (model.errorcode == 20000) {
+            [self.dataArray addObjectsFromArray:model.data.records.mutableCopy];
         }
     }
     //处理返回的SuccessData 数据之后刷新table

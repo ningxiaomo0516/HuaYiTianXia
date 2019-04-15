@@ -39,17 +39,13 @@ static NSString * const reuseIdentifier = @"TXAddressTableViewCell";
 
 /// 处理接口返回数据
 - (void)tt_tableView:(TTBaseTableView *)tt_tableView isPullDown:(BOOL)PullDown result:(id)results{
-    if (self.dataArray.count >0) {
-        self.dataArray = @[].mutableCopy;
-    }else{
-        if ([results isKindOfClass:[NSDictionary class]]) {
-            TXAddressModel *model = [TXAddressModel mj_objectWithKeyValues:results];
-            if (model.errorcode == 20000) {
-                [self.dataArray addObjectsFromArray:model.data.mutableCopy];
-                [self.tableView reloadData];
-            }else{
-                Toast(model.message);
-            }
+    if ([results isKindOfClass:[NSDictionary class]]) {
+        TXAddressModel *model = [TXAddressModel mj_objectWithKeyValues:results];
+        if (model.errorcode == 20000) {
+            [self.dataArray addObjectsFromArray:model.data.mutableCopy];
+            [self.tableView reloadData];
+        }else{
+            Toast(model.message);
         }
     }
     //处理返回的SuccessData 数据之后刷新table

@@ -8,7 +8,7 @@
 
 #import "TTBaseTableView.h"
 
-static NSString * const pageIndex = @"pageIndex";//获取第几页的根据自己的需求替换
+static NSString * const pageIndex = @"page";//获取第几页的根据自己的需求替换
 @interface TTBaseTableView (){
     /// 纪录当前页数
     NSInteger _pageNumber;
@@ -118,7 +118,7 @@ static NSString * const pageIndex = @"pageIndex";//获取第几页的根据自�
  *  请求方法
  *
  *  @param paramter 请求参数
- *  @param isPullDown 返回bool (YES:下拉刷新  NO:上拉记载)
+ *  @param isPullDown 返回bool (YES:下拉刷新  NO:上拉加载)
  */
 - (void)setupNetWorkParamter:(NSDictionary *)paramter isPullDown:(BOOL)isPullDown{
     //暂时是模仿数据请求h返回数据 替换下面的数据请求 这里就可以删除

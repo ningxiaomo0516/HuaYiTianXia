@@ -46,7 +46,21 @@ static NSString* reuseIdentifierMall = @"TXMallCollectionViewCell";
     self.pageSize = 20;
     self.pageIndex = 1;
     [self initView];
+    [self.view showLoadingViewWithText:@"加载中..."];
     [self loadMallData];
+    // 下拉刷新
+    self.collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        //将页码重新置为1
+        [self.dataArray removeAllObjects];
+        [self.bannerArray removeAllObjects];
+        self.pageIndex = 1;
+        [self loadMallData];
+    }];
+    /// 上拉加载
+    self.collectionView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+        self.pageIndex++;// 页码+1
+        [self loadMallData];
+    }];
 }
 
 - (void) loadMallData{
@@ -67,15 +81,22 @@ static NSString* reuseIdentifierMall = @"TXMallCollectionViewCell";
         }else{
             Toast(@"获取城市数据失败");
         }
+        [self.collectionView.mj_header endRefreshing];
+        [self.collectionView.mj_footer endRefreshing];
+        [self.view dismissLoadingView];
     } failure:^(NSError *error) {
         TTLog(@" -- error -- %@",error);
+        [self.collectionView.mj_header endRefreshing];
+        [self.collectionView.mj_footer endRefreshing];
+        [self.view dismissLoadingView];
     }];
 }
 
 - (void) initView{
     [self.view addSubview:self.collectionView];
     [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.top.right.bottom.equalTo(self.view);
+        make.left.top.right.equalTo(self.view);
+        make.bottom.equalTo(self.view.mas_bottom).offset(-kSafeAreaBottomHeight);
     }];
 }
 

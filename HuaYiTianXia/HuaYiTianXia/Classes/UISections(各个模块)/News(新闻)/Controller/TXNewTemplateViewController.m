@@ -39,7 +39,22 @@ static NSString * const reuseIdentifierSectionHeaderView = @"SCTableViewSectionH
     self.pageIndex = 1;
     [self initView];
     [self initViewConstraints];
+    [self.view showLoadingViewWithText:@"加载中..."];
     [self loadNewsData];
+    // 下拉刷新
+    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        //将页码重新置为1
+        [self.dataArray removeAllObjects];
+        [self.bannerArray removeAllObjects];
+        self.pageIndex = 1;
+        [self loadNewsData];
+    }];
+    /// 上拉加载
+    self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+        self.pageIndex++;// 页码+1
+        [self loadNewsData];
+    }];
+
 }
 
 
@@ -61,8 +76,14 @@ static NSString * const reuseIdentifierSectionHeaderView = @"SCTableViewSectionH
         }else{
             Toast(@"获取城市数据失败");
         }
+        [self.tableView.mj_header endRefreshing];
+        [self.tableView.mj_footer endRefreshing];
+        [self.view dismissLoadingView];
     } failure:^(NSError *error) {
         TTLog(@" -- error -- %@",error);
+        [self.tableView.mj_header endRefreshing];
+        [self.tableView.mj_footer endRefreshing];
+        [self.view dismissLoadingView];
     }];
 }
 

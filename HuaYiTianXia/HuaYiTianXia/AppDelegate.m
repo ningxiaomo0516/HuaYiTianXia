@@ -29,6 +29,12 @@
     ///初始化登陆信息
     [[TTUserModel shared] load];
     TTLog(@" --- %@ --- %@, --- %@ --- %@",kUserInfo.username,kUserInfo.realname,kUserInfo.uid,kUserInfo.inviteCode);
+    
+    ///开启监听网络
+//    [[AFNetworkReachabilityManager sharedManager] startMonitoring];
+//    [[AFNetworkReachabilityManager sharedManager] setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
+//        [[NSNotificationCenter defaultCenter] postNotificationName:NetworkReachabilityStatus object:nil userInfo:@{@"status":@(status)}];
+//    }];
     [self showMainViewController];
     return YES;
 }
