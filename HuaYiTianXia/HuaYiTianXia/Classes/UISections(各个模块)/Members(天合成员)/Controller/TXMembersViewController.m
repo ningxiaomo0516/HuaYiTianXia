@@ -7,23 +7,28 @@
 //
 
 #import "TXMembersViewController.h"
-#import "TXMembersBannerView.h"
-#import "TXMembersbleViewCell.h"
-#import "TXWebHeaderView.h"
-#import "TXGoodsH5TableViewCell.h"
+#import "TXMembersbleCollectionViewCell.h"
+#import "TXMallBannerCollectionViewCell.h"
+#import "TXMallToolsCollectionViewCell.h"
+#import "TXGeneralModel.h"
+#import "TTBannerModel.h"
+#import "TXTicketScreeningViewController.h"
 
-static NSString * const reuseIdentifier = @"TXMembersbleViewCell";
-static NSString * const reuseIdentifierGoodsH5 = @"TXGoodsH5TableViewCell";
+static NSString* reuseIdentifier = @"TXMallToolsCollectionViewCell";
+static NSString* reuseIdentifierBanner = @"TXMallBannerCollectionViewCell";
+static NSString* reuseIdentifierMall = @"TXMembersbleCollectionViewCell";
 
-@interface TXMembersViewController ()<UITableViewDelegate,UITableViewDataSource,WKUIDelegate, WKNavigationDelegate>
-@property (nonatomic, strong) UITableView *tableView;
+
+@interface TXMembersViewController ()<UICollectionViewDelegate, UICollectionViewDataSource>
+{
+@private
+    UICollectionView * _collectionView;
+    UIImageView * _iconImageView;
+    UILabel * _titleLabel;
+}
+@property(nonatomic,strong,readonly)UICollectionView * collectionView;
 @property (nonatomic, strong) NSMutableArray *dataArray;
-@property (strong, nonatomic) TXWebHeaderView *headerView;
-@property (nonatomic, strong) TXMembersBannerView *bannerView;
-
-@property (assign, nonatomic) CGFloat webViewHeight;
-@property (nonatomic, strong) UIScrollView *scrollView;
-@property (nonatomic, strong) WKWebView *webView;
+@property (nonatomic, strong) NSMutableArray *bannerArray;
 @end
 
 @implementation TXMembersViewController
@@ -31,145 +36,196 @@ static NSString * const reuseIdentifierGoodsH5 = @"TXGoodsH5TableViewCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.webViewHeight = 0.0;
     [self initView];
+    [self loadMallData];
+    // 下拉刷新
+    self.collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        //将页码重新置为1
+        [self.bannerArray removeAllObjects];
+        [self loadMallData];
+    }];
+}
+
+- (void) viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self loadMallData];
+}
+
+- (void) loadMallData{
+    NSMutableDictionary *parameter = [[NSMutableDictionary alloc] init];
+    [parameter setObject:@(16) forKey:@"status"];
+    
+    TTLog(@"parameter -- %@",parameter);
+    [SCHttpTools postWithURLString:@"banner/GetBanners" parameter:parameter success:^(id responseObject) {
+        NSDictionary *result = responseObject;
+        if ([result isKindOfClass:[NSDictionary class]]) {
+            TTBannerModel *model = [TTBannerModel mj_objectWithKeyValues:result];
+            [self.bannerArray addObjectsFromArray:model.banners];
+            [self.collectionView reloadData];
+        }else{
+            Toast(@"获取城市数据失败");
+        }
+        [self.collectionView.mj_header endRefreshing];
+        [self.collectionView.mj_footer endRefreshing];
+        [self.view dismissLoadingView];
+    } failure:^(NSError *error) {
+        TTLog(@" -- error -- %@",error);
+        [self.collectionView.mj_header endRefreshing];
+        [self.collectionView.mj_footer endRefreshing];
+        [self.view dismissLoadingView];
+    }];
 }
 
 - (void) initView{
-    [self createWebView];
-    self.headerView.titleLabel.text = @"欢迎激活共享飞行";
-    self.headerView.subtitleLabel.text = @"优享品质生活";
-    self.headerView.imagesView.image = kGetImage(@"c41_live_jinka");
-    [self.headerView.saveButton setTitle:@"系统审核中" forState:UIControlStateNormal];
-    [self.view addSubview:self.tableView];
-    [Utils lz_setExtraCellLineHidden:self.tableView];
-    self.tableView.tableHeaderView = self.headerView;
-    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.right.equalTo(self.view);
+    [self.view addSubview:self.collectionView];
+    [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.left.top.right.equalTo(self.view);
         make.bottom.equalTo(self.view.mas_bottom).offset(-kTabBarHeight);
     }];
-    MV(weakSelf);
-    [self.headerView.saveButton lz_handleControlEvent:UIControlEventTouchUpInside withBlock:^{
-        [weakSelf saveBtnClick:self.headerView.saveButton];
-    }];
-    
 }
 
-- (void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
+// MARK:- ====UICollectionViewDataSource,UICollectionViewDelegate=====
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
+    return self.dataArray.count;
 }
 
-/** 保存 */
-- (void) saveBtnClick:(UIButton *) sender{
-//    TXMallEppoViewController *vc = [[TXMallEppoViewController alloc] init];
-//    TTPushVC(vc);
+// 每个分区有多少个数据
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    NSArray *subArray = [self.dataArray lz_safeObjectAtIndex:section];
+    return subArray.count;
 }
 
-- (void)dealloc{
-    [self.webView.scrollView removeObserver:self forKeyPath:@"contentSize"];
+- (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    TXGeneralModel* templateModel = self.dataArray[indexPath.section][indexPath.row];
+    if (indexPath.section==0) {
+        TXMallBannerCollectionViewCell *tools = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifierBanner forIndexPath:indexPath];
+        tools.bannerArray = self.bannerArray;
+        return tools;
+    }else if (indexPath.section==2) {
+        TXMembersbleCollectionViewCell *tools = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifierMall forIndexPath:indexPath];
+        tools.imagesView.image = kGetImage(templateModel.imageText);
+        return tools;
+    }else{
+        TXMallToolsCollectionViewCell *tools = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
+        tools.titleLabel.text = templateModel.title;
+        tools.imagesView.image = kGetImage(templateModel.imageText);
+        [tools.imagesView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.centerX.equalTo(tools);
+            make.top.equalTo(@(IPHONE6_W(16)));
+        }];
+        return tools;
+    }
 }
 
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context{
-    if ([keyPath isEqualToString:@"contentSize"]) {
-        // 方法一
-        UIScrollView *scrollView = (UIScrollView *)object;
-        CGFloat height = scrollView.contentSize.height;
-        self.webViewHeight = height;
-        self.webView.frame = CGRectMake(0, 0, self.view.frame.size.width, height);
-        self.scrollView.frame = CGRectMake(0, 0, self.view.frame.size.width, height);
-        self.scrollView.contentSize =CGSizeMake(self.view.frame.size.width, height);
-        [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:[NSIndexPath indexPathForRow:0 inSection:0], nil] withRowAnimation:UITableViewRowAnimationNone];
+/// 点击collectionViewCell
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section==1) {
+        Toast(@"暂未开放");
+    }else if(indexPath.section==2){
+        if (indexPath.row==0) {
+            TXTicketScreeningViewController *vc = [[TXTicketScreeningViewController alloc] init];
+            TTPushVC(vc);
+        }else{
+            Toast(@"暂未开放");
+        }
+    }
+}
+
+/// 同一行的cell的间距
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
+    return 0;
+}
+
+//布局协议对应的方法实现
+#pragma mark - UICollectionViewDelegateFlowLayout
+//设置每个一个Item（cell）的大小
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
+    CGFloat width = kScreenWidth/4;
+    if (indexPath.section==0) return CGSizeMake(kScreenWidth, IPHONE6_W(180));
+    else if (indexPath.section==1)return CGSizeMake(width, IPHONE6_W(95));
+    CGFloat margin = 10*3;
+    return CGSizeMake((kScreenWidth-margin)/2, IPHONE6_W(70));
+}
+
+//设置所有的cell组成的视图与section 上、左、下、右的间隔
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section{
+    if (section==2) return UIEdgeInsetsMake(10,10,0,10);
+    return UIEdgeInsetsMake(0,0,0,0);
+}
+
+//设置footer呈现的size, 如果布局是垂直方向的话，size只需设置高度，宽与collectionView一致
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section{
+    if (section==2) return CGSizeMake(0,10);
+    return CGSizeMake(0,0);
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section{
+    return CGSizeMake(0,0);
+}
+
+- (UICollectionView *)collectionView{
+    if (!_collectionView) {
+        UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
+        //确定滚动方向
+        flowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
+        //确定item的大小
+        //        flowLayout.itemSize = CGSizeMake(100, 120);
+        //确定横向间距(设置行间距)
+        flowLayout.minimumLineSpacing = 10;
+        //确定纵向间距(设置列间距)
+        flowLayout.minimumInteritemSpacing = 10;
+        //确定距离上左下右的距离
+        flowLayout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0);
+        //头尾部高度
+        flowLayout.headerReferenceSize = CGSizeMake(0, 0);
+        flowLayout.footerReferenceSize = CGSizeMake(0, 0);
         
-        /*
-         // 方法二
-         [_webView evaluateJavaScript:@"document.body.offsetHeight" completionHandler:^(id _Nullable result, NSError * _Nullable error) {
-         CGFloat height = [result doubleValue] + 20;
-         self.webViewHeight = height;
-         self.webView.frame = CGRectMake(0, 0, self.view.frame.size.width, height);
-         self.scrollView.frame = CGRectMake(0, 0, self.view.frame.size.width, height);
-         self.scrollView.contentSize =CGSizeMake(self.view.frame.size.width, height);
-         [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:[NSIndexPath indexPathForRow:3 inSection:0], nil] withRowAnimation:UITableViewRowAnimationNone];
-         }];
-         */
+        _collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:flowLayout];
+        _collectionView.backgroundColor = [UIColor clearColor];
+        [_collectionView registerClass:[TXMallToolsCollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
+        [_collectionView registerClass:[TXMallBannerCollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifierBanner];
+        [_collectionView registerClass:[TXMembersbleCollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifierMall];
+        _collectionView.delegate = self;
+        _collectionView.dataSource = self;
+        _collectionView.showsVerticalScrollIndicator = NO;
+        _collectionView.showsHorizontalScrollIndicator = NO;
+        _collectionView.bounces = YES;
     }
+    return _collectionView;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    //    TXGoodsH5TableViewCell *tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierGoodsH5 forIndexPath:indexPath];
-    //    tools.webUrl = kAppendH5URL(DomainName, AgencyCompanyH5, @"");
-    //    MV(weakSelf)
-    //    tools.refreshWebViewHeightBlock = ^(CGFloat height) {
-    //        weakSelf.webViewHeight = height;
-    //        [self.tableView reloadData];
-    //    };
-    //    tools.indexPath = indexPath;
-    //    return tools;
-    UITableViewCell *webCell = [tableView dequeueReusableCellWithIdentifier:@"WebViewCell" forIndexPath:indexPath];
-    [webCell.contentView addSubview:self.scrollView];
-    return webCell;
-}
-
-/// 返回多少
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 1;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return self.webViewHeight;
-}
-
-- (UITableView *)tableView{
-    if (!_tableView) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
-        _tableView.showsVerticalScrollIndicator = false;
-        [_tableView setSeparatorInset:UIEdgeInsetsMake(0,15,0,15)];
-        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-        [_tableView registerClass:[TXGoodsH5TableViewCell class] forCellReuseIdentifier:reuseIdentifierGoodsH5];
-        [_tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"WebViewCell"];
-        
-        // 拖动tableView时收起键盘
-        _tableView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
-        _tableView.delegate = self;
-        _tableView.dataSource = self;
-        _tableView.backgroundColor = kClearColor;
+- (NSMutableArray *)dataArray{
+    if (!_dataArray) {
+        _dataArray = [[NSMutableArray alloc] init];
+        NSArray* titleArr;
+        NSArray* imagesArr;
+        titleArr = @[@[],@[@"会员",@"订单",@"礼包",@"其他"],@[]];
+        imagesArr = @[@[@"banner"],@[@"home_tools_sheying",@"home_tools_cehua",@"home_tools_lifu",@"home_tools_hotel"],
+                    @[@"机票预订",@"酒店订票",@"景区预订",@"美食天地"]];
+        NSArray* classArr = @[@[],@[@"",@"",@"",@""],@[]];
+        for (int i=0; i<imagesArr.count; i++) {
+            NSArray *subTitlesArray = [titleArr lz_safeObjectAtIndex:i];
+            NSArray *subImagesArray = [imagesArr lz_safeObjectAtIndex:i];
+            NSArray *classArray = [classArr lz_safeObjectAtIndex:i];
+            NSMutableArray *subArray = [NSMutableArray array];
+            for (int j = 0; j < subImagesArray.count; j ++) {
+                TXGeneralModel* templateModel = [[TXGeneralModel alloc] init];
+                templateModel.title = [subTitlesArray lz_safeObjectAtIndex:j];
+                templateModel.imageText = [subImagesArray lz_safeObjectAtIndex:j];
+                templateModel.showClass = [classArray lz_safeObjectAtIndex:j];
+                [subArray addObject:templateModel];
+            }
+            [_dataArray addObject:subArray];
+        }
     }
-    return _tableView;
+    return _dataArray;
 }
 
-- (void)createWebView{
-    WKWebViewConfiguration *wkWebConfig = [[WKWebViewConfiguration alloc] init];
-    WKUserContentController *wkUController = [[WKUserContentController alloc] init];
-    wkWebConfig.userContentController = wkUController;
-    // 自适应屏幕宽度js
-    NSString *jSString = @"var meta = document.createElement('meta'); meta.setAttribute('name', 'viewport'); meta.setAttribute('content', 'width=device-width'); document.getElementsByTagName('head')[0].appendChild(meta);";
-    WKUserScript *wkUserScript = [[WKUserScript alloc] initWithSource:jSString injectionTime:WKUserScriptInjectionTimeAtDocumentEnd forMainFrameOnly:YES];
-    // 添加js调用
-    [wkUController addUserScript:wkUserScript];
-    
-    self.webView = [[WKWebView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 1) configuration:wkWebConfig];
-    self.webView.backgroundColor = [UIColor clearColor];
-    self.webView.opaque = NO;
-    self.webView.userInteractionEnabled = NO;
-    self.webView.scrollView.bounces = NO;
-    self.webView.UIDelegate = self;
-    self.webView.navigationDelegate = self;
-    [self.webView sizeToFit];
-    [self.webView.scrollView addObserver:self forKeyPath:@"contentSize" options:NSKeyValueObservingOptionNew context:nil];
-    NSString *str = kAppendH5URL(DomainName, AviationShareH5, @"");
-    NSURL *url = [NSURL URLWithString:str];
-    NSURLRequest *urlRequest = [NSURLRequest requestWithURL:url];
-    [self.webView loadRequest:urlRequest];
-    
-    self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 1)];
-    [self.scrollView addSubview:self.webView];
-}
-
-- (TXWebHeaderView *)headerView{
-    if (!_headerView) {
-        _headerView = [[TXWebHeaderView alloc] init];
-        _headerView.frame = CGRectMake(0, 0, kScreenWidth, IPHONE6_W(340));
+- (NSMutableArray *)bannerArray{
+    if (!_bannerArray) {
+        _bannerArray = [[NSMutableArray alloc] init];
     }
-    return _headerView;
+    return _bannerArray;
 }
 
 @end

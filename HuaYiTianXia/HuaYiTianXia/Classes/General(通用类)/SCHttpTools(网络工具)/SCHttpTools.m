@@ -357,4 +357,40 @@ static AFHTTPSessionManager* manager_ = nil;
         failure(errorArr);
     });
 }
+
+
+/**
+ *  仅仅用于机票查询接口
+ *
+ *  @param URLString URLString
+ *  @param parameter 参数
+ *  @param success   成功回调
+ *  @param failure   失败回调
+ */
++ (void)getTicketWithURLString:(NSString *)URLString parameter:(NSDictionary *)parameter success:(void(^)(id responseObject))success failure:(void(^)(NSError *error))failure{
+    if(URLString.length == 0)return;
+    
+    URLString = [URLString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    URLString = [URLString stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+    TTLog(@"GetUrl -- %@",URLString);
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    [manager.requestSerializer setTimeoutInterval:timeoutInterval];
+    manager.requestSerializer.cachePolicy = NSURLRequestReloadIgnoringLocalAndRemoteCacheData;
+    [[NSURLCache sharedURLCache] removeAllCachedResponses];
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json",@"text/plain", @"text/javascript",@"text/html", nil];
+    
+    
+    [manager GET:URLString parameters:parameter progress:^(NSProgress * _Nonnull downloadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        if (responseObject) {
+            NSDictionary *result = responseObject;
+            success(result);
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        if (error && failure) {
+            failure(error);
+        }
+    }];
+}
 @end

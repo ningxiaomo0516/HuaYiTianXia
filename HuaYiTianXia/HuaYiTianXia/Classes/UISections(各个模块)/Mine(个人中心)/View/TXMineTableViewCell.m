@@ -40,7 +40,7 @@
     }];
     
     [self.subtitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(self.imagesArrow.mas_left).offset(IPHONE6_W(-10));
+        make.right.equalTo(self.imagesArrow.mas_left);
         make.centerY.equalTo(self);
     }];
     
@@ -50,7 +50,7 @@
     }];
     
     [self.imagesAvatar mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(self.imagesArrow.mas_left).offset(IPHONE6_W(-10));
+        make.right.equalTo(self.imagesArrow.mas_left);
         make.width.height.equalTo(@(IPHONE6_W(41)));
         make.centerY.equalTo(self);
     }];
@@ -74,7 +74,7 @@
 - (UIImageView *)imagesArrow{
     if (!_imagesArrow) {
         _imagesArrow = [[UIImageView alloc] init];
-        _imagesArrow.image = kGetImage(@"right_arrow");
+        _imagesArrow.image = kGetImage(@"mine_btn_enter");
     }
     return _imagesArrow;
 }

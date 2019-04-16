@@ -101,7 +101,7 @@
 - (UIImageView *)imagesArrow{
     if (!_imagesArrow) {
         _imagesArrow = [[UIImageView alloc] init];
-        _imagesArrow.image = kGetImage(@"right_arrow");
+        _imagesArrow.image = kGetImage(@"mine_btn_enter");
         _imagesArrow.hidden = YES;
     }
     return _imagesArrow;

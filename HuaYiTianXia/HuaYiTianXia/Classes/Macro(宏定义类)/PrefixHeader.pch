@@ -18,7 +18,10 @@
 #import "LZExtensions.h"
 #import "Utils.h"
 #import "SCSmallTools.h"
+#import "AppDefine.h"
+#import "AFNetworking.h"
 
+#import "MBProgressHUD.h"
 #import "TTBaseTableView.h"
 
 #import "SCNoDataView.h"
@@ -53,7 +56,6 @@
 
 /// 网络请求工具
 #import "SCHttpTools.h"
-#import "AppDefine.h"
 /// 分享(微信)
 #import "WXApi.h"
 /// 支付宝

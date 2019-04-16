@@ -14,20 +14,24 @@ PODS:
   - AFNetworking/Serialization (3.2.1)
   - AFNetworking/UIKit (3.2.1):
     - AFNetworking/NSURLSession
-  - IQKeyboardManager (6.0.4)
+  - IQKeyboardManager (6.2.0)
+  - JCore (1.2.6)
+  - JPush (3.1.2):
+    - JCore (~> 1.2.6)
   - Masonry (1.1.0)
   - MBProgressHUD (1.1.0)
-  - MJExtension (3.0.15)
-  - MJRefresh (3.1.15.3)
-  - SDWebImage (4.4.1):
-    - SDWebImage/Core (= 4.4.1)
-  - SDWebImage/Core (4.4.1)
-  - WechatOpenSDK (1.8.2)
+  - MJExtension (3.0.15.1)
+  - MJRefresh (3.1.15.7)
+  - SDWebImage (4.4.6):
+    - SDWebImage/Core (= 4.4.6)
+  - SDWebImage/Core (4.4.6)
+  - WechatOpenSDK (1.8.4)
   - YYModel (1.0.4)
 
 DEPENDENCIES:
   - AFNetworking
   - IQKeyboardManager
+  - JPush
   - Masonry
   - MBProgressHUD
   - MJExtension
@@ -40,6 +44,8 @@ SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - AFNetworking
     - IQKeyboardManager
+    - JCore
+    - JPush
     - Masonry
     - MBProgressHUD
     - MJExtension
@@ -50,15 +56,17 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
-  IQKeyboardManager: 29514134ef0334a6fa33cf4eee11c36c064baeaf
+  IQKeyboardManager: 6194101620b73af5e67900b8f89707a99de0b804
+  JCore: cae516dd2bf1a73b578ce6e1065abd49e709e0f7
+  JPush: d0cead70ba223a6a3b52749899ebda830dfbc49a
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9
-  MJExtension: 3f039575db1b135a20699ad298713b26acec1528
-  MJRefresh: b48380ae2b927b46c4ef000de9adb8dc748e1df7
-  SDWebImage: 47e9b5b925cbce75946c23f0c42dd19464189af4
-  WechatOpenSDK: 676feec516a11173eafd1fe64b10d27babf28701
+  MJExtension: 19bc33ce2eee2d319760f5622562cf581a6ff756
+  MJRefresh: 697f8ec75ebdbe9207767bb682cf0f51b0d8a41f
+  SDWebImage: 3f3f0c02f09798048c47a5ed0a13f17b063572d8
+  WechatOpenSDK: 9b721089507c895d05f997408c30bb6e6f5f9b60
   YYModel: 2a7fdd96aaa4b86a824e26d0c517de8928c04b30
 
-PODFILE CHECKSUM: 4dbbe8f6c87d2f6ff11f4bcb216b212eb8964f06
+PODFILE CHECKSUM: 0cb614e204f8d0a891d1fa2726693854207f20f2
 
-COCOAPODS: 1.5.3
+COCOAPODS: 1.6.1

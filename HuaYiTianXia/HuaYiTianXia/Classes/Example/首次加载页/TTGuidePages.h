@@ -1,0 +1,21 @@
+//
+//  TTGuidePages.h
+//  HuaYiTianXia
+//
+//  Created by 宁小陌 on 2019/4/16.
+//  Copyright © 2019年 宁小陌. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+
+NS_ASSUME_NONNULL_BEGIN
+
+@interface TTGuidePages : UIView
+
+@property (nonatomic, copy) void (^buttonAction)(void);
+
+- (instancetype)initWithImageArray:(NSArray *)imageArray completion:(void (^)(void))buttonAction;
+
+@end
+
+NS_ASSUME_NONNULL_END

@@ -90,7 +90,12 @@ static NSString * const reuseIdentifier = @"TXMineTableViewCell";
     TXGeneralModel* model = subArray[indexPath.row];
     model.index = indexPath.item;
     tools.titleLabel.text = model.title;
-    tools.subtitleLabel.hidden = NO;
+    if (indexPath.section == 1) {
+        tools.imagesArrow.hidden = YES;
+        tools.subtitleLabel.hidden = NO;
+        tools.subtitleLabel.text = kStringFormat(@"v", kVersioning);
+        tools.selectionStyle = UITableViewCellSelectionStyleNone;
+    }
     return tools;
 }
 
@@ -116,26 +121,28 @@ static NSString * const reuseIdentifier = @"TXMineTableViewCell";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     TXGeneralModel* model = self.dataArray[indexPath.section][indexPath.row];
     NSString *className = model.showClass;
-    if ([model.showClass isEqualToString:@""]) {
-        Toast(@"暂未开通");
-    }else if(model.index==0||model.index==1||model.index==4){
-        TXWebViewController *vc = [[TXWebViewController alloc] init];
-        vc.title = model.title;
-        if (model.index==0) {
-            vc.webUrl = kAppendH5URL(DomainName, UserAgreeH5,@"");
-        }else if(model.index==1){
-            vc.webUrl = kAppendH5URL(DomainName, UserAgreeH5,@"");
-        }else if(model.index==4){
-            vc.webUrl = kAppendH5URL(DomainName, UserHelpH5,@"");
-        }
-        TTPushVC(vc);
-    }else{
-        Class controller = NSClassFromString(className);
-        //    id controller = [[NSClassFromString(className) alloc] init];
-        if (controller &&  [controller isSubclassOfClass:[UIViewController class]]){
-            UIViewController *vc = [[controller alloc] init];
+    if (indexPath.section==0) {
+        if ([model.showClass isEqualToString:@""]) {
+            Toast(@"暂未开通");
+        }else if(model.index==0||model.index==1||model.index==4){
+            TXWebViewController *vc = [[TXWebViewController alloc] init];
             vc.title = model.title;
+            if (model.index==0) {
+                vc.webUrl = kAppendH5URL(DomainName, UserAgreeH5,@"");
+            }else if(model.index==1){
+                vc.webUrl = kAppendH5URL(DomainName, UserAgreeH5,@"");
+            }else if(model.index==4){
+                vc.webUrl = kAppendH5URL(DomainName, UserHelpH5,@"");
+            }
             TTPushVC(vc);
+        }else{
+            Class controller = NSClassFromString(className);
+            //    id controller = [[NSClassFromString(className) alloc] init];
+            if (controller &&  [controller isSubclassOfClass:[UIViewController class]]){
+                UIViewController *vc = [[controller alloc] init];
+                vc.title = model.title;
+                TTPushVC(vc);
+            }
         }
     }
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
@@ -181,10 +188,11 @@ static NSString * const reuseIdentifier = @"TXMineTableViewCell";
 - (NSMutableArray *)dataArray{
     if (!_dataArray) {
         _dataArray = [[NSMutableArray alloc] init];
-        NSArray* titleArr = @[@[@"用户使用协议",@"隐私政策",@"账户与安全",@"地址管理",@"操作手册"]];
-        NSArray* indexArr = @[@[@"0",@"1",@"2",@"3",@"4"]];
+        TTLog(@"kVersioning - %@",kVersioning);
+        NSArray* titleArr = @[@[@"用户使用协议",@"隐私政策",@"账户与安全",@"地址管理",@"操作手册"],@[@"当前版本"]];
+        NSArray* indexArr = @[@[@"0",@"1",@"2",@"3",@"4"],@[]];
         NSArray* classArr = @[@[@"TXWebViewController",@"TXWebViewController",@"TXAccountSecurityViewController",
-                                @"TXAddressViewController",@"TXWebViewController"]];
+                                @"TXAddressViewController",@"TXWebViewController"],@[]];
         for (int i=0; i<titleArr.count; i++) {
             NSArray *subTitlesArray = [titleArr lz_safeObjectAtIndex:i];
             NSArray *classArray     = [classArr lz_safeObjectAtIndex:i];

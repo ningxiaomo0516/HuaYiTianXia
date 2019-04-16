@@ -49,6 +49,14 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 
+## JCore
+
+Copyright jpush.cn
+
+## JPush
+
+Copyright jiguang.cn
+
 ## MBProgressHUD
 
 Copyright © 2009-2016 Matej Bukovinski
@@ -165,7 +173,7 @@ THE SOFTWARE.
 
 ## WechatOpenSDK
 
-Copyright 2018 tencent.com. All rights reserved.
+Copyright 2019 tencent.com. All rights reserved.
 
 
 ## YYModel

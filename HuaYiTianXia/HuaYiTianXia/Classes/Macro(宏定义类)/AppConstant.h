@@ -44,8 +44,8 @@
 #define GLOBAL(block) dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), block)
 #define MAIN(block) dispatch_async(dispatch_get_main_queue(),block)
 
-///版本号
-#define VERSIONing    [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]
+/// 获取版本号
+#define kVersioning    [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]
 
 #define kScreenWidth    ([UIScreen mainScreen].bounds.size.width)
 #define kScreenHeight   ([UIScreen mainScreen].bounds.size.height)

@@ -48,7 +48,7 @@
     
     [self.subtitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self);
-        make.right.equalTo(self.imagesArrow.mas_left).offset(-6);
+        make.right.equalTo(self.imagesArrow.mas_left);
     }];
     [self.linerView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.height.equalTo(@(kLinerViewHeight));
@@ -87,7 +87,7 @@
 - (UIImageView *)imagesArrow{
     if (!_imagesArrow) {
         _imagesArrow = [[UIImageView alloc] init];
-        _imagesArrow.image = kGetImage(@"right_arrow");
+        _imagesArrow.image = kGetImage(@"mine_btn_enter");
         _imagesArrow.hidden = YES;
     }
     return _imagesArrow;

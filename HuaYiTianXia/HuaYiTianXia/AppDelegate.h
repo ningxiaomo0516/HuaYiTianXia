@@ -17,6 +17,10 @@
 @property (strong, nonatomic) UIWindow *window;
 //@property (strong, nonatomic) UITabBarController *tabBarController;
 
+///是否执行了推送
+@property(nonatomic, assign)BOOL isImplementPush;
+@property(nonatomic, strong)NSDictionary* userInfo;
+
 + (AppDelegate *) appDelegate;
 /// 退出后选中首页
 - (void) setSelectedIndex;

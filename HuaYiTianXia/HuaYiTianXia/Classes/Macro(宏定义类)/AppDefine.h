@@ -46,13 +46,13 @@ static NSString * const PurchaseURL=@"https://buy.itunes.apple.com/verifyReceipt
 #define kSinaRedirectURI    @"http://www.sina.com"
 
 //////// 讯飞语音
-
 #define kBuglyAppId @"d3a94d98f4"
 
 
 ///////// 极光推送 ///////////
-#define kJGAppKey   @"8d6d370d13e362563130a273"
-#define kJGAppSecret @"475bc9e9ce20ce6f9e174d5e"
+
+#define kJGAppKey   @"d0000b94210a237aa7120e30"
+#define kJGAppSecret @"e1d7808e58db637c9cb8c800"
 
 
 //沙盒测试环境验证

@@ -70,5 +70,13 @@
  */
 + (void)postImageArrayWithURLString:(NSString *)URLString parameter:(NSDictionary *)parameter imagesArray:(NSArray *)imagesArray success:(void (^)(NSArray *result))success failure:(void (^)(NSArray *errorResult))failure;
 
-
+/**
+ *  仅仅用于机票查询接口
+ *
+ *  @param URLString URLString
+ *  @param parameter 参数
+ *  @param success   成功回调
+ *  @param failure   失败回调
+ */
++ (void)getTicketWithURLString:(NSString *)URLString parameter:(NSDictionary *)parameter success:(void(^)(id responseObject))success failure:(void(^)(NSError *error))failure;
 @end

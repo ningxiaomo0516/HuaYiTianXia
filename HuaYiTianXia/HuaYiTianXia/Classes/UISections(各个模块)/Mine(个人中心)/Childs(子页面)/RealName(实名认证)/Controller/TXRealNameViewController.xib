@@ -88,13 +88,13 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="请选择" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Shc-Vs-hdw">
-                        <rect key="frame" x="295" y="11.5" width="45" height="21"/>
+                        <rect key="frame" x="301" y="11.5" width="45" height="21"/>
                         <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="15"/>
                         <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="right_arrow" translatesAutoresizingMaskIntoConstraints="NO" id="7U3-BR-P7O">
-                        <rect key="frame" x="350" y="17" width="10" height="10"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mine_btn_enter" translatesAutoresizingMaskIntoConstraints="NO" id="7U3-BR-P7O">
+                        <rect key="frame" x="346" y="15" width="14" height="14"/>
                     </imageView>
                 </subviews>
                 <constraints>
@@ -103,7 +103,7 @@
                     <constraint firstItem="qU3-4J-3El" firstAttribute="centerY" secondItem="M3T-ks-c5p" secondAttribute="centerY" id="C7Y-di-G3q"/>
                     <constraint firstItem="7U3-BR-P7O" firstAttribute="centerY" secondItem="M3T-ks-c5p" secondAttribute="centerY" id="VQI-9u-QHe"/>
                     <constraint firstAttribute="trailing" secondItem="7U3-BR-P7O" secondAttribute="trailing" constant="15" id="ovG-y2-3kn"/>
-                    <constraint firstItem="7U3-BR-P7O" firstAttribute="leading" secondItem="Shc-Vs-hdw" secondAttribute="trailing" constant="10" id="xSX-M4-A0d"/>
+                    <constraint firstItem="7U3-BR-P7O" firstAttribute="leading" secondItem="Shc-Vs-hdw" secondAttribute="trailing" id="xSX-M4-A0d"/>
                 </constraints>
             </tableViewCellContentView>
             <point key="canvasLocation" x="-468" y="-78"/>
@@ -246,6 +246,6 @@
     </objects>
     <resources>
         <image name="c31_tianjia" width="22" height="22"/>
-        <image name="right_arrow" width="10" height="10"/>
+        <image name="mine_btn_enter" width="14" height="14"/>
     </resources>
 </document>
