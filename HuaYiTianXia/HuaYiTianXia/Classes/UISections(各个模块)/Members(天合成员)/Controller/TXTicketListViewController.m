@@ -25,6 +25,7 @@ static NSString* reuseIdentifier = @"TXTicketListTableViewCell";
     if ( self = [super init] ){
         self.parameter = parameter;
         self.URLString = URLString;
+//        [self.view showLoadingViewWithText:@"加载中..."];
     }
     return self;
 }
@@ -32,8 +33,13 @@ static NSString* reuseIdentifier = @"TXTicketListTableViewCell";
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.title = @"查询详情";
-    [self.view showLoadingViewWithText:@"加载中..."];
     [self initView];
+    [self GetTicketDataRequest];
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self.view showLoadingViewWithText:@"加载中..."];
 }
 
 - (void) GetTicketDataRequest{
@@ -44,7 +50,9 @@ static NSString* reuseIdentifier = @"TXTicketListTableViewCell";
             TXTicketModel *model = [TXTicketModel mj_objectWithKeyValues:result];
             if (model.errorcode==0) {
                 /// 查询列表
-                
+                [self.dataArray addObjectsFromArray:model.data];
+                TTLog(@"self.dataArray.count --- %lu",(unsigned long)self.dataArray.count);
+                [self.tableView reloadData];
             }else{
                 Toast(model.message);
             }
@@ -59,29 +67,22 @@ static NSString* reuseIdentifier = @"TXTicketListTableViewCell";
 - (void) initView{
     [Utils lz_setExtraCellLineHidden:self.tableView];
     [self.view addSubview:self.tableView];
+    [self initViewConstraints];
 }
 
 
 #pragma mark ---- 约束布局
 - (void) initViewConstraints{
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.right.equalTo(self.view);
-        make.bottom.equalTo(self.view.mas_bottom).offset(-kTabBarHeight);
+        make.bottom.top.left.right.equalTo(self.view);
     }];
 }
 
 #pragma mark - Table view data sourceFMMerchantsHomeAddressTableViewCell
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-//    if (self.bannerArray.count>0&&indexPath.section==0) {
-//        TXMallGoodsBannerTableViewCell* tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierBanner forIndexPath:indexPath];
-//        tools.bannerArray = self.bannerArray;
-//        return tools;
-//    }else{
-//        TXNewTemplateTableViewCell  *tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
-//        tools.recordsModel = self.dataArray[indexPath.row];
-//        return tools;
-//    }
-    return [UITableViewCell new];
+    TXTicketListTableViewCell  *tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
+    tools.ticketModel = self.dataArray[indexPath.section];
+    return tools;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -97,14 +98,11 @@ static NSString* reuseIdentifier = @"TXTicketListTableViewCell";
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return 1;
 }
-//
-//#pragma mark -------------- 设置Header高度 --------------
-//- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
-//    if (section!=0) {
-//        return 0.0f;
-//    }
-//    return 10.0f;
-//}
+
+#pragma mark -- 设置Header高度
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    return 10.f;
+}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
@@ -112,14 +110,14 @@ static NSString* reuseIdentifier = @"TXTicketListTableViewCell";
 }
 
 #pragma mark ----- getter/setter
--(UITableView *)tableView{
+- (UITableView *)tableView{
     if (!_tableView) {
         _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
         _tableView.showsVerticalScrollIndicator = false;
         [_tableView setSeparatorInset:UIEdgeInsetsMake(0, 15, 0, 15)];
-        [_tableView registerClass:[TXTicketListTableViewCell class] forHeaderFooterViewReuseIdentifier:reuseIdentifier];
+        [_tableView registerClass:[TXTicketListTableViewCell class] forCellReuseIdentifier:reuseIdentifier];
         //1 禁用系统自带的分割线
-        //        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.backgroundColor = kViewColorNormal;

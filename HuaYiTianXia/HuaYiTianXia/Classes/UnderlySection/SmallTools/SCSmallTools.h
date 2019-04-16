@@ -88,4 +88,21 @@
  *
  */
 + (BOOL)tt_simpleVerifyIdentityCardNum:(NSString *)idCardNumber;
+/**
+ *  替换文本字符串
+ *
+ *  @param currentText 当前的字符串
+ *  @param parameter1 需要替换的字符串
+ *  @param parameter2 需要替换成的字符串
+ */
++ (NSString *) tt_replaceText:(NSString *)currentText parameter1:(NSString *)parameter1 parameter2:(NSString *)parameter2;
+/**
+ *  富文本设置文字颜色
+ *
+ *  @param color 文字颜色
+ *  @param currentText 当前的字符串
+ *  @param index 开始下标
+ *  @param endIndex 结束下标
+ */
++ (NSMutableAttributedString *) setupTextColor:(UIColor *)color currentText:(NSString *)currentText index:(NSInteger)index endIndex:(NSInteger)endIndex;
 @end

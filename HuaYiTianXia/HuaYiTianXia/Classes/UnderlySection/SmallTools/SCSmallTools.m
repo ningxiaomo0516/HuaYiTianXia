@@ -27,7 +27,7 @@
 +(NSString *)timeStampConvertDateTime:(NSInteger)timeStamp{
     CGFloat timeStamp_ = timeStamp / 1000.0;
     NSString *dateTime = [NSString stringWithFormat:@"%f",timeStamp_];
-    return [Utils lz_timeWithTimeIntervalString:dateTime];
+    return [Utils lz_timeWithTimeIntervalString:dateTime formatter:@"yyyy-MM-dd HH:mm:ss"];
 }
 
 + (NSMutableAttributedString *)attributed:(NSString *)text color1:(UIColor *)color1 color2:(UIColor *)color2 length:(NSUInteger)length {
@@ -242,5 +242,34 @@
     NSString *regex2 = @"^(\\d{14}|\\d{17})(\\d|[xX])$";
     NSPredicate *identityCardPredicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",regex2];
     return [identityCardPredicate evaluateWithObject:idCardNumber];
+}
+
+/**
+ *  替换文本字符串
+ *
+ *  @param currentText 当前的字符串
+ *  @param parameter1 需要替换的字符串
+ *  @param parameter2 需要替换成的字符串
+ */
++ (NSString *) tt_replaceText:(NSString *)currentText parameter1:(NSString *)parameter1 parameter2:(NSString *)parameter2{
+    NSString *replaceText = [currentText stringByReplacingOccurrencesOfString:parameter1 withString:parameter2];
+    return replaceText;
+}
+
+/**
+ *  富文本设置文字颜色
+ *
+ *  @param currentText 当前的字符串
+ *  @param color 文字颜色
+ *  @param index 开始下标
+ *  @param endIndex 结束下标
+ */
++ (NSMutableAttributedString *) setupTextColor:(UIColor *)color currentText:(NSString *)currentText index:(NSInteger)index endIndex:(NSInteger)endIndex{
+    NSMutableAttributedString *attributedStr = [[NSMutableAttributedString alloc] initWithString:currentText];
+    /// 后面文字颜色
+    [attributedStr addAttribute:NSForegroundColorAttributeName
+                          value:color
+                          range:NSMakeRange(index, endIndex)];
+    return attributedStr;
 }
 @end

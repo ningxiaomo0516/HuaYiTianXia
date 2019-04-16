@@ -83,10 +83,10 @@
  *  时间戳转换为时间
  *
  *  @param timeString 时间戳
- *
+ *  @param formatter 设置时间戳h转时间的格式 如 @"yyyy-MM-dd HH:mm:ss"
  *  @return 返回字符串格式时间
  */
-+ (NSString *)lz_timeWithTimeIntervalString:(NSString *)timeString;
++ (NSString *)lz_timeWithTimeIntervalString:(NSString *)timeString formatter:(NSString *)formatter;
 /**
  *  获取当前系统时间
  *

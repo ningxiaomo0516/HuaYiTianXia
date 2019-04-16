@@ -2276,7 +2276,7 @@
 						CreatedOnToolsVersion = 10.1;
 						SystemCapabilities = {
 							com.apple.Push = {
-								enabled = 1;
+								enabled = 0;
 							};
 						};
 					};
@@ -2729,10 +2729,9 @@
 			baseConfigurationReference = D8A40D1AA3A1C66C50E33D9F /* Pods-HuaYiTianXia.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = HuaYiTianXia/HuaYiTianXia.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 32AGX7UB6B;
+				DEVELOPMENT_TEAM = 8RL8MGBZ32;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/HuaYiTianXia/Classes/Example/Alipay(支付宝)/Tools/SDK",
@@ -2774,10 +2773,9 @@
 			baseConfigurationReference = 7BDC34BA99E71AF550F8F19E /* Pods-HuaYiTianXia.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = HuaYiTianXia/HuaYiTianXia.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 32AGX7UB6B;
+				DEVELOPMENT_TEAM = 8RL8MGBZ32;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/HuaYiTianXia/Classes/Example/Alipay(支付宝)/Tools/SDK",

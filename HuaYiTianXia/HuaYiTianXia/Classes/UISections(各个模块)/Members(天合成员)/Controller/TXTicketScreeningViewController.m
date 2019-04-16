@@ -36,6 +36,8 @@
     [self addGesture];
     [self initView];
     self.datelabel.text = [Utils lz_getCurrentDate];
+    self.CFTextField.text = @"成都";
+    self.MDTextField.text = @"广州";
 }
 
 /** 保存 */
@@ -64,7 +66,7 @@
 
 /// 选择机票查询日期
 - (void) showDataPicker{
-    
+    [self tapGesture];
     NSString *minDateStr = [Utils lz_getCurrentTime];
     NSString *maxDateStr = @"";
     NSString *defaultSelValue = self.datelabel.text;
@@ -127,7 +129,7 @@
         make.width.equalTo(self.CFTextField.mas_width);
     }];
     [self.cellViews mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.cellView.mas_bottom).offset(0.5);
+        make.top.mas_equalTo(self.cellView.mas_bottom).offset(IPHONE6_W(0.5));
         make.height.left.right.mas_equalTo(self.cellView);
     }];
     [self.datelabel mas_makeConstraints:^(MASConstraintMaker *make) {

@@ -48,7 +48,6 @@ static NSString* reuseIdentifierMall = @"TXMembersbleCollectionViewCell";
 
 - (void) viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [self loadMallData];
 }
 
 - (void) loadMallData{

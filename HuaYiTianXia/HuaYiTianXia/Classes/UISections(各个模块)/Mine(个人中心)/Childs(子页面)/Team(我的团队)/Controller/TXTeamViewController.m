@@ -123,8 +123,8 @@ static NSString * const reuseIdentifier = @"TXTeamTableViewCell";
 - (SCNoDataView *)noDataView {
     if (!_noDataView) {
         _noDataView = [[SCNoDataView alloc] initWithFrame:self.view.bounds
-                                                imageName:@"live_k_yuyue"
-                                            tipsLabelText:@"没有预约的商家哦~"];
+                                                imageName:@"c12_live_nodata"
+                                            tipsLabelText:@"暂无数据哦~"];
         _noDataView.userInteractionEnabled = NO;
         [self.view insertSubview:_noDataView aboveSubview:self.tableView];
         [self.noDataView mas_makeConstraints:^(MASConstraintMaker *make) {

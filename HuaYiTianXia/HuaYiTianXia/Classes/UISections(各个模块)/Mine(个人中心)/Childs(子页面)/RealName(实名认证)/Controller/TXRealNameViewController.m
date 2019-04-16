@@ -124,10 +124,9 @@
         make.right.equalTo(self.view.mas_right).offset(-15);
         make.height.equalTo(@(45));
     }];
-    
     /// 设置身份证照片提示的富文本
-    self.idcardLabel1.attributedText = [self setupTextColor:self.idcardLabel1.text];
-    self.idcardLabel2.attributedText = [self setupTextColor:self.idcardLabel2.text];
+    self.idcardLabel1.attributedText = [SCSmallTools setupTextColor:HexString(@"#FA7C7C") currentText:self.idcardLabel1.text index:0 endIndex:1];
+    self.idcardLabel2.attributedText = [SCSmallTools setupTextColor:HexString(@"#FA7C7C") currentText:self.idcardLabel2.text index:0 endIndex:1];
     
     self.addButton1.tag = 100;
     self.addButton2.tag = 200;
@@ -263,15 +262,6 @@
     }else if(buttonIndex==1){
         self.sexLabel.text = @"女";
     }
-}
-
-- (NSMutableAttributedString *) setupTextColor:(NSString *)currentText{
-    NSMutableAttributedString *attributedStr = [[NSMutableAttributedString alloc] initWithString:currentText];
-    /// 后面文字颜色
-    [attributedStr addAttribute:NSForegroundColorAttributeName
-                           value:HexString(@"#FA7C7C")
-                           range:NSMakeRange(0, 1)];
-    return attributedStr;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{

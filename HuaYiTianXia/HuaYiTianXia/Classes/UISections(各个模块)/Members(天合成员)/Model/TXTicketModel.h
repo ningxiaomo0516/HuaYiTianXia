@@ -30,7 +30,7 @@ NS_ASSUME_NONNULL_BEGIN
     500代表其他错误类型，具体原因请看返回结果的错误原因。
 */
 @property (nonatomic, assign) NSInteger errorcode;
-/// 错误码
+/// 机票列表
 @property (nonatomic, strong) NSMutableArray<TicketModel *> *data;
 /// 返回说明，错误原因
 @property (nonatomic, copy) NSString *message;

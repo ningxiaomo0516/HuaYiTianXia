@@ -7,26 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TXTicketModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface TXTicketListTableViewCell : UITableViewCell
-//"uniq_key":[  /*航班ID*/
-//            "MU5138"
-//            ],
-//"flight_number":"MU5138",  /*航班号*/
-//"":"东方航空",  /*航空公司*/
-//"model":"空中客车 A330",  /*机型*/
-//"":"1573426800",
-//"":"首都国际机场",
-//"dep_airport_term":"T2",  /*起飞航站楼*/
-//"":"1573434900",
-//"":"虹桥国际机场",  /*到达机场*/
-//"arv_airport_term":"T2",  /*到达航站楼*/
-//"ontime_rate":"无",  /*准点率*/
-//"transfer_flights":[  /*转机*/
-//
-//                    ],
 /*起飞时间*/
 @property (strong, nonatomic) UILabel *dep_timeLabel;
 /*到达时间*/
@@ -46,11 +31,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) UILabel *timerLabel;
 
 /// 经济舱
-@property (strong, nonatomic) UILabel *titleLabel;
+@property (strong, nonatomic) UILabel *economyLabel;
 /// 公务舱
-@property (strong, nonatomic) UILabel *subtitleLabel;
+@property (strong, nonatomic) UILabel *businessleLabel;
 /// 头等舱
-@property (strong, nonatomic) UILabel *titleLabel;
+@property (strong, nonatomic) UILabel *luxuryLabel;
 
 /// 含税总价
 @property (strong, nonatomic) UILabel *taxPriceLabel;
@@ -58,9 +43,12 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) UILabel *allPriceLabel;
 
 /// 到图片
-@property (strong, nonatomic) UIImageView *imagesView;
+@property (strong, nonatomic) UIImageView *imagesTo;
 /// 时间图片
-@property (strong, nonatomic) UIImageView *imagesView;
+@property (strong, nonatomic) UIImageView *imagesTime;
+
+@property (strong, nonatomic) TicketModel *ticketModel;
+
 @end
 
 NS_ASSUME_NONNULL_END
