@@ -19,6 +19,13 @@
 #import <UserNotifications/UserNotifications.h>
 #endif
 
+//版本号
+#import "TXVersionViewController.h"
+//广告页
+#import "TXAdsViewController.h"
+#import "TXVersionModel.h"
+#import "TXAdsModel.h"
+
 @interface AppDelegate ()<WXApiDelegate,JPUSHRegisterDelegate>
 
 @end
@@ -71,10 +78,10 @@
     NSNotificationCenter *defaultCenter = kNotificationCenter;
     [defaultCenter addObserver:self selector:@selector(networkDidLogin:) name:kJPFNetworkDidLoginNotification object:nil];
     [self showMainViewController];
-    
+//    [self setVersionVC];
     if(![[NSUserDefaults standardUserDefaults] boolForKey:@"firstLaunch"]){
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"firstLaunch"];
-        [self guidePages];
+//        [self guidePages];
     }else{
     
     }
@@ -96,9 +103,7 @@
                              [weakMZ removeFromSuperview];
                          }];
     };
-    [self.window addSubview:mzgpc];
-    
-    
+    [self.window addSubview:mzgpc];    
 }
 
 /// 获取registedID
@@ -110,21 +115,23 @@
     }
 }
 
+//设置版本页面为主视图
+- (void)setVersionVC{
+    TXVersionViewController * vc = [[TXVersionViewController alloc] init];
+    self.window.backgroundColor = kClearColor;
+    self.window.rootViewController = vc;
+    [self.window makeKeyAndVisible];
+}
+
 - (void)showMainViewController {
     // 1. 创建窗口
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     //设置窗口颜色
     self.window.backgroundColor = [UIColor whiteColor];
     //设置窗口为主窗口并且显示
-    [self.window makeKeyAndVisible];
-//    if (kUserInfo.isLogin) {
-        // 设置窗口的根控制器
-        //        if (!kUserInfo.isBindTel) {
-        // 设置窗口的根控制器
-    [self jumpMainVC];
-//    }else{
-//        [self jumpLoginVC];
-//    }
+//    [self.window makeKeyAndVisible];
+    [self setVersionVC];
+//    [self jumpMainVC];
 }
 
 - (void) jumpMainVC{

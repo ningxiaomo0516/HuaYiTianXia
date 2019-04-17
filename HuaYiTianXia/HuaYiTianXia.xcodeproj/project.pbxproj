@@ -101,6 +101,11 @@
 		E74C963A226384A0000CBAF0 /* TTHUDManager_info@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E74C96322263849F000CBAF0 /* TTHUDManager_info@2x.png */; };
 		E74C963B226384A0000CBAF0 /* TTHUDManager_error@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = E74C96332263849F000CBAF0 /* TTHUDManager_error@3x.png */; };
 		E74C963C226384A0000CBAF0 /* TTHUDManager_tip@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = E74C9634226384A0000CBAF0 /* TTHUDManager_tip@3x.png */; };
+		E74C964322678358000CBAF0 /* TXAdsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E74C964222678358000CBAF0 /* TXAdsViewController.m */; };
+		E74C964622678552000CBAF0 /* TXVersionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E74C964522678552000CBAF0 /* TXVersionViewController.m */; };
+		E74C964922678575000CBAF0 /* TXVersionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E74C964822678575000CBAF0 /* TXVersionModel.m */; };
+		E74C964C226785FA000CBAF0 /* TXAdsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E74C964B226785FA000CBAF0 /* TXAdsModel.m */; };
+		E74C964F2267877E000CBAF0 /* TXVersionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E74C964E2267877E000CBAF0 /* TXVersionTableViewCell.m */; };
 		E753D1F12249D3B200A2DD36 /* SCPopoverAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = E753D1EB2249D3B200A2DD36 /* SCPopoverAnimator.m */; };
 		E753D1F22249D3B200A2DD36 /* SCPresentationController.m in Sources */ = {isa = PBXBuildFile; fileRef = E753D1EE2249D3B200A2DD36 /* SCPresentationController.m */; };
 		E753D1F32249D3B200A2DD36 /* UIViewController+SCPopover.m in Sources */ = {isa = PBXBuildFile; fileRef = E753D1F02249D3B200A2DD36 /* UIViewController+SCPopover.m */; };
@@ -416,6 +421,16 @@
 		E74C96322263849F000CBAF0 /* TTHUDManager_info@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TTHUDManager_info@2x.png"; sourceTree = "<group>"; };
 		E74C96332263849F000CBAF0 /* TTHUDManager_error@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TTHUDManager_error@3x.png"; sourceTree = "<group>"; };
 		E74C9634226384A0000CBAF0 /* TTHUDManager_tip@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TTHUDManager_tip@3x.png"; sourceTree = "<group>"; };
+		E74C964122678358000CBAF0 /* TXAdsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXAdsViewController.h; sourceTree = "<group>"; };
+		E74C964222678358000CBAF0 /* TXAdsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXAdsViewController.m; sourceTree = "<group>"; };
+		E74C964422678552000CBAF0 /* TXVersionViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXVersionViewController.h; sourceTree = "<group>"; };
+		E74C964522678552000CBAF0 /* TXVersionViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXVersionViewController.m; sourceTree = "<group>"; };
+		E74C964722678575000CBAF0 /* TXVersionModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXVersionModel.h; sourceTree = "<group>"; };
+		E74C964822678575000CBAF0 /* TXVersionModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXVersionModel.m; sourceTree = "<group>"; };
+		E74C964A226785FA000CBAF0 /* TXAdsModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXAdsModel.h; sourceTree = "<group>"; };
+		E74C964B226785FA000CBAF0 /* TXAdsModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXAdsModel.m; sourceTree = "<group>"; };
+		E74C964D2267877E000CBAF0 /* TXVersionTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXVersionTableViewCell.h; sourceTree = "<group>"; };
+		E74C964E2267877E000CBAF0 /* TXVersionTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXVersionTableViewCell.m; sourceTree = "<group>"; };
 		E753D1EA2249D3B200A2DD36 /* SCPopoverAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCPopoverAnimator.h; sourceTree = "<group>"; };
 		E753D1EB2249D3B200A2DD36 /* SCPopoverAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCPopoverAnimator.m; sourceTree = "<group>"; };
 		E753D1EC2249D3B200A2DD36 /* SCPopoverMacro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCPopoverMacro.h; sourceTree = "<group>"; };
@@ -1337,6 +1352,47 @@
 			path = images;
 			sourceTree = "<group>";
 		};
+		E74C963D226782E9000CBAF0 /* VersionAd */ = {
+			isa = PBXGroup;
+			children = (
+				E74C963E226782E9000CBAF0 /* Controller */,
+				E74C963F226782E9000CBAF0 /* Model */,
+				E74C9640226782E9000CBAF0 /* View */,
+			);
+			path = VersionAd;
+			sourceTree = "<group>";
+		};
+		E74C963E226782E9000CBAF0 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				E74C964122678358000CBAF0 /* TXAdsViewController.h */,
+				E74C964222678358000CBAF0 /* TXAdsViewController.m */,
+				E74C964422678552000CBAF0 /* TXVersionViewController.h */,
+				E74C964522678552000CBAF0 /* TXVersionViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		E74C963F226782E9000CBAF0 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				E74C964722678575000CBAF0 /* TXVersionModel.h */,
+				E74C964822678575000CBAF0 /* TXVersionModel.m */,
+				E74C964A226785FA000CBAF0 /* TXAdsModel.h */,
+				E74C964B226785FA000CBAF0 /* TXAdsModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		E74C9640226782E9000CBAF0 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E74C964D2267877E000CBAF0 /* TXVersionTableViewCell.h */,
+				E74C964E2267877E000CBAF0 /* TXVersionTableViewCell.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		E7525138224CBE8D005E0556 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -1388,6 +1444,7 @@
 		E756989A2252028B0022EC49 /* Example */ = {
 			isa = PBXGroup;
 			children = (
+				E74C963D226782E9000CBAF0 /* VersionAd */,
 				E78DCACC226575CB00252314 /* 首次加载页 */,
 				E725D074225ED3CA00C233E7 /* Alipay(支付宝) */,
 				E725D075225ED3CA00C233E7 /* TableView */,
@@ -2346,7 +2403,7 @@
 						CreatedOnToolsVersion = 10.1;
 						SystemCapabilities = {
 							com.apple.Push = {
-								enabled = 1;
+								enabled = 0;
 							};
 						};
 					};
@@ -2495,6 +2552,7 @@
 				E78333FC2248D0B1005CAB91 /* SCCustomMarginLabel.m in Sources */,
 				E7F1A7062241F1D2003FA216 /* TTBaseTableViewController.m in Sources */,
 				E7F1A73522427264003FA216 /* TTBaseNavImagesViewController.m in Sources */,
+				E74C964622678552000CBAF0 /* TXVersionViewController.m in Sources */,
 				E72699A3223F7ECC003A5043 /* NSString+LZPinYin.m in Sources */,
 				E7F1A70F224205A2003FA216 /* TTBaseSectionHeaderView.m in Sources */,
 				E76D9C5222602EE8009D1A23 /* TXPayOrderViewController.m in Sources */,
@@ -2505,6 +2563,7 @@
 				E72699F9223F8298003A5043 /* WMMenuItem.m in Sources */,
 				E78584032240C54300BBEA41 /* TYPageControl.m in Sources */,
 				E72699FC223F8298003A5043 /* WMProgressView.m in Sources */,
+				E74C964C226785FA000CBAF0 /* TXAdsModel.m in Sources */,
 				E72699FA223F8298003A5043 /* WMScrollView.m in Sources */,
 				E7C42E82224B770200F3FB1A /* HttpModel.m in Sources */,
 				E78584042240C54300BBEA41 /* TYCyclePagerView.m in Sources */,
@@ -2530,6 +2589,7 @@
 				E7269980223F7E4B003A5043 /* UIView+SCLoadingView.m in Sources */,
 				E7AA9DCA22436DA700C15483 /* TXTransactionRecordsViewController.m in Sources */,
 				E7C9FCED22673BC7008FD260 /* TXTicketInfoTableViewCell.m in Sources */,
+				E74C964F2267877E000CBAF0 /* TXVersionTableViewCell.m in Sources */,
 				E78583C1223F98A800BBEA41 /* TXNewTemplateTableViewCell.m in Sources */,
 				E7691EE72255E3E5006A94D9 /* TTPasswordView.m in Sources */,
 				E72699E9223F7F58003A5043 /* UIScrollView+Extension.m in Sources */,
@@ -2587,6 +2647,7 @@
 				E7269907223F754B003A5043 /* UIViewController+LZNavigationController.m in Sources */,
 				E75F2ECF224DC9FD0091C52E /* TXShareToolsCollectionViewCell.m in Sources */,
 				E78DCAD92265BFEF00252314 /* TXMembersbleCollectionViewCell.m in Sources */,
+				E74C964322678358000CBAF0 /* TXAdsViewController.m in Sources */,
 				E72699E2223F7F58003A5043 /* UIImage+Extension.m in Sources */,
 				E7F1A7092241F298003FA216 /* TXProductTableViewCell.m in Sources */,
 				E7691EE32255DC4E006A94D9 /* SCVerCodeInputView.m in Sources */,
@@ -2604,6 +2665,7 @@
 				E7269918223F789F003A5043 /* TXMembersViewController.m in Sources */,
 				E78DCADC2265C70D00252314 /* TXTicketScreeningViewController.m in Sources */,
 				E7F1A72C22423F92003FA216 /* TXAccountSecurityViewController.m in Sources */,
+				E74C964922678575000CBAF0 /* TXVersionModel.m in Sources */,
 				E78583EF2240C29300BBEA41 /* TXOrderViewController.m in Sources */,
 				E78334092248DE2F005CAB91 /* UIViewController+TTPopupViewController.m in Sources */,
 				E78583CA22409D5A00BBEA41 /* TXMineTableViewCell.m in Sources */,
@@ -2805,10 +2867,9 @@
 			baseConfigurationReference = D8A40D1AA3A1C66C50E33D9F /* Pods-HuaYiTianXia.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = HuaYiTianXia/HuaYiTianXia.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 32AGX7UB6B;
+				DEVELOPMENT_TEAM = 8RL8MGBZ32;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/HuaYiTianXia/Classes/Example/Alipay(支付宝)/Tools/SDK",
@@ -2850,10 +2911,9 @@
 			baseConfigurationReference = 7BDC34BA99E71AF550F8F19E /* Pods-HuaYiTianXia.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = HuaYiTianXia/HuaYiTianXia.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 32AGX7UB6B;
+				DEVELOPMENT_TEAM = 8RL8MGBZ32;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/HuaYiTianXia/Classes/Example/Alipay(支付宝)/Tools/SDK",
