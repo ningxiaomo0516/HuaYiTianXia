@@ -64,7 +64,7 @@
         Toast(@"两次交易密码不一致");
         return;
     }
-    
+    kMBShowHUD(@"");
     NSMutableDictionary *parameter = [[NSMutableDictionary alloc] init];
     [parameter setObject:self.password forKey:@"tranPwd"];
     [parameter setObject:self.passwords forKey:@"confirmpwd"];
@@ -88,8 +88,10 @@
         }else{
             Toast(@"交易密码设置失败");
         }
+        kMBHideHUD;
     } failure:^(NSError *error) {
         TTLog(@" -- error -- %@",error);
+        kMBHideHUD;
     }];
 }
 

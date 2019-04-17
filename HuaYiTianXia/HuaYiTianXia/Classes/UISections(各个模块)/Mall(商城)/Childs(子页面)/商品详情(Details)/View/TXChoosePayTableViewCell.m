@@ -33,7 +33,8 @@
 - (void) initView{
     [self addSubview:self.titleLabel];
     [self addSubview:self.imagesView];
-    [self addSubview:self.chooseBtn];
+    [self addSubview:self.alipayBtn];
+    [self addSubview:self.wechatBtn];
     [self addSubview:self.linerView];
     
     [self.imagesView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -46,7 +47,13 @@
         make.left.equalTo(self.imagesView.mas_right).offset(IPHONE6_W(8));
     }];
     
-    [self.chooseBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.alipayBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(self);
+        make.right.equalTo(self.mas_right).offset(IPHONE6_W(-15));
+    }];
+    
+    [self.wechatBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.centerY.right.equalTo(self.alipayBtn);
         make.centerY.equalTo(self);
         make.right.equalTo(self.mas_right).offset(IPHONE6_W(-15));
     }];
@@ -64,13 +71,30 @@
     return _titleLabel;
 }
 
-- (UIButton *)chooseBtn{
-    if (!_chooseBtn) {
-        _chooseBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_chooseBtn setImage:kGetImage(@"mine_btn_normal") forState:UIControlStateNormal];
-        [_chooseBtn setImage:kGetImage(@"mine_btn_selected") forState:UIControlStateSelected];
+- (UIButton *)alipayBtn{
+    if (!_alipayBtn) {
+        _alipayBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_alipayBtn setTitle:@"支付宝" forState:UIControlStateNormal];
+        [_alipayBtn setTitleColor:kTextColor51 forState:UIControlStateNormal];
+        [_alipayBtn setImage:kGetImage(@"mine_btn_normal") forState:UIControlStateNormal];
+        [_alipayBtn setImage:kGetImage(@"mine_btn_selected") forState:UIControlStateSelected];
+        _alipayBtn.hidden = YES;
+        _alipayBtn.selected = NO;
     }
-    return _chooseBtn;
+    return _alipayBtn;
+}
+
+- (UIButton *)wechatBtn{
+    if (!_wechatBtn) {
+        _wechatBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_wechatBtn setTitle:@"微信" forState:UIControlStateNormal];
+        [_wechatBtn setTitleColor:kTextColor51 forState:UIControlStateNormal];
+        [_wechatBtn setImage:kGetImage(@"mine_btn_normal") forState:UIControlStateNormal];
+        [_wechatBtn setImage:kGetImage(@"mine_btn_selected") forState:UIControlStateSelected];
+        _wechatBtn.hidden = YES;
+        _wechatBtn.selected = YES;
+    }
+    return _wechatBtn;
 }
 
 - (UIImageView *)imagesView{

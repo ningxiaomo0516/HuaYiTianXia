@@ -58,6 +58,9 @@ static NSString * const reuseIdentifier = @"TXEarningsTableViewCell";
     if ([result isKindOfClass:[NSDictionary class]]) {
         TXWalletModel *model = [TXWalletModel mj_objectWithKeyValues:result];
         if (model.errorcode == 20000) {
+            if (PullDown) {
+                [self.dataArray removeAllObjects];
+            }
             [self.dataArray addObjectsFromArray:model.data.list.mutableCopy];
             [self.tableView reloadData];
         }else{

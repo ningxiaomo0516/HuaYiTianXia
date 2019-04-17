@@ -50,7 +50,7 @@
     }
     
     self.subtitleLabel.text = self.model.synopsis;
-    self.priceLabel.text = [NSString stringWithFormat:@"￥%@.00",model.price];
+    self.priceLabel.text = [NSString stringWithFormat:@"￥%@",model.price];
 }
 
 - (void) initView{

@@ -133,6 +133,7 @@ static NSString * const reuseIdentifiers = @"TXRegisteredTableViewCell";
         [parameter setObject:@"1" forKey:@"type"];
     }
 //    [MBProgressHUD showMessage:@"" toView:self.view];
+    kMBShowHUD(@"");
     [SCHttpTools postWithURLString:@"customer/sendSMS" parameter:parameter success:^(id responseObject) {
         if (responseObject){
             id result = responseObject;
@@ -147,12 +148,13 @@ static NSString * const reuseIdentifiers = @"TXRegisteredTableViewCell";
                 }
             }
         }
+        kMBHideHUD;
     } failure:^(NSError *error) {
         
 //        [MBProgressHUD hideHUDForView:self.view];
         Toast(@"验证码发送失败");
         TTLog(@"error --- %@",error);
-        
+        kMBHideHUD;
     }];
 }
 

@@ -34,6 +34,7 @@ static NSString * const reuseIdentifier = @"TXEppoTableViewCell";
     self.pageSize = 20;
     self.pageIndex = 1;
     [self initView];
+    [self.view showLoadingViewWithText:@"加载中..."];
     [self requestData];
 }
 
@@ -49,6 +50,7 @@ static NSString * const reuseIdentifier = @"TXEppoTableViewCell";
 
 - (void)tt_tableView:(TTBaseTableView *)tt_tableView requestFailed:(NSError *)error{
     TTLog(@"error --- %@",error);
+    [self.view dismissLoadingView];
 }
 
 /// 处理接口返回数据
@@ -56,10 +58,14 @@ static NSString * const reuseIdentifier = @"TXEppoTableViewCell";
     if ([result isKindOfClass:[NSDictionary class]]) {
         TXNewsArrayModel *model = [TXNewsArrayModel mj_objectWithKeyValues:result];
         if (model.errorcode == 20000) {
-            self.bannerView.bannerArray = model.banners;
+            if (PullDown) {
+                self.bannerView.bannerArray = model.banners;
+                [self.dataArray removeAllObjects];
+            }
             [self.dataArray addObjectsFromArray:model.data.records.mutableCopy];
         }
     }
+    [self.view dismissLoadingView];
     //处理返回的SuccessData 数据之后刷新table
     [self.tableView reloadData];
 }
@@ -99,7 +105,7 @@ static NSString * const reuseIdentifier = @"TXEppoTableViewCell";
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    NewsRecordsModel *productModel = self.dataArray[indexPath.row];
+    NewsRecordsModel *productModel = self.dataArray[indexPath.section];
     TXMallGoodsDetailsViewController *vc = [[TXMallGoodsDetailsViewController alloc] initMallProductModel:productModel];
     vc.pageType = 1;
     TTPushVC(vc);

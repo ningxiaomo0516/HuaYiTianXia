@@ -223,6 +223,12 @@
 		E7C42E82224B770200F3FB1A /* HttpModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C42E7A224B770200F3FB1A /* HttpModel.m */; };
 		E7C42E83224B770200F3FB1A /* NetWorkAnalysisTool.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C42E7C224B770200F3FB1A /* NetWorkAnalysisTool.m */; };
 		E7C42E87224B7EFA00F3FB1A /* TXNewsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C42E86224B7EFA00F3FB1A /* TXNewsModel.m */; };
+		E7C9FCE722671023008FD260 /* TXTicketBookingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C9FCE622671023008FD260 /* TXTicketBookingViewController.m */; };
+		E7C9FCEA22671329008FD260 /* TXTicketBookingTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C9FCE922671329008FD260 /* TXTicketBookingTableViewCell.m */; };
+		E7C9FCED22673BC7008FD260 /* TXTicketInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C9FCEC22673BC7008FD260 /* TXTicketInfoTableViewCell.m */; };
+		E7C9FCF522675AA2008FD260 /* TXTicketOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C9FCF422675AA2008FD260 /* TXTicketOrderViewController.m */; };
+		E7C9FCF822675C38008FD260 /* TXTicketOrderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C9FCF722675C38008FD260 /* TXTicketOrderTableViewCell.m */; };
+		E7C9FCFB2267607E008FD260 /* TXTicketOrderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C9FCFA2267607E008FD260 /* TXTicketOrderModel.m */; };
 		E7CC89BA2264658C003D0EF7 /* TTImageButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E7CC89B92264658C003D0EF7 /* TTImageButton.m */; };
 		E7D07C622243C8B600E3FFAF /* NSObject+Toast.m in Sources */ = {isa = PBXBuildFile; fileRef = E7D07C612243C8B600E3FFAF /* NSObject+Toast.m */; };
 		E7D07C672243CCBE00E3FFAF /* LZActionSheet.bundle in Resources */ = {isa = PBXBuildFile; fileRef = E7D07C642243CCBE00E3FFAF /* LZActionSheet.bundle */; };
@@ -649,6 +655,18 @@
 		E7C42E7D224B770200F3FB1A /* UrlConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UrlConfig.h; sourceTree = "<group>"; };
 		E7C42E85224B7EFA00F3FB1A /* TXNewsModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXNewsModel.h; sourceTree = "<group>"; };
 		E7C42E86224B7EFA00F3FB1A /* TXNewsModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXNewsModel.m; sourceTree = "<group>"; };
+		E7C9FCE522671023008FD260 /* TXTicketBookingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXTicketBookingViewController.h; sourceTree = "<group>"; };
+		E7C9FCE622671023008FD260 /* TXTicketBookingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXTicketBookingViewController.m; sourceTree = "<group>"; };
+		E7C9FCE822671329008FD260 /* TXTicketBookingTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXTicketBookingTableViewCell.h; sourceTree = "<group>"; };
+		E7C9FCE922671329008FD260 /* TXTicketBookingTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXTicketBookingTableViewCell.m; sourceTree = "<group>"; };
+		E7C9FCEB22673BC7008FD260 /* TXTicketInfoTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXTicketInfoTableViewCell.h; sourceTree = "<group>"; };
+		E7C9FCEC22673BC7008FD260 /* TXTicketInfoTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXTicketInfoTableViewCell.m; sourceTree = "<group>"; };
+		E7C9FCF322675AA2008FD260 /* TXTicketOrderViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXTicketOrderViewController.h; sourceTree = "<group>"; };
+		E7C9FCF422675AA2008FD260 /* TXTicketOrderViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXTicketOrderViewController.m; sourceTree = "<group>"; };
+		E7C9FCF622675C38008FD260 /* TXTicketOrderTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXTicketOrderTableViewCell.h; sourceTree = "<group>"; };
+		E7C9FCF722675C38008FD260 /* TXTicketOrderTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXTicketOrderTableViewCell.m; sourceTree = "<group>"; };
+		E7C9FCF92267607E008FD260 /* TXTicketOrderModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXTicketOrderModel.h; sourceTree = "<group>"; };
+		E7C9FCFA2267607E008FD260 /* TXTicketOrderModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXTicketOrderModel.m; sourceTree = "<group>"; };
 		E7CC89B82264658C003D0EF7 /* TTImageButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TTImageButton.h; sourceTree = "<group>"; };
 		E7CC89B92264658C003D0EF7 /* TTImageButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TTImageButton.m; sourceTree = "<group>"; };
 		E7D07C602243C8B600E3FFAF /* NSObject+Toast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Toast.h"; sourceTree = "<group>"; };
@@ -1026,6 +1044,7 @@
 		E72698E0223F737C003A5043 /* Members(天合成员) */ = {
 			isa = PBXGroup;
 			children = (
+				E7C9FCEE22675A6A008FD260 /* Childs(子页面) */,
 				E78DCAD32265BC7900252314 /* Model */,
 				E72698E1223F737C003A5043 /* Controller */,
 				E7759AE42244DCB1007DA6CF /* View */,
@@ -1042,6 +1061,8 @@
 				E78DCADB2265C70D00252314 /* TXTicketScreeningViewController.m */,
 				E78DCAEA2265E2A700252314 /* TXTicketListViewController.h */,
 				E78DCAEB2265E2A700252314 /* TXTicketListViewController.m */,
+				E7C9FCE522671023008FD260 /* TXTicketBookingViewController.h */,
+				E7C9FCE622671023008FD260 /* TXTicketBookingViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1553,6 +1574,10 @@
 				E78DCAD82265BFEF00252314 /* TXMembersbleCollectionViewCell.m */,
 				E78DCAED2265E5C700252314 /* TXTicketListTableViewCell.h */,
 				E78DCAEE2265E5C700252314 /* TXTicketListTableViewCell.m */,
+				E7C9FCE822671329008FD260 /* TXTicketBookingTableViewCell.h */,
+				E7C9FCE922671329008FD260 /* TXTicketBookingTableViewCell.m */,
+				E7C9FCEB22673BC7008FD260 /* TXTicketInfoTableViewCell.h */,
+				E7C9FCEC22673BC7008FD260 /* TXTicketInfoTableViewCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2156,6 +2181,51 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		E7C9FCEE22675A6A008FD260 /* Childs(子页面) */ = {
+			isa = PBXGroup;
+			children = (
+				E7C9FCEF22675A6A008FD260 /* TicketOrder(机票订单) */,
+			);
+			path = "Childs(子页面)";
+			sourceTree = "<group>";
+		};
+		E7C9FCEF22675A6A008FD260 /* TicketOrder(机票订单) */ = {
+			isa = PBXGroup;
+			children = (
+				E7C9FCF022675A6A008FD260 /* Controller */,
+				E7C9FCF122675A6A008FD260 /* Model */,
+				E7C9FCF222675A6A008FD260 /* View */,
+			);
+			path = "TicketOrder(机票订单)";
+			sourceTree = "<group>";
+		};
+		E7C9FCF022675A6A008FD260 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				E7C9FCF322675AA2008FD260 /* TXTicketOrderViewController.h */,
+				E7C9FCF422675AA2008FD260 /* TXTicketOrderViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		E7C9FCF122675A6A008FD260 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				E7C9FCF92267607E008FD260 /* TXTicketOrderModel.h */,
+				E7C9FCFA2267607E008FD260 /* TXTicketOrderModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		E7C9FCF222675A6A008FD260 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E7C9FCF622675C38008FD260 /* TXTicketOrderTableViewCell.h */,
+				E7C9FCF722675C38008FD260 /* TXTicketOrderTableViewCell.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		E7CC89B72264651D003D0EF7 /* TTButton(图文按钮) */ = {
 			isa = PBXGroup;
 			children = (
@@ -2276,7 +2346,7 @@
 						CreatedOnToolsVersion = 10.1;
 						SystemCapabilities = {
 							com.apple.Push = {
-								enabled = 0;
+								enabled = 1;
 							};
 						};
 					};
@@ -2430,6 +2500,7 @@
 				E76D9C5222602EE8009D1A23 /* TXPayOrderViewController.m in Sources */,
 				E72699D7223F7F58003A5043 /* UIColor+Extension.m in Sources */,
 				E78583F52240C2AF00BBEA41 /* TXWalletViewController.m in Sources */,
+				E7C9FCEA22671329008FD260 /* TXTicketBookingTableViewCell.m in Sources */,
 				E78B8F82225B32BC0052852C /* TTPickerView.m in Sources */,
 				E72699F9223F8298003A5043 /* WMMenuItem.m in Sources */,
 				E78584032240C54300BBEA41 /* TYPageControl.m in Sources */,
@@ -2458,10 +2529,12 @@
 				E75F2ED6224DCB5F0091C52E /* TXBuyCountTableViewCell.m in Sources */,
 				E7269980223F7E4B003A5043 /* UIView+SCLoadingView.m in Sources */,
 				E7AA9DCA22436DA700C15483 /* TXTransactionRecordsViewController.m in Sources */,
+				E7C9FCED22673BC7008FD260 /* TXTicketInfoTableViewCell.m in Sources */,
 				E78583C1223F98A800BBEA41 /* TXNewTemplateTableViewCell.m in Sources */,
 				E7691EE72255E3E5006A94D9 /* TTPasswordView.m in Sources */,
 				E72699E9223F7F58003A5043 /* UIScrollView+Extension.m in Sources */,
 				E78DCAE42265D12000252314 /* LZBasePickerView.m in Sources */,
+				E7C9FCF522675AA2008FD260 /* TXTicketOrderViewController.m in Sources */,
 				E78B8F80225B32BC0052852C /* TTPickerListView.m in Sources */,
 				E78583F22240C29E00BBEA41 /* TXTeamViewController.m in Sources */,
 				E72699E0223F7F58003A5043 /* UIView+SCTapped.m in Sources */,
@@ -2554,6 +2627,7 @@
 				E72699DE223F7F58003A5043 /* UIBarButtonItem+Extension.m in Sources */,
 				E725D119225F2CC800C233E7 /* AlipayManager.m in Sources */,
 				E7C42E7F224B770200F3FB1A /* SCHttpToolsModel.m in Sources */,
+				E7C9FCFB2267607E008FD260 /* TXTicketOrderModel.m in Sources */,
 				E72699F8223F8298003A5043 /* WMPageController.m in Sources */,
 				E72699E1223F7F58003A5043 /* UILabel+SCExtension.m in Sources */,
 				E7F1A73822427A65003FA216 /* TXMallCollectionViewController.m in Sources */,
@@ -2569,6 +2643,7 @@
 				E77BC13F224F7321008440C9 /* TXOrderModel.m in Sources */,
 				E7CC89BA2264658C003D0EF7 /* TTImageButton.m in Sources */,
 				E7F1A72B22423F92003FA216 /* TXPersonalInfoViewController.m in Sources */,
+				E7C9FCF822675C38008FD260 /* TXTicketOrderTableViewCell.m in Sources */,
 				E78584052240C54300BBEA41 /* TYCyclePagerTransformLayout.m in Sources */,
 				E72699A7223F7ECC003A5043 /* NSDictionary+Extension.m in Sources */,
 				E72699A4223F7ECC003A5043 /* NSDate+Relation.m in Sources */,
@@ -2586,6 +2661,7 @@
 				E7759AB522447DC0007DA6CF /* SCLocalCacheTool.m in Sources */,
 				E7759AEA2244DD6C007DA6CF /* TXMembersBannerView.m in Sources */,
 				E78583BE223F967D00BBEA41 /* SCTableViewSectionHeaderView.m in Sources */,
+				E7C9FCE722671023008FD260 /* TXTicketBookingViewController.m in Sources */,
 				E72699FB223F8298003A5043 /* WMMenuView.m in Sources */,
 				E72699D5223F7F58003A5043 /* UIButton+MVImagePosition.m in Sources */,
 				E7AA9DD72243735A00C15483 /* TXEquityViewController.m in Sources */,
@@ -2729,9 +2805,10 @@
 			baseConfigurationReference = D8A40D1AA3A1C66C50E33D9F /* Pods-HuaYiTianXia.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = HuaYiTianXia/HuaYiTianXia.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 8RL8MGBZ32;
+				DEVELOPMENT_TEAM = 32AGX7UB6B;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/HuaYiTianXia/Classes/Example/Alipay(支付宝)/Tools/SDK",
@@ -2773,9 +2850,10 @@
 			baseConfigurationReference = 7BDC34BA99E71AF550F8F19E /* Pods-HuaYiTianXia.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = HuaYiTianXia/HuaYiTianXia.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 8RL8MGBZ32;
+				DEVELOPMENT_TEAM = 32AGX7UB6B;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/HuaYiTianXia/Classes/Example/Alipay(支付宝)/Tools/SDK",

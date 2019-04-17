@@ -82,7 +82,7 @@ static NSString * const reuseIdentifiers = @"TXRegisteredTableViewCell";
         return;
     }
     
-    
+    kMBShowHUD(@"请稍后...");
     NSMutableDictionary *parameter = [[NSMutableDictionary alloc] init];
     [parameter setObject:self.telphone forKey:@"mobile"];
     [parameter setObject:self.password forKey:@"pwd"];
@@ -117,8 +117,10 @@ static NSString * const reuseIdentifiers = @"TXRegisteredTableViewCell";
                 Toast(generalModel.message);
             }
         }
+        kMBHideHUD;
     } failure:^(NSError *error) {
         TTLog(@"error --- %@",error);
+        kMBHideHUD;
     }];
 }
 

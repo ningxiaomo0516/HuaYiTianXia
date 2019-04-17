@@ -77,6 +77,7 @@ static NSString * const reuseIdentifiers = @"TXRegisteredTableViewCell";
     NSMutableDictionary *parameter = [[NSMutableDictionary alloc] init];
     [parameter setObject:kUserInfo.mobile forKey:@"mobile"];
     [parameter setObject:@"1" forKey:@"type"];
+    kMBShowHUD(@"");
     [SCHttpTools postWithURLString:@"customer/sendSMS" parameter:parameter success:^(id responseObject) {
         if (responseObject){
             id result = responseObject;
@@ -91,8 +92,9 @@ static NSString * const reuseIdentifiers = @"TXRegisteredTableViewCell";
                 }
             }
         }
+        kMBHideHUD;
     } failure:^(NSError *error) {
-        
+        kMBHideHUD;
         //        [MBProgressHUD hideHUDForView:self.view];
         Toast(@"验证码发送失败");
         TTLog(@"error --- %@",error);
@@ -102,6 +104,7 @@ static NSString * const reuseIdentifiers = @"TXRegisteredTableViewCell";
 
 /// 验证身份信息和Code验证码
 - (void) validationIdentityInfo:(NSMutableDictionary *)parameter{
+    kMBShowHUD(@"");
     [SCHttpTools postWithURLString:kHttpURL(@"customer/ForgetTranPwd") parameter:parameter success:^(id responseObject) {
         NSDictionary *result = responseObject;
         if ([result isKindOfClass:[NSDictionary class]]) {
@@ -117,8 +120,10 @@ static NSString * const reuseIdentifiers = @"TXRegisteredTableViewCell";
         }else{
             Toast(@"身份验证失败");
         }
+        kMBHideHUD;
     } failure:^(NSError *error) {
         TTLog(@" -- error -- %@",error);
+        kMBHideHUD;
     }];
 }
 

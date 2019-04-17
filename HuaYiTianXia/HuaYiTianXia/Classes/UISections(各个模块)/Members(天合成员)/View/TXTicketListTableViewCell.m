@@ -128,7 +128,7 @@
     }];
     [self.dep_airportLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.dep_timeLabel);
-        make.top.equalTo(self.dep_timeLabel.mas_bottom).offset(IPHONE6_W(5));
+        make.top.equalTo(self.dep_timeLabel.mas_bottom).offset(IPHONE6_W(2));
     }];
     [self.arv_timeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(@(IPHONE6_W(112)));

@@ -14,6 +14,7 @@
 #import "TXGeneralModel.h"
 #import "TXAddressViewController.h"
 #import "TXAddressModel.h"
+#import "TXChoosePayViewController.h"
 
 
 static NSString * const reuseIdentifierReceiveAddress = @"TXReceiveAddressTableViewCell";
@@ -41,6 +42,8 @@ static NSString * const reuseIdentifierPurchase = @"TXPurchaseQuantityTableViewC
 /// 2:默认没选择支付方式 0:微信 1:支付宝
 @property (assign, nonatomic)  NSInteger payType;
 
+@property (strong, nonatomic) TXChoosePayTableViewCell *choosePayTableViewCell;
+
 @end
 
 @implementation TXSubmitOrderViewController
@@ -66,10 +69,23 @@ static NSString * const reuseIdentifierPurchase = @"TXPurchaseQuantityTableViewC
 }
 
 - (void) submitBtnClick:(UIButton *)sender{
-    if (self.payType==2) {
-        Toast(@"请选择支付方式");
-        return;
-    }
+//    if (self.payType==2) {
+//        Toast(@"请选择支付方式");
+//        return;
+//    }
+    
+//    self.model.price = self.priceLabel.text;
+    //    [self sc_dismissVC];
+    
+    int64_t delayInSeconds = 0.5;      // 延迟的时间
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        self.model.purchaseType = 2;
+        TXChoosePayViewController *vc = [[TXChoosePayViewController alloc]initNewsRecordsModel:self.model];
+        [self sc_bottomPresentController:vc presentedHeight:IPHONE6_W(400) completeHandle:^(BOOL presented) {
+            
+        }];
+    });
 }
 
 - (void) getAddressModel{
@@ -190,13 +206,20 @@ static NSString * const reuseIdentifierPurchase = @"TXPurchaseQuantityTableViewC
             break;
         case 3: {
             TXGeneralModel *model = self.paymentArray[indexPath.row];
-            TXChoosePayTableViewCell *tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierChoosePay forIndexPath:indexPath];
-            tools.titleLabel.text = model.title;
-            tools.chooseBtn.tag = indexPath.row;
-            tools.chooseBtn.selected = indexPath.row ==0?YES:NO;
-            tools.imagesView.image = kGetImage(model.imageText);
-            tools.linerView.hidden = (indexPath.row!=self.paymentArray.count-1)?NO:YES;
-            return tools;
+            _choosePayTableViewCell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierChoosePay forIndexPath:indexPath];
+            _choosePayTableViewCell.titleLabel.text = model.title;
+            _choosePayTableViewCell.imagesView.image = kGetImage(model.imageText);
+            _choosePayTableViewCell.linerView.hidden = (indexPath.row!=self.paymentArray.count-1)?NO:YES;
+            if (indexPath.row==0) {
+                self.payType = indexPath.row;
+                _choosePayTableViewCell.wechatBtn.hidden = NO;
+                _choosePayTableViewCell.alipayBtn.hidden = YES;
+            }else{
+                self.payType = indexPath.row;
+                _choosePayTableViewCell.wechatBtn.hidden = YES;
+                _choosePayTableViewCell.alipayBtn.hidden = NO;
+            }
+            return _choosePayTableViewCell;
         }
             break;
     }
@@ -205,7 +228,7 @@ static NSString * const reuseIdentifierPurchase = @"TXPurchaseQuantityTableViewC
 
 // 多少个分组 section
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 4;
+    return 3;
 }
 
 /// 返回多少
@@ -239,9 +262,14 @@ static NSString * const reuseIdentifierPurchase = @"TXPurchaseQuantityTableViewC
         TTPushVC(vc);
     }else if (indexPath.section==3){
         self.payType = indexPath.row;
-        TXChoosePayTableViewCell *currentCell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierChoosePay];
-        UIButton *tmpBtn = (UIButton *)[currentCell viewWithTag:indexPath.row];
-        TTLog(@"labelType -- %ld",(long)tmpBtn.tag);
+        TTLog(@"indexPath.row --- %ld",(long)indexPath.row);
+        if (indexPath.row==0) {
+            _choosePayTableViewCell.wechatBtn.selected = NO;
+            _choosePayTableViewCell.alipayBtn.selected = YES;
+        }else if(indexPath.row==1){
+            _choosePayTableViewCell.wechatBtn.selected = YES;
+            _choosePayTableViewCell.alipayBtn.selected = NO;
+        }
     }
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }

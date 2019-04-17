@@ -75,7 +75,7 @@
         Toast(@"请输入登录密码");
         return;
     }
-    
+    [TTHUDManager showHUDMessage:@"登录中..."];
     NSMutableDictionary *parameter = [[NSMutableDictionary alloc] init];
     [parameter setObject:self.telTextField.text forKey:@"mobile"];
     [parameter setObject:self.pwdTextField.text forKey:@"pwd"];
@@ -118,8 +118,10 @@
                 }
             }
         }
+        [TTHUDManager hide];
     } failure:^(NSError *error) {
         TTLog(@"error --- %@",error);
+        [TTHUDManager hide];
     }];
 }
 

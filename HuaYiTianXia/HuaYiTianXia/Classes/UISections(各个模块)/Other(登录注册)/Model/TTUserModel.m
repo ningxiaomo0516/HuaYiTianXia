@@ -9,6 +9,8 @@
 #import "TTUserModel.h"
 #import "SCLocalCacheTool.h"
 
+static NSString *topupType      = @"topupType";
+
 static NSString *uid            = @"uid";
 static NSString *isLogin        = @"isLogin";
 static NSString *username       = @"username";
@@ -70,7 +72,7 @@ static NSString *receivedTelphone   = @"receivedTelphone";
              @"registertime": @"time",
              @"idnumber"    : @"code",
              @"totalAssets" : @"assets",
-             @"type"        : @"isValidation"};
+             @"isValidation": @"type"};
 }
 
 + (NSDictionary *)objectClassInArray{
@@ -138,7 +140,12 @@ static TTUserModel *userModel = nil;
 - (instancetype)initWithCoder:(NSCoder *)aDecoder{
     self = [super init];
     if (self) {
+        
         /// 解码并返回一个与给定键相关联的Object类型的值
+        
+        
+        [TTUserModel shared].topupType = [aDecoder decodeIntegerForKey:topupType];
+        
         [TTUserModel shared].uid = [aDecoder decodeObjectForKey:uid];
         [TTUserModel shared].username = [aDecoder decodeObjectForKey:username];
         [TTUserModel shared].realname = [aDecoder decodeObjectForKey:realname];
@@ -182,6 +189,9 @@ static TTUserModel *userModel = nil;
 /// 将一个自定义归档时就会调用该方法，该方法用于描述如何存储自定义对象的属性
 - (void)encodeWithCoder:(NSCoder *)aCoder{
     /// 将Object类型编码，使其与字符串类型的键相关联
+    
+    [aCoder encodeInteger:[TTUserModel shared].topupType forKey:topupType];
+
     [aCoder encodeObject:[TTUserModel shared].uid forKey:uid];
     [aCoder encodeObject:[TTUserModel shared].username forKey:username];
     [aCoder encodeObject:[TTUserModel shared].realname forKey:realname];
@@ -255,5 +265,6 @@ static TTUserModel *userModel = nil;
     [TTUserModel shared].receivedGoodsAddr = @"";
     [TTUserModel shared].receivedTelphone = @"";
     [TTUserModel shared].receivedUserName = @"";
+    [TTUserModel shared].topupType = 0;
 }
 @end

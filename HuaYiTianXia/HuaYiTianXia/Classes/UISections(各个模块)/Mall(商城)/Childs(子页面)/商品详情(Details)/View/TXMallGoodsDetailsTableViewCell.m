@@ -34,7 +34,7 @@
     _model = model;
     self.titleLabel.text = model.title;
     self.subtitleLabel.text = model.synopsis;
-    self.priceLabel.text = [NSString stringWithFormat:@"产品价格:%@.0",model.price];
+    self.priceLabel.text = [NSString stringWithFormat:@"产品价格:%@",model.price];
 }
 
 - (void) initView{

@@ -68,6 +68,7 @@ static NSString * const reuseIdentifier = @"TXRolloutTableViewCell";
 
 /** 确认修改密码 */
 - (void) resetPasswordReuqest{
+    kMBShowHUD(@"");
     NSMutableDictionary *parameter = [[NSMutableDictionary alloc] init];
     [parameter setObject:self.oldPassword forKey:@"oldpwd"];
     [parameter setObject:self.password forKey:@"pwd"];
@@ -86,8 +87,10 @@ static NSString * const reuseIdentifier = @"TXRolloutTableViewCell";
         }else{
             Toast(@"重置密码失败");
         }
+        kMBHideHUD;
     } failure:^(NSError *error) {
         TTLog(@"error --- %@",error);
+        kMBHideHUD;
     }];
 }
 

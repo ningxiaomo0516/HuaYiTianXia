@@ -51,7 +51,8 @@
     }else{
         self.specLabel.text = @"";
     }
-    
+    self.totalPriceLabel.text = self.model.price;
+    self.priceLabel.text = self.model.price;
     
     // 注册通知(支付成功之后的处理)
     [kNotificationCenter addObserver:self selector:@selector(AlipaySuccessfulBlock) name:@"AlipaySuccessful" object:nil];
@@ -107,8 +108,9 @@
  *  @param sender 当前按钮
  */
 - (IBAction)increaseBtnClick:(id)sender {
-    NSInteger price = [self.priceLabel.text integerValue];
-    self.priceLabel.text = [NSString stringWithFormat:@"%ld",price += 1000];
+    CGFloat price = [self.priceLabel.text floatValue];
+    TTLog(@"price -- %f",price);
+    self.priceLabel.text = [NSString stringWithFormat:@"%.2f",price += 1000.00];
 }
 
 /**
@@ -117,12 +119,13 @@
  *  @param sender 当前按钮
  */
 - (IBAction)minusBtnClick:(id)sender {
-    NSInteger price = [self.priceLabel.text integerValue];
-    if (price<=1000) {
+    CGFloat price = [self.priceLabel.text floatValue];
+    CGFloat totalPrice = [self.totalPriceLabel.text floatValue];
+    if (price<=totalPrice) {
         Toast(@"已是最低投保金额");
         return;
     }else{
-        self.priceLabel.text = [NSString stringWithFormat:@"%ld",price -= 1000];
+        self.priceLabel.text = [NSString stringWithFormat:@"%.2f",price -= 1000.00];
     }
 }
 

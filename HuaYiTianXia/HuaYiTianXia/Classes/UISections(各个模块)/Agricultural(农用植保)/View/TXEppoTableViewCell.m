@@ -42,7 +42,7 @@
                        placeholderImage:kGetImage(VERTICALMAPBITMAP)];
     self.titleLabel.text = recordsModel.title;
     self.subtitleLabel.text = recordsModel.synopsis;
-    self.priceLabel.text = [NSString stringWithFormat:@"￥%@.0",recordsModel.price];
+    self.priceLabel.text = [NSString stringWithFormat:@"￥%@",recordsModel.price];
     if (recordsModel.prospec.count>0) {
         self.specLabel.text = recordsModel.prospec[0];
     }else{
@@ -107,6 +107,8 @@
 - (UIImageView *)imagesView{
     if (!_imagesView) {
         _imagesView = [[UIImageView alloc] init];
+//        _imagesView.contentMode = UIViewContentModeScaleAspectFill;
+        _imagesView.clipsToBounds = YES;
     }
     return _imagesView;
 }

@@ -9,7 +9,6 @@
 #import "TXTeamViewController.h"
 #import "TXTeamTableViewCell.h"
 #import "TXTeamModel.h"
-#import "TTHUDManager.h"
 
 static NSString * const reuseIdentifier = @"TXTeamTableViewCell";
 
@@ -28,7 +27,7 @@ static NSString * const reuseIdentifier = @"TXTeamTableViewCell";
     [self initView];
     [self.view showLoadingViewWithText:@"加载中..."];
     [self requestPersonalCenterData];
-    [TTHUDManager showHUDMessage:@"加载中..."];
+    
     // 下拉刷新
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         [self requestPersonalCenterData];
@@ -48,7 +47,7 @@ static NSString * const reuseIdentifier = @"TXTeamTableViewCell";
             [self analysisData];
             [self.tableView reloadData];
             [self.tableView.mj_header endRefreshing];
-            [TTHUDManager hide];
+            
         }else{
             Toast(@"个人中心数据获取失败");
         }

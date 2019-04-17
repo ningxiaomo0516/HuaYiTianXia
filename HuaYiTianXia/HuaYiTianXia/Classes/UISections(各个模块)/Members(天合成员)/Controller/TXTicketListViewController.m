@@ -9,6 +9,7 @@
 #import "TXTicketListViewController.h"
 #import "TXTicketModel.h"
 #import "TXTicketListTableViewCell.h"
+#import "TXTicketBookingViewController.h"
 
 static NSString* reuseIdentifier = @"TXTicketListTableViewCell";
 
@@ -21,7 +22,7 @@ static NSString* reuseIdentifier = @"TXTicketListTableViewCell";
 @end
 
 @implementation TXTicketListViewController
-- (id)initTicketListWithURLString:URLString parameter:(NSMutableDictionary *)parameter{
+- (id)initTicketListWithURLString:(NSString *)URLString parameter:(NSMutableDictionary *)parameter{
     if ( self = [super init] ){
         self.parameter = parameter;
         self.URLString = URLString;
@@ -105,19 +106,21 @@ static NSString* reuseIdentifier = @"TXTicketListTableViewCell";
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
+    TicketModel *ticketModel = self.dataArray[indexPath.section];
+    TXTicketBookingViewController *vc = [[TXTicketBookingViewController alloc] initTicketModel:ticketModel];
+    TTPushVC(vc);
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 #pragma mark ----- getter/setter
 - (UITableView *)tableView{
     if (!_tableView) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
+        _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
         _tableView.showsVerticalScrollIndicator = false;
         [_tableView setSeparatorInset:UIEdgeInsetsMake(0, 15, 0, 15)];
         [_tableView registerClass:[TXTicketListTableViewCell class] forCellReuseIdentifier:reuseIdentifier];
         //1 禁用系统自带的分割线
-        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        _tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.backgroundColor = kViewColorNormal;

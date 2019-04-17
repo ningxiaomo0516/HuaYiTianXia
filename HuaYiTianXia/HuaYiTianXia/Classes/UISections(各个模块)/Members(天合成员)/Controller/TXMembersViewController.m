@@ -13,6 +13,7 @@
 #import "TXGeneralModel.h"
 #import "TTBannerModel.h"
 #import "TXTicketScreeningViewController.h"
+#import "TXTicketOrderViewController.h"
 
 static NSString* reuseIdentifier = @"TXMallToolsCollectionViewCell";
 static NSString* reuseIdentifierBanner = @"TXMallBannerCollectionViewCell";
@@ -103,6 +104,7 @@ static NSString* reuseIdentifierMall = @"TXMembersbleCollectionViewCell";
     }else if (indexPath.section==2) {
         TXMembersbleCollectionViewCell *tools = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifierMall forIndexPath:indexPath];
         tools.imagesView.image = kGetImage(templateModel.imageText);
+        tools.titleLabel.text = templateModel.imageText;
         return tools;
     }else{
         TXMallToolsCollectionViewCell *tools = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
@@ -110,7 +112,7 @@ static NSString* reuseIdentifierMall = @"TXMembersbleCollectionViewCell";
         tools.imagesView.image = kGetImage(templateModel.imageText);
         [tools.imagesView mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.centerX.equalTo(tools);
-            make.top.equalTo(@(IPHONE6_W(16)));
+            make.top.equalTo(@(IPHONE6_W(15)));
         }];
         return tools;
     }
@@ -119,7 +121,12 @@ static NSString* reuseIdentifierMall = @"TXMembersbleCollectionViewCell";
 /// 点击collectionViewCell
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section==1) {
-        Toast(@"暂未开放");
+        if (indexPath.row==1) {
+            TXTicketOrderViewController *vc = [[TXTicketOrderViewController alloc] init];
+            TTPushVC(vc);
+        }else{
+            Toast(@"暂未开放");
+        }
     }else if(indexPath.section==2){
         if (indexPath.row==0) {
             TXTicketScreeningViewController *vc = [[TXTicketScreeningViewController alloc] init];
@@ -143,7 +150,7 @@ static NSString* reuseIdentifierMall = @"TXMembersbleCollectionViewCell";
     if (indexPath.section==0) return CGSizeMake(kScreenWidth, IPHONE6_W(180));
     else if (indexPath.section==1)return CGSizeMake(width, IPHONE6_W(95));
     CGFloat margin = 10*3;
-    return CGSizeMake((kScreenWidth-margin)/2, IPHONE6_W(70));
+    return CGSizeMake((kScreenWidth-margin)/2, IPHONE6_W(74));
 }
 
 //设置所有的cell组成的视图与section 上、左、下、右的间隔
@@ -199,8 +206,8 @@ static NSString* reuseIdentifierMall = @"TXMembersbleCollectionViewCell";
         NSArray* titleArr;
         NSArray* imagesArr;
         titleArr = @[@[],@[@"会员",@"订单",@"礼包",@"其他"],@[]];
-        imagesArr = @[@[@"banner"],@[@"home_tools_sheying",@"home_tools_cehua",@"home_tools_lifu",@"home_tools_hotel"],
-                    @[@"机票预订",@"酒店订票",@"景区预订",@"美食天地"]];
+        imagesArr = @[@[@"banner"],@[@"c41_btn_members",@"c41_btn_order",@"c41_btn_gift",@"c41_btn_other"],
+                    @[@"机票预订",@"热门景区",@"超值酒店",@"网红美食"]];
         NSArray* classArr = @[@[],@[@"",@"",@"",@""],@[]];
         for (int i=0; i<imagesArr.count; i++) {
             NSArray *subTitlesArray = [titleArr lz_safeObjectAtIndex:i];

@@ -57,6 +57,7 @@
 }
 
 - (void) validationIdentityInfo:(NSMutableDictionary *)parameter{
+    kMBShowHUD(@"");
     [SCHttpTools postWithURLString:kHttpURL(@"customer/VerifTranPwd") parameter:parameter success:^(id responseObject) {
         NSDictionary *result = responseObject;
         if ([result isKindOfClass:[NSDictionary class]]) {
@@ -72,8 +73,10 @@
         }else{
             Toast(@"身份验证失败");
         }
+        kMBHideHUD;
     } failure:^(NSError *error) {
         TTLog(@" -- error -- %@",error);
+        kMBHideHUD;
     }];
 }
 

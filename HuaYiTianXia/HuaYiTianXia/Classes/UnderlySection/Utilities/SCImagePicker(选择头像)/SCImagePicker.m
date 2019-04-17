@@ -81,6 +81,7 @@
 /// 上传图片
 - (void)uploadImageDataWithImage:(UIImage *)image {
 //    [MBProgressHUD showMessage:@"" toView:self.controller.view];
+    kMBShowHUD(@"上传中...");
     [SCHttpTools postImageWithURLString:uploadFile parameter:nil image:image success:^(id result) {
 //        [MBProgressHUD hideHUDForView:self.controller.view];
         
@@ -102,7 +103,9 @@
         }else {
             Toast(@"图片上传失败");
         }
+        kMBHideHUD;
     } failure:^(NSError *error) {
+        kMBHideHUD;
 //        [MBProgressHUD hideHUDForView:self.controller.view];
         TTLog(@"图片上传 --- %@",error);
     }];

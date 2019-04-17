@@ -38,9 +38,13 @@ static NSString * const reuseIdentifier = @"TXTransactionRecordsTableViewCell";
 
 /// 处理接口返回数据
 - (void)tt_tableView:(TTBaseTableView *)tt_tableView isPullDown:(BOOL)PullDown result:(id)result{
+
     if ([result isKindOfClass:[NSDictionary class]]) {
         TXWalletModel *model = [TXWalletModel mj_objectWithKeyValues:result];
         if (model.errorcode == 20000) {
+            if (PullDown) {
+                [self.dataArray removeAllObjects];
+            }
             [self.dataArray addObjectsFromArray:model.data.list.mutableCopy];
             [self.tableView reloadData];
         }else{

@@ -24,7 +24,7 @@
                        placeholderImage:kGetImage(VERTICALMAPBITMAP)];
     self.titleLabel.text = recordsModel.title;
     self.subtitleLabel.text = recordsModel.synopsis;
-    self.marketPriceLabel.text = [NSString stringWithFormat:@"￥%@.0",recordsModel.price];
+    self.marketPriceLabel.text = [NSString stringWithFormat:@"￥%@",recordsModel.price];
     self.currentPriceLabel.text = @"";
 }
 

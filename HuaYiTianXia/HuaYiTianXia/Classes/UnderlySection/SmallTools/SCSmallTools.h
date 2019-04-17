@@ -105,4 +105,6 @@
  *  @param endIndex 结束下标
  */
 + (NSMutableAttributedString *) setupTextColor:(UIColor *)color currentText:(NSString *)currentText index:(NSInteger)index endIndex:(NSInteger)endIndex;
+
++ (NSString *)tt_dateWeekWithDateString:(NSString *)dateString;
 @end

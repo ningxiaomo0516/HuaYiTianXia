@@ -39,7 +39,10 @@
     ///初始化登陆信息
     [[TTUserModel shared] load];
     TTLog(@" --- %@ --- %@, --- %@ --- %@",kUserInfo.username,kUserInfo.realname,kUserInfo.uid,kUserInfo.inviteCode);
-    
+
+    /// 默认没有任何支付页面
+    kUserInfo.topupType = 0;
+    [kUserInfo dump];
     ///开启监听网络
     [[AFNetworkReachabilityManager sharedManager] startMonitoring];
     [[AFNetworkReachabilityManager sharedManager] setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
@@ -161,6 +164,14 @@
         [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic) {
             //发送支付成功通知
             [kNotificationCenter postNotificationName:@"AlipayStatus" object:resultDic];
+            if (kUserInfo.topupType == 1) {
+                /// 充值成功处理
+                Toast(@"充值成功");
+            }else if (kUserInfo.topupType == 2) {
+                /// 商城支付成功
+            }else if (kUserInfo.topupType == 3) {
+                /// 农保支成功
+            }
         }];
     }
     if ([url.host isEqualToString:@"platformapi"]){//支付宝钱包快登授权返回authCode
@@ -192,12 +203,22 @@
      WXErrCodeUnsupport  = -5,   微信不支持
      };
      */
+    //// (1:充值 2:商城支付 3:农保支付)
+    NSString *payType = [NSString stringWithFormat:@"当前的支付页面是 -- --%ld",kUserInfo.topupType];
+    TTLog(@"%@", payType);
     //微信支付的类
     if([resp isKindOfClass:[PayResp class]]){
         //支付返回结果，实际支付结果需要去微信服务器端查询
         NSString *strMsg = [NSString stringWithFormat:@"支付结果"];
         if (resp.errCode == WXSuccess) {
-            strMsg = @"支付结果：成功！";
+            if (kUserInfo.topupType == 1) {
+                strMsg = @"支付成功！";
+            }else if (kUserInfo.topupType == 2) {
+                strMsg = @"支付成功！";
+            }else if (kUserInfo.topupType == 3) {
+                strMsg = @"充值成功！";
+            }
+            
             TTLog(@"支付成功－PaySuccess，retcode = %d", resp.errCode);
 //            PaySucceedViewController *vc = [[PaySucceedViewController alloc] init];
 //            vc.backStr = @"1";
@@ -309,6 +330,11 @@
     self.isImplementPush = true;
     TTLog(@"userInfo  - %@",userInfo);
 }
+
+- (void)jpushNotificationCenter:(UNUserNotificationCenter *)center openSettingsForNotification:(nullable UNNotification *)notification { 
+    TTLog(@"---- 什么玩意");
+}
+
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
     

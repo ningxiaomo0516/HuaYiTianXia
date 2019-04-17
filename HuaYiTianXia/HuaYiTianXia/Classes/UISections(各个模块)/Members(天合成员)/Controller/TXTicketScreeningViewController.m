@@ -60,7 +60,7 @@
     [parameter setObject:self.MDTextField.text forKey:@"toCity"];
     [parameter setObject:self.datelabel.text forKey:@"date"];
     /// 机票查询接口
-    TXTicketListViewController *vc = [[TXTicketListViewController alloc] initTicketListWithURLString:URLString parameter:parameter];
+       TXTicketListViewController *vc = [[TXTicketListViewController alloc] initTicketListWithURLString:URLString parameter:parameter];
     TTPushVC(vc);
 }
 

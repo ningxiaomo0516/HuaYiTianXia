@@ -18,7 +18,6 @@ typedef void(^ChangeInfoBlock) (NSString *text);
 //定义一个block
 @property (nonatomic, copy) ChangeInfoBlock block;
 
-- (void) updateUserInfoDataRequest:(NSString *) imageURL;
 @end
 
 NS_ASSUME_NONNULL_END

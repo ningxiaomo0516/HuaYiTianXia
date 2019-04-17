@@ -87,6 +87,9 @@
     model.purchaseType = 0;
     model.price = amountText;
     model.title = @"充值";
+    ///// 记录当前是充值
+    kUserInfo.topupType = 1;
+    [kUserInfo dump];
     TXChoosePayViewController *vc = [[TXChoosePayViewController alloc]initNewsRecordsModel:model];
     [self sc_bottomPresentController:vc presentedHeight:IPHONE6_W(400) completeHandle:^(BOOL presented) {
         

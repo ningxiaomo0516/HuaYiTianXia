@@ -272,4 +272,31 @@
                           range:NSMakeRange(index, endIndex)];
     return attributedStr;
 }
+
++ (NSString *)tt_dateWeekWithDateString:(NSString *)dateString{
+    NSTimeInterval time=[dateString doubleValue];
+    NSDate *date=[NSDate dateWithTimeIntervalSince1970:time];
+    NSCalendar *gregorian = [[NSCalendar alloc]
+                             initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    NSDateComponents *weekdayComponents =
+    [gregorian components:NSCalendarUnitWeekday fromDate:date];
+    NSInteger _weekday = [weekdayComponents weekday];
+    NSString *weekStr;
+    if (_weekday == 1) {
+        weekStr = @"星期日";
+    }else if (_weekday == 2){
+        weekStr = @"星期一";
+    }else if (_weekday == 3){
+        weekStr = @"星期二";
+    }else if (_weekday == 4){
+        weekStr = @"星期三";
+    }else if (_weekday == 5){
+        weekStr = @"星期四";
+    }else if (_weekday == 6){
+        weekStr = @"星期五";
+    }else if (_weekday == 7){
+        weekStr = @"星期六";
+    }
+    return weekStr;
+}
 @end

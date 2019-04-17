@@ -33,8 +33,14 @@ static NSString * const reuseIdentifier = @"TXAddressTableViewCell";
     [kNotificationCenter addObserver:self selector:@selector(requestAddressData) name:@"reloadAddressData" object:nil];
 }
 
+- (void) viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self.view showLoadingViewWithText:@"请稍后"];
+}
+
 - (void)tt_tableView:(TTBaseTableView *)tt_tableView requestFailed:(NSError *)error{
     TTLog(@"error --- %@",error);
+    [self.view dismissLoadingView];
 }
 
 /// 处理接口返回数据
@@ -42,12 +48,16 @@ static NSString * const reuseIdentifier = @"TXAddressTableViewCell";
     if ([results isKindOfClass:[NSDictionary class]]) {
         TXAddressModel *model = [TXAddressModel mj_objectWithKeyValues:results];
         if (model.errorcode == 20000) {
+            if (PullDown) {
+                [self.dataArray removeAllObjects];
+            }
             [self.dataArray addObjectsFromArray:model.data.mutableCopy];
             [self.tableView reloadData];
         }else{
             Toast(model.message);
         }
     }
+    [self.view dismissLoadingView];
     //处理返回的SuccessData 数据之后刷新table
     [self.tableView reloadData];
 }

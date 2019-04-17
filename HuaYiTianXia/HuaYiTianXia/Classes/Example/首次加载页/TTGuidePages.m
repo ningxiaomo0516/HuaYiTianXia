@@ -19,7 +19,7 @@
 
 // init
 - (instancetype)init{
-    return [self initWithImageArray:nil completion:nil];
+    return [self initWithImageArray:[NSArray new] completion:nil];
 }
 
 // init with imageDatas and completion
@@ -27,7 +27,6 @@
     self = [super init];
     if (self){
         [self initView];
-        [self setImageArray:imageArray];
         _buttonAction = buttonAction;
         [self initContentView];
     }
@@ -74,14 +73,14 @@
             [self.scrollView addSubview:imgView];
             
             if (i == self.imageArray.count - 1){
-                _actionButton.frame = CGRectMake((self.width - 175) / 2, self.height - kiPhoneX_B(110), 175, 45);
-                _actionButton.layer.cornerRadius = 5;
-                _actionButton.layer.masksToBounds = YES;
-                [_actionButton setTitle:@"进  入" forState:UIControlStateNormal];
-                _actionButton.tintColor = [UIColor whiteColor];
-                [_actionButton lz_setCornerRadius:5.0];
-                [_actionButton setBorderColor:kWhiteColor];
-                [_actionButton setBorderWidth:1.0];
+                _actionButton.frame = CGRectMake((self.width - IPHONE6_W(186)) / 2, self.height - kiPhoneX_B(IPHONE6_W(72)), IPHONE6_W(186), IPHONE6_W(45));
+////                _actionButton.layer.cornerRadius = 5;
+//                _actionButton.layer.masksToBounds = YES;
+//                [_actionButton setTitle:@"进  入" forState:UIControlStateNormal];
+//                _actionButton.tintColor = [UIColor whiteColor];
+//                [_actionButton lz_setCornerRadius:5.0];
+//                [_actionButton setBorderColor:kWhiteColor];
+//                [_actionButton setBorderWidth:1.0];
                 [_actionButton addTarget:self  action:@selector(enterButtonClick) forControlEvents:UIControlEventTouchUpInside];
                 [imgView addSubview:_actionButton];
                 //设置可以响应交互，UIImageView的默认值为NO
@@ -97,7 +96,7 @@
     if (_buttonAction) {
         _buttonAction();
         // 初始化 ---和--- 获取登录成功或者注销之后的标识
-        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+//        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         
 //        NSString *LOGIN=[defaults objectForKey:@"isLoggedIn"];
 //        if (![LOGIN isEqualToString:@"isLoggedIn"]) {
@@ -119,7 +118,7 @@
 - (NSMutableArray *)imageArray{
     if (!_imageArray) {
         _imageArray = [[NSMutableArray alloc] init];
-        NSArray *imagesArr = @[@"yindaoye1", @"yindaoye2",@"yindaoye3"];
+        NSArray *imagesArr = @[@"c417_yindaoye1", @"c417_yindaoye2",@"c417_yindaoye3"];
         for (int j = 0; j < imagesArr.count; j ++) {
             TXGeneralModel *generalModel = [[TXGeneralModel alloc] init];
             generalModel.imageText = [imagesArr lz_safeObjectAtIndex:j];

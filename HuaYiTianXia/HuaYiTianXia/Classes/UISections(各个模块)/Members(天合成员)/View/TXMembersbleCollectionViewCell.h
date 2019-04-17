@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface TXMembersbleCollectionViewCell : UICollectionViewCell
 /// 图片
 @property (nonatomic, strong) UIImageView *imagesView;
+@property (nonatomic, strong) UILabel *titleLabel;
 @end
 
 NS_ASSUME_NONNULL_END

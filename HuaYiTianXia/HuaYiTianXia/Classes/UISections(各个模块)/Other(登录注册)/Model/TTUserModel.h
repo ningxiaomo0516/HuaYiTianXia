@@ -18,6 +18,9 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 @interface TTUserModel : NSObject
+
+/// 记录当前的充值类型默认为0： (1:充值 2:商城支付 3:农保支付)
+@property (nonatomic, assign) NSInteger topupType;
 /// 是否登录
 @property (nonatomic, assign) BOOL isLogin;
 
@@ -61,7 +64,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *upproxy;
 /// VR币
 @property (nonatomic, copy) NSString *vrcurrency;
-/// 0：未认证 1：认证中 2：已认证
+/// 0：未认证 1：认证中 2：已认证 3：认证失败
 @property (nonatomic, assign) NSInteger isValidation;
 /// 股权总数
 @property (nonatomic, copy) NSString *stockRight;

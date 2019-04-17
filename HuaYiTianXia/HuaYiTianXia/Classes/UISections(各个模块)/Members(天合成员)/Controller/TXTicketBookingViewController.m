@@ -1,0 +1,296 @@
+//
+//  TXTicketBookingViewController.m
+//  HuaYiTianXia
+//
+//  Created by 宁小陌 on 2019/4/17.
+//  Copyright © 2019年 宁小陌. All rights reserved.
+//
+
+#import "TXTicketBookingViewController.h"
+#import "TXTicketModel.h"
+#import "TXTicketBookingTableViewCell.h"
+#import "TXRolloutTableViewCell.h"
+#import "TXTicketInfoTableViewCell.h"
+
+static NSString* reuseIdentifier = @"TXTicketBookingTableViewCell";
+static NSString* reuseIdentifierRollout = @"TXRolloutTableViewCell";
+static NSString* reuseIdentifierInfo = @"TXTicketInfoTableViewCell";
+
+@interface TXTicketBookingViewController ()<UITableViewDelegate,UITableViewDataSource>
+@property (nonatomic, strong) UITableView *tableView;
+
+@property (nonatomic, strong) NSMutableDictionary *parameter;
+@property (nonatomic, copy) NSString *URLString;
+@property (nonatomic, strong) NSMutableArray *dataArray;
+@property (nonatomic, strong) NSMutableArray *itemArray;
+@property (nonatomic, strong) TicketModel *ticketModel;
+@property (nonatomic, strong) UIView *footerView;
+@property (nonatomic, strong) UIView *boxView;
+@property (nonatomic, strong) UILabel *priceLabel;
+@property (nonatomic, strong) UIButton *payButton;
+@property (nonatomic, strong) UILabel *titleLabel;
+@property (nonatomic, strong) TXTicketBookingTableViewCell  *toolsTicket;
+/// 是否选择了机票
+@property (nonatomic, assign) NSInteger isSelected;
+@property (nonatomic, assign) NSInteger idx;
+
+@end
+
+@implementation TXTicketBookingViewController
+- (id)initTicketModel:(TicketModel *)ticketModel{
+    if ( self = [super init] ){
+        self.ticketModel = ticketModel;
+        for (TicketPricesModel *model in ticketModel.prices) {
+            if ([model.discount isEqualToString:@"全价"]) {
+                [self.dataArray addObject:model];
+            }
+        }
+        
+        self.isSelected = NO;
+    }
+    return self;
+}
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    // Do any additional setup after loading the view.
+    self.title = @"机票预订";
+    [self initView];
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+//    [self.view showLoadingViewWithText:@"加载中..."];
+}
+
+- (void) submitOnClick{
+    if (!self.isSelected) {
+        Toast(@"请先选择机票");
+        return;
+    }
+    [TTHUDManager showHUDMessage:@""];
+    NSString *URLString = kHttpURL(@"aircraftorder/AddAircraftorder");
+    NSMutableDictionary *parameter = [[NSMutableDictionary alloc] init];
+    [parameter setObject:self.ticketModel.dep_airport forKey:@"origin"];
+    [parameter setObject:self.ticketModel.arv_airport forKey:@"destination"];
+    [parameter setObject:self.priceLabel.text forKey:@"orderprice"];
+    [parameter setObject:self.priceLabel.text forKey:@"price"];
+    [parameter setObject:@"" forKey:@"remarks"];
+    [SCHttpTools getTicketWithURLString:URLString parameter:self.parameter success:^(id responseObject) {
+        NSDictionary *result = responseObject;
+        if ([result isKindOfClass:[NSDictionary class]]) {
+            TTLog(@" result --- %@",[Utils lz_dataWithJSONObject:result]);
+            TXTicketModel *model = [TXTicketModel mj_objectWithKeyValues:result];
+            [TTHUDManager hide];
+            if (model.errorcode==20000) {
+                [self.navigationController popViewControllerAnimated:YES];
+            }
+            Toast(model.message);
+        }
+        [TTHUDManager hide];
+    } failure:^(NSError *error) {
+        TTLog(@"机票查询信息 -- %@", error);
+        [TTHUDManager hide];
+    }];
+}
+
+- (void) initView{
+    [Utils lz_setExtraCellLineHidden:self.tableView];
+    [self.view addSubview:self.tableView];
+    [self.view addSubview:self.footerView];
+    [self.footerView addSubview:self.boxView];
+    [self.footerView addSubview:self.titleLabel];
+    [self.footerView addSubview:self.priceLabel];
+    [self.footerView addSubview:self.payButton];
+    [self initViewConstraints];
+}
+
+
+#pragma mark ---- 约束布局
+- (void) initViewConstraints{
+    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.left.right.equalTo(self.view);
+        make.bottom.equalTo(self.footerView.mas_top);
+    }];
+    [self.footerView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.bottom.equalTo(self.view);
+        make.height.equalTo(@(kTabBarHeight));
+    }];
+    [self.boxView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.top.equalTo(self.footerView);
+        make.height.equalTo(@(49));
+    }];
+    [self.priceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(@(15));
+        make.top.equalTo(@(6));
+    }];
+    [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.priceLabel);
+        make.bottom.equalTo(self.boxView.mas_bottom).offset(-6);
+    }];
+    
+    [self.payButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.bottom.top.equalTo(self.boxView);
+        make.width.equalTo(@(120));
+    }];
+}
+
+#pragma mark - Table view data sourceFMMerchantsHomeAddressTableViewCell
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section<self.dataArray.count){
+        _toolsTicket = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
+        _toolsTicket.ticketModel = self.ticketModel;
+        TicketPricesModel *priceModel = self.dataArray[indexPath.section];
+        /// 文字颜色
+        UIColor *textColor = HexString(@"#FC7E4C");
+        NSInteger index,endIndex;
+        index = priceModel.type.length+1;
+        NSString *economyText = [NSString stringWithFormat:@"%@:￥%@",priceModel.type,priceModel.price];
+        endIndex = economyText.length-index;
+        _toolsTicket.priceLabel.attributedText = [SCSmallTools setupTextColor:textColor currentText:economyText index:index endIndex:endIndex];
+        return _toolsTicket;
+    }else{
+        if (indexPath.row==0) {
+            TXTicketInfoTableViewCell *tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierInfo forIndexPath:indexPath];
+            tools.selectionStyle = UITableViewCellSelectionStyleNone;
+            tools.ticketModel = self.ticketModel;
+            return tools;
+        }else{
+            TXRolloutTableViewCell *tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierRollout forIndexPath:indexPath];
+            tools.selectionStyle = UITableViewCellSelectionStyleNone;
+            TXGeneralModel *generalModel = self.itemArray[indexPath.row];
+            tools.titleLabel.text = generalModel.title;
+            tools.textField.text = generalModel.imageText;
+            tools.textField.enabled = NO;
+            return tools;
+        }
+    }
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section<self.dataArray.count){
+         return 95;
+    }else{
+        if (indexPath.row==0) {
+            return IPHONE6_W(70);
+        }else{
+            return IPHONE6_W(50);
+        }
+    }
+    
+}
+
+// 多少个分组 section
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return self.dataArray.count+1;
+}
+
+/// 返回多少
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    if (section<self.dataArray.count) return 1;
+    return self.itemArray.count;
+}
+
+#pragma mark -- 设置Header高度
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    return 10.f;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.section<=self.dataArray.count) {
+        TicketPricesModel *model = self.dataArray[indexPath.section];
+        TTLog(@" --- %@",model.price);
+        self.priceLabel.text = [NSString stringWithFormat:@"￥%@",model.price];
+        self.isSelected = YES;
+//        TXTicketBookingTableViewCell *cell = (TXTicketBookingTableViewCell *)[self tableView:tableView cellForRowAtIndexPath:indexPath];
+//        cell.imagesSelected.hidden = NO;
+//        _toolsTicket.imagesSelected.hidden = YES;
+    }
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+#pragma mark ----- getter/setter
+- (UITableView *)tableView{
+    if (!_tableView) {
+        _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
+        _tableView.showsVerticalScrollIndicator = false;
+        [_tableView setSeparatorInset:UIEdgeInsetsMake(0, 15, 0, 0)];
+        [_tableView registerClass:[TXTicketBookingTableViewCell class] forCellReuseIdentifier:reuseIdentifier];
+        [_tableView registerClass:[TXRolloutTableViewCell class] forCellReuseIdentifier:reuseIdentifierRollout];
+        [_tableView registerClass:[TXTicketInfoTableViewCell class] forCellReuseIdentifier:reuseIdentifierInfo];
+        //1 禁用系统自带的分割线
+        _tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+        _tableView.delegate = self;
+        _tableView.dataSource = self;
+        _tableView.backgroundColor = kViewColorNormal;
+        _tableView.rowHeight = UITableViewAutomaticDimension;
+    }
+    return _tableView;
+}
+
+- (NSMutableArray *)dataArray{
+    if (!_dataArray) {
+        _dataArray = [[NSMutableArray alloc] init];
+    }
+    return _dataArray;
+}
+
+- (UIView *)footerView{
+    if (!_footerView) {
+        _footerView = [UIView lz_viewWithColor:kWhiteColor];
+    }
+    return _footerView;
+}
+
+- (UIView *)boxView{
+    if (!_boxView) {
+        _boxView = [UIView lz_viewWithColor:kWhiteColor];
+    }
+    return _boxView;
+}
+
+- (NSMutableArray *)itemArray{
+    if (!_itemArray) {
+        _itemArray = [[NSMutableArray alloc] init];
+        NSArray* titleArr = @[@"",@"姓名",@"身份证",@"手机号"];
+        NSArray* classArr = @[@"",kUserInfo.realname,kUserInfo.idnumber,kUserInfo.mobile];
+        for (int j = 0; j < titleArr.count; j ++) {
+            TXGeneralModel *generalModel = [[TXGeneralModel alloc] init];
+            generalModel.title = [titleArr lz_safeObjectAtIndex:j];
+            generalModel.imageText = [classArr lz_safeObjectAtIndex:j];
+            [_itemArray addObject:generalModel];
+        }
+    }
+    return _itemArray;
+}
+
+- (UILabel *)priceLabel{
+    if (!_priceLabel) {
+        _priceLabel = [UILabel lz_labelWithTitle:@"" color:HexString(@"#FD9141") font:kFontSizeMedium15];
+    }
+    return _priceLabel;
+}
+
+- (UILabel *)titleLabel{
+    if (!_titleLabel) {
+        _titleLabel = [UILabel lz_labelWithTitle:@"订单总价" color:kTextColor204 font:kFontSizeMedium11];
+    }
+    return _titleLabel;
+}
+
+- (UIButton *)payButton{
+    if (!_payButton) {
+        _payButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_payButton setTitleColor:kWhiteColor forState:UIControlStateNormal];
+        _payButton.titleLabel.font = kFontSizeMedium15;
+        _payButton.tag = 2;
+        [_payButton setTitle:@"付款" forState:UIControlStateNormal];
+        [_payButton setBackgroundImage:imageHexString(@"#00ADFF") forState:UIControlStateNormal];
+        MV(weakSelf);
+        [_payButton lz_handleControlEvent:UIControlEventTouchUpInside withBlock:^{
+            [weakSelf submitOnClick];
+        }];
+    }
+    return _payButton;
+}
+
+@end

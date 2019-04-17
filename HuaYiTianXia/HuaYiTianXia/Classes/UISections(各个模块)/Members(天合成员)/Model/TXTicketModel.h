@@ -39,42 +39,42 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface TicketModel : NSObject
 
-/*航班ID*/
+/**航班ID*/
 @property (nonatomic, strong) NSArray *uniq_key;
-/*航班号*/
+/**航班号*/
 @property (nonatomic, copy) NSString *flight_number;
 @property (nonatomic, copy) NSString *reason;
-/*航空公司*/
+/**航空公司*/
 @property (nonatomic, copy) NSString *airline;
-/*机型*/
+/**机型*/
 @property (nonatomic, copy) NSString *model;
-/*起飞时间*/
+/**起飞时间*/
 @property (nonatomic, copy) NSString *dep_time;
-/*起飞机场*/
+/**起飞机场*/
 @property (nonatomic, copy) NSString *dep_airport;
-/*起飞航站楼*/
+/**起飞航站楼*/
 @property (nonatomic, copy) NSString *dep_airport_term;
-/*到达时间*/
+/**到达时间*/
 @property (nonatomic, copy) NSString *arv_time;
-/*到达机场*/
+/**到达机场*/
 @property (nonatomic, copy) NSString *arv_airport;
-/*到达航站楼*/
+/**到达航站楼*/
 @property (nonatomic, copy) NSString *arv_airport_term;
-/*准点率*/
+/**准点率*/
 @property (nonatomic, copy) NSString *ontime_rate;
-/*转机*/
+/**转机*/
 @property (nonatomic, strong) NSArray *transfer_flights;
 
-/*价格*/
+/**价格*/
 @property (nonatomic, strong) NSMutableArray<TicketPricesModel *> *prices;
 @end
 
 @interface TicketPricesModel : NSObject
-/*经济舱"*/
+/**经济舱"*/
 @property (nonatomic, copy) NSString *type;
-/*价格（元）*/
+/**价格（元）*/
 @property (nonatomic, copy) NSString *price;
-/*折扣*/
+/**折扣*/
 @property (nonatomic, copy) NSString *discount;
 @end
 NS_ASSUME_NONNULL_END

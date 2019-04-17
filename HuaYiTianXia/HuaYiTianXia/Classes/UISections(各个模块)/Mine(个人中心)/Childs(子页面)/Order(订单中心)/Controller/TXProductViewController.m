@@ -45,6 +45,9 @@ static NSString * const reuseIdentifier = @"TXProductTableViewCell";
     if ([result isKindOfClass:[NSDictionary class]]) {
         TXOrderModel *model = [TXOrderModel mj_objectWithKeyValues:result];
         if (model.errorcode == 20000) {
+            if (PullDown) {
+                [self.dataArray removeAllObjects];
+            }
             [self.dataArray addObjectsFromArray:model.data.records.mutableCopy];
         }
     }

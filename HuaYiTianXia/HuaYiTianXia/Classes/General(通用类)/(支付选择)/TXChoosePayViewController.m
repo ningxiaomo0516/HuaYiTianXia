@@ -108,7 +108,7 @@ static NSString * const reuseIdentifier = @"TXChoosePayTableViewCell";
     TXChoosePayTableViewCell *tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
     tools.titleLabel.text = model.title;
     tools.imagesView.image = kGetImage(model.imageText);
-    tools.chooseBtn.hidden = YES;
+    
     return tools;
 }
 
@@ -141,7 +141,7 @@ static NSString * const reuseIdentifier = @"TXChoosePayTableViewCell";
     //    remarks    否    String    用户购买备注
     //    payType    是    int    0:支付宝 1:微信 2：余额支付
     //    currency    是    Double    vr币数量
-    
+    kMBShowHUD(@"");
     [parameter setObject:self.recordsModel.title forKey:@"title"];
     [parameter setObject:@(self.recordsModel.purchaseType) forKey:@"purchaseType"];
     [parameter setObject:@([self.recordsModel.price doubleValue]) forKey:@"priceMoney"];
@@ -172,13 +172,14 @@ static NSString * const reuseIdentifier = @"TXChoosePayTableViewCell";
                 Toast(model.message);
             }
         }
+        kMBHideHUD;
     } failure:^(NSError *error) {
         TTLog(@"error --- %@",error);
+        kMBHideHUD;
     }];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
     [self GenerateOrderData:indexPath.row];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }

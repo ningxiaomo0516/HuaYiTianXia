@@ -17,6 +17,7 @@
 #import "TXGoodsH5TableViewCell.h"
 #import "TXPayOrderViewController.h"
 #import "TXChoosePayViewController.h"
+#import "TXLoginViewController.h"
 
 static NSString * const reuseIdentifierBanner   = @"TXMallGoodsBannerTableViewCell";
 static NSString * const reuseIdentifierDetails  = @"TXMallGoodsDetailsTableViewCell";
@@ -90,23 +91,38 @@ TXMallGoodsSpecTableViewCellDelegate,WKUIDelegate,WKNavigationDelegate>
 /// 立即投保
 - (void) saveBtnClick:(UIButton *)sender{
     TTLog(@"self.pageType -- %ld",self.pageType);
-    if (self.pageType == 0) {
-        TXSubmitOrderViewController *vc = [[TXSubmitOrderViewController alloc] initNewsRecordsModel:self.model];
-        TTPushVC(vc);
-    }else if(self.pageType == 1){
-        TXPayOrderViewController *vc = [[TXPayOrderViewController alloc] initNewsRecordsModel:self.model];
-        vc.totalPriceBlock = ^(NSString * _Nonnull totalPrice) {
-//            model.price = totalPrice;
-        };
-        [self sc_bottomPresentController:vc presentedHeight:IPHONE6_W(kiPhoneX_T(420)) completeHandle:^(BOOL presented) {
-            if (presented) {
-                TTLog(@"弹出了");
-            }else{
-                TTLog(@"消失了");
-            }
-        }];
+    
+    if (kUserInfo.isLogin) {
+        if (self.pageType == 0) {
+            ///// 记录当前是商城购买
+            kUserInfo.topupType = 2;
+            [kUserInfo dump];
+            TXSubmitOrderViewController *vc = [[TXSubmitOrderViewController alloc] initNewsRecordsModel:self.model];
+            TTPushVC(vc);
+        }else if(self.pageType == 1){
+            ///// 记录当前是农保购买
+            kUserInfo.topupType = 3;
+            [kUserInfo dump];
+            TXPayOrderViewController *vc = [[TXPayOrderViewController alloc] initNewsRecordsModel:self.model];
+            vc.totalPriceBlock = ^(NSString * _Nonnull totalPrice) {
+                //            model.price = totalPrice;
+            };
+            [self sc_bottomPresentController:vc presentedHeight:IPHONE6_W(kiPhoneX_T(420)) completeHandle:^(BOOL presented) {
+                if (presented) {
+                    TTLog(@"弹出了");
+                }else{
+                    TTLog(@"消失了");
+                }
+            }];
+        }else{
+            Toast(@"当前按钮点击无效");
+        }
     }else{
-        Toast(@"当前按钮点击无效");
+        TXLoginViewController *view = [[TXLoginViewController alloc] init];
+        LZNavigationController *navigation = [[LZNavigationController alloc] initWithRootViewController:view];
+        [self presentViewController:navigation animated:YES completion:^{
+            TTLog(@"个人信息修改");
+        }];
     }
 }
 

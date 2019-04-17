@@ -124,6 +124,8 @@ static NSString * const reuseIdentifierBanner = @"TXMineBannerTableViewCell";
                 tools.imagesArrow.hidden = YES;
             }else if (kUserInfo.isValidation==1) {
                 tools.subtitleLabel.text = @"认证中";
+            }else if (kUserInfo.isValidation==3) {
+                tools.subtitleLabel.text = @"认证失败";
             }else{
                 tools.subtitleLabel.text = @"未实名认证";
             }

@@ -25,7 +25,8 @@
 #define MV(weakSelf)  __weak __typeof(&*self)weakSelf = self;
 
 #define Toast(tips) [self tt_make:tips]
-
+#define kMBShowHUD(message) [TTHUDManager showHUDMessage:message]
+#define kMBHideHUD [TTHUDManager hide]
 // 1.RGBA
 #define kColorWithRGBA(r, g, b, a) [UIColor colorWithRed:(r)/255.0f green:(g)/255.0f blue:(b)/255.0f alpha:(a)]
 #define kColorWithRGB(r,g,b) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:1]

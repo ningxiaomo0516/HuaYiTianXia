@@ -13,8 +13,11 @@ NS_ASSUME_NONNULL_BEGIN
 @interface TXChoosePayTableViewCell : UITableViewCell
 @property (nonatomic, strong) UIImageView   *imagesView;
 @property (nonatomic, strong) UILabel       *titleLabel;
-@property (nonatomic, strong) UIButton      *chooseBtn;
 @property (nonatomic, strong) UIView        *linerView;
+/// 支付宝
+@property (nonatomic, strong) UIButton      *alipayBtn;
+/// 微信
+@property (nonatomic, strong) UIButton      *wechatBtn;
 @end
 
 NS_ASSUME_NONNULL_END

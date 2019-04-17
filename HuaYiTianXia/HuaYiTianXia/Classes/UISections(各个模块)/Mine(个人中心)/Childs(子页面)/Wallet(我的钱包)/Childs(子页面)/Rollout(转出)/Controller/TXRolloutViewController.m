@@ -48,6 +48,7 @@ static NSString * const reuseIdentifierHeader = @"TXRolloutHeaderTableViewCell";
 /// 转账请求
 - (void) transferRequest{
 
+    kMBShowHUD(@"");
     NSInteger currency = [self.currencyText integerValue];
     NSMutableDictionary *parameter = [[NSMutableDictionary alloc] init];
     [parameter setObject:self.accountText forKey:@"mobile"];
@@ -68,8 +69,10 @@ static NSString * const reuseIdentifierHeader = @"TXRolloutHeaderTableViewCell";
         }else{
             Toast(@"获取城市数据失败");
         }
+        kMBHideHUD;
     } failure:^(NSError *error) {
         TTLog(@"error --- %@",error);
+        kMBHideHUD;
     }];
 }
 

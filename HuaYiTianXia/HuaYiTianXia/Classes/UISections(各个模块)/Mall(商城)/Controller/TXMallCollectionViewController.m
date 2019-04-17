@@ -76,7 +76,9 @@ static NSString* reuseIdentifierMall = @"TXMallCollectionViewCell";
             TTLog(@"result -- %@",result);
             TXNewsArrayModel *model = [TXNewsArrayModel mj_objectWithKeyValues:result];
             [self.dataArray addObjectsFromArray:model.data.records];
-            [self.bannerArray addObjectsFromArray:model.banners];
+            if (self.pageIndex==1) {
+                [self.bannerArray addObjectsFromArray:model.banners];
+            }
             [self.collectionView reloadData];
         }else{
             Toast(@"获取城市数据失败");

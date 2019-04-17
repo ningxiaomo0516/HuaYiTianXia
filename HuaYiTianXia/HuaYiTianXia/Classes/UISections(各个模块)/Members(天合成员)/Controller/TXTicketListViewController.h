@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface TXTicketListViewController : TTBaseTableViewController
-- (id)initTicketListWithURLString:URLString parameter:(NSMutableDictionary *)parameter;
+- (id)initTicketListWithURLString:(NSString *)URLString parameter:(NSMutableDictionary *)parameter;
 @end
 
 NS_ASSUME_NONNULL_END
