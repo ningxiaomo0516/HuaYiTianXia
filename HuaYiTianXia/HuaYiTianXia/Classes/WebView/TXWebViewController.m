@@ -8,6 +8,7 @@
 
 #import "TXWebViewController.h"
 #import <WebKit/WebKit.h>
+#import "TXShareViewController.h"
 
 @interface TXWebViewController ()<WKNavigationDelegate,WKUIDelegate>
 @property (nonatomic, strong) WKWebView *wkWebView;
@@ -31,6 +32,52 @@
                                                                     action:@selector(didTapPopButton:)];
         self.navigationItem.leftBarButtonItem = leftItem;
     }
+    
+    UIImage *rightImg = kGetImage(@"live_btn_share");
+    rightImg = [rightImg imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithImage:rightImg
+                                                                  style:UIBarButtonItemStylePlain
+                                                                 target:self
+                                                                 action:@selector(didTapShareButton:)];
+    self.navigationItem.rightBarButtonItem = rightItem;
+}
+
+/// 分享到第三方平台
+- (void)didTapShareButton:(UIBarButtonItem *)barButtonItem {
+    TXShareViewController *vc = [[TXShareViewController alloc] init];
+    CGFloat height = IPHONE6_W(150)+kTabBarHeight;
+    vc.selectItemBlock = ^(NSInteger idx, NSString * _Nonnull title) {
+        SCShareModel *model = [[SCShareModel alloc] init];
+        model.sharetitle = self.title;
+        model.h5Url = self.webUrl;
+        SSDKPlatformType type = -101;
+        if ([title isEqualToString:@"微信"]) {
+            type = SSDKPlatformSubTypeWechatSession;
+        }else if ([title isEqualToString:@"朋友圈"]){
+            type = SSDKPlatformSubTypeWechatTimeline;
+        }else if ([title isEqualToString:@"QQ好友"]){
+            type = SSDKPlatformSubTypeQQFriend;
+        }else if ([title isEqualToString:@"QQ空间"]){
+            type = SSDKPlatformSubTypeQZone;
+        }else if ([title isEqualToString:@"微博"]){
+            type = SSDKPlatformTypeSinaWeibo;
+        }else if ([title isEqualToString:@"复制链接"]){
+//            UIPasteboard *copyStr = [UIPasteboard generalPasteboard];
+//            copyStr.string = shareModel.videoUrl;
+//            [pv.playContainerView makeToast:@"链接复制成功" duration:2 position:CSToastPositionCenter];
+        }
+        [SCShareTools shareWithPlatformType:type shareDataModel:model shareresult:^(NSString *shareResultStr) {
+            [self sc_dismissVC];
+            Toast(shareResultStr);
+        }];
+    };
+    [self sc_bottomPresentController:vc presentedHeight:height completeHandle:^(BOOL presented) {
+        if (presented) {
+            TTLog(@"弹出了");
+        }else{
+            TTLog(@"消失了");
+        }
+    }];
 }
 
 //// 加载数据

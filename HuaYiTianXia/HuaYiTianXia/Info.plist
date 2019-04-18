@@ -104,5 +104,51 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>MOBAppKey</key>
+	<string>21412472c8156</string>
+	<key>MOBAppSecret</key>
+	<string></string>
+	<key>qq.com</key>
+	<dict>
+		<key>NSExceptionAllowsInsecureHTTPLoads</key>
+		<true/>
+		<key>NSExceptionRequiresForwardSecrecy</key>
+		<false/>
+		<key>NSIncludesSubdomains</key>
+		<true/>
+	</dict>
+	<key>sina.com.cn</key>
+	<dict>
+		<key>NSExceptionAllowsInsecureHTTPLoads</key>
+		<true/>
+		<key>NSExceptionMinimumTLSVersion</key>
+		<string>TLSv1.0</string>
+		<key>NSExceptionRequiresForwardSecrecy</key>
+		<false/>
+		<key>NSIncludesSubdomains</key>
+		<true/>
+	</dict>
+	<key>weibo.cn</key>
+	<dict>
+		<key>NSExceptionAllowsInsecureHTTPLoads</key>
+		<true/>
+		<key>NSExceptionMinimumTLSVersion</key>
+		<string>TLSv1.0</string>
+		<key>NSExceptionRequiresForwardSecrecy</key>
+		<false/>
+		<key>NSIncludesSubdomains</key>
+		<true/>
+	</dict>
+	<key>weibo.com</key>
+	<dict>
+		<key>NSExceptionAllowsInsecureHTTPLoads</key>
+		<true/>
+		<key>NSExceptionMinimumTLSVersion</key>
+		<string>TLSv1.0</string>
+		<key>NSExceptionRequiresForwardSecrecy</key>
+		<false/>
+		<key>NSIncludesSubdomains</key>
+		<true/>
+	</dict>
 </dict>
 </plist>

@@ -10,7 +10,7 @@
 #import "LZRootViewController.h"
 #import "IQKeyboardManager.h"
 #import "TTGuidePages.h"
-
+#import "AppDelegate+TXShare.h"
 #import <AVFoundation/AVFoundation.h>
 //推送
 #import "JPUSHService.h"
@@ -38,8 +38,11 @@
     if (@available(iOS 11.0, *)) {
         [[UIScrollView appearance] setContentInsetAdjustmentBehavior:UIScrollViewContentInsetAdjustmentNever];
     }
+    [self registLocalNotificationWithOptions:launchOptions];
     //配置键盘
     [IQKeyboardManager sharedManager];
+    /// 注册分享
+    [self registerMobLoginAndShare];
     /// 注册微信AppId
     [WXApi registerApp:kWechatAppId enableMTA:YES];
     
@@ -144,6 +147,15 @@
 }
 - (void) setSelectedIndex{
     [self.window.rootViewController.tabBarController setSelectedIndex:0];
+}
+
+#pragma mark  本地通知（预约）
+- (void)registLocalNotificationWithOptions:(NSDictionary *)launchOptions {
+    UILocalNotification *notification = [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
+    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
+    if (notification) {
+        //        NSString* kid = notification.userInfo[@"id"];
+    }
 }
 
 #pragma mark ------ 微信支付处理 ------

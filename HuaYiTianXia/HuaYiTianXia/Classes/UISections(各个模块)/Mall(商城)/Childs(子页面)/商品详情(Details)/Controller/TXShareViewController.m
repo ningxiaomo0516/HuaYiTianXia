@@ -96,7 +96,10 @@ static NSString* reuseIdentifierShareTools = @"TXShareToolsCollectionViewCell";
 
 /// 点击collectionViewCell
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    TTLog(@"indxPath -- %ld",(long)indexPath.row);
+    TXGeneralModel* templateModel = self.dataArray[indexPath.row];
+    if (self.selectItemBlock) {
+        self.selectItemBlock(indexPath.row,templateModel.title);
+    }
 }
 
 /// 同一行的cell的间距

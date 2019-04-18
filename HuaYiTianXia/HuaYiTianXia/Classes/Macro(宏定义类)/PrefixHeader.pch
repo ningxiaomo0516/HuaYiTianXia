@@ -45,6 +45,16 @@
 #import "LZActionSheet.h"
 #import "TTHUDManager.h"
 
+/// 第三方分享
+#import <ShareSDK/ShareSDK.h>
+#import <ShareSDKConnector/ShareSDKConnector.h>
+#import <TencentOpenAPI/TencentOAuth.h>
+#import <TencentOpenAPI/QQApiInterface.h>
+#import <ShareSDKExtension/ShareSDK+Extension.h>
+#import "WXApi.h"
+#import "WeiboSDK.h"
+#import "SCShareTools.h"
+
 #import "LZNavigationController.h"
 #import "UIViewController+LZNavigationController.h"
 /// 弹窗类
@@ -58,7 +68,7 @@
 /// 网络请求工具
 #import "SCHttpTools.h"
 /// 分享(微信)
-#import "WXApi.h"
+//#import "WXApi.h"
 /// 支付宝
 #import <AlipaySDK/AlipaySDK.h>
 #endif /* PrefixHeader_pch */
