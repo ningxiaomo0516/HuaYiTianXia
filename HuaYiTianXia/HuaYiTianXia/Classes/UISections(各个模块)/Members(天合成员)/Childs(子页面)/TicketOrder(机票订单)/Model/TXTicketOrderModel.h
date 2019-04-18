@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *message;
 /// 错误码
 @property (nonatomic, assign) NSInteger errorcode;
-@property (nonatomic, strong) NSMutableArray<TicketOrderData *> *data;
+@property (nonatomic, strong) TicketOrderData *data;
 @end
 
 @interface TicketOrderData : NSObject
@@ -31,11 +31,11 @@ NS_ASSUME_NONNULL_BEGIN
 /// 总页数
 @property (nonatomic, assign) NSInteger total;
 /// records 新闻列表集合
-@property (nonatomic, strong) NSMutableArray<TicketOrderModel *> *records;
+@property (nonatomic, strong) NSMutableArray<TicketOrderModel *> *list;
 @end
 
 @interface TicketOrderModel : NSObject
-@property (nonatomic, assign) NSInteger kid;
+@property (nonatomic, copy) NSString *kid;
 //// 出发地
 @property (nonatomic, copy) NSString *destination;
 /// 订票人姓名

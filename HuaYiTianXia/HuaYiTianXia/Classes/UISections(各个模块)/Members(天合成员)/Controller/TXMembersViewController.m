@@ -104,7 +104,6 @@ static NSString* reuseIdentifierMall = @"TXMembersbleCollectionViewCell";
     }else if (indexPath.section==2) {
         TXMembersbleCollectionViewCell *tools = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifierMall forIndexPath:indexPath];
         tools.imagesView.image = kGetImage(templateModel.imageText);
-        tools.titleLabel.text = templateModel.imageText;
         return tools;
     }else{
         TXMallToolsCollectionViewCell *tools = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];

@@ -17,6 +17,10 @@ static NSString * const reuseIdentifier = @"TXTicketOrderTableViewCell";
 @property (nonatomic, strong) NSMutableArray *dataArray;
 
 @property (nonatomic, strong) SCNoDataView *noDataView;
+/// 每页多少数据
+@property (nonatomic, assign) NSInteger pageSize;
+/// 当前页
+@property (nonatomic, assign) NSInteger pageIndex;
 
 @end
 
@@ -28,9 +32,19 @@ static NSString * const reuseIdentifier = @"TXTicketOrderTableViewCell";
     self.title = @"机票预订";
     [self initView];
     [self.view showLoadingViewWithText:@"加载中..."];
+    self.pageSize = 20;
+    self.pageIndex = 1;
     [self requestTicketOrderData];
     // 下拉刷新
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        self.pageIndex = 1;
+        [self.dataArray removeAllObjects];
+        [self requestTicketOrderData];
+    }];
+    
+    /// 上拉加载
+    self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+        self.pageIndex++;// 页码+1
         [self requestTicketOrderData];
     }];
 }
@@ -40,22 +54,23 @@ static NSString * const reuseIdentifier = @"TXTicketOrderTableViewCell";
 }
 
 - (void) requestTicketOrderData{
-//    NSMutableDictionary *parameter = [[NSMutableDictionary alloc] init];
-//    [parameter setObject:@(1) forKey:@"page"];     // 当前页
-//    [parameter setObject:@(20) forKey:@"pageSize"];  // 每页条数
-    [SCHttpTools postWithURLString:kHttpURL(@"aircraftorder/GetAircraftorder") parameter:nil success:^(id responseObject) {
+    NSMutableDictionary *parameter = [[NSMutableDictionary alloc] init];
+    [parameter setObject:@(self.pageIndex) forKey:@"page"];     // 当前页
+    [parameter setObject:@(self.pageSize) forKey:@"pageSize"];  // 每页条数
+    [SCHttpTools postWithURLString:kHttpURL(@"aircraftorder/GetAircraftorder") parameter:parameter success:^(id responseObject) {
         NSDictionary *result = responseObject;
         if ([result isKindOfClass:[NSDictionary class]]) {
             TTLog(@" result --- %@",[Utils lz_dataWithJSONObject:result]);
             TXTicketOrderModel *model = [TXTicketOrderModel mj_objectWithKeyValues:result];
             if (model.errorcode == 20000) {
-                [self.dataArray addObjectsFromArray:model.data];
+                [self.dataArray addObjectsFromArray:model.data.list];
             }else{
                 Toast(model.message);
             }
             [self analysisData];
             [self.tableView reloadData];
             [self.tableView.mj_header endRefreshing];
+            [self.tableView.mj_footer endRefreshing];
             [self.view dismissLoadingView];
         }else{
             Toast(@"个人中心数据获取失败");
@@ -64,6 +79,7 @@ static NSString * const reuseIdentifier = @"TXTicketOrderTableViewCell";
     } failure:^(NSError *error) {
         TTLog(@" -- error -- %@",error);
         [self.tableView.mj_header endRefreshing];
+        [self.tableView.mj_footer endRefreshing];
         [self.view dismissLoadingView];
     }];
 }
@@ -102,7 +118,7 @@ static NSString * const reuseIdentifier = @"TXTicketOrderTableViewCell";
  
  /// 返回多少
  - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-     return self.dataArray.count;
+     return 1;
  }
  
 #pragma mark -- 设置Header高度

@@ -34,6 +34,7 @@
     [self addSubview:self.subtitleLabel];
     [self addSubview:self.imagesArrow];
     [self addSubview:self.imagesAvatar];
+    [self addSubview:self.linerView];
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(@(IPHONE6_W(15)));
         make.centerY.equalTo(self);
@@ -53,6 +54,12 @@
         make.right.equalTo(self.imagesArrow.mas_left);
         make.width.height.equalTo(@(IPHONE6_W(41)));
         make.centerY.equalTo(self);
+    }];
+    
+    [self.linerView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(@(IPHONE6_W(15)));
+        make.right.bottom.equalTo(self);
+        make.height.equalTo(@(0.6));
     }];
 }
 
@@ -86,5 +93,13 @@
         _imagesAvatar.hidden = YES;
     }
     return _imagesAvatar;
+}
+
+- (UIView *)linerView{
+    if (!_linerView) {
+        _linerView = [UIView lz_viewWithColor:kLinerViewColor];
+        _linerView.hidden = YES;
+    }
+    return _linerView;
 }
 @end

@@ -44,8 +44,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *inviteCode;
 /// 是否已购买
 @property (nonatomic, assign) NSInteger ispay;
-/// 用户名(手机号)
-@property (nonatomic, copy) NSString *mobile;
+/// 登录账号
+@property (nonatomic, copy) NSString *account;
 /// 姓名
 @property (nonatomic, copy) NSString *realname;
 /// 昵称
@@ -53,13 +53,15 @@ NS_ASSUME_NONNULL_BEGIN
 /// 联系方式
 @property (nonatomic, copy) NSString *phone;
 /// 密码
-@property (nonatomic, copy) NSString *pwd;
+@property (nonatomic, copy) NSString *password;
 /// 性别(0:男 1：女)
 @property (nonatomic, assign) NSInteger sex;
 /// 邀请成功人数
 @property (nonatomic, copy) NSString *suinvited;
 /// 注册时间
 @property (nonatomic, copy) NSString *registertime;
+/// 最近登录时间
+@property (nonatomic, copy) NSString *lastTime;
 /// 上级代理ID
 @property (nonatomic, copy) NSString *upproxy;
 /// VR币
@@ -73,6 +75,24 @@ NS_ASSUME_NONNULL_BEGIN
 /// 0：未设置交易密码 1：已设置交易密码
 @property (nonatomic, assign) NSInteger tranPwd;
 
+
+/// 天合会员当前级别
+@property (nonatomic, copy) NSString *thGrade;
+/// 天合会员总登记数
+@property (nonatomic, copy) NSString *thGradeCount;
+/// 天合会员等级名称（需判断是否为""）
+@property (nonatomic, copy) NSString *thGradeName;
+/// 分公司名称
+@property (nonatomic, copy) NSString *companyname;
+/// 分公司已加入人数
+@property (nonatomic, copy) NSString *joined;
+/// 分公司允许加入总人数
+@property (nonatomic, copy) NSString *totalPeople;
+/// 会员类型名称
+@property (nonatomic, copy) NSString *userTypeName;
+/// 会员类型 0：普通会员 1：天合会员
+@property (nonatomic, assign) NSInteger usertype;
+
 @property (nonatomic, strong) NSMutableArray<NewsBannerModel *> *banners;
 
 /// 默认收货地址
@@ -81,6 +101,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *receivedUserName;
 /// 收货人电话
 @property (nonatomic, copy) NSString *receivedTelphone;
+
+
+//// 登录中的未知参数
+@property (nonatomic, copy) NSString *ifStart;
+@property (nonatomic, copy) NSString *ifActivate;
 
 + (instancetype)shared;
 /**

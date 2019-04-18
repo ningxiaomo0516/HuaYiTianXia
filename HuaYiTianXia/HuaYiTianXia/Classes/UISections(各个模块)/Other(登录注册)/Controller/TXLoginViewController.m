@@ -49,6 +49,7 @@
     
     [self.protocolButton lz_handleControlEvent:UIControlEventTouchUpInside withBlock:^{
        TXWebViewController *vc = [[TXWebViewController alloc] init];
+        vc.title = @"华翼天下服务协议";
         vc.webUrl = kAppendH5URL(DomainName, UserAgreeH5,@"");
         TTPushVC(vc);
     }];
@@ -75,7 +76,7 @@
         Toast(@"请输入登录密码");
         return;
     }
-    [TTHUDManager showHUDMessage:@"登录中..."];
+    kShowMBProgressHUD(self.view);
     NSMutableDictionary *parameter = [[NSMutableDictionary alloc] init];
     [parameter setObject:self.telTextField.text forKey:@"mobile"];
     [parameter setObject:self.pwdTextField.text forKey:@"pwd"];
@@ -83,6 +84,7 @@
         if (responseObject){
             id result = responseObject;
             if (result) {
+                TTLog(@"登录成功过数据集 -- %@",[Utils lz_dataWithJSONObject:[result lz_objectForKey:@"obj"]]);
                 TTUserDataModel *model = [TTUserDataModel mj_objectWithKeyValues:result];
                 if (model.errorcode == 20000) {
                     TTUserModel *userModel = [TTUserModel shared];
@@ -90,16 +92,18 @@
                     NSDictionary *dataDic = [result lz_objectForKey:@"obj"];
                     NSArray *dictKeysArray = [[result lz_objectForKey:@"obj"] allKeys];
                     [dictionary setObject:model.data.uid forKey:@"uid"];
+                    [dictionary setObject:model.data.account forKey:@"account"];
                     [dictionary setObject:model.data.username forKey:@"username"];
                     [dictionary setObject:model.data.realname forKey:@"realname"];
                     [dictionary setObject:model.data.avatar forKey:@"avatar"];
                     [dictionary setObject:model.data.registertime forKey:@"registertime"];
                     [dictionary setObject:model.data.idnumber forKey:@"idnumber"];
                     [dictionary setObject:model.data.totalAssets forKey:@"totalAssets"];
+                    [dictionary setObject:@(model.data.isValidation) forKey:@"isValidation"];
                     for (int i = 0; i<dictKeysArray.count; i++) {
                         NSString *key = dictKeysArray[i];
                         NSString *obj = [dataDic objectForKey:key];
-                        NSArray *keyArray = @[@"id",@"nickName",@"name",@"headImg",@"time",@"code",@"assets"];
+                        NSArray *keyArray = @[@"id",@"mobile",@"nickName",@"name",@"headImg",@"time",@"code",@"assets",@"type"];
                         for (NSString *keyArrStr in keyArray) {
                             if ([key isEqualToString:keyArrStr]) {
                                 break ;
@@ -118,10 +122,10 @@
                 }
             }
         }
-        [TTHUDManager hide];
+        kHideMBProgressHUD(self.view);
     } failure:^(NSError *error) {
         TTLog(@"error --- %@",error);
-        [TTHUDManager hide];
+        kHideMBProgressHUD(self.view);
     }];
 }
 

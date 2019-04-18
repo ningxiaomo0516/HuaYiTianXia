@@ -26,7 +26,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.title = @"交易密码";
+    
+    if (self.pageType==2) {
+        self.title = @"重置交易密码";
+        self.titleLabel.text = @"重置交易密码";
+        self.subtitleLabel.text = @"输入支付密码,完成身份验证";
+    }else{
+        self.title = @"交易密码";
+    }
     [self initView];
     
     CGFloat left = IPHONE6_W(35);
@@ -49,6 +56,33 @@
             }
         }else if(self.pageType==1){
             weakSelf.passwords = passwordText;
+        }else if(self.pageType==2){
+            if (passwordText.length==6) {
+                [weakSelf.passView clearUpPassword];
+                /// 发送支付验证请求(验证当前y支付密码)
+                NSMutableDictionary *parameter = [[NSMutableDictionary alloc] init];
+                [parameter setObject:passwordText forKey:@"tranPwd"];
+                kShowMBProgressHUD(weakSelf.view);
+                [SCHttpTools postWithURLString:kHttpURL(@"customer/TranPwdVerif") parameter:parameter success:^(id responseObject) {
+                    NSDictionary *result = responseObject;
+                    if ([result isKindOfClass:[NSDictionary class]]) {
+                        TXGeneralModel *model = [TXGeneralModel mj_objectWithKeyValues:result];
+                        if (model.errorcode == 20000) {
+                            TXResetTradingViewController *vc = [[TXResetTradingViewController alloc] init];
+                            vc.titleLabel.text = @"重置交易密码";
+                            vc.subtitleLabel.text = @"设置6位数字支付密码";
+                            vc.saveButton.hidden = NO;
+                            vc.pageType = 1;
+                            [weakSelf.navigationController pushViewController:vc animated:YES];
+                        }else{
+                            [weakSelf tt_make:@"交易密码验证失败"];
+                        }
+                    }
+                    kHideMBProgressHUD(weakSelf.view);
+                } failure:^(NSError *error) {
+                    kHideMBProgressHUD(weakSelf.view);
+                }];
+            }
         }
     };
 }
@@ -59,12 +93,15 @@
         Toast(@"请输入确认密码");
         return;
     }
-
+    if (self.pageType!=2) {
+        self.password = self.passwords;
+    }
     if (self.passwords != self.password) {
         Toast(@"两次交易密码不一致");
         return;
     }
-    kMBShowHUD(@"");
+    [TTHUDManager showHUDMessage:@"请稍后..."];
+    kShowMBProgressHUD(self.view);
     NSMutableDictionary *parameter = [[NSMutableDictionary alloc] init];
     [parameter setObject:self.password forKey:@"tranPwd"];
     [parameter setObject:self.passwords forKey:@"confirmpwd"];
@@ -83,15 +120,15 @@
 //                    }
 //                }
             }else{
-                Toast(model.message);
+                Toast(@"交易密码验证失败");
             }
         }else{
             Toast(@"交易密码设置失败");
         }
-        kMBHideHUD;
+        kHideMBProgressHUD(self.view);
     } failure:^(NSError *error) {
         TTLog(@" -- error -- %@",error);
-        kMBHideHUD;
+        kHideMBProgressHUD(self.view);
     }];
 }
 
@@ -144,7 +181,7 @@
 - (UILabel *)subtitleLabel{
     if (!_subtitleLabel) {
         _subtitleLabel = [UILabel lz_labelWithTitle:@"" color:kTextColor51 font:kFontSizeMedium15];
-        _subtitleLabel.text = @"请设置交易密码，用于交易严重。";
+        _subtitleLabel.text = @"请设置交易密码，用于交易验证。";
     }
     return _subtitleLabel;
 }

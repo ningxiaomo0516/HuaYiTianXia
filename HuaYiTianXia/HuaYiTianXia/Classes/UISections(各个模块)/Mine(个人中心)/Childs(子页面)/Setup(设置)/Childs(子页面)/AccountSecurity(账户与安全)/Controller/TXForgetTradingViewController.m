@@ -75,9 +75,9 @@ static NSString * const reuseIdentifiers = @"TXRegisteredTableViewCell";
  */
 - (IBAction)obtainVerificationCode:(id)sender {
     NSMutableDictionary *parameter = [[NSMutableDictionary alloc] init];
-    [parameter setObject:kUserInfo.mobile forKey:@"mobile"];
+    [parameter setObject:kUserInfo.account forKey:@"mobile"];
     [parameter setObject:@"1" forKey:@"type"];
-    kMBShowHUD(@"");
+    kShowMBProgressHUD(self.view);
     [SCHttpTools postWithURLString:@"customer/sendSMS" parameter:parameter success:^(id responseObject) {
         if (responseObject){
             id result = responseObject;
@@ -92,9 +92,9 @@ static NSString * const reuseIdentifiers = @"TXRegisteredTableViewCell";
                 }
             }
         }
-        kMBHideHUD;
+        kHideMBProgressHUD(self.view);;
     } failure:^(NSError *error) {
-        kMBHideHUD;
+        kHideMBProgressHUD(self.view);;
         //        [MBProgressHUD hideHUDForView:self.view];
         Toast(@"验证码发送失败");
         TTLog(@"error --- %@",error);
@@ -104,7 +104,7 @@ static NSString * const reuseIdentifiers = @"TXRegisteredTableViewCell";
 
 /// 验证身份信息和Code验证码
 - (void) validationIdentityInfo:(NSMutableDictionary *)parameter{
-    kMBShowHUD(@"");
+    kShowMBProgressHUD(self.view);
     [SCHttpTools postWithURLString:kHttpURL(@"customer/ForgetTranPwd") parameter:parameter success:^(id responseObject) {
         NSDictionary *result = responseObject;
         if ([result isKindOfClass:[NSDictionary class]]) {
@@ -120,10 +120,10 @@ static NSString * const reuseIdentifiers = @"TXRegisteredTableViewCell";
         }else{
             Toast(@"身份验证失败");
         }
-        kMBHideHUD;
+        kHideMBProgressHUD(self.view);;
     } failure:^(NSError *error) {
         TTLog(@" -- error -- %@",error);
-        kMBHideHUD;
+        kHideMBProgressHUD(self.view);;
     }];
 }
 
@@ -271,7 +271,7 @@ static NSString * const reuseIdentifiers = @"TXRegisteredTableViewCell";
     if (!_dataArray) {
         _dataArray = [[NSMutableArray alloc] init];
         NSArray* titleArr = @[@"手机号",@"验证码",@"真实姓名",@"身份证"];
-        NSArray* subtitleArr = @[kUserInfo.mobile,@"请输入验证码",@"请输入身份证姓名",@"请输入身份证号"];
+        NSArray* subtitleArr = @[kUserInfo.phone,@"请输入验证码",@"请输入身份证姓名",@"请输入身份证号"];
         for (int i=0; i<titleArr.count; i++) {
             TXGeneralModel *generalModel = [[TXGeneralModel alloc] init];
             generalModel.title = [titleArr lz_safeObjectAtIndex:i];

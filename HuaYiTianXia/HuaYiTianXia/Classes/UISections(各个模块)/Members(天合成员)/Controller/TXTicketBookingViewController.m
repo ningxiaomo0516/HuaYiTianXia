@@ -27,6 +27,7 @@ static NSString* reuseIdentifierInfo = @"TXTicketInfoTableViewCell";
 @property (nonatomic, strong) UIView *footerView;
 @property (nonatomic, strong) UIView *boxView;
 @property (nonatomic, strong) UILabel *priceLabel;
+@property (nonatomic, strong) UILabel *priceTipsLabel;
 @property (nonatomic, strong) UIButton *payButton;
 @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) TXTicketBookingTableViewCell  *toolsTicket;
@@ -45,7 +46,6 @@ static NSString* reuseIdentifierInfo = @"TXTicketInfoTableViewCell";
                 [self.dataArray addObject:model];
             }
         }
-        
         self.isSelected = NO;
     }
     return self;
@@ -67,7 +67,7 @@ static NSString* reuseIdentifierInfo = @"TXTicketInfoTableViewCell";
         Toast(@"请先选择机票");
         return;
     }
-    [TTHUDManager showHUDMessage:@""];
+    kShowMBProgressHUD(self.view);
     NSString *URLString = kHttpURL(@"aircraftorder/AddAircraftorder");
     NSMutableDictionary *parameter = [[NSMutableDictionary alloc] init];
     [parameter setObject:self.ticketModel.dep_airport forKey:@"origin"];
@@ -80,16 +80,16 @@ static NSString* reuseIdentifierInfo = @"TXTicketInfoTableViewCell";
         if ([result isKindOfClass:[NSDictionary class]]) {
             TTLog(@" result --- %@",[Utils lz_dataWithJSONObject:result]);
             TXTicketModel *model = [TXTicketModel mj_objectWithKeyValues:result];
-            [TTHUDManager hide];
+            kShowMBProgressHUD(self.view);
             if (model.errorcode==20000) {
                 [self.navigationController popViewControllerAnimated:YES];
             }
             Toast(model.message);
         }
-        [TTHUDManager hide];
+        kShowMBProgressHUD(self.view);
     } failure:^(NSError *error) {
         TTLog(@"机票查询信息 -- %@", error);
-        [TTHUDManager hide];
+        kShowMBProgressHUD(self.view);
     }];
 }
 
@@ -100,7 +100,9 @@ static NSString* reuseIdentifierInfo = @"TXTicketInfoTableViewCell";
     [self.footerView addSubview:self.boxView];
     [self.footerView addSubview:self.titleLabel];
     [self.footerView addSubview:self.priceLabel];
+    [self.footerView addSubview:self.priceTipsLabel];
     [self.footerView addSubview:self.payButton];
+    
     [self initViewConstraints];
 }
 
@@ -119,15 +121,18 @@ static NSString* reuseIdentifierInfo = @"TXTicketInfoTableViewCell";
         make.left.right.top.equalTo(self.footerView);
         make.height.equalTo(@(49));
     }];
-    [self.priceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(@(15));
-        make.top.equalTo(@(6));
-    }];
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.priceLabel);
-        make.bottom.equalTo(self.boxView.mas_bottom).offset(-6);
+        make.left.equalTo(@(15));
+        make.centerY.equalTo(self.boxView);
     }];
-    
+    [self.priceTipsLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.titleLabel.mas_right);
+        make.centerY.equalTo(self.boxView);
+    }];
+    [self.priceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.priceTipsLabel.mas_right);
+        make.centerY.equalTo(self.boxView);
+    }];
     [self.payButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.bottom.top.equalTo(self.boxView);
         make.width.equalTo(@(120));
@@ -164,6 +169,8 @@ static NSString* reuseIdentifierInfo = @"TXTicketInfoTableViewCell";
             return tools;
         }
     }
+    
+    return [UITableViewCell new];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -199,7 +206,7 @@ static NSString* reuseIdentifierInfo = @"TXTicketInfoTableViewCell";
     if (indexPath.section<=self.dataArray.count) {
         TicketPricesModel *model = self.dataArray[indexPath.section];
         TTLog(@" --- %@",model.price);
-        self.priceLabel.text = [NSString stringWithFormat:@"￥%@",model.price];
+        self.priceLabel.text = model.price;
         self.isSelected = YES;
 //        TXTicketBookingTableViewCell *cell = (TXTicketBookingTableViewCell *)[self tableView:tableView cellForRowAtIndexPath:indexPath];
 //        cell.imagesSelected.hidden = NO;
@@ -252,7 +259,7 @@ static NSString* reuseIdentifierInfo = @"TXTicketInfoTableViewCell";
     if (!_itemArray) {
         _itemArray = [[NSMutableArray alloc] init];
         NSArray* titleArr = @[@"",@"姓名",@"身份证",@"手机号"];
-        NSArray* classArr = @[@"",kUserInfo.realname,kUserInfo.idnumber,kUserInfo.mobile];
+        NSArray* classArr = @[@"",kUserInfo.realname,kUserInfo.idnumber,kUserInfo.phone];
         for (int j = 0; j < titleArr.count; j ++) {
             TXGeneralModel *generalModel = [[TXGeneralModel alloc] init];
             generalModel.title = [titleArr lz_safeObjectAtIndex:j];
@@ -265,14 +272,21 @@ static NSString* reuseIdentifierInfo = @"TXTicketInfoTableViewCell";
 
 - (UILabel *)priceLabel{
     if (!_priceLabel) {
-        _priceLabel = [UILabel lz_labelWithTitle:@"" color:HexString(@"#FD9141") font:kFontSizeMedium15];
+        _priceLabel = [UILabel lz_labelWithTitle:@"0" color:HexString(@"#FD9141") font:kFontSizeMedium25];
     }
     return _priceLabel;
 }
 
+- (UILabel *)priceTipsLabel{
+    if (!_priceTipsLabel) {
+        _priceTipsLabel = [UILabel lz_labelWithTitle:@"￥:" color:HexString(@"#FD9141") font:kFontSizeMedium15];
+    }
+    return _priceTipsLabel;
+}
+
 - (UILabel *)titleLabel{
     if (!_titleLabel) {
-        _titleLabel = [UILabel lz_labelWithTitle:@"订单总价" color:kTextColor204 font:kFontSizeMedium11];
+        _titleLabel = [UILabel lz_labelWithTitle:@"订单总价" color:kTextColor204 font:kFontSizeMedium15];
     }
     return _titleLabel;
 }

@@ -78,7 +78,7 @@
     [parameter setObject:self.textField.text forKey:@"nickName"];
     [parameter setObject:kUserInfo.avatar forKey:@"headImg"];
 //    [MBProgressHUD showMessage:@"" toView:self.view];
-    kMBShowHUD(@"");
+    kShowMBProgressHUD(self.view);
     [SCHttpTools postWithURLString:kHttpURL(@"customer/UpdateUserData") parameter:parameter success:^(id responseObject) {
         NSDictionary *result  = responseObject;
 //        [MBProgressHUD hideHUDForView:self.view];
@@ -95,11 +95,11 @@
                 Toast(model.message);
             }
         }
-        kMBHideHUD;
+        kHideMBProgressHUD(self.view);;
     } failure:^(NSError *error) {
 //        [MBProgressHUD hideHUDForView:self.view];
         TTLog(@"修改信息 -- %@", error);
-        kMBHideHUD;
+        kHideMBProgressHUD(self.view);;
     }];
 }
 

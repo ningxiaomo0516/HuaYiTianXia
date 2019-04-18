@@ -43,7 +43,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSArray *uniq_key;
 /**航班号*/
 @property (nonatomic, copy) NSString *flight_number;
-@property (nonatomic, copy) NSString *reason;
 /**航空公司*/
 @property (nonatomic, copy) NSString *airline;
 /**机型*/

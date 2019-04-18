@@ -19,6 +19,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) UIImageView *imagesAvatar;
 /// 右边箭头
 @property (nonatomic, strong) UIImageView *imagesArrow;
+/// 分割线
+@property (nonatomic, strong) UIView *linerView;
 @end
 
 NS_ASSUME_NONNULL_END

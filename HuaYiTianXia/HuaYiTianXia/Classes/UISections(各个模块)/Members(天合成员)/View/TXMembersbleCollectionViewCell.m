@@ -13,18 +13,13 @@
     if (self == [super initWithFrame:frame]) {
         self.contentView.backgroundColor = kClearColor;
         [self setupUI];
-        [self lz_setCornerRadius:5.0];
     }
     return self;
 }
 - (void) setupUI{
     [self addSubview:self.imagesView];
-    [self addSubview:self.titleLabel];
     [self.imagesView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.right.bottom .equalTo(self);
-    }];
-    [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.centerX.equalTo(self.imagesView);
     }];
 }
 
@@ -33,12 +28,5 @@
         _imagesView = [[UIImageView alloc] init];
     }
     return _imagesView;
-}
-
-- (UILabel *)titleLabel{
-    if (!_titleLabel) {
-        _titleLabel = [UILabel lz_labelWithTitle:@"" color:kWhiteColor font:kFontSizeScBold17];
-    }
-    return _titleLabel;
 }
 @end

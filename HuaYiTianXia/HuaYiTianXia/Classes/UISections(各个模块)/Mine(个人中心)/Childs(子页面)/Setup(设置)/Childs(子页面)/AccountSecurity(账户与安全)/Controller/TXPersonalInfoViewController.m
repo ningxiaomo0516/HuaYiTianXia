@@ -56,7 +56,7 @@ static NSString * const reuseIdentifier = @"TXMineTableViewCell";
     [SCHttpTools postWithURLString:kHttpURL(@"customer/UpdateUserData") parameter:parameter success:^(id responseObject) {
         NSDictionary *result  = responseObject;
         //        [MBProgressHUD hideHUDForView:self.view];
-        kMBShowHUD(@"上传中...");
+        kShowMBProgressHUD(self.view);
         TTLog(@" result --- %@",[Utils lz_dataWithJSONObject:result]);
         if (result){
             TXGeneralModel *model = [TXGeneralModel mj_objectWithKeyValues:result];
@@ -70,11 +70,11 @@ static NSString * const reuseIdentifier = @"TXMineTableViewCell";
                 Toast(model.message);
             }
         }
-        kMBHideHUD;
+        kHideMBProgressHUD(self.view);;
     } failure:^(NSError *error) {
         //        [MBProgressHUD hideHUDForView:self.view];
         TTLog(@"修改头像信息 -- %@", error);
-        kMBHideHUD;
+        kHideMBProgressHUD(self.view);;
     }];
 }
 

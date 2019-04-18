@@ -10,6 +10,7 @@
 #import "TXMineTableViewCell.h"
 #import "TXGeneralModel.h"
 #import "TXRealNameViewController.h"
+#import "TXResetTradingViewController.h"
 
 static NSString * const reuseIdentifier = @"TXMineTableViewCell";
 
@@ -70,7 +71,12 @@ static NSString * const reuseIdentifier = @"TXMineTableViewCell";
             vc.typePage = 1;
             TTPushVC(vc);
         }
+    }else if ([model.showClass isEqualToString:@"TXResetTradingViewController"]) {
+        TXResetTradingViewController *vc = [[TXResetTradingViewController alloc] init];
+        vc.pageType = 2;
+        TTPushVC(vc);
     }else{
+        
         Class controller = NSClassFromString(className);
         //    id controller = [[NSClassFromString(className) alloc] init];
         if (controller &&  [controller isSubclassOfClass:[UIViewController class]]){

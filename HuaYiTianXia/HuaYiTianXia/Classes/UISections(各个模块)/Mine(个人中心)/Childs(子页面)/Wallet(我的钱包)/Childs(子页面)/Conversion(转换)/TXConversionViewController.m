@@ -46,7 +46,7 @@ static NSString * const reuseIdentifierRollout = @"TXRolloutTableViewCell";
     }else{
         URLString = kHttpURL(@"customer/ARToStock");
     }
-    kMBShowHUD(@"");
+    kShowMBProgressHUD(self.view);
     NSMutableDictionary *parameter = [[NSMutableDictionary alloc] init];
     [parameter setObject:self.amountText forKey:@"arcurrency"];
     [SCHttpTools postWithURLString:URLString parameter:parameter success:^(id responseObject) {
@@ -64,10 +64,10 @@ static NSString * const reuseIdentifierRollout = @"TXRolloutTableViewCell";
         }else{
             Toast(@"获取城市数据失败");
         }
-        kMBHideHUD;
+        kHideMBProgressHUD(self.view);;
     } failure:^(NSError *error) {
         TTLog(@"error --- %@",error);
-        kMBHideHUD;
+        kHideMBProgressHUD(self.view);;
     }];
 }
 

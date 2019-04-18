@@ -195,7 +195,7 @@
 
 //// 保存实名认证数据
 - (void) saveRealNameData:(NSDictionary *)parameter{
-    kMBShowHUD(@"请稍后");
+    kShowMBProgressHUD(self.view);
     [SCHttpTools postWithURLString:kHttpURL(@"customer/Certification") parameter:parameter success:^(id responseObject) {
         NSDictionary *result = responseObject;
         if ([result isKindOfClass:[NSDictionary class]]) {
@@ -216,10 +216,10 @@
         }else{
             Toast(@"认证数据获取失败");
         }
-        kMBHideHUD;
+        kHideMBProgressHUD(self.view);;
     } failure:^(NSError *error) {
         TTLog(@" -- error -- %@",error);
-        kMBHideHUD;
+        kHideMBProgressHUD(self.view);;
     }];
 }
 

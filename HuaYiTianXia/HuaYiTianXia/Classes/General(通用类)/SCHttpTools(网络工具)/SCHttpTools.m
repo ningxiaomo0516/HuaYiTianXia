@@ -41,16 +41,16 @@ static AFHTTPSessionManager* manager_ = nil;
     URLString = [NSString stringWithFormat:@"%@%@",DynamicUrl,arrayURL[0]];
     URLString = [URLString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     URLString = [URLString stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
-    TTLog(@"GetUrl -- %@",URLString);
+    TTLog(@"GetUrl -- %@ - -- %ld --- %@",URLString,arrayURL.count,kUserInfo.uid);
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     [manager.requestSerializer setTimeoutInterval:timeoutInterval];
     manager.requestSerializer.cachePolicy = NSURLRequestReloadIgnoringLocalAndRemoteCacheData;
     [[NSURLCache sharedURLCache] removeAllCachedResponses];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json",@"text/plain", @"text/javascript",@"text/html", nil];
-    
+    TTLog(@"kUserInfo.account -- %@",kUserInfo.account);
     // 判断是否登录并且带有HTTP请求头
     if (arrayURL.count>1&&kUserInfo.isLogin) {
-        [manager.requestSerializer setValue:kUserInfo.mobile forHTTPHeaderField:@"token"];
+        [manager.requestSerializer setValue:kUserInfo.account forHTTPHeaderField:@"token"];
     }
     
     [manager GET:URLString parameters:parameter progress:^(NSProgress * _Nonnull downloadProgress) {
@@ -101,7 +101,7 @@ static AFHTTPSessionManager* manager_ = nil;
     
     // 判断是否登录并且带有HTTP请求头
     if (arrayURL.count>1&&kUserInfo.isLogin) {
-        [manager.requestSerializer setValue:kUserInfo.mobile forHTTPHeaderField:@"token"];
+        [manager.requestSerializer setValue:kUserInfo.account forHTTPHeaderField:@"token"];
     }
     
     [manager POST:URLString parameters:parameter progress:^(NSProgress * _Nonnull downloadProgress) {

@@ -24,18 +24,26 @@
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         self.contentView.backgroundColor = [UIColor clearColor];
-        [self initView];
         self.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     return self;
 }
 
+- (void)setUserModel:(TTUserModel *)userModel{
+    _userModel = userModel;
+    [self initView];
+    self.totalAssetsLabel.text = self.userModel.totalAssets;
+    self.vrAssetsLabel.text = self.userModel.vrcurrency;
+    self.arAssetsLabel.text = self.userModel.arcurrency;
+    self.eqAssetsLabel.text = self.userModel.stockRight;
+}
+
 - (void) initView{
+    self.imagesViewBG.hidden = YES;
     [self addSubview:self.imagesViewBG];
     [self.imagesViewBG mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.top.bottom.equalTo(self);
     }];
-    
     
     [self addSubview:self.totalAssetsLabel];
     [self addSubview:self.totalAssetsTipsLabel];
@@ -57,8 +65,7 @@
     [self.eqBoxView addSubview:self.eqAssetsTipsLabel];
     
     [self.totalAssetsLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self);
-        make.top.equalTo(@(IPHONE6_W(17)));
+        make.top.centerX.equalTo(self);
     }];
     
     [self.totalAssetsTipsLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -135,70 +142,70 @@
 
 - (UILabel *)totalAssetsLabel{
     if (!_totalAssetsLabel) {
-        _totalAssetsLabel = [UILabel lz_labelWithTitle:@"" color:kWhiteColor font:kFontSizeMedium30];
+        _totalAssetsLabel = [UILabel lz_labelWithTitle:@"" color:kTextColor102 font:kFontSizeMedium30];
     }
     return _totalAssetsLabel;
 }
 
 - (UILabel *)totalAssetsTipsLabel{
     if (!_totalAssetsTipsLabel) {
-        _totalAssetsTipsLabel = [UILabel lz_labelWithTitle:@"我的资产" color:kWhiteColor font:kFontSizeMedium14];
+        _totalAssetsTipsLabel = [UILabel lz_labelWithTitle:@"我的资产" color:kTextColor102 font:kFontSizeMedium14];
     }
     return _totalAssetsTipsLabel;
 }
 
 - (UILabel *)vrAssetsLabel{
     if (!_vrAssetsLabel) {
-        _vrAssetsLabel = [UILabel lz_labelWithTitle:@"0" color:kWhiteColor font:kFontSizeScBold20];
+        _vrAssetsLabel = [UILabel lz_labelWithTitle:@"0" color:kTextColor102 font:kFontSizeScBold20];
     }
     return _vrAssetsLabel;
 }
 
 - (UILabel *)vrAssetsTipsLabel{
     if (!_vrAssetsTipsLabel) {
-        _vrAssetsTipsLabel = [UILabel lz_labelWithTitle:@"VH积分" color:[kWhiteColor colorWithAlphaComponent:0.5] font:kFontSizeMedium14];
+        _vrAssetsTipsLabel = [UILabel lz_labelWithTitle:@"VH积分" color:[kTextColor102 colorWithAlphaComponent:0.5] font:kFontSizeMedium14];
     }
     return _vrAssetsTipsLabel;
 }
 
 - (UIView *)linerView {
     if (!_linerView) {
-        _linerView = [UIView lz_viewWithColor:kWhiteColor];
+        _linerView = [UIView lz_viewWithColor:kTextColor102];
     }
     return _linerView;
 }
 
 - (UILabel *)arAssetsLabel{
     if (!_arAssetsLabel) {
-        _arAssetsLabel = [UILabel lz_labelWithTitle:@"0" color:kWhiteColor font:kFontSizeScBold20];
+        _arAssetsLabel = [UILabel lz_labelWithTitle:@"0" color:kTextColor102 font:kFontSizeScBold20];
     }
     return _arAssetsLabel;
 }
 
 - (UILabel *)arAssetsTipsLabel {
     if (!_arAssetsTipsLabel) {
-        _arAssetsTipsLabel = [UILabel lz_labelWithTitle:@"AH积分" color:[kWhiteColor colorWithAlphaComponent:0.5] font:kFontSizeMedium14];
+        _arAssetsTipsLabel = [UILabel lz_labelWithTitle:@"AH积分" color:[kTextColor102 colorWithAlphaComponent:0.5] font:kFontSizeMedium14];
     }
     return _arAssetsTipsLabel;
 }
 
 - (UIView *)linersView {
     if (!_linersView) {
-        _linersView = [UIView lz_viewWithColor:kWhiteColor];
+        _linersView = [UIView lz_viewWithColor:kTextColor102];
     }
     return _linersView;
 }
 
 - (UILabel *)eqAssetsLabel{
     if (!_eqAssetsLabel) {
-        _eqAssetsLabel = [UILabel lz_labelWithTitle:@"0" color:kWhiteColor font:kFontSizeScBold20];
+        _eqAssetsLabel = [UILabel lz_labelWithTitle:@"0" color:kTextColor102 font:kFontSizeScBold20];
     }
     return _eqAssetsLabel;
 }
 
 - (UILabel *)eqAssetsTipsLabel {
     if (!_eqAssetsTipsLabel) {
-        _eqAssetsTipsLabel = [UILabel lz_labelWithTitle:@"股权数" color:[kWhiteColor colorWithAlphaComponent:0.5] font:kFontSizeMedium14];
+        _eqAssetsTipsLabel = [UILabel lz_labelWithTitle:@"股权数" color:[kTextColor102 colorWithAlphaComponent:0.5] font:kFontSizeMedium14];
     }
     return _eqAssetsTipsLabel;
 }

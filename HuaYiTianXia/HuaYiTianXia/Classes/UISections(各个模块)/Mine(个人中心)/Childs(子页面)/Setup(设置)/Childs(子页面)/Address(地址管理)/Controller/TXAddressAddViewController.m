@@ -93,7 +93,7 @@ static NSString * const reuseIdentifierSwitch = @"TXSwitchTableViewCell";
 
 /// 保存收货地址
 - (void) saveAddressRequest{
-    kMBShowHUD(@"");
+    kShowMBProgressHUD(self.view);
     NSMutableDictionary *parameter = [[NSMutableDictionary alloc] init];
     NSString *addressText = kStringFormat(self.citytext, self.address);
     [parameter setObject:self.username forKey:@"userName"];
@@ -111,10 +111,10 @@ static NSString * const reuseIdentifierSwitch = @"TXSwitchTableViewCell";
                 Toast(@"添加失败");
             }
         }
-        kMBHideHUD;
+        kHideMBProgressHUD(self.view);;
     } failure:^(NSError *error) {
         TTLog(@"error --- %@",error);
-        kMBHideHUD;
+        kHideMBProgressHUD(self.view);;
     }];
 }
 

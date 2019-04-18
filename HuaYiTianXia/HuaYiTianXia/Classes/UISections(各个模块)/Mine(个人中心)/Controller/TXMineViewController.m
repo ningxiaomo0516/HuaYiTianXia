@@ -25,7 +25,12 @@ static NSString * const reuseIdentifierBanner = @"TXMineBannerTableViewCell";
 @property (nonatomic, strong) NSMutableArray *itemModelArray;
 @property (nonatomic, strong) TTUserModel *userModel;
 @property (nonatomic, strong) NSMutableArray *bannerArray;
-
+/// 导航View
+@property (nonatomic, strong) UIView *navBoxView;
+/// 设置按钮
+@property (nonatomic, strong) UIButton *setupButton;
+/// 消息按钮
+@property (nonatomic, strong) UIButton *messageButton;
 @end
 
 @implementation TXMineViewController
@@ -48,7 +53,7 @@ static NSString * const reuseIdentifierBanner = @"TXMineBannerTableViewCell";
 }
 
 - (void) reloadUserName{
-    self.headerView.nickNameLabel.text = kUserInfo.username;
+    self.headerView.nicknameLabel.text = kUserInfo.username;
     [self.headerView.imagesViewAvatar sc_setImageWithUrlString:kUserInfo.avatar
                                               placeholderImage:kGetImage(@"mine_icon_avatar")
                                                       isAvatar:false];
@@ -57,7 +62,7 @@ static NSString * const reuseIdentifierBanner = @"TXMineBannerTableViewCell";
 - (void) requestPersonalCenterData{
     [SCHttpTools getWithURLString:kHttpURL(@"customer/Wallet") parameter:nil success:^(id responseObject) {
         NSDictionary *result = responseObject;
-        TTLog(@"result ---- %@",[Utils lz_dataWithJSONObject:result]);
+        TTLog(@"result ---- %@",[Utils lz_dataWithJSONObject:[result lz_objectForKey:@"obj"]]);
         if ([result isKindOfClass:[NSDictionary class]]) {
             TTUserDataModel *model = [TTUserDataModel mj_objectWithKeyValues:result];
             if (model.errorcode == 20000) {
@@ -74,8 +79,10 @@ static NSString * const reuseIdentifierBanner = @"TXMineBannerTableViewCell";
                 [self.headerView.imagesViewAvatar sc_setImageWithUrlString:model.data.avatar
                                                           placeholderImage:kGetImage(@"mine_icon_avatar")
                                                                   isAvatar:false];
-                self.headerView.nickNameLabel.text = model.data.username;
-                self.headerView.kidLabel.text = [NSString stringWithFormat:@"ID:%@",model.data.uid];
+                self.headerView.levelLabel.text = model.data.userTypeName;
+                self.headerView.nicknameLabel.text = model.data.username;
+                self.headerView.titleLabel.text = model.data.companyname.length>0?model.data.companyname:@"分公司筹建中";
+                self.headerView.numberLabel.text = [NSString stringWithFormat:@"人数：%@/30",model.data.joined.length>0?model.data.joined:@"0"];
                 [self.bannerArray addObjectsFromArray:model.data.banners];
                 [self.tableView reloadData];
             }else{
@@ -99,10 +106,7 @@ static NSString * const reuseIdentifierBanner = @"TXMineBannerTableViewCell";
     
     if (indexPath.section == 0) {
         TXMineHeaderTableViewCell* tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierHeader forIndexPath:indexPath];
-        tools.totalAssetsLabel.text = self.userModel.totalAssets;
-        tools.vrAssetsLabel.text = self.userModel.vrcurrency;
-        tools.arAssetsLabel.text = self.userModel.arcurrency;
-        tools.eqAssetsLabel.text = self.userModel.stockRight;
+        tools.userModel = self.userModel;
         return tools;
 
     }else if (indexPath.section == 1){
@@ -134,7 +138,7 @@ static NSString * const reuseIdentifierBanner = @"TXMineBannerTableViewCell";
         TXGeneralModel* model = self.itemModelArray[0][indexPath.row];
         model.index = indexPath.item;
         tools.titleLabel.text = model.title;
-
+        tools.linerView.hidden = NO;
         return tools;
     }
 }
@@ -152,7 +156,7 @@ static NSString * const reuseIdentifierBanner = @"TXMineBannerTableViewCell";
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section==0) return IPHONE6_W(146);
+    if (indexPath.section==0) return IPHONE6_W(126);
     if (indexPath.section==1) return IPHONE6_W(180);
     else {
         if (indexPath.row==0) return IPHONE6_W(40);
@@ -194,8 +198,9 @@ static NSString * const reuseIdentifierBanner = @"TXMineBannerTableViewCell";
         [_tableView registerClass:[TXMineHeaderTableViewCell class] forCellReuseIdentifier:reuseIdentifierHeader];
         [_tableView registerClass:[TXMineTableViewCell class] forCellReuseIdentifier:reuseIdentifier];
         [_tableView registerClass:[TXMineBannerTableViewCell class] forCellReuseIdentifier:reuseIdentifierBanner];
-
+//        _tableView.bounces = NO;
         [_tableView setSeparatorInset:UIEdgeInsetsMake(0,IPHONE6_W(15),0,0)];
+        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.backgroundColor = kWhiteColor;
@@ -205,28 +210,68 @@ static NSString * const reuseIdentifierBanner = @"TXMineBannerTableViewCell";
 
 #pragma mark ---- 界面布局设置
 - (void)initView{
-    [self.view addSubview:self.headerView];
-    [Utils lz_setExtraCellLineHidden:self.tableView];
-
-    [self.headerView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.right.equalTo(self.view);
-        make.height.equalTo(@(kNavBarHeight));
-    }];
     
     [self.view addSubview:self.tableView];
+    [Utils lz_setExtraCellLineHidden:self.tableView];
+    self.tableView.tableHeaderView = self.headerView;
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.equalTo(self.view);
-        make.top.equalTo(self.headerView.mas_bottom).offset(-1);
+        make.top.left.right.equalTo(self.view);
         make.bottom.equalTo(self.view.mas_bottom).offset(-kTabBarHeight);
+    }];
+    
+    
+    [self.view addSubview:self.navBoxView];
+    [self.navBoxView addSubview:self.setupButton];
+    [self.navBoxView addSubview:self.messageButton];
+    
+    [self.navBoxView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.equalTo(self.view);
+        make.height.equalTo(@(44));
+        make.top.equalTo(@(kNavBarHeight-44));
+    }];
+    
+    [self.setupButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(@(IPHONE6_W(15)));
+        make.centerY.equalTo(self.navBoxView);
+    }];
+    [self.messageButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(self.view.mas_right).offset(IPHONE6_W(-15));
+        make.centerY.equalTo(self.navBoxView);
     }];
 }
 
 - (TXMineHeaderView *)headerView{
     if (!_headerView) {
         _headerView = [[TXMineHeaderView alloc] init];
+        CGFloat height = IPHONE6_W(325)+kSafeAreaBottomHeight;
+        _headerView.frame = CGRectMake(0, 0, kScreenWidth, height);
     }
     return _headerView;
 }
+
+- (UIView *)navBoxView{
+    if (!_navBoxView) {
+        _navBoxView = [UIView lz_viewWithColor:kClearColor];
+    }
+    return _navBoxView;
+}
+
+- (UIButton *)setupButton{
+    if (!_setupButton) {
+        _setupButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_setupButton setImage:kGetImage(@"c7_设置") forState:UIControlStateNormal];
+    }
+    return _setupButton;
+}
+
+- (UIButton *)messageButton{
+    if (!_messageButton) {
+        _messageButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_messageButton setImage:kGetImage(@"c7_消息") forState:UIControlStateNormal];
+    }
+    return _messageButton;
+}
+
 
 - (NSMutableArray *)itemModelArray{
     if (!_itemModelArray) {

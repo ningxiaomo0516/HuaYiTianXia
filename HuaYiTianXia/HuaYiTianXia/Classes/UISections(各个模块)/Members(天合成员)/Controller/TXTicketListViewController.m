@@ -26,7 +26,6 @@ static NSString* reuseIdentifier = @"TXTicketListTableViewCell";
     if ( self = [super init] ){
         self.parameter = parameter;
         self.URLString = URLString;
-//        [self.view showLoadingViewWithText:@"加载中..."];
     }
     return self;
 }
@@ -35,12 +34,12 @@ static NSString* reuseIdentifier = @"TXTicketListTableViewCell";
     // Do any additional setup after loading the view.
     self.title = @"查询详情";
     [self initView];
+    [self.view showLoadingViewWithText:@"加载中..."];
     [self GetTicketDataRequest];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [self.view showLoadingViewWithText:@"加载中..."];
 }
 
 - (void) GetTicketDataRequest{
@@ -51,8 +50,13 @@ static NSString* reuseIdentifier = @"TXTicketListTableViewCell";
             TXTicketModel *model = [TXTicketModel mj_objectWithKeyValues:result];
             if (model.errorcode==0) {
                 /// 查询列表
-                [self.dataArray addObjectsFromArray:model.data];
-                TTLog(@"self.dataArray.count --- %lu",(unsigned long)self.dataArray.count);
+                for (TicketModel *ticketModel in model.data) {
+                    for (TicketPricesModel *priceModel in ticketModel.prices) {
+                        if ([priceModel.discount isEqualToString:@"全价"]) {
+                            [self.dataArray addObject:ticketModel];
+                        }
+                    }
+                }
                 [self.tableView reloadData];
             }else{
                 Toast(model.message);

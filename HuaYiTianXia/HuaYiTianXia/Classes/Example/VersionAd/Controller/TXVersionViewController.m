@@ -31,13 +31,19 @@
     // Do any additional setup after loading the view.
     //背景imageView
     self.view.backgroundColor = [UIColor whiteColor];
-    UIImageView * imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"启动页-无广告"]];
+    UIView *boxView = [UIView lz_viewWithColor:kColorWithRGB(254, 252, 252)];
+    UIImageView * imageView = [[UIImageView alloc] initWithImage:kGetImage(@"c18_启动页_无广告")];
     imageView.backgroundColor = [UIColor clearColor];
     imageView.userInteractionEnabled = YES;
-    [self.view addSubview:imageView];
+    [self.view addSubview:boxView];
+    [boxView addSubview:imageView];
+    [boxView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.bottom.right.equalTo(self.view);
+        make.height.equalTo(@(IPHONE6_W(90)+kSafeAreaBottomHeight));
+    }];
     [imageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.bottom.mas_offset(0);
-        make.height.equalTo(@88.5);
+        make.left.top.right.equalTo(boxView);
+        make.height.equalTo(@(IPHONE6_W(90)));
     }];
     [self performSelector:@selector(skipClick) withObject:nil afterDelay:3];
     [self loadVersionAndADsRequest];

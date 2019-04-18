@@ -15,12 +15,12 @@ static NSString *uid            = @"uid";
 static NSString *isLogin        = @"isLogin";
 static NSString *username       = @"username";
 static NSString *realname       = @"realname";
-static NSString *mobile         = @"mobile";
+static NSString *account        = @"account";
 static NSString *phone          = @"phone";
 static NSString *avatar         = @"avatar";
 static NSString *sex            = @"sex";
 static NSString *registertime   = @"registertime";
-static NSString *pwd            = @"pwd";
+static NSString *password       = @"pwd";
 static NSString *tranPwd        = @"tranPwd";
 static NSString *isValidation   = @"isValidation";
 
@@ -48,6 +48,16 @@ static NSString *receivedUserName   = @"receivedUserName";
 static NSString *receivedTelphone   = @"receivedTelphone";
 
 
+static NSString *thGrade            = @"thGrade";
+static NSString *thGradeCount       = @"thGradeCount";
+static NSString *thGradeName        = @"thGradeName";
+static NSString *companyname        = @"companyname";
+static NSString *joined             = @"joined";
+static NSString *totalPeople        = @"totalPeople";
+static NSString *userTypeName       = @"userTypeName";
+static NSString *usertype           = @"usertype";
+static NSString *ifStart            = @"ifStart";
+static NSString *ifActivate         = @"ifActivate";
 
 
 @implementation TTUserDataModel
@@ -66,6 +76,8 @@ static NSString *receivedTelphone   = @"receivedTelphone";
 
 + (NSDictionary *)replacedKeyFromPropertyName{
     return @{@"uid"         : @"id",
+             @"account"     : @"mobile",
+             @"password"    : @"pwd",
              @"username"    : @"nickName",
              @"realname"    : @"name",
              @"avatar"      : @"headImg",
@@ -96,7 +108,7 @@ static TTUserModel *userModel = nil;
 }
 
 - (BOOL)isBindTel{
-    if (self.mobile.length > 0) {
+    if (self.phone.length > 0) {
         return YES;
     }
     return NO;
@@ -144,44 +156,56 @@ static TTUserModel *userModel = nil;
         /// 解码并返回一个与给定键相关联的Object类型的值
         
         
-        [TTUserModel shared].topupType = [aDecoder decodeIntegerForKey:topupType];
+        [TTUserModel shared].topupType              = [aDecoder decodeIntegerForKey:topupType];
         
-        [TTUserModel shared].uid = [aDecoder decodeObjectForKey:uid];
-        [TTUserModel shared].username = [aDecoder decodeObjectForKey:username];
-        [TTUserModel shared].realname = [aDecoder decodeObjectForKey:realname];
-        [TTUserModel shared].avatar = [aDecoder decodeObjectForKey:avatar];
-        [TTUserModel shared].sex = [aDecoder decodeIntegerForKey:sex];
-        [TTUserModel shared].mobile = [aDecoder decodeObjectForKey:mobile];
-        [TTUserModel shared].phone = [aDecoder decodeObjectForKey:phone];
-        [TTUserModel shared].pwd = [aDecoder decodeObjectForKey:pwd];
-        [TTUserModel shared].tranPwd = [aDecoder decodeIntegerForKey:tranPwd];
-        [TTUserModel shared].registertime = [aDecoder decodeObjectForKey:registertime];
+        [TTUserModel shared].uid                    = [aDecoder decodeObjectForKey:uid];
+        [TTUserModel shared].username               = [aDecoder decodeObjectForKey:username];
+        [TTUserModel shared].realname               = [aDecoder decodeObjectForKey:realname];
+        [TTUserModel shared].avatar                 = [aDecoder decodeObjectForKey:avatar];
+        [TTUserModel shared].sex                    = [aDecoder decodeIntegerForKey:sex];
+        [TTUserModel shared].account                = [aDecoder decodeObjectForKey:account];
+        [TTUserModel shared].phone                  = [aDecoder decodeObjectForKey:phone];
+        [TTUserModel shared].password               = [aDecoder decodeObjectForKey:password];
+        [TTUserModel shared].tranPwd                = [aDecoder decodeIntegerForKey:tranPwd];
+        [TTUserModel shared].registertime           = [aDecoder decodeObjectForKey:registertime];
         
         /// 解码并返回一个与给定键相关联的Bool类型的值
-        [TTUserModel shared].isLogin = [[aDecoder decodeObjectForKey:isLogin] boolValue];
+        [TTUserModel shared].isLogin                = [[aDecoder decodeObjectForKey:isLogin] boolValue];
         
-        [TTUserModel shared].idnumber = [aDecoder decodeObjectForKey:idnumber];
-        [TTUserModel shared].imgb = [aDecoder decodeObjectForKey:imgb];
-        [TTUserModel shared].imgz = [aDecoder decodeObjectForKey:imgz];
+        [TTUserModel shared].idnumber               = [aDecoder decodeObjectForKey:idnumber];
+        [TTUserModel shared].imgb                   = [aDecoder decodeObjectForKey:imgb];
+        [TTUserModel shared].imgz                   = [aDecoder decodeObjectForKey:imgz];
         
-        [TTUserModel shared].ainvited = [aDecoder decodeObjectForKey:ainvited];
-        [TTUserModel shared].arcurrency = [aDecoder decodeObjectForKey:arcurrency];
-        [TTUserModel shared].inviteCode = [aDecoder decodeObjectForKey:inviteCode];
-        [TTUserModel shared].totalAssets = [aDecoder decodeObjectForKey:totalAssets];
-        [TTUserModel shared].balance = [aDecoder decodeObjectForKey:balance];
-        [TTUserModel shared].vrcurrency = [aDecoder decodeObjectForKey:vrcurrency];
-        [TTUserModel shared].suinvited = [aDecoder decodeObjectForKey:suinvited];
-        [TTUserModel shared].stockRight = [aDecoder decodeObjectForKey:stockRight];
+        [TTUserModel shared].ainvited               = [aDecoder decodeObjectForKey:ainvited];
+        [TTUserModel shared].arcurrency             = [aDecoder decodeObjectForKey:arcurrency];
+        [TTUserModel shared].inviteCode             = [aDecoder decodeObjectForKey:inviteCode];
+        [TTUserModel shared].totalAssets            = [aDecoder decodeObjectForKey:totalAssets];
+        [TTUserModel shared].balance                = [aDecoder decodeObjectForKey:balance];
+        [TTUserModel shared].vrcurrency             = [aDecoder decodeObjectForKey:vrcurrency];
+        [TTUserModel shared].suinvited              = [aDecoder decodeObjectForKey:suinvited];
+        [TTUserModel shared].stockRight             = [aDecoder decodeObjectForKey:stockRight];
         
-        [TTUserModel shared].ispay = [aDecoder decodeIntegerForKey:ispay];
-        [TTUserModel shared].upproxy = [aDecoder decodeObjectForKey:upproxy];
-        [TTUserModel shared].isValidation = [aDecoder decodeIntegerForKey:isValidation];
+        [TTUserModel shared].ispay                  = [aDecoder decodeIntegerForKey:ispay];
+        [TTUserModel shared].upproxy                = [aDecoder decodeObjectForKey:upproxy];
+        [TTUserModel shared].isValidation           = [aDecoder decodeIntegerForKey:isValidation];
         
         
-        [TTUserModel shared].receivedGoodsAddr = [aDecoder decodeObjectForKey:receivedGoodsAddr];
-        [TTUserModel shared].receivedUserName = [aDecoder decodeObjectForKey:receivedUserName];
-        [TTUserModel shared].receivedTelphone = [aDecoder decodeObjectForKey:receivedTelphone];
+        [TTUserModel shared].receivedGoodsAddr      = [aDecoder decodeObjectForKey:receivedGoodsAddr];
+        [TTUserModel shared].receivedUserName       = [aDecoder decodeObjectForKey:receivedUserName];
+        [TTUserModel shared].receivedTelphone       = [aDecoder decodeObjectForKey:receivedTelphone];
         
+        
+        [TTUserModel shared].thGrade                = [aDecoder decodeObjectForKey:thGrade];
+        [TTUserModel shared].thGradeCount           = [aDecoder decodeObjectForKey:thGradeCount];
+        [TTUserModel shared].thGradeName            = [aDecoder decodeObjectForKey:thGradeName];
+        [TTUserModel shared].companyname            = [aDecoder decodeObjectForKey:companyname];
+        [TTUserModel shared].joined                 = [aDecoder decodeObjectForKey:joined];
+        [TTUserModel shared].totalPeople            = [aDecoder decodeObjectForKey:totalPeople];
+        [TTUserModel shared].userTypeName           = [aDecoder decodeObjectForKey:userTypeName];
+        [TTUserModel shared].ifStart                = [aDecoder decodeObjectForKey:ifStart];
+        [TTUserModel shared].ifActivate             = [aDecoder decodeObjectForKey:ifActivate];
+        
+        [TTUserModel shared].usertype               = [aDecoder decodeIntegerForKey:usertype];
     }
     return self;
 }
@@ -197,9 +221,9 @@ static TTUserModel *userModel = nil;
     [aCoder encodeObject:[TTUserModel shared].realname forKey:realname];
     [aCoder encodeObject:[TTUserModel shared].avatar forKey:avatar];
     [aCoder encodeInteger:[TTUserModel shared].sex forKey:sex];
-    [aCoder encodeObject:[TTUserModel shared].mobile forKey:mobile];
+    [aCoder encodeObject:[TTUserModel shared].account forKey:account];
     [aCoder encodeObject:[TTUserModel shared].phone forKey:phone];
-    [aCoder encodeObject:[TTUserModel shared].pwd forKey:pwd];
+    [aCoder encodeObject:[TTUserModel shared].password forKey:password];
     [aCoder encodeInteger:[TTUserModel shared].tranPwd forKey:tranPwd];
     [aCoder encodeObject:[TTUserModel shared].registertime forKey:registertime];
     /// 将BOOL类型编码，使其与字符串类型的键相关联
@@ -226,6 +250,18 @@ static TTUserModel *userModel = nil;
     [aCoder encodeObject:[TTUserModel shared].receivedGoodsAddr forKey:receivedGoodsAddr];
     [aCoder encodeObject:[TTUserModel shared].receivedUserName forKey:receivedUserName];
     [aCoder encodeObject:[TTUserModel shared].receivedTelphone forKey:receivedTelphone];
+    
+    [aCoder encodeObject:[TTUserModel shared].thGrade forKey:thGrade];
+    [aCoder encodeObject:[TTUserModel shared].thGradeCount forKey:thGradeCount];
+    [aCoder encodeObject:[TTUserModel shared].thGradeName forKey:thGradeName];
+    [aCoder encodeObject:[TTUserModel shared].companyname forKey:companyname];
+    [aCoder encodeObject:[TTUserModel shared].joined forKey:joined];
+    [aCoder encodeObject:[TTUserModel shared].totalPeople forKey:totalPeople];
+    [aCoder encodeObject:[TTUserModel shared].userTypeName forKey:userTypeName];
+    [aCoder encodeObject:[TTUserModel shared].ifStart forKey:ifStart];
+    [aCoder encodeObject:[TTUserModel shared].ifActivate forKey:ifActivate];
+    [aCoder encodeInteger:[TTUserModel shared].usertype forKey:usertype];
+    
 }
 
 /**
@@ -237,9 +273,9 @@ static TTUserModel *userModel = nil;
     [TTUserModel shared].realname = @"";
     [TTUserModel shared].avatar = @"";
     [TTUserModel shared].sex = 0;
-    [TTUserModel shared].mobile = @"";
+    [TTUserModel shared].account = @"";
     [TTUserModel shared].phone = @"";
-    [TTUserModel shared].pwd = @"";
+    [TTUserModel shared].password = @"";
     [TTUserModel shared].tranPwd = 0;
     [TTUserModel shared].registertime = @"";
     
@@ -266,5 +302,16 @@ static TTUserModel *userModel = nil;
     [TTUserModel shared].receivedTelphone = @"";
     [TTUserModel shared].receivedUserName = @"";
     [TTUserModel shared].topupType = 0;
+    
+    [TTUserModel shared].thGrade = @"";
+    [TTUserModel shared].thGradeCount = @"";
+    [TTUserModel shared].thGradeName = @"";
+    [TTUserModel shared].companyname = @"";
+    [TTUserModel shared].joined = @"";
+    [TTUserModel shared].totalPeople = @"";
+    [TTUserModel shared].userTypeName = @"";
+    [TTUserModel shared].ifStart = @"";
+    [TTUserModel shared].ifActivate = @"";
+    [TTUserModel shared].usertype  = 0;
 }
 @end

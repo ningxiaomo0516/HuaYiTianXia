@@ -141,7 +141,7 @@ static NSString * const reuseIdentifier = @"TXChoosePayTableViewCell";
     //    remarks    否    String    用户购买备注
     //    payType    是    int    0:支付宝 1:微信 2：余额支付
     //    currency    是    Double    vr币数量
-    kMBShowHUD(@"");
+    kShowMBProgressHUD(self.view);
     [parameter setObject:self.recordsModel.title forKey:@"title"];
     [parameter setObject:@(self.recordsModel.purchaseType) forKey:@"purchaseType"];
     [parameter setObject:@([self.recordsModel.price doubleValue]) forKey:@"priceMoney"];
@@ -172,10 +172,10 @@ static NSString * const reuseIdentifier = @"TXChoosePayTableViewCell";
                 Toast(model.message);
             }
         }
-        kMBHideHUD;
+        kHideMBProgressHUD(self.view);;
     } failure:^(NSError *error) {
         TTLog(@"error --- %@",error);
-        kMBHideHUD;
+        kHideMBProgressHUD(self.view);;
     }];
 }
 

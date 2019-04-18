@@ -31,12 +31,16 @@
 
 - (void)setOrderModel:(TicketOrderModel *)orderModel{
     _orderModel = orderModel;
-    self.o_numLabel.text = [NSString stringWithFormat:@"订单号:%ld",(long)self.orderModel.kid];
+    self.o_numLabel.text = [NSString stringWithFormat:@"订单号:%@",self.orderModel.kid];
     self.o_dateLabel.text = [NSString stringWithFormat:@"订单时间:%@",self.orderModel.datetime];
     self.o_nameLabel.text = [NSString stringWithFormat:@"订单人:%@",self.orderModel.username];
-    self.o_priceLabel.text = [NSString stringWithFormat:@"订票价格:%@",self.orderModel.price];
+    NSString *o_price = [NSString stringWithFormat:@"订票价格:%@",self.orderModel.price];
     self.dep_airportLabel.text = [NSString stringWithFormat:@"起始地:%@",self.orderModel.origin];
     self.arv_airportLabel.text = [NSString stringWithFormat:@"目的地:%@",self.orderModel.destination];
+    self.o_statusLabel.text = self.orderModel.status;
+    
+    self.o_priceLabel.attributedText = [SCSmallTools setupTextColor:kTextColor51 currentText:o_price index:4 endIndex:o_price.length-4];
+
 }
 
 - (void) initView{
@@ -67,24 +71,24 @@
     
     
     [self.imagesTo mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo(self.dep_airportLabel);
-        make.left.equalTo(self.dep_airportLabel.mas_right).offset(3);
+        make.centerY.equalTo(self.dep_airportLabel).offset(-4);
+        make.left.equalTo(self.dep_airportLabel.mas_right).offset(5);
     }];
     
     [self.arv_airportLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.imagesTo.mas_right).offset(3);
-        make.centerY.equalTo(self.imagesTo);
+        make.left.equalTo(self.imagesTo.mas_right).offset(5);
+        make.centerY.equalTo(self.dep_airportLabel);
     }];
-    
+
     [self.o_dateLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self.o_numLabel);
-        make.left.equalTo(self.o_numLabel.mas_right).offset(100);
+        make.centerX.equalTo(self).offset(IPHONE6_W(80));
     }];
     [self.o_priceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self.o_nameLabel);
         make.left.equalTo(self.o_dateLabel);
     }];
-    [self.o_priceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.o_statusLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self.dep_airportLabel);
         make.right.equalTo(self.mas_right).offset(IPHONE6_W(-15));
     }];
@@ -92,49 +96,49 @@
 
 - (UILabel *)o_numLabel{
     if (!_o_numLabel) {
-        _o_numLabel = [UILabel lz_labelWithTitle:@"" color:kTextColor153 font:kFontSizeMedium11];
+        _o_numLabel = [UILabel lz_labelWithTitle:@"" color:kTextColor153 font:kFontSizeMedium13];
     }
     return _o_numLabel;
 }
 
 - (UILabel *)o_dateLabel{
     if (!_o_dateLabel) {
-        _o_dateLabel = [UILabel lz_labelWithTitle:@"" color:kTextColor153 font:kFontSizeMedium11];
+        _o_dateLabel = [UILabel lz_labelWithTitle:@"" color:kTextColor153 font:kFontSizeMedium13];
     }
     return _o_dateLabel;
 }
 
 - (UILabel *)o_nameLabel{
     if (!_o_nameLabel) {
-        _o_nameLabel = [UILabel lz_labelWithTitle:@"" color:kTextColor153 font:kFontSizeMedium11];
+        _o_nameLabel = [UILabel lz_labelWithTitle:@"" color:kTextColor153 font:kFontSizeMedium13];
     }
     return _o_nameLabel;
 }
 
 - (UILabel *)o_priceLabel{
     if (!_o_priceLabel) {
-        _o_priceLabel = [UILabel lz_labelWithTitle:@"" color:kTextColor153 font:kFontSizeMedium11];
+        _o_priceLabel = [UILabel lz_labelWithTitle:@"" color:kTextColor153 font:kFontSizeMedium13];
     }
     return _o_priceLabel;
 }
 
 - (UILabel *)dep_airportLabel{
     if (!_dep_airportLabel) {
-        _dep_airportLabel = [UILabel lz_labelWithTitle:@"" color:kTextColor153 font:kFontSizeMedium11];
+        _dep_airportLabel = [UILabel lz_labelWithTitle:@"" color:kTextColor153 font:kFontSizeMedium13];
     }
     return _dep_airportLabel;
 }
 
 - (UILabel *)arv_airportLabel{
     if (!_arv_airportLabel) {
-        _arv_airportLabel = [UILabel lz_labelWithTitle:@"" color:kTextColor153 font:kFontSizeMedium11];
+        _arv_airportLabel = [UILabel lz_labelWithTitle:@"" color:kTextColor153 font:kFontSizeMedium13];
     }
     return _arv_airportLabel;
 }
 
 - (UILabel *)o_statusLabel{
     if (!_o_statusLabel) {
-        _o_statusLabel = [UILabel lz_labelWithTitle:@"" color:kTextColor153 font:kFontSizeMedium11];
+        _o_statusLabel = [UILabel lz_labelWithTitle:@"" color:kThemeColor font:kFontSizeMedium13];
     }
     return _o_statusLabel;
 }

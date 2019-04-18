@@ -41,6 +41,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// 股权提示
 @property (nonatomic, strong) UILabel *eqAssetsTipsLabel;
 
+
+@property (nonatomic, strong) TTUserModel *userModel;
+
 @end
 
 NS_ASSUME_NONNULL_END

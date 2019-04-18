@@ -20,8 +20,11 @@
 @end
 
 @implementation TicketOrderData
++ (NSDictionary *)replacedKeyFromPropertyName{
+    return @{@"list"    : @"records"};
+}
 + (NSDictionary *)objectClassInArray{
-    return @{@"data" : [TicketOrderModel class]};
+    return @{@"list" : [TicketOrderModel class]};
 }
 @end
 
@@ -29,6 +32,7 @@
 + (NSDictionary *)replacedKeyFromPropertyName{
     return @{@"kid"         : @"id",
              @"username"    : @"name",
-             @"datetime"    : @"time"};
+             @"datetime"    : @"time",
+             @"status"      : @"typeName"};
 }
 @end
