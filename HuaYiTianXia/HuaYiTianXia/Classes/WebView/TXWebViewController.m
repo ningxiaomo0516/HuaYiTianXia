@@ -14,6 +14,7 @@
 @property (nonatomic, strong) WKWebView *wkWebView;
 @property (nonatomic, strong) UIButton *reloadButton;
 @property (nonatomic, strong) UIProgressView *progress;
+@property (nonatomic, strong) SCShareModel *shareModel;
 @end
 
 @implementation TXWebViewController
@@ -47,9 +48,8 @@
     TXShareViewController *vc = [[TXShareViewController alloc] init];
     CGFloat height = IPHONE6_W(150)+kTabBarHeight;
     vc.selectItemBlock = ^(NSInteger idx, NSString * _Nonnull title) {
-        SCShareModel *model = [[SCShareModel alloc] init];
-        model.sharetitle = self.title;
-        model.h5Url = self.webUrl;
+        self.shareModel.sharetitle = self.title;
+        self.shareModel.h5Url = self.webUrl;
         SSDKPlatformType type = -101;
         if ([title isEqualToString:@"微信"]) {
             type = SSDKPlatformSubTypeWechatSession;
@@ -66,7 +66,7 @@
 //            copyStr.string = shareModel.videoUrl;
 //            [pv.playContainerView makeToast:@"链接复制成功" duration:2 position:CSToastPositionCenter];
         }
-        [SCShareTools shareWithPlatformType:type shareDataModel:model shareresult:^(NSString *shareResultStr) {
+        [SCShareTools shareWithPlatformType:type shareDataModel:self.shareModel shareresult:^(NSString *shareResultStr) {
             [self sc_dismissVC];
             Toast(shareResultStr);
         }];
@@ -123,6 +123,8 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.wkWebView addObserver:self forKeyPath:@"estimatedProgress" options:NSKeyValueObservingOptionNew context:nil];
+    [self.wkWebView addObserver:self forKeyPath:@"title" options:NSKeyValueObservingOptionNew context:NULL];
+
     self.wkWebView.navigationDelegate = self;
     self.wkWebView.UIDelegate = self;
 }
@@ -130,6 +132,7 @@
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [self.wkWebView removeObserver:self forKeyPath:@"estimatedProgress"];
+    [self.wkWebView removeObserver:self forKeyPath:@"title"];
     self.wkWebView.navigationDelegate = nil;
     self.wkWebView.UIDelegate = nil;
 }
@@ -139,7 +142,16 @@
     if ([keyPath isEqualToString:@"estimatedProgress"]) {
         float estimateProgress = [change[NSKeyValueChangeNewKey] doubleValue];
         [self.progress setProgress:estimateProgress animated:YES];
+    }else if([keyPath isEqualToString:@"estimatedProgress"]){
+        if (object == self.wkWebView) {
+            self.shareModel.descriptStr = self.title;//self.wkWebView.title;
+        } else {
+            [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+        }
     }
+//    else {
+//        [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+//    }
 }
 
 #pragma mark - WKNavigationDelegate
@@ -212,6 +224,13 @@
         DisableAutoAdjustScrollViewInsets(_wkWebView.scrollView, self);
     }
     return _wkWebView;
+}
+
+- (SCShareModel *)shareModel{
+    if (!_shareModel) {
+        _shareModel = [[SCShareModel alloc] init];
+    }
+    return _shareModel;
 }
 
 @end

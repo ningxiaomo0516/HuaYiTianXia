@@ -11,6 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface TXAdsModel : NSObject
+@property(nonatomic,copy)NSString *kid;
 /// 名字
 @property(nonatomic,copy)NSString *imageName;
 /// 图片地址
@@ -27,6 +28,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,assign)NSInteger jumpType;
 /// 跳转地址
 @property(nonatomic,copy)NSString *jumpUrl;
+
 @end
 
 NS_ASSUME_NONNULL_END

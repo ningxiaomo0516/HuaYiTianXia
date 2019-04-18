@@ -22,7 +22,7 @@
         [self shareWithPlatformType:SSDKPlatformTypeSinaWeibo parameter:shareParams shareresult:resultBlock];
     }else {
         if ([ShareSDK isClientInstalled:platform]) {
-            [shareParams SSDKSetupShareParamsByText:shareModel.sharetitle
+            [shareParams SSDKSetupShareParamsByText:shareModel.descriptStr
                                              images:[UIImage imageNamed:@"AppIcon"]
                                                 url:[NSURL URLWithString:shareModel.h5Url]
                                               title:shareModel.sharetitle

@@ -71,7 +71,7 @@
             if (result[@"0"]) {
                 NSArray *versionArray = [NSArray yy_modelArrayWithClass:[TXVersionModel class] json:result[@"0"]];
                 for (TXVersionModel * model in versionArray) {
-                    if (model.type == 2) {
+                    if (model.type == 1) {
                         weakSelf.versionModel = model;
                     }
                 }

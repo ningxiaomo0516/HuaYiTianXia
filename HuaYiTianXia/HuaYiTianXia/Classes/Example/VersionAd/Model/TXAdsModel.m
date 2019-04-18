@@ -12,4 +12,16 @@
 - (NSString *)description{
     return [self yy_modelDescription];
 }
+
+//+ (NSDictionary *)replacedKeyFromPropertyName{
+//    return @{@"kid"         : @"id",
+//             @"imageName"   : @"imageName",
+//             @"imageUrl"    : @"imgurl",
+//             @"showTime"    : @"countdown",
+//             @"state"       : @"status",
+//             @"type"        : @"type",
+//             @"sort"        : @"sort",
+//             @"jumpType"    : @"jumptype",
+//             @"jumpUrl"     : @"url"};
+//}
 @end

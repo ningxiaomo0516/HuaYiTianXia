@@ -203,7 +203,7 @@ static NSString* reuseIdentifierInfo = @"TXTicketInfoTableViewCell";
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.section<=self.dataArray.count) {
+    if (indexPath.section<self.dataArray.count) {
         TicketPricesModel *model = self.dataArray[indexPath.section];
         TTLog(@" --- %@",model.price);
         self.priceLabel.text = model.price;
