@@ -15,6 +15,8 @@ typedef void(^ChoosePayTypeBlock) (NewsRecordsModel *recordsModel);
 - (id) initNewsRecordsModel:(NewsRecordsModel *)recordsModel;
 //定义一个block
 @property (nonatomic, copy) ChoosePayTypeBlock typeBlock;
+/// 0:商城 1:植保
+@property (nonatomic, assign) NSInteger pageType;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -9,6 +9,7 @@
 #import "TXChoosePayViewController.h"
 #import "TXChoosePayTableViewCell.h"
 #import "AlipayManager.h"
+#import "TXPayPasswordViewController.h"
 
 static NSString * const reuseIdentifier = @"TXChoosePayTableViewCell";
 
@@ -108,7 +109,11 @@ static NSString * const reuseIdentifier = @"TXChoosePayTableViewCell";
     TXChoosePayTableViewCell *tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
     tools.titleLabel.text = model.title;
     tools.imagesView.image = kGetImage(model.imageText);
-    
+    if (self.dataArray.count>2&&([kUserInfo.balance integerValue]<[self.recordsModel.totalPrice integerValue])) {
+        if(indexPath.row == 2){
+            tools.titleLabel.textColor = kTextColor153;
+        }
+    }
     return tools;
 }
 
@@ -119,7 +124,11 @@ static NSString * const reuseIdentifier = @"TXChoosePayTableViewCell";
 
 /// 返回多少行
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.dataArray.count;
+    if (self.pageType==0) {
+        return self.dataArray.count;
+    }else{
+        return self.dataArray.count-1;
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -168,6 +177,8 @@ static NSString * const reuseIdentifier = @"TXChoosePayTableViewCell";
                 }else{
                     Toast(@"未知支付");
                 }
+            }else if(idx==2){
+                Toast(@"支付成功");
             }else{
                 Toast(model.message);
             }
@@ -180,8 +191,51 @@ static NSString * const reuseIdentifier = @"TXChoosePayTableViewCell";
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    [self GenerateOrderData:indexPath.row];
+    if (indexPath.row==2) {
+        [self getBalance:indexPath.row];
+    }else{
+        [self GenerateOrderData:indexPath.row];
+    }
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+//// 购买之前先获取余额
+- (void) getBalance:(NSInteger) idx{
+    NSString *URLString = kHttpURL(@"customer/Balance");
+    [SCHttpTools getWithURLString:URLString parameter:nil success:^(id responseObject) {
+        NSDictionary *result = responseObject;
+        kShowMBProgressHUD(self.view);
+        if ([result isKindOfClass:[NSDictionary class]]) {
+            TTLog(@" result --- %@",[Utils lz_dataWithJSONObject:result]);
+            TTUserDataModel *model = [TTUserDataModel mj_objectWithKeyValues:result];
+            if (model.errorcode==20000) {
+                kUserInfo.balance = model.data.balance;
+                kUserInfo.vrcurrency = model.data.vrcurrency;
+                [kUserInfo dump];
+                if ([model.data.balance integerValue]<[self.recordsModel.totalPrice integerValue]) {
+                    Toast(@"余额不足");
+                }else{
+                    [self GenerateOrderData:idx];
+//                    [self sc_dismissVC];
+//                    int64_t delayInSeconds = 2.0;      // 延迟的时间
+//                    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+//                    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+//                        TXPayPasswordViewController *vc = [[TXPayPasswordViewController alloc] init];
+//                        vc.pageType = 4;
+//                        vc.tipsText = @"";
+//                        vc.integralText = kUserInfo.balance;
+//                        [self presentPopupViewController:vc animationType:TTPopupViewAnimationFade];
+//                    });
+                }
+            }else{
+                Toast(model.message);
+            }
+        }
+        kHideMBProgressHUD(self.view);
+    } failure:^(NSError *error) {
+        TTLog(@"余额查询信息 -- %@", error);
+        kShowMBProgressHUD(self.view);
+    }];
 }
 
 
@@ -233,8 +287,9 @@ static NSString * const reuseIdentifier = @"TXChoosePayTableViewCell";
 - (NSMutableArray *)dataArray{
     if (!_dataArray) {
         _dataArray = [[NSMutableArray alloc] init];
-        NSArray* titleArr = @[@"支付宝",@"微信支付"];
-        NSArray* classArr = @[@"c31_btn_zfb",@"c31_btn_wxzf"];
+        
+        NSArray* titleArr = @[@"支付宝",@"微信支付",[NSString stringWithFormat:@"余额(￥:%@)",kUserInfo.balance]];
+        NSArray* classArr = @[@"c31_btn_zfb",@"c31_btn_wxzf",@"c31_钱袋"];
         for (int j = 0; j < titleArr.count; j ++) {
             TXGeneralModel *generalModel = [[TXGeneralModel alloc] init];
             generalModel.title = [titleArr lz_safeObjectAtIndex:j];

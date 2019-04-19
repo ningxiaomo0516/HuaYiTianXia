@@ -161,8 +161,8 @@ static NSString* reuseIdentifierShareTools = @"TXShareToolsCollectionViewCell";
 - (NSMutableArray *)dataArray{
     if (!_dataArray) {
         _dataArray = [[NSMutableArray alloc] init];
-        NSArray* titleArr = @[@"微信",@"微博",@"QQ"];
-        NSArray* imagesArr = @[@"live_btn_wechat",@"live_btn_weibo",@"live_btn_qq"];
+        NSArray* titleArr = @[@"微信",@"朋友圈",@"QQ好友"];
+        NSArray* imagesArr = @[@"live_btn_wechat",@"live_btn_pyquan",@"live_btn_qq"];
         for (int i=0; i<titleArr.count; i++) {
             TXGeneralModel *generalModel = [[TXGeneralModel alloc] init];
             generalModel.title = [titleArr lz_safeObjectAtIndex:i];

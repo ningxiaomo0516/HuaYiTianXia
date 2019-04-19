@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, copy) NSString *tipsText;
 @property (nonatomic, copy) NSString *integralText;
-/// 0:转出 1:复投 2:转换
+/// 0:转出 1:复投 2:转换 3:商城余额购买 4:新增机票购买
 @property (nonatomic, assign) NSInteger pageType;
 
 @end

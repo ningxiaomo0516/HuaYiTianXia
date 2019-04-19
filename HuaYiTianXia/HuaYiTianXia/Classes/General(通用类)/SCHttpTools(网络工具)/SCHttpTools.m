@@ -136,8 +136,8 @@ static AFHTTPSessionManager* manager_ = nil;
     [manager.requestSerializer setTimeoutInterval:timeoutInterval];
     manager.requestSerializer.cachePolicy = NSURLRequestReloadIgnoringLocalAndRemoteCacheData;
     [[NSURLCache sharedURLCache] removeAllCachedResponses];
-    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript",@"text/html", nil];
-    
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json",@"text/plain", @"text/javascript",@"text/html", nil];
+
     ///返回的json数组
     NSMutableArray * resultArr = [NSMutableArray arrayWithCapacity:params.count];
     ///返回的error
@@ -158,6 +158,8 @@ static AFHTTPSessionManager* manager_ = nil;
         }else{
             // 将当前的下载操作添加到组中
             dispatch_group_enter(group);
+            NSString *st = netModel.isGetOrPost?@"广告页":@"版本更新";
+            TTLog(@" ------------ %@ --- URL_____%@ \n %@",st,netModel.url,getUrl);
             if (netModel.isGetOrPost) {//get
                 //执行网络请求
                 [manager GET:getUrl parameters:nil progress:^(NSProgress * _Nonnull downloadProgress) {
@@ -171,7 +173,6 @@ static AFHTTPSessionManager* manager_ = nil;
                     dispatch_group_leave(group);
                     
                 } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-                    
                     if (error) {
                         //保存调用的error
                         NSError * errorDict = error;
@@ -181,8 +182,10 @@ static AFHTTPSessionManager* manager_ = nil;
                     dispatch_group_leave(group);
                 }];
             } else{//post
+                manager.requestSerializer = [AFJSONRequestSerializer serializer];
                 [manager POST:getUrl parameters:netModel.param progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
                     if (success) {
+                        TTLog(@"post -- %@ ---- %@",netModel.url,netModel.param);
                         //保存调用结果
                         NSDictionary * jsonDict = @{indexNumber:responseObject};
                         [resultArr addObject:jsonDict];

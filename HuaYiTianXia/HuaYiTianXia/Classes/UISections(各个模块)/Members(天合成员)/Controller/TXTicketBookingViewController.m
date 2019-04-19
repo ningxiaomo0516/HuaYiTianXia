@@ -11,6 +11,7 @@
 #import "TXTicketBookingTableViewCell.h"
 #import "TXRolloutTableViewCell.h"
 #import "TXTicketInfoTableViewCell.h"
+#import "TXPayPasswordViewController.h"
 
 static NSString* reuseIdentifier = @"TXTicketBookingTableViewCell";
 static NSString* reuseIdentifierRollout = @"TXRolloutTableViewCell";
@@ -55,6 +56,34 @@ static NSString* reuseIdentifierInfo = @"TXTicketInfoTableViewCell";
     // Do any additional setup after loading the view.
     self.title = @"机票预订";
     [self initView];
+    // 注册通知
+//    [kNotificationCenter addObserver:self selector:@selector(dealwithNotice) name:@"buyTicketRequest" object:nil];
+}
+
+- (void) dealwithNotice{
+    kShowMBProgressHUD(self.view);
+    NSString *URLString = kHttpURL(@"aircraftorder/AddAircraftorder");
+    NSMutableDictionary *parameter = [[NSMutableDictionary alloc] init];
+    [parameter setObject:self.ticketModel.dep_airport forKey:@"origin"];
+    [parameter setObject:self.ticketModel.arv_airport forKey:@"destination"];
+    [parameter setObject:self.priceLabel.text forKey:@"orderprice"];
+    [parameter setObject:self.priceLabel.text forKey:@"price"];
+    [parameter setObject:@"" forKey:@"remarks"];
+    [SCHttpTools postWithURLString:URLString parameter:parameter success:^(id responseObject) {
+        NSDictionary *result = responseObject;
+        if ([result isKindOfClass:[NSDictionary class]]) {
+            TTLog(@" result --- %@",[Utils lz_dataWithJSONObject:result]);
+            TXTicketModel *model = [TXTicketModel mj_objectWithKeyValues:result];
+            if (model.errorcode==20000) {
+                [self.navigationController popViewControllerAnimated:YES];
+            }
+            Toast(model.message);
+        }
+        kHideMBProgressHUD(self.view);
+    } failure:^(NSError *error) {
+        TTLog(@"机票查询信息 -- %@", error);
+        kHideMBProgressHUD(self.view);
+    }];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -67,30 +96,26 @@ static NSString* reuseIdentifierInfo = @"TXTicketInfoTableViewCell";
         Toast(@"请先选择机票");
         return;
     }
-    kShowMBProgressHUD(self.view);
-    NSString *URLString = kHttpURL(@"aircraftorder/AddAircraftorder");
-    NSMutableDictionary *parameter = [[NSMutableDictionary alloc] init];
-    [parameter setObject:self.ticketModel.dep_airport forKey:@"origin"];
-    [parameter setObject:self.ticketModel.arv_airport forKey:@"destination"];
-    [parameter setObject:self.priceLabel.text forKey:@"orderprice"];
-    [parameter setObject:self.priceLabel.text forKey:@"price"];
-    [parameter setObject:@"" forKey:@"remarks"];
-    [SCHttpTools getTicketWithURLString:URLString parameter:self.parameter success:^(id responseObject) {
-        NSDictionary *result = responseObject;
-        if ([result isKindOfClass:[NSDictionary class]]) {
-            TTLog(@" result --- %@",[Utils lz_dataWithJSONObject:result]);
-            TXTicketModel *model = [TXTicketModel mj_objectWithKeyValues:result];
-            kShowMBProgressHUD(self.view);
-            if (model.errorcode==20000) {
-                [self.navigationController popViewControllerAnimated:YES];
-            }
-            Toast(model.message);
-        }
-        kShowMBProgressHUD(self.view);
-    } failure:^(NSError *error) {
-        TTLog(@"机票查询信息 -- %@", error);
-        kShowMBProgressHUD(self.view);
-    }];
+    if (kUserInfo.isValidation==2) {
+        [self getBalance];
+    }else if(kUserInfo.isValidation==1){
+        Toast(@"实名认证审核中,请稍后再试!");
+    }else{
+        // 退出登录提示
+        UIAlertController *alerController = [UIAlertController addAlertReminderText:@"提示"
+                                                                            message:@"是否立即实名认证?"
+                                                                        cancelTitle:@"好的"
+                                                                            doTitle:@""//去设置
+                                                                     preferredStyle:UIAlertControllerStyleAlert
+                                                                        cancelBlock:nil doBlock:^{
+                                                                            [self jumpSetRealNameRequest];
+                                                                        }];
+        [self presentViewController:alerController animated:YES completion:nil];
+    }
+}
+
+- (void) jumpSetRealNameRequest{
+    
 }
 
 - (void) initView{
@@ -104,6 +129,37 @@ static NSString* reuseIdentifierInfo = @"TXTicketInfoTableViewCell";
     [self.footerView addSubview:self.payButton];
     
     [self initViewConstraints];
+}
+
+//// 购买之前先获取余额
+- (void) getBalance{
+    NSString *URLString = kHttpURL(@"customer/Balance");
+    [SCHttpTools getWithURLString:URLString parameter:nil success:^(id responseObject) {
+        NSDictionary *result = responseObject;
+        kShowMBProgressHUD(self.view);
+        if ([result isKindOfClass:[NSDictionary class]]) {
+            TTLog(@" result --- %@",[Utils lz_dataWithJSONObject:result]);
+            TTUserDataModel *model = [TTUserDataModel mj_objectWithKeyValues:result];
+            kShowMBProgressHUD(self.view);
+            if (model.errorcode==20000) {
+                [self dealwithNotice];
+                /// 暂不调用支付密码界面
+//                kUserInfo.balance = model.data.balance;
+//                kUserInfo.vrcurrency = model.data.vrcurrency;
+//                [kUserInfo dump];
+//                TXPayPasswordViewController *vc = [[TXPayPasswordViewController alloc] init];
+//                vc.pageType = 4;
+//                vc.tipsText = @"VH";
+//                vc.integralText = kUserInfo.balance;
+//                [self presentPopupViewController:vc animationType:TTPopupViewAnimationFade];
+            }else{
+                Toast(model.message);
+            }
+        }
+    } failure:^(NSError *error) {
+        TTLog(@"余额查询信息 -- %@", error);
+        kShowMBProgressHUD(self.view);
+    }];
 }
 
 

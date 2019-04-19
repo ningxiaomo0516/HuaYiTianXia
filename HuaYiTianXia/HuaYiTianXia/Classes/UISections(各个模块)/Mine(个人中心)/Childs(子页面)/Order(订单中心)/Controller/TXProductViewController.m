@@ -127,6 +127,7 @@ static NSString * const reuseIdentifier = @"TXProductTableViewCell";
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.requestDelegate = self;
+        _tableView.requestType = kHttpPost;
         _tableView.backgroundColor = kTableViewInSectionColor;
     }
     return _tableView;

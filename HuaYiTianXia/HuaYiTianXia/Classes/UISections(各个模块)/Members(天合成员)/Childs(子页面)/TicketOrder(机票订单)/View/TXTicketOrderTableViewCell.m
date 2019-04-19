@@ -31,7 +31,7 @@
 
 - (void)setOrderModel:(TicketOrderModel *)orderModel{
     _orderModel = orderModel;
-    self.o_numLabel.text = [NSString stringWithFormat:@"订单号:%@",self.orderModel.kid];
+    self.o_numLabel.text = [NSString stringWithFormat:@"订单号:%@",self.orderModel.orderNumber];
     self.o_dateLabel.text = [NSString stringWithFormat:@"订单时间:%@",self.orderModel.datetime];
     self.o_nameLabel.text = [NSString stringWithFormat:@"订单人:%@",self.orderModel.username];
     NSString *o_price = [NSString stringWithFormat:@"订票价格:%@",self.orderModel.price];

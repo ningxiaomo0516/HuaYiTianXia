@@ -62,6 +62,7 @@
 - (UILabel *)titleLabel{
     if (!_titleLabel) {
         _titleLabel = [UILabel lz_labelWithTitle:@"" color:kTextColor51 font:kFontSizeScBold13];
+        _titleLabel.numberOfLines = 1;
     }
     return _titleLabel;
 }

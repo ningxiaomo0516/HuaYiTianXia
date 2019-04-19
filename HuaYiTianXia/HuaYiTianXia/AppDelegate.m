@@ -38,6 +38,8 @@
     if (@available(iOS 11.0, *)) {
         [[UIScrollView appearance] setContentInsetAdjustmentBehavior:UIScrollViewContentInsetAdjustmentNever];
     }
+    // 启动图片延时: 1秒
+    [NSThread sleepForTimeInterval:2];
     [self registLocalNotificationWithOptions:launchOptions];
     //配置键盘
     [IQKeyboardManager sharedManager];

@@ -36,6 +36,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface TicketOrderModel : NSObject
 @property (nonatomic, copy) NSString *kid;
+@property (nonatomic, copy) NSString *orderNumber;
 //// 出发地
 @property (nonatomic, copy) NSString *destination;
 /// 订票人姓名

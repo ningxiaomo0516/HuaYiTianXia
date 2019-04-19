@@ -20,3 +20,33 @@
 @implementation TXVersionCellModel
 
 @end
+
+@implementation TTVersionData
+
+- (NSString *)description{
+    return [self yy_modelDescription];
+}
+
++ (NSDictionary *)replacedKeyFromPropertyName{
+    return @{@"data"        : @"obj",
+             @"errorcode"   : @"code",
+             @"message"     : @"msg"};
+}
++ (NSDictionary *)objectClassInArray{
+    return @{@"data" : [TTVersionModel class]};
+}
+
+@end
+
+@implementation TTVersionModel
+
+- (NSString *)description{
+    return [self yy_modelDescription];
+}
+
++ (NSDictionary *)replacedKeyFromPropertyName{
+    return @{@"kid"         : @"id",
+             @"updateInfo"  : @"vexplain"};
+}
+
+@end

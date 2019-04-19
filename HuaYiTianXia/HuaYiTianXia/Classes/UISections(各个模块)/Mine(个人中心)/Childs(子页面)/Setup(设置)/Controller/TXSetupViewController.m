@@ -11,6 +11,7 @@
 #import "TXGeneralModel.h"
 #import "TXWebViewController.h"
 #import "AppDelegate.h"
+#import "TXAddressViewController.h"
 
 static NSString * const reuseIdentifier = @"TXMineTableViewCell";
 
@@ -124,6 +125,10 @@ static NSString * const reuseIdentifier = @"TXMineTableViewCell";
     if (indexPath.section==0) {
         if ([model.showClass isEqualToString:@""]) {
             Toast(@"暂未开通");
+        }else if ([model.showClass isEqualToString:@"TXAddressViewController"]) {
+            TXAddressViewController *vc = [[TXAddressViewController alloc] init];
+            vc.pageType = 1;
+            TTPushVC(vc);
         }else if(model.index==0||model.index==1||model.index==4){
             TXWebViewController *vc = [[TXWebViewController alloc] init];
             vc.title = model.title;

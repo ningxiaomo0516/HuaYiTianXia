@@ -27,7 +27,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zjw-gx-5YJ">
-                    <rect key="frame" x="15" y="178" width="345" height="50"/>
+                    <rect key="frame" x="15" y="255" width="345" height="50"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="手机号" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="00d-tt-CdH">
                             <rect key="frame" x="0.0" y="14.5" width="45" height="21"/>
@@ -67,7 +67,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hLc-0c-BHe">
-                    <rect key="frame" x="15" y="231" width="345" height="50"/>
+                    <rect key="frame" x="15" y="308" width="345" height="50"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="登录密码" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6q3-lm-r3S">
                             <rect key="frame" x="0.0" y="14.5" width="60" height="21"/>
@@ -107,7 +107,7 @@
                     </constraints>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l5z-aZ-FqI">
-                    <rect key="frame" x="15" y="301" width="345" height="45"/>
+                    <rect key="frame" x="15" y="378" width="345" height="45"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="45" id="tmg-OQ-Hnm"/>
@@ -122,11 +122,11 @@
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </button>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="c31_login_logo" translatesAutoresizingMaskIntoConstraints="NO" id="g2e-1m-HeM">
-                    <rect key="frame" x="128.5" y="40" width="118" height="118"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="c32_login_logo" translatesAutoresizingMaskIntoConstraints="NO" id="g2e-1m-HeM">
+                    <rect key="frame" x="110" y="60" width="155" height="155"/>
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sd8-Xt-7IK">
-                    <rect key="frame" x="15" y="366" width="345" height="45"/>
+                    <rect key="frame" x="15" y="443" width="345" height="45"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="45" id="7S6-e9-27h"/>
@@ -148,7 +148,7 @@
                     </userDefinedRuntimeAttributes>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WEG-J5-wO3">
-                    <rect key="frame" x="153" y="426" width="69" height="33"/>
+                    <rect key="frame" x="153" y="503" width="69" height="33"/>
                     <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="15"/>
                     <state key="normal" title="忘记密码?">
                         <color key="titleColor" red="0.14901960780000001" green="0.72549019609999998" blue="0.99607843139999996" alpha="1" colorSpace="calibratedRGB"/>
@@ -176,11 +176,11 @@
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="g2e-1m-HeM" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" constant="20" id="G6u-S7-bJd"/>
+                <constraint firstItem="g2e-1m-HeM" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" constant="40" id="G6u-S7-bJd"/>
                 <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="l5z-aZ-FqI" secondAttribute="trailing" constant="15" id="K1k-sG-CCb"/>
                 <constraint firstItem="l5z-aZ-FqI" firstAttribute="top" secondItem="hLc-0c-BHe" secondAttribute="bottom" constant="20" id="O0q-tu-cjW"/>
                 <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="Zjw-gx-5YJ" secondAttribute="trailing" constant="15" id="OGU-DT-VVq"/>
-                <constraint firstItem="Zjw-gx-5YJ" firstAttribute="top" secondItem="g2e-1m-HeM" secondAttribute="bottom" constant="20" id="Odk-vx-Jb4"/>
+                <constraint firstItem="Zjw-gx-5YJ" firstAttribute="top" secondItem="g2e-1m-HeM" secondAttribute="bottom" constant="40" id="Odk-vx-Jb4"/>
                 <constraint firstItem="xQT-yg-xoP" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Wtt-zB-zQ3"/>
                 <constraint firstItem="sd8-Xt-7IK" firstAttribute="top" secondItem="l5z-aZ-FqI" secondAttribute="bottom" constant="20" id="XZ5-is-UhG"/>
                 <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="hLc-0c-BHe" secondAttribute="trailing" constant="15" id="YKH-Tk-Gn3"/>
@@ -201,6 +201,6 @@
     </objects>
     <resources>
         <image name="c31_denglu" width="345" height="45"/>
-        <image name="c31_login_logo" width="118" height="118"/>
+        <image name="c32_login_logo" width="155" height="155"/>
     </resources>
 </document>

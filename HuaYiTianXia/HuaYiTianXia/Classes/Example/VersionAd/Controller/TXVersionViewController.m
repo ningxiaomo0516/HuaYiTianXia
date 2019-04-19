@@ -59,7 +59,9 @@
 //下载版本控制信息和引导广告
 - (void)loadVersionAndADsRequest{
     NSMutableArray * pramas = [NSMutableArray array];
-    SCHttpToolsModel* versionModel = [[SCHttpToolsModel alloc]  initIsGetOrPost:true Url:versionManage param:nil];
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    [dic setObject:@(1) forKey:@"status"];
+    SCHttpToolsModel* versionModel = [[SCHttpToolsModel alloc]  initIsGetOrPost:false Url:versionManage param:dic];
     [pramas addObject:versionModel];
     
     SCHttpToolsModel* adsModel = [[SCHttpToolsModel alloc]  initIsGetOrPost:true Url:startPage param:nil];
@@ -69,15 +71,27 @@
     [SCHttpTools getMoreDataWithParams:pramas success:^(id result) {
         if (result) {
             if (result[@"0"]) {
-                NSArray *versionArray = [NSArray yy_modelArrayWithClass:[TXVersionModel class] json:result[@"0"]];
-                for (TXVersionModel * model in versionArray) {
-                    if (model.type == 1) {
-                        weakSelf.versionModel = model;
-                    }
-                }
+                TTLog(@"get result -- %@",[Utils lz_dataWithJSONObject:result]);
+//                NSArray *versionArray = [NSArray yy_modelArrayWithClass:[TXVersionModel class] json:result[@"0"]];
+//                for (TXVersionModel * model in versionArray) {
+//                    if (model.type == 2) {
+//                        weakSelf.versionModel = model;
+//                    }
+//                }
+                TTVersionData *versionModel = [TTVersionData mj_objectWithKeyValues:result[@"0"]];
+                weakSelf.versionModel = versionModel.data;
             }
             if (result[@"1"]) {
-                weakSelf.adsArray = [NSArray yy_modelArrayWithClass:[TXAdsModel class] json:result[@"1"]];
+                TTLog(@"post result -- %@",[Utils lz_dataWithJSONObject:result]);
+//                weakSelf.adsArray = [NSArray yy_modelArrayWithClass:[TXAdsModel class] json:result[@"1"]];
+//                TTAdsData *adsModel = [TTAdsData mj_objectWithKeyValues:result[@"1"]];
+                NSDictionary * dic = [result lz_objectForKey:@"1"];
+                TTLog(@" --- dic %@",dic);
+                TTAdsData *model = [TTAdsData mj_objectWithKeyValues:dic];
+
+                if (model.errorcode == 20000) {
+                    [weakSelf.adsArray addObject:model.data];
+                }
             }
         }
         weakSelf.isData = YES;
@@ -269,7 +283,7 @@
 
 //更新
 - (void)updateBtnClicked{
-    NSString *AppURL = @"https://itunes.apple.com/cn/app/%E7%86%8A%E7%8C%AB%E8%A7%86%E9%A2%91-%E5%9B%9B%E5%B7%9D%E6%9C%80%E5%A4%A9%E5%BA%9C%E6%8E%8C%E4%B8%8A%E8%A7%86%E9%A2%91%E6%92%AD%E6%94%BE%E5%B9%B3%E5%8F%B0/id1133394264?l=zh&ls=1&mt=8";
+    NSString *AppURL = @"https://itunes.apple.com/cn/app/%E7%86%8A%E7%8C%AB%E8%A7%86%E9%A2%91-%E5%9B%9B%E5%B7%9D%E6%9C%80%E5%A4%A9%E5%BA%9C%E6%8E%8C%E4%B8%8A%E8%A7%86%E9%A2%91%E6%92%AD%E6%94%BE%E5%B9%B3%E5%8F%B0/id1460229512?l=zh&ls=1&mt=8";
     [[UIApplication sharedApplication] openURL:kGetImageURL(AppURL)];
 }
 //取消
@@ -340,7 +354,7 @@
 }
 
 - (UIButton *)updateButton{
-    if (_updateButton == nil) {
+    if (!_updateButton) {
         _updateButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [_updateButton setTitleColor:[UIColor lz_colorWithHex:0x00c5ed] forState:UIControlStateNormal];
         [_updateButton setTitle:@"立即更新" forState:UIControlStateNormal];
@@ -351,10 +365,17 @@
 }
 
 - (NSMutableArray *)listArray{
-    if (_listArray == nil) {
+    if (!_listArray) {
         _listArray = [NSMutableArray array];
     }
     return _listArray;
+}
+
+- (NSMutableArray *)adsArray{
+    if (!_adsArray) {
+        _adsArray = [NSMutableArray array];
+    }
+    return _adsArray;
 }
 
 - (void)didReceiveMemoryWarning {

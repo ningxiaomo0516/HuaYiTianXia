@@ -94,6 +94,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// 1：无人机商城产品（消费）；2：农用植保产品（购买）；3：VR产品（购买）；4：纵横矿机产品（购买）；5：共享飞行产品（购买）；6：生态农业商城产品（消费）
 @property (nonatomic, assign) NSInteger status;
 
+/// 购买产品的总价格
+@property (nonatomic, copy) NSString *totalPrice;
+
 //// --------------- 产品详情 --------------- ////
 /// 库存
 @property (nonatomic, assign) NSInteger spec;

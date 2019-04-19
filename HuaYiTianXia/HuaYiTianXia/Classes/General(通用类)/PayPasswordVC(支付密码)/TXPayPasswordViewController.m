@@ -8,6 +8,7 @@
 
 #import "TXPayPasswordViewController.h"
 #import "TTPasswordView.h"
+#import "IQKeyboardManager.h"
 
 @interface TXPayPasswordViewController ()
 /// 标题
@@ -61,6 +62,22 @@
     self.integralLabel.attributedText = attributedStr;
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    self.view.height = IPHONE6_W(230);
+    self.view.width = IPHONE6_W(280);
+    //TODO: 页面appear 禁用
+    [[IQKeyboardManager sharedManager] setEnable:NO];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    //TODO: 页面Disappear 启用
+    [[IQKeyboardManager sharedManager] setEnable:YES];
+}
+
 /// 验证交易密码
 - (void) validationTransactionPassword{
     NSMutableDictionary *parameter = [[NSMutableDictionary alloc] init];
@@ -78,6 +95,10 @@
                     [kNotificationCenter postNotificationName:@"repeatcCastRequest" object:nil];
                 }else if (self.pageType == 2 ) { /// 转换
                     [kNotificationCenter postNotificationName:@"conversionRequest" object:nil];
+                }else if(self.pageType == 3 ){ /// 商城余额购买
+                    [kNotificationCenter postNotificationName:@"mallBalanceRequest" object:nil];
+                }else if(self.pageType == 4 ){ /// 新增机票购买
+                    [kNotificationCenter postNotificationName:@"buyTicketRequest" object:nil];
                 }else{
                     Toast(@"未知页面");
                 }
@@ -173,6 +194,7 @@
         MV(weakSelf);
         [_closeButton lz_handleControlEvent:UIControlEventTouchUpInside withBlock:^{
             [weakSelf dismissViewControllerAnimated:YES completion:nil];
+//            [weakSelf dismissPopupViewControllerWithanimationType:TTPopupViewAnimationFade];
         }];
     }
     return _closeButton;

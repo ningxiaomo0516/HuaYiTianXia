@@ -142,6 +142,7 @@
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
         self.model.purchaseType = 2;
         TXChoosePayViewController *vc = [[TXChoosePayViewController alloc]initNewsRecordsModel:self.model];
+        vc.pageType = 1;
         [self sc_bottomPresentController:vc presentedHeight:IPHONE6_W(400) completeHandle:^(BOOL presented) {
 
         }];

@@ -13,15 +13,25 @@
     return [self yy_modelDescription];
 }
 
-//+ (NSDictionary *)replacedKeyFromPropertyName{
-//    return @{@"kid"         : @"id",
-//             @"imageName"   : @"imageName",
-//             @"imageUrl"    : @"imgurl",
-//             @"showTime"    : @"countdown",
-//             @"state"       : @"status",
-//             @"type"        : @"type",
-//             @"sort"        : @"sort",
-//             @"jumpType"    : @"jumptype",
-//             @"jumpUrl"     : @"url"};
-//}
+
+@end
+
+@implementation TTAdsData
++ (NSDictionary *)replacedKeyFromPropertyName{
+    return @{@"data"        : @"obj",
+             @"errorcode"   : @"code",
+             @"message"     : @"msg"};
+}
++ (NSDictionary *)objectClassInArray{
+    return @{@"data" : [TTAdsModel class]};
+}
+@end
+
+@implementation TTAdsModel
++ (NSDictionary *)replacedKeyFromPropertyName{
+    return @{@"kid"         : @"id",
+             @"imageUrl"    : @"imgurl",
+             @"showTime"    : @"countdown",
+             @"jumpUrl"     : @"url"};
+}
 @end

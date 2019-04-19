@@ -13,8 +13,10 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface TXVersionViewController : UIViewController
-@property(nonatomic,strong)TXVersionModel *versionModel;
-@property(nonatomic,strong)NSArray *adsArray;
+//@property(nonatomic,strong)TXVersionModel *versionModel;
+//@property(nonatomic,strong)NSArray *adsArray;
+@property(nonatomic,strong)NSMutableArray *adsArray;
+@property(nonatomic,strong)TTVersionModel *versionModel;
 - (void)updateAllData;
 @end
 

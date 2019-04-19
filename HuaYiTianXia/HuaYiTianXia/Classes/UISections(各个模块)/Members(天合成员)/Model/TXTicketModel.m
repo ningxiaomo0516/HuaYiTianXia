@@ -10,8 +10,8 @@
 
 @implementation TXTicketModel
 + (NSDictionary *)replacedKeyFromPropertyName{
-    return @{@"errorcode"   : @"error_code",
-             @"message"     : @"reason"};
+    return @{@"errorcode"   : @"code",
+             @"message"     : @"msg"};
 }
 + (NSDictionary *)objectClassInArray{
     return @{@"data" : [TicketModel class]};

@@ -51,9 +51,11 @@
     
     [self.view addSubview:self.scrollView];
     [self.view addSubview:self.skipButton];
+    TTLog(@"self.adsArray.count -- %ld",self.adsArray.count);
     for (NSInteger i = 0; i < self.adsArray.count; i++) {
         UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake(kScreenWidth * i, 0, kScreenWidth, kScreenHeight)];
         TXAdsModel * model = [self.adsArray lz_safeObjectAtIndex:i];
+        TTLog(@"model.imageUrl -- %@",model.imageUrl);
         [imgView sc_setImageWithUrlString:model.imageUrl placeholderImage:[UIImage imageNamed:@"guide_img_banner"] isAvatar:false];
         imgView.tag = 1150 + i;
         [imgView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(btnClickSkipUrl:)]];
@@ -123,7 +125,7 @@
             return ;
         }
         [self.scrollView setContentOffset:CGPointMake(kScreenWidth *(self.currentPage + 1), 0) animated:YES];
-        self.currentTime = 10;
+        self.currentTime = 3;
         self.currentPage = self.currentPage + 1;
     }
     [self.skipButton setTitle:[NSString stringWithFormat:@"%lds 跳过",(long)self.currentTime] forState:UIControlStateNormal];
@@ -131,9 +133,9 @@
 
 #pragma mark -- getter,setter
 - (UIButton *)skipButton{
-    if (_skipButton == nil) {
+    if (!_skipButton) {
         _skipButton = [[UIButton alloc] init];
-        [_skipButton setTitle:@"100s 跳过" forState:UIControlStateNormal];
+        [_skipButton setTitle:@"3s 跳过" forState:UIControlStateNormal];
         _skipButton.titleLabel.font = kFontSizeMedium12;
         [_skipButton setTitleColor:kWhiteColor forState:UIControlStateNormal];
         _skipButton.backgroundColor = [UIColor lz_colorWithHex:0x000000];
@@ -144,7 +146,7 @@
 }
 
 - (UIScrollView *)scrollView {
-    if (_scrollView == nil) {
+    if (!_scrollView) {
         _scrollView = [[UIScrollView alloc] init];
         _scrollView.pagingEnabled = true;
         _scrollView.showsVerticalScrollIndicator = false;
@@ -173,15 +175,5 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

@@ -77,16 +77,37 @@ static NSString * const reuseIdentifierPurchase = @"TXPurchaseQuantityTableViewC
 //    self.model.price = self.priceLabel.text;
     //    [self sc_dismissVC];
     
-    int64_t delayInSeconds = 0.5;      // 延迟的时间
-    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
-    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        self.model.purchaseType = 2;
-        TXChoosePayViewController *vc = [[TXChoosePayViewController alloc]initNewsRecordsModel:self.model];
-        [self sc_bottomPresentController:vc presentedHeight:IPHONE6_W(400) completeHandle:^(BOOL presented) {
-            
-        }];
-    });
+    if (kUserInfo.isValidation==2) {
+        int64_t delayInSeconds = 0.5;      // 延迟的时间
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+            self.model.purchaseType = 2;
+            TXChoosePayViewController *vc = [[TXChoosePayViewController alloc]initNewsRecordsModel:self.model];
+            vc.pageType = 0;
+            [self sc_bottomPresentController:vc presentedHeight:IPHONE6_W(400) completeHandle:^(BOOL presented) {
+                
+            }];
+        });
+    }else if(kUserInfo.isValidation==1){
+        Toast(@"实名认证审核中,请稍后再试!");
+    }else{
+        // 退出登录提示
+        UIAlertController *alerController = [UIAlertController addAlertReminderText:@"提示"
+                                                                            message:@"是否立即实名认证?"
+                                                                        cancelTitle:@"好的"
+                                                                            doTitle:@""//去设置
+                                                                     preferredStyle:UIAlertControllerStyleAlert
+                                                                        cancelBlock:nil doBlock:^{
+                                                                            [self jumpSetRealNameRequest];
+                                                                        }];
+        [self presentViewController:alerController animated:YES completion:nil];
+    }
 }
+
+- (void) jumpSetRealNameRequest{
+    
+}
+    
 
 - (void) getAddressModel{
     [SCHttpTools getWithURLString:kHttpURL(@"address/GetAddress") parameter:nil success:^(id responseObject) {
@@ -164,6 +185,7 @@ static NSString * const reuseIdentifierPurchase = @"TXPurchaseQuantityTableViewC
     }
     NSInteger totalAmount = self.model.buyCount*[self.model.price integerValue];
     self.totalAmountLabel.text = [NSString stringWithFormat:@"%ld.00",(long)totalAmount];
+    self.model.totalPrice = [NSString stringWithFormat:@"%ld",(long)totalAmount];
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:2];
     [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationFade];
 }

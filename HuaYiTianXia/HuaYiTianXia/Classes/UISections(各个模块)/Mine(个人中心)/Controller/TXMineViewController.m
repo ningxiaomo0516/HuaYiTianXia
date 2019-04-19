@@ -115,12 +115,11 @@ static NSString * const reuseIdentifierBanner = @"TXMineBannerTableViewCell";
         return tools;
     }else{
         TXMineTableViewCell* tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
-        if (indexPath.row==0) {
-            tools.titleLabel.textColor = kTextColor102;
-            tools.titleLabel.font = kFontSizeMedium13;
-            tools.imagesArrow.hidden = YES;
-            tools.selectionStyle = UITableViewCellSelectionStyleNone;
-        }else if(indexPath.row==1){
+        TXGeneralModel* model = self.itemModelArray[0][indexPath.row];
+        model.index = indexPath.item;
+        tools.titleLabel.text = model.title;
+        tools.linerView.hidden = NO;
+        if (indexPath.row==0){
             tools.subtitleLabel.textColor = HexString(@"#FF9B9B");
             if (kUserInfo.isValidation==2) {
                 tools.subtitleLabel.textColor = kTextColor153;
@@ -134,11 +133,10 @@ static NSString * const reuseIdentifierBanner = @"TXMineBannerTableViewCell";
                 tools.subtitleLabel.text = @"未实名认证";
             }
             tools.subtitleLabel.hidden = NO;
+        }else{
+            tools.imagesArrow.hidden = NO;
+            tools.subtitleLabel.hidden = YES;
         }
-        TXGeneralModel* model = self.itemModelArray[0][indexPath.row];
-        model.index = indexPath.item;
-        tools.titleLabel.text = model.title;
-        tools.linerView.hidden = NO;
         return tools;
     }
 }
@@ -158,9 +156,6 @@ static NSString * const reuseIdentifierBanner = @"TXMineBannerTableViewCell";
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section==0) return IPHONE6_W(126);
     if (indexPath.section==1) return IPHONE6_W(180);
-    else {
-        if (indexPath.row==0) return IPHONE6_W(40);
-    }
     return IPHONE6_W(50);
 }
 
@@ -276,9 +271,9 @@ static NSString * const reuseIdentifierBanner = @"TXMineBannerTableViewCell";
 - (NSMutableArray *)itemModelArray{
     if (!_itemModelArray) {
         _itemModelArray = [[NSMutableArray alloc] init];
-        NSArray* titleArr = @[@[@"资产管理",@"实名认证",@"订单中心",@"我的钱包",
+        NSArray* titleArr = @[@[@"实名认证",@"订单中心",@"我的钱包",
                                 @"推荐邀请",@"我的团队",@"设置"]];//TXOrderViewController
-        NSArray* classArr = @[@[@"",@"TXRealNameViewController",@"TXProductViewController",
+        NSArray* classArr = @[@[@"TXRealNameViewController",@"TXProductViewController",
                                 @"TXWalletViewController",@"TXWebViewController",
                                 @"TXTeamViewController",@"TXSetupViewController"]];
         for (int i=0; i<titleArr.count; i++) {

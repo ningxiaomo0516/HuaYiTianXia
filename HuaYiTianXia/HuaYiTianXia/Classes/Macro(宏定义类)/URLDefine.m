@@ -75,11 +75,12 @@ NSString *const tokenLogin = @"/tokenLogin";
 /// 图片上传接口
 NSString *const uploadFile = @"upload/codeImage";
 /// 版本信息
-NSString *const versionManage = @"http://pandafile.sctv.com:42086/System/VersionManage/VersionManage.json";
-//NSString *const versionManage = @"http://47.107.179.43:80/hytx/upload/version";
+//NSString *const versionManage = @"http://pandafile.sctv.com:42086/System/VersionManage/VersionManage.json";
+NSString *const versionManage = @"http://47.107.179.43:80/hytx/upload/version";
 /// 引导页
-NSString *const startPage = @"http://pandafile.sctv.com:42086/System/StartPage/StartPage.json";
-//NSString *const startPage = @"http://47.107.179.43:80/hytx/startadver/GetStartadver";
+//NSString *const startPage = @"http://pandafile.sctv.com:42086/System/StartPage/StartPage.json";
+NSString *const startPage = @"http://47.107.179.43:80/hytx/startadver/GetStartadver";
+//NSString *const startPage = @"http://192.168.1.5:80/hytx/startadver/GetStartadver";
 
 /// 获取熊猫钱包余额
 NSString *const getPandaBalance = @"/getPandaBalance";

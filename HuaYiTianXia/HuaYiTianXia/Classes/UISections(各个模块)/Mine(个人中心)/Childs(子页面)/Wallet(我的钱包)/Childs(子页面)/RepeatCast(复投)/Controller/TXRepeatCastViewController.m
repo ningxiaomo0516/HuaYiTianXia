@@ -68,14 +68,7 @@ static NSString * const reuseIdentifierRollout = @"TXRolloutTableViewCell";
     vc.pageType = 1;
     vc.tipsText = @"VH";
     vc.integralText = self.amountText;
-    CGSize size = CGSizeMake(IPHONE6_W(280), IPHONE6_W(230));
-    [self sc_centerPresentController:vc presentedSize:size completeHandle:^(BOOL presented) {
-        if (presented) {
-            TTLog(@"弹出了");
-        }else{
-            TTLog(@"消失了");
-        }
-    }];
+    [self presentPopupViewController:vc animationType:TTPopupViewAnimationFade];
 }
 
 - (void) initView{

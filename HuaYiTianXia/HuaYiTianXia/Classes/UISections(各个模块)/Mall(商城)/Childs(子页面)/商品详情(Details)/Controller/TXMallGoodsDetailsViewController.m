@@ -30,6 +30,8 @@ TXMallGoodsSpecTableViewCellDelegate,WKUIDelegate,WKNavigationDelegate>
 @property (nonatomic, strong) NSMutableArray *dataArray;
 @property (strong, nonatomic) UIButton *saveButton;
 @property (strong, nonatomic) UIView *footerView;
+
+@property (nonatomic, strong) SCNoDataView *noDataView;
 /// 列表页传过来的Model
 @property (strong, nonatomic) NewsRecordsModel *productModel;
 /// 产品详情
@@ -57,6 +59,7 @@ TXMallGoodsSpecTableViewCellDelegate,WKUIDelegate,WKNavigationDelegate>
         self.productModel = productModel;
         self.buyCount = 1;
         self.isload = NO;
+        self.tableView.hidden = YES;
     }
     return self;
 }
@@ -65,6 +68,7 @@ TXMallGoodsSpecTableViewCellDelegate,WKUIDelegate,WKNavigationDelegate>
     self.title = @"商品详情";
     [self createWebView];
     [self initView];
+    [self.view showLoadingViewWithText:@"请稍后"];
     [self loadMallGoodsDetailsData];
 }
 
@@ -78,20 +82,24 @@ TXMallGoodsSpecTableViewCellDelegate,WKUIDelegate,WKNavigationDelegate>
         if ([result isKindOfClass:[NSDictionary class]]) {
             self.productData = [NewsModel mj_objectWithKeyValues:result];
             self.isload = YES;
+            self.tableView.hidden = NO;
             [self.tableView reloadData];
+            self.noDataView.hidden = YES;
         }else{
             Toast(@"获取产品详情数据失败");
+            self.noDataView.hidden = NO;
         }
+        [self.view dismissLoadingView];
     } failure:^(NSError *error) {
         TTLog(@" -- error -- %@",error);
+        [self.view dismissLoadingView];
+        self.noDataView.hidden = NO;
     }];
 }
-
 
 /// 立即投保
 - (void) saveBtnClick:(UIButton *)sender{
     TTLog(@"self.pageType -- %ld",self.pageType);
-    
     if (kUserInfo.isLogin) {
         if (self.pageType == 0) {
             ///// 记录当前是商城购买
@@ -100,22 +108,35 @@ TXMallGoodsSpecTableViewCellDelegate,WKUIDelegate,WKNavigationDelegate>
             TXSubmitOrderViewController *vc = [[TXSubmitOrderViewController alloc] initNewsRecordsModel:self.model];
             TTPushVC(vc);
         }else if(self.pageType == 1){
-            ///// 记录当前是农保购买
-            kUserInfo.topupType = 3;
-            [kUserInfo dump];
-            TXPayOrderViewController *vc = [[TXPayOrderViewController alloc] initNewsRecordsModel:self.model];
-            vc.totalPriceBlock = ^(NSString * _Nonnull totalPrice) {
-                //            model.price = totalPrice;
-            };
-            [self sc_bottomPresentController:vc presentedHeight:IPHONE6_W(kiPhoneX_T(420)) completeHandle:^(BOOL presented) {
-                if (presented) {
-                    TTLog(@"弹出了");
-                }else{
-                    TTLog(@"消失了");
-                }
-            }];
-        }else{
-            Toast(@"当前按钮点击无效");
+            if (kUserInfo.isValidation==2) {
+                ///// 记录当前是农保购买
+                kUserInfo.topupType = 3;
+                [kUserInfo dump];
+                TXPayOrderViewController *vc = [[TXPayOrderViewController alloc] initNewsRecordsModel:self.model];
+                vc.totalPriceBlock = ^(NSString * _Nonnull totalPrice) {
+                    //            model.price = totalPrice;
+                };
+                [self sc_bottomPresentController:vc presentedHeight:IPHONE6_W(kiPhoneX_T(420)) completeHandle:^(BOOL presented) {
+                    if (presented) {
+                        TTLog(@"弹出了");
+                    }else{
+                        TTLog(@"消失了");
+                    }
+                }];
+            }else if(kUserInfo.isValidation==1){
+                Toast(@"实名认证审核中,请稍后再试!");
+            }else{
+                // 退出登录提示
+                UIAlertController *alerController = [UIAlertController addAlertReminderText:@"提示"
+                                                                                    message:@"是否立即实名认证?"
+                                                                                cancelTitle:@"好的"
+                                                                                    doTitle:@""//去设置
+                                                                             preferredStyle:UIAlertControllerStyleAlert
+                                                                                cancelBlock:nil doBlock:^{
+                                                                                    [self jumpSetRealNameRequest];
+                                                                                }];
+                [self presentViewController:alerController animated:YES completion:nil];
+            }
         }
     }else{
         TXLoginViewController *view = [[TXLoginViewController alloc] init];
@@ -124,6 +145,11 @@ TXMallGoodsSpecTableViewCellDelegate,WKUIDelegate,WKNavigationDelegate>
             TTLog(@"个人信息修改");
         }];
     }
+}
+
+
+- (void) jumpSetRealNameRequest{
+    
 }
 
 /// 分享到第三方平台
@@ -401,6 +427,22 @@ TXMallGoodsSpecTableViewCellDelegate,WKUIDelegate,WKNavigationDelegate>
         }];
     }
     return _saveButton;
+}
+
+- (SCNoDataView *)noDataView {
+    if (!_noDataView) {
+        _noDataView = [[SCNoDataView alloc] initWithFrame:self.view.bounds
+                                                imageName:@"c12_live_nodata"
+                                            tipsLabelText:@"数据加载失败~"];
+        _noDataView.userInteractionEnabled = NO;
+        [self.view insertSubview:_noDataView aboveSubview:self.tableView];
+        [self.noDataView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.mas_offset(0);
+            make.centerY.mas_equalTo(self.view.mas_centerY);
+            make.height.mas_equalTo(150);
+        }];
+    }
+    return _noDataView;
 }
 
 - (UIView *)footerView{

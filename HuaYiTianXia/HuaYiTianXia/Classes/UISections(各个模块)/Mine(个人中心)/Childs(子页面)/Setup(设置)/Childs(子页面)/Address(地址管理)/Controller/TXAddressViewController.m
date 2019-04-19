@@ -25,6 +25,8 @@ static NSString * const reuseIdentifier = @"TXAddressTableViewCell";
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self initView];
+    self.title = @"地址管理";
+    [self.view showLoadingViewWithText:@"请稍后"];
     
     // 添加右边保存按钮
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"新增地址" style:UIBarButtonItemStylePlain target:self action:@selector(addBtnClick)];
@@ -35,7 +37,6 @@ static NSString * const reuseIdentifier = @"TXAddressTableViewCell";
 
 - (void) viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [self.view showLoadingViewWithText:@"请稍后"];
 }
 
 - (void)tt_tableView:(TTBaseTableView *)tt_tableView requestFailed:(NSError *)error{
