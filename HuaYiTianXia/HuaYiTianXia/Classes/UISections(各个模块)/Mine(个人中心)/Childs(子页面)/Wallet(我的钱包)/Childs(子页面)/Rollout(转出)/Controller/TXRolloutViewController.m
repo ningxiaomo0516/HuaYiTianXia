@@ -16,7 +16,7 @@
 static NSString * const reuseIdentifier = @"TXRolloutTableViewCell";
 static NSString * const reuseIdentifierHeader = @"TXRolloutHeaderTableViewCell";
 
-@interface TXRolloutViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface TXRolloutViewController ()<UITableViewDelegate,UITableViewDataSource,TTPopupViewDelegate>
 @property (nonatomic, strong) UITableView *tableView;
 @property (strong, nonatomic) UIButton *saveButton;
 @property (nonatomic, strong) NSMutableArray *dataArray;
@@ -47,7 +47,7 @@ static NSString * const reuseIdentifierHeader = @"TXRolloutHeaderTableViewCell";
 
 /// 转账请求
 - (void) transferRequest{
-
+    [self dismissedButtonClicked];
     kShowMBProgressHUD(self.view);
     NSInteger currency = [self.currencyText integerValue];
     NSMutableDictionary *parameter = [[NSMutableDictionary alloc] init];
@@ -95,18 +95,17 @@ static NSString * const reuseIdentifierHeader = @"TXRolloutHeaderTableViewCell";
         return;
     }
     
-    TXPayPasswordViewController *vc = [[TXPayPasswordViewController alloc] init];
-    vc.pageType = 0;
-    vc.tipsText = self.currencyText;
-    vc.integralText = self.amountText;
-    CGSize size = CGSizeMake(IPHONE6_W(280), IPHONE6_W(230));
-    [self sc_centerPresentController:vc presentedSize:size completeHandle:^(BOOL presented) {
-        if (presented) {
-            TTLog(@"弹出了");
-        }else{
-            TTLog(@"消失了");
-        }
-    }];
+    TXPayPasswordViewController *viewController = [[TXPayPasswordViewController alloc] init];
+    viewController.pageType = 0;
+    viewController.tipsText = self.currencyText;
+    viewController.integralText = self.amountText;
+    viewController.delegate = self;
+    [self presentPopupViewController:viewController animationType:TTPopupViewAnimationFade];
+}
+
+/// 关闭当前交易密码弹出的窗口
+- (void)dismissedButtonClicked{
+    [self dismissPopupViewControllerWithanimationType:TTPopupViewAnimationFade];
 }
 
 

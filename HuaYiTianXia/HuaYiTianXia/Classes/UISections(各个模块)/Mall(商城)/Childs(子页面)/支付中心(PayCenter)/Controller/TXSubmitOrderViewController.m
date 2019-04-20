@@ -15,14 +15,15 @@
 #import "TXAddressViewController.h"
 #import "TXAddressModel.h"
 #import "TXChoosePayViewController.h"
-
+#import "TXPayPasswordViewController.h"
+#import "AlipayManager.h"
 
 static NSString * const reuseIdentifierReceiveAddress = @"TXReceiveAddressTableViewCell";
 static NSString * const reuseIdentifierShopping = @"TXShoppingTableViewCell";
 static NSString * const reuseIdentifierChoosePay = @"TXChoosePayTableViewCell";
 static NSString * const reuseIdentifierPurchase = @"TXPurchaseQuantityTableViewCell";
 
-@interface TXSubmitOrderViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface TXSubmitOrderViewController ()<UITableViewDelegate,UITableViewDataSource,TTPopupViewDelegate>
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *dataArray;
 /// 底部视图
@@ -38,11 +39,13 @@ static NSString * const reuseIdentifierPurchase = @"TXPurchaseQuantityTableViewC
 @property (nonatomic, strong) AddressModel  *addressModel;
 @property (nonatomic, assign) NSInteger  addressNum;
 /// 产品Model
-@property (strong, nonatomic)  NewsRecordsModel *model;
-/// 2:默认没选择支付方式 0:微信 1:支付宝
-@property (assign, nonatomic)  NSInteger payType;
-
-@property (strong, nonatomic) TXChoosePayTableViewCell *choosePayTableViewCell;
+@property (nonatomic, strong)  NewsRecordsModel *model;
+/// 单选,当前选中的行
+@property (nonatomic, assign) NSIndexPath *selectedIndexPath;
+/// 记录当前是否有选择支付方式
+@property (nonatomic, assign) BOOL isSelected;
+/// 0:支付宝 1:微信支付 2:余额支付
+@property (nonatomic, assign) NSInteger payType;
 
 @end
 
@@ -50,7 +53,6 @@ static NSString * const reuseIdentifierPurchase = @"TXPurchaseQuantityTableViewC
 - (id) initNewsRecordsModel:(NewsRecordsModel *)model{
     if ( self = [super init] ){
         self.model = model;
-        self.payType = 2;
     }
     return self;
 }
@@ -60,34 +62,41 @@ static NSString * const reuseIdentifierPurchase = @"TXPurchaseQuantityTableViewC
     // Do any additional setup after loading the view.
     self.title = @"支付中心";
     [self initView];
+    _isSelected = NO;
     self.addressModel = [[AddressModel alloc] init];
     NSInteger totalAmount = self.model.buyCount*[self.model.price integerValue];
     self.totalAmountLabel.text = [NSString stringWithFormat:@"%ld.00",(long)totalAmount];
     /// 通知得到默认收货地址
 //    [kNotificationCenter postNotificationName:@"reloadAddressData" object:nil];
     [self getAddressModel];
+    // 注册通知
+    [kNotificationCenter addObserver:self selector:@selector(dealwithNotice) name:@"mallBalanceRequest" object:nil];
+}
+
+- (void) dealwithNotice{
+    [self dismissedButtonClicked];
+    [self GenerateOrderData:self.payType];
 }
 
 - (void) submitBtnClick:(UIButton *)sender{
-//    if (self.payType==2) {
-//        Toast(@"请选择支付方式");
-//        return;
-//    }
-    
-//    self.model.price = self.priceLabel.text;
-    //    [self sc_dismissVC];
-    
+    self.model.purchaseType = 2;
+    //// 先验证实名认证
     if (kUserInfo.isValidation==2) {
-        int64_t delayInSeconds = 0.5;      // 延迟的时间
-        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
-        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-            self.model.purchaseType = 2;
-            TXChoosePayViewController *vc = [[TXChoosePayViewController alloc]initNewsRecordsModel:self.model];
-            vc.pageType = 0;
-            [self sc_bottomPresentController:vc presentedHeight:IPHONE6_W(400) completeHandle:^(BOOL presented) {
-                
-            }];
-        });
+        /// 接着验证是否有选择支付方式
+        if (!_isSelected) {
+            Toast(@"请选择支付方式");
+            return;
+        }
+        if (self.payType==2) {  /// 如果选择的余额支付调起支付密码界面
+            TXPayPasswordViewController *viewController = [[TXPayPasswordViewController alloc] init];
+            viewController.pageType = 3;
+            viewController.tipsText = @"";
+            viewController.integralText = kUserInfo.balance;
+            viewController.delegate = self;
+            [self presentPopupViewController:viewController animationType:TTPopupViewAnimationFade];
+        }else{                  /// 直接调用微信或者支付宝支付
+            [self GenerateOrderData:self.payType];
+        }
     }else if(kUserInfo.isValidation==1){
         Toast(@"实名认证审核中,请稍后再试!");
     }else{
@@ -107,7 +116,66 @@ static NSString * const reuseIdentifierPurchase = @"TXPurchaseQuantityTableViewC
 - (void) jumpSetRealNameRequest{
     
 }
+
+/// 生成订单且支付
+- (void) GenerateOrderData:(NSInteger) idx{
+    NSMutableDictionary *parameter = [[NSMutableDictionary alloc] init];
     
+    //    title    是    String    标题（当purchaseType=0时可传入固定值“会员充值”，purchaseType=6时可传入固定值“天合成员充值”，另外的情况请传入商品标题）
+    //    purchaseType    是    int    支付类型 0：充值； 1：无人机商城产品；2：农用植保产品； 3：VR产品 4：纵横矿机产品 5：共享飞行产品; 6：天合成员充值；7：生态农业商城产品（消费）
+    //    priceMoney    是    double    单价金额
+    //    number    是    double    产品数量(默认传1)
+    //    proID    否    int    产品ID（当purchaseType=0（充值）或=6（天合成员充值）时不传）
+    //    addressID    否    int    用户选择的收货地址表ID（当purchaseType=1或7必传）
+    //    spec    否    String    用户选择规格
+    //    color    否    String    用户选择颜色
+    //    remarks    否    String    用户购买备注
+    //    payType    是    int    0:支付宝 1:微信 2：余额支付
+    //    currency    是    Double    vr币数量
+    kShowMBProgressHUD(self.view);
+    [parameter setObject:self.model.title forKey:@"title"];
+    [parameter setObject:@(self.model.purchaseType) forKey:@"purchaseType"];
+    [parameter setObject:@([self.model.price doubleValue]) forKey:@"priceMoney"];
+    [parameter setObject:@(1) forKey:@"number"];
+    [parameter setObject:@([self.model.kid integerValue]) forKey:@"proID"];
+    [parameter setObject:@"" forKey:@"addressID"];
+    [parameter setObject:@"" forKey:@"spec"];
+    [parameter setObject:@"" forKey:@"color"];
+    [parameter setObject:@"" forKey:@"remarks"];
+    [parameter setObject:@(self.payType) forKey:@"payType"];/// 支付方式  0:支付宝 1:微信 2：余额支付
+    [parameter setObject:@"" forKey:@"currency"];
+    [SCHttpTools postWithURLString:kHttpURL(@"orderform/PayFrom") parameter:parameter success:^(id responseObject) {
+        NSDictionary *result = responseObject;
+        if ([result isKindOfClass:[NSDictionary class]]) {
+            TXGeneralModel *model = [TXGeneralModel mj_objectWithKeyValues:result];
+            if (model.errorcode == 20000) {
+                if (idx==0) {/// 支付宝支付
+                    [AlipayManager doAlipayPay:model];
+                }else if(idx==1){/// 微信支付
+                    NSString *str = [Utils lz_dataWithJSONObject:result];
+                    TTLog(@"str == %@",str);
+                    [AlipayManager doWechatPay:model];
+                }else if(idx==2){
+                    Toast(@"支付成功");
+                    [self.navigationController popViewControllerAnimated:YES];
+                }else{
+                    Toast(@"未知支付");
+                }
+            }else{
+                Toast(model.message);
+            }
+        }
+        kHideMBProgressHUD(self.view);;
+    } failure:^(NSError *error) {
+        TTLog(@"error --- %@",error);
+        kHideMBProgressHUD(self.view);;
+    }];
+}
+
+/// 关闭当前交易密码弹出的窗口
+- (void)dismissedButtonClicked{
+    [self dismissPopupViewControllerWithanimationType:TTPopupViewAnimationFade];
+}
 
 - (void) getAddressModel{
     [SCHttpTools getWithURLString:kHttpURL(@"address/GetAddress") parameter:nil success:^(id responseObject) {
@@ -228,20 +296,12 @@ static NSString * const reuseIdentifierPurchase = @"TXPurchaseQuantityTableViewC
             break;
         case 3: {
             TXGeneralModel *model = self.paymentArray[indexPath.row];
-            _choosePayTableViewCell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierChoosePay forIndexPath:indexPath];
-            _choosePayTableViewCell.titleLabel.text = model.title;
-            _choosePayTableViewCell.imagesView.image = kGetImage(model.imageText);
-            _choosePayTableViewCell.linerView.hidden = (indexPath.row!=self.paymentArray.count-1)?NO:YES;
-            if (indexPath.row==0) {
-                self.payType = indexPath.row;
-                _choosePayTableViewCell.wechatBtn.hidden = NO;
-                _choosePayTableViewCell.alipayBtn.hidden = YES;
-            }else{
-                self.payType = indexPath.row;
-                _choosePayTableViewCell.wechatBtn.hidden = YES;
-                _choosePayTableViewCell.alipayBtn.hidden = NO;
-            }
-            return _choosePayTableViewCell;
+            TXChoosePayTableViewCell *tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierChoosePay forIndexPath:indexPath];
+            tools.titleLabel.text = model.title;
+            tools.imagesView.image = kGetImage(model.imageText);
+            tools.linerView.hidden = (indexPath.row!=self.paymentArray.count-1)?NO:YES;
+            tools.selectedBtn.hidden = NO;
+            return tools;
         }
             break;
     }
@@ -250,7 +310,7 @@ static NSString * const reuseIdentifierPurchase = @"TXPurchaseQuantityTableViewC
 
 // 多少个分组 section
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 3;
+    return 4;
 }
 
 /// 返回多少
@@ -272,7 +332,6 @@ static NSString * const reuseIdentifierPurchase = @"TXPurchaseQuantityTableViewC
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-
     if (indexPath.section == 0) {
         TXAddressViewController *vc = [[TXAddressViewController alloc] init];
         MV(weakSelf)
@@ -282,18 +341,11 @@ static NSString * const reuseIdentifierPurchase = @"TXPurchaseQuantityTableViewC
             [self.tableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationAutomatic];
         };
         TTPushVC(vc);
+        [tableView deselectRowAtIndexPath:indexPath animated:YES];
     }else if (indexPath.section==3){
-        self.payType = indexPath.row;
-        TTLog(@"indexPath.row --- %ld",(long)indexPath.row);
-        if (indexPath.row==0) {
-            _choosePayTableViewCell.wechatBtn.selected = NO;
-            _choosePayTableViewCell.alipayBtn.selected = YES;
-        }else if(indexPath.row==1){
-            _choosePayTableViewCell.wechatBtn.selected = YES;
-            _choosePayTableViewCell.alipayBtn.selected = NO;
-        }
+        _isSelected = YES;
+        _payType = indexPath.row;
     }
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 -(UITableView *)tableView{
@@ -362,8 +414,8 @@ static NSString * const reuseIdentifierPurchase = @"TXPurchaseQuantityTableViewC
 - (NSMutableArray *)paymentArray{
     if (!_paymentArray) {
         _paymentArray = [[NSMutableArray alloc] init];
-        NSArray* titleArr = @[@"微信支付",@"支付宝"];
-        NSArray* classArr = @[@"c31_btn_wxzf",@"c31_btn_zfb"];
+        NSArray* titleArr = @[@"支付宝",@"微信支付",[NSString stringWithFormat:@"余额(￥:%@)",kUserInfo.balance]];
+        NSArray* classArr = @[@"c31_btn_zfb",@"c31_btn_wxzf",@"c31_钱袋"];
         for (int j = 0; j < titleArr.count; j ++) {
             TXGeneralModel *generalModel = [[TXGeneralModel alloc] init];
             generalModel.title = [titleArr lz_safeObjectAtIndex:j];

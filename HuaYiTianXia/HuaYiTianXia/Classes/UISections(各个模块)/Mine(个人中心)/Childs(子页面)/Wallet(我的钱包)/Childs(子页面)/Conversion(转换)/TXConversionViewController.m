@@ -15,7 +15,7 @@
 static NSString * const reuseIdentifier = @"TXRepeatCastTemplateTableViewCell";
 static NSString * const reuseIdentifierRollout = @"TXRolloutTableViewCell";
 
-@interface TXConversionViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface TXConversionViewController ()<UITableViewDelegate,UITableViewDataSource,TTPopupViewDelegate>
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *dataArray;
 @property (nonatomic, strong) UIButton *doneButton;
@@ -40,8 +40,10 @@ static NSString * const reuseIdentifierRollout = @"TXRolloutTableViewCell";
 }
 
 - (void) dealwithNotice{
+    [self dismissedButtonClicked];
+    /// 目前只支持AH转换VH
     NSString *URLString = [NSString new];
-    if (self.kid==0) {
+    if ([self.kid integerValue]==0) {
         URLString = kHttpURL(@"customer/ARToStock");
     }else{
         URLString = kHttpURL(@"customer/ARToStock");
@@ -55,7 +57,7 @@ static NSString * const reuseIdentifierRollout = @"TXRolloutTableViewCell";
             TTLog(@"result -- %@",result);
             TXGeneralModel *model = [TXGeneralModel mj_objectWithKeyValues:result];
             if (model.errorcode==20000) {
-                Toast(@"复投成功");
+                Toast(@"转换成功");
                 [kNotificationCenter addObserver:self selector:@selector(reloadData) name:@"reloadMineData" object:nil];
                 [self.navigationController popViewControllerAnimated:YES];
             }else{
@@ -79,21 +81,20 @@ static NSString * const reuseIdentifierRollout = @"TXRolloutTableViewCell";
         return;
     }
     if (self.amountText.length == 0) {
-        Toast(@"请输入转账金额");
+        Toast(@"请输入转换金额");
         return;
     }
-    TXPayPasswordViewController *vc = [[TXPayPasswordViewController alloc] init];
-    vc.pageType = 1;
-    vc.tipsText = @"VH";
-    vc.integralText = self.amountText;
-    CGSize size = CGSizeMake(IPHONE6_W(280), IPHONE6_W(230));
-    [self sc_centerPresentController:vc presentedSize:size completeHandle:^(BOOL presented) {
-        if (presented) {
-            TTLog(@"弹出了");
-        }else{
-            TTLog(@"消失了");
-        }
-    }];
+    TXPayPasswordViewController *viewController = [[TXPayPasswordViewController alloc] init];
+    viewController.pageType = 2;
+    viewController.tipsText = @"VH";
+    viewController.integralText = self.amountText;
+    viewController.delegate = self;
+    [self presentPopupViewController:viewController animationType:TTPopupViewAnimationFade];
+}
+
+/// 关闭当前交易密码弹出的窗口
+- (void)dismissedButtonClicked{
+    [self dismissPopupViewControllerWithanimationType:TTPopupViewAnimationFade];
 }
 
 - (void) initView{
@@ -141,6 +142,7 @@ static NSString * const reuseIdentifierRollout = @"TXRolloutTableViewCell";
             tools.titleLabel.text = @"转换金额";
             tools.textField.placeholder = @"请输入转换金额";
             tools.textField.ry_inputType = RYFloatInputType;
+            [tools.textField addTarget:self action:@selector(textFieldWithText:) forControlEvents:UIControlEventEditingChanged];
         }
         return tools;
     }
@@ -188,6 +190,10 @@ static NSString * const reuseIdentifierRollout = @"TXRolloutTableViewCell";
         }];
     }
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+- (void)textFieldWithText:(UITextField *)textField{
+    self.amountText = textField.text;
 }
 
 -(UITableView *)tableView{

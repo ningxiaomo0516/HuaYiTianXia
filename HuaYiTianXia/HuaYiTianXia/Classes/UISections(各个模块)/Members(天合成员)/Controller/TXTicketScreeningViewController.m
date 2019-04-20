@@ -36,8 +36,8 @@
     [self addGesture];
     [self initView];
     self.datelabel.text = [Utils lz_getCurrentDate];
-    self.CFTextField.text = @"成都";
-    self.MDTextField.text = @"广州";
+//    self.CFTextField.text = @"成都";
+//    self.MDTextField.text = @"广州";
 }
 
 /** 保存 */

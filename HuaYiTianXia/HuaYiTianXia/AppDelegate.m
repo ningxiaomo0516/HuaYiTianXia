@@ -8,7 +8,6 @@
 
 #import "AppDelegate.h"
 #import "LZRootViewController.h"
-#import "IQKeyboardManager.h"
 #import "TTGuidePages.h"
 #import "AppDelegate+TXShare.h"
 #import <AVFoundation/AVFoundation.h>
@@ -42,7 +41,7 @@
     [NSThread sleepForTimeInterval:2];
     [self registLocalNotificationWithOptions:launchOptions];
     //配置键盘
-    [IQKeyboardManager sharedManager];
+//    [IQKeyboardManager sharedManager];
     /// 注册分享
     [self registerMobLoginAndShare];
     /// 注册微信AppId

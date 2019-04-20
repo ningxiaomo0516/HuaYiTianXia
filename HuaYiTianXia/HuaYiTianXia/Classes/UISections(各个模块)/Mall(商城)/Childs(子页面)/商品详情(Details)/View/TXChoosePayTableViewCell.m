@@ -17,8 +17,10 @@
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
+    self.selectionStyle = UITableViewCellSelectionStyleNone;
     // Configure the view for the selected state
+    NSString *imageText = selected?@"mine_btn_selected":@"mine_btn_normal";
+    [self.selectedBtn setImage:kGetImage(imageText) forState:UIControlStateNormal];
 }
 
 
@@ -33,8 +35,7 @@
 - (void) initView{
     [self addSubview:self.titleLabel];
     [self addSubview:self.imagesView];
-    [self addSubview:self.alipayBtn];
-    [self addSubview:self.wechatBtn];
+    [self addSubview:self.selectedBtn];
     [self addSubview:self.linerView];
     
     [self.imagesView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -47,17 +48,10 @@
         make.left.equalTo(self.imagesView.mas_right).offset(IPHONE6_W(8));
     }];
     
-    [self.alipayBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.selectedBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self);
         make.right.equalTo(self.mas_right).offset(IPHONE6_W(-15));
     }];
-    
-    [self.wechatBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.centerY.right.equalTo(self.alipayBtn);
-        make.centerY.equalTo(self);
-        make.right.equalTo(self.mas_right).offset(IPHONE6_W(-15));
-    }];
-    
     [self.linerView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.left.right.equalTo(self);
         make.height.equalTo(@(0.7));
@@ -71,30 +65,12 @@
     return _titleLabel;
 }
 
-- (UIButton *)alipayBtn{
-    if (!_alipayBtn) {
-        _alipayBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_alipayBtn setTitle:@"支付宝" forState:UIControlStateNormal];
-        [_alipayBtn setTitleColor:kTextColor51 forState:UIControlStateNormal];
-        [_alipayBtn setImage:kGetImage(@"mine_btn_normal") forState:UIControlStateNormal];
-        [_alipayBtn setImage:kGetImage(@"mine_btn_selected") forState:UIControlStateSelected];
-        _alipayBtn.hidden = YES;
-        _alipayBtn.selected = NO;
+- (UIButton *)selectedBtn{
+    if (!_selectedBtn) {
+        _selectedBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        _selectedBtn.hidden = YES;
     }
-    return _alipayBtn;
-}
-
-- (UIButton *)wechatBtn{
-    if (!_wechatBtn) {
-        _wechatBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_wechatBtn setTitle:@"微信" forState:UIControlStateNormal];
-        [_wechatBtn setTitleColor:kTextColor51 forState:UIControlStateNormal];
-        [_wechatBtn setImage:kGetImage(@"mine_btn_normal") forState:UIControlStateNormal];
-        [_wechatBtn setImage:kGetImage(@"mine_btn_selected") forState:UIControlStateSelected];
-        _wechatBtn.hidden = YES;
-        _wechatBtn.selected = YES;
-    }
-    return _wechatBtn;
+    return _selectedBtn;
 }
 
 - (UIImageView *)imagesView{

@@ -20,7 +20,7 @@
         CGFloat top = self.containerView.center.y - self.presentedSize.height * 0.5;
         CGFloat width = self.presentedSize.width;
         CGFloat height = self.presentedSize.height;
-        if (self.presentedTop) { /// 默认为居中设置,presentedTop:NO
+        if (!self.presentedTop) { /// 默认为居中设置,presentedTop:NO
             top = self.containerView.center.y - self.presentedSize.height * 0.8;
         }
         self.presentedView.frame = CGRectMake(left, top, width, height);

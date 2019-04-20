@@ -10,8 +10,16 @@
 #import "TXTicketModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
+@class TXTicketBookingTableViewCell;
+@protocol TicketCellDelegate <NSObject>
+- (void)selectRowStr:(NSString *)cellStr indexPath:(NSIndexPath*)selectedIndexPath ;
+@end
 
 @interface TXTicketBookingTableViewCell : UITableViewCell
+@property (nonatomic , strong) UIButton *lastButton;
+@property (assign, nonatomic) NSIndexPath *selectedIndexPath;
+@property(nonatomic,weak)id<TicketCellDelegate>delegate;
+
 /*起飞时间*/
 @property (strong, nonatomic) UILabel *dep_timeLabel;
 /*到达时间*/
@@ -47,6 +55,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 选中图片
 @property (strong, nonatomic) UIImageView *imagesSelected;
+/// 选中图片
+@property (strong, nonatomic) UIButton *buttonSelected;
 @end
 
 NS_ASSUME_NONNULL_END

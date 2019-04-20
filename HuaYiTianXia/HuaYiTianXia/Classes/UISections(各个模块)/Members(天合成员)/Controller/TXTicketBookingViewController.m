@@ -17,7 +17,7 @@ static NSString* reuseIdentifier = @"TXTicketBookingTableViewCell";
 static NSString* reuseIdentifierRollout = @"TXRolloutTableViewCell";
 static NSString* reuseIdentifierInfo = @"TXTicketInfoTableViewCell";
 
-@interface TXTicketBookingViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface TXTicketBookingViewController ()<UITableViewDelegate,UITableViewDataSource,TicketCellDelegate,TTPopupViewDelegate>
 @property (nonatomic, strong) UITableView *tableView;
 
 @property (nonatomic, strong) NSMutableDictionary *parameter;
@@ -31,10 +31,10 @@ static NSString* reuseIdentifierInfo = @"TXTicketInfoTableViewCell";
 @property (nonatomic, strong) UILabel *priceTipsLabel;
 @property (nonatomic, strong) UIButton *payButton;
 @property (nonatomic, strong) UILabel *titleLabel;
-@property (nonatomic, strong) TXTicketBookingTableViewCell  *toolsTicket;
 /// 是否选择了机票
 @property (nonatomic, assign) NSInteger isSelected;
-@property (nonatomic, assign) NSInteger idx;
+/// 单选，当前选中的行
+@property (nonatomic, assign) NSIndexPath *selectedIndexPath;
 
 @end
 
@@ -57,10 +57,11 @@ static NSString* reuseIdentifierInfo = @"TXTicketInfoTableViewCell";
     self.title = @"机票预订";
     [self initView];
     // 注册通知
-//    [kNotificationCenter addObserver:self selector:@selector(dealwithNotice) name:@"buyTicketRequest" object:nil];
+    [kNotificationCenter addObserver:self selector:@selector(dealwithNotice) name:@"buyTicketRequest" object:nil];
 }
 
 - (void) dealwithNotice{
+    [self dismissedButtonClicked];
     kShowMBProgressHUD(self.view);
     NSString *URLString = kHttpURL(@"aircraftorder/AddAircraftorder");
     NSMutableDictionary *parameter = [[NSMutableDictionary alloc] init];
@@ -140,18 +141,18 @@ static NSString* reuseIdentifierInfo = @"TXTicketInfoTableViewCell";
         if ([result isKindOfClass:[NSDictionary class]]) {
             TTLog(@" result --- %@",[Utils lz_dataWithJSONObject:result]);
             TTUserDataModel *model = [TTUserDataModel mj_objectWithKeyValues:result];
-            kShowMBProgressHUD(self.view);
+            kHideMBProgressHUD(self.view);
             if (model.errorcode==20000) {
-                [self dealwithNotice];
                 /// 暂不调用支付密码界面
-//                kUserInfo.balance = model.data.balance;
-//                kUserInfo.vrcurrency = model.data.vrcurrency;
-//                [kUserInfo dump];
-//                TXPayPasswordViewController *vc = [[TXPayPasswordViewController alloc] init];
-//                vc.pageType = 4;
-//                vc.tipsText = @"VH";
-//                vc.integralText = kUserInfo.balance;
-//                [self presentPopupViewController:vc animationType:TTPopupViewAnimationFade];
+                kUserInfo.balance = model.data.balance;
+                kUserInfo.vrcurrency = model.data.vrcurrency;
+                [kUserInfo dump];
+                TXPayPasswordViewController *viewController = [[TXPayPasswordViewController alloc] init];
+                viewController.pageType = 4;
+                viewController.tipsText = @"";
+                viewController.integralText = kUserInfo.balance;
+                viewController.delegate = self;
+                [self presentPopupViewController:viewController animationType:TTPopupViewAnimationFade];
             }else{
                 Toast(model.message);
             }
@@ -160,6 +161,11 @@ static NSString* reuseIdentifierInfo = @"TXTicketInfoTableViewCell";
         TTLog(@"余额查询信息 -- %@", error);
         kShowMBProgressHUD(self.view);
     }];
+}
+
+/// 关闭当前交易密码弹出的窗口
+- (void)dismissedButtonClicked{
+    [self dismissPopupViewControllerWithanimationType:TTPopupViewAnimationFade];
 }
 
 
@@ -198,8 +204,8 @@ static NSString* reuseIdentifierInfo = @"TXTicketInfoTableViewCell";
 #pragma mark - Table view data sourceFMMerchantsHomeAddressTableViewCell
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section<self.dataArray.count){
-        _toolsTicket = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
-        _toolsTicket.ticketModel = self.ticketModel;
+        TXTicketBookingTableViewCell *toolsTicket = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
+        toolsTicket.ticketModel = self.ticketModel;
         TicketPricesModel *priceModel = self.dataArray[indexPath.section];
         /// 文字颜色
         UIColor *textColor = HexString(@"#FC7E4C");
@@ -207,8 +213,18 @@ static NSString* reuseIdentifierInfo = @"TXTicketInfoTableViewCell";
         index = priceModel.type.length+1;
         NSString *economyText = [NSString stringWithFormat:@"%@:￥%@",priceModel.type,priceModel.price];
         endIndex = economyText.length-index;
-        _toolsTicket.priceLabel.attributedText = [SCSmallTools setupTextColor:textColor currentText:economyText index:index endIndex:endIndex];
-        return _toolsTicket;
+        toolsTicket.priceLabel.attributedText = [SCSmallTools setupTextColor:textColor currentText:economyText index:index endIndex:endIndex];
+        
+        toolsTicket.selectedIndexPath = indexPath;
+        
+        //当上下拉动的时候，因为cell的复用性，我们需要重新判断一下哪一行是打勾的
+        if (_selectedIndexPath == indexPath) {
+            toolsTicket.imagesSelected.image = kGetImage(@"使用中");
+        }else {
+            toolsTicket.imagesSelected.image = [Utils lz_imageWithColor:kClearColor];
+        }
+        toolsTicket.delegate=self;
+        return toolsTicket;
     }else{
         if (indexPath.row==0) {
             TXTicketInfoTableViewCell *tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierInfo forIndexPath:indexPath];
@@ -225,8 +241,23 @@ static NSString* reuseIdentifierInfo = @"TXTicketInfoTableViewCell";
             return tools;
         }
     }
-    
     return [UITableViewCell new];
+}
+
+
+-(void)selectRowStr:(NSString *)cellStr indexPath:(NSIndexPath *)selectedIndexPath{
+//    self.cellStr=cellStr;
+    self.isSelected = YES;
+    TicketPricesModel *priceModel = self.dataArray[selectedIndexPath.section];
+    self.priceLabel.text = priceModel.price;
+
+    TXTicketBookingTableViewCell *toolsed = [self.tableView cellForRowAtIndexPath:_selectedIndexPath];
+    toolsed.imagesSelected.image = [Utils lz_imageWithColor:kClearColor];
+    //记录当前选中的位置索引
+    _selectedIndexPath = selectedIndexPath;
+    //当前选择的打勾
+    TXTicketBookingTableViewCell *tools = [self.tableView cellForRowAtIndexPath:selectedIndexPath];
+    tools.imagesSelected.image = kGetImage(@"使用中");
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -259,15 +290,6 @@ static NSString* reuseIdentifierInfo = @"TXTicketInfoTableViewCell";
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.section<self.dataArray.count) {
-        TicketPricesModel *model = self.dataArray[indexPath.section];
-        TTLog(@" --- %@",model.price);
-        self.priceLabel.text = model.price;
-        self.isSelected = YES;
-//        TXTicketBookingTableViewCell *cell = (TXTicketBookingTableViewCell *)[self tableView:tableView cellForRowAtIndexPath:indexPath];
-//        cell.imagesSelected.hidden = NO;
-//        _toolsTicket.imagesSelected.hidden = YES;
-    }
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 

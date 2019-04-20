@@ -17,7 +17,6 @@
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
     // Configure the view for the selected state
 }
 
@@ -29,6 +28,12 @@
         self.priceLabel.text = @"公务舱：￥1632";
     }
     return self;
+}
+
+- (void)selectAction:(UIButton *)sender {
+    if ([self.delegate respondsToSelector:@selector(selectRowStr:indexPath:)]) {
+        [_delegate selectRowStr:self.ticketModel.airline indexPath:self.selectedIndexPath];
+    }
 }
 
 - (void)setTicketModel:(TicketModel *)ticketModel{
@@ -72,8 +77,8 @@
     // 3.利用日历对象比较两个时间的差值
     NSDateComponents *cmps = [calendar components:type fromDate:date1 toDate:date2 options:0];
     // 4.输出结果
-    TTLog(@"两个时间相差%ld年%ld月%ld日%ld小时%ld分钟%ld秒", cmps.year, cmps.month, cmps.day, cmps.hour, cmps.minute, cmps.second);
-    return [NSString stringWithFormat:@"约%ld时%ld分",cmps.hour,cmps.minute];
+    TTLog(@"两个时间相差%ld年%ld月%ld日%ld小时%ld分钟%ld秒", (long)cmps.year, (long)cmps.month, (long)cmps.day, (long)cmps.hour, (long)cmps.minute, (long)cmps.second);
+    return [NSString stringWithFormat:@"约%ld时%ld分",(long)cmps.hour,(long)cmps.minute];
 }
 
 - (void) initView{
@@ -95,6 +100,7 @@
     [self addSubview:self.taxPriceLabel];
     
     [self addSubview:self.imagesSelected];
+    [self addSubview:self.buttonSelected];
     
     [self.dep_timeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(@(IPHONE6_W(15)));
@@ -154,6 +160,10 @@
     
     [self.imagesSelected mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.top.equalTo(self);
+    }];
+    
+    [self.buttonSelected mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.bottom.top.equalTo(self);
     }];
 }
 
@@ -247,10 +257,19 @@
 - (UIImageView *)imagesSelected{
     if (!_imagesSelected) {
         _imagesSelected = [[UIImageView alloc] init];
-        _imagesSelected.hidden = YES;
-        _imagesSelected.image = kGetImage(@"使用中");
     }
     return _imagesSelected;
+}
+
+- (UIButton *)buttonSelected{
+    if (!_buttonSelected) {
+        _buttonSelected = [UIButton buttonWithType:UIButtonTypeCustom];
+        MV(weakSelf)
+        [_buttonSelected lz_handleControlEvent:UIControlEventTouchUpInside withBlock:^{
+            [weakSelf selectAction:weakSelf.buttonSelected];
+        }];
+    }
+    return _buttonSelected;
 }
 
 @end

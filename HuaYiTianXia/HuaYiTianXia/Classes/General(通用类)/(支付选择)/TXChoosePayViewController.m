@@ -13,7 +13,7 @@
 
 static NSString * const reuseIdentifier = @"TXChoosePayTableViewCell";
 
-@interface TXChoosePayViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface TXChoosePayViewController ()<UITableViewDelegate,UITableViewDataSource,TTPopupViewDelegate>
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *dataArray;
 /// 关闭按钮
@@ -216,16 +216,12 @@ static NSString * const reuseIdentifier = @"TXChoosePayTableViewCell";
                     Toast(@"余额不足");
                 }else{
                     [self GenerateOrderData:idx];
-//                    [self sc_dismissVC];
-//                    int64_t delayInSeconds = 2.0;      // 延迟的时间
-//                    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
-//                    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-//                        TXPayPasswordViewController *vc = [[TXPayPasswordViewController alloc] init];
-//                        vc.pageType = 4;
-//                        vc.tipsText = @"";
-//                        vc.integralText = kUserInfo.balance;
-//                        [self presentPopupViewController:vc animationType:TTPopupViewAnimationFade];
-//                    });
+                    TXPayPasswordViewController *viewController = [[TXPayPasswordViewController alloc] init];
+                    viewController.pageType = 4;
+                    viewController.tipsText = @"";
+                    viewController.integralText = kUserInfo.balance;
+                    viewController.delegate = self;
+                    [self presentPopupViewController:viewController animationType:TTPopupViewAnimationFade];
                 }
             }else{
                 Toast(model.message);
@@ -238,6 +234,10 @@ static NSString * const reuseIdentifier = @"TXChoosePayTableViewCell";
     }];
 }
 
+/// 关闭当前交易密码弹出的窗口
+- (void)dismissedButtonClicked{
+    [self dismissPopupViewControllerWithanimationType:TTPopupViewAnimationFade];
+}
 
 #pragma mark ----- getter/setter
 - (UITableView *)tableView{

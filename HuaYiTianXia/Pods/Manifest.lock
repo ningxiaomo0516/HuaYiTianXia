@@ -14,7 +14,6 @@ PODS:
   - AFNetworking/Serialization (3.2.1)
   - AFNetworking/UIKit (3.2.1):
     - AFNetworking/NSURLSession
-  - IQKeyboardManager (6.2.0)
   - JCore (1.2.6)
   - JPush (3.1.2):
     - JCore (~> 1.2.6)
@@ -30,7 +29,6 @@ PODS:
 
 DEPENDENCIES:
   - AFNetworking
-  - IQKeyboardManager
   - JPush
   - Masonry
   - MBProgressHUD
@@ -43,7 +41,6 @@ DEPENDENCIES:
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - AFNetworking
-    - IQKeyboardManager
     - JCore
     - JPush
     - Masonry
@@ -56,7 +53,6 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
-  IQKeyboardManager: 6194101620b73af5e67900b8f89707a99de0b804
   JCore: cae516dd2bf1a73b578ce6e1065abd49e709e0f7
   JPush: d0cead70ba223a6a3b52749899ebda830dfbc49a
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
@@ -67,6 +63,6 @@ SPEC CHECKSUMS:
   WechatOpenSDK: 9b721089507c895d05f997408c30bb6e6f5f9b60
   YYModel: 2a7fdd96aaa4b86a824e26d0c517de8928c04b30
 
-PODFILE CHECKSUM: 0cb614e204f8d0a891d1fa2726693854207f20f2
+PODFILE CHECKSUM: 8818bf9761f199ad1cccd9385e7de9215759ae35
 
 COCOAPODS: 1.6.1

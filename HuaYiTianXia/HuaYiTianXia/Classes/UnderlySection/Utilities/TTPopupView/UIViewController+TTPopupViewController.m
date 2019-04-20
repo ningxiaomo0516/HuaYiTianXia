@@ -48,22 +48,18 @@ static void * const keypath = (void*)&keypath;
 
 - (void)setTt_popupBackgroundView:(TTPopupBackgroundView *)tt_popupBackgroundView {
     objc_setAssociatedObject(self, kTTPopupBackgroundView, tt_popupBackgroundView, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    
 }
 
-- (void)presentPopupViewController:(UIViewController*)popupViewController animationType:(TTPopupViewAnimation)animationType dismissed:(void(^)(void))dismissed
-{
+- (void)presentPopupViewController:(UIViewController*)popupViewController animationType:(TTPopupViewAnimation)animationType dismissed:(void(^)(void))dismissed{
     self.tt_popupViewController = popupViewController;
     [self presentPopupView:popupViewController.view animationType:animationType dismissed:dismissed];
 }
 
-- (void)presentPopupViewController:(UIViewController*)popupViewController animationType:(TTPopupViewAnimation)animationType
-{
+- (void)presentPopupViewController:(UIViewController*)popupViewController animationType:(TTPopupViewAnimation)animationType{
     [self presentPopupViewController:popupViewController animationType:animationType dismissed:nil];
 }
 
-- (void)dismissPopupViewControllerWithanimationType:(TTPopupViewAnimation)animationType
-{
+- (void)dismissPopupViewControllerWithanimationType:(TTPopupViewAnimation)animationType{
     UIView *sourceView = [self topView];
     UIView *popupView = [sourceView viewWithTag:kTTPopupViewTag];
     UIView *overlayView = [sourceView viewWithTag:kTTOverlayViewTag];
@@ -298,8 +294,7 @@ static void * const keypath = (void*)&keypath;
         self.tt_popupViewController = nil;
         
         id dismissed = [self dismissedCallback];
-        if (dismissed != nil)
-        {
+        if (!dismissed){
             ((void(^)(void))dismissed)();
             [self setDismissedCallback:nil];
         }
@@ -307,13 +302,13 @@ static void * const keypath = (void*)&keypath;
 }
 
 #pragma mark --- Fade
-
 - (void)fadeViewIn:(UIView*)popupView sourceView:(UIView*)sourceView overlayView:(UIView*)overlayView {
     // Generating Start and Stop Positions
     CGSize sourceSize = sourceView.bounds.size;
     CGSize popupSize = popupView.bounds.size;
+    /// 此处修改中间弹框的位置
     CGRect popupEndRect = CGRectMake((sourceSize.width - popupSize.width) / 2,
-                                     (sourceSize.height - popupSize.height) / 2,
+                                     (sourceSize.height - popupSize.height) / 3,
                                      popupSize.width,
                                      popupSize.height);
     

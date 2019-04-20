@@ -44,8 +44,6 @@ static NSString * const reuseIdentifierSectionHeaderView = @"SCTableViewSectionH
     // 下拉刷新
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         //将页码重新置为1
-        [self.dataArray removeAllObjects];
-        [self.bannerArray removeAllObjects];
         self.pageIndex = 1;
         [self loadNewsData];
     }];
@@ -69,6 +67,10 @@ static NSString * const reuseIdentifierSectionHeaderView = @"SCTableViewSectionH
         NSDictionary *result = responseObject;
         if ([result isKindOfClass:[NSDictionary class]]) {
             TTLog(@"result -- %@",result);
+            if (self.pageIndex==1) {
+                [self.dataArray removeAllObjects];
+                [self.bannerArray removeAllObjects];
+            }
             TXNewsArrayModel *model = [TXNewsArrayModel mj_objectWithKeyValues:result];
             [self.dataArray addObjectsFromArray:model.data.records];
             [self.bannerArray addObjectsFromArray:model.banners];

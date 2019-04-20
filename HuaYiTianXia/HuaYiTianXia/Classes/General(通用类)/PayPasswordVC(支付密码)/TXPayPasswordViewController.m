@@ -8,7 +8,6 @@
 
 #import "TXPayPasswordViewController.h"
 #import "TTPasswordView.h"
-#import "IQKeyboardManager.h"
 
 @interface TXPayPasswordViewController ()
 /// 标题
@@ -31,7 +30,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.view.backgroundColor = kWhiteColor;
     // Do any additional setup after loading the view.
+    self.view.frame = CGRectMake(AUTOLAYOUTSIZE((kScreenWidth - 280)/2), 0, AUTOLAYOUTSIZE(280), AUTOLAYOUTSIZE(230));
     [self initView];
     [self.view lz_setCornerRadius:7.0];
     CGFloat left = IPHONE6_W(17);
@@ -62,20 +63,21 @@
     self.integralLabel.attributedText = attributedStr;
 }
 
+// 去报名按钮
+- (void)dismissedPopupView:(id)sender{
+    if (self.delegate && [self.delegate respondsToSelector:@selector(dismissedButtonClicked)]) {
+        [self.delegate dismissedButtonClicked];
+    }
+}
+
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
     self.view.height = IPHONE6_W(230);
     self.view.width = IPHONE6_W(280);
-    //TODO: 页面appear 禁用
-    [[IQKeyboardManager sharedManager] setEnable:NO];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    
-    //TODO: 页面Disappear 启用
-    [[IQKeyboardManager sharedManager] setEnable:YES];
 }
 
 /// 验证交易密码
@@ -153,7 +155,7 @@
 
 - (UILabel *)titleLabel{
     if (!_titleLabel) {
-        _titleLabel = [UILabel lz_labelWithTitle:@"请输入支付密码" color:kTextColor204 font:kFontSizeMedium17];
+        _titleLabel = [UILabel lz_labelWithTitle:@"请输入支付密码" color:kTextColor102 font:kFontSizeMedium17];
         _titleLabel.textAlignment = NSTextAlignmentCenter;
     }
     return _titleLabel;
@@ -193,8 +195,7 @@
         [_closeButton setImage:kGetImage(@"c12_btn_close") forState:UIControlStateNormal];
         MV(weakSelf);
         [_closeButton lz_handleControlEvent:UIControlEventTouchUpInside withBlock:^{
-            [weakSelf dismissViewControllerAnimated:YES completion:nil];
-//            [weakSelf dismissPopupViewControllerWithanimationType:TTPopupViewAnimationFade];
+            [weakSelf dismissedPopupView:weakSelf.closeButton];
         }];
     }
     return _closeButton;

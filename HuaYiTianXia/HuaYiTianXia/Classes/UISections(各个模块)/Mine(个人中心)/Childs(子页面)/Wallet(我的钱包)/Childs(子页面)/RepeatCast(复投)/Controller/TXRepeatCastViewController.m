@@ -14,7 +14,7 @@
 static NSString * const reuseIdentifier = @"TXRepeatCastTemplateTableViewCell";
 static NSString * const reuseIdentifierRollout = @"TXRolloutTableViewCell";
 
-@interface TXRepeatCastViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface TXRepeatCastViewController ()<UITableViewDelegate,UITableViewDataSource,TTPopupViewDelegate>
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *dataArray;
 @property (nonatomic, strong) UIButton *doneButton;
@@ -35,6 +35,7 @@ static NSString * const reuseIdentifierRollout = @"TXRolloutTableViewCell";
 }
 
 - (void) dealwithNotice{
+    [self dismissedButtonClicked];
     NSMutableDictionary *parameter = [[NSMutableDictionary alloc] init];
     [parameter setObject:self.amountText forKey:@"money"];
     [SCHttpTools postWithURLString:kHttpURL(@"customer/DoubleThrow") parameter:parameter success:^(id responseObject) {
@@ -64,11 +65,17 @@ static NSString * const reuseIdentifierRollout = @"TXRolloutTableViewCell";
         return;
     }
     
-    TXPayPasswordViewController *vc = [[TXPayPasswordViewController alloc] init];
-    vc.pageType = 1;
-    vc.tipsText = @"VH";
-    vc.integralText = self.amountText;
-    [self presentPopupViewController:vc animationType:TTPopupViewAnimationFade];
+    TXPayPasswordViewController *viewController = [[TXPayPasswordViewController alloc] init];
+    viewController.pageType = 1;
+    viewController.tipsText = @"VH";
+    viewController.integralText = self.amountText;
+    viewController.delegate = self;
+    [self presentPopupViewController:viewController animationType:TTPopupViewAnimationFade];
+}
+
+/// 关闭当前交易密码弹出的窗口
+- (void)dismissedButtonClicked{
+    [self dismissPopupViewControllerWithanimationType:TTPopupViewAnimationFade];
 }
 
 - (void) initView{
