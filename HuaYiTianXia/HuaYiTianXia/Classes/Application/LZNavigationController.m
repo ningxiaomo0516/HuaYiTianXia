@@ -152,6 +152,11 @@
         backButtonImage = [UIImage imageNamed:@"all_btn_back_grey"];
     }
     
+    // 修改tabBra的frame (解决Push新页面的时候TabBar会上移)
+    CGRect frame = self.tabBarController.tabBar.frame;
+    frame.origin.y = [UIScreen mainScreen].bounds.size.height - frame.size.height;
+    self.tabBarController.tabBar.frame = frame;
+    
     viewController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:backButtonImage style:UIBarButtonItemStylePlain target:self action:@selector(didBackOnClick:)];
     
     [self.navigationController pushViewController:[LZWrapViewController wrapViewControllerWithViewController:viewController] animated:animated];

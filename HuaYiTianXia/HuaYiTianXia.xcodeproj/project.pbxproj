@@ -259,6 +259,9 @@
 		E7D732282268B21B006F171A /* ShareSDKConnector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7D732162268B21B006F171A /* ShareSDKConnector.framework */; };
 		E7D7322B2268B2D1006F171A /* AppDelegate+TXShare.m in Sources */ = {isa = PBXBuildFile; fileRef = E7D7322A2268B2D1006F171A /* AppDelegate+TXShare.m */; };
 		E7D7322E2268B8DF006F171A /* 微信分享的SDK.txt in Resources */ = {isa = PBXBuildFile; fileRef = E7D7322D2268B8DF006F171A /* 微信分享的SDK.txt */; };
+		E7DCD60F226DC8E100AE8DE8 /* TXBecomeVipViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7DCD60E226DC8E100AE8DE8 /* TXBecomeVipViewController.m */; };
+		E7DCD612226DCC2B00AE8DE8 /* TXBecomeVipHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = E7DCD611226DCC2B00AE8DE8 /* TXBecomeVipHeaderView.m */; };
+		E7DCD615226DCDD800AE8DE8 /* TXBecomeVipTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7DCD614226DCDD800AE8DE8 /* TXBecomeVipTableViewCell.m */; };
 		E7F1A7002241EF16003FA216 /* TXProductViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7F1A6FF2241EF16003FA216 /* TXProductViewController.m */; };
 		E7F1A7032241EF37003FA216 /* TXEarningsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7F1A7022241EF37003FA216 /* TXEarningsViewController.m */; };
 		E7F1A7062241F1D2003FA216 /* TTBaseTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7F1A7052241F1D2003FA216 /* TTBaseTableViewController.m */; };
@@ -739,6 +742,12 @@
 		E7D732292268B2D1006F171A /* AppDelegate+TXShare.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AppDelegate+TXShare.h"; sourceTree = "<group>"; };
 		E7D7322A2268B2D1006F171A /* AppDelegate+TXShare.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "AppDelegate+TXShare.m"; sourceTree = "<group>"; };
 		E7D7322D2268B8DF006F171A /* 微信分享的SDK.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "微信分享的SDK.txt"; sourceTree = "<group>"; };
+		E7DCD60D226DC8E100AE8DE8 /* TXBecomeVipViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXBecomeVipViewController.h; sourceTree = "<group>"; };
+		E7DCD60E226DC8E100AE8DE8 /* TXBecomeVipViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXBecomeVipViewController.m; sourceTree = "<group>"; };
+		E7DCD610226DCC2B00AE8DE8 /* TXBecomeVipHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXBecomeVipHeaderView.h; sourceTree = "<group>"; };
+		E7DCD611226DCC2B00AE8DE8 /* TXBecomeVipHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXBecomeVipHeaderView.m; sourceTree = "<group>"; };
+		E7DCD613226DCDD800AE8DE8 /* TXBecomeVipTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXBecomeVipTableViewCell.h; sourceTree = "<group>"; };
+		E7DCD614226DCDD800AE8DE8 /* TXBecomeVipTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXBecomeVipTableViewCell.m; sourceTree = "<group>"; };
 		E7F1A6FE2241EF16003FA216 /* TXProductViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXProductViewController.h; sourceTree = "<group>"; };
 		E7F1A6FF2241EF16003FA216 /* TXProductViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXProductViewController.m; sourceTree = "<group>"; };
 		E7F1A7012241EF37003FA216 /* TXEarningsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXEarningsViewController.h; sourceTree = "<group>"; };
@@ -2306,6 +2315,7 @@
 		E7C9FCEE22675A6A008FD260 /* Childs(子页面) */ = {
 			isa = PBXGroup;
 			children = (
+				E7DCD60A226DC8BC00AE8DE8 /* BecomeVip(成为会员) */,
 				E7C9FCEF22675A6A008FD260 /* TicketOrder(机票订单) */,
 			);
 			path = "Childs(子页面)";
@@ -2495,6 +2505,35 @@
 				E7D7322D2268B8DF006F171A /* 微信分享的SDK.txt */,
 			);
 			path = WeChatSDK;
+			sourceTree = "<group>";
+		};
+		E7DCD60A226DC8BC00AE8DE8 /* BecomeVip(成为会员) */ = {
+			isa = PBXGroup;
+			children = (
+				E7DCD60B226DC8BC00AE8DE8 /* Controller */,
+				E7DCD60C226DC8BC00AE8DE8 /* View */,
+			);
+			path = "BecomeVip(成为会员)";
+			sourceTree = "<group>";
+		};
+		E7DCD60B226DC8BC00AE8DE8 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				E7DCD60D226DC8E100AE8DE8 /* TXBecomeVipViewController.h */,
+				E7DCD60E226DC8E100AE8DE8 /* TXBecomeVipViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		E7DCD60C226DC8BC00AE8DE8 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E7DCD610226DCC2B00AE8DE8 /* TXBecomeVipHeaderView.h */,
+				E7DCD611226DCC2B00AE8DE8 /* TXBecomeVipHeaderView.m */,
+				E7DCD613226DCDD800AE8DE8 /* TXBecomeVipTableViewCell.h */,
+				E7DCD614226DCDD800AE8DE8 /* TXBecomeVipTableViewCell.m */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		E7F1A71B2242382E003FA216 /* Childs(子页面) */ = {
@@ -2754,6 +2793,7 @@
 				E78583F52240C2AF00BBEA41 /* TXWalletViewController.m in Sources */,
 				E7C9FCEA22671329008FD260 /* TXTicketBookingTableViewCell.m in Sources */,
 				E78B8F82225B32BC0052852C /* TTPickerView.m in Sources */,
+				E7DCD60F226DC8E100AE8DE8 /* TXBecomeVipViewController.m in Sources */,
 				E72699F9223F8298003A5043 /* WMMenuItem.m in Sources */,
 				E78584032240C54300BBEA41 /* TYPageControl.m in Sources */,
 				E72699FC223F8298003A5043 /* WMProgressView.m in Sources */,
@@ -2833,6 +2873,7 @@
 				E72699E3223F7F58003A5043 /* UITabBar+SCBadge.m in Sources */,
 				E75F2ED2224DC9FD0091C52E /* TXReceiveAddressTableViewCell.m in Sources */,
 				E78DCACF226575ED00252314 /* TTGuidePagesViewController.m in Sources */,
+				E7DCD612226DCC2B00AE8DE8 /* TXBecomeVipHeaderView.m in Sources */,
 				E756988D2251BE460022EC49 /* TXAddressModel.m in Sources */,
 				E7691EEE2255F8C4006A94D9 /* TXForgetTradingViewController.m in Sources */,
 				E7FBBCD122642E76009B9FC2 /* TXRolloutHeaderTableViewCell.m in Sources */,
@@ -2842,6 +2883,7 @@
 				E7C42E87224B7EFA00F3FB1A /* TXNewsModel.m in Sources */,
 				E7269907223F754B003A5043 /* UIViewController+LZNavigationController.m in Sources */,
 				E75F2ECF224DC9FD0091C52E /* TXShareToolsCollectionViewCell.m in Sources */,
+				E7DCD615226DCDD800AE8DE8 /* TXBecomeVipTableViewCell.m in Sources */,
 				E78DCAD92265BFEF00252314 /* TXMembersbleCollectionViewCell.m in Sources */,
 				E74C964322678358000CBAF0 /* TXAdsViewController.m in Sources */,
 				E72699E2223F7F58003A5043 /* UIImage+Extension.m in Sources */,

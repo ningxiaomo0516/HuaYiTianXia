@@ -11,7 +11,8 @@
 @implementation TXGeneralModel
 + (NSDictionary *)replacedKeyFromPropertyName{
     return @{@"message"     : @"msg",
-             @"errorcode"   : @"code"};
+             @"errorcode"   : @"code",
+             @"realname"    : @"name"};
 }
 @end
 

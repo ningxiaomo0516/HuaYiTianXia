@@ -24,7 +24,6 @@ NS_ASSUME_NONNULL_BEGIN
 /// 支付宝支付的时候取所需签名,微信支付时需要将字符串转为字典后在使用
 @property(nonatomic, copy)NSString *obj;
 
-
 @end
 
 

@@ -16,6 +16,8 @@
 @property (nonatomic, strong) UILabel *assetsLabel;
 /// 积分
 @property (nonatomic, strong) UILabel *integralLabel;
+/// 提示(收款人姓名)
+@property (nonatomic, strong) UILabel *payeeNameLabel;
 /// 分割线
 @property (nonatomic, strong) UIView *linerView;
 /// 分割线2
@@ -32,14 +34,21 @@
     [super viewDidLoad];
     self.view.backgroundColor = kWhiteColor;
     // Do any additional setup after loading the view.
-    self.view.frame = CGRectMake(AUTOLAYOUTSIZE((kScreenWidth - 280)/2), 0, AUTOLAYOUTSIZE(280), AUTOLAYOUTSIZE(230));
-    [self initView];
+    CGFloat top = 0;
+    if (self.pageType==0) {
+        top = 30;
+        self.payeeNameLabel.text = self.realnameText;
+        self.payeeNameLabel.hidden = NO;
+    }
+    self.view.frame = CGRectMake(IPHONE6_W((kScreenWidth - 280)/2), 0, IPHONE6_W(280), IPHONE6_W(230+top));
+
+    [self initView:top];
     [self.view lz_setCornerRadius:7.0];
     CGFloat left = IPHONE6_W(17);
     CGFloat widht = IPHONE6_W(280) - left * 2;
     CGFloat height = IPHONE6_W(42);
     [_passView lz_setCornerRadius:3.0];
-    _passView = [[TTPasswordView alloc] initWithFrame:CGRectMake(left, IPHONE6_W(170), widht, height)];
+    _passView = [[TTPasswordView alloc] initWithFrame:CGRectMake(left, IPHONE6_W(170+top), widht, height)];
     [self.view addSubview:_passView];
     MV(weakSelf)
     _passView.passwordBlock = ^(NSString * _Nonnull passwordText) {
@@ -63,7 +72,7 @@
     self.integralLabel.attributedText = attributedStr;
 }
 
-// 去报名按钮
+// 关闭按钮
 - (void)dismissedPopupView:(id)sender{
     if (self.delegate && [self.delegate respondsToSelector:@selector(dismissedButtonClicked)]) {
         [self.delegate dismissedButtonClicked];
@@ -72,8 +81,6 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    self.view.height = IPHONE6_W(230);
-    self.view.width = IPHONE6_W(280);
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -113,13 +120,14 @@
     }];
 }
 
-- (void) initView{
+- (void) initView:(CGFloat) top{
     [self.view addSubview:self.closeButton];
     [self.view addSubview:self.titleLabel];
     [self.view addSubview:self.assetsLabel];
     [self.view addSubview:self.integralLabel];
     [self.view addSubview:self.linerView];
     [self.view addSubview:self.linerView2];
+    [self.view addSubview:self.payeeNameLabel];
     
     [self.linerView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(self.view);
@@ -137,9 +145,14 @@
         make.bottom.equalTo(self.linerView.mas_top);
     }];
     
-    [self.assetsLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.payeeNameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.view);
         make.top.equalTo(self.titleLabel.mas_bottom).offset(18);
+    }];
+    
+    [self.assetsLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self.view);
+        make.top.equalTo(self.titleLabel.mas_bottom).offset(18+top);
     }];
     
     [self.integralLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -149,7 +162,7 @@
     
     [self.linerView2 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.height.equalTo(self.linerView);
-        make.top.equalTo(@(150));
+        make.top.equalTo(@(150+top));
     }];
 }
 
@@ -159,6 +172,14 @@
         _titleLabel.textAlignment = NSTextAlignmentCenter;
     }
     return _titleLabel;
+}
+
+- (UILabel *)payeeNameLabel{
+    if (!_payeeNameLabel) {
+        _payeeNameLabel = [UILabel lz_labelWithTitle:@"" color:kTextColor51 font:kFontSizeMedium15];
+        _payeeNameLabel.hidden = YES;
+    }
+    return _payeeNameLabel;
 }
 
 - (UILabel *)assetsLabel{

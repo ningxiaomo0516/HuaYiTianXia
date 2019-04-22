@@ -80,14 +80,10 @@
 /** 屏幕除去navigationBar，栏目高度，tabBar之后的高度*/
 #define kContentViewHeight kScreenHeight - LPPageVCSegmentHeight - 64 - 49
 
-/// 依照iPhone6的尺寸设计
-#define GETPIXEL (kScreenWidth / 375)
-#define AUTOLAYOUTSIZE(size) (size * GETPIXEL)
-
 #define systemFontOfSize(size) [UIFont systemFontOfSize:(size) * GETPIXEL]
 #define boldSystemFontOfSize(size) [UIFont boldSystemFontOfSize:(size) * GETPIXEL]
-/// 计算比例后的宽度
-#define AUTOLAYOUTSIZE_W(w)  (w*(kScreenWidth/375.0f))
+
+/// 依照iPhone6的尺寸设计(计算比例后的宽度)
 #define IPHONE6_W(x) ((kScreenWidth/375.0)*(x))
 #define IPHONE6_FONT(x) [UIFont systemFontOfSize:(kScreenWidth/375.0)*(x)]
 #define IPHONE6_FONT_NAME(fontName,x) [UIFont fontWithName:fontName size:(kScreenWidth/375.0)*(x)]

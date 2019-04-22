@@ -29,7 +29,7 @@ static NSString * const reuseIdentifier = @"TXTicketOrderTableViewCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.title = @"机票预订";
+    self.title = @"订票记录";
     [self initView];
     [self.view showLoadingViewWithText:@"加载中..."];
     self.pageSize = 20;

@@ -84,9 +84,9 @@
         if (responseObject){
             id result = responseObject;
             if (result) {
-                TTLog(@"登录成功过数据集 -- %@",[Utils lz_dataWithJSONObject:[result lz_objectForKey:@"obj"]]);
                 TTUserDataModel *model = [TTUserDataModel mj_objectWithKeyValues:result];
                 if (model.errorcode == 20000) {
+                    TTLog(@"登录成功过数据集 -- %@",[Utils lz_dataWithJSONObject:[result lz_objectForKey:@"obj"]]);
                     TTUserModel *userModel = [TTUserModel shared];
                     NSMutableDictionary *dictionary = [[NSMutableDictionary alloc] init];
                     NSDictionary *dataDic = [result lz_objectForKey:@"obj"];

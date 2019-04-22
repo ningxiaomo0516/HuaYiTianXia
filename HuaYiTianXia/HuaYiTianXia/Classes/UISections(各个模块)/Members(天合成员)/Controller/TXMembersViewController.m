@@ -119,19 +119,17 @@ static NSString* reuseIdentifierMall = @"TXMembersbleCollectionViewCell";
 
 /// 点击collectionViewCell
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section==1) {
-        if (indexPath.row==1) {
-            TXTicketOrderViewController *vc = [[TXTicketOrderViewController alloc] init];
+    TXGeneralModel* model = self.dataArray[indexPath.section][indexPath.row];
+    NSString *className = model.showClass;
+    if ([model.showClass isEqualToString:@""]) {
+        Toast(@"暂未开放");
+    }else{
+        Class controller = NSClassFromString(className);
+        //    id controller = [[NSClassFromString(className) alloc] init];
+        if (controller &&  [controller isSubclassOfClass:[UIViewController class]]){
+            UIViewController *vc = [[controller alloc] init];
+            vc.title = model.title;
             TTPushVC(vc);
-        }else{
-            Toast(@"暂未开放");
-        }
-    }else if(indexPath.section==2){
-        if (indexPath.row==0) {
-            TXTicketScreeningViewController *vc = [[TXTicketScreeningViewController alloc] init];
-            TTPushVC(vc);
-        }else{
-            Toast(@"暂未开放");
         }
     }
 }
@@ -207,7 +205,9 @@ static NSString* reuseIdentifierMall = @"TXMembersbleCollectionViewCell";
         titleArr = @[@[],@[@"会员",@"订单",@"礼包",@"其他"],@[]];
         imagesArr = @[@[@"banner"],@[@"c41_btn_members",@"c41_btn_order",@"c41_btn_gift",@"c41_btn_other"],
                     @[@"机票预订",@"热门景区",@"超值酒店",@"网红美食"]];
-        NSArray* classArr = @[@[],@[@"",@"",@"",@""],@[]];
+        NSArray* classArr = @[@[],
+                              @[@"TXBecomeVipViewController",@"TXTicketOrderViewController",@"",@""],
+                              @[@"TXTicketScreeningViewController",@"",@"",@""]];
         for (int i=0; i<imagesArr.count; i++) {
             NSArray *subTitlesArray = [titleArr lz_safeObjectAtIndex:i];
             NSArray *subImagesArray = [imagesArr lz_safeObjectAtIndex:i];

@@ -12,6 +12,7 @@
 #import "TXGeneralModel.h"
 #import "TXRolloutTypeViewController.h"
 #import "TXPayPasswordViewController.h"
+#import "TXTicketOrderModel.h"
 
 static NSString * const reuseIdentifier = @"TXRolloutTableViewCell";
 static NSString * const reuseIdentifierHeader = @"TXRolloutHeaderTableViewCell";
@@ -94,13 +95,34 @@ static NSString * const reuseIdentifierHeader = @"TXRolloutHeaderTableViewCell";
         Toast(@"请输入转账金额");
         return;
     }
-    
-    TXPayPasswordViewController *viewController = [[TXPayPasswordViewController alloc] init];
-    viewController.pageType = 0;
-    viewController.tipsText = self.currencyText;
-    viewController.integralText = self.amountText;
-    viewController.delegate = self;
-    [self presentPopupViewController:viewController animationType:TTPopupViewAnimationFade];
+    NSMutableDictionary *parameter = [[NSMutableDictionary alloc] init];
+    [parameter setObject:self.accountText forKey:@"mobile"];
+    [self validationPayeeInfo:parameter];
+}
+
+- (void) validationPayeeInfo:(NSDictionary *)parameter{
+    [SCHttpTools postWithURLString:kHttpURL(@"customer/MobileToUser") parameter:parameter success:^(id responseObject) {
+        NSDictionary *result = responseObject;
+        if ([result isKindOfClass:[NSDictionary class]]) {
+            TXGeneralModel *model = [TXGeneralModel mj_objectWithKeyValues:result];
+            if (model.errorcode == 20000) {
+                TicketOrderModel *userModel = [TicketOrderModel mj_objectWithKeyValues:result[@"obj"]];
+                TXPayPasswordViewController *viewController = [[TXPayPasswordViewController alloc] init];
+                viewController.pageType = 0;
+                viewController.tipsText = self.currencyText;
+                viewController.integralText = self.amountText;
+                viewController.realnameText = userModel.username;
+                viewController.delegate = self;
+                [self presentPopupViewController:viewController animationType:TTPopupViewAnimationFade];
+            }else{
+                Toast(model.message);
+            }
+        }
+        kHideMBProgressHUD(self.view);;
+    } failure:^(NSError *error) {
+        TTLog(@"error --- %@",error);
+        kHideMBProgressHUD(self.view);;
+    }];
 }
 
 /// 关闭当前交易密码弹出的窗口

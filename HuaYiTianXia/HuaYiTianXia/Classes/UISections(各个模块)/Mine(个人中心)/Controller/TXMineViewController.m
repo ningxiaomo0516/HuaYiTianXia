@@ -62,10 +62,10 @@ static NSString * const reuseIdentifierBanner = @"TXMineBannerTableViewCell";
 - (void) requestPersonalCenterData{
     [SCHttpTools getWithURLString:kHttpURL(@"customer/Wallet") parameter:nil success:^(id responseObject) {
         NSDictionary *result = responseObject;
-        TTLog(@"result ---- %@",[Utils lz_dataWithJSONObject:[result lz_objectForKey:@"obj"]]);
         if ([result isKindOfClass:[NSDictionary class]]) {
             TTUserDataModel *model = [TTUserDataModel mj_objectWithKeyValues:result];
             if (model.errorcode == 20000) {
+                TTLog(@"result ---- %@",[Utils lz_dataWithJSONObject:[result lz_objectForKey:@"obj"]]);
                 self.userModel = model.data;
                 kUserInfo.totalAssets = model.data.totalAssets;
                 kUserInfo.arcurrency = model.data.arcurrency;

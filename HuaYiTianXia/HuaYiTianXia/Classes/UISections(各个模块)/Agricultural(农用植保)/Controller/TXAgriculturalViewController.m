@@ -74,7 +74,7 @@ static NSString * const reuseIdentifierGoodsH5 = @"TXGoodsH5TableViewCell";
         self.webView.frame = CGRectMake(0, 0, self.view.frame.size.width, height);
         self.scrollView.frame = CGRectMake(0, 0, self.view.frame.size.width, height);
         self.scrollView.contentSize =CGSizeMake(self.view.frame.size.width, height);
-        [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:[NSIndexPath indexPathForRow:0 inSection:0], nil] withRowAnimation:UITableViewRowAnimationNone];
+//        [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:[NSIndexPath indexPathForRow:0 inSection:0], nil] withRowAnimation:UITableViewRowAnimationNone];
         
         /*
          // 方法二
@@ -91,16 +91,10 @@ static NSString * const reuseIdentifierGoodsH5 = @"TXGoodsH5TableViewCell";
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-//    TXGoodsH5TableViewCell *tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierGoodsH5 forIndexPath:indexPath];
-//    tools.webUrl = kAppendH5URL(DomainName, AgencyCompanyH5, @"");
-//    MV(weakSelf)
-//    tools.refreshWebViewHeightBlock = ^(CGFloat height) {
-//        weakSelf.webViewHeight = height;
-//        [self.tableView reloadData];
-//    };
-//    tools.indexPath = indexPath;
-//    return tools;
-    UITableViewCell *webCell = [tableView dequeueReusableCellWithIdentifier:@"WebViewCell" forIndexPath:indexPath];
+    UITableViewCell * webCell = [tableView dequeueReusableCellWithIdentifier:@"WebViewCell"];
+    if (!webCell) {
+        webCell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"WebViewCell"];
+    }
     [webCell.contentView addSubview:self.scrollView];
     return webCell;
 }
