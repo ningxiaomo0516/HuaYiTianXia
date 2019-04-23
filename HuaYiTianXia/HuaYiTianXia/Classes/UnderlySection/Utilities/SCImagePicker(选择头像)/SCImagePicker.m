@@ -83,13 +83,10 @@
 //    [MBProgressHUD showMessage:@"" toView:self.controller.view];
     kShowMBProgressHUD(self.controller.view);
     [SCHttpTools postImageWithURLString:uploadFile parameter:nil image:image success:^(id result) {
-//        [MBProgressHUD hideHUDForView:self.controller.view];
-        
-        TTLog(@"图片上传%@",[Utils lz_dataWithJSONObject:result]);
-        
         SCUploadImageModel *model = [SCUploadImageModel mj_objectWithKeyValues:result];
         if ([result isKindOfClass:[NSDictionary class]]) {
             if (model.errorcode == 20000) {
+                TTLog(@"图片上传%@",[Utils lz_dataWithJSONObject:result]);
                 if (self.completionHandler) {
                     if (model.data.count>0) {
                         self.completionHandler(image,model.data[0].imageURL);

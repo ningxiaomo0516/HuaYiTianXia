@@ -154,6 +154,7 @@ static NSString* reuseIdentifier = @"TXWalletCollectionViewCell";
 - (NSMutableArray *)dataArray{
     if (!_dataArray) {
         _dataArray = [[NSMutableArray alloc] init];
+        /**
         NSArray* titleArr = @[@"交易记录",@"充值",@"转出转入",@"股权",@"分红",@"转出",@"交易",@"转换",@"复投"];
         
         NSArray* imagesArr = @[@"wallet_btn_jiaoyijilu",@"wallet_btn_chongzhi",@"wallet_btn_zhuanchuzhuanru",
@@ -164,7 +165,17 @@ static NSString* reuseIdentifier = @"TXWalletCollectionViewCell";
                               @"TXZhuanchuZhuanruViewController",@"TXEquityViewController",
                               @"",@"TXRolloutViewController",@"",
                               @"TXConversionViewController",@"TXRepeatCastViewController"];
+        */
+        NSArray* titleArr = @[@"交易记录",@"充值",@"转出转入",@"股权",@"转出",@"转换",@"复投"];
         
+        NSArray* imagesArr = @[@"wallet_btn_jiaoyijilu",@"wallet_btn_chongzhi",@"wallet_btn_zhuanchuzhuanru",
+                               @"wallet_btn_guquan",@"wallet_btn_zhuanchu",
+                               @"wallet_btn_zhuanhuan",@"wallet_btn_futou"];
+        
+        NSArray* classArr = @[@"TXTransactionRecordsViewController",@"TXTopupViewController",
+                              @"TXZhuanchuZhuanruViewController",@"TXEquityViewController",
+                              @"TXRolloutViewController",
+                              @"TXConversionViewController",@"TXRepeatCastViewController"];
         for (int j = 0; j < titleArr.count; j ++) {
             TXGeneralModel* templateModel = [[TXGeneralModel alloc] init];
             templateModel.title = [titleArr lz_safeObjectAtIndex:j];

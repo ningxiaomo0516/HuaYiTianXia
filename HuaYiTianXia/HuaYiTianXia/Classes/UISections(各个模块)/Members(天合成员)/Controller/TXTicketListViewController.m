@@ -46,7 +46,6 @@ static NSString* reuseIdentifier = @"TXTicketListTableViewCell";
     [SCHttpTools getTicketWithURLString:self.URLString parameter:self.parameter success:^(id responseObject) {
         NSDictionary *result = responseObject;
         if ([result isKindOfClass:[NSDictionary class]]) {
-            TTLog(@" result --- %@",[Utils lz_dataWithJSONObject:result]);
             TXTicketModel *model = [TXTicketModel mj_objectWithKeyValues:result];
             if (model.errorcode==0) {
                 /// 查询列表

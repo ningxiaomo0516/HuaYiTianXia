@@ -71,7 +71,6 @@
     [SCHttpTools getMoreDataWithParams:pramas success:^(id result) {
         if (result) {
             if (result[@"0"]) {
-                TTLog(@"get result -- %@",[Utils lz_dataWithJSONObject:result]);
 //                NSArray *versionArray = [NSArray yy_modelArrayWithClass:[TXVersionModel class] json:result[@"0"]];
 //                for (TXVersionModel * model in versionArray) {
 //                    if (model.type == 2) {
@@ -82,7 +81,6 @@
                 weakSelf.versionModel = versionModel.data;
             }
             if (result[@"1"]) {
-                TTLog(@"post result -- %@",[Utils lz_dataWithJSONObject:result]);
 //                weakSelf.adsArray = [NSArray yy_modelArrayWithClass:[TXAdsModel class] json:result[@"1"]];
 //                TTAdsData *adsModel = [TTAdsData mj_objectWithKeyValues:result[@"1"]];
                 NSDictionary * dic = [result lz_objectForKey:@"1"];

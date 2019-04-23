@@ -82,10 +82,10 @@
     [SCHttpTools postWithURLString:kHttpURL(@"customer/UpdateUserData") parameter:parameter success:^(id responseObject) {
         NSDictionary *result  = responseObject;
 //        [MBProgressHUD hideHUDForView:self.view];
-        TTLog(@" result --- %@",[Utils lz_dataWithJSONObject:result]);
         if (result){
             TXGeneralModel *model = [TXGeneralModel mj_objectWithKeyValues:result];
             if (model.errorcode==20000) {
+                TTLog(@" result --- %@",[Utils lz_dataWithJSONObject:result]);
                 Toast(@"信息修改成功");
                 if (self.block) {
                     self.block(self.textField.text);

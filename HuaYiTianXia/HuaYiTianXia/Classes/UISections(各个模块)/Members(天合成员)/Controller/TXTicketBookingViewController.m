@@ -73,9 +73,9 @@ static NSString* reuseIdentifierInfo = @"TXTicketInfoTableViewCell";
     [SCHttpTools postWithURLString:URLString parameter:parameter success:^(id responseObject) {
         NSDictionary *result = responseObject;
         if ([result isKindOfClass:[NSDictionary class]]) {
-            TTLog(@" result --- %@",[Utils lz_dataWithJSONObject:result]);
             TXTicketModel *model = [TXTicketModel mj_objectWithKeyValues:result];
             if (model.errorcode==20000) {
+                TTLog(@" result --- %@",[Utils lz_dataWithJSONObject:result]);
                 [self.navigationController popViewControllerAnimated:YES];
             }
             Toast(model.message);
@@ -139,10 +139,10 @@ static NSString* reuseIdentifierInfo = @"TXTicketInfoTableViewCell";
         NSDictionary *result = responseObject;
         kShowMBProgressHUD(self.view);
         if ([result isKindOfClass:[NSDictionary class]]) {
-            TTLog(@" result --- %@",[Utils lz_dataWithJSONObject:result]);
             TTUserDataModel *model = [TTUserDataModel mj_objectWithKeyValues:result];
             kHideMBProgressHUD(self.view);
             if (model.errorcode==20000) {
+                TTLog(@" result --- %@",[Utils lz_dataWithJSONObject:result]);
                 /// 暂不调用支付密码界面
                 kUserInfo.balance = model.data.balance;
                 kUserInfo.vrcurrency = model.data.vrcurrency;

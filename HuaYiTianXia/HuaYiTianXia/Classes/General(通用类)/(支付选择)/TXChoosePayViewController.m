@@ -201,14 +201,14 @@ static NSString * const reuseIdentifier = @"TXChoosePayTableViewCell";
 
 //// 购买之前先获取余额
 - (void) getBalance:(NSInteger) idx{
+    kShowMBProgressHUD(self.view);
     NSString *URLString = kHttpURL(@"customer/Balance");
     [SCHttpTools getWithURLString:URLString parameter:nil success:^(id responseObject) {
         NSDictionary *result = responseObject;
-        kShowMBProgressHUD(self.view);
         if ([result isKindOfClass:[NSDictionary class]]) {
-            TTLog(@" result --- %@",[Utils lz_dataWithJSONObject:result]);
             TTUserDataModel *model = [TTUserDataModel mj_objectWithKeyValues:result];
             if (model.errorcode==20000) {
+                TTLog(@" result --- %@",[Utils lz_dataWithJSONObject:result]);
                 kUserInfo.balance = model.data.balance;
                 kUserInfo.vrcurrency = model.data.vrcurrency;
                 [kUserInfo dump];

@@ -47,10 +47,10 @@ static NSString * const reuseIdentifier = @"TXMineTableViewCell";
 - (void) logoutUserRequest{
     [SCHttpTools getWithURLString:kHttpURL(@"customer/outlogin") parameter:nil success:^(id responseObject) {
         NSDictionary *result = responseObject;
-        TTLog(@"result ---- %@",[Utils lz_dataWithJSONObject:result]);
         if ([result isKindOfClass:[NSDictionary class]]) {
             TTUserDataModel *model = [TTUserDataModel mj_objectWithKeyValues:result];
             if (model.errorcode == 20000) {
+                TTLog(@"result ---- %@",[Utils lz_dataWithJSONObject:result]);
                 [self.navigationController popToRootViewControllerAnimated:YES];
                 [[AppDelegate appDelegate] jumpMainVC];
                 [kUserInfo logout];

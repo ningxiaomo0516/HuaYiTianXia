@@ -57,10 +57,10 @@ static NSString * const reuseIdentifier = @"TXMineTableViewCell";
         NSDictionary *result  = responseObject;
         //        [MBProgressHUD hideHUDForView:self.view];
         kShowMBProgressHUD(self.view);
-        TTLog(@" result --- %@",[Utils lz_dataWithJSONObject:result]);
         if (result){
             TXGeneralModel *model = [TXGeneralModel mj_objectWithKeyValues:result];
             if (model.errorcode==20000) {
+                TTLog(@" result --- %@",[Utils lz_dataWithJSONObject:result]);
                 kUserInfo.avatar = self.imageText;
                 [kUserInfo dump];
                 [self.tableView reloadData];

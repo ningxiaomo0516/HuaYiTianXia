@@ -112,6 +112,7 @@
 		E756988D2251BE460022EC49 /* TXAddressModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E756988C2251BE460022EC49 /* TXAddressModel.m */; };
 		E75698982251EBA30022EC49 /* TXWalletModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E75698972251EBA30022EC49 /* TXWalletModel.m */; };
 		E756989D225202AE0022EC49 /* TXWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E756989C225202AE0022EC49 /* TXWebViewController.m */; };
+		E757D5BC226EE52800EA84B8 /* TXBecomeVipCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E757D5BB226EE52800EA84B8 /* TXBecomeVipCollectionViewCell.m */; };
 		E75F2EC9224DC9FD0091C52E /* TXMallGoodsDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E75F2EB0224DC9FD0091C52E /* TXMallGoodsDetailsViewController.m */; };
 		E75F2ECA224DC9FD0091C52E /* TXShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E75F2EB2224DC9FD0091C52E /* TXShareViewController.m */; };
 		E75F2ECB224DC9FD0091C52E /* TXChoosePayTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E75F2EB5224DC9FD0091C52E /* TXChoosePayTableViewCell.m */; };
@@ -468,6 +469,8 @@
 		E75698972251EBA30022EC49 /* TXWalletModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXWalletModel.m; sourceTree = "<group>"; };
 		E756989B225202AE0022EC49 /* TXWebViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXWebViewController.h; sourceTree = "<group>"; };
 		E756989C225202AE0022EC49 /* TXWebViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXWebViewController.m; sourceTree = "<group>"; };
+		E757D5BA226EE52800EA84B8 /* TXBecomeVipCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXBecomeVipCollectionViewCell.h; sourceTree = "<group>"; };
+		E757D5BB226EE52800EA84B8 /* TXBecomeVipCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXBecomeVipCollectionViewCell.m; sourceTree = "<group>"; };
 		E75F2EAF224DC9FD0091C52E /* TXMallGoodsDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXMallGoodsDetailsViewController.h; sourceTree = "<group>"; };
 		E75F2EB0224DC9FD0091C52E /* TXMallGoodsDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TXMallGoodsDetailsViewController.m; sourceTree = "<group>"; };
 		E75F2EB1224DC9FD0091C52E /* TXShareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXShareViewController.h; sourceTree = "<group>"; };
@@ -2532,6 +2535,8 @@
 				E7DCD611226DCC2B00AE8DE8 /* TXBecomeVipHeaderView.m */,
 				E7DCD613226DCDD800AE8DE8 /* TXBecomeVipTableViewCell.h */,
 				E7DCD614226DCDD800AE8DE8 /* TXBecomeVipTableViewCell.m */,
+				E757D5BA226EE52800EA84B8 /* TXBecomeVipCollectionViewCell.h */,
+				E757D5BB226EE52800EA84B8 /* TXBecomeVipCollectionViewCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2772,6 +2777,7 @@
 				E72699E8223F7F58003A5043 /* UIView+Extension.m in Sources */,
 				E7923C9F2253022D0094D0C3 /* TXGoodsH5TableViewCell.m in Sources */,
 				E78B8F7F225B32BC0052852C /* TTPickerHeaderView.m in Sources */,
+				E757D5BC226EE52800EA84B8 /* TXBecomeVipCollectionViewCell.m in Sources */,
 				E7F1A74122428A8F003FA216 /* TXMallCollectionViewCell.m in Sources */,
 				E756989D225202AE0022EC49 /* TXWebViewController.m in Sources */,
 				E7C42E7E224B770200F3FB1A /* SCHttpTools.m in Sources */,

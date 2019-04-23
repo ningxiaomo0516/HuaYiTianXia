@@ -60,9 +60,9 @@ static NSString * const reuseIdentifier = @"TXTicketOrderTableViewCell";
     [SCHttpTools postWithURLString:kHttpURL(@"aircraftorder/GetAircraftorder") parameter:parameter success:^(id responseObject) {
         NSDictionary *result = responseObject;
         if ([result isKindOfClass:[NSDictionary class]]) {
-            TTLog(@" result --- %@",[Utils lz_dataWithJSONObject:result]);
             TXTicketOrderModel *model = [TXTicketOrderModel mj_objectWithKeyValues:result];
             if (model.errorcode == 20000) {
+                TTLog(@" result --- %@",[Utils lz_dataWithJSONObject:result]);
                 [self.dataArray addObjectsFromArray:model.data.list];
             }else{
                 Toast(model.message);

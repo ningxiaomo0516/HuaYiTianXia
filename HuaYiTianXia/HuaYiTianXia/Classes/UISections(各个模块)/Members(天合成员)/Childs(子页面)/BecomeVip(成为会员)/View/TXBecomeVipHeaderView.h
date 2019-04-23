@@ -12,6 +12,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface TXBecomeVipHeaderView : UIView
 
+@property (nonatomic, strong) UIImageView *imagesViewAds;
+@property (nonatomic, strong) UIImageView *imagesViewVip;
+
+
 @end
 
 NS_ASSUME_NONNULL_END

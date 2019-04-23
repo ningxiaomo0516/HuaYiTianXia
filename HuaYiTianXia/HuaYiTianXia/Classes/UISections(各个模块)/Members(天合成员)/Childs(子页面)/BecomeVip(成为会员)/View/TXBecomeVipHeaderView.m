@@ -9,13 +9,39 @@
 #import "TXBecomeVipHeaderView.h"
 
 @implementation TXBecomeVipHeaderView
-
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
+- (instancetype)initWithFrame:(CGRect)frame{
+    if (self = [super initWithFrame:frame]) {
+        [self initView];
+        self.backgroundColor = kWhiteColor;
+    }
+    return self;
 }
-*/
+
+- (void) initView{
+    [self addSubview:self.imagesViewAds];
+    [self addSubview:self.imagesViewVip];
+    [self.imagesViewAds mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.top.right.equalTo(self);
+    }];
+    [self.imagesViewVip mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.bottom.equalTo(self);
+    }];
+}
+
+- (UIImageView *)imagesViewAds{
+    if (!_imagesViewAds) {
+        _imagesViewAds = [[UIImageView alloc] init];
+        _imagesViewAds.image = kGetImage(@"c22_btn_ads");
+    }
+    return _imagesViewAds;
+}
+
+- (UIImageView *)imagesViewVip{
+    if (!_imagesViewVip) {
+        _imagesViewVip = [[UIImageView alloc] init];
+        _imagesViewVip.image = kGetImage(@"c22_btn_vip");
+    }
+    return _imagesViewVip;
+}
 
 @end

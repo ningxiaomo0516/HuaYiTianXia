@@ -121,8 +121,8 @@ static NSString* reuseIdentifierMall = @"TXMembersbleCollectionViewCell";
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     TXGeneralModel* model = self.dataArray[indexPath.section][indexPath.row];
     NSString *className = model.showClass;
-    if ([model.showClass isEqualToString:@""]) {
-        Toast(@"暂未开放");
+    if ([model.showClass isEqualToString:@"礼包"]) {
+        Toast(@"礼包活动已结束");
     }else{
         Class controller = NSClassFromString(className);
         //    id controller = [[NSClassFromString(className) alloc] init];
@@ -143,7 +143,7 @@ static NSString* reuseIdentifierMall = @"TXMembersbleCollectionViewCell";
 #pragma mark - UICollectionViewDelegateFlowLayout
 //设置每个一个Item（cell）的大小
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
-    CGFloat width = kScreenWidth/4;
+    CGFloat width = kScreenWidth/3;
     if (indexPath.section==0) return CGSizeMake(kScreenWidth, IPHONE6_W(180));
     else if (indexPath.section==1)return CGSizeMake(width, IPHONE6_W(95));
     CGFloat margin = 10*3;
@@ -202,11 +202,12 @@ static NSString* reuseIdentifierMall = @"TXMembersbleCollectionViewCell";
         _dataArray = [[NSMutableArray alloc] init];
         NSArray* titleArr;
         NSArray* imagesArr;
-        titleArr = @[@[],@[@"会员",@"订单",@"礼包",@"其他"],@[]];
-        imagesArr = @[@[@"banner"],@[@"c41_btn_members",@"c41_btn_order",@"c41_btn_gift",@"c41_btn_other"],
+//        titleArr = @[@[],@[@"会员",@"订单",@"礼包",@"其他"],@[]];
+        titleArr = @[@[],@[@"会员",@"订单",@"礼包"],@[]];
+        imagesArr = @[@[@"banner"],@[@"c41_btn_members",@"c41_btn_order",@"c41_btn_gift"],//,@"c41_btn_other"
                     @[@"机票预订",@"热门景区",@"超值酒店",@"网红美食"]];
         NSArray* classArr = @[@[],
-                              @[@"TXBecomeVipViewController",@"TXTicketOrderViewController",@"",@""],
+                              @[@"TXBecomeVipViewController",@"TXTicketOrderViewController",@"礼包",@""],
                               @[@"TXTicketScreeningViewController",@"",@"",@""]];
         for (int i=0; i<imagesArr.count; i++) {
             NSArray *subTitlesArray = [titleArr lz_safeObjectAtIndex:i];

@@ -140,7 +140,7 @@ static NSString* reuseIdentifierMall = @"TXMallCollectionViewCell";
 /// 点击collectionViewCell
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section==1) {
-        Toast(@"暂未开放");
+        Toast(@"系统持续升级中");
     }else if(indexPath.section==2){
         NewsRecordsModel *productModel = self.dataArray[indexPath.row];
         TXMallGoodsDetailsViewController *vc = [[TXMallGoodsDetailsViewController alloc] initMallProductModel:productModel];
