@@ -46,7 +46,7 @@ static NSString * const reuseIdentifierHeader = @"TXWalletHeaderTableViewCell";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
         TXWalletHeaderTableViewCell* tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierHeader forIndexPath:indexPath];
-        tools.balanceLabel.text = kUserInfo.balance;
+        tools.balanceLabel.text = [NSString stringWithFormat:@"￥%@",kUserInfo.balance];
         return tools;
     } else {
         TXWalletTableViewCell* tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];

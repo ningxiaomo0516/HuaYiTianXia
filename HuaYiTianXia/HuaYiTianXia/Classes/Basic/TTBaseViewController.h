@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void) addGesture:(UITableView *) tableView;
 /// 点击View关闭 输入框
 - (void) tapGesture;
-
+- (void) setupNavigationBarTheme;
 @end
 
 NS_ASSUME_NONNULL_END

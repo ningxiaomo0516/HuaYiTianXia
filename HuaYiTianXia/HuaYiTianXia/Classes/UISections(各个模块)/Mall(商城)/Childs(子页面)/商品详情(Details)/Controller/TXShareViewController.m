@@ -198,7 +198,7 @@ static NSString* reuseIdentifierShareTools = @"TXShareToolsCollectionViewCell";
         [_cancelButton setBackgroundImage:image forState:UIControlStateHighlighted];
         MV(weakSelf);
         [_cancelButton lz_handleControlEvent:UIControlEventTouchUpInside withBlock:^{
-//            [weakSelf saveBtnClick:self._cancelButton];
+            [weakSelf sc_dismissVC];
         }];
     }
     return _cancelButton;

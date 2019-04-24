@@ -40,6 +40,7 @@ static NSString * const reuseIdentifierChoosePay = @"TXChoosePayTableViewCell";
     self.tableView.hidden = YES;
     [self.view showLoadingViewWithText:@"请稍后..."];
     [self getTopupAmount];
+    self.title = @"会员充值";
 }
 
 - (void) submitClick:(UIButton *)sender{
@@ -59,8 +60,12 @@ static NSString * const reuseIdentifierChoosePay = @"TXChoosePayTableViewCell";
             if (model.errorcode==20000) {
                 TTLog(@" result --- %@",[Utils lz_dataWithJSONObject:result]);
                 NSDictionary *obj = [result lz_objectForKey:@"obj"];
-                self.topupAmount1 = [obj lz_objectForKey:@"money"];
-                self.topupAmount2 = [obj lz_objectForKey:@"thMoney"];
+                TTLog(@" ---- -%@",[obj lz_objectForKey:@"money"]);
+                TTLog(@" ---- -%@",[obj lz_objectForKey:@"thMoney"]);
+                NSString *AmoutText1 = [NSString stringWithFormat:@"%@",[obj lz_objectForKey:@"thMoney"]];
+                self.topupAmount1 = [self isNull:AmoutText1];
+                self.topupAmount2 = [self isNull:AmoutText1];
+                [self.tableView reloadData];
             }else{
                 self.topupAmount1 = @"0";
                 self.topupAmount2 = @"0";
@@ -75,6 +80,18 @@ static NSString * const reuseIdentifierChoosePay = @"TXChoosePayTableViewCell";
         kShowMBProgressHUD(self.view);
         [self.view dismissLoadingView];
     }];
+}
+
+- (NSString *) isNull:(NSString *) parameter{
+    //（null）判断方法
+    if (parameter == nil) return @"0";
+    // <null>判断方法
+    if([parameter isEqual:[NSNull null]]) return @"0";
+    // "<null>"判断方法
+    if([parameter isEqualToString:@"<null>"]) return @"0";
+    // ""判断方法
+    if(parameter.length == 0) return @"0";
+    return parameter;
 }
 
 /// 生成订单且支付
@@ -171,7 +188,11 @@ static NSString * const reuseIdentifierChoosePay = @"TXChoosePayTableViewCell";
         TXBecomeVipTableViewCell *tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
         tools.delegate = self;
         tools.indexPath = indexPath;
-        [tools setDataCell:self.topupAmount amountText1:self.topupAmount1 amountText2:self.topupAmount2];
+        if (self.topupAmount1.length>0&&self.topupAmount2.length>0) {
+            [tools setDataCell:self.topupAmount amountText1:self.topupAmount1];
+        }else{
+            [tools setDataCell:self.topupAmount amountText1:@"0"];
+        }
         return tools;
     }else if (indexPath.section==1) {
         TXGeneralModel *model = self.paymentArray[indexPath.row];

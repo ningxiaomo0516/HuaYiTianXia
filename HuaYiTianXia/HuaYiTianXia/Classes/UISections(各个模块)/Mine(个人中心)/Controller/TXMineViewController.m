@@ -14,6 +14,9 @@
 #import "TXGeneralModel.h"
 #import "TXRealNameViewController.h"
 #import "TXWebViewController.h"
+#import "TXBecomeVipViewController.h"
+#import "TXPushMessageViewController.h"
+#import "TXSetupViewController.h"
 
 static NSString * const reuseIdentifier = @"TXMineTableViewCell";
 static NSString * const reuseIdentifierHeader = @"TXMineHeaderTableViewCell";
@@ -45,6 +48,21 @@ static NSString * const reuseIdentifierBanner = @"TXMineBannerTableViewCell";
     // 注册通知
     [kNotificationCenter addObserver:self selector:@selector(reloadUserName) name:@"reloadUserName" object:nil];
     [kNotificationCenter addObserver:self selector:@selector(reloadData) name:@"reloadMineData" object:nil];
+    MV(weakSelf)
+    [self.headerView.upgradeButton lz_handleControlEvent:UIControlEventTouchUpInside withBlock:^{
+        [weakSelf jumpBecomeVipVC:[[TXBecomeVipViewController alloc] init]];
+    }];
+    
+    [self.messageButton lz_handleControlEvent:UIControlEventTouchUpInside withBlock:^{
+        [weakSelf jumpBecomeVipVC:[[TXPushMessageViewController alloc] init]];
+    }];
+    [self.setupButton lz_handleControlEvent:UIControlEventTouchUpInside withBlock:^{
+        [weakSelf jumpBecomeVipVC:[[TXSetupViewController alloc] init]];
+    }];
+}
+
+- (void) jumpBecomeVipVC:(UIViewController *)vc{
+    TTPushVC(vc);
 }
 
 /// 登录成功之后再获取数据
@@ -79,7 +97,14 @@ static NSString * const reuseIdentifierBanner = @"TXMineBannerTableViewCell";
                 [self.headerView.imagesViewAvatar sc_setImageWithUrlString:model.data.avatar
                                                           placeholderImage:kGetImage(@"mine_icon_avatar")
                                                                   isAvatar:false];
-                self.headerView.levelLabel.text = model.data.userTypeName;
+                NSAttributedString *attributedText;
+                if ([model.data.userTypeName isEqualToString:@"天合会员"]) {
+                   attributedText = [SCSmallTools sc_initImageWithText:model.data.userTypeName imageName:@"c7_普通用户" fontWithSize:kFontSizeMedium13];
+                }else{
+                    attributedText = [SCSmallTools sc_initImageWithText:model.data.userTypeName imageName:@"c7_黄金会员" fontWithSize:kFontSizeMedium13];
+                }
+                
+                self.headerView.levelLabel.attributedText = attributedText;
                 self.headerView.nicknameLabel.text = model.data.username;
                 self.headerView.titleLabel.text = model.data.companyname.length>0?model.data.companyname:@"分公司筹建中";
                 self.headerView.numberLabel.text = [NSString stringWithFormat:@"人数：%@/30",model.data.joined.length>0?model.data.joined:@"0"];

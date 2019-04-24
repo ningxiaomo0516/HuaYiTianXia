@@ -47,7 +47,7 @@ static NSString* reuseIdentifier = @"TXBecomeVipCollectionViewCell";
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         self.contentView.backgroundColor = [UIColor clearColor];
         self.selectionStyle = UITableViewCellSelectionStyleNone;
-        self.headerHeight = IPHONE6_W(135);
+        self.headerHeight = IPHONE6_W(90);
         self.selectedRow = 0;
         self.isClick = 1;
         [self initView];
@@ -60,12 +60,18 @@ static NSString* reuseIdentifier = @"TXBecomeVipCollectionViewCell";
     self.collectionView.frame = CGRectMake(0, 0, kScreenWidth, self.height+self.headerHeight);
 }
 
-- (void)setDataCell:(NSString *)amountText amountText1:(NSString *)amountText1 amountText2:(NSString *)amountText2{
+- (void)setDataCell:(NSString *)amountText amountText1:(NSString *)amountText1{
 
-    TTLog(@"amountText -- %@ amountText1:%@   ---amountText2:%@",amountText,amountText1,amountText2);
+    TTLog(@"amountText -- %@ amountText1:%@ ",amountText,amountText1);
     self.textField.text = amountText;
-    self.subtitlelabel1.text = amountText1;
-    self.subtitlelabel2.text = amountText2;
+    NSString *amountText11 = [NSString stringWithFormat:@"%@元",amountText1];
+    
+    NSMutableAttributedString *mutableAttr = [[NSMutableAttributedString alloc] initWithString:amountText11];
+    /// 前面文字颜色
+    [mutableAttr addAttribute:NSForegroundColorAttributeName
+                        value:kTextColor102
+                        range:NSMakeRange(amountText1.length, 1)];
+    self.subtitlelabel1.attributedText = mutableAttr;
 }
 
 // MARK:- ====UICollectionViewDataSource,UICollectionViewDelegate=====
@@ -224,35 +230,24 @@ static NSString* reuseIdentifier = @"TXBecomeVipCollectionViewCell";
     
 
     UIView *v1 = [UIView lz_viewWithColor:kWhiteColor];
-    UIView *v2 = [UIView lz_viewWithColor:kWhiteColor];
     UIView *v3 = [UIView lz_viewWithColor:kWhiteColor];
     [self.boxView addSubview:v1];
-    [self.boxView addSubview:v2];
     [self.boxView addSubview:v3];
 
-    v1.frame = CGRectMake(0, 0, kScreenWidth, self.headerHeight/3.0);
-    v2.frame = CGRectMake(0, CGRectGetMaxY(v1.frame), kScreenWidth, CGRectGetHeight(v1.frame)-20);
-    v3.frame = CGRectMake(0, CGRectGetMaxY(v2.frame), kScreenWidth, CGRectGetHeight(v1.frame));
+    v1.frame = CGRectMake(0, 0, kScreenWidth, 25);
+    v3.frame = CGRectMake(0, CGRectGetMaxY(v1.frame), kScreenWidth, 65);
 
-    UILabel *titlelabel1 = [UILabel lz_labelWithTitle:@"应充值:" color:kTextColor51 font:kFontSizeMedium15];
-    UILabel *titlelabel2 = [UILabel lz_labelWithTitle:@"已充值:" color:kTextColor51 font:kFontSizeMedium15];
+    UILabel *titlelabel1 = [UILabel lz_labelWithTitle:@"已充值:" color:kTextColor51 font:kFontSizeMedium15];
     UILabel *titlelabel3 = [UILabel lz_labelWithTitle:@"充值金额:" color:kTextColor51 font:kFontSizeMedium15];
-
     [v1 addSubview:titlelabel1];
-    [v2 addSubview:titlelabel2];
     [v3 addSubview:titlelabel3];
 
     [v1 addSubview:self.subtitlelabel1];
-    [v2 addSubview:self.subtitlelabel2];
     [v3 addSubview:self.textField];
 
     [titlelabel1 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(@(IPHONE6_W(15)));
         make.centerY.equalTo(v1);
-    }];
-    [titlelabel2 mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(titlelabel1);
-        make.centerY.equalTo(v2);
     }];
     [titlelabel3 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(titlelabel1);
@@ -263,12 +258,8 @@ static NSString* reuseIdentifier = @"TXBecomeVipCollectionViewCell";
         make.left.equalTo(@(IPHONE6_W(90)));
         make.centerY.equalTo(v1);
     }];
-    [_subtitlelabel2 mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self->_subtitlelabel1);
-        make.centerY.equalTo(v2);
-    }];
     [_textField mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self->_subtitlelabel2);
+        make.left.equalTo(self->_subtitlelabel1);
         make.centerY.equalTo(v3);
         make.height.equalTo(@(IPHONE6_W(35)));
         make.right.equalTo(self.mas_right).offset(-IPHONE6_W(15));
@@ -282,19 +273,14 @@ static NSString* reuseIdentifier = @"TXBecomeVipCollectionViewCell";
     return _subtitlelabel1;
 }
 
-- (UILabel *)subtitlelabel2{
-    if (!_subtitlelabel2) {
-        _subtitlelabel2 = [UILabel lz_labelWithTitle:@"" color:HexString(@"#F7D073") font:kFontSizeMedium15];
-    }
-    return _subtitlelabel2;
-}
-
 - (UITextField *)textField{
     if (!_textField) {
         _textField = [UITextField lz_textFieldWithPlaceHolder:@"请输入充值金额"];
         _textField.layer.cornerRadius = 5.0;
         _textField.layer.borderColor = HexString(@"#78C1EA").CGColor;
         _textField.layer.borderWidth = 1.0;
+        _textField.keyboardType = UIKeyboardTypeNumberPad;
+//        _textField.ry_inputType = RYIntInputType;
     }
     return _textField;
 }

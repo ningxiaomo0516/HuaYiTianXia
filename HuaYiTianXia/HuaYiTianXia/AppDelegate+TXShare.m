@@ -16,8 +16,7 @@
                                         @(SSDKPlatformTypeQQ)]
                              onImport:^(SSDKPlatformType platformType)
      {
-         switch (platformType)
-         {
+         switch (platformType){
              case SSDKPlatformTypeWechat:
                  [ShareSDKConnector connectWeChat:[WXApi class]];
                  break;
@@ -35,8 +34,7 @@
                       onConfiguration:^(SSDKPlatformType platformType, NSMutableDictionary *appInfo)
      {
          
-         switch (platformType)
-         {
+         switch (platformType){
              case SSDKPlatformTypeSinaWeibo:
                  //设置新浪微博应用信息,其中authType设置为使用SSO＋Web形式授权
                  [appInfo SSDKSetupSinaWeiboByAppKey:@"1737449259"

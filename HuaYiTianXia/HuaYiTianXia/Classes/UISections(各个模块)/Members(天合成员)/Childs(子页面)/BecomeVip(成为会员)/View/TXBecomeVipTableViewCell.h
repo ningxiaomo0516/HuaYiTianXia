@@ -30,10 +30,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSMutableArray *dataArray;
 
 @property (nonatomic, strong) UILabel *subtitlelabel1;
-@property (nonatomic, strong) UILabel *subtitlelabel2;
 @property (nonatomic, strong) UITextField *textField;
 
-- (void) setDataCell:(NSString *)amountText amountText1:(NSString *)amountText1 amountText2:(NSString *)amountText2;
+- (void) setDataCell:(NSString *)amountText amountText1:(NSString *)amountText1;
 @property (nonatomic, strong) TXGeneralModel *model;
 
 @end
