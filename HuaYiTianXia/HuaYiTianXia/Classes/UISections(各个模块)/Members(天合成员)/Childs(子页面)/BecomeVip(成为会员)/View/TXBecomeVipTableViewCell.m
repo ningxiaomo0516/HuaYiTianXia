@@ -48,8 +48,7 @@ static NSString* reuseIdentifier = @"TXBecomeVipCollectionViewCell";
         self.contentView.backgroundColor = [UIColor clearColor];
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         self.headerHeight = IPHONE6_W(90);
-        self.selectedRow = 0;
-        self.isClick = 1;
+        self.selectedRow = -1;
         [self initView];
     }
     return self;
@@ -63,6 +62,19 @@ static NSString* reuseIdentifier = @"TXBecomeVipCollectionViewCell";
 - (void)setDataCell:(NSString *)amountText amountText1:(NSString *)amountText1{
 
     TTLog(@"amountText -- %@ amountText1:%@ ",amountText,amountText1);
+//    NSInteger text = [amountText integerValue];
+//    if (text==0) {
+//        self.selectedRow = 0;
+//        self.isClick = 1;
+//    } 
+//    if (text==100000) {
+//        self.selectedRow = 1;
+//        self.isClick = 3;
+//    }
+//    if (text==100000) {
+//        self.selectedRow = 2;
+//        self.isClick = 1;
+//    }
     self.textField.text = amountText;
     NSString *amountText11 = [NSString stringWithFormat:@"%@元",amountText1];
     
@@ -104,13 +116,17 @@ static NSString* reuseIdentifier = @"TXBecomeVipCollectionViewCell";
     } else {
         [tools setChecked:NO isClick:indexPath.row<self.isClick?YES:NO];
     }
+    
+//    if (self.isClick==1&&indexPath.row==0) {
+//        tools.titleLabel.textColor = kColorWithRGB(180, 180, 180);
+//    }
     return tools;
 }
 
 /// 点击collectionViewCell
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     if (self.selectedRow == indexPath.row ) {
-        self.selectedRow = -1;
+//        self.selectedRow = -1;
         TTLog(@"暂停 == 暂停");
     } else {
         self.selectedRow = indexPath.row;

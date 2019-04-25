@@ -18,7 +18,8 @@
 }
 
 - (void)setChecked:(BOOL)checked isClick:(BOOL)isClick{
-    if (checked && isClick) {
+//    if (checked && isClick) {
+    if (checked){
         [_boxView setBorderColor:HexString(@"#C79538")];
 //        if (isClick) {
 //            self.titleLabel.textColor = kTextColor51;

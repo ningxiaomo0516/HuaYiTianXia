@@ -7,11 +7,11 @@
 //
 
 #import "WMPageController.h"
-#import "TTBaseViewController.h"
+#import "TXBaseNavPageViewController.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface TXPushMessageViewController : WMPageController
+@interface TXPushMessageViewController : TXBaseNavPageViewController
 
 @end
 

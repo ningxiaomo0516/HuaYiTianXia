@@ -11,6 +11,11 @@
 		E7089EF6225D7C6C00A7EF27 /* TXMallEppoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7089EF5225D7C6C00A7EF27 /* TXMallEppoViewController.m */; };
 		E7089EF9225D7EFA00A7EF27 /* TXEppoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7089EF8225D7EFA00A7EF27 /* TXEppoTableViewCell.m */; };
 		E7089EFD225DB8E400A7EF27 /* TXChoosePayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7089EFC225DB8E400A7EF27 /* TXChoosePayViewController.m */; };
+		E714F2822271574200024FA3 /* TXBaseNavPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E714F2812271574200024FA3 /* TXBaseNavPageViewController.m */; };
+		E714F2852271903900024FA3 /* TXPushViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E714F2842271903900024FA3 /* TXPushViewController.m */; };
+		E714F2882271904B00024FA3 /* TXSystemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E714F2872271904B00024FA3 /* TXSystemViewController.m */; };
+		E714F28B2271910600024FA3 /* TXPushTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E714F28A2271910600024FA3 /* TXPushTableViewCell.m */; };
+		E714F28E227192F200024FA3 /* TXSystemTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E714F28D227192F200024FA3 /* TXSystemTableViewCell.m */; };
 		E725D079225ED3CA00C233E7 /* TTBaseTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = E725D077225ED3CA00C233E7 /* TTBaseTableView.m */; };
 		E725D0DE225EF36400C233E7 /* c31_btn_zfb@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E725D0DA225EF36300C233E7 /* c31_btn_zfb@2x.png */; };
 		E725D0DF225EF36400C233E7 /* c31_btn_wxzf@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E725D0DB225EF36300C233E7 /* c31_btn_wxzf@2x.png */; };
@@ -294,6 +299,16 @@
 		E7089EFB225DB8E400A7EF27 /* TXChoosePayViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXChoosePayViewController.h; sourceTree = "<group>"; };
 		E7089EFC225DB8E400A7EF27 /* TXChoosePayViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXChoosePayViewController.m; sourceTree = "<group>"; };
 		E7089F0C225DC8B000A7EF27 /* AppDefine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDefine.h; sourceTree = "<group>"; };
+		E714F2802271574200024FA3 /* TXBaseNavPageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXBaseNavPageViewController.h; sourceTree = "<group>"; };
+		E714F2812271574200024FA3 /* TXBaseNavPageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXBaseNavPageViewController.m; sourceTree = "<group>"; };
+		E714F2832271903900024FA3 /* TXPushViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXPushViewController.h; sourceTree = "<group>"; };
+		E714F2842271903900024FA3 /* TXPushViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXPushViewController.m; sourceTree = "<group>"; };
+		E714F2862271904B00024FA3 /* TXSystemViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXSystemViewController.h; sourceTree = "<group>"; };
+		E714F2872271904B00024FA3 /* TXSystemViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXSystemViewController.m; sourceTree = "<group>"; };
+		E714F2892271910600024FA3 /* TXPushTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXPushTableViewCell.h; sourceTree = "<group>"; };
+		E714F28A2271910600024FA3 /* TXPushTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXPushTableViewCell.m; sourceTree = "<group>"; };
+		E714F28C227192F200024FA3 /* TXSystemTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXSystemTableViewCell.h; sourceTree = "<group>"; };
+		E714F28D227192F200024FA3 /* TXSystemTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXSystemTableViewCell.m; sourceTree = "<group>"; };
 		E725D076225ED3CA00C233E7 /* TTBaseTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTBaseTableView.h; sourceTree = "<group>"; };
 		E725D077225ED3CA00C233E7 /* TTBaseTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTBaseTableView.m; sourceTree = "<group>"; };
 		E725D0DA225EF36300C233E7 /* c31_btn_zfb@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "c31_btn_zfb@2x.png"; sourceTree = "<group>"; };
@@ -979,6 +994,8 @@
 				E7AA9DAE2243353200C15483 /* TTBaseNavImagesTableViewController.m */,
 				E7F1A70D224205A2003FA216 /* TTBaseSectionHeaderView.h */,
 				E7F1A70E224205A2003FA216 /* TTBaseSectionHeaderView.m */,
+				E714F2802271574200024FA3 /* TXBaseNavPageViewController.h */,
+				E714F2812271574200024FA3 /* TXBaseNavPageViewController.m */,
 			);
 			path = Basic;
 			sourceTree = "<group>";
@@ -1733,6 +1750,10 @@
 			children = (
 				E778DE62227065B800D6F0E7 /* TXPushMessageViewController.h */,
 				E778DE63227065B800D6F0E7 /* TXPushMessageViewController.m */,
+				E714F2832271903900024FA3 /* TXPushViewController.h */,
+				E714F2842271903900024FA3 /* TXPushViewController.m */,
+				E714F2862271904B00024FA3 /* TXSystemViewController.h */,
+				E714F2872271904B00024FA3 /* TXSystemViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1740,6 +1761,10 @@
 		E778DE612270659500D6F0E7 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				E714F2892271910600024FA3 /* TXPushTableViewCell.h */,
+				E714F28A2271910600024FA3 /* TXPushTableViewCell.m */,
+				E714F28C227192F200024FA3 /* TXSystemTableViewCell.h */,
+				E714F28D227192F200024FA3 /* TXSystemTableViewCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2857,6 +2882,7 @@
 				E78B8F81225B32BC0052852C /* TTPickerModel.m in Sources */,
 				E72699E6223F7F58003A5043 /* UIScreen+Extension.m in Sources */,
 				E77F653C225C3A0E0017B4C8 /* UITextField+RYNumberKeyboard.m in Sources */,
+				E714F2822271574200024FA3 /* TXBaseNavPageViewController.m in Sources */,
 				E75F2ED6224DCB5F0091C52E /* TXBuyCountTableViewCell.m in Sources */,
 				E7269980223F7E4B003A5043 /* UIView+SCLoadingView.m in Sources */,
 				E7AA9DCA22436DA700C15483 /* TXTransactionRecordsViewController.m in Sources */,
@@ -2877,6 +2903,7 @@
 				E7D07C682243CCBE00E3FFAF /* LZActionSheet.m in Sources */,
 				E7F1A73B22427DC0003FA216 /* TXMallToolsCollectionViewCell.m in Sources */,
 				E72699D8223F7F58003A5043 /* UIButton+Extension.m in Sources */,
+				E714F28B2271910600024FA3 /* TXPushTableViewCell.m in Sources */,
 				E75F2ED3224DC9FD0091C52E /* TXShoppingTableViewCell.m in Sources */,
 				E7691EE42255DC4E006A94D9 /* UIView+SCValidation.m in Sources */,
 				E7923CAA22535CF30094D0C3 /* SCTextField.m in Sources */,
@@ -2933,6 +2960,7 @@
 				E7269906223F754B003A5043 /* LZNavigationController.m in Sources */,
 				E76D9C4C226027DF009D1A23 /* TXPayOrderVC.m in Sources */,
 				E72699A8223F7ECC003A5043 /* NSDate+Extensions.m in Sources */,
+				E714F28E227192F200024FA3 /* TXSystemTableViewCell.m in Sources */,
 				E7C42E83224B770200F3FB1A /* NetWorkAnalysisTool.m in Sources */,
 				E72699A2223F7ECC003A5043 /* NSString+SCExtension.m in Sources */,
 				E7759AC422448158007DA6CF /* TXRepeatCastTemplateTableViewCell.m in Sources */,
@@ -2962,6 +2990,7 @@
 				E7D731F12268AB47006F171A /* SCShareModel.m in Sources */,
 				E7923CA5225341C40094D0C3 /* SCImagePicker.m in Sources */,
 				E72699DE223F7F58003A5043 /* UIBarButtonItem+Extension.m in Sources */,
+				E714F2852271903900024FA3 /* TXPushViewController.m in Sources */,
 				E725D119225F2CC800C233E7 /* AlipayManager.m in Sources */,
 				E7C42E7F224B770200F3FB1A /* SCHttpToolsModel.m in Sources */,
 				E7C9FCFB2267607E008FD260 /* TXTicketOrderModel.m in Sources */,
@@ -2980,6 +3009,7 @@
 				E77BC13F224F7321008440C9 /* TXOrderModel.m in Sources */,
 				E7CC89BA2264658C003D0EF7 /* TTImageButton.m in Sources */,
 				E7F1A72B22423F92003FA216 /* TXPersonalInfoViewController.m in Sources */,
+				E714F2882271904B00024FA3 /* TXSystemViewController.m in Sources */,
 				E7C9FCF822675C38008FD260 /* TXTicketOrderTableViewCell.m in Sources */,
 				E78584052240C54300BBEA41 /* TYCyclePagerTransformLayout.m in Sources */,
 				E72699A7223F7ECC003A5043 /* NSDictionary+Extension.m in Sources */,

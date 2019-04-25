@@ -48,6 +48,10 @@ static NSString * const reuseIdentifierChoosePay = @"TXChoosePayTableViewCell";
         Toast(@"请输入充值金额");
         return;
     }
+    if (self.payType == -1) {
+        Toast(@"请输旋转轴支付方式");
+        return;
+    }
     [self GenerateOrderData:self.payType];
 }
 

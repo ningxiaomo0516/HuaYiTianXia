@@ -6,11 +6,11 @@
 //  Copyright © 2019年 宁小陌. All rights reserved.
 //
 
-#import "TTBaseViewController.h"
+#import "TXBaseNavPageViewController.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface TXZhuanchuZhuanruViewController : TTBaseViewController
+@interface TXZhuanchuZhuanruViewController : TXBaseNavPageViewController
 
 @end
 

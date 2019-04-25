@@ -59,6 +59,13 @@
     [[AFNetworkReachabilityManager sharedManager] setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
         [kNotificationCenter postNotificationName:NetworkReachabilityStatus object:nil userInfo:@{@"status":@(status)}];
     }];
+    
+    BOOL isProduction = NO;
+    #ifdef DEBUG
+        isProduction = NO;
+    #else
+        isProduction = YES;
+    #endif
     ///极光推送
     JPUSHRegisterEntity * entity = [[JPUSHRegisterEntity alloc] init];
     entity.types = JPAuthorizationOptionAlert|JPAuthorizationOptionBadge|JPAuthorizationOptionSound;
@@ -316,6 +323,7 @@
     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
 }
 
+/// iOS 10 Support
 - (void)jpushNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(NSInteger))completionHandler  API_AVAILABLE(ios(10.0)){
     // Required
     NSDictionary * userInfo = notification.request.content.userInfo;
@@ -367,7 +375,8 @@
     TTLog(@"---- 什么玩意");
 }
 
-
+#pragma mark Notification
+/// 应用在后台运行
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
     
     // Required, iOS 7 Support
@@ -388,8 +397,10 @@
     TTLog(@"userInfo  - %@",userInfo);
 }
 
+#pragma mark- JPUSHRegisterDelegate // 2.1.9版新增JPUSHRegisterDelegate,需实现以下两个方法
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
     // Required,For systems with less than or equal to iOS6
+    // iOS 10 以下 Required
     [JPUSHService handleRemoteNotification:userInfo];
     //处理推送结果
     if (application.applicationState == UIApplicationStateInactive){
@@ -484,8 +495,18 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    [self cleanNotNum];
 }
 
+- (void)cleanNotNum{
+    [JPUSHService resetBadge];
+    [self cleanNotificationNumber];
+}
+
+- (void)cleanNotificationNumber{
+    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:1];
+    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
+}
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.

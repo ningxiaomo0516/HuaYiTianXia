@@ -7,9 +7,11 @@
 //
 
 #import "TXZhuanchuZhuanruViewController.h"
-#import "WMPageController.h"
+#import "TXEquityViewController.h"
 
-@interface TXZhuanchuZhuanruViewController ()<WMPageControllerDelegate>
+@interface TXZhuanchuZhuanruViewController ()
+
+@property (nonatomic, strong) NSArray *titleArray;
 
 @end
 
@@ -18,58 +20,27 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-
-    [self.view addSubview:self.setPageViewControllers];
 }
 
-#pragma mark -- setter/getter
--(UIView *)setPageViewControllers {
-    WMPageController *pageController = [self p_defaultController];
-    pageController.titleFontName = @"PingFang-SC-Medium";
-    pageController.titleSizeNormal = 14;  /// 默认字体大小
-    pageController.titleSizeSelected = 16;/// 选中字体大小
-    pageController.menuViewStyle = WMMenuViewStyleLine;/// 样式
-    pageController.menuViewLayoutMode = WMMenuViewLayoutModeCenter;//居中模式
-    pageController.menuItemWidth = kScreenWidth/3;/// 宽度
-    pageController.titleColorSelected = kThemeColor;
-    pageController.titleColorNormal = kTextColor51;
-    pageController.progressWidth = 20;
-    pageController.progressColor = kThemeColor;
-    pageController.menuBGColor = kClearColor;
-    //    pageController.showOnNavigationBar = YES;
-    
-    [self addChildViewController:pageController];
-    [pageController didMoveToParentViewController:self];
-    
-    
-    UIView *linerView = [UIView lz_viewWithColor:kTextColor238];
-    [pageController.view addSubview:linerView];
-    linerView.frame = CGRectMake(0, pageController.menuHeight, kScreenWidth, 0.7);
-    return pageController.view;
+- (NSInteger)numbersOfChildControllersInPageController:(WMPageController *)pageController {
+    return self.titleArray.count;
 }
 
-- (WMPageController *)p_defaultController {
-    NSArray *titles = @[@"转出记录",@"转入记录"];
-    NSArray *showClass = @[@"TXEquityViewController",@"TXEquityViewController"];
-    NSMutableArray *viewControllers = [[NSMutableArray alloc] init];
-    for (int i=0; i<titles.count; i++) {
-        NSString *className = [showClass lz_safeObjectAtIndex:i];
-        Class controller = NSClassFromString(className);
-        //    id controller = [[NSClassFromString(className) alloc] init];
-        if (controller &&  [controller isSubclassOfClass:[UIViewController class]]){
-            UIViewController *vc = [[controller alloc] init];
-            vc.title = [titles lz_safeObjectAtIndex:i];
-            [viewControllers addObject:vc];
-        }
+- (NSString *)pageController:(WMPageController *)pageController titleAtIndex:(NSInteger)index {
+
+    return self.titleArray[index];
+}
+
+- (UIViewController *)pageController:(WMPageController *)pageController viewControllerAtIndex:(NSInteger)index {
+    TXEquityViewController *viewController = [[TXEquityViewController alloc] init];
+    viewController.title = self.titleArray[index];
+    return viewController;
+}
+
+- (NSArray *)titleArray{
+    if (!_titleArray) {
+        _titleArray = @[@"转出记录",@"转入记录"];
     }
-    
-    WMPageController *pageVC = [[WMPageController alloc] initWithViewControllerClasses:viewControllers andTheirTitles:titles];
-    [pageVC setViewFrame:CGRectMake(0,0, kScreenWidth, kScreenHeight-kNavBarHeight)];
-    pageVC.delegate = self;
-    pageVC.menuHeight = 40;
-    pageVC.postNotification = YES;
-    pageVC.bounces = YES;
-    return pageVC;
+    return _titleArray;
 }
-
 @end

@@ -1,8 +1,8 @@
 //
-//  TXBecomeVipViewController.h
+//  TXPushViewController.h
 //  HuaYiTianXia
 //
-//  Created by 宁小陌 on 2019/4/22.
+//  Created by 宁小陌 on 2019/4/25.
 //  Copyright © 2019年 宁小陌. All rights reserved.
 //
 
@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface TXBecomeVipViewController : TTBaseTableViewController
+@interface TXPushViewController : TTBaseTableViewController
 
 @end
 

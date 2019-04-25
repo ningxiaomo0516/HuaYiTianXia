@@ -25,7 +25,7 @@ static NSString * const reuseIdentifierBanner = @"TXMineBannerTableViewCell";
 @interface TXMineViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) TXMineHeaderView *headerView;
 @property (nonatomic, strong) UITableView *tableView;
-@property (nonatomic, strong) NSMutableArray *itemModelArray;
+@property (nonatomic, strong) NSMutableArray *dataArray;
 @property (nonatomic, strong) TTUserModel *userModel;
 @property (nonatomic, strong) NSMutableArray *bannerArray;
 /// 导航View
@@ -54,7 +54,7 @@ static NSString * const reuseIdentifierBanner = @"TXMineBannerTableViewCell";
     }];
     
     [self.messageButton lz_handleControlEvent:UIControlEventTouchUpInside withBlock:^{
-        [weakSelf jumpBecomeVipVC:[[TXPushMessageViewController alloc] init]];
+//        [weakSelf jumpBecomeVipVC:[[TXPushMessageViewController alloc] init]];
     }];
     [self.setupButton lz_handleControlEvent:UIControlEventTouchUpInside withBlock:^{
         [weakSelf jumpBecomeVipVC:[[TXSetupViewController alloc] init]];
@@ -140,7 +140,7 @@ static NSString * const reuseIdentifierBanner = @"TXMineBannerTableViewCell";
         return tools;
     }else{
         TXMineTableViewCell* tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
-        TXGeneralModel* model = self.itemModelArray[0][indexPath.row];
+        TXGeneralModel* model = self.dataArray[0][indexPath.row];
         model.index = indexPath.item;
         tools.titleLabel.text = model.title;
         tools.linerView.hidden = NO;
@@ -174,7 +174,7 @@ static NSString * const reuseIdentifierBanner = @"TXMineBannerTableViewCell";
 /// 返回多少
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section!=2) return 1;
-    NSArray *subArray = [self.itemModelArray lz_safeObjectAtIndex:0];
+    NSArray *subArray = [self.dataArray lz_safeObjectAtIndex:0];
     return subArray.count;
 }
 
@@ -185,7 +185,7 @@ static NSString * const reuseIdentifierBanner = @"TXMineBannerTableViewCell";
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    TXGeneralModel* model = self.itemModelArray[0][indexPath.row];
+    TXGeneralModel* model = self.dataArray[0][indexPath.row];
     NSString *className = model.showClass;
     if ([model.showClass isEqualToString:@"TXRealNameViewController"]) {
         if (kUserInfo.isValidation==0) {
@@ -253,10 +253,12 @@ static NSString * const reuseIdentifierBanner = @"TXMineBannerTableViewCell";
     [self.setupButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(@(IPHONE6_W(15)));
         make.centerY.equalTo(self.navBoxView);
+        make.height.width.equalTo(self.navBoxView.mas_height);
     }];
     [self.messageButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(self.view.mas_right).offset(IPHONE6_W(-15));
         make.centerY.equalTo(self.navBoxView);
+        make.height.width.equalTo(self.setupButton);
     }];
 }
 
@@ -293,9 +295,9 @@ static NSString * const reuseIdentifierBanner = @"TXMineBannerTableViewCell";
 }
 
 
-- (NSMutableArray *)itemModelArray{
-    if (!_itemModelArray) {
-        _itemModelArray = [[NSMutableArray alloc] init];
+- (NSMutableArray *)dataArray{
+    if (!_dataArray) {
+        _dataArray = [[NSMutableArray alloc] init];
         NSArray* titleArr = @[@[@"实名认证",@"订单中心",@"我的钱包",
                                 @"推荐邀请",@"我的团队",@"设置"]];//TXOrderViewController
         NSArray* classArr = @[@[@"TXRealNameViewController",@"TXProductViewController",
@@ -311,10 +313,10 @@ static NSString * const reuseIdentifierBanner = @"TXMineBannerTableViewCell";
                 generalModel.showClass = [classArray lz_safeObjectAtIndex:j];
                 [subArray addObject:generalModel];
             }
-            [_itemModelArray addObject:subArray];
+            [_dataArray addObject:subArray];
         }
     }
-    return _itemModelArray;
+    return _dataArray;
 }
 
 - (NSMutableArray *)bannerArray{
