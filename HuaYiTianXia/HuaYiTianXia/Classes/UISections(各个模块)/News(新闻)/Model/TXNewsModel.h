@@ -67,6 +67,9 @@ NS_ASSUME_NONNULL_BEGIN
  *  4:纵横矿机产品 5:共享飞行产品; 6:天合成员充值;7:生态农业商城产品（消费）
  */
 @property (nonatomic, assign) NSInteger purchaseType;
+//// --------------- 礼包 model --------------- ////
+@property (nonatomic, copy) NSString *pname;
+@property (nonatomic, copy) NSString *typeName;
 
 //// --------------- new model --------------- ////
 /// 新闻ID(产品id)

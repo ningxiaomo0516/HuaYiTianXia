@@ -142,7 +142,7 @@
     if ([keyPath isEqualToString:@"estimatedProgress"]) {
         float estimateProgress = [change[NSKeyValueChangeNewKey] doubleValue];
         [self.progress setProgress:estimateProgress animated:YES];
-    }else if([keyPath isEqualToString:@"estimatedProgress"]){
+    }else if([keyPath isEqualToString:@"title"]){
         if (object == self.wkWebView) {
             self.shareModel.descriptStr = self.title;//self.wkWebView.title;
         } else {

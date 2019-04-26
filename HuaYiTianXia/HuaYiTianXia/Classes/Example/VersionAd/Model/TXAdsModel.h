@@ -50,7 +50,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,copy)NSString *imageUrl;
 /// 倒计时
 @property(nonatomic,assign)NSInteger showTime;
-/// 状态
+/// 状态 (礼包活动是否结束1:活动继续，进入礼包界面，2:活动终止,无法进入礼包界面)
 @property(nonatomic,assign)NSInteger status;
 /// 类型
 @property(nonatomic,assign)NSInteger type;

@@ -91,7 +91,7 @@
                     NSMutableDictionary *dictionary = [[NSMutableDictionary alloc] init];
                     NSDictionary *dataDic = [result lz_objectForKey:@"obj"];
                     NSArray *dictKeysArray = [[result lz_objectForKey:@"obj"] allKeys];
-                    [dictionary setObject:model.data.uid forKey:@"uid"];
+                    [dictionary setObject:model.data.userid forKey:@"userid"];
                     [dictionary setObject:model.data.account forKey:@"account"];
                     [dictionary setObject:model.data.username forKey:@"username"];
                     [dictionary setObject:model.data.realname forKey:@"realname"];

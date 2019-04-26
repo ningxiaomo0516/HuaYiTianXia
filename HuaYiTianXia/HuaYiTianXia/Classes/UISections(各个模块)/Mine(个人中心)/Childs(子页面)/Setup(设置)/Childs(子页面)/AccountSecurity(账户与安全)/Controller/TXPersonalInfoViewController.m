@@ -90,7 +90,7 @@ static NSString * const reuseIdentifier = @"TXMineTableViewCell";
                               placeholderImage:kGetImage(VERTICALMAPBITMAP)];
         tools.imagesAvatar.hidden = NO;
     }else{
-        tools.subtitleLabel.text = (indexPath.row==1)?kUserInfo.username:kUserInfo.uid;
+        tools.subtitleLabel.text = (indexPath.row==1)?kUserInfo.username:kUserInfo.userid;
         tools.subtitleLabel.hidden = NO;
     }
     return tools;

@@ -41,7 +41,7 @@ static AFHTTPSessionManager* manager_ = nil;
     URLString = [NSString stringWithFormat:@"%@%@",DynamicUrl,arrayURL[0]];
     URLString = [URLString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     URLString = [URLString stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
-    TTLog(@"GetUrl -- %@ - -- %ld --- %@",URLString,arrayURL.count,kUserInfo.uid);
+    TTLog(@"GetUrl -- %@ - -- %ld --- %@",URLString,arrayURL.count,kUserInfo.userid);
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     [manager.requestSerializer setTimeoutInterval:timeoutInterval];
     manager.requestSerializer.cachePolicy = NSURLRequestReloadIgnoringLocalAndRemoteCacheData;

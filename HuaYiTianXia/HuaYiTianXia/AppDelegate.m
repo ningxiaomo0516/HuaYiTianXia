@@ -49,7 +49,7 @@
     
     ///初始化登陆信息
     [[TTUserModel shared] load];
-    TTLog(@" --- %@ --- %@, --- %@ --- %@",kUserInfo.username,kUserInfo.realname,kUserInfo.uid,kUserInfo.inviteCode);
+    TTLog(@" --- %@ --- %@, --- %@ --- %@",kUserInfo.username,kUserInfo.realname,kUserInfo.userid,kUserInfo.inviteCode);
 
     /// 默认没有任何支付页面
     kUserInfo.topupType = 0;

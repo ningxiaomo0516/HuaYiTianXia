@@ -14,6 +14,8 @@
 #import "TTBannerModel.h"
 #import "TXTicketScreeningViewController.h"
 #import "TXTicketOrderViewController.h"
+#import "TXAdsModel.h"
+#import "TXAdsGiftViewController.h"
 
 static NSString* reuseIdentifier = @"TXMallToolsCollectionViewCell";
 static NSString* reuseIdentifierBanner = @"TXMallBannerCollectionViewCell";
@@ -54,16 +56,16 @@ static NSString* reuseIdentifierMall = @"TXMembersbleCollectionViewCell";
 - (void) loadMallData{
     NSMutableDictionary *parameter = [[NSMutableDictionary alloc] init];
     [parameter setObject:@(16) forKey:@"status"];
-    
-    TTLog(@"parameter -- %@",parameter);
     [SCHttpTools postWithURLString:@"banner/GetBanners" parameter:parameter success:^(id responseObject) {
         NSDictionary *result = responseObject;
         if ([result isKindOfClass:[NSDictionary class]]) {
             TTBannerModel *model = [TTBannerModel mj_objectWithKeyValues:result];
-            [self.bannerArray addObjectsFromArray:model.banners];
-            [self.collectionView reloadData];
+            if (model.errorcode == 20000) {
+                [self.bannerArray addObjectsFromArray:model.banners];
+                [self.collectionView reloadData];
+            }
         }else{
-            Toast(@"获取城市数据失败");
+            Toast(@"获取数据失败");
         }
         [self.collectionView.mj_header endRefreshing];
         [self.collectionView.mj_footer endRefreshing];
@@ -75,6 +77,35 @@ static NSString* reuseIdentifierMall = @"TXMembersbleCollectionViewCell";
         [self.view dismissLoadingView];
     }];
 }
+
+- (void) getGiftData{
+    kShowMBProgressHUD(self.view);
+    NSMutableDictionary *parameter = [[NSMutableDictionary alloc] init];
+    [parameter setObject:@(1) forKey:@"type"];
+    [SCHttpTools postWithURLString:kHttpURL(@"parcel/ControlParcel") parameter:parameter success:^(id responseObject) {
+        NSDictionary *result = responseObject;
+        if ([result isKindOfClass:[NSDictionary class]]) {
+            TTAdsData *model = [TTAdsData mj_objectWithKeyValues:result];
+            if (model.errorcode == 20000) {
+                /// 礼包活动是否结束1:活动继续，进入礼包界面，2:活动终止,无法进入礼包界面
+                if (model.data.status==1) {
+                    TXAdsGiftViewController *vc = [[TXAdsGiftViewController alloc] init];
+//                    vc.webUrl = kStringFormat(@"http://192.168.1.5/libao/index.html?type=1&userID=", kUserInfo.userid);
+                    TTPushVC(vc);
+                }else{
+                    Toast(@"礼包活动已结束");
+                }
+            }
+        }else{
+            Toast(@"获取礼包数据失败");
+        }
+        kHideMBProgressHUD(self.view);
+    } failure:^(NSError *error) {
+        TTLog(@" -- error -- %@",error);
+        kHideMBProgressHUD(self.view);
+    }];
+}
+
 
 - (void) initView{
     [self.view addSubview:self.collectionView];
@@ -122,7 +153,7 @@ static NSString* reuseIdentifierMall = @"TXMembersbleCollectionViewCell";
     TXGeneralModel* model = self.dataArray[indexPath.section][indexPath.row];
     NSString *className = model.showClass;
     if ([model.showClass isEqualToString:@"礼包"]) {
-        Toast(@"礼包活动已结束");
+        [self getGiftData];
     }else{
         Class controller = NSClassFromString(className);
         //    id controller = [[NSClassFromString(className) alloc] init];

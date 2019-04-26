@@ -11,7 +11,7 @@
 
 static NSString *topupType      = @"topupType";
 
-static NSString *uid            = @"uid";
+static NSString *userid         = @"userid";
 static NSString *isLogin        = @"isLogin";
 static NSString *username       = @"username";
 static NSString *realname       = @"realname";
@@ -75,7 +75,7 @@ static NSString *ifActivate         = @"ifActivate";
 @implementation TTUserModel
 
 + (NSDictionary *)replacedKeyFromPropertyName{
-    return @{@"uid"         : @"id",
+    return @{@"userid"         : @"id",
              @"account"     : @"mobile",
              @"password"    : @"pwd",
              @"username"    : @"nickName",
@@ -101,7 +101,7 @@ static TTUserModel *userModel = nil;
 }
 
 - (BOOL)isLogin{
-    if (self.uid.length > 0) {
+    if (self.userid.length > 0) {
         return YES;
     }
     return NO;
@@ -141,7 +141,7 @@ static TTUserModel *userModel = nil;
     
     if (user) {
         MVLog(@"SCSettingsModel load 成功");
-        MVLog(@"userID:%@", [TTUserModel shared].uid);
+        MVLog(@"userID:%@", [TTUserModel shared].userid);
     } else {
         MVLog(@"SCSettingsModel load 失败");
     }
@@ -158,7 +158,7 @@ static TTUserModel *userModel = nil;
         
         [TTUserModel shared].topupType              = [aDecoder decodeIntegerForKey:topupType];
         
-        [TTUserModel shared].uid                    = [aDecoder decodeObjectForKey:uid];
+        [TTUserModel shared].userid                 = [aDecoder decodeObjectForKey:userid];
         [TTUserModel shared].username               = [aDecoder decodeObjectForKey:username];
         [TTUserModel shared].realname               = [aDecoder decodeObjectForKey:realname];
         [TTUserModel shared].avatar                 = [aDecoder decodeObjectForKey:avatar];
@@ -216,7 +216,7 @@ static TTUserModel *userModel = nil;
     
     [aCoder encodeInteger:[TTUserModel shared].topupType forKey:topupType];
 
-    [aCoder encodeObject:[TTUserModel shared].uid forKey:uid];
+    [aCoder encodeObject:[TTUserModel shared].userid forKey:userid];
     [aCoder encodeObject:[TTUserModel shared].username forKey:username];
     [aCoder encodeObject:[TTUserModel shared].realname forKey:realname];
     [aCoder encodeObject:[TTUserModel shared].avatar forKey:avatar];
@@ -227,7 +227,7 @@ static TTUserModel *userModel = nil;
     [aCoder encodeInteger:[TTUserModel shared].tranPwd forKey:tranPwd];
     [aCoder encodeObject:[TTUserModel shared].registertime forKey:registertime];
     /// 将BOOL类型编码，使其与字符串类型的键相关联
-    [aCoder encodeBool:[NSNumber numberWithBool:[TTUserModel shared].isLogin] forKey:isLogin];
+    [aCoder encodeObject:[NSNumber numberWithBool:[TTUserModel shared].isLogin] forKey:isLogin];
     
     [aCoder encodeObject:[TTUserModel shared].idnumber forKey:idnumber];
     [aCoder encodeObject:[TTUserModel shared].imgb forKey:imgb];
@@ -268,7 +268,7 @@ static TTUserModel *userModel = nil;
  * 清空数据
  */
 - (void)logout {
-    [TTUserModel shared].uid = @"";
+    [TTUserModel shared].userid = @"";
     [TTUserModel shared].username = @"";
     [TTUserModel shared].realname = @"";
     [TTUserModel shared].avatar = @"";

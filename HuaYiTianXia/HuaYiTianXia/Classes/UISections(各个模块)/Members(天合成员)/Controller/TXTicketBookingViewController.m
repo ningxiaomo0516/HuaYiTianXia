@@ -159,7 +159,7 @@ static NSString* reuseIdentifierInfo = @"TXTicketInfoTableViewCell";
         }
     } failure:^(NSError *error) {
         TTLog(@"余额查询信息 -- %@", error);
-        kShowMBProgressHUD(self.view);
+        kHideMBProgressHUD(self.view);
     }];
 }
 

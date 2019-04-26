@@ -229,8 +229,8 @@ static NSString * const reuseIdentifier = @"TXChoosePayTableViewCell";
         }
         kHideMBProgressHUD(self.view);
     } failure:^(NSError *error) {
-        TTLog(@"余额查询信息 -- %@", error);
-        kShowMBProgressHUD(self.view);
+        TTLog(@"购买之前先获取余额 -- %@", error);
+        kHideMBProgressHUD(self.view);
     }];
 }
 

@@ -100,7 +100,6 @@
         Toast(@"两次交易密码不一致");
         return;
     }
-    [TTHUDManager showHUDMessage:@"请稍后..."];
     kShowMBProgressHUD(self.view);
     NSMutableDictionary *parameter = [[NSMutableDictionary alloc] init];
     [parameter setObject:self.password forKey:@"tranPwd"];

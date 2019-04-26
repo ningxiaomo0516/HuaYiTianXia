@@ -15,6 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, copy)NSString* imageText;
 @property(nonatomic, copy)NSString* showClass;
 @property(nonatomic, assign)NSInteger index;
+/// 礼包ID
+@property(nonatomic, copy)NSString* libaoId;
 
 
 /// 消息提示

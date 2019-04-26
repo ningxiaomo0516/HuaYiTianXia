@@ -8,6 +8,7 @@ target 'HuaYiTianXia' do
     pod 'SDWebImage'
     pod 'MBProgressHUD'
     pod 'WechatOpenSDK'
+    pod 'WebViewJavascriptBridge', '~> 6.0'
 #    pod 'IQKeyboardManager'
     pod 'JPush'
   use_frameworks!

@@ -49,7 +49,7 @@ static NSString * const reuseIdentifierChoosePay = @"TXChoosePayTableViewCell";
         return;
     }
     if (self.payType == -1) {
-        Toast(@"请输旋转轴支付方式");
+        Toast(@"请输选择支付方式");
         return;
     }
     [self GenerateOrderData:self.payType];
@@ -80,8 +80,8 @@ static NSString * const reuseIdentifierChoosePay = @"TXChoosePayTableViewCell";
         kHideMBProgressHUD(self.view);
         [self.view dismissLoadingView];
     } failure:^(NSError *error) {
-        TTLog(@"余额查询信息 -- %@", error);
-        kShowMBProgressHUD(self.view);
+        TTLog(@"成为会员 -- %@", error);
+        kHideMBProgressHUD(self.view);
         [self.view dismissLoadingView];
     }];
 }

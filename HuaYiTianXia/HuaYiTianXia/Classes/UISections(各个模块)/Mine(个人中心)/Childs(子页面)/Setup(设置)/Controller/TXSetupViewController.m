@@ -28,6 +28,7 @@ static NSString * const reuseIdentifier = @"TXMineTableViewCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self initView];
+    self.title = @"设置";
 }
 
 /** 退出 */

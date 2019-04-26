@@ -147,6 +147,12 @@
 		E77326522254A03100FD665A /* TXWalletHeaderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E77326512254A03100FD665A /* TXWalletHeaderTableViewCell.m */; };
 		E77326552254A87D00FD665A /* TXRolloutTypeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E77326542254A87D00FD665A /* TXRolloutTypeViewController.m */; };
 		E77326582254A99900FD665A /* TXRolloutTypeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E77326572254A99900FD665A /* TXRolloutTypeTableViewCell.m */; };
+		E774DCDC2272D21A001A95B8 /* TTWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E774DCDA2272D219001A95B8 /* TTWebViewController.m */; };
+		E774DCE02272D9ED001A95B8 /* index.html in Resources */ = {isa = PBXBuildFile; fileRef = E774DCDE2272D9ED001A95B8 /* index.html */; };
+		E774DCF122730FC6001A95B8 /* TXAdsGiftViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E774DCEC22730FC6001A95B8 /* TXAdsGiftViewController.m */; };
+		E774DCF222730FC6001A95B8 /* TXReceiveGiftListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E774DCEE22730FC6001A95B8 /* TXReceiveGiftListViewController.m */; };
+		E774DCF322730FC6001A95B8 /* TXReceiveGiftViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E774DCF022730FC6001A95B8 /* TXReceiveGiftViewController.m */; };
+		E774DCF622730FD9001A95B8 /* TXReceiveGiftListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E774DCF522730FD9001A95B8 /* TXReceiveGiftListTableViewCell.m */; };
 		E7759AAF22447ADA007DA6CF /* TXModifyUserInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7759AAE22447AD9007DA6CF /* TXModifyUserInfoViewController.m */; };
 		E7759AB522447DC0007DA6CF /* SCLocalCacheTool.m in Sources */ = {isa = PBXBuildFile; fileRef = E7759AB222447DC0007DA6CF /* SCLocalCacheTool.m */; };
 		E7759AB622447DC0007DA6CF /* SCSmallTools.m in Sources */ = {isa = PBXBuildFile; fileRef = E7759AB422447DC0007DA6CF /* SCSmallTools.m */; };
@@ -542,6 +548,17 @@
 		E77326542254A87D00FD665A /* TXRolloutTypeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXRolloutTypeViewController.m; sourceTree = "<group>"; };
 		E77326562254A99900FD665A /* TXRolloutTypeTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXRolloutTypeTableViewCell.h; sourceTree = "<group>"; };
 		E77326572254A99900FD665A /* TXRolloutTypeTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXRolloutTypeTableViewCell.m; sourceTree = "<group>"; };
+		E774DCDA2272D219001A95B8 /* TTWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTWebViewController.m; sourceTree = "<group>"; };
+		E774DCDB2272D21A001A95B8 /* TTWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTWebViewController.h; sourceTree = "<group>"; };
+		E774DCDE2272D9ED001A95B8 /* index.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = index.html; sourceTree = "<group>"; };
+		E774DCEB22730FC6001A95B8 /* TXAdsGiftViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXAdsGiftViewController.h; sourceTree = "<group>"; };
+		E774DCEC22730FC6001A95B8 /* TXAdsGiftViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TXAdsGiftViewController.m; sourceTree = "<group>"; };
+		E774DCED22730FC6001A95B8 /* TXReceiveGiftListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXReceiveGiftListViewController.h; sourceTree = "<group>"; };
+		E774DCEE22730FC6001A95B8 /* TXReceiveGiftListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TXReceiveGiftListViewController.m; sourceTree = "<group>"; };
+		E774DCEF22730FC6001A95B8 /* TXReceiveGiftViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXReceiveGiftViewController.h; sourceTree = "<group>"; };
+		E774DCF022730FC6001A95B8 /* TXReceiveGiftViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TXReceiveGiftViewController.m; sourceTree = "<group>"; };
+		E774DCF422730FD9001A95B8 /* TXReceiveGiftListTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXReceiveGiftListTableViewCell.h; sourceTree = "<group>"; };
+		E774DCF522730FD9001A95B8 /* TXReceiveGiftListTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXReceiveGiftListTableViewCell.m; sourceTree = "<group>"; };
 		E7759AAD22447AD9007DA6CF /* TXModifyUserInfoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXModifyUserInfoViewController.h; sourceTree = "<group>"; };
 		E7759AAE22447AD9007DA6CF /* TXModifyUserInfoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXModifyUserInfoViewController.m; sourceTree = "<group>"; };
 		E7759AB122447DC0007DA6CF /* SCSmallTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCSmallTools.h; sourceTree = "<group>"; };
@@ -968,6 +985,7 @@
 		E72698CB223F737C003A5043 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				E774DCDD2272D9ED001A95B8 /* H5 */,
 				E725D0D9225EF31300C233E7 /* Resources */,
 				E72698E9223F737C003A5043 /* Application */,
 				E72698CE223F737C003A5043 /* Basic */,
@@ -1534,6 +1552,8 @@
 			children = (
 				E756989B225202AE0022EC49 /* TXWebViewController.h */,
 				E756989C225202AE0022EC49 /* TXWebViewController.m */,
+				E774DCDB2272D21A001A95B8 /* TTWebViewController.h */,
+				E774DCDA2272D219001A95B8 /* TTWebViewController.m */,
 			);
 			path = WebView;
 			sourceTree = "<group>";
@@ -1547,6 +1567,16 @@
 				E725D075225ED3CA00C233E7 /* TableView */,
 			);
 			path = Example;
+			sourceTree = "<group>";
+		};
+		E756C7C82272A13B0071EED9 /* AdsGift(礼包) */ = {
+			isa = PBXGroup;
+			children = (
+				E774DCEA22730FC6001A95B8 /* Controller */,
+				E774DCE922730FC6001A95B8 /* Model */,
+				E774DCE822730FC6001A95B8 /* View */,
+			);
+			path = "AdsGift(礼包)";
 			sourceTree = "<group>";
 		};
 		E75F2EAD224DC9FD0091C52E /* 商品详情(Details) */ = {
@@ -1641,6 +1671,43 @@
 				E7691EE62255E3E5006A94D9 /* TTPasswordView.m */,
 			);
 			path = "SCVerViewInputView(验证码界面)";
+			sourceTree = "<group>";
+		};
+		E774DCDD2272D9ED001A95B8 /* H5 */ = {
+			isa = PBXGroup;
+			children = (
+				E774DCDE2272D9ED001A95B8 /* index.html */,
+			);
+			path = H5;
+			sourceTree = "<group>";
+		};
+		E774DCE822730FC6001A95B8 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E774DCF422730FD9001A95B8 /* TXReceiveGiftListTableViewCell.h */,
+				E774DCF522730FD9001A95B8 /* TXReceiveGiftListTableViewCell.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		E774DCE922730FC6001A95B8 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		E774DCEA22730FC6001A95B8 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				E774DCEB22730FC6001A95B8 /* TXAdsGiftViewController.h */,
+				E774DCEC22730FC6001A95B8 /* TXAdsGiftViewController.m */,
+				E774DCED22730FC6001A95B8 /* TXReceiveGiftListViewController.h */,
+				E774DCEE22730FC6001A95B8 /* TXReceiveGiftListViewController.m */,
+				E774DCEF22730FC6001A95B8 /* TXReceiveGiftViewController.h */,
+				E774DCF022730FC6001A95B8 /* TXReceiveGiftViewController.m */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 		E7759AB022447DA0007DA6CF /* SmallTools */ = {
@@ -2372,6 +2439,7 @@
 		E7C9FCEE22675A6A008FD260 /* Childs(子页面) */ = {
 			isa = PBXGroup;
 			children = (
+				E756C7C82272A13B0071EED9 /* AdsGift(礼包) */,
 				E7DCD60A226DC8BC00AE8DE8 /* BecomeVip(成为会员) */,
 				E7C9FCEF22675A6A008FD260 /* TicketOrder(机票订单) */,
 			);
@@ -2759,6 +2827,7 @@
 				E7D07C672243CCBE00E3FFAF /* LZActionSheet.bundle in Resources */,
 				E74C954A22638442000CBAF0 /* wildcat_gif_1@2x.png in Resources */,
 				E78B8F7E225B32BC0052852C /* c31_btn_close@2x.png in Resources */,
+				E774DCE02272D9ED001A95B8 /* index.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2796,6 +2865,7 @@
 				"${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework",
 				"${BUILT_PRODUCTS_DIR}/Masonry/Masonry.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/WebViewJavascriptBridge/WebViewJavascriptBridge.framework",
 				"${BUILT_PRODUCTS_DIR}/YYModel/YYModel.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -2806,6 +2876,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJRefresh.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Masonry.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/WebViewJavascriptBridge.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YYModel.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2903,12 +2974,14 @@
 				E7D07C682243CCBE00E3FFAF /* LZActionSheet.m in Sources */,
 				E7F1A73B22427DC0003FA216 /* TXMallToolsCollectionViewCell.m in Sources */,
 				E72699D8223F7F58003A5043 /* UIButton+Extension.m in Sources */,
+				E774DCF222730FC6001A95B8 /* TXReceiveGiftListViewController.m in Sources */,
 				E714F28B2271910600024FA3 /* TXPushTableViewCell.m in Sources */,
 				E75F2ED3224DC9FD0091C52E /* TXShoppingTableViewCell.m in Sources */,
 				E7691EE42255DC4E006A94D9 /* UIView+SCValidation.m in Sources */,
 				E7923CAA22535CF30094D0C3 /* SCTextField.m in Sources */,
 				E72699A1223F7ECC003A5043 /* NSString+MD5.m in Sources */,
 				E75F2EE0224E1BE30091C52E /* TTUserModel.m in Sources */,
+				E774DCF322730FC6001A95B8 /* TXReceiveGiftViewController.m in Sources */,
 				E78333E72248A963005CAB91 /* TXRegisterTableViewCell.m in Sources */,
 				E7759ADD2244C0D7007DA6CF /* SCTextView.m in Sources */,
 				E7269A00223F8472003A5043 /* TXNewTemplateViewController.m in Sources */,
@@ -2961,6 +3034,7 @@
 				E76D9C4C226027DF009D1A23 /* TXPayOrderVC.m in Sources */,
 				E72699A8223F7ECC003A5043 /* NSDate+Extensions.m in Sources */,
 				E714F28E227192F200024FA3 /* TXSystemTableViewCell.m in Sources */,
+				E774DCDC2272D21A001A95B8 /* TTWebViewController.m in Sources */,
 				E7C42E83224B770200F3FB1A /* NetWorkAnalysisTool.m in Sources */,
 				E72699A2223F7ECC003A5043 /* NSString+SCExtension.m in Sources */,
 				E7759AC422448158007DA6CF /* TXRepeatCastTemplateTableViewCell.m in Sources */,
@@ -3032,12 +3106,14 @@
 				E72699FB223F8298003A5043 /* WMMenuView.m in Sources */,
 				E72699D5223F7F58003A5043 /* UIButton+MVImagePosition.m in Sources */,
 				E7AA9DD72243735A00C15483 /* TXEquityViewController.m in Sources */,
+				E774DCF122730FC6001A95B8 /* TXAdsGiftViewController.m in Sources */,
 				E7269A04223F8738003A5043 /* TXMainHeaderView.m in Sources */,
 				E753D1F22249D3B200A2DD36 /* SCPresentationController.m in Sources */,
 				E78583D02240BD5A00BBEA41 /* TXGeneralModel.m in Sources */,
 				E77BC13B224F6A31008440C9 /* TXTeamModel.m in Sources */,
 				E72699E5223F7F58003A5043 /* UITextField+Extension.m in Sources */,
 				E78DCAD62265BC9200252314 /* TTBannerModel.m in Sources */,
+				E774DCF622730FD9001A95B8 /* TXReceiveGiftListTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
