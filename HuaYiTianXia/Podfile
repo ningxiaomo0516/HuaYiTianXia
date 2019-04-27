@@ -10,6 +10,7 @@ target 'HuaYiTianXia' do
     pod 'WechatOpenSDK'
     pod 'WebViewJavascriptBridge', '~> 6.0'
 #    pod 'IQKeyboardManager'
+    pod 'JhtMarquee'  #跑马灯
     pod 'JPush'
   use_frameworks!
 end

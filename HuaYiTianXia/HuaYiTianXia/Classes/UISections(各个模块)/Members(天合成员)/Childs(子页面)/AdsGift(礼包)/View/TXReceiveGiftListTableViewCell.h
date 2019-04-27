@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "TXNewsModel.h"
+#import "TXGiftDataModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) UILabel *dateLabel;
 /// 昵称
 @property (nonatomic, strong) UILabel *subtitleLabel;
-@property (nonatomic, strong) NewsRecordsModel *model;
+@property (nonatomic, strong) GiftModel *giftmodel;
 @end
 
 NS_ASSUME_NONNULL_END

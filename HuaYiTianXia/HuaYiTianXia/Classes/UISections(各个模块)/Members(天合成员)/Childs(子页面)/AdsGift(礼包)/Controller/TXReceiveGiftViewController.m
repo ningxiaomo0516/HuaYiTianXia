@@ -69,8 +69,8 @@ static NSString * const reuseIdentifierReceiveAddress = @"TXReceiveAddressTableV
     kShowMBProgressHUD(self.view);
     NSMutableDictionary *parameter = [[NSMutableDictionary alloc] init];
     [parameter setObject:self.model.libaoId forKey:@"id"];
-    [parameter setObject:self.addressModel.sid forKey:@"id"];
-    [SCHttpTools getWithURLString:kHttpURL(@"parcel/UserToParcel") parameter:parameter success:^(id responseObject) {
+    [parameter setObject:self.addressModel.sid forKey:@"addressID"];
+    [SCHttpTools postWithURLString:kHttpURL(@"parcel/UserToParcel") parameter:parameter success:^(id responseObject) {
         NSDictionary *result = responseObject;
         if ([result isKindOfClass:[NSDictionary class]]) {
             TTUserDataModel *model = [TTUserDataModel mj_objectWithKeyValues:result];

@@ -18,6 +18,7 @@ NSString *const DynamicUrl = @"http://192.168.1.5:80/hytx/";
 
 
 NSString *const DomainName = @"http://47.107.179.43:80/";
+//NSString *const DomainName = @"http://192.168.1.5:80/";
 
 NSString *const imageBaseUrl = @"//pic11.wed114.cn/";
 /*

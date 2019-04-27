@@ -12,8 +12,18 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface TXTicketOrderTableViewCell : UITableViewCell
+@property (strong, nonatomic) UIView *boxView;
+
 /**订单号*/
 @property (strong, nonatomic) UILabel *o_numLabel;
+@property (strong, nonatomic) UIView *linerView;
+@property (strong, nonatomic) UIImageView *imagesViewPlane;
+/**起飞城市*/
+@property (strong, nonatomic) UILabel *dep_city_label;
+@property (strong, nonatomic) UIView *dep_arv_liner_h;
+/**到达城市*/
+@property (strong, nonatomic) UILabel *arv_city_label;
+
 /**订票日期*/
 @property (strong, nonatomic) UILabel *o_dateLabel;
 /**订票人姓名*/
@@ -22,10 +32,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) UILabel *o_priceLabel;
 /**起飞机场*/
 @property (strong, nonatomic) UILabel *dep_airportLabel;
+@property (strong, nonatomic) UIView *dep_arv_liner_v;
 /**到达机场*/
 @property (strong, nonatomic) UILabel *arv_airportLabel;
-/// 到图片
-@property (strong, nonatomic) UIImageView *imagesTo;
 /**订单状态*/
 @property (strong, nonatomic) UILabel *o_statusLabel;
 @property (strong, nonatomic) TicketOrderModel *orderModel;

@@ -108,7 +108,7 @@ static NSString * const reuseIdentifier = @"TXTicketOrderTableViewCell";
  }
  
  - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-     return IPHONE6_W(95);
+     return IPHONE6_W(130);
  }
  
  // 多少个分组 section

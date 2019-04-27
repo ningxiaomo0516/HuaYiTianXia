@@ -13,6 +13,8 @@
 #import "TXMallGoodsBannerTableViewCell.h"
 #import "TXNewsModel.h"
 #import "TXWebViewController.h"
+#import <JhtMarquee/JhtVerticalMarquee.h>
+#import <JhtMarquee/JhtHorizontalMarquee.h>
 
 
 static NSString * const reuseIdentifier = @"TXNewTemplateTableViewCell";
@@ -27,6 +29,9 @@ static NSString * const reuseIdentifierSectionHeaderView = @"SCTableViewSectionH
 @property (nonatomic, assign) NSInteger pageSize;
 /// 当前页
 @property (nonatomic, assign) NSInteger pageIndex;
+/// 横向 跑马灯
+@property (nonatomic, strong) JhtHorizontalMarquee *horizontalMarquee;
+@property (nonatomic, copy) NSString *rollText;
 
 @end
 
@@ -37,6 +42,7 @@ static NSString * const reuseIdentifierSectionHeaderView = @"SCTableViewSectionH
     // Do any additional setup after loading the view.
     self.pageSize = 20;
     self.pageIndex = 1;
+    self.rollText = @"";
     [self initView];
     [self initViewConstraints];
     [self.view showLoadingViewWithText:@"加载中..."];
@@ -52,9 +58,46 @@ static NSString * const reuseIdentifierSectionHeaderView = @"SCTableViewSectionH
         self.pageIndex++;// 页码+1
         [self loadNewsData];
     }];
-
+    [self loadRollLabelData];
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    // 开启跑马灯
+    [self.horizontalMarquee marqueeOfSettingWithState:MarqueeStart_H];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    // 关闭跑马灯
+    [self.horizontalMarquee marqueeOfSettingWithState:MarqueeShutDown_H];
+}
+
+/// 获取跑马灯数据
+- (void) loadRollLabelData{
+    NSMutableDictionary *parameter = [[NSMutableDictionary alloc] init];
+    /// 1:首页跑马灯消息 2:
+    [parameter setObject:@(1) forKey:@"status"];
+    [SCHttpTools postWithURLString:@"notice/GetNotice" parameter:parameter success:^(id responseObject) {
+        NSDictionary *result = responseObject;
+        if ([result isKindOfClass:[NSDictionary class]]) {
+            TTLog(@"result -- %@",result);
+            TXNewsArrayModel *model = [TXNewsArrayModel mj_objectWithKeyValues:result];
+            if (model.errorcode==20000) {
+                self.rollText = model.data.content;
+                TTLog(@"model.content -- %@",model.data.content);
+                self.horizontalMarquee.text = model.data.content;
+            }
+            [self.tableView reloadData];
+        }else{
+            Toast(@"获取城市数据失败");
+        }
+    } failure:^(NSError *error) {
+        TTLog(@" -- error -- %@",error);
+    }];
+}
 
 - (void) loadNewsData{
     NSMutableDictionary *parameter = [[NSMutableDictionary alloc] init];
@@ -109,6 +152,18 @@ static NSString * const reuseIdentifierSectionHeaderView = @"SCTableViewSectionH
         TXMallGoodsBannerTableViewCell* tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierBanner forIndexPath:indexPath];
         tools.bannerArray = self.bannerArray;
         return tools;
+    }else if(indexPath.section==1){
+        UITableViewCell *tools = [tableView dequeueReusableCellWithIdentifier:@"TTRollLabelWebViewCell" forIndexPath:indexPath];
+        tools.backgroundColor = kWhiteColor;
+        [tools.contentView addSubview:self.horizontalMarquee];
+        // 开启跑马灯
+        [self.horizontalMarquee marqueeOfSettingWithState:MarqueeStart_H];
+//        [self.horizontalMarquee mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.centerY.equalTo(tools.contentView);
+//            make.left.equalTo(@(IPHONE6_W(15)));
+//            make.right.equalTo(tools.contentView.mas_right).offset(IPHONE6_W(-15));
+//        }];
+        return tools;
     }else{
         TXNewTemplateTableViewCell  *tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
         tools.recordsModel = self.dataArray[indexPath.row];
@@ -122,27 +177,44 @@ static NSString * const reuseIdentifierSectionHeaderView = @"SCTableViewSectionH
 
 // 多少个分组 section
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return (self.bannerArray.count>0)?2:1;
+    return (self.bannerArray.count>0)?3:2;
 }
 
 /// 返回多少
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return (self.bannerArray.count>0&&section==0)?1:self.dataArray.count;
+    return ((self.bannerArray.count>0&&section==0)||(section==1))?1:self.dataArray.count;
 }
 
 #pragma mark -------------- 设置Header高度 --------------
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return (self.bannerArray.count>0&&section==0)?0.f:44.0f;
+    if ((self.bannerArray.count>0&&section==0)) {
+        return 0.f;
+    }else if((self.rollText.length>0&&section==1)){
+        return 0.f;
+    }else{
+        return 44.0f;
+    }
+//    return (self.bannerArray.count>0&&section==0)?0.f:44.0f;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
-    if (section!=0) {
-        return 0.0f;
+    if (self.rollText.length == 0) {
+        if (self.dataArray.count-1==section) {
+            return 0.0f;
+        }
+        return 10.0f;
+    }else{
+        if (section!=0) {
+            return 0.0f;
+        }
+        return 10.0f;
     }
-    return 10.0f;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (((self.bannerArray.count>0&&indexPath.section==0)||(indexPath.section==1))) {
+        
+    }
     NewsRecordsModel *model = self.dataArray[indexPath.row];
     TXWebViewController *vc = [[TXWebViewController alloc] init];
     vc.title = @"新闻详情";
@@ -160,6 +232,8 @@ static NSString * const reuseIdentifierSectionHeaderView = @"SCTableViewSectionH
         headerView.lineView.hidden = NO;
         headerView.titleLabel.text = titleTextStr;
         headerView.subtitleLabel.text = subtitleTestStr;
+    }else if((self.rollText.length>0&&section==1)){
+        
     }else{
         NSString *titleTextStr = @"新闻动态";
         NSString *subtitleTestStr = @"";
@@ -179,6 +253,8 @@ static NSString * const reuseIdentifierSectionHeaderView = @"SCTableViewSectionH
         [_tableView registerClass:[SCTableViewSectionHeaderView class] forHeaderFooterViewReuseIdentifier:reuseIdentifierSectionHeaderView];
         [_tableView registerClass:[TXNewTemplateTableViewCell class] forCellReuseIdentifier:reuseIdentifier];
         [_tableView registerClass:[TXMallGoodsBannerTableViewCell class] forCellReuseIdentifier:reuseIdentifierBanner];
+        [_tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"TTRollLabelWebViewCell"];
+        
         //1 禁用系统自带的分割线
         //        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _tableView.delegate = self;
@@ -201,6 +277,19 @@ static NSString * const reuseIdentifierSectionHeaderView = @"SCTableViewSectionH
         _bannerArray = [[NSMutableArray alloc] init];
     }
     return _bannerArray;
+}
+
+/** 横向 跑马灯 */
+- (JhtHorizontalMarquee *)horizontalMarquee {
+    if (!_horizontalMarquee) {
+        _horizontalMarquee = [[JhtHorizontalMarquee alloc] initWithFrame:CGRectMake(IPHONE6_W(15), 20, self.view.width-IPHONE6_W(30), 40) singleScrollDuration:0.0];
+        _horizontalMarquee.tag = 100;
+        _horizontalMarquee.backgroundColor = kClearColor;
+        _horizontalMarquee.textColor = kTextColor51;
+        _horizontalMarquee.font = kFontSizeMedium15;
+    }
+    
+    return _horizontalMarquee;
 }
 
 @end

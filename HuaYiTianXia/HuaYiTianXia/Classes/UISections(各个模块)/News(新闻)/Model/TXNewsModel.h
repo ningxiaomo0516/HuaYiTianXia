@@ -56,6 +56,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) NSInteger errorcode;
 /// 产品详情Model数据
 @property (nonatomic, strong) NSMutableArray<NewsRecordsModel *> *data;
+
+/// 跑马灯接口
+@property (nonatomic, copy) NSString *content;
+
 @end
 
 @interface NewsRecordsModel : NSObject
@@ -70,6 +74,7 @@ NS_ASSUME_NONNULL_BEGIN
 //// --------------- 礼包 model --------------- ////
 @property (nonatomic, copy) NSString *pname;
 @property (nonatomic, copy) NSString *typeName;
+@property (nonatomic, copy) NSString *timestamp;
 
 //// --------------- new model --------------- ////
 /// 新闻ID(产品id)

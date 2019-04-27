@@ -37,6 +37,13 @@
     if (@available(iOS 11.0, *)) {
         [[UIScrollView appearance] setContentInsetAdjustmentBehavior:UIScrollViewContentInsetAdjustmentNever];
     }
+    
+    // 手机系统：iPhone OS
+    NSString *deviceName = [[UIDevice currentDevice] systemName];
+    // 1.手机系统版本：9.1
+    NSString *phoneVersion = [[UIDevice currentDevice] systemVersion];
+    TTLog(@" --- %@ --- %@",deviceName,phoneVersion);
+
     // 启动图片延时: 1秒
     [NSThread sleepForTimeInterval:2];
     [self registLocalNotificationWithOptions:launchOptions];
@@ -123,6 +130,12 @@
         //下面是我拿到registeID,发送给服务器的代码，可以根据你需求来处理
         NSString *registerid = [JPUSHService registrationID];
         TTLog(@"APPDelegate开始上传rgeisterID -- %@",registerid);
+        kUserInfo.registrationID = registerid;
+        [kUserInfo dump];
+        NSString *idd = [NSString stringWithFormat:@"--- %@ --- \n --- %@ ---",kUserInfo.registrationID,registerid];
+        Toast(idd);
+    }else{
+        Toast(@"有个卵");
     }
 }
 

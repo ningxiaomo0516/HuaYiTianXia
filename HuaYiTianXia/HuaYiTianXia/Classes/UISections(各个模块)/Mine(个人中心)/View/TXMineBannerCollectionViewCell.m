@@ -20,7 +20,7 @@
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     if (self = [super initWithCoder:aDecoder]) {
-        self.backgroundColor = [UIColor clearColor];
+        self.backgroundColor = kWhiteColor;
         [self initView];
     }
     return self;

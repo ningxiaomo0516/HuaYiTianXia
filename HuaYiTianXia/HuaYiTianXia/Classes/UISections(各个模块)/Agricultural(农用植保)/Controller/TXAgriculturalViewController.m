@@ -10,6 +10,8 @@
 #import "TXGoodsH5TableViewCell.h"
 #import "TXWebHeaderView.h"
 #import "TXMallEppoViewController.h"
+#import "TXAdsModel.h"
+#import "TXAdsGiftViewController.h"
 
 static NSString * const reuseIdentifierGoodsH5 = @"TXGoodsH5TableViewCell";
 
@@ -57,8 +59,39 @@ static NSString * const reuseIdentifierGoodsH5 = @"TXGoodsH5TableViewCell";
 
 /** 保存 */
 - (void) saveBtnClick:(UIButton *) sender{
-    TXMallEppoViewController *vc = [[TXMallEppoViewController alloc] init];
-    TTPushVC(vc);
+//    TXMallEppoViewController *vc = [[TXMallEppoViewController alloc] init];
+//    TTPushVC(vc);
+    [self getGiftData];
+}
+
+/// 获取礼包活动数据
+- (void) getGiftData{
+    kShowMBProgressHUD(self.view);
+    //    礼包类型 1:农保礼包 2:天合成员礼包
+    NSMutableDictionary *parameter = [[NSMutableDictionary alloc] init];
+    [parameter setObject:@(1) forKey:@"type"];
+    [SCHttpTools postWithURLString:kHttpURL(@"parcel/ControlParcel") parameter:parameter success:^(id responseObject) {
+        NSDictionary *result = responseObject;
+        if ([result isKindOfClass:[NSDictionary class]]) {
+            TTAdsData *model = [TTAdsData mj_objectWithKeyValues:result];
+            if (model.errorcode == 20000) {
+                /// 礼包活动是否结束1:活动继续，进入礼包界面，2:活动终止,无法进入礼包界面
+                if (model.data.status==1) {
+                    TXAdsGiftViewController *vc = [[TXAdsGiftViewController alloc] init];
+                    vc.webURL = [NSString stringWithFormat:@"%@libao/index.html?type=1&userID=%@", DomainName,kUserInfo.userid];
+                    TTPushVC(vc);
+                }else{
+                    Toast(@"礼包活动已结束");
+                }
+            }
+        }else{
+            Toast(@"获取礼包数据失败");
+        }
+        kHideMBProgressHUD(self.view);
+    } failure:^(NSError *error) {
+        TTLog(@" -- error -- %@",error);
+        kHideMBProgressHUD(self.view);
+    }];
 }
 
 - (void)dealloc{

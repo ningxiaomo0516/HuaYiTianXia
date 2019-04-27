@@ -10,6 +10,7 @@
 #import "SCLocalCacheTool.h"
 
 static NSString *topupType      = @"topupType";
+static NSString *registrationID = @"registrationID";
 
 static NSString *userid         = @"userid";
 static NSString *isLogin        = @"isLogin";
@@ -157,6 +158,7 @@ static TTUserModel *userModel = nil;
         
         
         [TTUserModel shared].topupType              = [aDecoder decodeIntegerForKey:topupType];
+        [TTUserModel shared].registrationID         = [aDecoder decodeObjectForKey:registrationID];
         
         [TTUserModel shared].userid                 = [aDecoder decodeObjectForKey:userid];
         [TTUserModel shared].username               = [aDecoder decodeObjectForKey:username];
@@ -193,7 +195,7 @@ static TTUserModel *userModel = nil;
         [TTUserModel shared].receivedGoodsAddr      = [aDecoder decodeObjectForKey:receivedGoodsAddr];
         [TTUserModel shared].receivedUserName       = [aDecoder decodeObjectForKey:receivedUserName];
         [TTUserModel shared].receivedTelphone       = [aDecoder decodeObjectForKey:receivedTelphone];
-        
+
         
         [TTUserModel shared].thGrade                = [aDecoder decodeObjectForKey:thGrade];
         [TTUserModel shared].thGradeCount           = [aDecoder decodeObjectForKey:thGradeCount];
@@ -215,6 +217,7 @@ static TTUserModel *userModel = nil;
     /// 将Object类型编码，使其与字符串类型的键相关联
     
     [aCoder encodeInteger:[TTUserModel shared].topupType forKey:topupType];
+    [aCoder encodeObject:[TTUserModel shared].registrationID forKey:registrationID];
 
     [aCoder encodeObject:[TTUserModel shared].userid forKey:userid];
     [aCoder encodeObject:[TTUserModel shared].username forKey:username];
@@ -313,5 +316,9 @@ static TTUserModel *userModel = nil;
     [TTUserModel shared].ifStart = @"";
     [TTUserModel shared].ifActivate = @"";
     [TTUserModel shared].usertype  = 0;
+    
+    [TTUserModel shared].registrationID = @"";
+
+    
 }
 @end

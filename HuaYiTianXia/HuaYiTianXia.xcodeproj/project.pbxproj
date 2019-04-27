@@ -177,6 +177,9 @@
 		E77F653B225C3A0E0017B4C8 /* RYNumberKeyboard.xib in Resources */ = {isa = PBXBuildFile; fileRef = E77F6536225C3A0E0017B4C8 /* RYNumberKeyboard.xib */; };
 		E77F653C225C3A0E0017B4C8 /* UITextField+RYNumberKeyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = E77F6538225C3A0E0017B4C8 /* UITextField+RYNumberKeyboard.m */; };
 		E77F6540225C48150017B4C8 /* TXPayPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E77F653F225C48150017B4C8 /* TXPayPasswordViewController.m */; };
+		E77F87482273F0EB004EB9C1 /* UIDevice+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = E77F87472273F0EB004EB9C1 /* UIDevice+Extension.m */; };
+		E77F874B2273F7CF004EB9C1 /* TXGiftDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E77F874A2273F7CF004EB9C1 /* TXGiftDataModel.m */; };
+		E77F87512274316C004EB9C1 /* TTRollLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = E77F87502274316C004EB9C1 /* TTRollLabel.m */; };
 		E78333DB22487913005CAB91 /* TXLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E78333D922487913005CAB91 /* TXLoginViewController.m */; };
 		E78333DC22487913005CAB91 /* TXLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E78333DA22487913005CAB91 /* TXLoginViewController.xib */; };
 		E78333E0224884F1005CAB91 /* TXRegisteredViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E78333DE224884F1005CAB91 /* TXRegisteredViewController.m */; };
@@ -605,6 +608,12 @@
 		E77F6538225C3A0E0017B4C8 /* UITextField+RYNumberKeyboard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+RYNumberKeyboard.m"; sourceTree = "<group>"; };
 		E77F653E225C48150017B4C8 /* TXPayPasswordViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXPayPasswordViewController.h; sourceTree = "<group>"; };
 		E77F653F225C48150017B4C8 /* TXPayPasswordViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXPayPasswordViewController.m; sourceTree = "<group>"; };
+		E77F87462273F0EB004EB9C1 /* UIDevice+Extension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIDevice+Extension.h"; sourceTree = "<group>"; };
+		E77F87472273F0EB004EB9C1 /* UIDevice+Extension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+Extension.m"; sourceTree = "<group>"; };
+		E77F87492273F7CF004EB9C1 /* TXGiftDataModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXGiftDataModel.h; sourceTree = "<group>"; };
+		E77F874A2273F7CF004EB9C1 /* TXGiftDataModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXGiftDataModel.m; sourceTree = "<group>"; };
+		E77F874F2274316C004EB9C1 /* TTRollLabel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TTRollLabel.h; sourceTree = "<group>"; };
+		E77F87502274316C004EB9C1 /* TTRollLabel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TTRollLabel.m; sourceTree = "<group>"; };
 		E78333D822487913005CAB91 /* TXLoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXLoginViewController.h; sourceTree = "<group>"; };
 		E78333D922487913005CAB91 /* TXLoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXLoginViewController.m; sourceTree = "<group>"; };
 		E78333DA22487913005CAB91 /* TXLoginViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TXLoginViewController.xib; sourceTree = "<group>"; };
@@ -1243,6 +1252,7 @@
 		E72698E8223F737C003A5043 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				E77F874E22743157004EB9C1 /* TTRollLabel(跑马灯) */,
 				E78DCADD2265D12000252314 /* LZBasePickerView(日期选择) */,
 				E7CC89B72264651D003D0EF7 /* TTButton(图文按钮) */,
 				E77F6532225C3A0E0017B4C8 /* TTNumberkeyboard */,
@@ -1360,6 +1370,8 @@
 				E72699AC223F7F52003A5043 /* UIView+IBExtension.m */,
 				E72699B3223F7F53003A5043 /* UIView+SCTapped.h */,
 				E72699C3223F7F55003A5043 /* UIView+SCTapped.m */,
+				E77F87462273F0EB004EB9C1 /* UIDevice+Extension.h */,
+				E77F87472273F0EB004EB9C1 /* UIDevice+Extension.m */,
 			);
 			path = "Category-UIKit";
 			sourceTree = "<group>";
@@ -1693,6 +1705,8 @@
 		E774DCE922730FC6001A95B8 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				E77F87492273F7CF004EB9C1 /* TXGiftDataModel.h */,
+				E77F874A2273F7CF004EB9C1 /* TXGiftDataModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1874,6 +1888,15 @@
 				E77F653F225C48150017B4C8 /* TXPayPasswordViewController.m */,
 			);
 			path = "PayPasswordVC(支付密码)";
+			sourceTree = "<group>";
+		};
+		E77F874E22743157004EB9C1 /* TTRollLabel(跑马灯) */ = {
+			isa = PBXGroup;
+			children = (
+				E77F874F2274316C004EB9C1 /* TTRollLabel.h */,
+				E77F87502274316C004EB9C1 /* TTRollLabel.m */,
+			);
+			path = "TTRollLabel(跑马灯)";
 			sourceTree = "<group>";
 		};
 		E78333CE224874D9005CAB91 /* Other(登录注册) */ = {
@@ -2928,6 +2951,7 @@
 				E72699F9223F8298003A5043 /* WMMenuItem.m in Sources */,
 				E78584032240C54300BBEA41 /* TYPageControl.m in Sources */,
 				E72699FC223F8298003A5043 /* WMProgressView.m in Sources */,
+				E77F87512274316C004EB9C1 /* TTRollLabel.m in Sources */,
 				E74C964C226785FA000CBAF0 /* TXAdsModel.m in Sources */,
 				E72699FA223F8298003A5043 /* WMScrollView.m in Sources */,
 				E7D731F02268AB47006F171A /* SCLoginTools.m in Sources */,
@@ -2996,6 +3020,7 @@
 				E77326522254A03100FD665A /* TXWalletHeaderTableViewCell.m in Sources */,
 				E7269912223F7881003A5043 /* TXAgriculturalViewController.m in Sources */,
 				E72698B7223F7165003A5043 /* AppDelegate.m in Sources */,
+				E77F874B2273F7CF004EB9C1 /* TXGiftDataModel.m in Sources */,
 				E72699DA223F7F58003A5043 /* UIFont+Extension.m in Sources */,
 				E75F2ECE224DC9FD0091C52E /* TXMallGoodsSpecTableViewCell.m in Sources */,
 				E726991B223F7D28003A5043 /* TTBaseViewController.m in Sources */,
@@ -3024,6 +3049,7 @@
 				E74C964322678358000CBAF0 /* TXAdsViewController.m in Sources */,
 				E72699E2223F7F58003A5043 /* UIImage+Extension.m in Sources */,
 				E7F1A7092241F298003FA216 /* TXProductTableViewCell.m in Sources */,
+				E77F87482273F0EB004EB9C1 /* UIDevice+Extension.m in Sources */,
 				E7691EE32255DC4E006A94D9 /* SCVerCodeInputView.m in Sources */,
 				E72699D9223F7F58003A5043 /* UILabel+Extension.m in Sources */,
 				E72699A5223F7ECC003A5043 /* NSFileManager+Paths.m in Sources */,

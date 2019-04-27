@@ -39,6 +39,10 @@ static NSString* reuseIdentifierShareTools = @"TXShareToolsCollectionViewCell";
     [self initView];
 }
 
+- (void)setShareModel:(SCShareModel *)shareModel{
+    _shareModel = shareModel;
+}
+
 - (void) initView{
     [self.view addSubview:self.titleLabel];
     [self.view addSubview:self.footerView];
@@ -97,9 +101,26 @@ static NSString* reuseIdentifierShareTools = @"TXShareToolsCollectionViewCell";
 /// 点击collectionViewCell
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     TXGeneralModel* templateModel = self.dataArray[indexPath.row];
-    if (self.selectItemBlock) {
-        self.selectItemBlock(indexPath.row,templateModel.title);
+    SSDKPlatformType type = -101;
+    if ([templateModel.title isEqualToString:@"微信"]) {
+        type = SSDKPlatformSubTypeWechatSession;
+    }else if ([templateModel.title isEqualToString:@"朋友圈"]){
+        type = SSDKPlatformSubTypeWechatTimeline;
+    }else if ([templateModel.title isEqualToString:@"QQ好友"]){
+        type = SSDKPlatformSubTypeQQFriend;
+    }else if ([templateModel.title isEqualToString:@"QQ空间"]){
+        type = SSDKPlatformSubTypeQZone;
+    }else if ([templateModel.title isEqualToString:@"微博"]){
+        type = SSDKPlatformTypeSinaWeibo;
+    }else if ([templateModel.title isEqualToString:@"复制链接"]){
+        //            UIPasteboard *copyStr = [UIPasteboard generalPasteboard];
+        //            copyStr.string = shareModel.videoUrl;
+        //            [pv.playContainerView makeToast:@"链接复制成功" duration:2 position:CSToastPositionCenter];
     }
+    [SCShareTools shareWithPlatformType:type shareDataModel:self.shareModel shareresult:^(NSString *shareResultStr) {
+        [self sc_dismissVC];
+        Toast(shareResultStr);
+    }];
 }
 
 /// 同一行的cell的间距

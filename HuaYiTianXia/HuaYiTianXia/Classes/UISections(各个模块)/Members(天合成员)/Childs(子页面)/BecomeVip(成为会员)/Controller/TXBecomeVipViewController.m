@@ -312,7 +312,7 @@ static NSString * const reuseIdentifierChoosePay = @"TXChoosePayTableViewCell";
         [_saveButton setBackgroundImage:kGetImage(@"c31_denglu") forState:UIControlStateNormal];
         MV(weakSelf);
         [_saveButton lz_handleControlEvent:UIControlEventTouchUpInside withBlock:^{
-            [weakSelf submitClick:_saveButton];
+            [weakSelf submitClick:self->_saveButton];
         }];
     }
     return _saveButton;

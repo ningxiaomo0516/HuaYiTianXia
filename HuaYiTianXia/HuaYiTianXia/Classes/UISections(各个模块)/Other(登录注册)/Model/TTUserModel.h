@@ -23,6 +23,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) NSInteger topupType;
 /// 是否登录
 @property (nonatomic, assign) BOOL isLogin;
+/// 极光的注册ID
+@property (nonatomic, copy) NSString *registrationID;
 
 /// 已邀请人数
 @property (nonatomic, copy) NSString *ainvited;

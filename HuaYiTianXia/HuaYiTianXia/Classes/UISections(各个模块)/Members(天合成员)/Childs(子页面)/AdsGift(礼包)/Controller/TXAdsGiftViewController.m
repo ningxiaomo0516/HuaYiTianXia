@@ -26,9 +26,9 @@
 //    NSString *localHtml = [NSString stringWithContentsOfFile:urlStr encoding:NSUTF8StringEncoding error:nil];
 //    NSURL *fileURL = [NSURL fileURLWithPath:urlStr];
 //    [self.webView loadHTMLString:localHtml baseURL:fileURL];
-    NSString *url = [NSString stringWithFormat:@"http://192.168.1.5/libao/index.html?type=1&userID=%@",kUserInfo.userid];
+//    NSString *url = [NSString stringWithFormat:@"http://192.168.1.5/libao/index.html?type=1&userID=%@",kUserInfo.userid];
 //    [self loadWebViewURLString:@"http://192.168.1.5/libao/index.html"];
-    [self loadWebViewURLString:url];
+    [self loadWebViewURLString:self.webURL];
     [self registLocationFunction];
     
     // 添加右边保存按钮

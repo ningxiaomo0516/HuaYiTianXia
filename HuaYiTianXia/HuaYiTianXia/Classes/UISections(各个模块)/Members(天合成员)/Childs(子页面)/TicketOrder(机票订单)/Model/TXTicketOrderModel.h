@@ -45,10 +45,33 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *origin;
 /// 机票价格
 @property (nonatomic, copy) NSString *price;
-/// 订票状态
-@property (nonatomic, copy) NSString *status;
+/// 订票状态类型 0:未支付 1:订票中 2:已取消 3:已取消 4:已取消 5:已出票
+@property (nonatomic, assign) NSInteger status;
+@property (nonatomic, copy) NSString *typeName;
 /// 日期时间
 @property (nonatomic, copy) NSString *datetime;
-@end
+/// 航班号
+@property (nonatomic, copy) NSString *flightNumber;
+/// 起飞时间
+@property (nonatomic, copy) NSString *arvTime;
+/// 到达时间
+@property (nonatomic, copy) NSString *depTime;
+/// 用户ID
+@property (nonatomic, copy) NSString *userID;
+/// 航空公司
+@property (nonatomic, copy) NSString *airline;
+@property (nonatomic, copy) NSString *idcard;
+/// 起飞机场
+@property (nonatomic, copy) NSString *arvAirport;
+/// 到达机场
+@property (nonatomic, copy) NSString *depAirport;
+@property (nonatomic, copy) NSString *phone;
+/// 飞机类型
+@property (nonatomic, copy) NSString *aircraft;
+/// 备注
+@property (nonatomic, copy) NSString *remarks;
 
+@property (nonatomic, copy) NSString *orderprice;
+@property (nonatomic, copy) NSString *orderTime;
+@end
 NS_ASSUME_NONNULL_END

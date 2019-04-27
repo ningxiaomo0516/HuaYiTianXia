@@ -8,7 +8,7 @@
 
 #import "TXReceiveGiftListViewController.h"
 #import "TXReceiveGiftListTableViewCell.h"
-#import "TXNewsModel.h"
+#import "TXGiftDataModel.h"
 
 static NSString * const reuseIdentifier = @"TXReceiveGiftListTableViewCell";
 
@@ -56,10 +56,10 @@ static NSString * const reuseIdentifier = @"TXReceiveGiftListTableViewCell";
     NSMutableDictionary *parameter = [[NSMutableDictionary alloc] init];
     [parameter setObject:@(self.pageIndex) forKey:@"page"];     // 当前页
     [parameter setObject:@(self.pageSize) forKey:@"pageSize"];  // 每页条数
-    [SCHttpTools getWithURLString:kHttpURL(@"parcel/ParcelList") parameter:parameter success:^(id responseObject) {
+    [SCHttpTools postWithURLString:kHttpURL(@"parcel/ParcelList") parameter:parameter success:^(id responseObject) {
         NSDictionary *result = responseObject;
         if ([result isKindOfClass:[NSDictionary class]]) {
-            TXNewsArrayModel *model = [TXNewsArrayModel mj_objectWithKeyValues:result];
+            TXGiftDataModel *model = [TXGiftDataModel mj_objectWithKeyValues:result];
             if (model.errorcode == 20000) {
                 if (self.pageIndex==1) {
                     [self.dataArray removeAllObjects];
@@ -101,7 +101,7 @@ static NSString * const reuseIdentifier = @"TXReceiveGiftListTableViewCell";
 #pragma mark - Table view data source
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     TXReceiveGiftListTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
-    cell.model = self.dataArray[indexPath.row];
+    cell.giftmodel = self.dataArray[indexPath.row];
     return cell;
 }
 

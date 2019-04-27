@@ -14,16 +14,15 @@
 #import "TXShareViewController.h"
 #import "TXSubmitOrderViewController.h"
 #import "TXWebViewController.h"
-#import "TXGoodsH5TableViewCell.h"
 #import "TXPayOrderViewController.h"
 #import "TXChoosePayViewController.h"
 #import "TXLoginViewController.h"
+#import <WebKit/WebKit.h>
 
 static NSString * const reuseIdentifierBanner   = @"TXMallGoodsBannerTableViewCell";
 static NSString * const reuseIdentifierDetails  = @"TXMallGoodsDetailsTableViewCell";
 static NSString * const reuseIdentifierSpec     = @"TXMallGoodsSpecTableViewCell";
 static NSString * const reuseIdentifierBuynum   = @"TXBuyCountTableViewCell";
-static NSString * const reuseIdentifierGoodsH5  = @"TXGoodsH5TableViewCell";
 @interface TXMallGoodsDetailsViewController ()<UITableViewDelegate,UITableViewDataSource,
 TXMallGoodsSpecTableViewCellDelegate,WKUIDelegate,WKNavigationDelegate>
 @property (nonatomic, strong) UITableView *tableView;
@@ -47,8 +46,9 @@ TXMallGoodsSpecTableViewCellDelegate,WKUIDelegate,WKNavigationDelegate>
 
 @property (assign, nonatomic) CGFloat webViewHeight;
 @property (nonatomic, strong) UIScrollView *scrollView;
-@property (nonatomic, strong) WKWebView *webView;
+@property (nonatomic, strong) WKWebView *wkWebView;
 
+@property (nonatomic, strong) SCShareModel *shareModel;
 /// 购买数量
 @property (nonatomic, assign) NSInteger buyCount;
 @end
@@ -155,8 +155,8 @@ TXMallGoodsSpecTableViewCellDelegate,WKUIDelegate,WKNavigationDelegate>
 /// 分享到第三方平台
 - (void)didTapShareButton:(UIBarButtonItem *)barButtonItem {
     TXShareViewController *vc = [[TXShareViewController alloc] init];
-    //    [self presentPopupViewController:vc animationType:TTPopupViewAnimationSlideBottomBottom];
     CGFloat height = IPHONE6_W(150)+kTabBarHeight;
+    vc.shareModel = self.shareModel;
     [self sc_bottomPresentController:vc presentedHeight:height completeHandle:^(BOOL presented) {
         if (presented) {
             TTLog(@"弹出了");
@@ -259,41 +259,16 @@ TXMallGoodsSpecTableViewCellDelegate,WKUIDelegate,WKNavigationDelegate>
         UITableViewCell *webCell = [tableView dequeueReusableCellWithIdentifier:@"WebViewCell" forIndexPath:indexPath];
         NSString *parameter = [NSString stringWithFormat:@"%@&status=%ld",
                                self.productModel.kid,(long)self.productModel.status];
-        NSString *str = kAppendH5URL(DomainName, GoodsDetailsH5, parameter);
-        NSURL *url = [NSURL URLWithString:str];
+        NSString *URLStr = kAppendH5URL(DomainName, GoodsDetailsH5, parameter);
+        NSURL *url = [NSURL URLWithString:URLStr];
+        self.shareModel.h5Url = URLStr;
         NSURLRequest *urlRequest = [NSURLRequest requestWithURL:url];
         if (self.isload) {
             self.isload = NO;
-            [self.webView loadRequest:urlRequest];
+            [self.wkWebView loadRequest:urlRequest];
         }
         [webCell.contentView addSubview:self.scrollView];
         return webCell;
-//        TXGoodsH5TableViewCell *tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierGoodsH5 forIndexPath:indexPath];
-
-        //http://47.107.179.43/yq/invation/goodsDetails.html?id=59&status=1
-//        tools.wkWebView.navigationDelegate = self;
-//        MV(weakSelf)
-//
-//        tools.refreshWebViewHeightBlock = ^(CGFloat height) {
-//            TTLog(@"========= %f",height);
-//            weakSelf.webH5Height = height;
-//            if (weakSelf.webH5Height < height) {//当缓存的高度小于返回的高度时，更新缓存高度，刷新tableview
-//                weakSelf.webH5Height = height;
-//                [weakSelf.tableView beginUpdates];
-//                [weakSelf.tableView endUpdates];
-//            if (self.isload) {
-//                TTLog(@"执行一次");
-//                self.isload = NO;
-//                NSIndexSet *indexSet=[[NSIndexSet alloc] initWithIndex:4];
-//                [self.tableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationAutomatic];
-//            }
-//                [self.tableView reloadData];
-//            }else{
-//                TTLog(@"劳资已经够了");
-//            }
-//        };
-//        tools.indexPath = indexPath;
-//        return tools;
     }
     return [UITableViewCell new];
 }
@@ -350,7 +325,6 @@ TXMallGoodsSpecTableViewCellDelegate,WKUIDelegate,WKNavigationDelegate>
         [_tableView registerClass:[TXMallGoodsDetailsTableViewCell class] forCellReuseIdentifier:reuseIdentifierDetails];
         [_tableView registerClass:[TXMallGoodsSpecTableViewCell class] forCellReuseIdentifier:reuseIdentifierSpec];
         [_tableView registerClass:[TXBuyCountTableViewCell class] forCellReuseIdentifier:reuseIdentifierBuynum];
-        [_tableView registerClass:[TXGoodsH5TableViewCell class] forCellReuseIdentifier:reuseIdentifierGoodsH5];
         [_tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"WebViewCell"];
 
         [_tableView setSeparatorInset:UIEdgeInsetsMake(0,0,0,0)];
@@ -363,7 +337,8 @@ TXMallGoodsSpecTableViewCellDelegate,WKUIDelegate,WKNavigationDelegate>
 }
 
 - (void)dealloc{
-    [self.webView.scrollView removeObserver:self forKeyPath:@"contentSize"];
+    [self.wkWebView.scrollView removeObserver:self forKeyPath:@"contentSize"];
+    [self.wkWebView.scrollView removeObserver:self forKeyPath:@"title"];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context{
@@ -372,24 +347,21 @@ TXMallGoodsSpecTableViewCellDelegate,WKUIDelegate,WKNavigationDelegate>
         UIScrollView *scrollView = (UIScrollView *)object;
         CGFloat height = scrollView.contentSize.height;
         self.webViewHeight = height;
-        self.webView.frame = CGRectMake(0, 0, self.view.frame.size.width, height);
+        self.wkWebView.frame = CGRectMake(0, 0, self.view.frame.size.width, height);
         self.scrollView.frame = CGRectMake(0, 0, self.view.frame.size.width, height);
         self.scrollView.contentSize =CGSizeMake(self.view.frame.size.width, height);
         [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:[NSIndexPath indexPathForRow:0 inSection:4], nil] withRowAnimation:UITableViewRowAnimationNone];
-        
-        /*
-         // 方法二
-         [_webView evaluateJavaScript:@"document.body.offsetHeight" completionHandler:^(id _Nullable result, NSError * _Nullable error) {
-         CGFloat height = [result doubleValue] + 20;
-         self.webViewHeight = height;
-         self.webView.frame = CGRectMake(0, 0, self.view.frame.size.width, height);
-         self.scrollView.frame = CGRectMake(0, 0, self.view.frame.size.width, height);
-         self.scrollView.contentSize =CGSizeMake(self.view.frame.size.width, height);
-         [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:[NSIndexPath indexPathForRow:3 inSection:0], nil] withRowAnimation:UITableViewRowAnimationNone];
-         }];
-         */
+    }else if([keyPath isEqualToString:@"title"]){
+        if (object == self.wkWebView) {
+            TTLog(@"self.wkWebView.title --- %@",self.wkWebView.title);
+            self.shareModel.descriptStr = self.wkWebView.title;
+            self.shareModel.sharetitle = self.wkWebView.title;
+        } else {
+            [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+        }
     }
 }
+
 
 - (void)createWebView{
     WKWebViewConfiguration *wkWebConfig = [[WKWebViewConfiguration alloc] init];
@@ -401,17 +373,18 @@ TXMallGoodsSpecTableViewCellDelegate,WKUIDelegate,WKNavigationDelegate>
     // 添加js调用
     [wkUController addUserScript:wkUserScript];
     
-    self.webView = [[WKWebView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 1) configuration:wkWebConfig];
-    self.webView.backgroundColor = [UIColor clearColor];
-    self.webView.opaque = NO;
-    self.webView.userInteractionEnabled = NO;
-    self.webView.scrollView.bounces = NO;
-    self.webView.UIDelegate = self;
-    self.webView.navigationDelegate = self;
-    [self.webView sizeToFit];
-    [self.webView.scrollView addObserver:self forKeyPath:@"contentSize" options:NSKeyValueObservingOptionNew context:nil];
+    self.wkWebView = [[WKWebView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 1) configuration:wkWebConfig];
+    self.wkWebView.backgroundColor = [UIColor clearColor];
+    self.wkWebView.opaque = NO;
+    self.wkWebView.userInteractionEnabled = NO;
+    self.wkWebView.scrollView.bounces = NO;
+    self.wkWebView.UIDelegate = self;
+    self.wkWebView.navigationDelegate = self;
+    [self.wkWebView sizeToFit];
+    [self.wkWebView.scrollView addObserver:self forKeyPath:@"contentSize" options:NSKeyValueObservingOptionNew context:nil];
+    [self.wkWebView addObserver:self forKeyPath:@"title" options:NSKeyValueObservingOptionNew context:nil];
     self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 1)];
-    [self.scrollView addSubview:self.webView];
+    [self.scrollView addSubview:self.wkWebView];
 }
 
 - (UIButton *)saveButton{
@@ -457,6 +430,13 @@ TXMallGoodsSpecTableViewCellDelegate,WKUIDelegate,WKNavigationDelegate>
         _heightAtIndexPath = [[NSMutableDictionary alloc] init];
     }
     return _heightAtIndexPath;
+}
+
+- (SCShareModel *)shareModel{
+    if (!_shareModel) {
+        _shareModel = [[SCShareModel alloc] init];
+    }
+    return _shareModel;
 }
 
 - (void)didReceiveMemoryWarning {

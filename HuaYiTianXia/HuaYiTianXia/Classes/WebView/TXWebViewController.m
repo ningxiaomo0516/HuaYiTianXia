@@ -47,30 +47,8 @@
 - (void)didTapShareButton:(UIBarButtonItem *)barButtonItem {
     TXShareViewController *vc = [[TXShareViewController alloc] init];
     CGFloat height = IPHONE6_W(150)+kTabBarHeight;
-    vc.selectItemBlock = ^(NSInteger idx, NSString * _Nonnull title) {
-        self.shareModel.sharetitle = self.title;
-        self.shareModel.h5Url = self.webUrl;
-        SSDKPlatformType type = -101;
-        if ([title isEqualToString:@"微信"]) {
-            type = SSDKPlatformSubTypeWechatSession;
-        }else if ([title isEqualToString:@"朋友圈"]){
-            type = SSDKPlatformSubTypeWechatTimeline;
-        }else if ([title isEqualToString:@"QQ好友"]){
-            type = SSDKPlatformSubTypeQQFriend;
-        }else if ([title isEqualToString:@"QQ空间"]){
-            type = SSDKPlatformSubTypeQZone;
-        }else if ([title isEqualToString:@"微博"]){
-            type = SSDKPlatformTypeSinaWeibo;
-        }else if ([title isEqualToString:@"复制链接"]){
-//            UIPasteboard *copyStr = [UIPasteboard generalPasteboard];
-//            copyStr.string = shareModel.videoUrl;
-//            [pv.playContainerView makeToast:@"链接复制成功" duration:2 position:CSToastPositionCenter];
-        }
-        [SCShareTools shareWithPlatformType:type shareDataModel:self.shareModel shareresult:^(NSString *shareResultStr) {
-            [self sc_dismissVC];
-            Toast(shareResultStr);
-        }];
-    };
+    self.shareModel.h5Url = self.webUrl;
+    vc.shareModel = self.shareModel;
     [self sc_bottomPresentController:vc presentedHeight:height completeHandle:^(BOOL presented) {
         if (presented) {
             TTLog(@"弹出了");
@@ -144,7 +122,8 @@
         [self.progress setProgress:estimateProgress animated:YES];
     }else if([keyPath isEqualToString:@"title"]){
         if (object == self.wkWebView) {
-            self.shareModel.descriptStr = self.title;//self.wkWebView.title;
+            self.shareModel.descriptStr = self.wkWebView.title;
+            self.shareModel.sharetitle = self.wkWebView.title;
         } else {
             [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
         }

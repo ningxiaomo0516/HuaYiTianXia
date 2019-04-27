@@ -32,11 +32,11 @@
     return self;
 }
 
-- (void)setModel:(NewsRecordsModel *)model{
-    self.titleLabel.text = model.pname;
-    self.subtitleLabel.text = model.typeName;
-//    self.dateLabel.text = model.time;
-    self.dateLabel.text = @"2018/12/21";
+- (void)setGiftmodel:(GiftModel *)giftmodel{
+    _giftmodel = giftmodel;
+    self.titleLabel.text = self.giftmodel.pname;
+    self.subtitleLabel.text = self.giftmodel.typeName;
+    self.dateLabel.text = self.giftmodel.datatime;
 }
 
 - (void) initView{
@@ -45,11 +45,12 @@
     [self addSubview:self.dateLabel];
     
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.equalTo(@(IPHONE6_W(15)));
+        make.top.equalTo(@(IPHONE6_W(13)));
+        make.left.equalTo(@(IPHONE6_W(15)));
     }];
     [self.dateLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.titleLabel);
-        make.bottom.equalTo(self.mas_bottom).offset(IPHONE6_W(-15));
+        make.bottom.equalTo(self.mas_bottom).offset(IPHONE6_W(-13));
     }];
     [self.subtitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(self.mas_right).offset(IPHONE6_W(-15));

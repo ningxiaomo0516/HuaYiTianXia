@@ -26,6 +26,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"登录";
+    TTLog(@"kUserInfo.registrationID -- %@",kUserInfo.registrationID);
     // Do any additional setup after loading the view from its nib.
     [self.registerBtn lz_handleControlEvent:UIControlEventTouchUpInside withBlock:^{
         TXRegisteredViewController *vc = [[TXRegisteredViewController alloc] init];
@@ -80,6 +81,10 @@
     NSMutableDictionary *parameter = [[NSMutableDictionary alloc] init];
     [parameter setObject:self.telTextField.text forKey:@"mobile"];
     [parameter setObject:self.pwdTextField.text forKey:@"pwd"];
+    [parameter setObject:kUserInfo.registrationID forKey:@"jg_deviceID"];
+    Toast(kUserInfo.registrationID);
+    
+    NSString *temp_registrationID = kUserInfo.registrationID;
     [SCHttpTools postWithURLString:@"customer/login" parameter:parameter success:^(id responseObject) {
         if (responseObject){
             id result = responseObject;
@@ -112,8 +117,10 @@
                             }
                         }
                     }
+                    kUserInfo.registrationID = temp_registrationID;
                     [userModel yy_modelSetWithDictionary:dictionary];
                     [userModel dump];
+                    TTLog(@"kUserInfo.registrationID -- %@",kUserInfo.registrationID);
                     [kNotificationCenter postNotificationName:@"reloadMineData" object:nil];
                     [self didTapPopButton:nil];
                     Toast(@"登录成功");

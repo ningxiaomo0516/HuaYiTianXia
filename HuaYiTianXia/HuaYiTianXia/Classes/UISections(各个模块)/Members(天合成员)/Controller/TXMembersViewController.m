@@ -78,8 +78,10 @@ static NSString* reuseIdentifierMall = @"TXMembersbleCollectionViewCell";
     }];
 }
 
+/// 获取礼包活动数据
 - (void) getGiftData{
     kShowMBProgressHUD(self.view);
+    //    礼包类型 1:农保礼包 2:天合成员礼包
     NSMutableDictionary *parameter = [[NSMutableDictionary alloc] init];
     [parameter setObject:@(1) forKey:@"type"];
     [SCHttpTools postWithURLString:kHttpURL(@"parcel/ControlParcel") parameter:parameter success:^(id responseObject) {
@@ -90,7 +92,7 @@ static NSString* reuseIdentifierMall = @"TXMembersbleCollectionViewCell";
                 /// 礼包活动是否结束1:活动继续，进入礼包界面，2:活动终止,无法进入礼包界面
                 if (model.data.status==1) {
                     TXAdsGiftViewController *vc = [[TXAdsGiftViewController alloc] init];
-//                    vc.webUrl = kStringFormat(@"http://192.168.1.5/libao/index.html?type=1&userID=", kUserInfo.userid);
+                    vc.webURL = [NSString stringWithFormat:@"%@libao/index.html?type=2&userID=%@", DomainName,kUserInfo.userid];
                     TTPushVC(vc);
                 }else{
                     Toast(@"礼包活动已结束");
