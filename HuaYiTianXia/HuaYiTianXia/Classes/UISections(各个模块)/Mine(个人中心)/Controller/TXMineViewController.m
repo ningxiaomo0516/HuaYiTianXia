@@ -15,7 +15,7 @@
 #import "TXRealNameViewController.h"
 #import "TXWebViewController.h"
 #import "TXBecomeVipViewController.h"
-#import "TXPushMessageViewController.h"
+#import "TXPushViewController.h"
 #import "TXSetupViewController.h"
 
 static NSString * const reuseIdentifier = @"TXMineTableViewCell";
@@ -54,7 +54,7 @@ static NSString * const reuseIdentifierBanner = @"TXMineBannerTableViewCell";
     }];
     
     [self.messageButton lz_handleControlEvent:UIControlEventTouchUpInside withBlock:^{
-//        [weakSelf jumpBecomeVipVC:[[TXPushMessageViewController alloc] init]];
+        [weakSelf jumpBecomeVipVC:[[TXPushViewController alloc] init]];
     }];
     [self.setupButton lz_handleControlEvent:UIControlEventTouchUpInside withBlock:^{
         [weakSelf jumpBecomeVipVC:[[TXSetupViewController alloc] init]];

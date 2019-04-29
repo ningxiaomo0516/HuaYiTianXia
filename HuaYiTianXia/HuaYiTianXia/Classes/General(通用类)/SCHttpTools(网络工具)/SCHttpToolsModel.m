@@ -10,7 +10,7 @@
 
 @implementation SCHttpToolsModel
 
--(instancetype)initIsGetOrPost:(BOOL)isGet  Url:(NSString*)url  param:(NSDictionary*)param{
+- (instancetype)initIsGetOrPost:(BOOL)isGet  Url:(NSString*)url  param:(NSDictionary*)param{
     
     self = [super init];
     

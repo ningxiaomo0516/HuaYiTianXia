@@ -64,6 +64,12 @@ NS_ASSUME_NONNULL_BEGIN
 /**转机*/
 @property (nonatomic, strong) NSArray *transfer_flights;
 
+
+/**起飞城市*/
+@property (nonatomic, copy) NSString *dep_city;
+/**到达城市*/
+@property (nonatomic, copy) NSString *arv_city;
+
 /**价格*/
 @property (nonatomic, strong) NSMutableArray<TicketPricesModel *> *prices;
 @end

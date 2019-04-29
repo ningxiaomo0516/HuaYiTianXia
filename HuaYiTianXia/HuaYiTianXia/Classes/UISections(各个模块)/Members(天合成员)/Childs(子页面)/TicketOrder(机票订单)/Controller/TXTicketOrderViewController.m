@@ -103,6 +103,7 @@ static NSString * const reuseIdentifier = @"TXTicketOrderTableViewCell";
 #pragma mark - Table view data sourceFMMerchantsHomeAddressTableViewCell
  - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
      TXTicketOrderTableViewCell *tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
+     tools.selectionStyle = UITableViewCellSelectionStyleNone;
      tools.orderModel = self.dataArray[indexPath.section];
      return tools;
  }
@@ -139,7 +140,7 @@ static NSString * const reuseIdentifier = @"TXTicketOrderTableViewCell";
         [_tableView setSeparatorInset:UIEdgeInsetsMake(0, 15, 0, 0)];
         [_tableView registerClass:[TXTicketOrderTableViewCell class] forCellReuseIdentifier:reuseIdentifier];
         //1 禁用系统自带的分割线
-        _tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.backgroundColor = kViewColorNormal;

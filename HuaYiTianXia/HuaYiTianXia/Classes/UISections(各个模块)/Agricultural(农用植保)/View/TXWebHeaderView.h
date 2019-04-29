@@ -15,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) UILabel *titleLabel;
 @property (strong, nonatomic) UILabel *subtitleLabel;
 @property (strong, nonatomic) UIImageView *imagesView;
+@property (strong, nonatomic) UIButton *receiveBtn;
 @end
 
 NS_ASSUME_NONNULL_END

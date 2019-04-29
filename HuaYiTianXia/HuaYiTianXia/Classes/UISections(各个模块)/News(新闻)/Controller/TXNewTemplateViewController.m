@@ -85,7 +85,7 @@ static NSString * const reuseIdentifierSectionHeaderView = @"SCTableViewSectionH
         if ([result isKindOfClass:[NSDictionary class]]) {
             TTLog(@"result -- %@",result);
             TXNewsArrayModel *model = [TXNewsArrayModel mj_objectWithKeyValues:result];
-            if (model.errorcode==20000) {
+            if (model.errorcode==20000&&model.data.content!=nil) {
                 self.rollText = model.data.content;
                 TTLog(@"model.content -- %@",model.data.content);
                 self.horizontalMarquee.text = model.data.content;

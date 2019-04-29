@@ -80,11 +80,11 @@ static NSString * const reuseIdentifierHeader = @"TXRolloutHeaderTableViewCell";
 /** 确认转账 */
 - (void) saveBtnClick:(UIButton *) sender{
     if (self.accountText.length == 0) {
-        Toast(@"请输入账号或ID");
+        Toast(@"请输入账号");
         return;
     }
     if (self.accountsText.length == 0) {
-        Toast(@"请再次输入账号或ID");
+        Toast(@"请再次输入账号");
         return;
     }
     if (self.currencyText.length == 0) {
@@ -292,7 +292,7 @@ static NSString * const reuseIdentifierHeader = @"TXRolloutHeaderTableViewCell";
     if (!_dataArray) {
         _dataArray = [[NSMutableArray alloc] init];
         NSArray* titleArr = @[@"账号",@"确认账号",@"类型",@"积分"];
-        NSArray* subtitleArr = @[@"请输入账号或ID",@"再次输入账号或ID",@"请选择类型",@"请输入转账积分"];
+        NSArray* subtitleArr = @[@"请输入账号",@"再次输入账号",@"请选择类型",@"请输入转账积分"];
         for (int i=0; i<titleArr.count; i++) {
             TXGeneralModel *generalModel = [[TXGeneralModel alloc] init];
             generalModel.title = [titleArr lz_safeObjectAtIndex:i];

@@ -87,7 +87,7 @@
                 TTLog(@" --- dic %@",dic);
                 TTAdsData *model = [TTAdsData mj_objectWithKeyValues:dic];
 
-                if (model.errorcode == 20000) {
+                if (model.errorcode == 20000&&model.data!=nil) {
                     [weakSelf.adsArray addObject:model.data];
                 }
             }

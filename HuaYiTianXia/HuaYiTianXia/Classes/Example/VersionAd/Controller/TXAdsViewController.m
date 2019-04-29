@@ -31,7 +31,7 @@
     [self setupUI];
     UIView *boxView = [UIView lz_viewWithColor:kColorWithRGB(254, 252, 252)];
     UIImageView * imageView = [[UIImageView alloc] initWithImage:kGetImage(@"c18_启动页_无广告")];
-    imageView.backgroundColor = [UIColor clearColor];
+    imageView.backgroundColor = [UIColor whiteColor];
     imageView.userInteractionEnabled = YES;
     self.bottomImageView = imageView;
     [self.view addSubview:boxView];

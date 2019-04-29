@@ -65,18 +65,18 @@ static NSString* reuseIdentifierInfo = @"TXTicketInfoTableViewCell";
     kShowMBProgressHUD(self.view);
     NSString *URLString = kHttpURL(@"aircraftorder/AddAircraftorder");
     NSMutableDictionary *parameter = [[NSMutableDictionary alloc] init];
-    [parameter setObject:self.ticketModel.dep_airport forKey:@"origin"];
-    [parameter setObject:self.ticketModel.arv_airport forKey:@"destination"];
+    [parameter setObject:self.ticketModel.dep_city forKey:@"origin"];
+    [parameter setObject:self.ticketModel.arv_city forKey:@"destination"];
     [parameter setObject:self.priceLabel.text forKey:@"orderprice"];
     [parameter setObject:self.priceLabel.text forKey:@"price"];
     [parameter setObject:@"" forKey:@"remarks"];
     [parameter setObject:self.ticketModel.flight_number forKey:@"flightNumber"];// 航班号
-    [parameter setObject:self.ticketModel.arv_time forKey:@"arvTime"];/// 起飞时间
-    [parameter setObject:self.ticketModel.dep_time forKey:@"depTime"];/// 到达时间
+    [parameter setObject:self.ticketModel.arv_time forKey:@"depTime"];/// 起飞时间
+    [parameter setObject:self.ticketModel.dep_time forKey:@"arvTime"];/// 到达时间
     [parameter setObject:self.ticketModel.airline forKey:@"airline"];/// 航空公司
     [parameter setObject:self.ticketModel.model forKey:@"aircraft"]; /// 飞机类型
-    [parameter setObject:self.ticketModel.dep_airport forKey:@"arvAirport"];/// 起飞机场
-    [parameter setObject:self.ticketModel.arv_airport forKey:@"depAirport"];/// 到达机场
+    [parameter setObject:self.ticketModel.dep_airport forKey:@"depAirport"];/// 起飞机场
+    [parameter setObject:self.ticketModel.arv_airport forKey:@"arvAirport"];/// 到达机场
 //
     [SCHttpTools postWithURLString:URLString parameter:parameter success:^(id responseObject) {
         NSDictionary *result = responseObject;

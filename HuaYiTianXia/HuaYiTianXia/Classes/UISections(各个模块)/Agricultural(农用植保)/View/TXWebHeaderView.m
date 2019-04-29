@@ -14,6 +14,7 @@
     if (self = [super initWithFrame:frame]) {
         self.backgroundColor = kClearColor;
         [self initView];
+        TTLog(@" -- %f",self.width);
     }
     return self;
 }
@@ -23,6 +24,7 @@
     [self addSubview:self.subtitleLabel];
     [self addSubview:self.saveButton];
     [self addSubview:self.imagesView];
+    [self addSubview:self.receiveBtn];
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self);
         make.top.equalTo(@(IPHONE6_W(20)));
@@ -33,21 +35,17 @@
         make.top.equalTo(self.titleLabel.mas_bottom).offset(IPHONE6_W(10));
     }];
     [self.saveButton mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.top.equalTo(self.subtitleLabel.mas_bottom).offset(IPHONE6_W(15));
-//        make.left.equalTo(@(15));
-//        make.right.equalTo(self.mas_right).offset(-15);
-//        make.height.equalTo(@(45));
-        
-        make.centerX.equalTo(self);
-        make.height.equalTo(@(IPHONE6_W(45)));
-        make.width.equalTo(@(IPHONE6_W(345)));
-//        make.left.equalTo(@(15));
-//        make.right.equalTo(self.mas_right).offset(-15);
-        make.top.equalTo(self.subtitleLabel.mas_bottom).offset(15);
-
+        make.top.equalTo(self.subtitleLabel.mas_bottom).offset(IPHONE6_W(15));
+        make.left.equalTo(@(15));
+        make.right.equalTo(self.mas_right).offset(-15);
+        make.height.equalTo(@(45));
     }];
     [self.imagesView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.centerX.equalTo(self);
+    }];
+    [self.receiveBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(self.imagesView);
+        make.right.equalTo(self.imagesView.mas_right).offset(IPHONE6_W(-20));
     }];
 }
 
@@ -77,8 +75,17 @@
         _saveButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [_saveButton setTitleColor:kWhiteColor forState:UIControlStateNormal];
         _saveButton.titleLabel.font = kFontSizeMedium15;
+        _saveButton.tag = 100;
         [_saveButton setBackgroundImage:kGetImage(@"c31_denglu") forState:UIControlStateNormal];
     }
     return _saveButton;
+}
+
+- (UIButton *)receiveBtn{
+    if (!_receiveBtn) {
+        _receiveBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        _receiveBtn.tag = 200;
+    }
+    return _receiveBtn;
 }
 @end

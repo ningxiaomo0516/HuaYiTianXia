@@ -110,6 +110,8 @@ static NSString* reuseIdentifier = @"TXTicketListTableViewCell";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     TicketModel *ticketModel = self.dataArray[indexPath.section];
+    ticketModel.dep_city = [self.parameter lz_objectForKey:@"fromCity"];
+    ticketModel.arv_city = [self.parameter lz_objectForKey:@"toCity"];
     TXTicketBookingViewController *vc = [[TXTicketBookingViewController alloc] initTicketModel:ticketModel];
     TTPushVC(vc);
     [tableView deselectRowAtIndexPath:indexPath animated:YES];

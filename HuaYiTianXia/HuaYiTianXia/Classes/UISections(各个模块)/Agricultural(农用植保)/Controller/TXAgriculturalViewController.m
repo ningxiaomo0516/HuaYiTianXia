@@ -35,10 +35,6 @@ static NSString * const reuseIdentifierGoodsH5 = @"TXGoodsH5TableViewCell";
 
 - (void) initView{
     [self createWebView];
-    self.headerView.titleLabel.text = @"一县一代理独家经营";
-    self.headerView.subtitleLabel.text = @"农用科技化、现代化";
-    self.headerView.imagesView.image = kGetImage(@"c41_live_nongbao");
-    [self.headerView.saveButton setTitle:@"农用植保" forState:UIControlStateNormal];
     [self.view addSubview:self.tableView];
     [Utils lz_setExtraCellLineHidden:self.tableView];
     self.tableView.tableHeaderView = self.headerView;
@@ -50,7 +46,14 @@ static NSString * const reuseIdentifierGoodsH5 = @"TXGoodsH5TableViewCell";
     [self.headerView.saveButton lz_handleControlEvent:UIControlEventTouchUpInside withBlock:^{
         [weakSelf saveBtnClick:self.headerView.saveButton];
     }];
-
+    [self.headerView.receiveBtn lz_handleControlEvent:UIControlEventTouchUpInside withBlock:^{
+        [weakSelf saveBtnClick:self.headerView.receiveBtn];
+    }];
+    self.headerView.titleLabel.text = @"一县一代理独家经营";
+    self.headerView.subtitleLabel.text = @"农用科技化、现代化";
+    self.headerView.imagesView.image = kGetImage(@"c41_live_nongbao");
+    [self.headerView.saveButton setTitle:@"农用植保" forState:UIControlStateNormal];
+    [self.headerView.receiveBtn setImage:kGetImage(@"c41_live_椭圆") forState:UIControlStateNormal];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -59,9 +62,15 @@ static NSString * const reuseIdentifierGoodsH5 = @"TXGoodsH5TableViewCell";
 
 /** 保存 */
 - (void) saveBtnClick:(UIButton *) sender{
-//    TXMallEppoViewController *vc = [[TXMallEppoViewController alloc] init];
-//    TTPushVC(vc);
-    [self getGiftData];
+    TTLog(@"sender.tag -- %ld",sender.tag);
+    if (sender.tag == 100) {
+        TXMallEppoViewController *vc = [[TXMallEppoViewController alloc] init];
+        TTPushVC(vc);
+    }else if (sender.tag == 200){
+        [self getGiftData];
+    }else{
+        TTLog(@"未知按钮");
+    }
 }
 
 /// 获取礼包活动数据
@@ -107,19 +116,6 @@ static NSString * const reuseIdentifierGoodsH5 = @"TXGoodsH5TableViewCell";
         self.webView.frame = CGRectMake(0, 0, self.view.frame.size.width, height);
         self.scrollView.frame = CGRectMake(0, 0, self.view.frame.size.width, height);
         self.scrollView.contentSize =CGSizeMake(self.view.frame.size.width, height);
-//        [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:[NSIndexPath indexPathForRow:0 inSection:0], nil] withRowAnimation:UITableViewRowAnimationNone];
-        
-        /*
-         // 方法二
-         [_webView evaluateJavaScript:@"document.body.offsetHeight" completionHandler:^(id _Nullable result, NSError * _Nullable error) {
-         CGFloat height = [result doubleValue] + 20;
-         self.webViewHeight = height;
-         self.webView.frame = CGRectMake(0, 0, self.view.frame.size.width, height);
-         self.scrollView.frame = CGRectMake(0, 0, self.view.frame.size.width, height);
-         self.scrollView.contentSize =CGSizeMake(self.view.frame.size.width, height);
-         [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:[NSIndexPath indexPathForRow:3 inSection:0], nil] withRowAnimation:UITableViewRowAnimationNone];
-         }];
-         */
     }
 }
 
@@ -189,8 +185,7 @@ static NSString * const reuseIdentifierGoodsH5 = @"TXGoodsH5TableViewCell";
 
 - (TXWebHeaderView *)headerView{
     if (!_headerView) {
-        _headerView = [[TXWebHeaderView alloc] init];
-        _headerView.frame = CGRectMake(0, 0, kScreenWidth, IPHONE6_W(340));
+        _headerView = [[TXWebHeaderView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, IPHONE6_W(340))];
     }
     return _headerView;
 }

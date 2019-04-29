@@ -47,6 +47,7 @@
 #import "UIView+SCLoadingView.h"
 #import "UITableView+SCExtension.h"
 #import "UINavigationBar+SCExtension.h"
+#import "UIDevice+Extension.h"
 
 //MARK: NSDate
 #import "NSDate+Extensions.h"               // NSDate 时间日期快速获取

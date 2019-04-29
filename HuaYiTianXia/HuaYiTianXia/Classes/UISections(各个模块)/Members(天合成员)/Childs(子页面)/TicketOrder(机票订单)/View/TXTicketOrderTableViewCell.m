@@ -32,17 +32,28 @@
 - (void)setOrderModel:(TicketOrderModel *)orderModel{
     _orderModel = orderModel;
     self.o_numLabel.text = [NSString stringWithFormat:@"订单号:%@",self.orderModel.orderNumber];
-    self.o_dateLabel.text = [NSString stringWithFormat:@"订单时间:%@",self.orderModel.datetime];
-    self.o_nameLabel.text = [NSString stringWithFormat:@"订单人:%@",self.orderModel.username];
+    self.o_nameLabel.text = [NSString stringWithFormat:@"订票人:%@",self.orderModel.username];
     NSString *o_price = [NSString stringWithFormat:@"￥%@",self.orderModel.price];
-    self.dep_airportLabel.text = self.orderModel.origin;
-    self.arv_airportLabel.text = self.orderModel.destination;
+    self.dep_airportLabel.text = self.orderModel.depAirport;
+    self.arv_airportLabel.text = self.orderModel.arvAirport;
     self.o_statusLabel.text = self.orderModel.typeName;
-    
-    self.o_priceLabel.attributedText = [SCSmallTools setupTextColor:HexString(@"#FE881C") currentText:o_price index:1 endIndex:o_price.length-1];
+    NSString *arvTime = self.orderModel.arvTime;
+    /// 根据 / 分割字符串
+    NSArray *arrayTime = [self.orderModel.depTime componentsSeparatedByString:@" "];
+    NSString *depTime = arrayTime.count>1?arrayTime[1]:@"";
+    NSString *flightNumber = self.orderModel.flightNumber;
+    self.o_datetime_label.text = [NSString stringWithFormat:@"%@至%@ (%@)",arvTime,depTime,flightNumber];
 
-    self.dep_city_label.text = @"成都";
-    self.arv_city_label.text = @"广州";
+    self.dep_city_label.text = self.orderModel.origin;
+    self.arv_city_label.text = self.orderModel.destination;
+    
+    NSMutableAttributedString *attributedStr = [[NSMutableAttributedString alloc]initWithString:o_price];
+    // 前面文字大小
+    [attributedStr addAttribute:NSFontAttributeName
+                          value:kFontSizeMedium13
+                          range:NSMakeRange(0, 1)];
+    
+    self.o_priceLabel.attributedText = attributedStr;
 }
 
 - (void) initView{
@@ -59,13 +70,13 @@
     [self.boxView addSubview:self.arv_airportLabel];
     [self.boxView addSubview:self.imagesViewPlane];
     
-    [self.boxView addSubview:self.o_numLabel];
-    [self.boxView addSubview:self.o_dateLabel];
+    [self.boxView addSubview:self.o_datetime_label];
+    [self.boxView addSubview:self.o_statusLabel];
+    
     [self.boxView addSubview:self.o_nameLabel];
     [self.boxView addSubview:self.o_priceLabel];
     [self.boxView addSubview:self.dep_airportLabel];
     [self.boxView addSubview:self.arv_airportLabel];
-    [self.boxView addSubview:self.o_statusLabel];
     
     [self.boxView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(@(IPHONE6_W(15)));
@@ -112,16 +123,20 @@
         make.top.equalTo(self.dep_city_label.mas_bottom).offset(IPHONE6_W(10));
     }];
     
+    [self.o_datetime_label mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.imagesViewPlane.mas_right).offset(5);
+        make.centerY.equalTo(self.imagesViewPlane);
+    }];
+    
     [self.dep_airportLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.o_numLabel);
-//        make.top.equalTo(self.linerView.mas_bottom).offset(IPHONE6_W(10));
         make.bottom.equalTo(self.boxView.mas_bottom).offset(IPHONE6_W(-10));
     }];
     [self.dep_arv_liner_v mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.dep_airportLabel.mas_right).offset(5);
         make.centerY.equalTo(self.dep_airportLabel);
-        make.height.equalTo(@(2));
-        make.width.equalTo(@(10));
+        make.height.equalTo(@(12));
+        make.width.equalTo(@(1));
     }];
     
     [self.arv_airportLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -129,32 +144,15 @@
         make.centerY.equalTo(self.dep_airportLabel);
     }];
     
+    [self.o_nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(self.o_priceLabel);
+        make.centerY.equalTo(self.o_numLabel);
+    }];
     
-    
-    
-//    [self.o_nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.left.equalTo(self.o_numLabel);
-//        make.centerY.equalTo(self);
-//    }];
-//
-//    [self.dep_airportLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.left.equalTo(self.o_numLabel);
-//        make.bottom.equalTo(self.mas_bottom).offset(IPHONE6_W(-10));
-//    }];
-//
-//
-//    [self.o_dateLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.centerY.equalTo(self.o_numLabel);
-//        make.centerX.equalTo(self).offset(IPHONE6_W(80));
-//    }];
-//    [self.o_priceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.centerY.equalTo(self.o_nameLabel);
-//        make.left.equalTo(self.o_dateLabel);
-//    }];
-//    [self.o_statusLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.centerY.equalTo(self.dep_airportLabel);
-//        make.right.equalTo(self.mas_right).offset(IPHONE6_W(-15));
-//    }];
+    [self.o_statusLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(self.dep_airportLabel);
+        make.right.equalTo(self.boxView.mas_right).offset(IPHONE6_W(-15));
+    }];
 }
 
 - (UILabel *)o_numLabel{
@@ -164,23 +162,16 @@
     return _o_numLabel;
 }
 
-- (UILabel *)o_dateLabel{
-    if (!_o_dateLabel) {
-        _o_dateLabel = [UILabel lz_labelWithTitle:@"" color:kTextColor153 font:kFontSizeMedium13];
-    }
-    return _o_dateLabel;
-}
-
 - (UILabel *)o_nameLabel{
     if (!_o_nameLabel) {
-        _o_nameLabel = [UILabel lz_labelWithTitle:@"" color:kTextColor153 font:kFontSizeMedium13];
+        _o_nameLabel = [UILabel lz_labelWithTitle:@"" color:kTextColor153 font:kFontSizeMedium12];
     }
     return _o_nameLabel;
 }
 
 - (UILabel *)o_priceLabel{
     if (!_o_priceLabel) {
-        _o_priceLabel = [UILabel lz_labelWithTitle:@"" color:HexString(@"#FE881C") font:kFontSizeMedium13];
+        _o_priceLabel = [UILabel lz_labelWithTitle:@"" color:HexString(@"#FE881C") font:kFontSizeMedium17];
     }
     return _o_priceLabel;
 }
@@ -232,21 +223,21 @@
 
 - (UILabel *)dep_airportLabel{
     if (!_dep_airportLabel) {
-        _dep_airportLabel = [UILabel lz_labelWithTitle:@"" color:kTextColor102 font:kFontSizeMedium15];
+        _dep_airportLabel = [UILabel lz_labelWithTitle:@"" color:kTextColor153 font:kFontSizeMedium13];
     }
     return _dep_airportLabel;
 }
 
 - (UILabel *)arv_airportLabel{
     if (!_arv_airportLabel) {
-        _arv_airportLabel = [UILabel lz_labelWithTitle:@"" color:kTextColor102 font:kFontSizeMedium15];
+        _arv_airportLabel = [UILabel lz_labelWithTitle:@"" color:kTextColor153 font:kFontSizeMedium13];
     }
     return _arv_airportLabel;
 }
 
 - (UIView *)dep_arv_liner_v{
     if (!_dep_arv_liner_v) {
-        _dep_arv_liner_v = [UIView lz_viewWithColor:kTextColor102];
+        _dep_arv_liner_v = [UIView lz_viewWithColor:kTextColor153];
     }
     return _dep_arv_liner_v;
 }
@@ -254,8 +245,15 @@
 - (UIImageView *)imagesViewPlane{
     if (!_imagesViewPlane) {
         _imagesViewPlane = [[UIImageView alloc] init];
-        _imagesViewPlane.image = kGetImage(@"c41_plane");
+        _imagesViewPlane.image = kGetImage(@"c48_飞机");
     }
     return _imagesViewPlane;
+}
+
+- (UILabel *)o_datetime_label{
+    if (!_o_datetime_label) {
+        _o_datetime_label = [UILabel lz_labelWithTitle:@"" color:kTextColor102 font:kFontSizeMedium13];
+    }
+    return _o_datetime_label;
 }
 @end

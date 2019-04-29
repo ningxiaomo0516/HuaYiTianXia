@@ -34,7 +34,7 @@
     _teamModel = teamModel;
     [self.imagesView sd_setImageWithURL:kGetImageURL(self.teamModel.avatar) placeholderImage:kGetImage(VERTICALMAPBITMAP)];
     self.titleLabel.text = [NSString stringWithFormat:@"昵称:%@",self.teamModel.username];
-    self.kidLabel.text = [NSString stringWithFormat:@"UID:%@",self.teamModel.uid];
+    self.kidLabel.text = [NSString stringWithFormat:@"账号:%@",self.teamModel.uid];
     self.telLabel.text = [NSString stringWithFormat:@"手机号码:%@",self.teamModel.mobile];
 }
 

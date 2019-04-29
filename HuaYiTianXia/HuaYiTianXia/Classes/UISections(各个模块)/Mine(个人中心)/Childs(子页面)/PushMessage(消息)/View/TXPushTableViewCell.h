@@ -17,6 +17,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) UILabel   *dateLabel;
 @property (nonatomic, strong) UIView    *linerView;
 @property (nonatomic, strong) UILabel   *contenLabel;
+@property (nonatomic, strong) UIButton   *detailsButton;
+@property (nonatomic, strong) UIImageView   *imagesArrow;
 @end
 
 NS_ASSUME_NONNULL_END

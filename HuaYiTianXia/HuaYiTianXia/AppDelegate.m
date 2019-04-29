@@ -37,13 +37,6 @@
     if (@available(iOS 11.0, *)) {
         [[UIScrollView appearance] setContentInsetAdjustmentBehavior:UIScrollViewContentInsetAdjustmentNever];
     }
-    
-    // 手机系统：iPhone OS
-    NSString *deviceName = [[UIDevice currentDevice] systemName];
-    // 1.手机系统版本：9.1
-    NSString *phoneVersion = [[UIDevice currentDevice] systemVersion];
-    TTLog(@" --- %@ --- %@",deviceName,phoneVersion);
-
     // 启动图片延时: 1秒
     [NSThread sleepForTimeInterval:2];
     [self registLocalNotificationWithOptions:launchOptions];

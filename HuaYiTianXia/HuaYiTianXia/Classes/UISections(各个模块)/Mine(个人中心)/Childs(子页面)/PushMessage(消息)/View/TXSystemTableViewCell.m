@@ -43,11 +43,13 @@
     
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(@(IPHONE6_W(65)));
-        make.top.equalTo(self.imagesView.mas_top).offset(IPHONE6_W(-2));
+        make.top.equalTo(@(IPHONE6_W(15)));
     }];
     [self.subtitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.titleLabel);
-        make.bottom.equalTo(self.imagesView.mas_bottom).offset(IPHONE6_W(2));
+        make.top.equalTo(self.titleLabel.mas_bottom).offset(IPHONE6_W(10));
+        make.bottom.equalTo(self.mas_bottom).offset(IPHONE6_W(-15));
+        make.right.equalTo(self.mas_right).offset(IPHONE6_W(-15));
     }];
     [self.amountLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self);
@@ -72,6 +74,7 @@
 - (UILabel *)subtitleLabel{
     if (!_subtitleLabel) {
         _subtitleLabel = [UILabel lz_labelWithTitle:@"" color:kTextColor102 font:kFontSizeMedium12];
+        _subtitleLabel.numberOfLines = 1;
     }
     return _subtitleLabel;
 }

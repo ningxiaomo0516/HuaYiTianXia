@@ -132,6 +132,9 @@
 		E75F2ED6224DCB5F0091C52E /* TXBuyCountTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E75F2ED5224DCB5F0091C52E /* TXBuyCountTableViewCell.m */; };
 		E75F2EDD224DEE680091C52E /* TTTagView.m in Sources */ = {isa = PBXBuildFile; fileRef = E75F2EDC224DEE680091C52E /* TTTagView.m */; };
 		E75F2EE0224E1BE30091C52E /* TTUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E75F2EDF224E1BE30091C52E /* TTUserModel.m */; };
+		E76579EE2276D6F400AFAEFE /* TXTicketQueryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E76579EC2276D6F400AFAEFE /* TXTicketQueryViewController.m */; };
+		E76579EF2276D6F400AFAEFE /* TXTicketQueryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E76579ED2276D6F400AFAEFE /* TXTicketQueryViewController.xib */; };
+		E76579F3227702A900AFAEFE /* TXPushMessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E76579F2227702A900AFAEFE /* TXPushMessageModel.m */; };
 		E7691ED52255A809006A94D9 /* TXResetTradingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7691ED42255A809006A94D9 /* TXResetTradingViewController.m */; };
 		E7691EDC2255D3FA006A94D9 /* TXSetupTradingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7691EDA2255D3FA006A94D9 /* TXSetupTradingViewController.m */; };
 		E7691EDD2255D3FA006A94D9 /* TXSetupTradingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7691EDB2255D3FA006A94D9 /* TXSetupTradingViewController.xib */; };
@@ -524,6 +527,11 @@
 		E75F2EDC224DEE680091C52E /* TTTagView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TTTagView.m; sourceTree = "<group>"; };
 		E75F2EDE224E1BE30091C52E /* TTUserModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TTUserModel.h; sourceTree = "<group>"; };
 		E75F2EDF224E1BE30091C52E /* TTUserModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TTUserModel.m; sourceTree = "<group>"; };
+		E76579EB2276D6F400AFAEFE /* TXTicketQueryViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXTicketQueryViewController.h; sourceTree = "<group>"; };
+		E76579EC2276D6F400AFAEFE /* TXTicketQueryViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXTicketQueryViewController.m; sourceTree = "<group>"; };
+		E76579ED2276D6F400AFAEFE /* TXTicketQueryViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TXTicketQueryViewController.xib; sourceTree = "<group>"; };
+		E76579F1227702A900AFAEFE /* TXPushMessageModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXPushMessageModel.h; sourceTree = "<group>"; };
+		E76579F2227702A900AFAEFE /* TXPushMessageModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXPushMessageModel.m; sourceTree = "<group>"; };
 		E7691ED32255A809006A94D9 /* TXResetTradingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXResetTradingViewController.h; sourceTree = "<group>"; };
 		E7691ED42255A809006A94D9 /* TXResetTradingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXResetTradingViewController.m; sourceTree = "<group>"; };
 		E7691ED92255D3FA006A94D9 /* TXSetupTradingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXSetupTradingViewController.h; sourceTree = "<group>"; };
@@ -1194,6 +1202,9 @@
 			children = (
 				E7269916223F789F003A5043 /* TXMembersViewController.h */,
 				E7269917223F789F003A5043 /* TXMembersViewController.m */,
+				E76579EB2276D6F400AFAEFE /* TXTicketQueryViewController.h */,
+				E76579EC2276D6F400AFAEFE /* TXTicketQueryViewController.m */,
+				E76579ED2276D6F400AFAEFE /* TXTicketQueryViewController.xib */,
 				E78DCADA2265C70D00252314 /* TXTicketScreeningViewController.h */,
 				E78DCADB2265C70D00252314 /* TXTicketScreeningViewController.m */,
 				E78DCAEA2265E2A700252314 /* TXTicketListViewController.h */,
@@ -1672,6 +1683,15 @@
 			path = TTTagView;
 			sourceTree = "<group>";
 		};
+		E76579F02277028500AFAEFE /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				E76579F1227702A900AFAEFE /* TXPushMessageModel.h */,
+				E76579F2227702A900AFAEFE /* TXPushMessageModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		E7691EDE2255DC4E006A94D9 /* SCVerViewInputView(验证码界面) */ = {
 			isa = PBXGroup;
 			children = (
@@ -1820,6 +1840,7 @@
 		E778DE5F2270659500D6F0E7 /* PushMessage(消息) */ = {
 			isa = PBXGroup;
 			children = (
+				E76579F02277028500AFAEFE /* Model */,
 				E778DE602270659500D6F0E7 /* Controller */,
 				E778DE612270659500D6F0E7 /* View */,
 			);
@@ -2829,6 +2850,7 @@
 				E72698C2223F7167003A5043 /* LaunchScreen.storyboard in Resources */,
 				E725D0DE225EF36400C233E7 /* c31_btn_zfb@2x.png in Resources */,
 				E7D7321C2268B21B006F171A /* ShareSDKUI.bundle in Resources */,
+				E76579EF2276D6F400AFAEFE /* TXTicketQueryViewController.xib in Resources */,
 				E77F653B225C3A0E0017B4C8 /* RYNumberKeyboard.xib in Resources */,
 				E7D732222268B21B006F171A /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
 				E725D0DF225EF36400C233E7 /* c31_btn_wxzf@2x.png in Resources */,
@@ -2927,6 +2949,7 @@
 				E78B8F7F225B32BC0052852C /* TTPickerHeaderView.m in Sources */,
 				E757D5BC226EE52800EA84B8 /* TXBecomeVipCollectionViewCell.m in Sources */,
 				E7F1A74122428A8F003FA216 /* TXMallCollectionViewCell.m in Sources */,
+				E76579F3227702A900AFAEFE /* TXPushMessageModel.m in Sources */,
 				E756989D225202AE0022EC49 /* TXWebViewController.m in Sources */,
 				E7C42E7E224B770200F3FB1A /* SCHttpTools.m in Sources */,
 				E78333E0224884F1005CAB91 /* TXRegisteredViewController.m in Sources */,
@@ -3094,6 +3117,7 @@
 				E725D119225F2CC800C233E7 /* AlipayManager.m in Sources */,
 				E7C42E7F224B770200F3FB1A /* SCHttpToolsModel.m in Sources */,
 				E7C9FCFB2267607E008FD260 /* TXTicketOrderModel.m in Sources */,
+				E76579EE2276D6F400AFAEFE /* TXTicketQueryViewController.m in Sources */,
 				E72699F8223F8298003A5043 /* WMPageController.m in Sources */,
 				E72699E1223F7F58003A5043 /* UILabel+SCExtension.m in Sources */,
 				E7F1A73822427A65003FA216 /* TXMallCollectionViewController.m in Sources */,

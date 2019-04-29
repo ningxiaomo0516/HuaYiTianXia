@@ -51,6 +51,11 @@ static AFHTTPSessionManager* manager_ = nil;
     // 判断是否登录并且带有HTTP请求头
     if (arrayURL.count>1&&kUserInfo.isLogin) {
         [manager.requestSerializer setValue:kUserInfo.account forHTTPHeaderField:@"token"];
+        NSString *phoneVersion = [UIDevice phoneVersion];           /// 手机版本号
+        NSString *deviceName = [UIDevice systemName];               /// 手机系统名称
+        NSString *deviceModel = [UIDevice getCurrentDeviceModel];   /// 手机型号
+        NSString *deviceInfo = [NSString stringWithFormat:@"%@--%@--%@",phoneVersion,deviceName,deviceModel];
+        [manager.requestSerializer setValue:deviceInfo forHTTPHeaderField:@"clientInfo"];
     }
     
     [manager GET:URLString parameters:parameter progress:^(NSProgress * _Nonnull downloadProgress) {
@@ -102,6 +107,11 @@ static AFHTTPSessionManager* manager_ = nil;
     // 判断是否登录并且带有HTTP请求头
     if (arrayURL.count>1&&kUserInfo.isLogin) {
         [manager.requestSerializer setValue:kUserInfo.account forHTTPHeaderField:@"token"];
+        NSString *phoneVersion = [UIDevice phoneVersion];           /// 手机版本号
+        NSString *deviceName = [UIDevice systemName];               /// 手机系统名称
+        NSString *deviceModel = [UIDevice getCurrentDeviceModel];   /// 手机型号
+        NSString *deviceInfo = [NSString stringWithFormat:@"%@--%@--%@",phoneVersion,deviceName,deviceModel];
+        [manager.requestSerializer setValue:deviceInfo forHTTPHeaderField:@"clientInfo"];
     }
     
     [manager POST:URLString parameters:parameter progress:^(NSProgress * _Nonnull downloadProgress) {

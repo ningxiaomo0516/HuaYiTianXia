@@ -12,7 +12,7 @@
 #import "TXMallToolsCollectionViewCell.h"
 #import "TXGeneralModel.h"
 #import "TTBannerModel.h"
-#import "TXTicketScreeningViewController.h"
+#import "TXTicketQueryViewController.h"
 #import "TXTicketOrderViewController.h"
 #import "TXAdsModel.h"
 #import "TXAdsGiftViewController.h"
@@ -241,7 +241,7 @@ static NSString* reuseIdentifierMall = @"TXMembersbleCollectionViewCell";
                     @[@"机票预订",@"热门景区",@"超值酒店",@"网红美食"]];
         NSArray* classArr = @[@[],
                               @[@"TXBecomeVipViewController",@"TXTicketOrderViewController",@"礼包",@""],
-                              @[@"TXTicketScreeningViewController",@"",@"",@""]];
+                              @[@"TXTicketQueryViewController",@"",@"",@""]];
         for (int i=0; i<imagesArr.count; i++) {
             NSArray *subTitlesArray = [titleArr lz_safeObjectAtIndex:i];
             NSArray *subImagesArray = [imagesArr lz_safeObjectAtIndex:i];
