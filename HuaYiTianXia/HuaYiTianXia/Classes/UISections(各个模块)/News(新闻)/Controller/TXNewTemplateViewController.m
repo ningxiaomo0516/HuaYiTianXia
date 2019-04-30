@@ -59,6 +59,18 @@ static NSString * const reuseIdentifierSectionHeaderView = @"SCTableViewSectionH
         [self loadNewsData];
     }];
     [self loadRollLabelData];
+    [kNotificationCenter addObserver:self selector:@selector(receiveNotification:) name:@"dealwithNewPushMessage" object:nil];
+}
+
+- (void)receiveNotification:(NSNotification *)notification {
+    NSDictionary *resultDic = [notification object];
+    NSString *kid = [resultDic lz_objectForKey:@"id"];
+    TXWebViewController *vc = [[TXWebViewController alloc] init];
+    vc.title = @"新闻详情";
+    NSString *url = kAppendH5URL(DomainName, NewsDetailsH5, kid);
+    TTLog(@" h5 url ---- %@",url);
+    vc.webUrl = kAppendH5URL(DomainName, NewsDetailsH5, kid);
+    TTPushVC(vc);
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -88,7 +100,7 @@ static NSString * const reuseIdentifierSectionHeaderView = @"SCTableViewSectionH
             if (model.errorcode==20000&&model.data.content!=nil) {
                 self.rollText = model.data.content;
                 TTLog(@"model.content -- %@",model.data.content);
-                self.horizontalMarquee.text = model.data.content;
+                self.horizontalMarquee.text = [NSString stringWithFormat:@"到达的方法发大水发方法说法是飞洒发发发发发沙发沙发发发发沙%@发发",model.data.content];
             }
             [self.tableView reloadData];
         }else{
@@ -152,17 +164,13 @@ static NSString * const reuseIdentifierSectionHeaderView = @"SCTableViewSectionH
         TXMallGoodsBannerTableViewCell* tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierBanner forIndexPath:indexPath];
         tools.bannerArray = self.bannerArray;
         return tools;
-    }else if(indexPath.section==1){
+    }else if(indexPath.section==1&&self.rollText.length!=0){
         UITableViewCell *tools = [tableView dequeueReusableCellWithIdentifier:@"TTRollLabelWebViewCell" forIndexPath:indexPath];
         tools.backgroundColor = kWhiteColor;
         [tools.contentView addSubview:self.horizontalMarquee];
+        tools.selectionStyle = UITableViewCellSelectionStyleNone;
         // 开启跑马灯
         [self.horizontalMarquee marqueeOfSettingWithState:MarqueeStart_H];
-//        [self.horizontalMarquee mas_makeConstraints:^(MASConstraintMaker *make) {
-//            make.centerY.equalTo(tools.contentView);
-//            make.left.equalTo(@(IPHONE6_W(15)));
-//            make.right.equalTo(tools.contentView.mas_right).offset(IPHONE6_W(-15));
-//        }];
         return tools;
     }else{
         TXNewTemplateTableViewCell  *tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
@@ -172,12 +180,20 @@ static NSString * const reuseIdentifierSectionHeaderView = @"SCTableViewSectionH
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return (self.bannerArray.count>0&&indexPath.section==0)?IPHONE6_W(180):IPHONE6_W(108);
+    if((self.rollText.length>0&&indexPath.section==1)){
+        return IPHONE6_W(50);
+    }else{
+        return (self.bannerArray.count>0&&indexPath.section==0)?IPHONE6_W(180):IPHONE6_W(108);
+    }
 }
 
 // 多少个分组 section
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return (self.bannerArray.count>0)?3:2;
+    if (self.rollText.length>0) {
+        return (self.bannerArray.count>0)?3:1;
+    }else{
+        return (self.bannerArray.count>0)?2:1;
+    }
 }
 
 /// 返回多少
@@ -187,53 +203,47 @@ static NSString * const reuseIdentifierSectionHeaderView = @"SCTableViewSectionH
 
 #pragma mark -------------- 设置Header高度 --------------
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    if ((self.bannerArray.count>0&&section==0)) {
-        return 0.f;
-    }else if((self.rollText.length>0&&section==1)){
+    if ((self.bannerArray.count>0&&section==0)||(self.rollText.length>0&&section==1)) {
         return 0.f;
     }else{
         return 44.0f;
     }
-//    return (self.bannerArray.count>0&&section==0)?0.f:44.0f;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
-    if (self.rollText.length == 0) {
-        if (self.dataArray.count-1==section) {
-            return 0.0f;
-        }
+    if ((self.bannerArray.count>0&&section==0)) {
+        return 10.f;
+    }else if (self.rollText.length >= 0 && section == 1) {
         return 10.0f;
     }else{
-        if (section!=0) {
-            return 0.0f;
-        }
-        return 10.0f;
+        return 0.0f;
     }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if (((self.bannerArray.count>0&&indexPath.section==0)||(indexPath.section==1))) {
         
+    }else{
+        NewsRecordsModel *model = self.dataArray[indexPath.row];
+        TXWebViewController *vc = [[TXWebViewController alloc] init];
+        vc.title = @"新闻详情";
+        vc.webUrl = kAppendH5URL(DomainName, NewsDetailsH5, model.kid)
+        TTPushVC(vc);
     }
-    NewsRecordsModel *model = self.dataArray[indexPath.row];
-    TXWebViewController *vc = [[TXWebViewController alloc] init];
-    vc.title = @"新闻详情";
-    vc.webUrl = kAppendH5URL(DomainName, NewsDetailsH5, model.kid)
-    TTPushVC(vc);
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 #pragma mark -------------- 设置组头 --------------
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     SCTableViewSectionHeaderView *headerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:reuseIdentifierSectionHeaderView];
-    if (self.bannerArray.count>0&&section==1) {
+    if (self.bannerArray.count>0&&section==2) {
         NSString *titleTextStr = @"新闻动态";
         NSString *subtitleTestStr = @"";
         headerView.lineView.hidden = NO;
         headerView.titleLabel.text = titleTextStr;
         headerView.subtitleLabel.text = subtitleTestStr;
     }else if((self.rollText.length>0&&section==1)){
-        
+        return [UIView new];
     }else{
         NSString *titleTextStr = @"新闻动态";
         NSString *subtitleTestStr = @"";
@@ -282,7 +292,7 @@ static NSString * const reuseIdentifierSectionHeaderView = @"SCTableViewSectionH
 /** 横向 跑马灯 */
 - (JhtHorizontalMarquee *)horizontalMarquee {
     if (!_horizontalMarquee) {
-        _horizontalMarquee = [[JhtHorizontalMarquee alloc] initWithFrame:CGRectMake(IPHONE6_W(15), 20, self.view.width-IPHONE6_W(30), 40) singleScrollDuration:0.0];
+        _horizontalMarquee = [[JhtHorizontalMarquee alloc] initWithFrame:CGRectMake(IPHONE6_W(15), 0, self.view.width-IPHONE6_W(30), IPHONE6_W(50)) singleScrollDuration:0.0];
         _horizontalMarquee.tag = 100;
         _horizontalMarquee.backgroundColor = kClearColor;
         _horizontalMarquee.textColor = kTextColor51;
@@ -290,6 +300,10 @@ static NSString * const reuseIdentifierSectionHeaderView = @"SCTableViewSectionH
     }
     
     return _horizontalMarquee;
+}
+
+- (void)dealloc{
+    [kNotificationCenter removeObserver:self];
 }
 
 @end

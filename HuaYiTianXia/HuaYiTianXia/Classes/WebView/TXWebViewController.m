@@ -25,7 +25,7 @@
     [self initView];
 //    self.webUrl = @"http://www.baidu.com";
     [self loadData];
-    
+    TTLog(@"华翼天下-掌上共享飞机平台 --- %@",self.webUrl);
     if ([self.title isEqualToString:@"农保电子协议"]) {
         UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithImage:kGetImage(@"all_btn_close_grey")
                                                                      style:UIBarButtonItemStylePlain

@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "TXPushMessageModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface TXSystemTableViewCell : UITableViewCell
@@ -15,6 +15,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) UIImageView   *imagesView;
 @property (nonatomic, strong) UILabel       *subtitleLabel;
 @property (nonatomic, strong) UILabel       *amountLabel;
+@property (nonatomic, strong) UILabel       *dateLabel;
+
+@property (nonatomic, strong) PushMessageModel *messageModel;
 @end
 
 NS_ASSUME_NONNULL_END

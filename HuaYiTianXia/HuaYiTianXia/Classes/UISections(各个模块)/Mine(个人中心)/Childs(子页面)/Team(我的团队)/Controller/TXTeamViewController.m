@@ -16,6 +16,10 @@ static NSString * const reuseIdentifier = @"TXTeamTableViewCell";
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *dataArray;
 @property (nonatomic, strong) SCNoDataView *noDataView;
+/// 每页多少数据
+@property (nonatomic, assign) NSInteger pageSize;
+/// 当前页
+@property (nonatomic, assign) NSInteger pageIndex;
 @end
 
 
@@ -25,36 +29,53 @@ static NSString * const reuseIdentifier = @"TXTeamTableViewCell";
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self initView];
+    self.pageSize = 20;
+    self.pageIndex = 1;
     [self.view showLoadingViewWithText:@"加载中..."];
     [self requestPersonalCenterData];
     
     // 下拉刷新
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        //将页码重新置为1
+        self.pageIndex = 1;
+        [self requestPersonalCenterData];
+    }];
+    
+    /// 上拉加载
+    self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+        self.pageIndex++;// 页码+1
         [self requestPersonalCenterData];
     }];
 }
 
 - (void) requestPersonalCenterData{
-    [SCHttpTools getWithURLString:kHttpURL(@"customer/MyTeam") parameter:nil success:^(id responseObject) {
+    NSMutableDictionary *parameter = [[NSMutableDictionary alloc] init];
+    [parameter setObject:@(self.pageIndex) forKey:@"page"];     // 当前页
+    [parameter setObject:@(self.pageSize) forKey:@"pageSize"];  // 每页条数
+    [SCHttpTools postWithURLString:kHttpURL(@"customer/MyTeamNew") parameter:parameter success:^(id responseObject) {
         NSDictionary *result = responseObject;
         if ([result isKindOfClass:[NSDictionary class]]) {
             TXTeamModel *model = [TXTeamModel mj_objectWithKeyValues:result];
             if (model.errorcode == 20000) {
-                [self.dataArray addObjectsFromArray:model.data];
+                if (self.pageIndex==1) {
+                    [self.dataArray removeAllObjects];
+                }
+                [self.dataArray addObjectsFromArray:model.data.list];
             }else{
                 Toast(model.message);
             }
-            [self analysisData];
-            [self.tableView reloadData];
-            [self.tableView.mj_header endRefreshing];
-            
         }else{
-            Toast(@"个人中心数据获取失败");
+            Toast(@"我的团队数据获取失败");
         }
+        [self analysisData];
         [self.view dismissLoadingView];
+        [self.tableView reloadData];
+        [self.tableView.mj_header endRefreshing];
+        [self.tableView.mj_footer endRefreshing];
     } failure:^(NSError *error) {
         TTLog(@" -- error -- %@",error);
         [self.tableView.mj_header endRefreshing];
+        [self.tableView.mj_footer endRefreshing];
         [self.view dismissLoadingView];
     }];
 }

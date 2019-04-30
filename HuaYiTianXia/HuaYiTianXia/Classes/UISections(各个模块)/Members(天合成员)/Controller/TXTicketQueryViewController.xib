@@ -136,7 +136,7 @@
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mine_btn_enter" translatesAutoresizingMaskIntoConstraints="NO" id="oxK-ZN-LfS">
                             <rect key="frame" x="316" y="118.5" width="14" height="14"/>
                         </imageView>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="agQ-nA-CyH">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="agQ-nA-CyH">
                             <rect key="frame" x="15" y="161" width="315" height="45"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="45" id="R1B-lI-K3l"/>

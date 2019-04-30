@@ -77,14 +77,14 @@
         Toast(@"请输入登录密码");
         return;
     }
+    
+    NSString *registerid = [kUserDefaults objectForKey:@"registerid"];
     kShowMBProgressHUD(self.view);
     NSMutableDictionary *parameter = [[NSMutableDictionary alloc] init];
     [parameter setObject:self.telTextField.text forKey:@"mobile"];
     [parameter setObject:self.pwdTextField.text forKey:@"pwd"];
-    [parameter setObject:kUserInfo.registrationID forKey:@"jg_deviceID"];
-    Toast(kUserInfo.registrationID);
+    [parameter setObject:registerid forKey:@"jg_deviceID"];
     
-    NSString *temp_registrationID = kUserInfo.registrationID;
     [SCHttpTools postWithURLString:@"customer/login" parameter:parameter success:^(id responseObject) {
         if (responseObject){
             id result = responseObject;
@@ -117,10 +117,8 @@
                             }
                         }
                     }
-                    kUserInfo.registrationID = temp_registrationID;
                     [userModel yy_modelSetWithDictionary:dictionary];
                     [userModel dump];
-                    TTLog(@"kUserInfo.registrationID -- %@",kUserInfo.registrationID);
                     [kNotificationCenter postNotificationName:@"reloadMineData" object:nil];
                     [self didTapPopButton:nil];
                     Toast(@"登录成功");

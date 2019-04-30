@@ -299,4 +299,25 @@
     }
     return weekStr;
 }
+
+/**
+ *  字符串转星期几
+ *
+ *  @param currentDate 当前日期(2019-04-30)
+ *  @return 返回星期-到星期天中的某一天
+ */
++ (NSString*)tt_weekdayStringFromDate:(NSString*)currentDate {
+    NSDateFormatter* dateFormat = [[NSDateFormatter alloc]init];//实例化一个NSDateFormatter对象
+    [dateFormat setDateFormat:@"yyyy-MM-dd"];//设定时间格式,要注意跟下面的dateString匹配，否则日起将无效
+    NSDate*inputDate =[dateFormat dateFromString:currentDate];
+    
+    
+    NSArray *weekdays = [NSArray arrayWithObjects: [NSNull null], @"周日", @"周一", @"周二", @"周三", @"周四", @"周五", @"周六", nil];
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierChinese];
+    NSTimeZone *timeZone = [[NSTimeZone alloc] initWithName:@"Asia/Shanghai"];
+    [calendar setTimeZone: timeZone];
+    NSCalendarUnit calendarUnit = NSCalendarUnitWeekday;
+    NSDateComponents *theComponents = [calendar components:calendarUnit fromDate:inputDate];
+    return [weekdays objectAtIndex:theComponents.weekday];
+}
 @end

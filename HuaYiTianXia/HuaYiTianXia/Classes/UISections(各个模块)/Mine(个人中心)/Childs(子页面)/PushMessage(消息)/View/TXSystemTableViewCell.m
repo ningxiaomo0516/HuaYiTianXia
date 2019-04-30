@@ -24,10 +24,31 @@
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         self.contentView.backgroundColor = [UIColor clearColor];
-        self.selectionStyle = UITableViewCellSelectionStyleNone;
+//        self.selectionStyle = UITableViewCellSelectionStyleNone;
         [self initView];
     }
     return self;
+}
+
+- (void)setMessageModel:(PushMessageModel *)messageModel{
+    _messageModel = messageModel;
+    self.titleLabel.text = messageModel.title;
+    self.subtitleLabel.text = messageModel.content;
+    self.dateLabel.text = messageModel.datetime;
+    /// 消息类型 2：转出记录 3：转入记录 4：后台公告 5：通知
+    if (messageModel.messageType==2) {
+        self.amountLabel.text = [NSString stringWithFormat:@"- %@",messageModel.money];
+        self.imagesView.image = kGetImage(@"转账图标2");
+        self.amountLabel.textColor = HexString(@"#1296DB");
+    }else if(messageModel.messageType==3){
+        self.imagesView.image = kGetImage(@"转账图标");
+        self.amountLabel.text = [NSString stringWithFormat:@"+ %@",messageModel.money];
+    }else if(messageModel.messageType==4){
+        self.imagesView.image = kGetImage(@"c51_消息");
+        self.amountLabel.text = @"";
+    }else if(messageModel.messageType==5){
+        
+    }
 }
 
 - (void) initView{
@@ -35,6 +56,7 @@
     [self addSubview:self.imagesView];
     [self addSubview:self.subtitleLabel];
     [self addSubview:self.amountLabel];
+    [self addSubview:self.dateLabel];
     
     [self.imagesView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(@(IPHONE6_W(15)));
@@ -44,6 +66,10 @@
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(@(IPHONE6_W(65)));
         make.top.equalTo(@(IPHONE6_W(15)));
+    }];
+    [self.dateLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(self.titleLabel);
+        make.left.equalTo(self.titleLabel.mas_right).offset(IPHONE6_W(15));
     }];
     [self.subtitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.titleLabel);
@@ -84,6 +110,13 @@
         _amountLabel = [UILabel lz_labelWithTitle:@"" color:HexString(@"#FC822B") font:kFontSizeScBold20];
     }
     return _amountLabel;
+}
+
+- (UILabel *)dateLabel{
+    if (!_dateLabel) {
+        _dateLabel = [UILabel lz_labelWithTitle:@"" color:kTextColor102 font:kFontSizeMedium12];
+    }
+    return _dateLabel;
 }
 
 @end

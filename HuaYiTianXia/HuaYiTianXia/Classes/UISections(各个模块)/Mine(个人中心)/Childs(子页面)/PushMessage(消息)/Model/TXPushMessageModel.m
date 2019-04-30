@@ -21,7 +21,15 @@
 
 @implementation PushMessageData
 + (NSDictionary *)replacedKeyFromPropertyName{
-    return @{@"list"        : @"records"};
+    return @{@"list"            : @"records",
+             @"realname"        : @"name",
+             @"account"         : @"mobile",
+             @"tradingAmount"   : @"money",
+             @"orderid"         : @"id",
+             @"tradingTime"     : @"time",
+             @"avatarURL"       : @"headImg",
+             @"nickname"        : @"nickName",
+             @"datetime"        : @"time"};
 }
 + (NSDictionary *)objectClassInArray{
     return @{@"list" : [PushMessageModel class]};
@@ -34,6 +42,12 @@
     return @{@"kid"        : @"id",
              @"messageType": @"status",
              @"datetime"   : @"time"};
+}
+@end
+
+@implementation PushHandleModel
++ (NSDictionary *)replacedKeyFromPropertyName{
+    return @{@"kid"        : @"id"};
 }
 @end
 

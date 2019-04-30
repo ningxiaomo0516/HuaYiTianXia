@@ -107,4 +107,12 @@
 + (NSMutableAttributedString *) setupTextColor:(UIColor *)color currentText:(NSString *)currentText index:(NSInteger)index endIndex:(NSInteger)endIndex;
 
 + (NSString *)tt_dateWeekWithDateString:(NSString *)dateString;
+
+/**
+ *  字符串转星期几
+ *
+ *  @param currentDate 当前日期(2019-04-30)
+ *  @return 返回星期-到星期天中的某一天
+ */
++ (NSString *)tt_weekdayStringFromDate:(NSString*)currentDate;
 @end

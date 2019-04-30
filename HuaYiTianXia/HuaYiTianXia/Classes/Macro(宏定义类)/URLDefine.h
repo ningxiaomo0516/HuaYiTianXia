@@ -14,6 +14,8 @@ extern NSString *const DynamicUrl;
 /// 域名
 extern NSString *const DomainName;
 
+/// 推送详情
+extern NSString *const PushDetailsH5;
 /// 新闻详情(已做)
 extern NSString *const NewsDetailsH5;
 /// 商品详情

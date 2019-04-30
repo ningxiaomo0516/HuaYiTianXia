@@ -9,6 +9,9 @@
 #import "TXTicketQueryViewController.h"
 #import "LZDatePickerView.h"
 #import "TXTicketListViewController.h"
+#import "FMSelectedCityViewController.h"
+
+
 @interface TXTicketQueryViewController ()
 
 @property (nonatomic, strong) UIView *navigationView;
@@ -47,19 +50,52 @@
     // Do any additional setup after loading the view from its nib.
     
     [self initView];
-    self.dep_city_label.text = @"广州";
-    self.arv_city_label.text = @"上海";
+    NSString* province = [kUserDefaults objectForKey:@"city"];
+    self.dep_city_label.text = province;
+    self.arv_city_label.text = @"北京";
     self.date_select_label.text = [Utils lz_getCurrentDate];
-    self.week_select_label.text = @"星期五";
+    /// 根据当前日期转换星期
+    self.week_select_label.text = [SCSmallTools tt_weekdayStringFromDate:[Utils lz_getCurrentDate]];
+    self.dep_city_btn.tag = 100;
+    self.arv_city_btn.tag = 200;
     MV(weakSelf)
+    /// 出发城市选择
+    [self.dep_city_btn lz_handleControlEvent:UIControlEventTouchUpInside withBlock:^{
+        [weakSelf citySelected:self.dep_city_btn];
+    }];
+    /// 到达城市选择
+    [self.arv_city_btn lz_handleControlEvent:UIControlEventTouchUpInside withBlock:^{
+        [weakSelf citySelected:self.arv_city_btn];
+    }];
+    /// 日期选择
     [self.date_select_btn lz_handleControlEvent:UIControlEventTouchUpInside withBlock:^{
         [weakSelf showDataPicker];
+    }];
+    /// 搜索按
+    [self.searchButton lz_handleControlEvent:UIControlEventTouchUpInside withBlock:^{
+        [weakSelf searchBtnClick];
     }];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     self.navigationController.navigationBar.hidden = YES;
+}
+
+- (void) citySelected:(UIButton *) sender{
+    MV(weakSelf)
+    FMSelectedCityViewController *vc= [[FMSelectedCityViewController alloc] init];
+    LZNavigationController *nav = [[LZNavigationController alloc] initWithRootViewController:vc];
+    [vc returnText:^(NSString *cityname) {
+        if (sender.tag == 100) {
+            weakSelf.dep_city_label.text = cityname;
+        }else{
+            weakSelf.arv_city_label.text = cityname;
+        }
+    }];
+    [self.navigationController presentViewController:nav animated:YES completion:^{
+        TTLog(@"城市选择");
+    }];
 }
 
 /// 选择机票查询日期
@@ -83,6 +119,7 @@
      */
     [LZDatePickerView showDatePickerWithTitle:@"" dateType:UIDatePickerModeDate defaultSelValue:defaultSelValue minDateStr:minDateStr maxDateStr:maxDateStr isAutoSelect:NO resultBlock:^(NSString *selectValue) {
         weakSelf.date_select_label.text = selectValue;
+        weakSelf.week_select_label.text = [SCSmallTools tt_weekdayStringFromDate:selectValue];
     }];
 }
 
@@ -170,7 +207,7 @@
         _rightButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [_rightButton setTitleColor:kTextColor51 forState:UIControlStateNormal];
         _rightButton.titleLabel.font = kFontSizeMedium12;
-        [_rightButton setTitle:@"成都" forState:UIControlStateNormal];
+        [_rightButton setTitle:[kUserDefaults objectForKey:@"city"] forState:UIControlStateNormal];
         [_rightButton setImage:kGetImage(@"c48_btn_定位") forState:UIControlStateNormal];
     }
     return _rightButton;

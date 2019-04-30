@@ -32,7 +32,7 @@ static NSString* reuseIdentifier = @"TXTicketListTableViewCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.title = @"查询详情";
+    self.title = @"机票查询";
     [self initView];
     [self.view showLoadingViewWithText:@"加载中..."];
     [self GetTicketDataRequest];

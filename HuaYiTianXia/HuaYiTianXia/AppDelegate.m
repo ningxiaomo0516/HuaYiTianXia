@@ -24,9 +24,14 @@
 #import "TXAdsViewController.h"
 #import "TXVersionModel.h"
 #import "TXAdsModel.h"
+#import "TTLocation.h"
+#import "TXPushMessageModel.h"
 
+#import "TXMessageChildViewController.h"
+#import "TXWebViewController.h"
+#import "TXTeamViewController.h"
 @interface AppDelegate ()<WXApiDelegate,JPUSHRegisterDelegate>
-
+@property(nonatomic, strong)TTLocation* location;
 @end
 
 @implementation AppDelegate
@@ -89,13 +94,13 @@
     NSNotificationCenter *defaultCenter = kNotificationCenter;
     [defaultCenter addObserver:self selector:@selector(networkDidLogin:) name:kJPFNetworkDidLoginNotification object:nil];
     [self showMainViewController];
-//    [self setVersionVC];
     if(![[NSUserDefaults standardUserDefaults] boolForKey:@"firstLaunch"]){
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"firstLaunch"];
-//        [self guidePages];
-    }else{
-    
+        [self guidePages];
     }
+    
+    //开启定位
+    [self.location startLocation];
     return YES;
 }
 
@@ -123,12 +128,8 @@
         //下面是我拿到registeID,发送给服务器的代码，可以根据你需求来处理
         NSString *registerid = [JPUSHService registrationID];
         TTLog(@"APPDelegate开始上传rgeisterID -- %@",registerid);
-        kUserInfo.registrationID = registerid;
-        [kUserInfo dump];
-        NSString *idd = [NSString stringWithFormat:@"--- %@ --- \n --- %@ ---",kUserInfo.registrationID,registerid];
-        Toast(idd);
-    }else{
-        Toast(@"有个卵");
+        [kUserDefaults setObject:registerid forKey:@"registerid"];
+        [kUserDefaults synchronize];
     }
 }
 
@@ -432,11 +433,54 @@
     [JPUSHService setBadge:0];
     [JPUSHService resetBadge];
     application.applicationIconBadgeNumber = 0;
-    TTLog(@"userInfo  - %@",userInfo);
+    UINavigationController *nav = (UINavigationController *)self.window.rootViewController;
+    TXWebViewController *webVC = [[TXWebViewController alloc] init];
+    webVC.webUrl = @"http://www.baidu.com";
+    [webVC setHidesBottomBarWhenPushed:YES];
+    [nav pushViewController:webVC animated:YES];
+    /*
+    TTLog(@"userInfot推送   - %@",[userInfo lz_objectForKey:@"obj"]);
+    PushHandleModel *messageModel = [PushHandleModel mj_objectWithKeyValues:[userInfo lz_objectForKey:@"obj"]];
+//    messageType等于2或者3，使用原生转账页面，需要请求接口(2：转出记录 3：转入记录)
+//    messageType等于4，使用H5页面，拼接公告地址
+//    messageType等于5，使用原生页面，标题、内容、时间
+//    messageType等于6，使用H5页面，拼接新闻地址
+//    messageType等于7，直接跳转“我的团队”（未登陆先登陆）
+    UITabBarController* tabVC = (UITabBarController*)application.keyWindow.rootViewController;
+    LZNavigationController* navVC = tabVC.selectedViewController;
+
+    if (messageModel.messageType==2||messageModel.messageType==3) {
+        TXMessageChildViewController *vc = [[TXMessageChildViewController alloc] initPushMessageModel:messageModel];
+        [navVC pushViewController:vc animated:YES];
+    }else if(messageModel.messageType==4){
+//        TXWebViewController *vc = [[TXWebViewController alloc] init];
+//
+//        vc.title = @"新闻详情";
+//        NSString *outID = [NSString stringWithFormat:@"%ld",(long)messageModel.kid];
+//        vc.webUrl = kAppendH5URL(DomainName, PushDetailsH5, outID);
+//        [navVC pushViewController:vc animated:YES];
+        NSDictionary *resultDic = [userInfo lz_objectForKey:@"obj"];
+        [kNotificationCenter postNotificationName:@"dealwithNewPushMessage" object:resultDic];
+    }else if(messageModel.messageType==5){
+//        TXMessageChildAdsViewController *vc = [[TXMessageChildAdsViewController alloc] init];
+//        vc.title = @"消息详情";
+//        [navVC pushViewController:vc animated:YES];
+    }else if(messageModel.messageType==6){
+        TXWebViewController *vc = [[TXWebViewController alloc] init];
+        vc.title = @"新闻详情";
+        NSString *outID = [NSString stringWithFormat:@"%ld",(long)messageModel.kid];
+        vc.webUrl = kAppendH5URL(DomainName, PushDetailsH5, outID);
+        [navVC pushViewController:vc animated:YES];
+    }else if(messageModel.messageType==7){
+        TXTeamViewController *vc = [[TXTeamViewController alloc] init];
+        [navVC pushViewController:vc animated:YES];
+        //// 提示登录
+    }
 //    NSString *voiceStr = userInfo[@"aps"][@"alert"];
     //对接送进行解析
     if (userInfo[@"iosNotification extras key"] && [userInfo[@"iosNotification extras key"] isKindOfClass:[NSString class]]) {
         NSDictionary* jsonDict  = [self dictionaryWithJsonString:userInfo[@"iosNotification extras key"]];
+        TTLog(@"执行了推送处理");
         //        NSString* type = [NSString stringWithFormat:@"%@",jsonDict[@"type"]];
         //        NSString* url = jsonDict[@"url"];
         //        UITabBarController* tabVC = (UITabBarController*)application.keyWindow.rootViewController;
@@ -476,6 +520,7 @@
         //        }
         TTLog(@"jsonDict = %@",jsonDict);
     }
+     */
 }
 
 - (NSDictionary *)dictionaryWithJsonString:(NSString *)jsonString{
@@ -507,6 +552,13 @@
 - (void)cleanNotNum{
     [JPUSHService resetBadge];
     [self cleanNotificationNumber];
+}
+
+- (TTLocation *)location{
+    if (!_location) {
+        _location = [[TTLocation alloc] init];
+    }
+    return _location;
 }
 
 - (void)cleanNotificationNumber{

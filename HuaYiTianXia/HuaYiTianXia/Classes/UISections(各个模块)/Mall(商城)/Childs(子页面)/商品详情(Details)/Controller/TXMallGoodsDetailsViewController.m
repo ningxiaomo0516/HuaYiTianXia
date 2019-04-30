@@ -126,7 +126,7 @@ TXMallGoodsSpecTableViewCellDelegate,WKUIDelegate,WKNavigationDelegate>
             }else if(kUserInfo.isValidation==1){
                 Toast(@"实名认证审核中,请稍后再试!");
             }else{
-                // 退出登录提示
+                // 立即认证提示
                 UIAlertController *alerController = [UIAlertController addAlertReminderText:@"提示"
                                                                                     message:@"是否立即实名认证?"
                                                                                 cancelTitle:@"好的"

@@ -46,7 +46,11 @@ static NSString * const reuseIdentifier = @"TXMineTableViewCell";
 }
 
 - (void) logoutUserRequest{
-    [SCHttpTools getWithURLString:kHttpURL(@"customer/outlogin") parameter:nil success:^(id responseObject) {
+    NSString *registerid = [kUserDefaults objectForKey:@"registerid"];
+    kShowMBProgressHUD(self.view);
+    NSMutableDictionary *parameter = [[NSMutableDictionary alloc] init];
+    [parameter setObject:registerid forKey:@"jg_deviceID"];
+    [SCHttpTools getWithURLString:kHttpURL(@"customer/outlogin") parameter:parameter success:^(id responseObject) {
         NSDictionary *result = responseObject;
         if ([result isKindOfClass:[NSDictionary class]]) {
             TTUserDataModel *model = [TTUserDataModel mj_objectWithKeyValues:result];
@@ -56,14 +60,17 @@ static NSString * const reuseIdentifier = @"TXMineTableViewCell";
                 [[AppDelegate appDelegate] jumpMainVC];
                 [kUserInfo logout];
                 [kUserInfo dump];
+                Toast(@"退出登录成功");
             }else{
                 Toast(model.message);
             }
         }else{
             Toast(@"个人中心数据获取失败");
         }
+        kHideMBProgressHUD(self.view);
     } failure:^(NSError *error) {
         TTLog(@" -- error -- %@",error);
+        kHideMBProgressHUD(self.view);
     }];
 
 }

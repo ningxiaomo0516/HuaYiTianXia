@@ -15,7 +15,17 @@
              @"message"     : @"msg"};
 }
 + (NSDictionary *)objectClassInArray{
-    return @{@"data" : [TeamModel class]};
+    return @{@"data" : [TeamData class]};
+}
+@end
+
+
+@implementation TeamData
++ (NSDictionary *)replacedKeyFromPropertyName{
+    return @{@"list"        : @"records"};
+}
++ (NSDictionary *)objectClassInArray{
+    return @{@"list" : [TeamModel class]};
 }
 @end
 
