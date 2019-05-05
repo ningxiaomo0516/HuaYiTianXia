@@ -127,7 +127,7 @@
         TXLoginViewController *view = [[TXLoginViewController alloc] init];
         LZNavigationController *navigation = [[LZNavigationController alloc] initWithRootViewController:view];
         [viewController presentViewController:navigation animated:YES completion:^{
-            TTLog(@"个人信息修改");
+            TTLog(@"登录界面");
         }];
         return NO;
     }

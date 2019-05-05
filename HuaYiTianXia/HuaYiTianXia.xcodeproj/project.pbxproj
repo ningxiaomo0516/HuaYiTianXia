@@ -272,6 +272,7 @@
 		E7AA9DDA22437A1700C15483 /* TXTopupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7AA9DD922437A1700C15483 /* TXTopupViewController.m */; };
 		E7AA9DDF224392FB00C15483 /* TXRolloutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7AA9DDE224392FB00C15483 /* TXRolloutViewController.m */; };
 		E7AA9DE2224394A600C15483 /* TXRolloutTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7AA9DE1224394A600C15483 /* TXRolloutTableViewCell.m */; };
+		E7ACCE2D227EDC1B00CFB662 /* TXEppoListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7ACCE2C227EDC1B00CFB662 /* TXEppoListViewController.m */; };
 		E7C42E7E224B770200F3FB1A /* SCHttpTools.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C42E71224B770200F3FB1A /* SCHttpTools.m */; };
 		E7C42E7F224B770200F3FB1A /* SCHttpToolsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C42E73224B770200F3FB1A /* SCHttpToolsModel.m */; };
 		E7C42E80224B770200F3FB1A /* AFLoadDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C42E76224B770200F3FB1A /* AFLoadDataManager.m */; };
@@ -829,6 +830,8 @@
 		E7AA9DDE224392FB00C15483 /* TXRolloutViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXRolloutViewController.m; sourceTree = "<group>"; };
 		E7AA9DE0224394A600C15483 /* TXRolloutTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXRolloutTableViewCell.h; sourceTree = "<group>"; };
 		E7AA9DE1224394A600C15483 /* TXRolloutTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXRolloutTableViewCell.m; sourceTree = "<group>"; };
+		E7ACCE2B227EDC1B00CFB662 /* TXEppoListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXEppoListViewController.h; sourceTree = "<group>"; };
+		E7ACCE2C227EDC1B00CFB662 /* TXEppoListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXEppoListViewController.m; sourceTree = "<group>"; };
 		E7C42E70224B770200F3FB1A /* SCHttpTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCHttpTools.h; sourceTree = "<group>"; };
 		E7C42E71224B770200F3FB1A /* SCHttpTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCHttpTools.m; sourceTree = "<group>"; };
 		E7C42E72224B770200F3FB1A /* SCHttpToolsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCHttpToolsModel.h; sourceTree = "<group>"; };
@@ -1205,6 +1208,8 @@
 				E7269911223F7881003A5043 /* TXAgriculturalViewController.m */,
 				E7089EF4225D7C6C00A7EF27 /* TXMallEppoViewController.h */,
 				E7089EF5225D7C6C00A7EF27 /* TXMallEppoViewController.m */,
+				E7ACCE2B227EDC1B00CFB662 /* TXEppoListViewController.h */,
+				E7ACCE2C227EDC1B00CFB662 /* TXEppoListViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -3259,6 +3264,7 @@
 				E7C9FCED22673BC7008FD260 /* TXTicketInfoTableViewCell.m in Sources */,
 				E74C964F2267877E000CBAF0 /* TXVersionTableViewCell.m in Sources */,
 				E78583C1223F98A800BBEA41 /* TXNewTemplateTableViewCell.m in Sources */,
+				E7ACCE2D227EDC1B00CFB662 /* TXEppoListViewController.m in Sources */,
 				E7691EE72255E3E5006A94D9 /* TTPasswordView.m in Sources */,
 				E72699E9223F7F58003A5043 /* UIScrollView+Extension.m in Sources */,
 				E78DCAE42265D12000252314 /* LZBasePickerView.m in Sources */,

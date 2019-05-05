@@ -58,7 +58,7 @@
     
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(@(IPHONE6_W(15)));
-        make.top.equalTo(self.tagView.mas_top).offset(15);
+        make.top.equalTo(self.tagView.mas_top).offset(12);
     }];
     
     [self.subtitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -68,7 +68,7 @@
     
     [self.tagView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.subtitleLabel).offset(IPHONE6_W(-15));
-        make.top.equalTo(self.contentView).offset(IPHONE6_W(6));
+        make.top.equalTo(self.contentView).offset(IPHONE6_W(2));
     }];
 
 }
@@ -98,7 +98,7 @@
 
 - (UILabel *)titleLabel{
     if (!_titleLabel) {
-        _titleLabel = [UILabel lz_labelWithTitle:@"产品规格：" color:kTextColor102  font:kFontSizeMedium13];
+        _titleLabel = [UILabel lz_labelWithTitle:@"产品规格：" color:kTextColor102  font:kFontSizeMedium15];
     }
     return _titleLabel;
 }

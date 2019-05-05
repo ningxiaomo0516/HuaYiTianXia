@@ -178,7 +178,7 @@ TXMallGoodsSpecTableViewCellDelegate,WKUIDelegate,WKNavigationDelegate>
         self.buyCount = (self.buyCount<2) ? 1 : (self.buyCount-= 1);
     }
     self.model.buyCount = self.buyCount;
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:3];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:2];
     [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationFade];
 }
 
@@ -222,21 +222,22 @@ TXMallGoodsSpecTableViewCellDelegate,WKUIDelegate,WKNavigationDelegate>
         self.model.buyCount = self.buyCount;
     }
     if (indexPath.section==0) {
-        TXMallGoodsBannerTableViewCell* tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierBanner forIndexPath:indexPath];
-        tools.bannerArray = self.model.banners;
-        return tools;
-
+        if (indexPath.row==0) {
+            TXMallGoodsBannerTableViewCell* tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierBanner forIndexPath:indexPath];
+            tools.bannerArray = self.model.banners;
+            return tools;
+        }else{
+            TXMallGoodsDetailsTableViewCell* tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierDetails forIndexPath:indexPath];
+            tools.model = self.model;
+            return tools;
+        }
     }else if(indexPath.section==1){
-        TXMallGoodsDetailsTableViewCell* tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierDetails forIndexPath:indexPath];
-        tools.model = self.model;
-        return tools;
-    }else if(indexPath.section==2){
         TXMallGoodsSpecTableViewCell *tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierSpec forIndexPath:indexPath];
         tools.delegate = self;
         tools.tagView.dataArray = self.model.prospec;
         tools.indexPath = indexPath;
         return tools;
-    }else if(indexPath.section==3){
+    }else if(indexPath.section==2){
         TXBuyCountTableViewCell *tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierBuynum forIndexPath:indexPath];
         MV(weakSelf)
         [tools.minusBtn lz_handleControlEvent:UIControlEventTouchUpInside withBlock:^{
@@ -275,20 +276,23 @@ TXMallGoodsSpecTableViewCellDelegate,WKUIDelegate,WKNavigationDelegate>
 
 // 多少个分组 section
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 5;
+    return 4;
 }
 
 /// 返回多少
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    if (section==0) return 2;
     return 1;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section==0) return IPHONE6_W(212);
-    if (indexPath.section==1) return IPHONE6_W(90);
-    if (indexPath.section==2) return IPHONE6_W(60);
-    if (indexPath.section==3) return IPHONE6_W(60);
-    if (indexPath.section==4){
+    if (indexPath.section==0) {
+        if (indexPath.row==0) return IPHONE6_W(250);
+        else return IPHONE6_W(90);
+    }
+    if (indexPath.section==1) return IPHONE6_W(50);
+    if (indexPath.section==2) return IPHONE6_W(50);
+    if (indexPath.section==3){
         return self.webViewHeight;
     }
     return UITableViewAutomaticDimension;
@@ -350,7 +354,7 @@ TXMallGoodsSpecTableViewCellDelegate,WKUIDelegate,WKNavigationDelegate>
         self.wkWebView.frame = CGRectMake(0, 0, self.view.frame.size.width, height);
         self.scrollView.frame = CGRectMake(0, 0, self.view.frame.size.width, height);
         self.scrollView.contentSize =CGSizeMake(self.view.frame.size.width, height);
-        [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:[NSIndexPath indexPathForRow:0 inSection:4], nil] withRowAnimation:UITableViewRowAnimationNone];
+        [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:[NSIndexPath indexPathForRow:0 inSection:3], nil] withRowAnimation:UITableViewRowAnimationNone];
     }else if([keyPath isEqualToString:@"title"]){
         if (object == self.wkWebView) {
             TTLog(@"self.wkWebView.title --- %@",self.wkWebView.title);

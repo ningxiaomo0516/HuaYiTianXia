@@ -58,6 +58,32 @@ static NSString * const reuseIdentifiers = @"TXSystemTableViewCell";
     }];
     
     [self isReloadData];
+    
+    [kNotificationCenter addObserver:self selector:@selector(receiveNotification:) name:@"dealwithSystemPushMessage" object:nil];
+
+}
+
+- (void)receiveNotification:(NSNotification *)infoNotification {
+    NSDictionary *resultDic = [infoNotification userInfo];
+    NSString *kid = [resultDic lz_objectForKey:@"info"];
+    NSString *messageType = [resultDic lz_objectForKey:@"messageType"];
+    PushMessageModel *messageModel = [[PushMessageModel alloc] init];
+    messageModel.outID = kid.integerValue;
+    if (messageType.integerValue==2||messageType.integerValue==3) { //// 拼接公告地址
+        [self jumpPushChildVC:messageModel messageType:23];
+    }else if (messageType.integerValue==5) {/// 新闻
+        [self jumpPushChildVC:messageModel messageType:5];
+    }
+}
+
+- (void) jumpPushChildVC:(PushMessageModel *)messageModel messageType:(NSInteger) messageType{
+    if (messageType==23) {
+        TXMessageChildViewController *vc = [[TXMessageChildViewController alloc] initPushMessageModel:messageModel];
+        TTPushVC(vc);
+    }else if(messageType==5){
+        TXMessageChildViewController *vc = [[TXMessageChildViewController alloc] initPushMessageModel:messageModel];
+        TTPushVC(vc);
+    }
 }
 
 /// 首次加载或者下拉刷新
@@ -265,6 +291,7 @@ static NSString * const reuseIdentifiers = @"TXSystemTableViewCell";
     if (messageModel.messageType==2||messageModel.messageType==3) {
         TXMessageChildViewController *vc = [[TXMessageChildViewController alloc] initPushMessageModel:messageModel];
         TTPushVC(vc);
+        [self jumpPushChildVC:messageModel messageType:23];
     }else if(messageModel.messageType==4){
         TXWebViewController *vc = [[TXWebViewController alloc] init];
         vc.title = @"新闻详情";
@@ -272,9 +299,7 @@ static NSString * const reuseIdentifiers = @"TXSystemTableViewCell";
         vc.webUrl = kAppendH5URL(DomainName, PushDetailsH5, outID);
         TTPushVC(vc);
     }else if(messageModel.messageType==5){
-        TXMessageChildAdsViewController *vc = [[TXMessageChildAdsViewController alloc] init];
-        vc.title = @"消息详情";
-        TTPushVC(vc);
+        [self jumpPushChildVC:messageModel messageType:5];
     }
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
@@ -306,7 +331,7 @@ static NSString * const reuseIdentifiers = @"TXSystemTableViewCell";
     if (!_noDataView) {
         _noDataView = [[SCNoDataView alloc] initWithFrame:self.view.bounds
                                                 imageName:@"c12_live_nodata"
-                                            tipsLabelText:@"暂无数据哦~"];
+                                            tipsLabelText:@"暂无消息哦~"];
         _noDataView.userInteractionEnabled = NO;
         [self.view insertSubview:_noDataView aboveSubview:self.tableView];
         [self.noDataView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -316,6 +341,10 @@ static NSString * const reuseIdentifiers = @"TXSystemTableViewCell";
         }];
     }
     return _noDataView;
+}
+
+- (void)dealloc{
+    [kNotificationCenter removeObserver:self];
 }
 
 @end

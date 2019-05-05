@@ -11,6 +11,7 @@
 #import "TXShoppingTableViewCell.h"
 #import "TXChoosePayTableViewCell.h"
 #import "TXPurchaseQuantityTableViewCell.h"
+#import "TXMessageChildTableViewCell.h"
 #import "TXGeneralModel.h"
 #import "TXAddressViewController.h"
 #import "TXAddressModel.h"
@@ -22,6 +23,7 @@ static NSString * const reuseIdentifierReceiveAddress = @"TXReceiveAddressTableV
 static NSString * const reuseIdentifierShopping = @"TXShoppingTableViewCell";
 static NSString * const reuseIdentifierChoosePay = @"TXChoosePayTableViewCell";
 static NSString * const reuseIdentifierPurchase = @"TXPurchaseQuantityTableViewCell";
+static NSString * const reuseIdentifierMessage = @"TXMessageChildTableViewCell";
 
 @interface TXSubmitOrderViewController ()<UITableViewDelegate,UITableViewDataSource,TTPopupViewDelegate>
 @property (nonatomic, strong) UITableView *tableView;
@@ -295,6 +297,13 @@ static NSString * const reuseIdentifierPurchase = @"TXPurchaseQuantityTableViewC
         }
             break;
         case 3: {
+            TXMessageChildTableViewCell* tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierMessage forIndexPath:indexPath];
+            tools.titleLabel.text = @"可用VH积分";
+            tools.subtitleLabel.text = kUserInfo.vrcurrency;
+            return tools;
+        }
+            break;
+        case 4: {
             TXGeneralModel *model = self.paymentArray[indexPath.row];
             TXChoosePayTableViewCell *tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierChoosePay forIndexPath:indexPath];
             tools.titleLabel.text = model.title;
@@ -310,12 +319,12 @@ static NSString * const reuseIdentifierPurchase = @"TXPurchaseQuantityTableViewC
 
 // 多少个分组 section
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 4;
+    return 5;
 }
 
 /// 返回多少
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (section==3) return self.paymentArray.count;
+    if (section==4) return self.paymentArray.count;
     return 1;
 }
 
@@ -327,7 +336,7 @@ static NSString * const reuseIdentifierPurchase = @"TXPurchaseQuantityTableViewC
 
 #pragma mark -- 设置Header高度
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    if (section==0||section==2) return 0;
+    if (section==0||section==2||section==3) return 0;
     return 10;
 }
 
@@ -348,7 +357,7 @@ static NSString * const reuseIdentifierPurchase = @"TXPurchaseQuantityTableViewC
     }
 }
 
--(UITableView *)tableView{
+- (UITableView *)tableView{
     if (!_tableView) {
         _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
         _tableView.showsVerticalScrollIndicator = false;
@@ -356,7 +365,8 @@ static NSString * const reuseIdentifierPurchase = @"TXPurchaseQuantityTableViewC
         [_tableView registerClass:[TXShoppingTableViewCell class] forCellReuseIdentifier:reuseIdentifierShopping];
         [_tableView registerClass:[TXChoosePayTableViewCell class] forCellReuseIdentifier:reuseIdentifierChoosePay];
         [_tableView registerClass:[TXPurchaseQuantityTableViewCell class] forCellReuseIdentifier:reuseIdentifierPurchase];
-        
+        [_tableView registerClass:[TXMessageChildTableViewCell class] forCellReuseIdentifier:reuseIdentifierMessage];
+
         [_tableView setSeparatorInset:UIEdgeInsetsMake(0,0,0,0)];
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _tableView.delegate = self;

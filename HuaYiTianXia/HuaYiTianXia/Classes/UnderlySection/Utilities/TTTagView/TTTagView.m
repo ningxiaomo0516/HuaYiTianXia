@@ -29,11 +29,11 @@
         }
         [tagBtn setTitle:_dataArray[i] forState:UIControlStateNormal];
         tagBtn.titleLabel.font = kFontSizeMedium13;
-        [tagBtn setTitleColor:kThemeColor forState:UIControlStateNormal];
-        [tagBtn setTitleColor:kWhiteColor forState:UIControlStateSelected];
-        [tagBtn setBackgroundImage:imageColor(kClearColor) forState:UIControlStateNormal];
-        [tagBtn setBackgroundImage:imageColor(kThemeColor) forState:UIControlStateSelected];
-        [self makeCornerRadius:3.0 borderColor:kThemeColor layer:tagBtn.layer borderWidth:.5];
+        [tagBtn setTitleColor:kTextColor51 forState:UIControlStateNormal];
+        [tagBtn setTitleColor:kTextColor51 forState:UIControlStateSelected];
+        [tagBtn setBackgroundImage:imageColor(kTextColor227) forState:UIControlStateNormal];
+        [tagBtn setBackgroundImage:imageColor(kTextColor227) forState:UIControlStateSelected];
+        [self makeCornerRadius:3.0 borderColor:kTextColor227 layer:tagBtn.layer borderWidth:.5];
         markBtn = tagBtn;
         
         [tagBtn addTarget:self action:@selector(onClickTo:) forControlEvents:UIControlEventTouchUpInside];

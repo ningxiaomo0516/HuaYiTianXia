@@ -17,6 +17,8 @@
 #import "TXBecomeVipViewController.h"
 #import "TXPushViewController.h"
 #import "TXSetupViewController.h"
+#import "TXTeamViewController.h"
+#import "TXLoginViewController.h"
 
 static NSString * const reuseIdentifier = @"TXMineTableViewCell";
 static NSString * const reuseIdentifierHeader = @"TXMineHeaderTableViewCell";
@@ -59,6 +61,24 @@ static NSString * const reuseIdentifierBanner = @"TXMineBannerTableViewCell";
     [self.setupButton lz_handleControlEvent:UIControlEventTouchUpInside withBlock:^{
         [weakSelf jumpBecomeVipVC:[[TXSetupViewController alloc] init]];
     }];
+    [kNotificationCenter addObserver:self selector:@selector(receiveNotification:) name:@"dealwithTeamPushMessage" object:nil];
+}
+
+- (void)receiveNotification:(NSNotification *)infoNotification {
+//    NSDictionary *resultDic = [infoNotification userInfo];
+//    NSString *kid = [resultDic lz_objectForKey:@"info"];
+//    NSString *messageType = [resultDic lz_objectForKey:@"messageType"];
+    TXTeamViewController *vc = [[TXTeamViewController alloc] init];
+    vc.title = @"我的团队";
+    [self jumpBecomeVipVC:vc];
+    
+    UITabBarController *tab=self.tabBarController;
+    if (tab){
+        TTLog(@"I have a tab bar");
+        [self.tabBarController setSelectedIndex:4];
+    } else{
+        TTLog(@"I don't have");
+    }
 }
 
 - (void) jumpBecomeVipVC:(UIViewController *)vc{

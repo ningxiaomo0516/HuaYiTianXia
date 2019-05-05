@@ -16,6 +16,7 @@
 
 @end
 
+/** 导航控制器的基类 */
 @interface LZNavigationController : UINavigationController
 
 @property (nonatomic, strong) UIPanGestureRecognizer *popPanGesture;

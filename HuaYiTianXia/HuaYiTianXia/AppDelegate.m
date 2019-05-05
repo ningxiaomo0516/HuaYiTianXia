@@ -30,6 +30,7 @@
 #import "TXMessageChildViewController.h"
 #import "TXWebViewController.h"
 #import "TXTeamViewController.h"
+#import "TXSetupViewController.h"
 @interface AppDelegate ()<WXApiDelegate,JPUSHRegisterDelegate>
 @property(nonatomic, strong)TTLocation* location;
 @end
@@ -433,14 +434,28 @@
     [JPUSHService setBadge:0];
     [JPUSHService resetBadge];
     application.applicationIconBadgeNumber = 0;
-    UINavigationController *nav = (UINavigationController *)self.window.rootViewController;
-    TXWebViewController *webVC = [[TXWebViewController alloc] init];
-    webVC.webUrl = @"http://www.baidu.com";
-    [webVC setHidesBottomBarWhenPushed:YES];
-    [nav pushViewController:webVC animated:YES];
-    /*
+//    NSDictionary *resultDic = [userInfo lz_objectForKey:@"obj"];
+//    NSDictionary *dataDic = [NSDictionary dictionaryWithObject:resultDic forKey:@"info"];
+//    [kNotificationCenter postNotificationName:@"dealwithNewPushMessage" object:nil userInfo:dataDic];
+//    LZRootViewController* tabBarController = (LZRootViewController*)application.keyWindow.rootViewController;
+//
+////    [tabBarController setSelectedIndex:0];
+//    LZNavigationController  *navigation = tabBarController.selectedViewController;
+//    TXSetupViewController *webVC = [[TXSetupViewController alloc] init];
+////
+////    webVC.webUrl = @"http://www.baidu.com";
+//    [webVC setHidesBottomBarWhenPushed:YES];
+//    [navigation pushViewController:webVC animated:YES];
+//    [navigation presentViewController:webVC animated:YES completion:nil];
+//    UITabBarController *tabBarController = (UITabBarController *)(AppDelegate *)[UIApplication sharedApplication].delegate.window.rootViewController;
+//    LZRootViewController *tabBarController = (LZRootViewController *)application.delegate.window.rootViewController;
+//    UITabBarController *tabBarController = (UITabBarController *)application.delegate.window.rootViewController;
+//    UINavigationController *navigation = (UINavigationController *)tabBarController.selectedViewController;
+//    UIViewController *controller = navigation.visibleViewController;
+//    [controller.navigationController pushViewController:[UIViewController new] animated:YES];
     TTLog(@"userInfot推送   - %@",[userInfo lz_objectForKey:@"obj"]);
-    PushHandleModel *messageModel = [PushHandleModel mj_objectWithKeyValues:[userInfo lz_objectForKey:@"obj"]];
+  
+    PushHandleModel *pushModel = [PushHandleModel mj_objectWithKeyValues:[userInfo lz_objectForKey:@"obj"]];
 //    messageType等于2或者3，使用原生转账页面，需要请求接口(2：转出记录 3：转入记录)
 //    messageType等于4，使用H5页面，拼接公告地址
 //    messageType等于5，使用原生页面，标题、内容、时间
@@ -449,32 +464,19 @@
     UITabBarController* tabVC = (UITabBarController*)application.keyWindow.rootViewController;
     LZNavigationController* navVC = tabVC.selectedViewController;
 
-    if (messageModel.messageType==2||messageModel.messageType==3) {
-        TXMessageChildViewController *vc = [[TXMessageChildViewController alloc] initPushMessageModel:messageModel];
-        [navVC pushViewController:vc animated:YES];
-    }else if(messageModel.messageType==4){
-//        TXWebViewController *vc = [[TXWebViewController alloc] init];
-//
-//        vc.title = @"新闻详情";
-//        NSString *outID = [NSString stringWithFormat:@"%ld",(long)messageModel.kid];
-//        vc.webUrl = kAppendH5URL(DomainName, PushDetailsH5, outID);
-//        [navVC pushViewController:vc animated:YES];
-        NSDictionary *resultDic = [userInfo lz_objectForKey:@"obj"];
-        [kNotificationCenter postNotificationName:@"dealwithNewPushMessage" object:resultDic];
-    }else if(messageModel.messageType==5){
-//        TXMessageChildAdsViewController *vc = [[TXMessageChildAdsViewController alloc] init];
-//        vc.title = @"消息详情";
-//        [navVC pushViewController:vc animated:YES];
-    }else if(messageModel.messageType==6){
-        TXWebViewController *vc = [[TXWebViewController alloc] init];
-        vc.title = @"新闻详情";
-        NSString *outID = [NSString stringWithFormat:@"%ld",(long)messageModel.kid];
-        vc.webUrl = kAppendH5URL(DomainName, PushDetailsH5, outID);
-        [navVC pushViewController:vc animated:YES];
-    }else if(messageModel.messageType==7){
+    NSMutableDictionary *resultDic = [[NSMutableDictionary alloc] init];
+    [resultDic setObject:pushModel.kid forKey:@"info"];
+    [resultDic setObject:[NSString stringWithFormat:@"%ld",(long)pushModel.messageType] forKey:@"messageType"];
+    if (pushModel.messageType==2||pushModel.messageType==3||pushModel.messageType==5) {
+        [kNotificationCenter postNotificationName:@"dealwithSystemPushMessage" object:nil userInfo:resultDic];
+    }else if(pushModel.messageType==4||pushModel.messageType==6){
+        [kNotificationCenter postNotificationName:@"dealwithNewPushMessage" object:nil userInfo:resultDic];
+    }else if(pushModel.messageType==7){
         TXTeamViewController *vc = [[TXTeamViewController alloc] init];
         [navVC pushViewController:vc animated:YES];
         //// 提示登录
+        [kNotificationCenter postNotificationName:@"dealwithTeamPushMessage" object:nil userInfo:resultDic];
+
     }
 //    NSString *voiceStr = userInfo[@"aps"][@"alert"];
     //对接送进行解析
@@ -520,7 +522,7 @@
         //        }
         TTLog(@"jsonDict = %@",jsonDict);
     }
-     */
+    
 }
 
 - (NSDictionary *)dictionaryWithJsonString:(NSString *)jsonString{

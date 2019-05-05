@@ -62,6 +62,13 @@
     [self sc_dismissVC];
     [self.navigationController popToRootViewControllerAnimated:YES];
 //    [self.navigationController.tabBarController setSelectedIndex:4];
+    UITabBarController *tab=self.tabBarController;
+    if (tab){
+        TTLog(@"I have a tab bar");
+        [self.tabBarController setSelectedIndex:4];
+    } else{
+        TTLog(@"I don't have");
+    }
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];

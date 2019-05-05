@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-/** 导航控制器基类 */
+/** TabBar的基类 */
 @interface LZRootViewController : UITabBarController{
     NSInteger _tabbarIndex;
 }

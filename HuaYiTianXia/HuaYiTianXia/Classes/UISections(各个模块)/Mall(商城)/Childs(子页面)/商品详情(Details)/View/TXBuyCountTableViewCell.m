@@ -50,14 +50,14 @@
     
     [self.minusBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.centerY.equalTo(self.boxView);
-        make.height.width.equalTo(@(30));
+        make.height.width.equalTo(@(25));
     }];
     
     [self.buyNumLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.minusBtn.mas_right).offset(5);
         make.centerY.equalTo(self.increaseBtn);
-        make.width.equalTo(@(IPHONE6_W(60)));
-        make.height.equalTo(@(IPHONE6_W(27)));
+        make.width.equalTo(@(IPHONE6_W(25)));
+        make.height.equalTo(@(IPHONE6_W(25)));
     }];
     
     [self.increaseBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -73,7 +73,7 @@
 
 - (UILabel *)titleLabel{
     if (!_titleLabel) {
-        _titleLabel = [UILabel lz_labelWithTitle:@"购买数量：" color:kTextColor102  font:kFontSizeMedium13];
+        _titleLabel = [UILabel lz_labelWithTitle:@"购买数量：" color:kTextColor102  font:kFontSizeMedium15];
     }
     return _titleLabel;
 }
@@ -85,8 +85,9 @@
         _buyNumLabel.textAlignment = NSTextAlignmentCenter;
         _buyNumLabel.textColor = kTextColor51;
         _buyNumLabel.font = kFontSizeMedium15;
-        _buyNumLabel.edgeInsets    = UIEdgeInsetsMake(6.f, 12.f, 6.f, 12.f); // 设置左内边距
-        _buyNumLabel.borderColor = kThemeColor;
+        _buyNumLabel.backgroundColor = kTextColor227;
+        _buyNumLabel.edgeInsets    = UIEdgeInsetsMake(2.f, 2.f, 2.f, 2.f); // 设置左内边距
+        _buyNumLabel.borderColor = kTextColor227;
         _buyNumLabel.borderWidth = 0.5f;
         [_buyNumLabel lz_setCornerRadius:3.0];
         [_buyNumLabel sizeToFit]; // 重新计算尺寸
@@ -122,7 +123,8 @@
     if (!_minusBtn) {
         _minusBtn = [UIButton buttonWithType:UIButtonTypeCustom];
 //        [_minusBtn setImage:kGetImage(@"c11_btn_minus") forState:UIControlStateNormal];
-        [_minusBtn setImage:kGetImage(@"mine_btn_reduction") forState:UIControlStateNormal];
+//        [_minusBtn setImage:kGetImage(@"mine_btn_reduction") forState:UIControlStateNormal];
+        [_minusBtn setBackgroundImage:kGetImage(@"mine_btn_reduction") forState:UIControlStateNormal];
         _minusBtn.tag = 1;
     }
     return _minusBtn;
@@ -131,8 +133,8 @@
 - (UIButton *)increaseBtn{
     if (!_increaseBtn) {
         _increaseBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-//        [_increaseBtn setImage:kGetImage(@"c11_btn_increase") forState:UIControlStateNormal];
-        [_increaseBtn setImage:kGetImage(@"mine_btn_increase") forState:UIControlStateNormal];
+//        [_increaseBtn setImage:kGetImage(@"mine_btn_increase") forState:UIControlStateNormal];
+        [_increaseBtn setBackgroundImage:kGetImage(@"mine_btn_increase") forState:UIControlStateNormal];
         _increaseBtn.tag = 0;
     }
     return _increaseBtn;

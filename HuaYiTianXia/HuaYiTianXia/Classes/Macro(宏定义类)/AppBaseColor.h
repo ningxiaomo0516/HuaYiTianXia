@@ -94,6 +94,7 @@
 #define kTextColor153 kColorWithRGB(153, 153, 153)
 #define kTextColor170 kColorWithRGB(170, 170, 170)
 #define kTextColor204 kColorWithRGB(204, 204, 204)
+#define kTextColor227 kColorWithRGB(227, 227, 227)
 #define kTextColor238 kColorWithRGB(238, 238, 238)
 #define kTextColor221 kColorWithRGB(221, 221, 221)
 

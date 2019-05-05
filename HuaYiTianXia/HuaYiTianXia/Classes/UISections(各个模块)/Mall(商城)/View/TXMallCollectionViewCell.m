@@ -36,7 +36,7 @@
     [self addSubview:self.currentPriceLabel];
     [self.imagesView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.top.centerX.equalTo(self);
-        make.height.equalTo(@(IPHONE6_W(134)));
+        make.height.equalTo(@(IPHONE6_W(145)));
     }];
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(@(7));
@@ -46,7 +46,7 @@
     [self.subtitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.titleLabel);
         make.right.equalTo(self.mas_right).offset(-7);
-        make.top.equalTo(self.titleLabel.mas_bottom).offset(3);
+        make.top.equalTo(self.titleLabel.mas_bottom).offset(5);
     }];
     [self.marketPriceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(self.mas_bottom).offset(-10);
@@ -77,7 +77,7 @@
 - (UILabel *)subtitleLabel{
     if (!_subtitleLabel) {
         _subtitleLabel = [UILabel lz_labelWithTitle:@"" color:kTextColor153 font:kFontSizeMedium13];
-        _subtitleLabel.numberOfLines = 2;
+        _subtitleLabel.numberOfLines = 1;
     }
     return _subtitleLabel;
 }

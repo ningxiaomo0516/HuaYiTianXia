@@ -62,14 +62,21 @@ static NSString * const reuseIdentifierSectionHeaderView = @"SCTableViewSectionH
     [kNotificationCenter addObserver:self selector:@selector(receiveNotification:) name:@"dealwithNewPushMessage" object:nil];
 }
 
-- (void)receiveNotification:(NSNotification *)notification {
-    NSDictionary *resultDic = [notification object];
-    NSString *kid = [resultDic lz_objectForKey:@"id"];
+- (void)receiveNotification:(NSNotification *)infoNotification {
+    NSDictionary *resultDic = [infoNotification userInfo];
+    NSString *kid = [resultDic lz_objectForKey:@"info"];
+    NSString *messageType = [resultDic lz_objectForKey:@"messageType"];
+    
+    NSString *webURL = @"http://www.baidu.com";
+    if (messageType.integerValue==4) { //// 拼接公告地址
+        webURL = kAppendH5URL(DomainName, PushDetailsH5, kid);
+    }else if (messageType.integerValue==6) {/// 新闻
+        webURL = kAppendH5URL(DomainName, NewsDetailsH5, kid);
+    }
     TXWebViewController *vc = [[TXWebViewController alloc] init];
     vc.title = @"新闻详情";
-    NSString *url = kAppendH5URL(DomainName, NewsDetailsH5, kid);
-    TTLog(@" h5 url ---- %@",url);
-    vc.webUrl = kAppendH5URL(DomainName, NewsDetailsH5, kid);
+    TTLog(@" h5 url ---- %@",webURL);
+    vc.webUrl = webURL;
     TTPushVC(vc);
 }
 
