@@ -17,8 +17,13 @@
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
+    self.badgeView.backgroundColor = kBadgeColor;
     // Configure the view for the selected state
+}
+
+- (void) setHighlighted:(BOOL)highlighted animated:(BOOL)animated{
+    [super setHighlighted:highlighted animated:animated];
+    self.badgeView.backgroundColor = kBadgeColor;
 }
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
@@ -47,8 +52,10 @@
         self.imagesView.image = kGetImage(@"c51_消息");
         self.amountLabel.text = @"";
     }else if(messageModel.messageType==5){
-        
+        self.imagesView.image = kGetImage(@"c51_消息");
     }
+    
+    self.badgeView.hidden = messageModel.hasRead==0?NO:YES;
 }
 
 - (void) initView{
@@ -57,6 +64,7 @@
     [self addSubview:self.subtitleLabel];
     [self addSubview:self.amountLabel];
     [self addSubview:self.dateLabel];
+    [self addSubview:self.badgeView];
     
     [self.imagesView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(@(IPHONE6_W(15)));
@@ -80,6 +88,12 @@
     [self.amountLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self);
         make.right.equalTo(self.mas_right).offset(IPHONE6_W(-15));
+    }];
+    
+    [self.badgeView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.width.height.equalTo(@(8));
+        make.top.equalTo(self.imagesView.mas_top).offset(-4);
+        make.right.equalTo(self.imagesView.mas_right).offset(4);
     }];
 }
 
@@ -117,6 +131,14 @@
         _dateLabel = [UILabel lz_labelWithTitle:@"" color:kTextColor102 font:kFontSizeMedium12];
     }
     return _dateLabel;
+}
+
+- (UIView *)badgeView{
+    if (!_badgeView) {
+        _badgeView = [UIView lz_viewWithColor:kBadgeColor];
+        [_badgeView lz_setCornerRadius:4];
+    }
+    return _badgeView;
 }
 
 @end

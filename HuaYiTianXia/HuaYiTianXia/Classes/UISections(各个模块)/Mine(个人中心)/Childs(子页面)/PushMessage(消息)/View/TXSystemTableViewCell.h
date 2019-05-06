@@ -16,6 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) UILabel       *subtitleLabel;
 @property (nonatomic, strong) UILabel       *amountLabel;
 @property (nonatomic, strong) UILabel       *dateLabel;
+@property (nonatomic, strong) UIView        *badgeView;
 
 @property (nonatomic, strong) PushMessageModel *messageModel;
 @end

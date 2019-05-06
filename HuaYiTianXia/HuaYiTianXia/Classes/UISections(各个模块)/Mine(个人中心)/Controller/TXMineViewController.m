@@ -62,6 +62,8 @@ static NSString * const reuseIdentifierBanner = @"TXMineBannerTableViewCell";
         [weakSelf jumpBecomeVipVC:[[TXSetupViewController alloc] init]];
     }];
     [kNotificationCenter addObserver:self selector:@selector(receiveNotification:) name:@"dealwithTeamPushMessage" object:nil];
+    
+//    self.navigationController.tabBarItem.badgeValue = @"20";
 }
 
 - (void)receiveNotification:(NSNotification *)infoNotification {

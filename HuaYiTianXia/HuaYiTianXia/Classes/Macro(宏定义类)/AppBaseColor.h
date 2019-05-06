@@ -12,6 +12,8 @@
 
 #define kWhiteColor kColorWithRGB(255,255,255)
 #define kBlackColor kColorWithRGB(0,0,0)
+#define kRedColor   kColorWithRGB(255,0,0)
+#define kBadgeColor kColorWithRGB(252,13,27)
 
 
 /// TabBar 默认颜色和选择颜色

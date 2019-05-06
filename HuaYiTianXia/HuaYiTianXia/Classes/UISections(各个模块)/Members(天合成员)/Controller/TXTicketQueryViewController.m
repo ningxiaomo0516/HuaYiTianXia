@@ -193,7 +193,7 @@
 - (UIButton *)leftButton{
     if (!_leftButton) {
         _leftButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_leftButton setImage:kGetImage(@"c48_btn_返回") forState:UIControlStateNormal];
+        [_leftButton setImage:kGetImage(@"live_btn_back") forState:UIControlStateNormal];
         MV(weakSelf)
         [_leftButton lz_handleControlEvent:UIControlEventTouchUpInside withBlock:^{
             [weakSelf.navigationController popViewControllerAnimated:YES];
@@ -208,6 +208,7 @@
         [_rightButton setTitleColor:kTextColor51 forState:UIControlStateNormal];
         _rightButton.titleLabel.font = kFontSizeMedium12;
         [_rightButton setTitle:[kUserDefaults objectForKey:@"city"] forState:UIControlStateNormal];
+        [Utils lz_setButtonTitleWithImageEdgeInsets:_rightButton postition:kMVImagePositionLeft spacing:5.0];
         [_rightButton setImage:kGetImage(@"c48_btn_定位") forState:UIControlStateNormal];
     }
     return _rightButton;

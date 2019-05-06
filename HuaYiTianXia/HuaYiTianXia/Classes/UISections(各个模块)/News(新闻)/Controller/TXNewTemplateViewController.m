@@ -107,7 +107,7 @@ static NSString * const reuseIdentifierSectionHeaderView = @"SCTableViewSectionH
             if (model.errorcode==20000&&model.data.content!=nil) {
                 self.rollText = model.data.content;
                 TTLog(@"model.content -- %@",model.data.content);
-                self.horizontalMarquee.text = [NSString stringWithFormat:@"到达的方法发大水发方法说法是飞洒发发发发发沙发沙发发发发沙%@发发",model.data.content];
+                self.horizontalMarquee.text = model.data.content;
             }
             [self.tableView reloadData];
         }else{

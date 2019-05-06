@@ -41,7 +41,8 @@
 + (NSDictionary *)replacedKeyFromPropertyName{
     return @{@"kid"        : @"id",
              @"messageType": @"status",
-             @"datetime"   : @"time"};
+             @"datetime"   : @"time",
+             @"hasRead"    : @"yidu"};
 }
 @end
 

@@ -301,8 +301,28 @@ static NSString * const reuseIdentifiers = @"TXSystemTableViewCell";
     }else if(messageModel.messageType==5){
         [self jumpPushChildVC:messageModel messageType:5];
     }
-    
+    if (messageModel.hasRead==0) {
+        [self sendHasReadMessageRequest:messageModel indexPath:indexPath];
+    }
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+- (void) sendHasReadMessageRequest:(PushMessageModel *) messageModel indexPath:(NSIndexPath *) indexPath{
+    NSMutableArray *parameterArray = [[NSMutableArray alloc] init];
+    [parameterArray addObject:messageModel.kid];
+    NSMutableDictionary *parameter = [[NSMutableDictionary alloc] init];
+    [parameter setObject:parameterArray forKey:@"ids"];
+    [SCHttpTools postWithURLString:kHttpURL(@"notice/insertNoticeRead") parameter:parameter success:^(id responseObject) {
+        NSDictionary *result = responseObject;
+        if ([result isKindOfClass:[NSDictionary class]]) {
+            TTLog(@"不做任何提示");
+            /// 修改已读状态
+            if (messageModel.hasRead==0) messageModel.hasRead = 1;
+//            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+            [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationFade];
+        }
+    } failure:^(NSError *error) {
+    }];
 }
 
 - (UITableView *)tableView{

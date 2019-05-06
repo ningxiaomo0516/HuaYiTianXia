@@ -68,7 +68,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// 消息标题
 @property (nonatomic, copy) NSString *title;
 /// 0：未读消息 1：已读消息
-@property (nonatomic, copy) NSString *yidu;
+@property (nonatomic, assign) NSInteger hasRead;
 @property (nonatomic, assign) NSInteger outID;
 @property (nonatomic, copy) NSString *money;
 
