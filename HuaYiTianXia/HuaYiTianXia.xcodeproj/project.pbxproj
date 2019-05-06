@@ -154,27 +154,6 @@
 		E769B29D22780B930049EF73 /* TXMessageChildHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = E769B29C22780B930049EF73 /* TXMessageChildHeaderView.m */; };
 		E769B2A0227820DF0049EF73 /* TXMessageChildAdsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E769B29F227820DF0049EF73 /* TXMessageChildAdsViewController.m */; };
 		E769B2A4227837110049EF73 /* TTLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = E769B2A3227837110049EF73 /* TTLocation.m */; };
-		E769B2F8227845A70049EF73 /* NSMutableArray+FilterElement.m in Sources */ = {isa = PBXBuildFile; fileRef = E769B2E3227845A60049EF73 /* NSMutableArray+FilterElement.m */; };
-		E769B2F9227845A70049EF73 /* ChineseInclude.m in Sources */ = {isa = PBXBuildFile; fileRef = E769B2E6227845A60049EF73 /* ChineseInclude.m */; };
-		E769B2FA227845A70049EF73 /* ChineseToPinyinResource.m in Sources */ = {isa = PBXBuildFile; fileRef = E769B2E8227845A60049EF73 /* ChineseToPinyinResource.m */; };
-		E769B2FB227845A70049EF73 /* HanyuPinyinOutputFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = E769B2EA227845A60049EF73 /* HanyuPinyinOutputFormat.m */; };
-		E769B2FC227845A70049EF73 /* NSString+PinYin4Cocoa.m in Sources */ = {isa = PBXBuildFile; fileRef = E769B2EC227845A60049EF73 /* NSString+PinYin4Cocoa.m */; };
-		E769B2FD227845A70049EF73 /* PinyinFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = E769B2EF227845A60049EF73 /* PinyinFormatter.m */; };
-		E769B2FE227845A70049EF73 /* PinYinForObjc.m in Sources */ = {isa = PBXBuildFile; fileRef = E769B2F1227845A60049EF73 /* PinYinForObjc.m */; };
-		E769B2FF227845A70049EF73 /* PinyinHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = E769B2F3227845A60049EF73 /* PinyinHelper.m */; };
-		E769B300227845A70049EF73 /* unicode_to_hanyu_pinyin.txt in Resources */ = {isa = PBXBuildFile; fileRef = E769B2F4227845A60049EF73 /* unicode_to_hanyu_pinyin.txt */; };
-		E769B301227845A70049EF73 /* citydict.plist in Resources */ = {isa = PBXBuildFile; fileRef = E769B2F7227845A70049EF73 /* citydict.plist */; };
-		E769B308227845CC0049EF73 /* SearchResult.m in Sources */ = {isa = PBXBuildFile; fileRef = E769B302227845CB0049EF73 /* SearchResult.m */; };
-		E769B309227845CC0049EF73 /* NBSearchController.m in Sources */ = {isa = PBXBuildFile; fileRef = E769B303227845CB0049EF73 /* NBSearchController.m */; };
-		E769B30A227845CC0049EF73 /* NBSearchResultController.m in Sources */ = {isa = PBXBuildFile; fileRef = E769B304227845CB0049EF73 /* NBSearchResultController.m */; };
-		E769B318227845D70049EF73 /* CityViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E769B30B227845D50049EF73 /* CityViewCell.xib */; };
-		E769B319227845D70049EF73 /* ZWCollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = E769B30E227845D60049EF73 /* ZWCollectionViewFlowLayout.m */; };
-		E769B31A227845D70049EF73 /* ItemViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E769B30F227845D60049EF73 /* ItemViewCell.xib */; };
-		E769B31B227845D70049EF73 /* FMSelectedCityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E769B310227845D60049EF73 /* FMSelectedCityViewController.m */; };
-		E769B31C227845D70049EF73 /* HeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = E769B311227845D60049EF73 /* HeadView.m */; };
-		E769B31D227845D70049EF73 /* CityViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E769B313227845D70049EF73 /* CityViewCell.m */; };
-		E769B31E227845D70049EF73 /* HeadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E769B314227845D70049EF73 /* HeadView.xib */; };
-		E769B31F227845D70049EF73 /* ItemViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E769B316227845D70049EF73 /* ItemViewCell.m */; };
 		E76D9C4C226027DF009D1A23 /* TXPayOrderVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E76D9C4B226027DE009D1A23 /* TXPayOrderVC.m */; };
 		E76D9C5222602EE8009D1A23 /* TXPayOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E76D9C5022602EE8009D1A23 /* TXPayOrderViewController.m */; };
 		E76D9C5322602EE8009D1A23 /* TXPayOrderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E76D9C5122602EE8009D1A23 /* TXPayOrderViewController.xib */; };
@@ -273,6 +252,24 @@
 		E7AA9DDF224392FB00C15483 /* TXRolloutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7AA9DDE224392FB00C15483 /* TXRolloutViewController.m */; };
 		E7AA9DE2224394A600C15483 /* TXRolloutTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7AA9DE1224394A600C15483 /* TXRolloutTableViewCell.m */; };
 		E7ACCE2D227EDC1B00CFB662 /* TXEppoListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7ACCE2C227EDC1B00CFB662 /* TXEppoListViewController.m */; };
+		E7B4704322803A3000ADDC7A /* FMCurrentCitysTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B4703722803A2F00ADDC7A /* FMCurrentCitysTableViewCell.m */; };
+		E7B4704422803A3000ADDC7A /* FMGroupsCityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B4703C22803A3000ADDC7A /* FMGroupsCityTableViewCell.m */; };
+		E7B4704522803A3000ADDC7A /* FMCitySectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B4703D22803A3000ADDC7A /* FMCitySectionView.m */; };
+		E7B4704622803A3000ADDC7A /* FMCityCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B4703E22803A3000ADDC7A /* FMCityCollectionViewCell.m */; };
+		E7B4704722803A3000ADDC7A /* FMHotsCityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B4703F22803A3000ADDC7A /* FMHotsCityTableViewCell.m */; };
+		E7B4704822803A3000ADDC7A /* FMSelectedCityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B4704122803A3000ADDC7A /* FMSelectedCityViewController.m */; };
+		E7B4704B22803A7C00ADDC7A /* FMSelectedCityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B4704A22803A7C00ADDC7A /* FMSelectedCityModel.m */; };
+		E7B4706222803BBD00ADDC7A /* LZChineseSort.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B4704F22803BBC00ADDC7A /* LZChineseSort.m */; };
+		E7B4706322803BBD00ADDC7A /* LZChineseInclude.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B4705222803BBC00ADDC7A /* LZChineseInclude.m */; };
+		E7B4706422803BBD00ADDC7A /* LZChineseToPinyinResource.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B4705422803BBC00ADDC7A /* LZChineseToPinyinResource.m */; };
+		E7B4706522803BBD00ADDC7A /* LZHanyuPinyinOutputFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B4705622803BBC00ADDC7A /* LZHanyuPinyinOutputFormat.m */; };
+		E7B4706622803BBD00ADDC7A /* LZPinyinFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B4705822803BBC00ADDC7A /* LZPinyinFormatter.m */; };
+		E7B4706722803BBD00ADDC7A /* LZPinYinForObjc.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B4705A22803BBC00ADDC7A /* LZPinYinForObjc.m */; };
+		E7B4706822803BBD00ADDC7A /* LZPinyinHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B4705C22803BBC00ADDC7A /* LZPinyinHelper.m */; };
+		E7B4706922803BBD00ADDC7A /* LZPinYinSearch.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B4705E22803BBC00ADDC7A /* LZPinYinSearch.m */; };
+		E7B4706A22803BBD00ADDC7A /* NSString+PinYin4Cocoa.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B4706022803BBC00ADDC7A /* NSString+PinYin4Cocoa.m */; };
+		E7B4706B22803BBD00ADDC7A /* unicode_to_hanyu_pinyin.txt in Resources */ = {isa = PBXBuildFile; fileRef = E7B4706122803BBC00ADDC7A /* unicode_to_hanyu_pinyin.txt */; };
+		E7B4706E22803D7100ADDC7A /* FMTravelCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B4706D22803D7100ADDC7A /* FMTravelCollectionViewCell.m */; };
 		E7C42E7E224B770200F3FB1A /* SCHttpTools.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C42E71224B770200F3FB1A /* SCHttpTools.m */; };
 		E7C42E7F224B770200F3FB1A /* SCHttpToolsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C42E73224B770200F3FB1A /* SCHttpToolsModel.m */; };
 		E7C42E80224B770200F3FB1A /* AFLoadDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C42E76224B770200F3FB1A /* AFLoadDataManager.m */; };
@@ -603,45 +600,6 @@
 		E769B29F227820DF0049EF73 /* TXMessageChildAdsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXMessageChildAdsViewController.m; sourceTree = "<group>"; };
 		E769B2A2227837100049EF73 /* TTLocation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TTLocation.h; sourceTree = "<group>"; };
 		E769B2A3227837110049EF73 /* TTLocation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TTLocation.m; sourceTree = "<group>"; };
-		E769B2E2227845A60049EF73 /* NSMutableArray+FilterElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+FilterElement.h"; sourceTree = "<group>"; };
-		E769B2E3227845A60049EF73 /* NSMutableArray+FilterElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+FilterElement.m"; sourceTree = "<group>"; };
-		E769B2E5227845A60049EF73 /* ChineseInclude.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChineseInclude.h; sourceTree = "<group>"; };
-		E769B2E6227845A60049EF73 /* ChineseInclude.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChineseInclude.m; sourceTree = "<group>"; };
-		E769B2E7227845A60049EF73 /* ChineseToPinyinResource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChineseToPinyinResource.h; sourceTree = "<group>"; };
-		E769B2E8227845A60049EF73 /* ChineseToPinyinResource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChineseToPinyinResource.m; sourceTree = "<group>"; };
-		E769B2E9227845A60049EF73 /* HanyuPinyinOutputFormat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HanyuPinyinOutputFormat.h; sourceTree = "<group>"; };
-		E769B2EA227845A60049EF73 /* HanyuPinyinOutputFormat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HanyuPinyinOutputFormat.m; sourceTree = "<group>"; };
-		E769B2EB227845A60049EF73 /* NSString+PinYin4Cocoa.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+PinYin4Cocoa.h"; sourceTree = "<group>"; };
-		E769B2EC227845A60049EF73 /* NSString+PinYin4Cocoa.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+PinYin4Cocoa.m"; sourceTree = "<group>"; };
-		E769B2ED227845A60049EF73 /* PinYin4Objc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PinYin4Objc.h; sourceTree = "<group>"; };
-		E769B2EE227845A60049EF73 /* PinyinFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PinyinFormatter.h; sourceTree = "<group>"; };
-		E769B2EF227845A60049EF73 /* PinyinFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PinyinFormatter.m; sourceTree = "<group>"; };
-		E769B2F0227845A60049EF73 /* PinYinForObjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PinYinForObjc.h; sourceTree = "<group>"; };
-		E769B2F1227845A60049EF73 /* PinYinForObjc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PinYinForObjc.m; sourceTree = "<group>"; };
-		E769B2F2227845A60049EF73 /* PinyinHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PinyinHelper.h; sourceTree = "<group>"; };
-		E769B2F3227845A60049EF73 /* PinyinHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PinyinHelper.m; sourceTree = "<group>"; };
-		E769B2F4227845A60049EF73 /* unicode_to_hanyu_pinyin.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = unicode_to_hanyu_pinyin.txt; sourceTree = "<group>"; };
-		E769B2F7227845A70049EF73 /* citydict.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = citydict.plist; sourceTree = "<group>"; };
-		E769B302227845CB0049EF73 /* SearchResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchResult.m; sourceTree = "<group>"; };
-		E769B303227845CB0049EF73 /* NBSearchController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NBSearchController.m; sourceTree = "<group>"; };
-		E769B304227845CB0049EF73 /* NBSearchResultController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NBSearchResultController.m; sourceTree = "<group>"; };
-		E769B305227845CB0049EF73 /* NBSearchController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NBSearchController.h; sourceTree = "<group>"; };
-		E769B306227845CB0049EF73 /* NBSearchResultController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NBSearchResultController.h; sourceTree = "<group>"; };
-		E769B307227845CC0049EF73 /* SearchResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchResult.h; sourceTree = "<group>"; };
-		E769B30B227845D50049EF73 /* CityViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CityViewCell.xib; sourceTree = "<group>"; };
-		E769B30C227845D60049EF73 /* ItemViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemViewCell.h; sourceTree = "<group>"; };
-		E769B30D227845D60049EF73 /* ZWCollectionViewFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZWCollectionViewFlowLayout.h; sourceTree = "<group>"; };
-		E769B30E227845D60049EF73 /* ZWCollectionViewFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZWCollectionViewFlowLayout.m; sourceTree = "<group>"; };
-		E769B30F227845D60049EF73 /* ItemViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ItemViewCell.xib; sourceTree = "<group>"; };
-		E769B310227845D60049EF73 /* FMSelectedCityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMSelectedCityViewController.m; sourceTree = "<group>"; };
-		E769B311227845D60049EF73 /* HeadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeadView.m; sourceTree = "<group>"; };
-		E769B312227845D60049EF73 /* FMSelectedCityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMSelectedCityViewController.h; sourceTree = "<group>"; };
-		E769B313227845D70049EF73 /* CityViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CityViewCell.m; sourceTree = "<group>"; };
-		E769B314227845D70049EF73 /* HeadView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HeadView.xib; sourceTree = "<group>"; };
-		E769B315227845D70049EF73 /* HeadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeadView.h; sourceTree = "<group>"; };
-		E769B316227845D70049EF73 /* ItemViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemViewCell.m; sourceTree = "<group>"; };
-		E769B317227845D70049EF73 /* CityViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CityViewCell.h; sourceTree = "<group>"; };
-		E769B3202278461F0049EF73 /* Public.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Public.h; sourceTree = "<group>"; };
 		E76D9C4A226027DE009D1A23 /* TXPayOrderVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXPayOrderVC.h; sourceTree = "<group>"; };
 		E76D9C4B226027DE009D1A23 /* TXPayOrderVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXPayOrderVC.m; sourceTree = "<group>"; };
 		E76D9C4F22602EE8009D1A23 /* TXPayOrderViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXPayOrderViewController.h; sourceTree = "<group>"; };
@@ -832,6 +790,41 @@
 		E7AA9DE1224394A600C15483 /* TXRolloutTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXRolloutTableViewCell.m; sourceTree = "<group>"; };
 		E7ACCE2B227EDC1B00CFB662 /* TXEppoListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXEppoListViewController.h; sourceTree = "<group>"; };
 		E7ACCE2C227EDC1B00CFB662 /* TXEppoListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXEppoListViewController.m; sourceTree = "<group>"; };
+		E7B4703722803A2F00ADDC7A /* FMCurrentCitysTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMCurrentCitysTableViewCell.m; sourceTree = "<group>"; };
+		E7B4703822803A2F00ADDC7A /* FMHotsCityTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMHotsCityTableViewCell.h; sourceTree = "<group>"; };
+		E7B4703922803A2F00ADDC7A /* FMCityCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCityCollectionViewCell.h; sourceTree = "<group>"; };
+		E7B4703A22803A2F00ADDC7A /* FMCitySectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCitySectionView.h; sourceTree = "<group>"; };
+		E7B4703B22803A2F00ADDC7A /* FMGroupsCityTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMGroupsCityTableViewCell.h; sourceTree = "<group>"; };
+		E7B4703C22803A3000ADDC7A /* FMGroupsCityTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMGroupsCityTableViewCell.m; sourceTree = "<group>"; };
+		E7B4703D22803A3000ADDC7A /* FMCitySectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMCitySectionView.m; sourceTree = "<group>"; };
+		E7B4703E22803A3000ADDC7A /* FMCityCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMCityCollectionViewCell.m; sourceTree = "<group>"; };
+		E7B4703F22803A3000ADDC7A /* FMHotsCityTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMHotsCityTableViewCell.m; sourceTree = "<group>"; };
+		E7B4704022803A3000ADDC7A /* FMSelectedCityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMSelectedCityViewController.h; sourceTree = "<group>"; };
+		E7B4704122803A3000ADDC7A /* FMSelectedCityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMSelectedCityViewController.m; sourceTree = "<group>"; };
+		E7B4704222803A3000ADDC7A /* FMCurrentCitysTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCurrentCitysTableViewCell.h; sourceTree = "<group>"; };
+		E7B4704922803A7C00ADDC7A /* FMSelectedCityModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMSelectedCityModel.h; sourceTree = "<group>"; };
+		E7B4704A22803A7C00ADDC7A /* FMSelectedCityModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMSelectedCityModel.m; sourceTree = "<group>"; };
+		E7B4704E22803BBC00ADDC7A /* LZChineseSort.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LZChineseSort.h; sourceTree = "<group>"; };
+		E7B4704F22803BBC00ADDC7A /* LZChineseSort.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LZChineseSort.m; sourceTree = "<group>"; };
+		E7B4705122803BBC00ADDC7A /* LZChineseInclude.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LZChineseInclude.h; sourceTree = "<group>"; };
+		E7B4705222803BBC00ADDC7A /* LZChineseInclude.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LZChineseInclude.m; sourceTree = "<group>"; };
+		E7B4705322803BBC00ADDC7A /* LZChineseToPinyinResource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LZChineseToPinyinResource.h; sourceTree = "<group>"; };
+		E7B4705422803BBC00ADDC7A /* LZChineseToPinyinResource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LZChineseToPinyinResource.m; sourceTree = "<group>"; };
+		E7B4705522803BBC00ADDC7A /* LZHanyuPinyinOutputFormat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LZHanyuPinyinOutputFormat.h; sourceTree = "<group>"; };
+		E7B4705622803BBC00ADDC7A /* LZHanyuPinyinOutputFormat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LZHanyuPinyinOutputFormat.m; sourceTree = "<group>"; };
+		E7B4705722803BBC00ADDC7A /* LZPinyinFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LZPinyinFormatter.h; sourceTree = "<group>"; };
+		E7B4705822803BBC00ADDC7A /* LZPinyinFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LZPinyinFormatter.m; sourceTree = "<group>"; };
+		E7B4705922803BBC00ADDC7A /* LZPinYinForObjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LZPinYinForObjc.h; sourceTree = "<group>"; };
+		E7B4705A22803BBC00ADDC7A /* LZPinYinForObjc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LZPinYinForObjc.m; sourceTree = "<group>"; };
+		E7B4705B22803BBC00ADDC7A /* LZPinyinHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LZPinyinHelper.h; sourceTree = "<group>"; };
+		E7B4705C22803BBC00ADDC7A /* LZPinyinHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LZPinyinHelper.m; sourceTree = "<group>"; };
+		E7B4705D22803BBC00ADDC7A /* LZPinYinSearch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LZPinYinSearch.h; sourceTree = "<group>"; };
+		E7B4705E22803BBC00ADDC7A /* LZPinYinSearch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LZPinYinSearch.m; sourceTree = "<group>"; };
+		E7B4705F22803BBC00ADDC7A /* NSString+PinYin4Cocoa.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+PinYin4Cocoa.h"; sourceTree = "<group>"; };
+		E7B4706022803BBC00ADDC7A /* NSString+PinYin4Cocoa.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+PinYin4Cocoa.m"; sourceTree = "<group>"; };
+		E7B4706122803BBC00ADDC7A /* unicode_to_hanyu_pinyin.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = unicode_to_hanyu_pinyin.txt; sourceTree = "<group>"; };
+		E7B4706C22803D7100ADDC7A /* FMTravelCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FMTravelCollectionViewCell.h; sourceTree = "<group>"; };
+		E7B4706D22803D7100ADDC7A /* FMTravelCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FMTravelCollectionViewCell.m; sourceTree = "<group>"; };
 		E7C42E70224B770200F3FB1A /* SCHttpTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCHttpTools.h; sourceTree = "<group>"; };
 		E7C42E71224B770200F3FB1A /* SCHttpTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCHttpTools.m; sourceTree = "<group>"; };
 		E7C42E72224B770200F3FB1A /* SCHttpToolsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCHttpToolsModel.h; sourceTree = "<group>"; };
@@ -1857,87 +1850,25 @@
 		E769B2A522783FE30049EF73 /* 城市选择 */ = {
 			isa = PBXGroup;
 			children = (
-				E769B2F5227845A60049EF73 /* 城市列表 */,
-				E769B2F6227845A70049EF73 /* 搜索结果 */,
-				E769B2F7227845A70049EF73 /* citydict.plist */,
-				E769B3202278461F0049EF73 /* Public.h */,
-				E769B2E0227845A60049EF73 /* Lib */,
+				E7B4704C22803BBC00ADDC7A /* LZSortAndSearch */,
+				E7B4704922803A7C00ADDC7A /* FMSelectedCityModel.h */,
+				E7B4704A22803A7C00ADDC7A /* FMSelectedCityModel.m */,
+				E7B4703922803A2F00ADDC7A /* FMCityCollectionViewCell.h */,
+				E7B4703E22803A3000ADDC7A /* FMCityCollectionViewCell.m */,
+				E7B4703A22803A2F00ADDC7A /* FMCitySectionView.h */,
+				E7B4703D22803A3000ADDC7A /* FMCitySectionView.m */,
+				E7B4704222803A3000ADDC7A /* FMCurrentCitysTableViewCell.h */,
+				E7B4703722803A2F00ADDC7A /* FMCurrentCitysTableViewCell.m */,
+				E7B4703B22803A2F00ADDC7A /* FMGroupsCityTableViewCell.h */,
+				E7B4703C22803A3000ADDC7A /* FMGroupsCityTableViewCell.m */,
+				E7B4703822803A2F00ADDC7A /* FMHotsCityTableViewCell.h */,
+				E7B4703F22803A3000ADDC7A /* FMHotsCityTableViewCell.m */,
+				E7B4704022803A3000ADDC7A /* FMSelectedCityViewController.h */,
+				E7B4704122803A3000ADDC7A /* FMSelectedCityViewController.m */,
+				E7B4706C22803D7100ADDC7A /* FMTravelCollectionViewCell.h */,
+				E7B4706D22803D7100ADDC7A /* FMTravelCollectionViewCell.m */,
 			);
 			path = "城市选择";
-			sourceTree = "<group>";
-		};
-		E769B2E0227845A60049EF73 /* Lib */ = {
-			isa = PBXGroup;
-			children = (
-				E769B2E1227845A60049EF73 /* Category */,
-				E769B2E4227845A60049EF73 /* PinYin */,
-			);
-			path = Lib;
-			sourceTree = "<group>";
-		};
-		E769B2E1227845A60049EF73 /* Category */ = {
-			isa = PBXGroup;
-			children = (
-				E769B2E2227845A60049EF73 /* NSMutableArray+FilterElement.h */,
-				E769B2E3227845A60049EF73 /* NSMutableArray+FilterElement.m */,
-			);
-			path = Category;
-			sourceTree = "<group>";
-		};
-		E769B2E4227845A60049EF73 /* PinYin */ = {
-			isa = PBXGroup;
-			children = (
-				E769B2E5227845A60049EF73 /* ChineseInclude.h */,
-				E769B2E6227845A60049EF73 /* ChineseInclude.m */,
-				E769B2E7227845A60049EF73 /* ChineseToPinyinResource.h */,
-				E769B2E8227845A60049EF73 /* ChineseToPinyinResource.m */,
-				E769B2E9227845A60049EF73 /* HanyuPinyinOutputFormat.h */,
-				E769B2EA227845A60049EF73 /* HanyuPinyinOutputFormat.m */,
-				E769B2EB227845A60049EF73 /* NSString+PinYin4Cocoa.h */,
-				E769B2EC227845A60049EF73 /* NSString+PinYin4Cocoa.m */,
-				E769B2ED227845A60049EF73 /* PinYin4Objc.h */,
-				E769B2EE227845A60049EF73 /* PinyinFormatter.h */,
-				E769B2EF227845A60049EF73 /* PinyinFormatter.m */,
-				E769B2F0227845A60049EF73 /* PinYinForObjc.h */,
-				E769B2F1227845A60049EF73 /* PinYinForObjc.m */,
-				E769B2F2227845A60049EF73 /* PinyinHelper.h */,
-				E769B2F3227845A60049EF73 /* PinyinHelper.m */,
-				E769B2F4227845A60049EF73 /* unicode_to_hanyu_pinyin.txt */,
-			);
-			path = PinYin;
-			sourceTree = "<group>";
-		};
-		E769B2F5227845A60049EF73 /* 城市列表 */ = {
-			isa = PBXGroup;
-			children = (
-				E769B317227845D70049EF73 /* CityViewCell.h */,
-				E769B313227845D70049EF73 /* CityViewCell.m */,
-				E769B30B227845D50049EF73 /* CityViewCell.xib */,
-				E769B315227845D70049EF73 /* HeadView.h */,
-				E769B311227845D60049EF73 /* HeadView.m */,
-				E769B314227845D70049EF73 /* HeadView.xib */,
-				E769B30C227845D60049EF73 /* ItemViewCell.h */,
-				E769B316227845D70049EF73 /* ItemViewCell.m */,
-				E769B30F227845D60049EF73 /* ItemViewCell.xib */,
-				E769B312227845D60049EF73 /* FMSelectedCityViewController.h */,
-				E769B310227845D60049EF73 /* FMSelectedCityViewController.m */,
-				E769B30D227845D60049EF73 /* ZWCollectionViewFlowLayout.h */,
-				E769B30E227845D60049EF73 /* ZWCollectionViewFlowLayout.m */,
-			);
-			path = "城市列表";
-			sourceTree = "<group>";
-		};
-		E769B2F6227845A70049EF73 /* 搜索结果 */ = {
-			isa = PBXGroup;
-			children = (
-				E769B305227845CB0049EF73 /* NBSearchController.h */,
-				E769B303227845CB0049EF73 /* NBSearchController.m */,
-				E769B306227845CB0049EF73 /* NBSearchResultController.h */,
-				E769B304227845CB0049EF73 /* NBSearchResultController.m */,
-				E769B307227845CC0049EF73 /* SearchResult.h */,
-				E769B302227845CB0049EF73 /* SearchResult.m */,
-			);
-			path = "搜索结果";
 			sourceTree = "<group>";
 		};
 		E774DCDD2272D9ED001A95B8 /* H5 */ = {
@@ -2666,6 +2597,48 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
+		E7B4704C22803BBC00ADDC7A /* LZSortAndSearch */ = {
+			isa = PBXGroup;
+			children = (
+				E7B4704D22803BBC00ADDC7A /* LZChineseSort */,
+				E7B4705022803BBC00ADDC7A /* LZPinYinSearchLib */,
+			);
+			path = LZSortAndSearch;
+			sourceTree = "<group>";
+		};
+		E7B4704D22803BBC00ADDC7A /* LZChineseSort */ = {
+			isa = PBXGroup;
+			children = (
+				E7B4704E22803BBC00ADDC7A /* LZChineseSort.h */,
+				E7B4704F22803BBC00ADDC7A /* LZChineseSort.m */,
+			);
+			path = LZChineseSort;
+			sourceTree = "<group>";
+		};
+		E7B4705022803BBC00ADDC7A /* LZPinYinSearchLib */ = {
+			isa = PBXGroup;
+			children = (
+				E7B4705122803BBC00ADDC7A /* LZChineseInclude.h */,
+				E7B4705222803BBC00ADDC7A /* LZChineseInclude.m */,
+				E7B4705322803BBC00ADDC7A /* LZChineseToPinyinResource.h */,
+				E7B4705422803BBC00ADDC7A /* LZChineseToPinyinResource.m */,
+				E7B4705522803BBC00ADDC7A /* LZHanyuPinyinOutputFormat.h */,
+				E7B4705622803BBC00ADDC7A /* LZHanyuPinyinOutputFormat.m */,
+				E7B4705722803BBC00ADDC7A /* LZPinyinFormatter.h */,
+				E7B4705822803BBC00ADDC7A /* LZPinyinFormatter.m */,
+				E7B4705922803BBC00ADDC7A /* LZPinYinForObjc.h */,
+				E7B4705A22803BBC00ADDC7A /* LZPinYinForObjc.m */,
+				E7B4705B22803BBC00ADDC7A /* LZPinyinHelper.h */,
+				E7B4705C22803BBC00ADDC7A /* LZPinyinHelper.m */,
+				E7B4705D22803BBC00ADDC7A /* LZPinYinSearch.h */,
+				E7B4705E22803BBC00ADDC7A /* LZPinYinSearch.m */,
+				E7B4705F22803BBC00ADDC7A /* NSString+PinYin4Cocoa.h */,
+				E7B4706022803BBC00ADDC7A /* NSString+PinYin4Cocoa.m */,
+				E7B4706122803BBC00ADDC7A /* unicode_to_hanyu_pinyin.txt */,
+			);
+			path = LZPinYinSearchLib;
+			sourceTree = "<group>";
+		};
 		E7C42E6D224B586C00F3FB1A /* General(通用类) */ = {
 			isa = PBXGroup;
 			children = (
@@ -3079,13 +3052,11 @@
 				E7269905223F754B003A5043 /* LZRootView.json in Resources */,
 				E74C9636226384A0000CBAF0 /* TTHUDManager_right@2x.png in Resources */,
 				E74C9639226384A0000CBAF0 /* TTHUDManager_error@2x.png in Resources */,
-				E769B301227845A70049EF73 /* citydict.plist in Resources */,
 				E76D9C5322602EE8009D1A23 /* TXPayOrderViewController.xib in Resources */,
 				E74C9637226384A0000CBAF0 /* TTHUDManager_tip@2x.png in Resources */,
 				E74C954722638442000CBAF0 /* wildcat_gif_6@2x.png in Resources */,
-				E769B31A227845D70049EF73 /* ItemViewCell.xib in Resources */,
 				E74C963B226384A0000CBAF0 /* TTHUDManager_error@3x.png in Resources */,
-				E769B300227845A70049EF73 /* unicode_to_hanyu_pinyin.txt in Resources */,
+				E7B4706B22803BBD00ADDC7A /* unicode_to_hanyu_pinyin.txt in Resources */,
 				E77F6539225C3A0E0017B4C8 /* TTNumbeKeyboard.bundle in Resources */,
 				E725D0E1225EF36400C233E7 /* c31_btn_wxzf@3x.png in Resources */,
 				E74C9638226384A0000CBAF0 /* TTHUDManager_info@3x.png in Resources */,
@@ -3097,7 +3068,6 @@
 				E725D0DE225EF36400C233E7 /* c31_btn_zfb@2x.png in Resources */,
 				E7D7321C2268B21B006F171A /* ShareSDKUI.bundle in Resources */,
 				E76579EF2276D6F400AFAEFE /* TXTicketQueryViewController.xib in Resources */,
-				E769B31E227845D70049EF73 /* HeadView.xib in Resources */,
 				E77F653B225C3A0E0017B4C8 /* RYNumberKeyboard.xib in Resources */,
 				E7D732222268B21B006F171A /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
 				E725D0DF225EF36400C233E7 /* c31_btn_wxzf@2x.png in Resources */,
@@ -3112,7 +3082,6 @@
 				E74C954922638442000CBAF0 /* loading@2x.gif in Resources */,
 				E725D0E0225EF36400C233E7 /* c31_btn_zfb@3x.png in Resources */,
 				E7D732192268B21B006F171A /* ShareSDKConfigFile.bundle in Resources */,
-				E769B318227845D70049EF73 /* CityViewCell.xib in Resources */,
 				E7691EEF2255F8C4006A94D9 /* TXForgetTradingViewController.xib in Resources */,
 				E78B8F7D225B32BC0052852C /* addr.json in Resources */,
 				E74C954822638442000CBAF0 /* wildcat_gif_4@2x.png in Resources */,
@@ -3187,7 +3156,6 @@
 				E7759AD322449557007DA6CF /* TXAddressTableViewCell.m in Sources */,
 				E75F2ED0224DC9FD0091C52E /* TXSubmitOrderViewController.m in Sources */,
 				E75F2EDD224DEE680091C52E /* TTTagView.m in Sources */,
-				E769B31F227845D70049EF73 /* ItemViewCell.m in Sources */,
 				E78584082240C68500BBEA41 /* TXMineBannerCollectionViewCell.m in Sources */,
 				E725D079225ED3CA00C233E7 /* TTBaseTableView.m in Sources */,
 				E7759AC722448DA3007DA6CF /* TXConversionViewController.m in Sources */,
@@ -3198,7 +3166,6 @@
 				E769B2932277EDB20049EF73 /* UIView+Category.m in Sources */,
 				E769B29D22780B930049EF73 /* TXMessageChildHeaderView.m in Sources */,
 				E78B8F7F225B32BC0052852C /* TTPickerHeaderView.m in Sources */,
-				E769B2FC227845A70049EF73 /* NSString+PinYin4Cocoa.m in Sources */,
 				E757D5BC226EE52800EA84B8 /* TXBecomeVipCollectionViewCell.m in Sources */,
 				E7F1A74122428A8F003FA216 /* TXMallCollectionViewCell.m in Sources */,
 				E76579F3227702A900AFAEFE /* TXPushMessageModel.m in Sources */,
@@ -3215,12 +3182,13 @@
 				E7F1A7062241F1D2003FA216 /* TTBaseTableViewController.m in Sources */,
 				E7F1A73522427264003FA216 /* TTBaseNavImagesViewController.m in Sources */,
 				E74C964622678552000CBAF0 /* TXVersionViewController.m in Sources */,
-				E769B2FA227845A70049EF73 /* ChineseToPinyinResource.m in Sources */,
 				E72699A3223F7ECC003A5043 /* NSString+LZPinYin.m in Sources */,
-				E769B31C227845D70049EF73 /* HeadView.m in Sources */,
 				E7F1A70F224205A2003FA216 /* TTBaseSectionHeaderView.m in Sources */,
+				E7B4704422803A3000ADDC7A /* FMGroupsCityTableViewCell.m in Sources */,
 				E76D9C5222602EE8009D1A23 /* TXPayOrderViewController.m in Sources */,
+				E7B4704B22803A7C00ADDC7A /* FMSelectedCityModel.m in Sources */,
 				E72699D7223F7F58003A5043 /* UIColor+Extension.m in Sources */,
+				E7B4706622803BBD00ADDC7A /* LZPinyinFormatter.m in Sources */,
 				E78583F52240C2AF00BBEA41 /* TXWalletViewController.m in Sources */,
 				E7C9FCEA22671329008FD260 /* TXTicketBookingTableViewCell.m in Sources */,
 				E78B8F82225B32BC0052852C /* TTPickerView.m in Sources */,
@@ -3235,9 +3203,9 @@
 				E7C42E82224B770200F3FB1A /* HttpModel.m in Sources */,
 				E769B2A4227837110049EF73 /* TTLocation.m in Sources */,
 				E78584042240C54300BBEA41 /* TYCyclePagerView.m in Sources */,
-				E769B309227845CC0049EF73 /* NBSearchController.m in Sources */,
 				E7089EFD225DB8E400A7EF27 /* TXChoosePayViewController.m in Sources */,
 				E726997E223F7E4B003A5043 /* SCLoadingLabel.m in Sources */,
+				E7B4704322803A3000ADDC7A /* FMCurrentCitysTableViewCell.m in Sources */,
 				E7F1A7162242123A003FA216 /* TXRealNameViewController.m in Sources */,
 				E7089EF6225D7C6C00A7EF27 /* TXMallEppoViewController.m in Sources */,
 				E7C42E80224B770200F3FB1A /* AFLoadDataManager.m in Sources */,
@@ -3254,10 +3222,11 @@
 				E72699A6223F7ECC003A5043 /* NSString+URL.m in Sources */,
 				E78334082248DE2F005CAB91 /* TTPopupBackgroundView.m in Sources */,
 				E78B8F81225B32BC0052852C /* TTPickerModel.m in Sources */,
-				E769B30A227845CC0049EF73 /* NBSearchResultController.m in Sources */,
+				E7B4706922803BBD00ADDC7A /* LZPinYinSearch.m in Sources */,
 				E72699E6223F7F58003A5043 /* UIScreen+Extension.m in Sources */,
 				E77F653C225C3A0E0017B4C8 /* UITextField+RYNumberKeyboard.m in Sources */,
 				E714F2822271574200024FA3 /* TXBaseNavPageViewController.m in Sources */,
+				E7B4706222803BBD00ADDC7A /* LZChineseSort.m in Sources */,
 				E75F2ED6224DCB5F0091C52E /* TXBuyCountTableViewCell.m in Sources */,
 				E7269980223F7E4B003A5043 /* UIView+SCLoadingView.m in Sources */,
 				E7AA9DCA22436DA700C15483 /* TXTransactionRecordsViewController.m in Sources */,
@@ -3279,21 +3248,23 @@
 				E726990C223F7844003A5043 /* TXNewsViewController.m in Sources */,
 				E7D07C682243CCBE00E3FFAF /* LZActionSheet.m in Sources */,
 				E7F1A73B22427DC0003FA216 /* TXMallToolsCollectionViewCell.m in Sources */,
+				E7B4706722803BBD00ADDC7A /* LZPinYinForObjc.m in Sources */,
 				E72699D8223F7F58003A5043 /* UIButton+Extension.m in Sources */,
 				E774DCF222730FC6001A95B8 /* TXReceiveGiftListViewController.m in Sources */,
 				E714F28B2271910600024FA3 /* TXPushTableViewCell.m in Sources */,
 				E75F2ED3224DC9FD0091C52E /* TXShoppingTableViewCell.m in Sources */,
 				E7691EE42255DC4E006A94D9 /* UIView+SCValidation.m in Sources */,
+				E7B4706A22803BBD00ADDC7A /* NSString+PinYin4Cocoa.m in Sources */,
 				E7923CAA22535CF30094D0C3 /* SCTextField.m in Sources */,
 				E72699A1223F7ECC003A5043 /* NSString+MD5.m in Sources */,
 				E75F2EE0224E1BE30091C52E /* TTUserModel.m in Sources */,
+				E7B4706322803BBD00ADDC7A /* LZChineseInclude.m in Sources */,
 				E774DCF322730FC6001A95B8 /* TXReceiveGiftViewController.m in Sources */,
 				E78333E72248A963005CAB91 /* TXRegisterTableViewCell.m in Sources */,
 				E7759ADD2244C0D7007DA6CF /* SCTextView.m in Sources */,
 				E769B2882277E4070049EF73 /* SCDropDownMenuCollectionViewCell.m in Sources */,
 				E7269A00223F8472003A5043 /* TXNewTemplateViewController.m in Sources */,
 				E7759AB922447E6B007DA6CF /* URLDefine.m in Sources */,
-				E769B2FE227845A70049EF73 /* PinYinForObjc.m in Sources */,
 				E7F1A71222420A1B003FA216 /* TXEarningsTableViewCell.m in Sources */,
 				E78333EA2248AAD2005CAB91 /* TXRegisterPasswordViewController.m in Sources */,
 				E75F2EC9224DC9FD0091C52E /* TXMallGoodsDetailsViewController.m in Sources */,
@@ -3306,6 +3277,7 @@
 				E72698B7223F7165003A5043 /* AppDelegate.m in Sources */,
 				E77F874B2273F7CF004EB9C1 /* TXGiftDataModel.m in Sources */,
 				E72699DA223F7F58003A5043 /* UIFont+Extension.m in Sources */,
+				E7B4706E22803D7100ADDC7A /* FMTravelCollectionViewCell.m in Sources */,
 				E75F2ECE224DC9FD0091C52E /* TXMallGoodsSpecTableViewCell.m in Sources */,
 				E726991B223F7D28003A5043 /* TTBaseViewController.m in Sources */,
 				E7759AD022449507007DA6CF /* TXAddressViewController.m in Sources */,
@@ -3313,7 +3285,6 @@
 				E7759ACA224491BA007DA6CF /* TXResetPwdViewController.m in Sources */,
 				E77F6540225C48150017B4C8 /* TXPayPasswordViewController.m in Sources */,
 				E75F2ECA224DC9FD0091C52E /* TXShareViewController.m in Sources */,
-				E769B31B227845D70049EF73 /* FMSelectedCityViewController.m in Sources */,
 				E78333E422489E6B005CAB91 /* TXRegisteredTableViewCell.m in Sources */,
 				E78DCAEF2265E5C700252314 /* TXTicketListTableViewCell.m in Sources */,
 				E769B2972277FD6C0049EF73 /* TXMessageChildViewController.m in Sources */,
@@ -3324,6 +3295,7 @@
 				E756988D2251BE460022EC49 /* TXAddressModel.m in Sources */,
 				E7691EEE2255F8C4006A94D9 /* TXForgetTradingViewController.m in Sources */,
 				E7FBBCD122642E76009B9FC2 /* TXRolloutHeaderTableViewCell.m in Sources */,
+				E7B4704522803A3000ADDC7A /* FMCitySectionView.m in Sources */,
 				E72699A0223F7ECC003A5043 /* NSObject+SCValidation.m in Sources */,
 				E74C953622637A39000CBAF0 /* TTHUDManager.m in Sources */,
 				E7759AC122447FD2007DA6CF /* TXRepeatCastViewController.m in Sources */,
@@ -3332,7 +3304,7 @@
 				E75F2ECF224DC9FD0091C52E /* TXShareToolsCollectionViewCell.m in Sources */,
 				E7DCD615226DCDD800AE8DE8 /* TXBecomeVipTableViewCell.m in Sources */,
 				E78DCAD92265BFEF00252314 /* TXMembersbleCollectionViewCell.m in Sources */,
-				E769B2FF227845A70049EF73 /* PinyinHelper.m in Sources */,
+				E7B4706522803BBD00ADDC7A /* LZHanyuPinyinOutputFormat.m in Sources */,
 				E74C964322678358000CBAF0 /* TXAdsViewController.m in Sources */,
 				E72699E2223F7F58003A5043 /* UIImage+Extension.m in Sources */,
 				E7F1A7092241F298003FA216 /* TXProductTableViewCell.m in Sources */,
@@ -3348,6 +3320,7 @@
 				E72699A8223F7ECC003A5043 /* NSDate+Extensions.m in Sources */,
 				E714F28E227192F200024FA3 /* TXSystemTableViewCell.m in Sources */,
 				E774DCDC2272D21A001A95B8 /* TTWebViewController.m in Sources */,
+				E7B4706822803BBD00ADDC7A /* LZPinyinHelper.m in Sources */,
 				E7C42E83224B770200F3FB1A /* NetWorkAnalysisTool.m in Sources */,
 				E72699A2223F7ECC003A5043 /* NSString+SCExtension.m in Sources */,
 				E7759AC422448158007DA6CF /* TXRepeatCastTemplateTableViewCell.m in Sources */,
@@ -3357,23 +3330,23 @@
 				E769B2892277E4070049EF73 /* SCIndexPatch.m in Sources */,
 				E74C964922678575000CBAF0 /* TXVersionModel.m in Sources */,
 				E78583EF2240C29300BBEA41 /* TXOrderViewController.m in Sources */,
-				E769B2FD227845A70049EF73 /* PinyinFormatter.m in Sources */,
 				E78334092248DE2F005CAB91 /* UIViewController+TTPopupViewController.m in Sources */,
 				E78583CA22409D5A00BBEA41 /* TXMineTableViewCell.m in Sources */,
 				E78583C4223FA3C000BBEA41 /* TXMineHeaderView.m in Sources */,
 				E75698982251EBA30022EC49 /* TXWalletModel.m in Sources */,
 				E75F2ECD224DC9FD0091C52E /* TXMallGoodsDetailsTableViewCell.m in Sources */,
+				E7B4706422803BBD00ADDC7A /* LZChineseToPinyinResource.m in Sources */,
+				E7B4704622803A3000ADDC7A /* FMCityCollectionViewCell.m in Sources */,
+				E7B4704822803A3000ADDC7A /* FMSelectedCityViewController.m in Sources */,
 				E72699E4223F7F58003A5043 /* UIImage+SCExtension.m in Sources */,
 				E77326552254A87D00FD665A /* TXRolloutTypeViewController.m in Sources */,
 				E72699DB223F7F58003A5043 /* UINavigationBar+SCExtension.m in Sources */,
 				E78B8F83225B32BC0052852C /* MyCollectionViewCell.m in Sources */,
 				E78583CD22409E6D00BBEA41 /* TXMineBannerTableViewCell.m in Sources */,
 				E7AA9DAF2243353200C15483 /* TTBaseNavImagesTableViewController.m in Sources */,
-				E769B2F8227845A70049EF73 /* NSMutableArray+FilterElement.m in Sources */,
 				E72699AA223F7ECC003A5043 /* NSArray+Extension.m in Sources */,
 				E78DCAE92265DEA400252314 /* TXTicketModel.m in Sources */,
 				E72699DD223F7F58003A5043 /* UIImageView+SCExtension.m in Sources */,
-				E769B31D227845D70049EF73 /* CityViewCell.m in Sources */,
 				E7759AAF22447ADA007DA6CF /* TXModifyUserInfoViewController.m in Sources */,
 				E7AA9DD2224372B500C15483 /* TXZhuanchuZhuanruViewController.m in Sources */,
 				E77326582254A99900FD665A /* TXRolloutTypeTableViewCell.m in Sources */,
@@ -3396,17 +3369,14 @@
 				E753D1F12249D3B200A2DD36 /* SCPopoverAnimator.m in Sources */,
 				E726990F223F786B003A5043 /* TXMineViewController.m in Sources */,
 				E78583F82240C2BE00BBEA41 /* TXSetupViewController.m in Sources */,
-				E769B2FB227845A70049EF73 /* HanyuPinyinOutputFormat.m in Sources */,
 				E72699D6223F7F58003A5043 /* UIView+IBExtension.m in Sources */,
 				E78DCAEC2265E2A700252314 /* TXTicketListViewController.m in Sources */,
-				E769B319227845D70049EF73 /* ZWCollectionViewFlowLayout.m in Sources */,
 				E77BC13F224F7321008440C9 /* TXOrderModel.m in Sources */,
 				E769B29A227807600049EF73 /* TXMessageChildTableViewCell.m in Sources */,
 				E7CC89BA2264658C003D0EF7 /* TTImageButton.m in Sources */,
 				E7F1A72B22423F92003FA216 /* TXPersonalInfoViewController.m in Sources */,
 				E714F2882271904B00024FA3 /* TXSystemViewController.m in Sources */,
 				E7C9FCF822675C38008FD260 /* TXTicketOrderTableViewCell.m in Sources */,
-				E769B308227845CC0049EF73 /* SearchResult.m in Sources */,
 				E78584052240C54300BBEA41 /* TYCyclePagerTransformLayout.m in Sources */,
 				E72699A7223F7ECC003A5043 /* NSDictionary+Extension.m in Sources */,
 				E72699A4223F7ECC003A5043 /* NSDate+Relation.m in Sources */,
@@ -3423,12 +3393,12 @@
 				E78DCAE52265D12000252314 /* LZDatePickerView.m in Sources */,
 				E769B2A0227820DF0049EF73 /* TXMessageChildAdsViewController.m in Sources */,
 				E7759AB522447DC0007DA6CF /* SCLocalCacheTool.m in Sources */,
-				E769B2F9227845A70049EF73 /* ChineseInclude.m in Sources */,
 				E7759AEA2244DD6C007DA6CF /* TXMembersBannerView.m in Sources */,
 				E78583BE223F967D00BBEA41 /* SCTableViewSectionHeaderView.m in Sources */,
 				E7C9FCE722671023008FD260 /* TXTicketBookingViewController.m in Sources */,
 				E72699FB223F8298003A5043 /* WMMenuView.m in Sources */,
 				E72699D5223F7F58003A5043 /* UIButton+MVImagePosition.m in Sources */,
+				E7B4704722803A3000ADDC7A /* FMHotsCityTableViewCell.m in Sources */,
 				E7AA9DD72243735A00C15483 /* TXEquityViewController.m in Sources */,
 				E774DCF122730FC6001A95B8 /* TXAdsGiftViewController.m in Sources */,
 				E7269A04223F8738003A5043 /* TXMainHeaderView.m in Sources */,
