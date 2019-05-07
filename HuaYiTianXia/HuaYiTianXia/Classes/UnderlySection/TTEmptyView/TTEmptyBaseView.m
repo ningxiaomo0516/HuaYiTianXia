@@ -16,8 +16,6 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
-        /// 默认自动显隐
-        self.autoShowEmptyView = YES;
         [self prepare];
     }
     return self;
@@ -27,10 +25,10 @@
     self.autoresizingMask = UIViewAutoresizingFlexibleWidth |  UIViewAutoresizingFlexibleHeight;
 }
 
-- (void)layoutSubviews{
+- (void)layoutSubviews {
     [super layoutSubviews];
     UIView *view = self.superview;
-    //不是UIScrollView，不做操作
+    /// 不是UIView，不做操作
     if (view && [view isKindOfClass:[UIView class]]){
         self.width = view.width;
         self.height = view.height;
@@ -42,9 +40,9 @@
     
 }
 
-- (void)willMoveToSuperview:(UIView *)newSuperview{
+- (void)willMoveToSuperview:(UIView *)newSuperview {
     [super willMoveToSuperview:newSuperview];
-    /// 不是UIScrollView，不做操作
+    /// 不是UIView，不做操作
     if (newSuperview && ![newSuperview isKindOfClass:[UIView class]]) return;
     if (newSuperview) {
         self.width = newSuperview.width;
@@ -53,21 +51,41 @@
 }
 
 #pragma mark - ------------------ 实例化 ------------------
-+ (instancetype)emptyActionViewWithImageStr:(NSString *)imageStr titleStr:(NSString *)titleStr detailStr:(NSString *)detailStr btnTitleStr:(NSString *)btnTitleStr target:(id)target action:(SEL)action{
++ (instancetype)emptyActionViewWithImage:(UIImage *)image titleText:(NSString *)titleText detailText:(NSString *)detailText btnTitleText:(NSString *)btnTitleText target:(id)target action:(SEL)action{
     TTEmptyBaseView *emptyView = [[self alloc] init];
-    [emptyView creatEmptyViewWithImageStr:imageStr titleStr:titleStr detailStr:detailStr btnTitleStr:btnTitleStr target:target action:action];
+    [emptyView creatEmptyViewWithImage:image imagesText:nil titleText:titleText detailText:detailText btnTitleText:btnTitleText target:target action:action btnClickBlock:nil];
+    
     return emptyView;
 }
 
-+ (instancetype)emptyActionViewWithImageStr:(NSString *)imageStr titleStr:(NSString *)titleStr detailStr:(NSString *)detailStr btnTitleStr:(NSString *)btnTitleStr btnClickBlock:(TTActionTapBlock)btnClickBlock{
++ (instancetype)emptyActionViewWithImage:(UIImage *)image titleText:(NSString *)titleText detailText:(NSString *)detailText btnTitleText:(NSString *)btnTitleText btnClickBlock:(TTActionTapBlock)btnClickBlock{
     TTEmptyBaseView *emptyView = [[self alloc] init];
-    [emptyView creatEmptyViewWithImageStr:imageStr titleStr:titleStr detailStr:detailStr btnTitleStr:btnTitleStr btnClickBlock:btnClickBlock];
+    [emptyView creatEmptyViewWithImage:image imagesText:nil titleText:titleText detailText:detailText btnTitleText:btnTitleText target:nil action:nil btnClickBlock:btnClickBlock];
+    
     return emptyView;
 }
 
-+ (instancetype)emptyViewWithImageStr:(NSString *)imageStr titleStr:(NSString *)titleStr detailStr:(NSString *)detailStr{
++ (instancetype)emptyActionViewWithImagesText:(NSString *)imagesText titleText:(NSString *)titleText detailText:(NSString *)detailText btnTitleText:(NSString *)btnTitleText target:(id)target action:(SEL)action{
     TTEmptyBaseView *emptyView = [[self alloc] init];
-    [emptyView creatEmptyViewWithImageStr:imageStr titleStr:titleStr detailStr:detailStr btnTitleStr:nil btnClickBlock:nil];
+    [emptyView creatEmptyViewWithImage:nil imagesText:imagesText titleText:titleText detailText:detailText btnTitleText:btnTitleText target:target action:action btnClickBlock:nil];
+    return emptyView;
+}
+
++ (instancetype)emptyActionViewWithImagesText:(NSString *)imagesText titleText:(NSString *)titleText detailText:(NSString *)detailText btnTitleText:(NSString *)btnTitleText btnClickBlock:(TTActionTapBlock)btnClickBlock{
+    TTEmptyBaseView *emptyView = [[self alloc] init];
+    [emptyView creatEmptyViewWithImage:nil imagesText:imagesText titleText:titleText detailText:detailText btnTitleText:btnTitleText target:nil action:nil btnClickBlock:btnClickBlock];
+    return emptyView;
+}
+
++ (instancetype)emptyViewWithImage:(UIImage *)image titleText:(NSString *)titleText detailText:(NSString *)detailText{
+    TTEmptyBaseView *emptyView = [[self alloc] init];
+    [emptyView creatEmptyViewWithImage:image imagesText:nil titleText:titleText detailText:detailText btnTitleText:nil target:nil action:nil btnClickBlock:nil];
+    return emptyView;
+}
+
++ (instancetype)emptyViewWithImagesText:(NSString *)imagesText titleText:(NSString *)titleText detailText:(NSString *)detailText{
+    TTEmptyBaseView *emptyView = [[self alloc] init];
+    [emptyView creatEmptyViewWithImage:nil imagesText:imagesText titleText:titleText detailText:detailText btnTitleText:nil target:nil action:nil btnClickBlock:nil];
     return emptyView;
 }
 
@@ -77,30 +95,15 @@
     return emptyView;
 }
 
-- (void)creatEmptyViewWithImageStr:(NSString *)imageStr titleStr:(NSString *)titleStr detailStr:(NSString *)detailStr btnTitleStr:(NSString *)btnTitleStr target:(id)target action:(SEL)action{
+- (void)creatEmptyViewWithImage:(UIImage *)image imagesText:(NSString *)imagesText titleText:(NSString *)titleText detailText:(NSString *)detailText btnTitleText:(NSString *)btnTitleText target:(id)target action:(SEL)action btnClickBlock:(TTActionTapBlock)btnClickBlock{
     
-    _imageStr = imageStr;
-    _titleStr = titleStr;
-    _detailStr = detailStr;
-    _btnTitleStr = btnTitleStr;
+    _image = image;
+    _imagesText = imagesText;
+    _titleText = titleText;
+    _detailText = detailText;
+    _btnTitleText = btnTitleText;
     _actionBtnTarget = target;
     _actionBtnAction = action;
-    
-    //内容物背景视图
-    if (!_contentView) {
-        _contentView = [[UIView alloc] initWithFrame:CGRectZero];
-        [self addSubview:_contentView];
-        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapContentView:)];
-        [_contentView addGestureRecognizer:tap];
-    }
-}
-
-- (void)creatEmptyViewWithImageStr:(NSString *)imageStr titleStr:(NSString *)titleStr detailStr:(NSString *)detailStr btnTitleStr:(NSString *)btnTitleStr btnClickBlock:(TTActionTapBlock)btnClickBlock{
-    
-    _imageStr = imageStr;
-    _titleStr = titleStr;
-    _detailStr = detailStr;
-    _btnTitleStr = btnTitleStr;
     _btnClickBlock = btnClickBlock;
     
     //内容物背景视图
@@ -111,9 +114,9 @@
         [_contentView addGestureRecognizer:tap];
     }
 }
+
 - (void)creatEmptyViewWithCustomView:(UIView *)customView{
-    
-    //内容物背景视图
+    /// 内容物背景视图
     if (!_contentView) {
         _contentView = [[UIView alloc] initWithFrame:CGRectZero];
         [self addSubview:_contentView];
@@ -125,31 +128,37 @@
     _customView = customView;
 }
 
-#pragma mark - ------------------ Setter ------------------
-- (void)setImageStr:(NSString *)imageStr{
-    _imageStr = imageStr;
-    [self layoutSubviews];
-}
-
-- (void)setTitleStr:(NSString *)titleStr{
-    _titleStr = titleStr;
-    [self layoutSubviews];
-}
-
-- (void)setDetailStr:(NSString *)detailStr{
-    _detailStr = detailStr;
-    [self layoutSubviews];
-}
-
-- (void)setBtnTitleStr:(NSString *)btnTitleStr{
-    _btnTitleStr = btnTitleStr;
-    [self layoutSubviews];
-}
-
+#pragma mark - ------------------ Event Method ------------------
 - (void)tapContentView:(UITapGestureRecognizer *)tap{
     if (_tapContentViewBlock) {
         _tapContentViewBlock();
     }
+}
+
+#pragma mark - ------------------ Setter ------------------
+- (void)setImage:(UIImage *)image{
+    _image = image;
+    [self setNeedsLayout];
+}
+
+- (void)setImagesText:(NSString *)imagesText{
+    _imagesText = imagesText;
+    [self setNeedsLayout];
+}
+
+- (void)setTitleText:(NSString *)titleText{
+    _titleText = titleText;
+    [self setNeedsLayout];
+}
+
+- (void)setDetailText:(NSString *)detailText{
+    _detailText = detailText;
+    [self setNeedsLayout];
+}
+
+- (void)setBtnTitleText:(NSString *)btnTitleText{
+    _btnTitleText = btnTitleText;
+    [self setNeedsLayout];
 }
 
 @end

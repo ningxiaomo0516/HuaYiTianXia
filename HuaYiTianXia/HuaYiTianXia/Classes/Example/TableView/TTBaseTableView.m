@@ -234,9 +234,9 @@ static NSString * const pageIndex = @"page";//获取第几页的根据自己的�
     _emptyViewHeight = emptyViewHeight;
 }
 
-- (TTEmptyView *)emptyView{
+- (SCEmptyView *)emptyView{
     if (!_emptyView) {
-        _emptyView = [[TTEmptyView alloc]init];
+        _emptyView = [[SCEmptyView alloc]init];
         _emptyView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight - self.tableHeaderView.frame.size.height- kNavBarHeight) ;
         _emptyView.backgroundColor = kClearColor;
     }
@@ -250,11 +250,11 @@ static NSString * const pageIndex = @"page";//获取第几页的根据自己的�
 
 
 /***************************  以下是空白界面的View  **************************************************/
-@interface TTEmptyView ()
+@interface SCEmptyView ()
 @property (nonatomic ,strong) UILabel *hintLabel;
 @property (nonatomic ,strong) UIImageView *imagesView;
 @end
-@implementation TTEmptyView
+@implementation SCEmptyView
 - (instancetype)initWithFrame:(CGRect)frame{
     if (self = [super initWithFrame:frame]) {
         [self initEmptyView];

@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class TTBaseTableView,TTEmptyView;
+@class TTBaseTableView,SCEmptyView;
 @protocol TTTableViewRequestDelegate <NSObject>
 @required
 /**
@@ -50,7 +50,7 @@ typedef NS_ENUM(NSInteger, kRequestType){
 /// 传递controller进来展示loadding状态只能是weak不会引用
 @property (nonatomic, weak) UIViewController *tempVC;
 /// 空白页、网络错误页  页面的内容可用此属性去更改
-@property (nonatomic, strong) TTEmptyView *emptyView;
+@property (nonatomic, strong) SCEmptyView *emptyView;
 /// 空白页、网络错误页  页面的内容可用此属性去更改
 @property (nonatomic, assign) CGFloat emptyViewHeight;
 /// 是否有头部刷新  默认YES
@@ -81,7 +81,7 @@ typedef NS_ENUM(NSInteger, kRequestType){
 
 
 #pragma mark -------- 以下是空白界面的View --------
-@interface TTEmptyView : UIView
+@interface SCEmptyView : UIView
 
 /// 占位图名称
 @property (nonatomic ,copy) NSString *imageName;

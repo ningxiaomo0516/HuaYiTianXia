@@ -66,7 +66,7 @@ static char kEmptyViewKey;
 }
 
 - (void)show{
-    //当不自动显隐时，内部自动调用show方法时也不要去显示，要显示的话只有手动去调用 ly_showEmptyView
+    //当不自动显隐时，内部自动调用show方法时也不要去显示，要显示的话只有手动去调用 tt_showEmptyView
     if (!self.tt_emptyView.autoShowEmptyView) {
         self.tt_emptyView.hidden = YES;
         return;
@@ -84,7 +84,7 @@ static char kEmptyViewKey;
 }
 
 #pragma mark - Public Method
-- (void)ly_showEmptyView{
+- (void)tt_showEmptyView{
     
     [self.tt_emptyView.superview layoutSubviews];
     self.tt_emptyView.hidden = NO;

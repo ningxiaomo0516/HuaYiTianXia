@@ -155,6 +155,9 @@ static NSString * const reuseIdentifiers = @"TXSystemTableViewCell";
             }
             [self analysisData];
         }
+        self.tableView.tt_emptyView = [TTEmptyView emptyViewWithImageText:@"noData"
+                                                                titleText:@"暂无数据"
+                                                               detailText:@""];
         kHideMBProgressHUD(self.view);
         [self.tableView reloadData];
         [self.view dismissLoadingView];

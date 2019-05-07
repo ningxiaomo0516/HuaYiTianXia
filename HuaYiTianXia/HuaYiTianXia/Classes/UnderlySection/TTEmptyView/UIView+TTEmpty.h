@@ -22,8 +22,8 @@ NS_ASSUME_NONNULL_BEGIN
 ///////////////////////
 
 /**
- *  一般用于开始请求网络时调用，ly_startLoading调用时会暂时隐藏emptyView
- *  当调用ly_endLoading方法时，ly_endLoading方法内部会根据当前的tableView/collectionView的
+ *  一般用于开始请求网络时调用，tt_startLoading调用时会暂时隐藏emptyView
+ *  当调用tt_endLoading方法时，tt_endLoading方法内部会根据当前的tableView/collectionView的
  *  DataSource来自动判断是否显示emptyView
  */
 - (void)tt_startLoading;

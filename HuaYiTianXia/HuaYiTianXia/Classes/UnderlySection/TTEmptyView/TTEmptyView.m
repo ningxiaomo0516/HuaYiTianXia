@@ -24,6 +24,8 @@
 //水平方向内边距
 #define kActionBtnHorizontalMargin 30.f
 
+//背景色
+#define kBackgroundColor [UIColor colorWithRed:247.f/255.f green:247.f/255.f blue:247.f/255.f alpha:1.f]
 //黑色
 //#define kBlackColor [UIColor colorWithRed:0.3f green:0.3f blue:0.3f alpha:1.f]
 //灰色
@@ -45,27 +47,30 @@
     CGFloat contentHeight;   //内容物高度
     CGFloat subViweMargin;   //间距
 }
-
 - (void)prepare{
     [super prepare];
-    self.contentViewY = 1000;//默认值,用来判断是否设置过content的Y值
+    
+    self.autoShowEmptyView = YES; //默认自动显隐
+    self.contentViewY = 1000;     //默认值,用来判断是否设置过content的Y值
 }
-
 - (void)setupSubviews{
     [super setupSubviews];
     
-    contentMaxWidth = self.width - 30.f; //最大宽度（ScrollView 的宽 - 30）
+    contentMaxWidth = self.emptyViewIsCompleteCoverSuperView ? self.width : self.width - 30.f;
     contentWidth = 0;//内容物宽度
     contentHeight = 0;//内容物高度
     subViweMargin = self.subViewMargin ? self.subViewMargin : kSubViewMargin;
     
     //占位图片
     UIImage *image = [UIImage imageNamed:self.imageStr];
-    if (image) {
+    if(self.image){
+        [self setupPromptImageView:self.image];
+    }else if (image) {
         [self setupPromptImageView:image];
-    }else{
+    } else{
         if (_promptImageView) {
-            [_promptImageView removeFromSuperview];
+            [self.promptImageView removeFromSuperview];
+            self.promptImageView = nil;
         }
     }
     
@@ -74,7 +79,8 @@
         [self setupTitleLabel:self.titleStr];
     }else{
         if (_titleLabel) {
-            [_titleLabel removeFromSuperview];
+            [self.titleLabel removeFromSuperview];
+            self.titleLabel = nil;
         }
     }
     
@@ -83,7 +89,8 @@
         [self setupDetailLabel:self.detailStr];
     }else{
         if (_detailLabel) {
-            [_detailLabel removeFromSuperview];
+            [self.detailLabel removeFromSuperview];
+            self.detailLabel = nil;
         }
     }
     
@@ -95,68 +102,74 @@
             [self setupActionBtn:self.btnTitleStr target:nil action:nil btnClickBlock:self.btnClickBlock];
         }else{
             if (_actionButton) {
-                [_actionButton removeFromSuperview];
+                [self.actionButton removeFromSuperview];
+                self.actionButton = nil;
             }
         }
     }else{
         if (_actionButton) {
-            [_actionButton removeFromSuperview];
+            [self.actionButton removeFromSuperview];
+            self.actionButton = nil;
         }
     }
-    
     //自定义view
     if (self.customView) {
         contentWidth = self.customView.width;
         contentHeight = self.customView.maxY;
     }
-    
     ///设置frame
     [self setSubViewFrame];
 }
 
 - (void)setSubViewFrame{
     
-    //获取self原始宽高
-    CGFloat scrollViewWidth = self.bounds.size.width;
-    CGFloat scrollViewHeight = self.bounds.size.height;
+    //emptyView初始宽高
+    CGFloat originEmptyWidth = self.width;
+    CGFloat originEmptyHeight = self.height;
     
-    //重新设置self的frame（大小为content的大小）
-    self.size = CGSizeMake(contentWidth, contentHeight);
-    CGFloat emptyViewCenterX = scrollViewWidth * 0.5f;
-    CGFloat emptyViewCenterY = scrollViewHeight * 0.5f;
+    CGFloat emptyViewCenterX = originEmptyWidth * 0.5f;
+    CGFloat emptyViewCenterY = originEmptyHeight * 0.5f;
+    
+    //不是完全覆盖父视图时，重新设置self的frame（大小为content的大小）
+    if (!self.emptyViewIsCompleteCoverSuperView) {
+        self.size = CGSizeMake(contentWidth, contentHeight);
+    }
     self.center = CGPointMake(emptyViewCenterX, emptyViewCenterY);
     
     //设置contentView
-    self.contentView.frame = self.bounds;
+    self.contentView.size = CGSizeMake(contentWidth, contentHeight);
+    if (self.emptyViewIsCompleteCoverSuperView) {
+        self.contentView.center = CGPointMake(emptyViewCenterX, emptyViewCenterY);
+    }
     
     //子控件的centerX设置
     CGFloat centerX = self.contentView.width * 0.5f;
     if (self.customView) {
-        self.customView.centerX      = centerX;
-        
+        self.customView.centerX     = centerX;
     }else{
-        _promptImageView.centerX = centerX;
-        _titleLabel.centerX       = centerX;
-        _detailLabel.centerX = centerX;
-        _actionButton.centerX    = centerX;
+        _promptImageView.centerX    = centerX;
+        _titleLabel.centerX         = centerX;
+        _detailLabel.centerX        = centerX;
+        _actionButton.centerX       = centerX;
     }
     
-    //有无设置偏移
-    if (self.contentViewOffset) {
+    if (self.contentViewOffset) { //有无设置偏移
         self.centerY += self.contentViewOffset;
+    } else if (self.contentViewY < 1000) { //有无设置Y坐标值
+        self.y = self.contentViewY;
     }
     
-    //有无设置Y坐标值
-    if (self.contentViewY < 1000) {
-        self.y = self.contentViewY;
+    //是否忽略scrollView的contentInset
+    if (self.ignoreContentInset && [self.superview isKindOfClass:[UIScrollView class]]) {
+        UIScrollView *scrollView = (UIScrollView *)self.superview;
+        self.centerY -= scrollView.contentInset.top;
+        self.centerX -= scrollView.contentInset.left;
     }
 }
 
 #pragma mark - ------------------ Setup View ------------------
 - (void)setupPromptImageView:(UIImage *)img{
-    
     self.promptImageView.image = img;
-    
     CGFloat imgViewWidth = img.size.width;
     CGFloat imgViewHeight = img.size.height;
     
@@ -215,16 +228,16 @@
 
 - (void)setupActionBtn:(NSString *)btnTitle target:(id)target action:(SEL)action btnClickBlock:(TTActionTapBlock)btnClickBlock{
     
-    UIFont *font = self.actionBtnFont.pointSize ? self.actionBtnFont : kActionBtnFont;
-    CGFloat fontSize = font.pointSize;
-    UIColor *titleColor = self.actionBtnTitleColor ? self.actionBtnTitleColor : kBlackColor;
-    UIColor *backGColor = self.actionBtnBackGroundColor ? self.actionBtnBackGroundColor : [UIColor whiteColor];
-    UIColor *borderColor = self.actionBtnBorderColor ? self.actionBtnBorderColor : [UIColor colorWithRed:0.8f green:0.8f blue:0.8f alpha:1];
-    CGFloat borderWidth = self.actionBtnBorderWidth ? self.actionBtnBorderWidth : 0.0f;
-    CGFloat cornerRadius = self.actionBtnCornerRadius ? self.actionBtnCornerRadius : 5.f;
-    CGFloat horiMargin = self.actionBtnHorizontalMargin ? self.actionBtnHorizontalMargin : kActionBtnHorizontalMargin;
-    CGFloat height = self.actionBtnHeight ? self.actionBtnHeight : kActionBtnHeight;
-    CGSize textSize = [self returnTextWidth:btnTitle size:CGSizeMake(contentMaxWidth, fontSize) font:font];//计算得出title文字内容大小
+    UIFont *font            = self.actionBtnFont.pointSize ? self.actionBtnFont : kActionBtnFont;
+    CGFloat fontSize        = font.pointSize;
+    UIColor *titleColor     = self.actionBtnTitleColor ? self.actionBtnTitleColor : kBlackColor;
+    UIColor *backGColor     = self.actionBtnBackGroundColor ? self.actionBtnBackGroundColor : [UIColor whiteColor];
+    UIColor *borderColor    = self.actionBtnBorderColor ? self.actionBtnBorderColor : [UIColor colorWithRed:0.8f green:0.8f blue:0.8f alpha:1];
+    CGFloat borderWidth     = self.actionBtnBorderWidth ? self.actionBtnBorderWidth : 0.0f;
+    CGFloat cornerRadius    = self.actionBtnCornerRadius ? self.actionBtnCornerRadius : 5.f;
+    CGFloat horiMargin      = self.actionBtnHorizontalMargin ? self.actionBtnHorizontalMargin : kActionBtnHorizontalMargin;
+    CGFloat height          = self.actionBtnHeight ? self.actionBtnHeight : kActionBtnHeight;
+    CGSize textSize         = [self returnTextWidth:btnTitle size:CGSizeMake(contentMaxWidth, fontSize) font:font];//计算得出title文字内容大小
     if (height < textSize.height) {
         height = textSize.height + 4;
     }
@@ -255,42 +268,18 @@
     contentHeight = self.actionButton.maxY;
 }
 
-#pragma mark - ------------------ 懒加载 ------------------
-- (UIImageView *)promptImageView{
-    if (!_promptImageView) {
-        _promptImageView = [[UIImageView alloc] init];
-        _promptImageView.contentMode = UIViewContentModeScaleAspectFit;
-        [self.contentView addSubview:_promptImageView];
+#pragma mark - ------------------ Properties Set ------------------
+- (void)setEmptyViewIsCompleteCoverSuperView:(BOOL)emptyViewIsCompleteCoverSuperView{
+    _emptyViewIsCompleteCoverSuperView = emptyViewIsCompleteCoverSuperView;
+    if (emptyViewIsCompleteCoverSuperView) {
+        if (!self.backgroundColor) {
+            self.backgroundColor = kBackgroundColor;
+        }
+    }else{
+        self.backgroundColor = [UIColor clearColor];
     }
-    return _promptImageView;
-}
-- (UILabel *)titleLabel{
-    if (!_titleLabel) {
-        _titleLabel = [[UILabel alloc] init];
-        _titleLabel.textAlignment = NSTextAlignmentCenter;
-        [self.contentView addSubview:_titleLabel];
-    }
-    return _titleLabel;
-}
-- (UILabel *)detailLabel{
-    if (!_detailLabel) {
-        _detailLabel = [[UILabel alloc] init];
-        _detailLabel.textAlignment = NSTextAlignmentCenter;
-        _detailLabel.numberOfLines = 0;
-        [self.contentView addSubview:_detailLabel];
-    }
-    return _detailLabel;
-}
-- (UIButton *)actionButton{
-    if (!_actionButton) {
-        _actionButton = [[UIButton alloc] init];
-        _actionButton.layer.masksToBounds = YES;
-        [self.contentView addSubview:_actionButton];
-    }
-    return _actionButton;
 }
 
-#pragma mark - ------------------ Properties Set ------------------
 #pragma mark 内容物背景视图 相关
 - (void)setSubViewMargin:(CGFloat)subViewMargin{
     if (_subViewMargin != subViewMargin) {
@@ -304,18 +293,17 @@
 - (void)setContentViewOffset:(CGFloat)contentViewOffset{
     if (_contentViewOffset != contentViewOffset) {
         _contentViewOffset = contentViewOffset;
-        
         if (_promptImageView || _titleLabel || _detailLabel || _actionButton || self.customView) {
-            self.ly_centerY += self.contentViewOffset;
+            self.centerY += self.contentViewOffset;
         }
     }
 }
+
 - (void)setContentViewY:(CGFloat)contentViewY{
     if (_contentViewY != contentViewY) {
         _contentViewY = contentViewY;
-        
         if (_promptImageView || _titleLabel || _detailLabel || _actionButton || self.customView) {
-            self.ly_y = self.contentViewY;
+            self.y = self.contentViewY;
         }
     }
 }
@@ -324,7 +312,6 @@
 - (void)setImageSize:(CGSize)imageSize{
     if (_imageSize.width != imageSize.width || _imageSize.height != imageSize.height) {
         _imageSize = imageSize;
-        
         if (_promptImageView) {
             [self setupSubviews];
         }
@@ -332,20 +319,18 @@
 }
 
 #pragma mark 描述Label 相关
--(void)setTitleLabFont:(UIFont *)titleLabFont{
+- (void)setTitleLabFont:(UIFont *)titleLabFont{
     if (_titleLabFont != titleLabFont) {
         _titleLabFont = titleLabFont;
-        
         if (_titleLabel) {
             [self setupSubviews];
         }
     }
-    
 }
+
 - (void)setTitleLabTextColor:(UIColor *)titleLabTextColor{
     if (_titleLabTextColor != titleLabTextColor) {
         _titleLabTextColor = titleLabTextColor;
-        
         if (_titleLabel) {
             _titleLabel.textColor = titleLabTextColor;
         }
@@ -362,6 +347,7 @@
         }
     }
 }
+
 - (void)setDetailLabMaxLines:(NSInteger)detailLabMaxLines{
     if (_detailLabMaxLines != detailLabMaxLines) {
         _detailLabMaxLines = detailLabMaxLines;
@@ -371,6 +357,7 @@
         }
     }
 }
+
 -(void)setDetailLabTextColor:(UIColor *)detailLabTextColor{
     if (_detailLabTextColor != detailLabTextColor) {
         _detailLabTextColor = detailLabTextColor;
@@ -386,71 +373,70 @@
 - (void)setActionBtnFont:(UIFont *)actionBtnFont{
     if (_actionBtnFont != actionBtnFont) {
         _actionBtnFont = actionBtnFont;
-        
         if (_actionButton) {
             [self setupSubviews];
         }
     }
 }
+
 - (void)setActionBtnHeight:(CGFloat)actionBtnHeight{
     if (_actionBtnHeight != actionBtnHeight) {
         _actionBtnHeight = actionBtnHeight;
-        
         if (_actionButton) {
             [self setupSubviews];
         }
     }
 }
+
 - (void)setActionBtnHorizontalMargin:(CGFloat)actionBtnHorizontalMargin{
     if (_actionBtnHorizontalMargin != actionBtnHorizontalMargin) {
         _actionBtnHorizontalMargin = actionBtnHorizontalMargin;
-        
         if (_actionButton) {
             [self setupSubviews];
         }
     }
 }
+
 //////////其他相关-直接赋值
 - (void)setActionBtnCornerRadius:(CGFloat)actionBtnCornerRadius{
     if (_actionBtnCornerRadius != actionBtnCornerRadius) {
         _actionBtnCornerRadius = actionBtnCornerRadius;
-        
         if (_actionButton) {
             _actionButton.layer.cornerRadius = actionBtnCornerRadius;
         }
     }
 }
+
 - (void)setActionBtnBorderWidth:(CGFloat)actionBtnBorderWidth{
     if (actionBtnBorderWidth != _actionBtnBorderWidth) {
         _actionBtnBorderWidth = actionBtnBorderWidth;
-        
         if (_actionButton) {
             _actionButton.layer.borderWidth = actionBtnBorderWidth;
         }
     }
 }
+
 - (void)setActionBtnBorderColor:(UIColor *)actionBtnBorderColor{
     if (_actionBtnBorderColor != actionBtnBorderColor) {
         _actionBtnBorderColor = actionBtnBorderColor;
-        
         if (_actionButton) {
             _actionButton.layer.borderColor = actionBtnBorderColor.CGColor;
         }
     }
 }
+
 - (void)setActionBtnTitleColor:(UIColor *)actionBtnTitleColor{
     if (_actionBtnTitleColor != actionBtnTitleColor) {
         _actionBtnTitleColor = actionBtnTitleColor;
-        
         if (_actionButton) {
             [_actionButton setTitleColor:actionBtnTitleColor forState:UIControlStateNormal];
         }
     }
 }
+
 - (void)setActionBtnBackGroundColor:(UIColor *)actionBtnBackGroundColor{
     if (actionBtnBackGroundColor != _actionBtnBackGroundColor) {
         _actionBtnBackGroundColor = actionBtnBackGroundColor;
-        
         if (_actionButton) {
             [_actionButton setBackgroundColor:actionBtnBackGroundColor];
         }
@@ -469,4 +455,43 @@
     CGSize textSize = [text boundingRectWithSize:size options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : font} context:nil].size;
     return textSize;
 }
+
+#pragma mark - ------------------ 懒加载 ------------------
+- (UIImageView *)promptImageView{
+    if (!_promptImageView) {
+        _promptImageView = [[UIImageView alloc] init];
+        _promptImageView.contentMode = UIViewContentModeScaleAspectFit;
+        [self.contentView addSubview:_promptImageView];
+    }
+    return _promptImageView;
+}
+
+- (UILabel *)titleLabel{
+    if (!_titleLabel) {
+        _titleLabel = [[UILabel alloc] init];
+        _titleLabel.textAlignment = NSTextAlignmentCenter;
+        [self.contentView addSubview:_titleLabel];
+    }
+    return _titleLabel;
+}
+
+- (UILabel *)detailLabel{
+    if (!_detailLabel) {
+        _detailLabel = [[UILabel alloc] init];
+        _detailLabel.textAlignment = NSTextAlignmentCenter;
+        _detailLabel.numberOfLines = 0;
+        [self.contentView addSubview:_detailLabel];
+    }
+    return _detailLabel;
+}
+
+- (UIButton *)actionButton{
+    if (!_actionButton) {
+        _actionButton = [[UIButton alloc] init];
+        _actionButton.layer.masksToBounds = YES;
+        [self.contentView addSubview:_actionButton];
+    }
+    return _actionButton;
+}
+
 @end
