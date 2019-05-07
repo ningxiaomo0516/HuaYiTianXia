@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "LZRootViewController.h"
+#import "Reachability.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate,UITabBarControllerDelegate>
 {
@@ -25,5 +26,10 @@
 /// 退出后选中首页
 - (void) setSelectedIndex;
 - (void) jumpMainVC;
+
+
+@property (nonatomic, strong) Reachability  *hostReachability;
+@property (nonatomic, strong) Reachability  *interNetReachability;
+@property (nonatomic, strong) NSString      *offLine;
 @end
 

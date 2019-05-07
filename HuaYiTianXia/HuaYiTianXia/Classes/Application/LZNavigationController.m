@@ -148,11 +148,10 @@
     UIImage *backButtonImage = viewController.lz_navigationController.backButtonImage;
     
     if (!backButtonImage) {
-//        backButtonImage = [UIImage imageNamed:kDefaultBackImageName];
         backButtonImage = [UIImage imageNamed:@"all_btn_back_grey"];
     }
     
-    // 修改tabBra的frame (解决Push新页面的时候TabBar会上移)
+    // 修改iPhone X跳转时tabbar往上移动问题
     CGRect frame = self.tabBarController.tabBar.frame;
     frame.origin.y = [UIScreen mainScreen].bounds.size.height - frame.size.height;
     self.tabBarController.tabBar.frame = frame;

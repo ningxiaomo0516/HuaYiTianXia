@@ -15,9 +15,9 @@
 #define TOAST_POSITION_Y   (kScreenHeight/2)
 
 //字体
-#define TOAST_TEXT_FONTSIZE         kFontSizeMedium12
+#define TOAST_TEXT_FONTSIZE         kFontSizeMedium13
 //动画时间
-#define TOAST_ANIMATION_DURATION    1.8f
+#define TOAST_ANIMATION_DURATION    4.8f
 //显示和消失时间
 #define TOAST_ANI_STARTEND_DURATION 2.0f
 

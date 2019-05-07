@@ -138,7 +138,7 @@ static NSString * const reuseIdentifierSectionHeaderView = @"SCTableViewSectionH
             [self.bannerArray addObjectsFromArray:model.banners];
             [self.tableView reloadData];
         }else{
-            Toast(@"获取城市数据失败");
+            Toast(@"获取新闻数据失败");
         }
         [self.tableView.mj_header endRefreshing];
         [self.tableView.mj_footer endRefreshing];

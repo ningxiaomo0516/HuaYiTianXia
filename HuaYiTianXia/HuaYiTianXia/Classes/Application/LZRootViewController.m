@@ -40,7 +40,7 @@
     // Do any additional setup after loading the view.
     // 添加所有子控制器
     [self addAllChildVc];
-    //    [self addObverser];
+    [self addObverser];
     self.delegate = self;
 }
 
@@ -109,6 +109,7 @@
  */
 - (void) tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController{
     TTLog(@"tabBarController.selectedIndex --- %lu",(unsigned long)tabBarController.selectedIndex);
+    //点击tabBarItem动画 这里可以根据当前的索引值做不同的动画
 }
 
 //should选中viewController  return YES 可以本选中， NO不可以被选中
@@ -147,28 +148,32 @@
     
 }
 
-//#pragma mark - 添加通知，创建圆点和删除圆点
-//- (void)addObverser {
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showBadge) name:@"showBadge" object:nil];
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dismissBadge) name:@"dismissBadge" object:nil];
-//}
-//
-//- (void)showBadge {
-//    for (UITabBarItem *item in self.tabBar.items) {
-//        if ([item.title isEqualToString:@"我的"]) {
-//            NSInteger tag = [self.tabBar.items indexOfObject:item];
-//            [self.tabBar showBadgeOnItemIndex:tag];
-//        }
-//    }
-//}
-//- (void)dismissBadge {
-//    for (UITabBarItem *item in self.tabBar.items) {
-//        if ([item.title isEqualToString:@"我的"]) {
-//            NSInteger tag = [self.tabBar.items indexOfObject:item];
-//            [self.tabBar hideBadgeOnItemIndex:tag];
-//        }
-//    }
-//}
+#pragma mark - 添加通知，创建圆点和删除圆点
+- (void)addObverser {
+    [kNotificationCenter addObserver:self selector:@selector(showBadge) name:@"showBadge" object:nil];
+    [kNotificationCenter addObserver:self selector:@selector(dismissBadge) name:@"dismissBadge" object:nil];
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    [kNotificationCenter removeObserver:self];
+}
+
+- (void)showBadge {
+    for (UITabBarItem *item in self.tabBar.items) {
+        if ([item.title isEqualToString:@"个人中心"]) {
+            NSInteger tag = [self.tabBar.items indexOfObject:item];
+            [self.tabBar showBadgeOnItemIndex:tag];
+        }
+    }
+}
+- (void)dismissBadge {
+    for (UITabBarItem *item in self.tabBar.items) {
+        if ([item.title isEqualToString:@"个人中心"]) {
+            NSInteger tag = [self.tabBar.items indexOfObject:item];
+            [self.tabBar hideBadgeOnItemIndex:tag];
+        }
+    }
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

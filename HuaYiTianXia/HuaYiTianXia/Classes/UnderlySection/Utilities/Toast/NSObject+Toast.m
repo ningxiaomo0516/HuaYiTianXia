@@ -32,7 +32,7 @@
     textLabel.backgroundColor = [UIColor clearColor];
     textLabel.text = text;
     textLabel.textColor = [UIColor whiteColor];
-    textLabel.font = TOAST_TEXT_FONTSIZE    ;
+    textLabel.font = TOAST_TEXT_FONTSIZE;
     textLabel.numberOfLines = 0;
     textLabel.textAlignment = NSTextAlignmentCenter;
     [textLabel sizeToFit];
@@ -60,22 +60,19 @@
     toastView.alpha = 0;
     
     //动画
-    [UIView animateWithDuration:TOAST_ANI_STARTEND_DURATION
-                     animations:^{
-                         toastView.alpha = 1.0;
-                     }
-                     completion:^(BOOL finished) {
-                         
-                         [UIView animateWithDuration:TOAST_ANI_STARTEND_DURATION
-                                               delay:(duration-TOAST_ANI_STARTEND_DURATION*2)
-                                             options:(UIViewAnimationOptionCurveEaseIn | UIViewAnimationOptionBeginFromCurrentState)
-                                          animations:^{
-                                              toastView.alpha = 0;
-                                          }
-                                          completion:^(BOOL finished) {
-                                              [toastView removeFromSuperview];
-                                          }];
-                     }];
+    [UIView animateWithDuration:TOAST_ANI_STARTEND_DURATION animations:^{
+        toastView.alpha = 1.0;
+    } completion:^(BOOL finished) {
+        [UIView animateWithDuration:TOAST_ANI_STARTEND_DURATION
+                              delay:(duration-TOAST_ANI_STARTEND_DURATION*2)
+                            options:(UIViewAnimationOptionCurveEaseIn | UIViewAnimationOptionBeginFromCurrentState)
+                         animations:^{
+                             toastView.alpha = 0;
+                         }
+                         completion:^(BOOL finished) {
+                             [toastView removeFromSuperview];
+                         }];
+    }];
 }
 
 

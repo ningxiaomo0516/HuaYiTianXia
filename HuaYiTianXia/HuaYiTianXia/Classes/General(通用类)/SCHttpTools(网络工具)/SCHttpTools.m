@@ -126,6 +126,7 @@ static AFHTTPSessionManager* manager_ = nil;
             success(result);
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        Toast(@"哎哟~您的网络有问题,\n请检查网络设置");
         if (error && failure) {
             failure(error);
         }

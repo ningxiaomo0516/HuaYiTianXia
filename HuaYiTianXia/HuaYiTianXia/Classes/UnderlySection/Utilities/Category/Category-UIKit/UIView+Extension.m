@@ -50,6 +50,14 @@
     return self.frame.size.height;
 }
 
+- (CGFloat)maxY{
+    return self.frame.origin.y + self.frame.size.width;
+}
+
+- (CGFloat)maxX{
+    return self.frame.origin.x + self.frame.size.width;
+}
+
 - (void)setSize:(CGSize)size {
     //    self.width = size.width;
     //    self.height = size.height;

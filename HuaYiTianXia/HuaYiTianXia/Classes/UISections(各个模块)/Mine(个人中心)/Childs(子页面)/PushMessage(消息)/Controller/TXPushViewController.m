@@ -44,7 +44,6 @@ static NSString * const reuseIdentifiers = @"TXSystemTableViewCell";
     self.pageSize = 20;
     self.pageIndex = 1;
     
-    [self.view showLoadingViewWithText:@"加载中..."];
     // 下拉刷新
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         //将页码重新置为1
@@ -57,10 +56,13 @@ static NSString * const reuseIdentifiers = @"TXSystemTableViewCell";
         self.messageType==0 ? [self isReloadData] : [self isLoadData];
     }];
     
-    [self isReloadData];
-    
     [kNotificationCenter addObserver:self selector:@selector(receiveNotification:) name:@"dealwithSystemPushMessage" object:nil];
-
+    if ([AFNetworkReachabilityManager sharedManager].networkReachabilityStatus == AFNetworkReachabilityStatusNotReachable) {
+        [self analysisData];
+    }else{
+        [self.view showLoadingViewWithText:@"加载中..."];
+        [self isReloadData];
+    }
 }
 
 - (void)receiveNotification:(NSNotification *)infoNotification {

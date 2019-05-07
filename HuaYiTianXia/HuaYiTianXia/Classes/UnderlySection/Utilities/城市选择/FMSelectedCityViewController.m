@@ -119,7 +119,8 @@ static NSString * const reuseIdentifierCurrent = @"FMCurrentCitysTableViewCell";
 #pragma mark -------- 加载城市数据Models --------
 - (void)loadCityDataModel {
     kShowMBProgressHUD(self.view);
-    [SCHttpTools getTicketWithURLString:@"http://api2.wed114.co/?s=site/groups?sid=ogj4n3l6hpt1q8hf5acd12fssf&sign=fb989adb8d4ccd82ae5f7906449edf58&timestamp=1557137201" parameter:nil success:^(id responseObject) {
+    NSString *URLString = [NSString stringWithFormat:@"%@CityData.json",DomainName];
+    [SCHttpTools getTicketWithURLString:URLString parameter:nil success:^(id responseObject) {
         NSDictionary *result = responseObject;
         if ([result isKindOfClass:[NSDictionary class]]) {
             FMSelectedCityModel *model = [FMSelectedCityModel mj_objectWithKeyValues:result];

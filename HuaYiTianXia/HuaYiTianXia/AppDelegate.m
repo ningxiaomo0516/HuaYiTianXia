@@ -10,6 +10,7 @@
 #import "LZRootViewController.h"
 #import "TTGuidePages.h"
 #import "AppDelegate+TXShare.h"
+#import "AppDelegate+TXReachability.h"
 #import <AVFoundation/AVFoundation.h>
 //推送
 #import "JPUSHService.h"
@@ -50,6 +51,10 @@
 //    [IQKeyboardManager sharedManager];
     /// 注册分享
     [self registerMobLoginAndShare];
+    /// 监听苹果官方 Reachability
+//    [self listenNetWorkReachabilityStatus];
+    /// 监听AFN Reachability
+    [self listenAFNetworkReachabilityStatus];
     /// 注册微信AppId
     [WXApi registerApp:kWechatAppId enableMTA:YES];
     
@@ -60,11 +65,6 @@
     /// 默认没有任何支付页面
     kUserInfo.topupType = 0;
     [kUserInfo dump];
-    ///开启监听网络
-    [[AFNetworkReachabilityManager sharedManager] startMonitoring];
-    [[AFNetworkReachabilityManager sharedManager] setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
-        [kNotificationCenter postNotificationName:NetworkReachabilityStatus object:nil userInfo:@{@"status":@(status)}];
-    }];
     
     BOOL isProduction = NO;
     #ifdef DEBUG
