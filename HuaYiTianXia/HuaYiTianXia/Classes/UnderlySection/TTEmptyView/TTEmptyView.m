@@ -62,7 +62,7 @@
     subViweMargin = self.subViewMargin ? self.subViewMargin : kSubViewMargin;
     
     //占位图片
-    UIImage *image = [UIImage imageNamed:self.imageStr];
+    UIImage *image = [UIImage imageNamed:self.imagesText];
     if(self.image){
         [self setupPromptImageView:self.image];
     }else if (image) {
@@ -75,8 +75,8 @@
     }
     
     //标题
-    if (self.titleStr.length) {
-        [self setupTitleLabel:self.titleStr];
+    if (self.titleText.length) {
+        [self setupTitleLabel:self.titleText];
     }else{
         if (_titleLabel) {
             [self.titleLabel removeFromSuperview];
@@ -85,8 +85,8 @@
     }
     
     //详细描述
-    if (self.detailStr.length) {
-        [self setupDetailLabel:self.detailStr];
+    if (self.detailText.length) {
+        [self setupDetailLabel:self.detailText];
     }else{
         if (_detailLabel) {
             [self.detailLabel removeFromSuperview];
@@ -95,11 +95,11 @@
     }
     
     //按钮
-    if (self.btnTitleStr.length) {
+    if (self.btnTitleText.length) {
         if (self.actionBtnTarget && self.actionBtnAction) {
-            [self setupActionBtn:self.btnTitleStr target:self.actionBtnTarget action:self.actionBtnAction btnClickBlock:nil];
+            [self setupActionBtn:self.btnTitleText target:self.actionBtnTarget action:self.actionBtnAction btnClickBlock:nil];
         }else if (self.btnClickBlock) {
-            [self setupActionBtn:self.btnTitleStr target:nil action:nil btnClickBlock:self.btnClickBlock];
+            [self setupActionBtn:self.btnTitleText target:nil action:nil btnClickBlock:self.btnClickBlock];
         }else{
             if (_actionButton) {
                 [self.actionButton removeFromSuperview];

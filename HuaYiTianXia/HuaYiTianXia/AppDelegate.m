@@ -95,10 +95,10 @@
     NSNotificationCenter *defaultCenter = kNotificationCenter;
     [defaultCenter addObserver:self selector:@selector(networkDidLogin:) name:kJPFNetworkDidLoginNotification object:nil];
     [self showMainViewController];
-    if(![[NSUserDefaults standardUserDefaults] boolForKey:@"firstLaunch"]){
-        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"firstLaunch"];
-        [self guidePages];
-    }
+//    if(![[NSUserDefaults standardUserDefaults] boolForKey:@"firstLaunch"]){
+//        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"firstLaunch"];
+//        [self guidePages];
+//    }
     
     //开启定位
     [self.location startLocation];

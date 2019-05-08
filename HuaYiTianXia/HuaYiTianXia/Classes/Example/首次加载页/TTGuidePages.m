@@ -19,7 +19,9 @@
 
 // init
 - (instancetype)init{
-    return [self initWithImageArray:[NSArray new] completion:nil];
+    return [self initWithImageArray:[NSArray new] completion:^{
+        TTLog(@"默认点击事件");
+    }];
 }
 
 // init with imageDatas and completion
@@ -37,12 +39,11 @@
 - (void)initView{
     // init view
     self.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight);
-    
     // init scrollView
     _scrollView = [[UIScrollView alloc] init];
     _scrollView.delegate = self;
     _scrollView.frame = CGRectMake(0, 0, self.width, self.height);
-    _scrollView.backgroundColor = [UIColor clearColor];
+    _scrollView.backgroundColor = [UIColor whiteColor];
     _scrollView.bounces = NO;
     _scrollView.pagingEnabled = YES;
     _scrollView.showsHorizontalScrollIndicator = NO;

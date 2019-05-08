@@ -83,7 +83,7 @@ static NSString * const reuseIdentifiers = @"TXSystemTableViewCell";
         TXMessageChildViewController *vc = [[TXMessageChildViewController alloc] initPushMessageModel:messageModel];
         TTPushVC(vc);
     }else if(messageType==5){
-        TXMessageChildViewController *vc = [[TXMessageChildViewController alloc] initPushMessageModel:messageModel];
+        TXMessageChildAdsViewController *vc = [[TXMessageChildAdsViewController alloc] initPushMessageModel:messageModel];
         TTPushVC(vc);
     }
 }
@@ -155,9 +155,9 @@ static NSString * const reuseIdentifiers = @"TXSystemTableViewCell";
             }
             [self analysisData];
         }
-        self.tableView.tt_emptyView = [TTEmptyView emptyViewWithImageText:@"noData"
-                                                                titleText:@"暂无数据"
-                                                               detailText:@""];
+//        self.tableView.tt_emptyView = [TTEmptyView emptyViewWithImagesText:@"noData"
+//                                                                 titleText:@"暂无数据"
+//                                                                detailText:@""];
         kHideMBProgressHUD(self.view);
         [self.tableView reloadData];
         [self.view dismissLoadingView];
@@ -294,8 +294,6 @@ static NSString * const reuseIdentifiers = @"TXSystemTableViewCell";
     ///    status等于4，使用H5页面，拼接地址
     ///    status等于5，使用原生页面，标题、内容、时间
     if (messageModel.messageType==2||messageModel.messageType==3) {
-        TXMessageChildViewController *vc = [[TXMessageChildViewController alloc] initPushMessageModel:messageModel];
-        TTPushVC(vc);
         [self jumpPushChildVC:messageModel messageType:23];
     }else if(messageModel.messageType==4){
         TXWebViewController *vc = [[TXWebViewController alloc] init];

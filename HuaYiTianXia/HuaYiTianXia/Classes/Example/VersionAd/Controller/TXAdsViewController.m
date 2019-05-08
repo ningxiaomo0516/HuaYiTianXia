@@ -76,7 +76,7 @@
 - (void)btnClickSkipUrl:(UIImageView *)imageView{
     NSInteger index = imageView.tag -  1150;
     TXAdsModel * model = [self.adsArray lz_safeObjectAtIndex:index];
-    NSString * url = model.jumpUrl;
+    TTLog(@" --- 需要跳转的广告页链接 -- %@",model.jumpUrl);
 }
 
 //跳过事件
