@@ -65,17 +65,23 @@ static NSString* reuseIdentifiers = @"TXMineBannerCollectionViewCell";
 - (void)addPagerView {
     
     [self addSubview:self.pagerView];
-    [self addPageControl];
 //    [self.pagerView lz_setCornerRadius:3.0];
-    
     [self.pagerView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.right.left.top.equalTo(self);
     }];
+    /// 需要显示
+    if (self.isPageControl) {
+        [self addPageControl];
+        [self.pageControl mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.bottom.equalTo(self.pagerView.mas_bottom).offset(-15);
+            make.centerX.equalTo(self);
+        }];
+    }else{
+        /// 显示数字
+        
+        TTLog(@" - -- 11111 ");
+    }
     
-    [self.pageControl mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(self.pagerView.mas_bottom).offset(-15);
-        make.centerX.equalTo(self);
-    }];
 }
 
 #pragma mark - TYCyclePagerViewDataSource
@@ -87,12 +93,23 @@ static NSString* reuseIdentifiers = @"TXMineBannerCollectionViewCell";
 - (UICollectionViewCell *)pagerView:(TYCyclePagerView *)pagerView cellForItemAtIndex:(NSInteger)index {
     TXMineBannerCollectionViewCell *tools = [pagerView dequeueReusableCellWithReuseIdentifier:reuseIdentifiers forIndex:index];
     tools.bannerModel = self.bannerArray[index];
+    tools.boxView.hidden = self.isPageControl;
+    tools.countLabel.text = [NSString stringWithFormat:@"%ld/%ld",index+1,(unsigned long)self.bannerArray.count];
+    if (self.bannerArray.count == 1) {
+        tools.countLabel.hidden = true;
+    }
     return tools;
+}
+
+- (void)pagerView:(TYCyclePagerView *)pageView didSelectedItemCell:(__kindof UICollectionViewCell *)cell atIndex:(NSInteger)index {
+    if (self.callBlock) {
+        self.callBlock(self.bannerArray[index]);
+    }
 }
 
 - (TYCyclePagerViewLayout *)layoutForPagerView:(TYCyclePagerView *)pageView {
     TYCyclePagerViewLayout *layout = [[TYCyclePagerViewLayout alloc]init];
-    layout.itemSize = CGSizeMake(kScreenWidth, kScreenHeight);
+    layout.itemSize = CGSizeMake(self.width, self.height);
     layout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0);
     layout.itemSpacing = 0.0;//间距
     layout.itemVerticalCenter = YES;

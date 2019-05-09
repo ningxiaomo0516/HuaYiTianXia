@@ -13,11 +13,12 @@
 #import "TXMallCollectionViewCell.h"
 #import "TXMallGoodsDetailsViewController.h"
 #import "TXNewsModel.h"
+#import "TXMembersbleCollectionViewCell.h"
 
 static NSString* reuseIdentifier = @"TXMallToolsCollectionViewCell";
 static NSString* reuseIdentifierBanner = @"TXMallBannerCollectionViewCell";
 static NSString* reuseIdentifierMall = @"TXMallCollectionViewCell";
-
+static NSString* reuseIdentifierHot     = @"TXMembersbleCollectionViewCell";
 
 @interface TXMallCollectionViewController ()<UICollectionViewDelegate, UICollectionViewDataSource>
 {
@@ -106,17 +107,14 @@ static NSString* reuseIdentifierMall = @"TXMallCollectionViewCell";
 
 // MARK:- ====UICollectionViewDataSource,UICollectionViewDelegate=====
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-    return self.dataArray.count+2;
+    return 4;
 }
 
 // 每个分区有多少个数据
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     if (section==0) return 1;
-    else if (section==2) return self.dataArray.count;
-    else{
-        NSArray *subArray = [self.toolsArray lz_safeObjectAtIndex:section-1];
-        return subArray.count;
-    }
+    else if (section==3) return self.dataArray.count;
+    else return self.toolsArray.count;
 }
 
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -125,14 +123,21 @@ static NSString* reuseIdentifierMall = @"TXMallCollectionViewCell";
         tools.bannerArray = self.bannerArray;
         return tools;
     }else if (indexPath.section==2) {
+        TXMembersbleCollectionViewCell *tools = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifierHot forIndexPath:indexPath];
+        NSString *imagsName = [NSString stringWithFormat:@"c09_mall_hot%ld",indexPath.row+1];
+        tools.imagesView.image = kGetImage(imagsName);
+        return tools;
+    }else if (indexPath.section==3) {
         TXMallCollectionViewCell *tools = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifierMall forIndexPath:indexPath];
         tools.recordsModel = self.dataArray[indexPath.row];
+        tools.backgroundColor = kWhiteColor;
         return tools;
     }else{
         TXMallToolsCollectionViewCell *tools = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
-        TXGeneralModel* templateModel = self.toolsArray[indexPath.section-1][indexPath.row];
+        TXGeneralModel* templateModel = self.toolsArray[indexPath.row];
         tools.titleLabel.text = templateModel.title;
-        tools.imagesView.image = kGetImage(templateModel.imageText);
+        NSString *imagesName = [NSString stringWithFormat:@"c09_tools_%@",templateModel.title];
+        tools.imagesView.image = kGetImage(imagesName);
         return tools;
     }
 }
@@ -141,7 +146,7 @@ static NSString* reuseIdentifierMall = @"TXMallCollectionViewCell";
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section==1) {
         Toast(@"系统持续开放中");
-    }else if(indexPath.section==2){
+    }else if(indexPath.section==3){
         NewsRecordsModel *productModel = self.dataArray[indexPath.row];
         TXMallGoodsDetailsViewController *vc = [[TXMallGoodsDetailsViewController alloc] initMallProductModel:productModel];
         vc.pageType = 0;
@@ -161,19 +166,21 @@ static NSString* reuseIdentifierMall = @"TXMallCollectionViewCell";
     CGFloat width = kScreenWidth/4;
     if (indexPath.section==0) return CGSizeMake(kScreenWidth, IPHONE6_W(180));
     else if (indexPath.section==1)return CGSizeMake(width, IPHONE6_W(95));
+    else if (indexPath.section==2)return CGSizeMake((kScreenWidth-35)/2, IPHONE6_W(95));
     CGFloat margin = 10*3;
     return CGSizeMake((kScreenWidth-margin)/2, IPHONE6_W(230));
 }
 
 //设置所有的cell组成的视图与section 上、左、下、右的间隔
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section{
-    if (section==2) return UIEdgeInsetsMake(10,10,0,10);
+    if (section==2) return UIEdgeInsetsMake(10,15,0,15);
+    if (section==3) return UIEdgeInsetsMake(0,10,0,10);
     return UIEdgeInsetsMake(0,0,0,0);
 }
 
 //设置footer呈现的size, 如果布局是垂直方向的话，size只需设置高度，宽与collectionView一致
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section{
-    if (section==2) return CGSizeMake(0,10);
+    if (section==2)return CGSizeMake(10,10);
     return CGSizeMake(0,0);
 }
 
@@ -203,6 +210,7 @@ static NSString* reuseIdentifierMall = @"TXMallCollectionViewCell";
         [_collectionView registerClass:[TXMallToolsCollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
         [_collectionView registerClass:[TXMallBannerCollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifierBanner];
         [_collectionView registerClass:[TXMallCollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifierMall];
+        [_collectionView registerClass:[TXMembersbleCollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifierHot];
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
         _collectionView.showsVerticalScrollIndicator = NO;
@@ -216,31 +224,20 @@ static NSString* reuseIdentifierMall = @"TXMallCollectionViewCell";
     if (!_toolsArray) {
         _toolsArray = [[NSMutableArray alloc] init];
         NSArray* titleArr;
-        NSArray* imagesArr;
 //        NSArray* imagesArr = @[@[@"home_tools_sheying",@"home_tools_cehua",@"home_tools_lifu",@"home_tools_hotel"]];
 
         if ([self.title isEqualToString:@"1"]) {
-            titleArr = @[@[@"飞行",@"培训",@"服装",@"零件"]];
-            imagesArr = @[@[@"mall_tools_fx_nor",@"mall_tools_px_nor",@"mall_tools_fz_nor",@"mall_tools_lj_nor"]];
+            titleArr = @[@"飞行",@"培训",@"服装",@"零件"];
         }else{
-            titleArr = @[@[@"农业",@"蔬菜",@"水果",@"其他"]];
-            imagesArr = @[@[@"mall_tools_nb_nor",@"mall_tools_sc_nor",@"mall_tools_sg_nor",@"mall_tools_qt_nor"]];
+            titleArr = @[@"农业",@"蔬菜",@"水果",@"其它"];
         }
         
-        NSArray* classArr = @[@[@"",@"",@"",@""]];
-        for (int i=0; i<titleArr.count; i++) {
-            NSArray *subTitlesArray = [titleArr lz_safeObjectAtIndex:i];
-            NSArray *subImagesArray = [imagesArr lz_safeObjectAtIndex:i];
-            NSArray *classArray = [classArr lz_safeObjectAtIndex:i];
-            NSMutableArray *subArray = [NSMutableArray array];
-            for (int j = 0; j < subTitlesArray.count; j ++) {
-                TXGeneralModel* templateModel = [[TXGeneralModel alloc] init];
-                templateModel.title = [subTitlesArray lz_safeObjectAtIndex:j];
-                templateModel.imageText = [subImagesArray lz_safeObjectAtIndex:j];
-                templateModel.showClass = [classArray lz_safeObjectAtIndex:j];
-                [subArray addObject:templateModel];
-            }
-            [_toolsArray addObject:subArray];
+        NSArray* classArr = @[@"",@"",@"",@""];
+        for (int j = 0; j < titleArr.count; j ++) {
+            TXGeneralModel* templateModel = [[TXGeneralModel alloc] init];
+            templateModel.title = [titleArr lz_safeObjectAtIndex:j];
+            templateModel.showClass = [classArr lz_safeObjectAtIndex:j];
+            [_toolsArray addObject:templateModel];
         }
     }
     return _toolsArray;

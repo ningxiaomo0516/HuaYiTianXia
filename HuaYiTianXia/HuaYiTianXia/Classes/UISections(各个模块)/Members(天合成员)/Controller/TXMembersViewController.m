@@ -142,10 +142,6 @@ static NSString* reuseIdentifierMall = @"TXMembersbleCollectionViewCell";
         TXMallToolsCollectionViewCell *tools = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
         tools.titleLabel.text = templateModel.title;
         tools.imagesView.image = kGetImage(templateModel.imageText);
-        [tools.imagesView mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.centerX.equalTo(tools);
-            make.top.equalTo(@(IPHONE6_W(15)));
-        }];
         return tools;
     }
 }

@@ -35,7 +35,7 @@
              @"banners"     : @"banner"};
 }
 + (NSDictionary *)objectClassInArray{
-    return @{@"data" : [NewsModel class],
+    return @{@"data"    : [NewsModel class],
              @"banners" : [NewsBannerModel class]};
 }
 @end
@@ -48,7 +48,7 @@
 }
 + (NSDictionary *)objectClassInArray{
     return @{@"records" : [NewsRecordsModel class],
-             @"data" : [NewsRecordsModel class]};
+             @"data"    : [NewsRecordsModel class]};
 }
 @end
 
@@ -64,8 +64,16 @@
 @implementation NewsBannerModel
 
 + (NSDictionary *)replacedKeyFromPropertyName{
-    return @{@"kid" : @"id",
-             @"imageText":@"url"};
+    return @{@"kid"         : @"outID",
+             @"imageText"   : @"url",
+             @"title"       : @"outName"};
+}
+
+- (BOOL)isBannerTitle{
+    if (self.title.length>0) {
+        return YES;
+    }
+    return NO;
 }
 @end
 

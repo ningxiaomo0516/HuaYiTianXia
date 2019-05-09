@@ -89,11 +89,11 @@ static NSString* reuseIdentifiers = @"TXMineBannerCollectionViewCell";
 
 - (TYCyclePagerViewLayout *)layoutForPagerView:(TYCyclePagerView *)pageView {
     TYCyclePagerViewLayout *layout = [[TYCyclePagerViewLayout alloc]init];
-    layout.itemSize = CGSizeMake(kScreenWidth, kScreenHeight);
     layout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0);
     layout.itemSpacing = 0.0;//间距
     layout.itemVerticalCenter = YES;
     layout.minimumAlpha = 0.3;
+    layout.itemSize = CGSizeMake(self.width,self.height);
     return layout;
 }
 

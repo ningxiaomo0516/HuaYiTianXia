@@ -73,6 +73,10 @@ static NSString * const reuseIdentifierSectionHeaderView = @"SCTableViewSectionH
     }else if (messageType.integerValue==6) {/// 新闻
         webURL = kAppendH5URL(DomainName, NewsDetailsH5, kid);
     }
+    [self jumpNewDetailsBannerModel:webURL];
+}
+
+-(void)jumpNewDetailsBannerModel:(NSString*)webURL{
     TXWebViewController *vc = [[TXWebViewController alloc] init];
     vc.title = @"新闻详情";
     TTLog(@" h5 url ---- %@",webURL);
@@ -164,12 +168,19 @@ static NSString * const reuseIdentifierSectionHeaderView = @"SCTableViewSectionH
         make.bottom.equalTo(self.view.mas_bottom).offset(-kTabBarHeight);
     }];
 }
-
+//setImagesDidOnClickCallBlock
 #pragma mark - Table view data sourceFMMerchantsHomeAddressTableViewCell
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    MV(weakSelf)
     if (self.bannerArray.count>0&&indexPath.section==0) {
         TXMallGoodsBannerTableViewCell* tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierBanner forIndexPath:indexPath];
+        tools.isPageControl = NO;
         tools.bannerArray = self.bannerArray;
+        [tools setImagesDidOnClickCallBlock:^(NewsBannerModel * _Nonnull bannerModel) {
+            /// 跳转banner详情
+            NSString *webURL = kAppendH5URL(DomainName, NewsDetailsH5, bannerModel.kid)
+            [weakSelf jumpNewDetailsBannerModel:webURL];
+        }];
         return tools;
     }else if(indexPath.section==1&&self.rollText.length!=0){
         UITableViewCell *tools = [tableView dequeueReusableCellWithIdentifier:@"TTRollLabelWebViewCell" forIndexPath:indexPath];
@@ -190,7 +201,7 @@ static NSString * const reuseIdentifierSectionHeaderView = @"SCTableViewSectionH
     if((self.rollText.length>0&&indexPath.section==1)){
         return IPHONE6_W(50);
     }else{
-        return (self.bannerArray.count>0&&indexPath.section==0)?IPHONE6_W(180):IPHONE6_W(108);
+        return (self.bannerArray.count>0&&indexPath.section==0)?(kScreenWidth)*9/16:IPHONE6_W(108);
     }
 }
 
@@ -228,14 +239,12 @@ static NSString * const reuseIdentifierSectionHeaderView = @"SCTableViewSectionH
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (((self.bannerArray.count>0&&indexPath.section==0)||(indexPath.section==1))) {
+    if (((self.bannerArray.count>0&&indexPath.section==0)||(indexPath.section==1&&self.rollText.length))) {
         
     }else{
         NewsRecordsModel *model = self.dataArray[indexPath.row];
-        TXWebViewController *vc = [[TXWebViewController alloc] init];
-        vc.title = @"新闻详情";
-        vc.webUrl = kAppendH5URL(DomainName, NewsDetailsH5, model.kid)
-        TTPushVC(vc);
+        NSString *webURL = kAppendH5URL(DomainName, NewsDetailsH5, model.kid)
+        [self jumpNewDetailsBannerModel:webURL];
     }
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }

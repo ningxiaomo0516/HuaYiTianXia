@@ -9,14 +9,14 @@
 #import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
-//typedef void(^TXMineBannerTableViewCellCallBlock)(PVVideoListModel* videoListModel);
-typedef void(^TXMallGoodsBannerTableViewCellCallBlock)(NSInteger idx);
+typedef void(^TXMallGoodsBannerTableViewCellCallBlock)(NewsBannerModel *bannerModel);
 
 @interface TXMallGoodsBannerTableViewCell : UITableViewCell
 
 - (void)setImagesDidOnClickCallBlock:(TXMallGoodsBannerTableViewCellCallBlock)block;
 
 @property (nonatomic, strong) NSMutableArray *bannerArray;
+@property (nonatomic, assign) BOOL isPageControl;
 
 @end
 

@@ -117,11 +117,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface NewsBannerModel : NSObject
 /// bannerID
-@property (nonatomic, assign) NSInteger kid;
+@property (nonatomic, copy) NSString *kid;
 /// banner 图片地址
 @property (nonatomic, copy) NSString *img;
 /// 产品详情 banner 图片地址
 @property (nonatomic, copy) NSString *imageText;
+/// banner 标题
+@property (nonatomic, copy) NSString *title;
+/// 是否需要显示 banner title yes 需要显示 no 不需要显示
+@property (nonatomic, assign) BOOL isBannerTitle;
 @end
 
 

@@ -75,7 +75,7 @@
 
 - (UILabel *)priceLabel{
     if (!_priceLabel) {
-        _priceLabel = [UILabel lz_labelWithTitle:@"" color:kThemeColor  font:kFontSizeMedium15];
+        _priceLabel = [UILabel lz_labelWithTitle:@"" color:HexString(@"#F56C36")  font:kFontSizeMedium15];
     }
     return _priceLabel;
 }

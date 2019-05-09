@@ -12,7 +12,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface TXMineBannerCollectionViewCell : UICollectionViewCell
 @property (nonatomic, strong) UIImageView *imagesView;
-
+@property (nonatomic, strong) UILabel *titleLabel;
+@property (nonatomic, strong) UIView *boxView;
+@property (nonatomic, strong) UIImageView *imagesViewBottom;
+@property (nonatomic, strong) UILabel *countLabel;
 @property (nonatomic, strong) NewsBannerModel *bannerModel;
 @end
 

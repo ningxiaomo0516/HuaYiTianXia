@@ -15,7 +15,11 @@
     CGFloat marginY = 10;
     CGFloat height = 28;
     UIButton * markBtn;
-    for (int i = 0; i < _dataArray.count; i++) {
+    NSInteger count = 0;
+    if (_dataArray.count>0) {
+        count = 1;
+    }
+    for (int i = 0; i < count; i++) {
         CGFloat width =  [self sizeWithString:_dataArray[i] maxWidth:self.width maxFont:kFontSizeMedium12].width + 25;
         UIButton *tagBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         if (!markBtn) {

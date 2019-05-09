@@ -224,6 +224,7 @@ TXMallGoodsSpecTableViewCellDelegate,WKUIDelegate,WKNavigationDelegate>
     if (indexPath.section==0) {
         if (indexPath.row==0) {
             TXMallGoodsBannerTableViewCell* tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierBanner forIndexPath:indexPath];
+            tools.isPageControl = YES;
             tools.bannerArray = self.model.banners;
             return tools;
         }else{

@@ -85,7 +85,7 @@
 - (UILabel *)marketPriceLabel{
     if (!_marketPriceLabel) {
 //        _marketPriceLabel = [UILabel lz_labelWithTitle:@"" color:kTextColor153 font:kFontSizeMedium13];
-        _marketPriceLabel = [UILabel lz_labelWithTitle:@"" color:HexString(@"#2DAFF7") font:kFontSizeMedium13];
+        _marketPriceLabel = [UILabel lz_labelWithTitle:@"" color:HexString(@"#F56C36") font:kFontSizeMedium13];
     }
     return _marketPriceLabel;
 }
