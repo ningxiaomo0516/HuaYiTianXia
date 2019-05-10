@@ -32,4 +32,23 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 @property (nonatomic, copy) NSString *username;
 @end
+
+@interface  TXCityModel: NSObject
+/// ID
+@property (nonatomic, copy) NSString *kid;
+/// 编码
+@property (nonatomic, copy) NSString *code;
+/// 城市
+@property (nonatomic, copy) NSString *areaName;
+/// 级别
+@property (nonatomic, copy) NSString *level;
+/// 父级ID
+@property (nonatomic, copy) NSString *parentId;
+@end
+
+@interface TXCityData : NSObject
+@property (nonatomic, copy) NSString *message;
+@property (nonatomic, assign) NSInteger errorcode;
+@property (nonatomic, strong) NSMutableArray<TXCityModel *> *list;
+@end
 NS_ASSUME_NONNULL_END

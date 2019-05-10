@@ -9,12 +9,12 @@
 #import "TXRealNameViewController.h"
 #import "TXLoginViewController.h"
 #import "SCImagePicker.h"
+#import "TXAddTitleAddressView.h"
 
 @interface TXRealNameViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (strong, nonatomic) UIButton *saveButton;
 @property (strong, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) UIView *footerView;
-
 /// 姓名
 @property (strong, nonatomic) IBOutlet UITableViewCell *nickNameCell;
 /// 性别
@@ -25,12 +25,15 @@
 @property (strong, nonatomic) IBOutlet UITableViewCell *telCell;
 /// 身份证照片
 @property (strong, nonatomic) IBOutlet UITableViewCell *idcardCell;
+/// 城市选择
+@property (strong, nonatomic) IBOutlet UITableViewCell *cityCell;
 
 @property (strong, nonatomic) IBOutlet UILabel *idnumberLabel;
 @property (strong, nonatomic) IBOutlet UILabel *sexLabel;
 @property (strong, nonatomic) IBOutlet UITextField *nickNameTextField;
 @property (strong, nonatomic) IBOutlet UITextField *idnumberTextField;
 @property (strong, nonatomic) IBOutlet UITextField *telTextField;
+@property (strong, nonatomic) IBOutlet UILabel *cityLabel;
 
 //  图片1
 @property (weak, nonatomic) IBOutlet UIImageView *imageView1;
@@ -52,6 +55,10 @@
 @property (copy, nonatomic) NSString *imageText2;
 //  图片2地址
 @property (assign, nonatomic) NSInteger sex;
+@property (copy, nonatomic) NSString *parentId;
+
+/// 城市选择
+@property (nonatomic, strong) TXAddTitleAddressView *addTitleAddressView;
 @end
 
 @implementation TXRealNameViewController
@@ -130,6 +137,20 @@
     
     self.addButton1.tag = 100;
     self.addButton2.tag = 200;
+    
+    self.addTitleAddressView = [[TXAddTitleAddressView alloc]init];
+    self.addTitleAddressView.title = @"选择地址";
+    self.addTitleAddressView.defaultHeight = kScreenHeight-kScreenHeight/3;
+    self.addTitleAddressView.titleScrollViewH = 37;
+    [self.view addSubview:[self.addTitleAddressView initAddressView]];
+    MV(weakSelf)
+    //// 选择城市后的block
+    self.addTitleAddressView.selectBlock = ^(NSString * _Nonnull areaText, NSString * _Nonnull parentId) {
+        weakSelf.cityLabel.text = areaText;
+        weakSelf.parentId = parentId;
+        TTLog( @"%@", [NSString stringWithFormat:@"打印的对应省市县的id=%@",parentId]);
+        [weakSelf.tableView reloadData];
+    };
 }
 
 /** 保存 */
@@ -173,6 +194,11 @@
         return;
     }
     
+    if ([self.cityLabel.text isEqualToString:@"请选择"]) {
+        Toast(@"请选所在地区");
+        return;
+    }
+    
     if (self.imageText1.length<=0) {
         Toast(@"请上传身份证正面照");
         return;
@@ -188,6 +214,7 @@
     [parameter setObject:idnumber forKey:@"code"];
     [parameter setObject:telphone forKey:@"phone"];
     [parameter setObject:@(self.sex) forKey:@"sex"];
+    [parameter setObject:@(self.parentId.integerValue) forKey:@"districtID"];
     [parameter setObject:self.imageText1 forKey:@"imgz"];
     [parameter setObject:self.imageText2 forKey:@"imgb"];
     [self saveRealNameData:parameter];
@@ -273,31 +300,16 @@
     static NSString *CellIdentifier = @"TXRealNameViewController";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
-    if (row == 0) {
-        _nickNameCell.selectionStyle = UITableViewCellSelectionStyleNone;
-        return _nickNameCell;
-    }
-    if (row == 1) {
-        return _sexCell;
-    }
-    if (row == 2) {
-        _idnumberCell.selectionStyle = UITableViewCellSelectionStyleNone;
-        return _idnumberCell;
-    }
+    if (row == 0) return _nickNameCell;
+    if (row == 1) return _sexCell;
+    if (row == 2) return _idnumberCell;
     if (self.typePage==0) {
-        if (row == 3) {
-            _telCell.selectionStyle = UITableViewCellSelectionStyleNone;
-            return _telCell;
-        }
-        if (row == 4) {
-            _idcardCell.selectionStyle = UITableViewCellSelectionStyleNone;
-            return _idcardCell;
-        }
+        if (row == 3) return _telCell;
+        if (row == 4) return _cityCell;
+        if (row == 5) return _idcardCell;
     }else{
-        if (row == 3) {
-            _idcardCell.selectionStyle = UITableViewCellSelectionStyleNone;
-            return _idcardCell;
-        }
+        if (row == 3) return _idnumberCell;
+        if (row == 4) return _idcardCell;
     }
     
     return cell;
@@ -310,15 +322,15 @@
 
 /// 返回多少
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (self.typePage==0) return 5;
-    return 4;
+    if (self.typePage==0) return 6;
+    return 5;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (self.typePage==0) {
-        if (indexPath.row==4) return IPHONE6_W(160);
+        if (indexPath.row==5) return IPHONE6_W(160);
     }else{
-        if (indexPath.row==3) return IPHONE6_W(160);
+        if (indexPath.row==4) return IPHONE6_W(160);
     }
     
     return IPHONE6_W(50);
@@ -328,10 +340,13 @@
     if (indexPath.row==1&&self.typePage==0) {
         [self showSexActionSheet:@[@"女",@"男"]];
     }
+    if (indexPath.row==4&&self.typePage==0) {
+        [self.addTitleAddressView addAnimate];
+    }
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
--(UITableView *)tableView{
+- (UITableView *)tableView{
     if (!_tableView) {
         _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
         _tableView.showsVerticalScrollIndicator = false;

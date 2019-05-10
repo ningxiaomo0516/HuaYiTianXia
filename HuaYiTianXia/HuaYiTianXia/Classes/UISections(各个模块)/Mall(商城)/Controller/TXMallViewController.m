@@ -67,13 +67,19 @@
 - (WMPageController *)p_defaultController {
     NSArray *titles = @[@"无人机产品",@"生态产业"];
     NSArray *kidArray = @[@"1",@"6"];
+    NSArray *classArray = @[@"TXUAvCollectionViewController",@"TXMallCollectionViewController"];
 //    1：无人机商城产品（消费）；2：农用植保产品（购买）；3：VR产品（购买）；4：纵横矿机产品（购买）；5：共享飞行产品（购买）；6：生态农业商城产品（消费）
 
     NSMutableArray *viewControllers = [[NSMutableArray alloc] init];
-    for (int i=0; i<titles.count; i++) {
-        TXMallCollectionViewController *vc = [TXMallCollectionViewController new];
-        vc.title = kidArray[i];
-        [viewControllers addObject:vc];
+    for (int i=0; i<classArray.count; i++) {
+        NSString *className = classArray[i];
+        Class controller = NSClassFromString(className);
+        //    id controller = [[NSClassFromString(className) alloc] init];
+        if (controller &&  [controller isSubclassOfClass:[UIViewController class]]){
+            UIViewController *vc = [[controller alloc] init];
+            vc.title = kidArray[i];
+            [viewControllers addObject:vc];
+        }
     }
     
     WMPageController *pageVC = [[WMPageController alloc] initWithViewControllerClasses:viewControllers andTheirTitles:titles];

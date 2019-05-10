@@ -34,3 +34,21 @@
              @"username": @"userName"};
 }
 @end
+
+
+@implementation TXCityModel
++ (NSDictionary *)replacedKeyFromPropertyName{
+    return @{@"kid"     : @"id"};
+}
+@end
+
+@implementation TXCityData
++ (NSDictionary *)replacedKeyFromPropertyName{
+    return @{@"list"        : @"obj",
+             @"errorcode"   : @"code",
+             @"message"     : @"msg"};
+}
++ (NSDictionary *)objectClassInArray{
+    return @{@"list" : [TXCityModel class]};
+}
+@end

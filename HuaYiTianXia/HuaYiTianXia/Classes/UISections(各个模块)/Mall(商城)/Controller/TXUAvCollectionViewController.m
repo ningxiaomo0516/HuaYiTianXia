@@ -1,33 +1,25 @@
 //
-//  TXMallCollectionViewController.m
+//  TXUAvViewController.m
 //  HuaYiTianXia
-//  生态产业控制器
-//  Created by 宁小陌 on 2019/3/20.
-//  Copyright © 2019 宁小陌. All rights reserved.
+//  无人机产品
+//  Created by 宁小陌 on 2019/5/10.
+//  Copyright © 2019年 宁小陌. All rights reserved.
 //
 
-#import "TXMallCollectionViewController.h"
+#import "TXUAvCollectionViewController.h"
 #import "TXMallToolsCollectionViewCell.h"
 #import "TXGeneralModel.h"
 #import "TXMallBannerCollectionViewCell.h"
 #import "TXMallCollectionViewCell.h"
 #import "TXMallGoodsDetailsViewController.h"
 #import "TXNewsModel.h"
-#import "TXMallHotTableViewCell.h"
 
 static NSString* reuseIdentifier        = @"TXMallToolsCollectionViewCell";
 static NSString* reuseIdentifierBanner  = @"TXMallBannerCollectionViewCell";
 static NSString* reuseIdentifierMall    = @"TXMallCollectionViewCell";
-static NSString* reuseIdentifierHot     = @"TXMallHotTableViewCell";
 
-@interface TXMallCollectionViewController ()<UICollectionViewDelegate, UICollectionViewDataSource>
-{
-@private
-    UICollectionView * _collectionView;
-    UIImageView * _iconImageView;
-    UILabel * _titleLabel;
-}
-@property(nonatomic,strong,readonly)UICollectionView * collectionView;
+@interface TXUAvCollectionViewController ()<UICollectionViewDelegate, UICollectionViewDataSource>
+@property (nonatomic, strong)UICollectionView * collectionView;
 @property (nonatomic, strong) NSMutableArray *dataArray;
 @property (nonatomic, strong) NSMutableArray *toolsArray;
 @property (nonatomic, strong) NSMutableArray *bannerArray;
@@ -39,7 +31,7 @@ static NSString* reuseIdentifierHot     = @"TXMallHotTableViewCell";
 
 @end
 
-@implementation TXMallCollectionViewController
+@implementation TXUAvCollectionViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -107,14 +99,13 @@ static NSString* reuseIdentifierHot     = @"TXMallHotTableViewCell";
 
 // MARK:- ====UICollectionViewDataSource,UICollectionViewDelegate=====
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-    
-    return 4;
+    return 3;
 }
 
 // 每个分区有多少个数据
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    if (section==0||section==2) return 1;
-    else if (section==3) return self.dataArray.count;
+    if (section==0) return 1;
+    else if (section==2) return self.dataArray.count;
     else return self.toolsArray.count;
 }
 
@@ -124,9 +115,6 @@ static NSString* reuseIdentifierHot     = @"TXMallHotTableViewCell";
         tools.bannerArray = self.bannerArray;
         return tools;
     }else if (indexPath.section==2) {
-        TXMallHotTableViewCell *tools = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifierHot forIndexPath:indexPath];
-        return tools;
-    }else if (indexPath.section==3) {
         TXMallCollectionViewCell *tools = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifierMall forIndexPath:indexPath];
         tools.recordsModel = self.dataArray[indexPath.row];
         return tools;
@@ -136,6 +124,7 @@ static NSString* reuseIdentifierHot     = @"TXMallHotTableViewCell";
         tools.titleLabel.text = templateModel.title;
         NSString *imagesName = [NSString stringWithFormat:@"c09_tools_%@",templateModel.title];
         tools.imagesView.image = kGetImage(imagesName);
+        tools.backgroundColor = kColorWithRGB(211, 0, 0);
         return tools;
     }
 }
@@ -144,7 +133,7 @@ static NSString* reuseIdentifierHot     = @"TXMallHotTableViewCell";
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section==1) {
         Toast(@"系统持续开放中");
-    }else if(indexPath.section==3){
+    }else if(indexPath.section==2){
         NewsRecordsModel *productModel = self.dataArray[indexPath.row];
         TXMallGoodsDetailsViewController *vc = [[TXMallGoodsDetailsViewController alloc] initMallProductModel:productModel];
         vc.pageType = 0;
@@ -161,18 +150,16 @@ static NSString* reuseIdentifierHot     = @"TXMallHotTableViewCell";
 #pragma mark - UICollectionViewDelegateFlowLayout
 //设置每个一个Item（cell）的大小
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
-    CGFloat width = kScreenWidth/4;
+    CGFloat width = kScreenWidth/2;
     if (indexPath.section==0) return CGSizeMake(kScreenWidth, IPHONE6_W(180));
     else if (indexPath.section==1)return CGSizeMake(width, IPHONE6_W(95));
-    else if (indexPath.section==2)return CGSizeMake(kScreenWidth, IPHONE6_W(95*2+30));
     CGFloat margin = 10*3;
     return CGSizeMake((kScreenWidth-margin)/2, IPHONE6_W(230));
 }
 
 //设置所有的cell组成的视图与section 上、左、下、右的间隔
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section{
-//    if (section==2) return UIEdgeInsetsMake(0,15,0,15);
-    if (section==3) return UIEdgeInsetsMake(0,10,0,10);
+    if (section==2) return UIEdgeInsetsMake(0,10,0,10);
     return UIEdgeInsetsMake(0,0,0,0);
 }
 
@@ -207,7 +194,6 @@ static NSString* reuseIdentifierHot     = @"TXMallHotTableViewCell";
         [_collectionView registerClass:[TXMallToolsCollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
         [_collectionView registerClass:[TXMallBannerCollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifierBanner];
         [_collectionView registerClass:[TXMallCollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifierMall];
-        [_collectionView registerClass:[TXMallHotTableViewCell class] forCellWithReuseIdentifier:reuseIdentifierHot];
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
         _collectionView.showsVerticalScrollIndicator = NO;
@@ -220,7 +206,7 @@ static NSString* reuseIdentifierHot     = @"TXMallHotTableViewCell";
 - (NSMutableArray *)toolsArray{
     if (!_toolsArray) {
         _toolsArray = [[NSMutableArray alloc] init];
-        NSArray* titleArr = @[@"农业",@"蔬菜",@"水果",@"其它"];
+        NSArray* titleArr = @[@"购机",@"培训",@"课程",@"活动"];
         NSArray* classArr = @[@"",@"",@"",@""];
         for (int j = 0; j < titleArr.count; j ++) {
             TXGeneralModel* templateModel = [[TXGeneralModel alloc] init];
@@ -245,4 +231,5 @@ static NSString* reuseIdentifierHot     = @"TXMallHotTableViewCell";
     }
     return _bannerArray;
 }
+
 @end
