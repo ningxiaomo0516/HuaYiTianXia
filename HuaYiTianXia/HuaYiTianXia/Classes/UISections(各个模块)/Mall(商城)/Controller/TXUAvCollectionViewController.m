@@ -11,24 +11,25 @@
 #import "TXGeneralModel.h"
 #import "TXMallBannerCollectionViewCell.h"
 #import "TXMallCollectionViewCell.h"
+#import "TTTemplateThreeTableViewCell.h"
 #import "TXMallGoodsDetailsViewController.h"
 #import "TXNewsModel.h"
+#import "TXMallUAVModel.h"
 
 static NSString* reuseIdentifier        = @"TXMallToolsCollectionViewCell";
 static NSString* reuseIdentifierBanner  = @"TXMallBannerCollectionViewCell";
 static NSString* reuseIdentifierMall    = @"TXMallCollectionViewCell";
+static NSString* reuseIdentifierUAV     = @"TTTemplateThreeTableViewCell";
 
 @interface TXUAvCollectionViewController ()<UICollectionViewDelegate, UICollectionViewDataSource>
 @property (nonatomic, strong)UICollectionView * collectionView;
 @property (nonatomic, strong) NSMutableArray *dataArray;
 @property (nonatomic, strong) NSMutableArray *toolsArray;
 @property (nonatomic, strong) NSMutableArray *bannerArray;
-
 /// 每页多少数据
 @property (nonatomic, assign) NSInteger pageSize;
 /// 当前页
 @property (nonatomic, assign) NSInteger pageIndex;
-
 @end
 
 @implementation TXUAvCollectionViewController
@@ -99,14 +100,14 @@ static NSString* reuseIdentifierMall    = @"TXMallCollectionViewCell";
 
 // MARK:- ====UICollectionViewDataSource,UICollectionViewDelegate=====
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-    return 3;
+    return 6;
 }
 
 // 每个分区有多少个数据
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    if (section==0) return 1;
-    else if (section==2) return self.dataArray.count;
-    else return self.toolsArray.count;
+    if (section==1) return self.toolsArray.count;
+    else if (section<6) return 1;
+    return self.dataArray.count;
 }
 
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -114,17 +115,23 @@ static NSString* reuseIdentifierMall    = @"TXMallCollectionViewCell";
         TXMallBannerCollectionViewCell *tools = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifierBanner forIndexPath:indexPath];
         tools.bannerArray = self.bannerArray;
         return tools;
-    }else if (indexPath.section==2) {
-        TXMallCollectionViewCell *tools = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifierMall forIndexPath:indexPath];
-        tools.recordsModel = self.dataArray[indexPath.row];
-        return tools;
-    }else{
+    }else if(indexPath.section==1){
         TXMallToolsCollectionViewCell *tools = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
         TXGeneralModel* templateModel = self.toolsArray[indexPath.row];
         tools.titleLabel.text = templateModel.title;
         NSString *imagesName = [NSString stringWithFormat:@"c09_tools_%@",templateModel.title];
         tools.imagesView.image = kGetImage(imagesName);
-        tools.backgroundColor = kColorWithRGB(211, 0, 0);
+        return tools;
+    } else if (indexPath.section==5) {
+        TXMallCollectionViewCell *tools = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifierMall forIndexPath:indexPath];
+        tools.recordsModel = self.dataArray[indexPath.row];
+        return tools;
+    }else{
+        TTTemplateThreeTableViewCell *tools = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifierUAV forIndexPath:indexPath];
+//        tools.titleLabel.text = [NSString stringWithFormat:@"为您推荐  -%ld",(long)indexPath.section];
+        TXMallUAVModel *model = [[TXMallUAVModel alloc] init];
+        model.sectionType = indexPath.section;
+        tools.model = model;
         return tools;
     }
 }
@@ -133,7 +140,7 @@ static NSString* reuseIdentifierMall    = @"TXMallCollectionViewCell";
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section==1) {
         Toast(@"系统持续开放中");
-    }else if(indexPath.section==2){
+    }else if(indexPath.section==5){
         NewsRecordsModel *productModel = self.dataArray[indexPath.row];
         TXMallGoodsDetailsViewController *vc = [[TXMallGoodsDetailsViewController alloc] initMallProductModel:productModel];
         vc.pageType = 0;
@@ -150,17 +157,27 @@ static NSString* reuseIdentifierMall    = @"TXMallCollectionViewCell";
 #pragma mark - UICollectionViewDelegateFlowLayout
 //设置每个一个Item（cell）的大小
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
-    CGFloat width = kScreenWidth/2;
+    CGFloat width = (kScreenWidth-2)/4;
+    CGFloat height = 0;
+    if (indexPath.section==2) {
+        height = 240;
+    }else if (indexPath.section==3){
+        height = 200;
+    }else if(indexPath.section==4){
+        height = 220;
+    }
     if (indexPath.section==0) return CGSizeMake(kScreenWidth, IPHONE6_W(180));
     else if (indexPath.section==1)return CGSizeMake(width, IPHONE6_W(95));
+    else if (indexPath.section<5)return CGSizeMake(kScreenWidth, height);
     CGFloat margin = 10*3;
     return CGSizeMake((kScreenWidth-margin)/2, IPHONE6_W(230));
 }
 
 //设置所有的cell组成的视图与section 上、左、下、右的间隔
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section{
-    if (section==2) return UIEdgeInsetsMake(0,10,0,10);
-    return UIEdgeInsetsMake(0,0,0,0);
+    if (section==1) return UIEdgeInsetsMake(0,1,0,1);
+    if (section<5) return UIEdgeInsetsMake(0,0,0,0);
+    return UIEdgeInsetsMake(0,10,0,10);
 }
 
 //设置footer呈现的size, 如果布局是垂直方向的话，size只需设置高度，宽与collectionView一致
@@ -180,9 +197,9 @@ static NSString* reuseIdentifierMall    = @"TXMallCollectionViewCell";
         //确定item的大小
         //        flowLayout.itemSize = CGSizeMake(100, 120);
         //确定横向间距(设置行间距)
-        flowLayout.minimumLineSpacing = 10;
+        flowLayout.minimumLineSpacing = 0;
         //确定纵向间距(设置列间距)
-        flowLayout.minimumInteritemSpacing = 10;
+        flowLayout.minimumInteritemSpacing = 0;
         //确定距离上左下右的距离
         flowLayout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0);
         //头尾部高度
@@ -194,6 +211,7 @@ static NSString* reuseIdentifierMall    = @"TXMallCollectionViewCell";
         [_collectionView registerClass:[TXMallToolsCollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
         [_collectionView registerClass:[TXMallBannerCollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifierBanner];
         [_collectionView registerClass:[TXMallCollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifierMall];
+        [_collectionView registerClass:[TTTemplateThreeTableViewCell class] forCellWithReuseIdentifier:reuseIdentifierUAV];
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
         _collectionView.showsVerticalScrollIndicator = NO;

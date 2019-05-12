@@ -161,7 +161,7 @@ static NSString* reuseIdentifierHot     = @"TXMallHotTableViewCell";
 #pragma mark - UICollectionViewDelegateFlowLayout
 //设置每个一个Item（cell）的大小
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
-    CGFloat width = kScreenWidth/4;
+    CGFloat width = (kScreenWidth-2)/4;
     if (indexPath.section==0) return CGSizeMake(kScreenWidth, IPHONE6_W(180));
     else if (indexPath.section==1)return CGSizeMake(width, IPHONE6_W(95));
     else if (indexPath.section==2)return CGSizeMake(kScreenWidth, IPHONE6_W(95*2+30));
@@ -171,7 +171,7 @@ static NSString* reuseIdentifierHot     = @"TXMallHotTableViewCell";
 
 //设置所有的cell组成的视图与section 上、左、下、右的间隔
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section{
-//    if (section==2) return UIEdgeInsetsMake(0,15,0,15);
+    if (section==1) return UIEdgeInsetsMake(0,1,0,1);
     if (section==3) return UIEdgeInsetsMake(0,10,0,10);
     return UIEdgeInsetsMake(0,0,0,0);
 }
@@ -193,9 +193,9 @@ static NSString* reuseIdentifierHot     = @"TXMallHotTableViewCell";
         //确定item的大小
         //        flowLayout.itemSize = CGSizeMake(100, 120);
         //确定横向间距(设置行间距)
-        flowLayout.minimumLineSpacing = 10;
+        flowLayout.minimumLineSpacing = 0;
         //确定纵向间距(设置列间距)
-        flowLayout.minimumInteritemSpacing = 10;
+        flowLayout.minimumInteritemSpacing = 0;
         //确定距离上左下右的距离
         flowLayout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0);
         //头尾部高度

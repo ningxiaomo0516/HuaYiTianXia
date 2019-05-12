@@ -29,11 +29,11 @@
 }
 
 - (void)setupUI {
-    [self addSubview:self.imagesView];
-    [self addSubview:self.titleLabel];
-    [self addSubview:self.subtitleLabel];
-    [self addSubview:self.marketPriceLabel];
-    [self addSubview:self.currentPriceLabel];
+    [self.contentView addSubview:self.imagesView];
+    [self.contentView addSubview:self.titleLabel];
+    [self.contentView addSubview:self.subtitleLabel];
+    [self.contentView addSubview:self.marketPriceLabel];
+    [self.contentView addSubview:self.currentPriceLabel];
     [self.imagesView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.top.centerX.equalTo(self);
         make.height.equalTo(@(IPHONE6_W(145)));

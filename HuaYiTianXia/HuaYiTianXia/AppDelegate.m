@@ -137,7 +137,7 @@
 //设置版本页面为主视图
 - (void)setVersionVC{
     TXVersionViewController * vc = [[TXVersionViewController alloc] init];
-    self.window.backgroundColor = kClearColor;
+    self.window.backgroundColor = kWhiteColor;
     self.window.rootViewController = vc;
     [self.window makeKeyAndVisible];
 }
@@ -146,7 +146,7 @@
     // 1. 创建窗口
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     //设置窗口颜色
-    self.window.backgroundColor = [UIColor whiteColor];
+    self.window.backgroundColor = kWhiteColor;
     //设置窗口为主窗口并且显示
 //    [self.window makeKeyAndVisible];
     [self setVersionVC];
