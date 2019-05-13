@@ -1,28 +1,18 @@
 //
-//  TTTemplateThreeTableViewCell.m
-//  FlowersMarry
+//  TXMallUAVRecommendTableViewCell.m
+//  HuaYiTianXia
 //
-//  Created by 宁小陌 on 2018/12/10.
-//  Copyright © 2018 宁小陌. All rights reserved.
+//  Created by 宁小陌 on 2019/5/13.
+//  Copyright © 2019年 宁小陌. All rights reserved.
 //
 
-#import "TTTemplateThreeTableViewCell.h"
-#import "TXMallUAVHotCollectionViewCell.h"
-#import "TXMallUAVAdCollectionViewCell.h"
+#import "TXMallUAVRecommendTableViewCell.h"
 #import "TXMallUAVRecommendCollectionViewCell.h"
 
-static NSString* reuseIdentifierHot         = @"TXMallUAVHotCollectionViewCell";
-static NSString* reuseIdentifierAd          = @"TXMallUAVAdCollectionViewCell";
 static NSString* reuseIdentifierRecommend   = @"TXMallUAVRecommendCollectionViewCell";
 
-@interface TTTemplateThreeTableViewCell()<UICollectionViewDelegate, UICollectionViewDataSource>
-{
-@private
-    UICollectionView * _collectionView;
-    UIImageView * _iconImageView;
-    UILabel * _titleLabel;
-}
-@property(nonatomic,strong,readonly)UICollectionView * collectionView;
+@interface TXMallUAVRecommendTableViewCell()<UICollectionViewDelegate, UICollectionViewDataSource>
+@property (nonatomic, strong) UICollectionView *collectionView;
 /// headerView的高度
 @property (nonatomic, strong) UIView *headerView;
 /// headerView的高度
@@ -31,7 +21,7 @@ static NSString* reuseIdentifierRecommend   = @"TXMallUAVRecommendCollectionView
 @property (nonatomic, strong) UILabel *headerSubtitle;
 @end
 
-@implementation TTTemplateThreeTableViewCell
+@implementation TXMallUAVRecommendTableViewCell
 
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self == [super initWithFrame:frame]) {
@@ -44,17 +34,8 @@ static NSString* reuseIdentifierRecommend   = @"TXMallUAVRecommendCollectionView
 - (void)setListModel:(MallUAVModel *)listModel{
     _listModel = listModel;
     [self initView];
-    if (self.listModel.sectionType==2) {
-        self.headerTitle.text = @"为您推荐";
-        self.collectionView.frame = CGRectMake(0, 40, kScreenWidth, 190);
-    }else if (self.listModel.sectionType==3) {
-        self.headerTitle.text = @"当下热门";
-        self.collectionView.frame = CGRectMake(0, 40, kScreenWidth, 160);
-    }else if (self.listModel.sectionType==4) {
-        self.headerTitle.text = @"精选活动";
-        self.collectionView.frame = CGRectMake(0, 40, kScreenWidth, 180);
-    }
-    self.collectionView.backgroundColor = kRedColor;
+    self.headerTitle.text = @"为您推荐";
+    self.collectionView.frame = CGRectMake(0, 40, kScreenWidth, 190);
     [self.collectionView reloadData];
 }
 
@@ -88,59 +69,27 @@ static NSString* reuseIdentifierRecommend   = @"TXMallUAVRecommendCollectionView
 
 //每个分区有多少个数据
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    if (self.listModel.sectionType==2) return self.listModel.recommended.count;
-    if (self.listModel.sectionType==3) return self.listModel.hot.count;
-    if (self.listModel.sectionType==4) return self.listModel.jingxuan.count;
-    return 3;
+    return self.listModel.recommended.count;
 }
 
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-//    tools.backgroundColor = kRandomColor;
-//    tools.model.sectionType = self.listModel.sectionType;
-    if (self.listModel.sectionType==2) {
-        TXMallUAVRecommendCollectionViewCell *tools = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifierRecommend forIndexPath:indexPath];
-tools.backgroundColor = kRandomColor;
-        tools.model = self.listModel.recommended[indexPath.row];
-        
-        return tools;
-        
-    }else if(self.listModel.sectionType==3){
-        TXMallUAVHotCollectionViewCell *tools = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifierHot forIndexPath:indexPath];
-tools.backgroundColor = kRandomColor;
-//        tools.model = self.listModel.hot[indexPath.row];
-        
-        return tools;
-        
-    }//else if(self.listModel.sectionType==4){
-        TXMallUAVAdCollectionViewCell *tools = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifierAd forIndexPath:indexPath];
-tools.backgroundColor = kRandomColor;
-//        tools.model = self.listModel.jingxuan[indexPath.row];
-        
-        
-        return tools;
-        
-    //}
+    TXMallUAVRecommendCollectionViewCell *tools = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifierRecommend forIndexPath:indexPath];
+    tools.model = self.listModel.recommended[indexPath.row];
+    return tools;
 }
 
-/// 点击collectionViewCell
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(didRecommendVideoSelectItemAtIndexPath:)]) {
-        [self.delegate didRecommendVideoSelectItemAtIndexPath:indexPath];
-    }
-}
+///// 点击collectionViewCell
+//- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+//    if (self.delegate && [self.delegate respondsToSelector:@selector(didRecommendVideoSelectItemAtIndexPath:)]) {
+//        [self.delegate didRecommendVideoSelectItemAtIndexPath:indexPath];
+//    }
+//}
 
 //布局协议对应的方法实现
 #pragma mark - UICollectionViewDelegateFlowLayout
 //设置每个一个Item（cell）的大小
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
-    if (self.listModel.sectionType==2) {
-        return CGSizeMake(190, 190);
-    }else if (self.listModel.sectionType==3) {
-        return CGSizeMake(190, 160);
-    }else if (self.listModel.sectionType==4) {
-        return CGSizeMake(190, 180);
-    }
-    return CGSizeMake(190, 135);
+    return CGSizeMake(190, 190);
 }
 
 //设置所有的cell组成的视图与section 上、左、下、右的间隔
@@ -179,8 +128,6 @@ tools.backgroundColor = kRandomColor;
         
         _collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:flowLayout];
         _collectionView.backgroundColor = [UIColor clearColor];
-        [_collectionView registerClass:[TXMallUAVHotCollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifierHot];
-        [_collectionView registerClass:[TXMallUAVAdCollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifierAd];
         [_collectionView registerClass:[TXMallUAVRecommendCollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifierRecommend];
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
@@ -211,5 +158,4 @@ tools.backgroundColor = kRandomColor;
     }
     return _headerSubtitle;
 }
-
 @end

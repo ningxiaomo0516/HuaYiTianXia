@@ -32,7 +32,7 @@
     //设置添加地址的View
     self.addAddressView = [[UIView alloc] init];
     self.addAddressView.frame = CGRectMake(0, kScreenHeight, kScreenWidth, _defaultHeight);
-    self.addAddressView.backgroundColor = [UIColor whiteColor];
+    self.addAddressView.backgroundColor = kWhiteColor;
     [self addSubview:self.addAddressView];
     
     UILabel * titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(40, 10, kScreenWidth - 80, 30)];
@@ -54,9 +54,8 @@
     [self.addAddressView addSubview:self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(self.addAddressView);
-        CGFloat top = CGRectGetMaxY(lineView.frame);
-        make.top.equalTo(@(top));
-        make.bottom.equalTo(self.mas_bottom).offset(-kNavBarHeight);
+        make.top.equalTo(lineView.mas_bottom);
+        make.bottom.equalTo(self.addAddressView.mas_bottom).offset(-kNavBarHeight);
     }];
     return self;
 }
@@ -133,7 +132,7 @@
         _tableView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
         _tableView.delegate = self;
         _tableView.dataSource = self;
-        _tableView.backgroundColor = kColorWithRGB(245, 244, 249);
+        _tableView.backgroundColor = kWhiteColor;
         [Utils lz_setExtraCellLineHidden:_tableView];
     }
     return _tableView;

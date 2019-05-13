@@ -16,13 +16,27 @@
 #import "TXNewsModel.h"
 #import "TXMallUAVModel.h"
 
+#import "TXMallUAVHotTableViewCell.h"
+#import "TXMallUAVAdTableViewCell.h"
+#import "TXMallUAVRecommendTableViewCell.h"
+
+/// 购机
+#import "TXUAVRecommendedViewController.h"
+/// 体验
+#import "TXUAVExperienceMainViewController.h"
+
 static NSString* reuseIdentifier        = @"TXMallToolsCollectionViewCell";
 static NSString* reuseIdentifierBanner  = @"TXMallBannerCollectionViewCell";
 static NSString* reuseIdentifierMall    = @"TXMallCollectionViewCell";
 static NSString* reuseIdentifierUAV     = @"TTTemplateThreeTableViewCell";
 
+static NSString* reuseIdentifierHot         = @"TXMallUAVHotTableViewCell";
+static NSString* reuseIdentifierAd          = @"TXMallUAVAdTableViewCell";
+static NSString* reuseIdentifierRecommend   = @"TXMallUAVRecommendTableViewCell";
+
 @interface TXUAvCollectionViewController ()<UICollectionViewDelegate, UICollectionViewDataSource>
 @property (nonatomic, strong)UICollectionView * collectionView;
+/// 优秀产品数据
 @property (nonatomic, strong) NSMutableArray *dataArray;
 @property (nonatomic, strong) NSMutableArray *toolsArray;
 @property (nonatomic, strong) NSMutableArray *bannerArray;
@@ -30,6 +44,10 @@ static NSString* reuseIdentifierUAV     = @"TTTemplateThreeTableViewCell";
 @property (nonatomic, assign) NSInteger pageSize;
 /// 当前页
 @property (nonatomic, assign) NSInteger pageIndex;
+
+@property (nonatomic, strong) MallUAVModel *listArray;
+
+
 @end
 
 @implementation TXUAvCollectionViewController
@@ -74,6 +92,7 @@ static NSString* reuseIdentifierUAV     = @"TTTemplateThreeTableViewCell";
             [self.dataArray addObjectsFromArray:model.data.records];
             if (self.pageIndex==1) {
                 [self.bannerArray addObjectsFromArray:model.banners];
+                self.listArray = model.listArray;
             }
             [self.collectionView reloadData];
         }else{
@@ -106,7 +125,7 @@ static NSString* reuseIdentifierUAV     = @"TTTemplateThreeTableViewCell";
 // 每个分区有多少个数据
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     if (section==1) return self.toolsArray.count;
-    else if (section<6) return 1;
+    else if (section<5) return 1;
     return self.dataArray.count;
 }
 
@@ -127,19 +146,47 @@ static NSString* reuseIdentifierUAV     = @"TTTemplateThreeTableViewCell";
         tools.recordsModel = self.dataArray[indexPath.row];
         return tools;
     }else{
-        TTTemplateThreeTableViewCell *tools = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifierUAV forIndexPath:indexPath];
-//        tools.titleLabel.text = [NSString stringWithFormat:@"为您推荐  -%ld",(long)indexPath.section];
-        TXMallUAVModel *model = [[TXMallUAVModel alloc] init];
-        model.sectionType = indexPath.section;
-        tools.model = model;
-        return tools;
+        if (indexPath.section==2) {
+            TXMallUAVRecommendTableViewCell *tools = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifierRecommend forIndexPath:indexPath];
+            tools.listModel = self.listArray;
+            return tools;
+        }else if (indexPath.section==3) {
+            TXMallUAVHotTableViewCell *tools = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifierHot forIndexPath:indexPath];
+            tools.listModel = self.listArray;
+            return tools;
+        }else if (indexPath.section==4) {
+            TXMallUAVAdTableViewCell *tools = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifierAd forIndexPath:indexPath];
+            tools.listModel = self.listArray;
+            return tools;
+        }else{
+            TTTemplateThreeTableViewCell *tools = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifierUAV forIndexPath:indexPath];
+            self.listArray.sectionType = indexPath.section;
+            tools.listModel = self.listArray;
+            return tools;
+        }
     }
 }
 
 /// 点击collectionViewCell
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section==1) {
-        Toast(@"系统持续开放中");
+        if (indexPath.row==1) {
+            TXUAVExperienceMainViewController *vc = [[TXUAVExperienceMainViewController alloc] init];
+            TTPushVC(vc);
+        }else{
+            NSMutableDictionary *parameter = [[NSMutableDictionary alloc] init];
+            if (indexPath.row==0) {
+                [parameter setObject:@"1" forKey:@"pageType"];
+            }else if(indexPath.row==2){
+                [parameter setObject:@"2" forKey:@"pageType"];
+            }else if(indexPath.row==3){
+                [parameter setObject:@"3" forKey:@"pageType"];
+            }else{
+                [parameter setObject:@"0" forKey:@"pageType"];
+            }
+            TXUAVRecommendedViewController *vc = [[TXUAVRecommendedViewController alloc] initParameter:parameter];
+            TTPushVC(vc);
+        }
     }else if(indexPath.section==5){
         NewsRecordsModel *productModel = self.dataArray[indexPath.row];
         TXMallGoodsDetailsViewController *vc = [[TXMallGoodsDetailsViewController alloc] initMallProductModel:productModel];
@@ -212,6 +259,10 @@ static NSString* reuseIdentifierUAV     = @"TTTemplateThreeTableViewCell";
         [_collectionView registerClass:[TXMallBannerCollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifierBanner];
         [_collectionView registerClass:[TXMallCollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifierMall];
         [_collectionView registerClass:[TTTemplateThreeTableViewCell class] forCellWithReuseIdentifier:reuseIdentifierUAV];
+        
+        [_collectionView registerClass:[TXMallUAVHotTableViewCell class] forCellWithReuseIdentifier:reuseIdentifierHot];
+        [_collectionView registerClass:[TXMallUAVAdTableViewCell class] forCellWithReuseIdentifier:reuseIdentifierAd];
+        [_collectionView registerClass:[TXMallUAVRecommendTableViewCell class] forCellWithReuseIdentifier:reuseIdentifierRecommend];
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
         _collectionView.showsVerticalScrollIndicator = NO;
@@ -224,7 +275,7 @@ static NSString* reuseIdentifierUAV     = @"TTTemplateThreeTableViewCell";
 - (NSMutableArray *)toolsArray{
     if (!_toolsArray) {
         _toolsArray = [[NSMutableArray alloc] init];
-        NSArray* titleArr = @[@"购机",@"培训",@"课程",@"活动"];
+        NSArray* titleArr = @[@"购机",@"培训",@"体验",@"活动"];
         NSArray* classArr = @[@"",@"",@"",@""];
         for (int j = 0; j < titleArr.count; j ++) {
             TXGeneralModel* templateModel = [[TXGeneralModel alloc] init];
@@ -248,6 +299,13 @@ static NSString* reuseIdentifierUAV     = @"TTTemplateThreeTableViewCell";
         _bannerArray = [[NSMutableArray alloc] init];
     }
     return _bannerArray;
+}
+
+- (MallUAVModel *)listArray{
+    if (!_listArray) {
+        _listArray = [[MallUAVModel alloc] init];
+    }
+    return _listArray;
 }
 
 @end

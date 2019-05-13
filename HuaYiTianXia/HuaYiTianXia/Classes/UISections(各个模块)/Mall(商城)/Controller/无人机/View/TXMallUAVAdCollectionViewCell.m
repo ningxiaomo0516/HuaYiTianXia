@@ -1,56 +1,67 @@
 //
-//  TTTemplateThreeCollectionViewCell.m
-//  FlowersMarry
+//  TXMallUAVAdCollectionViewCell.m
+//  HuaYiTianXia
 //
-//  Created by 宁小陌 on 2018/12/10.
-//  Copyright © 2018 宁小陌. All rights reserved.
+//  Created by 宁小陌 on 2019/5/13.
+//  Copyright © 2019年 宁小陌. All rights reserved.
 //
 
-#import "TTTemplateThreeCollectionViewCell.h"
+#import "TXMallUAVAdCollectionViewCell.h"
 
-@implementation TTTemplateThreeCollectionViewCell
+@implementation TXMallUAVAdCollectionViewCell
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self == [super initWithFrame:frame]) {
         self.contentView.backgroundColor = [UIColor clearColor];
         [self setupUI];
-//        self.imagesView.image = kGetImage(@"base_deprecated_activity");
-//        self.titleLabel.text = @"无人机体验";
-//        self.subtitleLabel.text = @"1小时无人机操控";
+        self.imagesView.image = kGetImage(@"base_deprecated_activity");
+        self.titleLabel.text = @"无人机体验";
+        self.subtitleLabel.text = @"1小时无人机操控";
     }
     return self;
 }
 
-- (void)setupUI {
-//    [self.imagesView lz_setCornerRadius:5.0];
-}
-
 - (void)setModel:(MallUAVListModel *)model{
     _model = model;
+    self.titleLabel.text = self.model.title;
+    self.subtitleLabel.text = self.model.synopsis;
+    [self.imagesView sd_setImageWithURL:kGetImageURL(self.model.coverimg) placeholderImage:kGetImage(VERTICALMAPBITMAP)];
+}
+
+- (void)setupUI {
+    //    [self.imagesView lz_setCornerRadius:5.0];
+    
     [self.contentView addSubview:self.imagesView];
     [self.contentView addSubview:self.titleLabel];
-    self.titleLabel.text = self.model.title;
-    [self.imagesView sd_setImageWithURL:kGetImageURL(self.model.coverimg) placeholderImage:kGetImage(VERTICALMAPBITMAP)];
-    if (model.sectionType==2) { /// 推荐
-        [self.imagesView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.left.right.equalTo(self.contentView);
-            make.height.equalTo(@(190));
-            make.width.equalTo(@(190));
-        }];
-        [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.bottom.equalTo(self.imagesView.mas_bottom).offset(-5);
-            make.left.equalTo(@(5));
-            make.right.equalTo(self);
-        }];
-
-        self.titleLabel.textColor = kWhiteColor;
-        
-    }else if(model.sectionType==3){ /// 热门
-        
-        self.titleLabel.textColor = kTextColor51;
-    }else if (model.sectionType==4){ /// 精选活动
-        
-    }
+    [self.contentView addSubview:self.subtitleLabel];
+    [self.contentView addSubview:self.imagesViewAd];
+    [self.contentView addSubview:self.endAdLabel];
+    [self.imagesView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.left.right.equalTo(self.contentView);
+        make.height.equalTo(@(120));
+    }];
+    [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(self.subtitleLabel.mas_top).offset(-5);
+        make.right.equalTo(self);
+        make.left.equalTo(@(5));
+    }];
+    [self.subtitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(self.mas_bottom).offset(-10);
+        make.left.right.equalTo(self.titleLabel);
+    }];
+    
+    [self.imagesViewAd mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.top.equalTo(self.imagesView);
+    }];
+    [self.endAdLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(self.imagesView.mas_bottom).offset(-3);
+        make.right.equalTo(self.imagesView.mas_right).offset(-3);
+    }];
+    self.titleLabel.textColor = kTextColor51;
+    self.subtitleLabel.textColor = kTextColor102;
+    self.subtitleLabel.text = self.model.synopsis;
+    self.endAdLabel.text = @"活动结束";
 }
+
 
 #pragma mark -- setter getter
 - (UILabel *)titleLabel{
@@ -100,5 +111,4 @@
     }
     return _endAdLabel;
 }
-
 @end

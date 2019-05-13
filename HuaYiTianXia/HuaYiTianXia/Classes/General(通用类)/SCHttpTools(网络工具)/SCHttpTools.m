@@ -54,7 +54,8 @@ static AFHTTPSessionManager* manager_ = nil;
         NSString *phoneVersion = [UIDevice phoneVersion];           /// 手机版本号
         NSString *deviceName = [UIDevice systemName];               /// 手机系统名称
         NSString *deviceModel = [UIDevice getCurrentDeviceModel];   /// 手机型号
-        NSString *deviceInfo = [NSString stringWithFormat:@"%@--%@--%@",phoneVersion,deviceName,deviceModel];
+        NSString *appVersion = kStringFormat(@"iosv", kVersioning); /// App版本号
+        NSString *deviceInfo = [NSString stringWithFormat:@"%@--%@--%@--%@",phoneVersion,deviceName,deviceModel,appVersion];
         [manager.requestSerializer setValue:deviceInfo forHTTPHeaderField:@"clientInfo"];
     }
     
@@ -110,7 +111,8 @@ static AFHTTPSessionManager* manager_ = nil;
         NSString *phoneVersion = [UIDevice phoneVersion];           /// 手机版本号
         NSString *deviceName = [UIDevice systemName];               /// 手机系统名称
         NSString *deviceModel = [UIDevice getCurrentDeviceModel];   /// 手机型号
-        NSString *deviceInfo = [NSString stringWithFormat:@"%@--%@--%@",phoneVersion,deviceName,deviceModel];
+        NSString *appVersion = kStringFormat(@"iosv", kVersioning); /// App版本号
+        NSString *deviceInfo = [NSString stringWithFormat:@"%@--%@--%@--%@",phoneVersion,deviceName,deviceModel,appVersion];
         [manager.requestSerializer setValue:deviceInfo forHTTPHeaderField:@"clientInfo"];
     }
     

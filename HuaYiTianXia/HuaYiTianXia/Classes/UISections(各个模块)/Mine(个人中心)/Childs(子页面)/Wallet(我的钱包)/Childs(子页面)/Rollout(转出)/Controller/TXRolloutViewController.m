@@ -41,6 +41,7 @@ static NSString * const reuseIdentifierHeader = @"TXRolloutHeaderTableViewCell";
     // Do any additional setup after loading the view.
     self.currencyText = @"";
     self.amountText = @"";
+    self.kid = @"-1";
     [self initView];
     // 注册通知
     [kNotificationCenter addObserver:self selector:@selector(transferRequest) name:@"transferRequest" object:nil];
@@ -49,8 +50,9 @@ static NSString * const reuseIdentifierHeader = @"TXRolloutHeaderTableViewCell";
 /// 转账请求
 - (void) transferRequest{
     [self dismissedButtonClicked];
+    TTLog(@"执行点击----------\n账号-- :%@\n确认账号-- :%@\n类型-- :%@\n积分-- :%@",self.accountText,self.accountsText,self.kid,self.amountText);
     kShowMBProgressHUD(self.view);
-    NSInteger currency = [self.currencyText integerValue];
+    NSInteger currency = [self.kid integerValue];
     NSMutableDictionary *parameter = [[NSMutableDictionary alloc] init];
     [parameter setObject:self.accountText forKey:@"mobile"];
     [parameter setObject:self.accountsText forKey:@"confirmMobile"];
@@ -95,6 +97,9 @@ static NSString * const reuseIdentifierHeader = @"TXRolloutHeaderTableViewCell";
         Toast(@"请输入转账金额");
         return;
     }
+    
+    TTLog(@"点击----------\n账号-- :%@\n确认账号-- :%@\n类型-- :%@\n积分-- :%@",self.accountText,self.accountsText,self.kid,self.amountText);
+    
     NSMutableDictionary *parameter = [[NSMutableDictionary alloc] init];
     [parameter setObject:self.accountText forKey:@"mobile"];
     [self validationPayeeInfo:parameter];

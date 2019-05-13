@@ -26,6 +26,7 @@
 @property (nonatomic, strong) UIButton *closeButton;
 @property (nonatomic, strong) TTPasswordView *passView;
 @property (nonatomic, copy) NSString *passwordText;
+@property (nonatomic, copy) NSArray *dataArray;
 @end
 
 @implementation TXPayPasswordViewController
@@ -41,7 +42,7 @@
         self.payeeNameLabel.hidden = NO;
     }
     self.view.frame = CGRectMake(IPHONE6_W((kScreenWidth - 280)/2), 0, IPHONE6_W(280), IPHONE6_W(230+top));
-
+    self.dataArray = @[@"转出",@"复投",@"转换",@"商城余额购买",@"新增机票购买"];
     [self initView:top];
     [self.view lz_setCornerRadius:7.0];
     CGFloat left = IPHONE6_W(17);
@@ -52,7 +53,7 @@
     [self.view addSubview:_passView];
     MV(weakSelf)
     _passView.passwordBlock = ^(NSString * _Nonnull passwordText) {
-        TTLog(@"text = %@",passwordText);
+//        TTLog(@"text = %@",passwordText);
         weakSelf.passwordText = passwordText;
         if (passwordText.length==6) {
             [weakSelf validationTransactionPassword];
@@ -97,7 +98,7 @@
             TXGeneralModel *model = [TXGeneralModel mj_objectWithKeyValues:result];
             if (model.errorcode == 20000) {
                 [self sc_dismissVC];
-                TTLog(@"self.pageType -- %ld",self.pageType);
+                TTLog(@"当前页面需要执行的相关推送 -- %@",self.dataArray[self.pageType]);
                 if (self.pageType == 0 ) {  //// 转出
                     [kNotificationCenter postNotificationName:@"transferRequest" object:nil];
                 }else if (self.pageType == 1 ) { //// 复投

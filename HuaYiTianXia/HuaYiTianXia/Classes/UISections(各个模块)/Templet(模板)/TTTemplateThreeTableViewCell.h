@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "TXMallUAVModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -21,10 +20,9 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 @interface TTTemplateThreeTableViewCell : UICollectionViewCell
-@property (nonatomic, strong) NSArray *dataArray;
 @property (nonatomic, weak) id<TTTemplateThreeTableViewCellDelegate> delegate;
 
-@property (nonatomic, strong) TXMallUAVModel *model;
+@property (nonatomic, strong) MallUAVModel *listModel;
 @end
 
 NS_ASSUME_NONNULL_END

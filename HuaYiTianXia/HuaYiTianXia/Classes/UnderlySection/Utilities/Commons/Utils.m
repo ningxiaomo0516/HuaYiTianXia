@@ -206,13 +206,13 @@
     
     NSTimeInterval interval = [timeString doubleValue] + 28800;//因为时差问题要加8小时 == 28800 sec
     NSDate *detaildate = [NSDate dateWithTimeIntervalSince1970:interval];
-    TTLog(@"date:%@",[detaildate description]);
+//    TTLog(@"date:%@",[detaildate description]);
     //实例化一个NSDateFormatter对象
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
     //设定时间格式,这里可以设置成自己需要的格式
     [dateFormatter setDateFormat:formatter];
     NSString*currentDateStr = [dateFormatter stringFromDate:detaildate];
-    TTLog(@"时间戳转换后的日期时间:%@",currentDateStr);
+//    TTLog(@"时间戳转换后的日期时间:%@",currentDateStr);
     return currentDateStr;
 }
 

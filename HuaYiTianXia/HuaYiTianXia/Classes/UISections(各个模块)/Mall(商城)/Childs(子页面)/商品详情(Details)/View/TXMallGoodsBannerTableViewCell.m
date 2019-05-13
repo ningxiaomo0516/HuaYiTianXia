@@ -79,7 +79,7 @@ static NSString* reuseIdentifiers = @"TXMineBannerCollectionViewCell";
     }else{
         /// 显示数字
         
-        TTLog(@" - -- 11111 ");
+//        TTLog(@" - -- 11111 ");
     }
     
 }

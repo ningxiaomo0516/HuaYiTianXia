@@ -128,11 +128,11 @@ static NSString * const reuseIdentifierSectionHeaderView = @"SCTableViewSectionH
     [parameter setObject:@(self.pageIndex) forKey:@"page"];     // 当前页
     [parameter setObject:@(self.pageSize) forKey:@"pageSize"];  // 每页条数
 
-    TTLog(@"parameter -- %@",parameter);
+//    TTLog(@"parameter -- %@",parameter);
     [SCHttpTools postWithURLString:@"news/GetNew" parameter:parameter success:^(id responseObject) {
         NSDictionary *result = responseObject;
         if ([result isKindOfClass:[NSDictionary class]]) {
-            TTLog(@"result -- %@",result);
+//            TTLog(@"result -- %@",result);
             if (self.pageIndex==1) {
                 [self.dataArray removeAllObjects];
                 [self.bannerArray removeAllObjects];
@@ -216,7 +216,7 @@ static NSString * const reuseIdentifierSectionHeaderView = @"SCTableViewSectionH
 
 /// 返回多少
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return ((self.bannerArray.count>0&&section==0)||(section==1))?1:self.dataArray.count;
+    return ((self.bannerArray.count>0&&section==0)||(self.rollText.length>0&&section==1))?1:self.dataArray.count;
 }
 
 #pragma mark -------------- 设置Header高度 --------------
@@ -231,7 +231,7 @@ static NSString * const reuseIdentifierSectionHeaderView = @"SCTableViewSectionH
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
     if ((self.bannerArray.count>0&&section==0)) {
         return 10.f;
-    }else if (self.rollText.length >= 0 && section == 1) {
+    }else if (self.rollText.length > 0 && section == 1) {
         return 10.0f;
     }else{
         return 0.0f;

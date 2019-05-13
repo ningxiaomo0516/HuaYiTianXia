@@ -90,8 +90,8 @@ static NSString * const reuseIdentifier = @"TXRolloutTypeTableViewCell";
 - (NSMutableArray *)dataArray{
     if (!_dataArray) {
         _dataArray = [[NSMutableArray alloc] init];
-        NSArray* titleArr = @[@"VH积分",@"AH积分"];
-        NSArray* subtitleArr = @[kUserInfo.vrcurrency,kUserInfo.arcurrency];
+        NSArray* titleArr = @[@"AH积分",@"VH积分"];
+        NSArray* subtitleArr = @[kUserInfo.arcurrency,kUserInfo.vrcurrency];
         for (int i=0; i<titleArr.count; i++) {
             TXGeneralModel *generalModel = [[TXGeneralModel alloc] init];
             generalModel.title = [titleArr lz_safeObjectAtIndex:i];

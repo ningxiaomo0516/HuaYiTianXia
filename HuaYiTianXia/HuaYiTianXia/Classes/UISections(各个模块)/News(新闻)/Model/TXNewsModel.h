@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class TXNewsTabModel,NewsModel,NewsRecordsModel,NewsBannerModel;
+@class TXNewsTabModel,NewsModel,NewsRecordsModel,NewsBannerModel,MallUAVModel,MallUAVListModel;
 @interface TXNewsModel : NSObject
 /// 状态 21000统一异常情况,22000登录超时，23000账号冻结，20000请求成功，另外的状态请直接输出msg
 @property (nonatomic, copy) NSString *message;
@@ -34,6 +34,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NewsModel *data;
 /// banner 集合
 @property (nonatomic, strong) NSMutableArray<NewsBannerModel *> *banners;
+/// 商城 --- 无人机产品
+@property (nonatomic, strong) MallUAVModel *listArray;
 @end
 
 @interface NewsModel : NSObject
@@ -128,5 +130,39 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) BOOL isBannerTitle;
 @end
 
+
+@interface MallUAVModel : NSObject
+/// 购机(推荐)
+@property (nonatomic, strong) NSMutableArray<MallUAVListModel *> *recommended;//buyingMachine;
+/// 活动(预留字段)
+@property (nonatomic, strong) NSMutableArray<MallUAVListModel *> *activity;
+/// 体验（精选活动）
+@property (nonatomic, strong) NSMutableArray<MallUAVListModel *> *jingxuan;///experience;
+///培训(当下热门）,请注意培训无简介
+@property (nonatomic, strong) NSMutableArray<MallUAVListModel *> *hot;//train;
+@property (nonatomic, assign) NSInteger sectionType;
+
+@end
+
+@interface MallUAVListModel : NSObject
+/// 当前ID
+@property (nonatomic, copy) NSString *kid;
+/// 标题
+@property (nonatomic, copy) NSString *title;
+/// 封面
+@property (nonatomic, copy) NSString *coverimg;
+/// 简介
+@property (nonatomic, copy) NSString *synopsis;
+@property (nonatomic, assign) NSInteger sectionType;
+
+// --------------- 购机列表
+/// 起始价格（价格）
+@property (nonatomic, copy) NSString *startPrice;
+/// 结束价格价格（此字段为预留字段，先阶段可不适用）
+@property (nonatomic, copy) NSString *endPrice;
+/// 已报名或预约人数
+@property (nonatomic, copy) NSString *signup;
+
+@end
 
 NS_ASSUME_NONNULL_END

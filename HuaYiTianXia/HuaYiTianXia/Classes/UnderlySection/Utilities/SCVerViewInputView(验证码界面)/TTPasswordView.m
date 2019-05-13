@@ -54,7 +54,7 @@
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
-    TTLog(@"变化%@", string);
+//    TTLog(@"变化%@", string);
     if([string isEqualToString:@"\n"]) {
         //按回车关闭键盘
         [textField resignFirstResponder];

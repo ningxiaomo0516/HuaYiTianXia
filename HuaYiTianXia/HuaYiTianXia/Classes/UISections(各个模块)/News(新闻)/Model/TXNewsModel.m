@@ -12,7 +12,7 @@
 + (NSDictionary *)replacedKeyFromPropertyName{
     return @{@"data"        : @"obj",
              @"errorcode"   : @"code",
-             @"message"     : @"msg",};
+             @"message"     : @"msg"};
 }
 + (NSDictionary *)objectClassInArray{
     return @{@"data" : [TXNewsTabModel class]};
@@ -35,8 +35,9 @@
              @"banners"     : @"banner"};
 }
 + (NSDictionary *)objectClassInArray{
-    return @{@"data"    : [NewsModel class],
-             @"banners" : [NewsBannerModel class]};
+    return @{@"data"        : [NewsModel class],
+             @"banners"     : [NewsBannerModel class],
+             @"listArray"   : [MallUAVModel class]};
 }
 @end
 
@@ -77,3 +78,25 @@
 }
 @end
 
+
+@implementation MallUAVModel
++ (NSDictionary *)replacedKeyFromPropertyName{
+    return @{@"recommended" : @"buyingMachine",
+             @"jingxuan"    : @"experience",
+             @"hot"         : @"train"};
+}
++ (NSDictionary *)objectClassInArray{
+    return @{@"recommended" : [MallUAVListModel class],
+             @"activity"    : [MallUAVListModel class],
+             @"jingxuan"    : [MallUAVListModel class],
+             @"hot"         : [MallUAVListModel class]};
+}
+@end
+
+@implementation MallUAVListModel
+
++ (NSDictionary *)replacedKeyFromPropertyName{
+    return @{@"kid" : @"id"};
+}
+
+@end

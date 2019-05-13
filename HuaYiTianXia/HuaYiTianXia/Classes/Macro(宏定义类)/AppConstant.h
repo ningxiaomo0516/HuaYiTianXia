@@ -156,6 +156,14 @@ method_exchangeImplementations(oldMethod, newMethod);\
 || ([_object respondsToSelector:@selector(length)] && [(NSData *)_object length] == 0) \
 || ([_object respondsToSelector:@selector(count)] && [(NSArray *)_object count] == 0))
 
+static inline BOOL IsEmpty(id thing) {
+    return thing == nil || [thing isEqual:[NSNull null]]
+    || ([thing respondsToSelector:@selector(length)]
+        && [(NSData *)thing length] == 0)
+    || ([thing respondsToSelector:@selector(count)]
+        && [(NSArray *)thing count] == 0);
+}
+
 
 #ifndef LZSYNTH_DUMMY_CLASS
 #define LZSYNTH_DUMMY_CLASS(_name_) \
