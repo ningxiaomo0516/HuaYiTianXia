@@ -193,7 +193,7 @@ static NSString* reuseIdentifierHot     = @"TXMallHotTableViewCell";
         //确定item的大小
         //        flowLayout.itemSize = CGSizeMake(100, 120);
         //确定横向间距(设置行间距)
-        flowLayout.minimumLineSpacing = 0;
+        flowLayout.minimumLineSpacing = 10;
         //确定纵向间距(设置列间距)
         flowLayout.minimumInteritemSpacing = 0;
         //确定距离上左下右的距离

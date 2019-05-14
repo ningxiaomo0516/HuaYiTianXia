@@ -17,8 +17,8 @@ NSString *const DynamicUrl = @"http://192.168.1.5:80/hytx/";
 //NSString *const DynamicUrl = @"http://47.107.179.43:80/hytx/";
 
 
-NSString *const DomainName = @"http://47.107.179.43:80/";
-//NSString *const DomainName = @"http://192.168.1.5:80/";
+//NSString *const DomainName = @"http://47.107.179.43:80/";
+NSString *const DomainName = @"http://192.168.1.5:80/";
 
 NSString *const imageBaseUrl = @"//pic11.wed114.cn/";
 /*
@@ -56,6 +56,10 @@ NSString *const AviationShareH5 = @"yq/invation/ndex.html";
 NSString *const CooperationAgreementH5 = @"yq/invation/cooperationAgreement.html";
 /// 农保电子协议
 NSString *const NBElectronicAgreementH5 = @"userHelp/nyzbAgrement.html";
+/// 培训详情(课程网页)
+NSString *const CourseDetailsH5 = @"userHelp/flightProductDetails.html?id=";
+
+
 
 /// 0:测试环境 1:生产环境
 NSString *const environment = @"1";

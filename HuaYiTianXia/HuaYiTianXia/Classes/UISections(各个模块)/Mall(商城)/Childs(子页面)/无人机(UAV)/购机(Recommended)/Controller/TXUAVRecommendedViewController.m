@@ -10,6 +10,7 @@
 #import "TXUAVRecommendedTableViewCell.h"
 #import "TXMallUAVModel.h"
 #import "TXSignatureView.h"
+#import "TXUAVChildRecommendedViewController.h"
 
 static NSString * const reuseIdentifier = @"TXUAVRecommendedTableViewCell";
 @interface TXUAVRecommendedViewController ()<UITableViewDelegate,UITableViewDataSource>
@@ -35,27 +36,25 @@ static NSString * const reuseIdentifier = @"TXUAVRecommendedTableViewCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    
-    
     // Do any additional setup after loading the view.
     [self initView];
     self.pageSize = 20;
     self.pageIndex = 1;
     self.title = @"选择飞机";
     [self.view showLoadingViewWithText:@"加载中..."];
-    [self requestPersonalCenterData];
+    [self requestData];
     
     // 下拉刷新
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         //将页码重新置为1
         self.pageIndex = 1;
-        [self requestPersonalCenterData];
+        [self requestData];
     }];
     
     /// 上拉加载
     self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
         self.pageIndex++;// 页码+1
-        [self requestPersonalCenterData];
+        [self requestData];
     }];
     self.signatureView = [[TXSignatureView alloc] init];
     [self.view addSubview:[self.signatureView initSignatureView]];
@@ -65,7 +64,7 @@ static NSString * const reuseIdentifier = @"TXUAVRecommendedTableViewCell";
     signatureView.frame = CGRectMake(0, kScreenHeight/3, kScreenWidth, kScreenHeight - kScreenHeight/3);
 }
 
-- (void) requestPersonalCenterData{
+- (void) requestData{
     
     /// 分类ID 1:购机  2:体验 3:活动;
     /// 查询排序方式 1:销量降序 2:销量升序 3:价格降序 4:价格升序 5:新品降序 6:新品升序
@@ -139,8 +138,10 @@ static NSString * const reuseIdentifier = @"TXUAVRecommendedTableViewCell";
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    [self.signatureView addAnimate];
-    
+//    [self.signatureView addAnimate];
+    MallUAVListModel *listModel = self.dataArray[indexPath.row];
+    TXUAVChildRecommendedViewController *vc = [[TXUAVChildRecommendedViewController alloc] initListModel:listModel];
+    TTPushVC(vc);
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 

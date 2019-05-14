@@ -22,8 +22,10 @@
 
 /// 购机
 #import "TXUAVRecommendedViewController.h"
-/// 体验
+/// 培训(课程)
 #import "TXUAVExperienceMainViewController.h"
+/// 体验
+#import "TXUAVChildExperienceViewController.h"
 
 static NSString* reuseIdentifier        = @"TXMallToolsCollectionViewCell";
 static NSString* reuseIdentifierBanner  = @"TXMallBannerCollectionViewCell";
@@ -170,15 +172,17 @@ static NSString* reuseIdentifierRecommend   = @"TXMallUAVRecommendTableViewCell"
 /// 点击collectionViewCell
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section==1) {
+        NSMutableDictionary *parameter = [[NSMutableDictionary alloc] init];
         if (indexPath.row==1) {
             TXUAVExperienceMainViewController *vc = [[TXUAVExperienceMainViewController alloc] init];
             TTPushVC(vc);
+        }else if(indexPath.row==2){
+            [parameter setObject:@"2" forKey:@"pageType"];
+            TXUAVChildExperienceViewController *vc = [[TXUAVChildExperienceViewController alloc] initParameter:parameter];
+            TTPushVC(vc);
         }else{
-            NSMutableDictionary *parameter = [[NSMutableDictionary alloc] init];
             if (indexPath.row==0) {
                 [parameter setObject:@"1" forKey:@"pageType"];
-            }else if(indexPath.row==2){
-                [parameter setObject:@"2" forKey:@"pageType"];
             }else if(indexPath.row==3){
                 [parameter setObject:@"3" forKey:@"pageType"];
             }else{

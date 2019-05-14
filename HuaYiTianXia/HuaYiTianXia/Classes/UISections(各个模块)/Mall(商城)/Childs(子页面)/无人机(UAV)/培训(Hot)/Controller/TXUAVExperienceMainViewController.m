@@ -47,7 +47,7 @@
 }
 
 - (WMPageController *)p_defaultController {
-    NSArray *titles = @[@"无人机产品",@"生态产业"];
+    NSArray *titles = @[@"推荐培训",@"我的课程"];
     NSArray *classArray = @[@"TXUAVExperienceViewController",@"TXUAVExperienceViewController"];
     
     NSMutableArray *viewControllers = [[NSMutableArray alloc] init];

@@ -36,6 +36,10 @@ extern NSString *const AviationShareH5;
 extern NSString *const CooperationAgreementH5;
 /// 农保电子协议
 extern NSString *const NBElectronicAgreementH5;
+/// 培训详情(课程网页)
+extern NSString *const CourseDetailsH5;
+
+
 
 
 /// 0:测试环境 1:生产环境

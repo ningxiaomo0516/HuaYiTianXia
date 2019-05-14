@@ -343,7 +343,7 @@ TXMallGoodsSpecTableViewCellDelegate,WKUIDelegate,WKNavigationDelegate>
 
 - (void)dealloc{
     [self.wkWebView.scrollView removeObserver:self forKeyPath:@"contentSize"];
-    [self.wkWebView.scrollView removeObserver:self forKeyPath:@"title"];
+    [self.wkWebView removeObserver:self forKeyPath:@"title"];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context{
@@ -354,7 +354,7 @@ TXMallGoodsSpecTableViewCellDelegate,WKUIDelegate,WKNavigationDelegate>
         self.webViewHeight = height;
         self.wkWebView.frame = CGRectMake(0, 0, self.view.frame.size.width, height);
         self.scrollView.frame = CGRectMake(0, 0, self.view.frame.size.width, height);
-        self.scrollView.contentSize =CGSizeMake(self.view.frame.size.width, height);
+        self.scrollView.contentSize = CGSizeMake(self.view.frame.size.width, height);
         [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:[NSIndexPath indexPathForRow:0 inSection:3], nil] withRowAnimation:UITableViewRowAnimationNone];
     }else if([keyPath isEqualToString:@"title"]){
         if (object == self.wkWebView) {
