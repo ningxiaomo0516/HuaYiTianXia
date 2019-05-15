@@ -159,6 +159,8 @@
 		E74CFFE72289811B00576B86 /* TXUAVRecommendedTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E74CFFE62289811B00576B86 /* TXUAVRecommendedTableViewCell.m */; };
 		E74CFFF42289ACDE00576B86 /* TXSignatureView.m in Sources */ = {isa = PBXBuildFile; fileRef = E74CFFF32289ACDE00576B86 /* TXSignatureView.m */; };
 		E74CFFFD228A719600576B86 /* TXCourseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E74CFFFC228A719600576B86 /* TXCourseModel.m */; };
+		E750422F228C25CD00A34006 /* TXConventionSucceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E750422E228C25CD00A34006 /* TXConventionSucceViewController.m */; };
+		E7504232228C528200A34006 /* TXBaseCollectionReusableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = E7504231228C528200A34006 /* TXBaseCollectionReusableHeaderView.m */; };
 		E753D1F12249D3B200A2DD36 /* SCPopoverAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = E753D1EB2249D3B200A2DD36 /* SCPopoverAnimator.m */; };
 		E753D1F22249D3B200A2DD36 /* SCPresentationController.m in Sources */ = {isa = PBXBuildFile; fileRef = E753D1EE2249D3B200A2DD36 /* SCPresentationController.m */; };
 		E753D1F32249D3B200A2DD36 /* UIViewController+SCPopover.m in Sources */ = {isa = PBXBuildFile; fileRef = E753D1F02249D3B200A2DD36 /* UIViewController+SCPopover.m */; };
@@ -327,6 +329,8 @@
 		E7C9FCF822675C38008FD260 /* TXTicketOrderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C9FCF722675C38008FD260 /* TXTicketOrderTableViewCell.m */; };
 		E7C9FCFB2267607E008FD260 /* TXTicketOrderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C9FCFA2267607E008FD260 /* TXTicketOrderModel.m */; };
 		E7CC89BA2264658C003D0EF7 /* TTImageButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E7CC89B92264658C003D0EF7 /* TTImageButton.m */; };
+		E7CCDEE5228BC2F30017A684 /* TTSortButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E7CCDEE4228BC2F30017A684 /* TTSortButton.m */; };
+		E7CCDEE8228C04120017A684 /* TTBottomShowView.m in Sources */ = {isa = PBXBuildFile; fileRef = E7CCDEE7228C04120017A684 /* TTBottomShowView.m */; };
 		E7D07C622243C8B600E3FFAF /* NSObject+Toast.m in Sources */ = {isa = PBXBuildFile; fileRef = E7D07C612243C8B600E3FFAF /* NSObject+Toast.m */; };
 		E7D07C672243CCBE00E3FFAF /* LZActionSheet.bundle in Resources */ = {isa = PBXBuildFile; fileRef = E7D07C642243CCBE00E3FFAF /* LZActionSheet.bundle */; };
 		E7D07C682243CCBE00E3FFAF /* LZActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = E7D07C662243CCBE00E3FFAF /* LZActionSheet.m */; };
@@ -647,6 +651,10 @@
 		E74CFFF32289ACDE00576B86 /* TXSignatureView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXSignatureView.m; sourceTree = "<group>"; };
 		E74CFFFB228A719600576B86 /* TXCourseModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXCourseModel.h; sourceTree = "<group>"; };
 		E74CFFFC228A719600576B86 /* TXCourseModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXCourseModel.m; sourceTree = "<group>"; };
+		E750422D228C25CD00A34006 /* TXConventionSucceViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXConventionSucceViewController.h; sourceTree = "<group>"; };
+		E750422E228C25CD00A34006 /* TXConventionSucceViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXConventionSucceViewController.m; sourceTree = "<group>"; };
+		E7504230228C528200A34006 /* TXBaseCollectionReusableHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXBaseCollectionReusableHeaderView.h; sourceTree = "<group>"; };
+		E7504231228C528200A34006 /* TXBaseCollectionReusableHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXBaseCollectionReusableHeaderView.m; sourceTree = "<group>"; };
 		E753D1EA2249D3B200A2DD36 /* SCPopoverAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCPopoverAnimator.h; sourceTree = "<group>"; };
 		E753D1EB2249D3B200A2DD36 /* SCPopoverAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCPopoverAnimator.m; sourceTree = "<group>"; };
 		E753D1EC2249D3B200A2DD36 /* SCPopoverMacro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCPopoverMacro.h; sourceTree = "<group>"; };
@@ -978,6 +986,10 @@
 		E7C9FCFA2267607E008FD260 /* TXTicketOrderModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXTicketOrderModel.m; sourceTree = "<group>"; };
 		E7CC89B82264658C003D0EF7 /* TTImageButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TTImageButton.h; sourceTree = "<group>"; };
 		E7CC89B92264658C003D0EF7 /* TTImageButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TTImageButton.m; sourceTree = "<group>"; };
+		E7CCDEE3228BC2F30017A684 /* TTSortButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TTSortButton.h; sourceTree = "<group>"; };
+		E7CCDEE4228BC2F30017A684 /* TTSortButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TTSortButton.m; sourceTree = "<group>"; };
+		E7CCDEE6228C04120017A684 /* TTBottomShowView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TTBottomShowView.h; sourceTree = "<group>"; };
+		E7CCDEE7228C04120017A684 /* TTBottomShowView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TTBottomShowView.m; sourceTree = "<group>"; };
 		E7D07C602243C8B600E3FFAF /* NSObject+Toast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Toast.h"; sourceTree = "<group>"; };
 		E7D07C612243C8B600E3FFAF /* NSObject+Toast.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Toast.m"; sourceTree = "<group>"; };
 		E7D07C642243CCBE00E3FFAF /* LZActionSheet.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = LZActionSheet.bundle; sourceTree = "<group>"; };
@@ -1238,6 +1250,8 @@
 				E7F1A70E224205A2003FA216 /* TTBaseSectionHeaderView.m */,
 				E714F2802271574200024FA3 /* TXBaseNavPageViewController.h */,
 				E714F2812271574200024FA3 /* TXBaseNavPageViewController.m */,
+				E7504230228C528200A34006 /* TXBaseCollectionReusableHeaderView.h */,
+				E7504231228C528200A34006 /* TXBaseCollectionReusableHeaderView.m */,
 			);
 			path = Basic;
 			sourceTree = "<group>";
@@ -1431,6 +1445,7 @@
 		E72698E6223F737C003A5043 /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				E7CCDEE2228BC2D20017A684 /* 排序Button */,
 				E769B28B2277EDB20049EF73 /* PopupTableView */,
 				E74C953322637818000CBAF0 /* HUDManager */,
 				E74C952F225CEA18000CBAF0 /* 无数据 */,
@@ -1452,6 +1467,7 @@
 		E72698E8223F737C003A5043 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				E750422C228C256D00A34006 /* 预约成功 */,
 				E769B2A522783FE30049EF73 /* 城市选择 */,
 				E769B2A1227836F20049EF73 /* 城市定位 */,
 				E769B27E2277E4070049EF73 /* SCDropDownMenu */,
@@ -1626,6 +1642,8 @@
 				E78583B8223F947500BBEA41 /* Utils.m */,
 				E7269A02223F8738003A5043 /* TXMainHeaderView.h */,
 				E7269A03223F8738003A5043 /* TXMainHeaderView.m */,
+				E7CCDEE6228C04120017A684 /* TTBottomShowView.h */,
+				E7CCDEE7228C04120017A684 /* TTBottomShowView.m */,
 			);
 			path = Commons;
 			sourceTree = "<group>";
@@ -1821,19 +1839,19 @@
 			children = (
 				E74CFF812289086B00576B86 /* TXMallViewController.h */,
 				E74CFF822289086B00576B86 /* TXMallViewController.m */,
-				E74CFF832289086B00576B86 /* 无人机 */,
+				E74CFF832289086B00576B86 /* 俱乐部 */,
 				E74CFF882289086B00576B86 /* 生态产业 */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
 		};
-		E74CFF832289086B00576B86 /* 无人机 */ = {
+		E74CFF832289086B00576B86 /* 俱乐部 */ = {
 			isa = PBXGroup;
 			children = (
 				E74CFF842289086B00576B86 /* Controller */,
 				E74CFF872289086B00576B86 /* View */,
 			);
-			path = "无人机";
+			path = "俱乐部";
 			sourceTree = "<group>";
 		};
 		E74CFF842289086B00576B86 /* Controller */ = {
@@ -2012,6 +2030,9 @@
 		E74CFFDD22897E3C00576B86 /* 培训(Hot) */ = {
 			isa = PBXGroup;
 			children = (
+				E74C0005228A953800576B86 /* ChildVC(详情) */,
+				E74C000A228A953800576B86 /* Controller */,
+				E74C0001228A953800576B86 /* View */,
 			);
 			path = "培训(Hot)";
 			sourceTree = "<group>";
@@ -2019,9 +2040,6 @@
 		E74CFFDE22897E3C00576B86 /* 活动(Adv) */ = {
 			isa = PBXGroup;
 			children = (
-				E74C0005228A953800576B86 /* ChildVC(详情) */,
-				E74C000A228A953800576B86 /* Controller */,
-				E74C0001228A953800576B86 /* View */,
 			);
 			path = "活动(Adv)";
 			sourceTree = "<group>";
@@ -2067,6 +2085,15 @@
 				E74CFFF32289ACDE00576B86 /* TXSignatureView.m */,
 			);
 			path = "SignatureView(画板签字)";
+			sourceTree = "<group>";
+		};
+		E750422C228C256D00A34006 /* 预约成功 */ = {
+			isa = PBXGroup;
+			children = (
+				E750422D228C25CD00A34006 /* TXConventionSucceViewController.h */,
+				E750422E228C25CD00A34006 /* TXConventionSucceViewController.m */,
+			);
+			path = "预约成功";
 			sourceTree = "<group>";
 		};
 		E753D1E92249D3B200A2DD36 /* SCPopover */ = {
@@ -3140,6 +3167,15 @@
 			path = "TTButton(图文按钮)";
 			sourceTree = "<group>";
 		};
+		E7CCDEE2228BC2D20017A684 /* 排序Button */ = {
+			isa = PBXGroup;
+			children = (
+				E7CCDEE3228BC2F30017A684 /* TTSortButton.h */,
+				E7CCDEE4228BC2F30017A684 /* TTSortButton.m */,
+			);
+			path = "排序Button";
+			sourceTree = "<group>";
+		};
 		E7D07C5F2243C8B600E3FFAF /* Toast */ = {
 			isa = PBXGroup;
 			children = (
@@ -3629,6 +3665,7 @@
 				E7269980223F7E4B003A5043 /* UIView+SCLoadingView.m in Sources */,
 				E7AA9DCA22436DA700C15483 /* TXTransactionRecordsViewController.m in Sources */,
 				E7C9FCED22673BC7008FD260 /* TXTicketInfoTableViewCell.m in Sources */,
+				E7CCDEE8228C04120017A684 /* TTBottomShowView.m in Sources */,
 				E74C964F2267877E000CBAF0 /* TXVersionTableViewCell.m in Sources */,
 				E76E680D22817E5A00B035B9 /* Reachability.m in Sources */,
 				E78583C1223F98A800BBEA41 /* TXNewTemplateTableViewCell.m in Sources */,
@@ -3719,6 +3756,7 @@
 				E76D9C4C226027DF009D1A23 /* TXPayOrderVC.m in Sources */,
 				E72699A8223F7ECC003A5043 /* NSDate+Extensions.m in Sources */,
 				E714F28E227192F200024FA3 /* TXSystemTableViewCell.m in Sources */,
+				E7504232228C528200A34006 /* TXBaseCollectionReusableHeaderView.m in Sources */,
 				E774DCDC2272D21A001A95B8 /* TTWebViewController.m in Sources */,
 				E7B4706822803BBD00ADDC7A /* LZPinyinHelper.m in Sources */,
 				E7C42E83224B770200F3FB1A /* NetWorkAnalysisTool.m in Sources */,
@@ -3788,6 +3826,7 @@
 				E769B29A227807600049EF73 /* TXMessageChildTableViewCell.m in Sources */,
 				E7CC89BA2264658C003D0EF7 /* TTImageButton.m in Sources */,
 				E7F1A72B22423F92003FA216 /* TXPersonalInfoViewController.m in Sources */,
+				E7CCDEE5228BC2F30017A684 /* TTSortButton.m in Sources */,
 				E714F2882271904B00024FA3 /* TXSystemViewController.m in Sources */,
 				E7C9FCF822675C38008FD260 /* TXTicketOrderTableViewCell.m in Sources */,
 				E78584052240C54300BBEA41 /* TYCyclePagerTransformLayout.m in Sources */,
@@ -3823,6 +3862,7 @@
 				E7B4704722803A3000ADDC7A /* FMHotsCityTableViewCell.m in Sources */,
 				E7AA9DD72243735A00C15483 /* TXEquityViewController.m in Sources */,
 				E774DCF122730FC6001A95B8 /* TXAdsGiftViewController.m in Sources */,
+				E750422F228C25CD00A34006 /* TXConventionSucceViewController.m in Sources */,
 				E7269A04223F8738003A5043 /* TXMainHeaderView.m in Sources */,
 				E782AB4E2285698000CE2F81 /* TXAddTitleAddressView.m in Sources */,
 				E74CFFCB2289091A00576B86 /* TXMallUAVHotCollectionViewCell.m in Sources */,

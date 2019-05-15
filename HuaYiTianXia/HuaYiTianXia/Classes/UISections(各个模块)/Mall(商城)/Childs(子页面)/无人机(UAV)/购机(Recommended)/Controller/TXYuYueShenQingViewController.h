@@ -7,11 +7,12 @@
 //
 
 #import "TTBaseViewController.h"
-
+#import "TXRecommendedModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface TXYuYueShenQingViewController : TTBaseViewController
 
+- (id) initWidthRecommendedModel:(TXRecommendedModel *)recommendedModel;
 @end
 
 NS_ASSUME_NONNULL_END

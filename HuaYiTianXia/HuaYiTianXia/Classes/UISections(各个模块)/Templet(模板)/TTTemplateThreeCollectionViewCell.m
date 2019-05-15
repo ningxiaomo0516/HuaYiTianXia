@@ -47,7 +47,7 @@
     }else if(model.sectionType==3){ /// 热门
         
         self.titleLabel.textColor = kTextColor51;
-    }else if (model.sectionType==4){ /// 精选活动
+    }else if (model.sectionType==4){ /// 体验专区
         
     }
 }

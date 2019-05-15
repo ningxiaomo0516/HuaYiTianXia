@@ -124,7 +124,7 @@ static NSString * const reuseIdentifierMessage = @"TXMessageChildTableViewCell";
     NSMutableDictionary *parameter = [[NSMutableDictionary alloc] init];
     
     //    title    是    String    标题（当purchaseType=0时可传入固定值“会员充值”，purchaseType=6时可传入固定值“天合成员充值”，另外的情况请传入商品标题）
-    //    purchaseType    是    int    支付类型 0：充值； 1：无人机商城产品；2：农用植保产品； 3：VR产品 4：纵横矿机产品 5：共享飞行产品; 6：天合成员充值；7：生态农业商城产品（消费）
+    //    purchaseType    是    int    支付类型 0：充值； 1：无人机商城产品；2：农用植保产品； 3：VR产品 4：纵横矿机产品 5：共享飞行产品; 6：天合成员充值；7：生态农业商城产品（消费）；8：飞机订票订单；9：购机预约订单（只能现金支付）；10：培训预约订单（只能现金支付）；11：体验预约订单（只能现金支付）
     //    priceMoney    是    double    单价金额
     //    number    是    double    产品数量(默认传1)
     //    proID    否    int    产品ID（当purchaseType=0（充值）或=6（天合成员充值）时不传）
@@ -134,6 +134,7 @@ static NSString * const reuseIdentifierMessage = @"TXMessageChildTableViewCell";
     //    remarks    否    String    用户购买备注
     //    payType    是    int    0:支付宝 1:微信 2：余额支付
     //    currency    是    Double    vr币数量
+    //    subscribeID    否    int    预约表ID（插入预约表后，必传）
     kShowMBProgressHUD(self.view);
     [parameter setObject:self.model.title forKey:@"title"];
     [parameter setObject:@(self.model.purchaseType) forKey:@"purchaseType"];

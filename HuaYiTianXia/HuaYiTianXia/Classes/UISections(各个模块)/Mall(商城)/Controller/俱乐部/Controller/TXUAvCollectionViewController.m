@@ -1,7 +1,7 @@
 //
 //  TXUAvViewController.m
 //  HuaYiTianXia
-//  无人机产品
+//  俱乐部
 //  Created by 宁小陌 on 2019/5/10.
 //  Copyright © 2019年 宁小陌. All rights reserved.
 //
@@ -26,6 +26,10 @@
 #import "TXUAVExperienceMainViewController.h"
 /// 体验
 #import "TXUAVChildExperienceViewController.h"
+/// 培训详情
+#import "TXUAVExperienceChildViewController.h"
+
+#import "TXBaseCollectionReusableHeaderView.h"
 
 static NSString* reuseIdentifier        = @"TXMallToolsCollectionViewCell";
 static NSString* reuseIdentifierBanner  = @"TXMallBannerCollectionViewCell";
@@ -35,6 +39,8 @@ static NSString* reuseIdentifierUAV     = @"TTTemplateThreeTableViewCell";
 static NSString* reuseIdentifierHot         = @"TXMallUAVHotTableViewCell";
 static NSString* reuseIdentifierAd          = @"TXMallUAVAdTableViewCell";
 static NSString* reuseIdentifierRecommend   = @"TXMallUAVRecommendTableViewCell";
+
+static NSString *headerViewIdentifier       = @"TXBaseCollectionReusableHeaderView";
 
 @interface TXUAvCollectionViewController ()<UICollectionViewDelegate, UICollectionViewDataSource>
 @property (nonatomic, strong)UICollectionView * collectionView;
@@ -49,7 +55,7 @@ static NSString* reuseIdentifierRecommend   = @"TXMallUAVRecommendTableViewCell"
 
 @property (nonatomic, strong) MallUAVModel *listArray;
 
-
+@property (nonatomic, strong) UIView *headerView;
 @end
 
 @implementation TXUAvCollectionViewController
@@ -169,6 +175,15 @@ static NSString* reuseIdentifierRecommend   = @"TXMallUAVRecommendTableViewCell"
     }
 }
 
+
+/**
+ 
+ CourseListModel *listModel = self.dataArray[indexPath.row];
+ TXUAVExperienceChildViewController *vc = [[TXUAVExperienceChildViewController alloc] initCourseListModel:listModel];
+ TTPushVC(vc);
+ 
+ */
+
 /// 点击collectionViewCell
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section==1) {
@@ -211,11 +226,14 @@ static NSString* reuseIdentifierRecommend   = @"TXMallUAVRecommendTableViewCell"
     CGFloat width = (kScreenWidth-2)/4;
     CGFloat height = 0;
     if (indexPath.section==2) {
-        height = 240;
+        // 两个显示，40位顶部title高度，10为底部间距
+        height = (kScreenWidth-15*2-10)/2+40+10;
     }else if (indexPath.section==3){
-        height = 200;
+        // 110图片加文字高度，40位顶部title高度
+        height = 110+40;
     }else if(indexPath.section==4){
-        height = 220;
+        // 150图片加文字高度，40位顶部title高度
+        height = 150+40;
     }
     if (indexPath.section==0) return CGSizeMake(kScreenWidth, IPHONE6_W(180));
     else if (indexPath.section==1)return CGSizeMake(width, IPHONE6_W(95));
@@ -231,13 +249,55 @@ static NSString* reuseIdentifierRecommend   = @"TXMallUAVRecommendTableViewCell"
     return UIEdgeInsetsMake(0,10,0,10);
 }
 
-//设置footer呈现的size, 如果布局是垂直方向的话，size只需设置高度，宽与collectionView一致
+/// 设置footer呈现的size, 如果布局是垂直方向的话，size只需设置高度，宽与collectionView一致
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section{
     return CGSizeMake(self.view.width,10);
 }
 
+/// 设置Header的尺寸
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section{
-    return CGSizeMake(0,0);
+    if (section==5) {
+        return CGSizeMake(self.view.width,40);
+    }else{
+        return CGSizeMake(0.0001f,0.0001f);
+    }
+}
+
+//  返回头视图
+- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
+////    如果是头视图
+//    if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
+//        TXBaseCollectionReusableHeaderView *header=[collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:headerViewIdentifier forIndexPath:indexPath];
+////        //添加头视图的内容
+////        [self addContent];
+////        //头视图添加view
+////        [header addSubview:self.headerView];
+//        return header;
+//    }
+////    如果底部视图
+//        if([kind isEqualToString:UICollectionElementKindSectionFooter]){
+//
+//        }
+//    UICollectionReusableView *reusableview = nil;
+//    reusableview.backgroundColor = [UIColor redColor];
+//    return reusableview;
+    
+//    if (indexPath.section==5) {
+        UICollectionReusableView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"MGHeaderView" forIndexPath:indexPath];
+//        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, self.view.width*7/15)];
+//        [headerView addSubview:imageView];
+        headerView.backgroundColor = kWhiteColor;
+    UILabel *titlelabel = [UILabel lz_labelWithTitle:@"会员精选" color:kTextColor51 font:kFontSizeScBold17];
+    if (indexPath.section==5) {
+        [headerView addSubview:titlelabel];
+        [titlelabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(@(15));
+            make.centerY.equalTo(headerView);
+        }];
+    }
+        return headerView;
+//    }
+//    return nil;
 }
 
 - (UICollectionView *)collectionView{
@@ -267,6 +327,9 @@ static NSString* reuseIdentifierRecommend   = @"TXMallUAVRecommendTableViewCell"
         [_collectionView registerClass:[TXMallUAVHotTableViewCell class] forCellWithReuseIdentifier:reuseIdentifierHot];
         [_collectionView registerClass:[TXMallUAVAdTableViewCell class] forCellWithReuseIdentifier:reuseIdentifierAd];
         [_collectionView registerClass:[TXMallUAVRecommendTableViewCell class] forCellWithReuseIdentifier:reuseIdentifierRecommend];
+
+        //注册头视图
+        [_collectionView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"MGHeaderView"];
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
         _collectionView.showsVerticalScrollIndicator = NO;
@@ -310,6 +373,27 @@ static NSString* reuseIdentifierRecommend   = @"TXMallUAVRecommendTableViewCell"
         _listArray = [[MallUAVModel alloc] init];
     }
     return _listArray;
+}
+
+/*
+ *  补充头部内容
+ */
+-(void)addContent {
+    UIView *headerView=[[UIView alloc]init];
+    headerView.backgroundColor = kWhiteColor;
+    headerView.frame=CGRectMake(0, 0, self.view.width - 20, 44);
+    
+    UIView *yellowView = [[UIView alloc]initWithFrame:CGRectMake(10, (headerView.frame.size.height - 13) / 2, 3, 13)];
+    yellowView.backgroundColor = kWhiteColor;
+    [headerView addSubview:yellowView];
+    
+    UILabel *titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(23, 0, self.view.width - 20 - 33, headerView.frame.size.height)];
+    titleLabel.font = [UIFont systemFontOfSize:12.0];
+    titleLabel.text = @"户口办理";
+    titleLabel.textColor = kRedColor;
+    [headerView addSubview:titleLabel];
+    
+    self.headerView=headerView;
 }
 
 @end

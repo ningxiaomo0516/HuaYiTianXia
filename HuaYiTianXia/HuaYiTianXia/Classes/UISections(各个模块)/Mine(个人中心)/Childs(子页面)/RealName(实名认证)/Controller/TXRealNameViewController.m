@@ -308,8 +308,7 @@
         if (row == 4) return _cityCell;
         if (row == 5) return _idcardCell;
     }else{
-        if (row == 3) return _idnumberCell;
-        if (row == 4) return _idcardCell;
+        if (row == 3) return _idcardCell;
     }
     
     return cell;
@@ -323,14 +322,14 @@
 /// 返回多少
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (self.typePage==0) return 6;
-    return 5;
+    return 4;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (self.typePage==0) {
         if (indexPath.row==5) return IPHONE6_W(160);
     }else{
-        if (indexPath.row==4) return IPHONE6_W(160);
+        if (indexPath.row==3) return IPHONE6_W(160);
     }
     
     return IPHONE6_W(50);

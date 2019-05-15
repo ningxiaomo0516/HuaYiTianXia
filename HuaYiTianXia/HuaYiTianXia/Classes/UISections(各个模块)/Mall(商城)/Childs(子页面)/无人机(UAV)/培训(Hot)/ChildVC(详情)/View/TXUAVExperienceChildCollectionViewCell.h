@@ -28,7 +28,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) UILabel *cycleTitleLable;
 /// 资费
 @property (nonatomic, strong) UILabel *costLable;
-@property (nonatomic, strong) UILabel *costTitleLable;
 
 
 @property (nonatomic, strong) FlightCourseModel *courseModel;

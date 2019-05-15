@@ -34,7 +34,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NewsModel *data;
 /// banner 集合
 @property (nonatomic, strong) NSMutableArray<NewsBannerModel *> *banners;
-/// 商城 --- 无人机产品
+/// 商城 --- 俱乐部
 @property (nonatomic, strong) MallUAVModel *listArray;
 @end
 
@@ -136,9 +136,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSMutableArray<MallUAVListModel *> *recommended;//buyingMachine;
 /// 活动(预留字段)
 @property (nonatomic, strong) NSMutableArray<MallUAVListModel *> *activity;
-/// 体验（精选活动）
+/// 体验（体验专区）
 @property (nonatomic, strong) NSMutableArray<MallUAVListModel *> *jingxuan;///experience;
-///培训(当下热门）,请注意培训无简介
+///培训(当下热门）,请注意培训无简介 --- 对应课程
 @property (nonatomic, strong) NSMutableArray<MallUAVListModel *> *hot;//train;
 @property (nonatomic, assign) NSInteger sectionType;
 

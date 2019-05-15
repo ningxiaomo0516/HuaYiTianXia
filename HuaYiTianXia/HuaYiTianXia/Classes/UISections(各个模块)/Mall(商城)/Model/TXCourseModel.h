@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface Flightmodels : NSObject
 /// 机型
 @property (nonatomic, copy) NSString *modelName;
-/// 课程ID
+/// 模型ID
 @property (nonatomic, copy) NSString *kid;
 @end
 
@@ -39,6 +39,11 @@ NS_ASSUME_NONNULL_BEGIN
 /// 课程----飞机集合
 @property (nonatomic, strong) NSMutableArray<Flightmodels *> *flightmodels;
 
+// 把机型的两个字段提取出来
+/// 机型
+@property (nonatomic, copy) NSString *modelName;
+/// 模型ID
+@property (nonatomic, copy) NSString *modelID;
 @end
 
 @interface CourseListModel : NSObject

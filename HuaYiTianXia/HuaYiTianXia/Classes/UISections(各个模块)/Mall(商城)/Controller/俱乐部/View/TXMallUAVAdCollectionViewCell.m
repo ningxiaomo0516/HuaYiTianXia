@@ -28,7 +28,7 @@
 }
 
 - (void)setupUI {
-    //    [self.imagesView lz_setCornerRadius:5.0];
+    [self lz_setCornerRadius:5.0];
     
     [self.contentView addSubview:self.imagesView];
     [self.contentView addSubview:self.titleLabel];
@@ -37,15 +37,15 @@
     [self.contentView addSubview:self.endAdLabel];
     [self.imagesView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.right.equalTo(self.contentView);
-        make.height.equalTo(@(120));
+        make.bottom.equalTo(self.mas_bottom).offset(-50);
     }];
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(self.subtitleLabel.mas_top).offset(-5);
+        make.top.equalTo(self.imagesView.mas_bottom).offset(6);
         make.right.equalTo(self);
         make.left.equalTo(@(5));
     }];
     [self.subtitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(self.mas_bottom).offset(-10);
+        make.bottom.equalTo(self.mas_bottom).offset(-6);
         make.left.right.equalTo(self.titleLabel);
     }];
     

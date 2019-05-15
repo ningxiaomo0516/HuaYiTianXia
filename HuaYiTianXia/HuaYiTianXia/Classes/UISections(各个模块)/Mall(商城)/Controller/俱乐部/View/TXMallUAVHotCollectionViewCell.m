@@ -30,12 +30,11 @@
     [self.contentView addSubview:self.titleLabel];
     [self.imagesView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.right.equalTo(self.contentView);
-        make.height.equalTo(@(120));
-        make.width.equalTo(@(190));
+        make.bottom.equalTo(self.contentView.mas_bottom).offset(-30);
     }];
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(self.mas_bottom).offset(-10);
-        make.right.equalTo(self);
+        make.right.bottom.equalTo(self);
+        make.top.equalTo(self.imagesView.mas_bottom);
         make.left.equalTo(@(5));
     }];
 }

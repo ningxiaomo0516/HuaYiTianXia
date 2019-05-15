@@ -51,7 +51,7 @@ static NSString* reuseIdentifierRecommend   = @"TXMallUAVRecommendCollectionView
         self.headerTitle.text = @"当下热门";
         self.collectionView.frame = CGRectMake(0, 40, kScreenWidth, 160);
     }else if (self.listModel.sectionType==4) {
-        self.headerTitle.text = @"精选活动";
+        self.headerTitle.text = @"体验专区";
         self.collectionView.frame = CGRectMake(0, 40, kScreenWidth, 180);
     }
     self.collectionView.backgroundColor = kRedColor;
@@ -207,7 +207,7 @@ tools.backgroundColor = kRandomColor;
 
 - (UILabel *)headerSubtitle {
     if (!_headerSubtitle) {
-        _headerSubtitle = [UILabel lz_labelWithTitle:@"结婚精彩视频" color:kTextColor153 font:kFontSizeMedium12];
+        _headerSubtitle = [UILabel lz_labelWithTitle:@"" color:kTextColor153 font:kFontSizeMedium12];
     }
     return _headerSubtitle;
 }

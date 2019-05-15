@@ -30,23 +30,22 @@
     /// 课程标题
     self.titleLable.text = self.courseModel.courseTitle;
     /// 机型
-    self.modelLable.text = @"罗宾逊R22/R44";
+    self.modelLable.text = self.courseModel.modelName;//@"罗宾逊R22/R44";
     self.modelTitleLable.text = @"机型";
     /// 理论培训
-    self.theoryLable.text = @"109小时";
+    self.theoryLable.text = self.courseModel.practiceTime;//@"109小时";
     self.theoryTitleLable.text = @"理论培训";
     /// 实践培训
-    self.practiceLable.text = @"飞行50小时";
+    self.practiceLable.text = self.courseModel.theoryTime;//@"飞行50小时";
     self.practiceTitleLable.text = @"实践培训";
     /// 培训周期
-    self.cycleLable.text = @"3~6个月";
+    self.cycleLable.text = self.courseModel.courseSynopsis;//@"3~6个月";
     self.cycleTitleLable.text = @"培训周期";
     /// 资费
     self.costLable.text = @"￥19.8万元起";
-    self.costTitleLable.text = @"资费";
     NSString *icon = @"￥";
-    NSString *unit = @"万元起";
-    NSString *amountText1 = @"19.8";
+    NSString *unit = self.courseModel.unit;
+    NSString *amountText1 = self.courseModel.money;
     NSString *amountText11 = [NSString stringWithFormat:@"%@%@%@",icon,amountText1,unit];
     
     NSMutableAttributedString *mutableAttr = [[NSMutableAttributedString alloc] initWithString:amountText11];
@@ -86,7 +85,6 @@
     [self.contentView addSubview:self.cycleTitleLable];
     /// 资费
     [self.contentView addSubview:self.costLable];
-    [self.contentView addSubview:self.costTitleLable];
     
     [self.titleLable mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.top.equalTo(@(10));
@@ -109,13 +107,8 @@
         make.left.equalTo(self.titleLable);
         make.top.equalTo(self.practiceTitleLable.mas_bottom);
     }];
-    [self.costTitleLable mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.titleLable);
-        make.top.equalTo(self.cycleTitleLable.mas_bottom).offset(3);
-    }];
     
     [self.modelLable mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.left.equalTo(self.theoryTitleLable.mas_right).offset(10);
         make.left.equalTo(@(IPHONE6_W(70)));
         make.right.equalTo(self.mas_right).offset(-10);
         make.centerY.equalTo(self.modelTitleLable);
@@ -133,9 +126,8 @@
         make.centerY.equalTo(self.cycleTitleLable);
     }];
     [self.costLable mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.right.equalTo(self.modelLable);
-        make.left.equalTo(@(IPHONE6_W(70)));
-        make.centerY.equalTo(self.costTitleLable);
+        make.bottom.equalTo(self.mas_bottom).offset(-10);
+        make.centerX.equalTo(self);
     }];
 }
 
@@ -212,12 +204,5 @@
         _costLable.numberOfLines = 1;
     }
     return _costLable;
-}
-- (UILabel *)costTitleLable{
-    if (!_costTitleLable) {
-        _costTitleLable = [UILabel lz_labelWithTitle:@"" color:kTextColor51 font:kFontSizeMedium16];
-        _costTitleLable.numberOfLines = 1;
-    }
-    return _costTitleLable;
 }
 @end

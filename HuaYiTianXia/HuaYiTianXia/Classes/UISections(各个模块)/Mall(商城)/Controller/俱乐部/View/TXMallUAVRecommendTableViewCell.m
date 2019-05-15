@@ -19,6 +19,7 @@ static NSString* reuseIdentifierRecommend   = @"TXMallUAVRecommendCollectionView
 @property (nonatomic, strong) UILabel *headerTitle;
 /// headerView的高度
 @property (nonatomic, strong) UILabel *headerSubtitle;
+@property (nonatomic, assign) CGFloat height;
 @end
 
 @implementation TXMallUAVRecommendTableViewCell
@@ -35,7 +36,8 @@ static NSString* reuseIdentifierRecommend   = @"TXMallUAVRecommendCollectionView
     _listModel = listModel;
     [self initView];
     self.headerTitle.text = @"为您推荐";
-    self.collectionView.frame = CGRectMake(0, 40, kScreenWidth, 190);
+    self.height = (kScreenWidth-15*2-10)/2;
+    self.collectionView.frame = CGRectMake(0, 40, kScreenWidth, self.height);
     [self.collectionView reloadData];
 }
 
@@ -89,7 +91,7 @@ static NSString* reuseIdentifierRecommend   = @"TXMallUAVRecommendCollectionView
 #pragma mark - UICollectionViewDelegateFlowLayout
 //设置每个一个Item（cell）的大小
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
-    return CGSizeMake(190, 190);
+    return CGSizeMake(self.height, self.height);
 }
 
 //设置所有的cell组成的视图与section 上、左、下、右的间隔
@@ -154,7 +156,7 @@ static NSString* reuseIdentifierRecommend   = @"TXMallUAVRecommendCollectionView
 
 - (UILabel *)headerSubtitle {
     if (!_headerSubtitle) {
-        _headerSubtitle = [UILabel lz_labelWithTitle:@"结婚精彩视频" color:kTextColor153 font:kFontSizeMedium12];
+        _headerSubtitle = [UILabel lz_labelWithTitle:@"" color:kTextColor153 font:kFontSizeMedium12];
     }
     return _headerSubtitle;
 }

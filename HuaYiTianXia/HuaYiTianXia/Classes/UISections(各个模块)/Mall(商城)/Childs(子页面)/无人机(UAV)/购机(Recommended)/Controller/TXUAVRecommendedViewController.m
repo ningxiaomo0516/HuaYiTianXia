@@ -11,11 +11,14 @@
 #import "TXMallUAVModel.h"
 #import "TXSignatureView.h"
 #import "TXUAVChildRecommendedViewController.h"
+#import "TTSortButton.h"
 
+NSInteger const SortButtonBeginTag = 1000;
 static NSString * const reuseIdentifier = @"TXUAVRecommendedTableViewCell";
 @interface TXUAVRecommendedViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *dataArray;
+@property (nonatomic, strong) UIView *headerView;
 @property (nonatomic, strong) SCNoDataView *noDataView;
 /// 每页多少数据
 @property (nonatomic, assign) NSInteger pageSize;
@@ -24,6 +27,8 @@ static NSString * const reuseIdentifier = @"TXUAVRecommendedTableViewCell";
 @property (nonatomic, assign) NSInteger pageType;
 /// 画板签字
 @property (nonatomic, strong) TXSignatureView *signatureView;
+@property (nonatomic, assign) BOOL isSelect;
+@property (nonatomic, assign) NSInteger sortType;
 @end
 
 @implementation TXUAVRecommendedViewController
@@ -40,6 +45,7 @@ static NSString * const reuseIdentifier = @"TXUAVRecommendedTableViewCell";
     [self initView];
     self.pageSize = 20;
     self.pageIndex = 1;
+    self.sortType = 1;
     self.title = @"选择飞机";
     [self.view showLoadingViewWithText:@"加载中..."];
     [self requestData];
@@ -72,7 +78,7 @@ static NSString * const reuseIdentifier = @"TXUAVRecommendedTableViewCell";
     [parameter setObject:@(self.pageIndex) forKey:@"page"];     // 当前页
     [parameter setObject:@(self.pageSize) forKey:@"pageSize"];  // 每页条数
     [parameter setObject:@(self.pageType) forKey:@"type"];  // 每页条数
-    [parameter setObject:@(1) forKey:@"sortType"];  // 每页条数
+    [parameter setObject:@(self.sortType) forKey:@"sortType"];  // 每页条数
     [SCHttpTools postWithURLString:kHttpURL(@"flightproduct/flightProductPage") parameter:parameter success:^(id responseObject) {
         NSDictionary *result = responseObject;
         if ([result isKindOfClass:[NSDictionary class]]) {
@@ -111,9 +117,15 @@ static NSString * const reuseIdentifier = @"TXUAVRecommendedTableViewCell";
 
 - (void) initView{
     [Utils lz_setExtraCellLineHidden:self.tableView];
+    [self.view addSubview:self.headerView];
     [self.view addSubview:self.tableView];
+    [self.headerView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.left.right.equalTo(self.view);
+        make.height.equalTo(@(40));
+    }];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.bottom.right.equalTo(self.view);
+        make.left.bottom.right.equalTo(self.view);
+        make.top.equalTo(self.headerView.mas_bottom);
     }];
 }
 
@@ -180,5 +192,66 @@ static NSString * const reuseIdentifier = @"TXUAVRecommendedTableViewCell";
         _dataArray = [[NSMutableArray alloc] init];
     }
     return _dataArray;
+}
+
+- (UIView *)headerView{
+    if (!_headerView) {
+        _headerView = [UIView lz_viewWithColor:kWhiteColor];
+        NSArray *titleArray = @[@"热门", @"价格", @"新品"];
+        NSMutableArray *buttonArray = [NSMutableArray array];
+        for (int i = 0; i < titleArray.count; i++) {
+            TTSortButton *button = [[TTSortButton alloc] init];
+            [_headerView addSubview:button];
+            button.buttonTitle = titleArray[i];
+            button.tag = SortButtonBeginTag + i;
+            MV(weakSelf)
+            [button lz_handleControlEvent:UIControlEventTouchUpInside withBlock:^{
+                [weakSelf sortButtonClicked:button dataArray:titleArray];
+            }];
+            [buttonArray addObject:button];
+            /// 默认选中第一个
+            button.selected = (i==0)?YES:NO;
+            /// 默认降序
+            button.hasAscending = NO;
+        }
+        
+        // 按钮等宽依次排列
+        [buttonArray mas_distributeViewsAlongAxis:MASAxisTypeHorizontal withFixedSpacing:0 leadSpacing:0 tailSpacing:0];
+        [buttonArray mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(0);
+            make.height.mas_equalTo(40);
+        }];
+    }
+    return _headerView;
+}
+
+/// 排序
+- (void) sortButtonClicked:(TTSortButton *) sender dataArray:(NSArray*)dataArray{
+    for (int i = 0; i < dataArray.count; i++) {
+        TTSortButton *button = [self.headerView viewWithTag:(SortButtonBeginTag + i)];
+        button.selected = (button.tag == sender.tag);
+    }
+    NSInteger idx = sender.tag - SortButtonBeginTag;
+    TTLog(@"第%ld个按钮点击，状态：%@", (long)(idx), sender.isAscending ? @"升序" : @"降序");
+    //    查询排序方式 1:销量降序; 2:销量升序; 3:价格降序; 4:价格升序; 5:新品降序;6:新品升序
+    
+    
+    /// sender.isAscending 正反序反着用就对了
+    switch (idx) {
+        case 0:
+            self.sortType = sender.isAscending?1:2;
+            [self requestData];
+            break;
+        case 1:
+            self.sortType = sender.isAscending?3:4;
+            [self requestData];
+            break;
+        case 2:
+            self.sortType = sender.isAscending?5:6;
+            [self requestData];
+            break;
+        default:
+            break;
+    }
 }
 @end

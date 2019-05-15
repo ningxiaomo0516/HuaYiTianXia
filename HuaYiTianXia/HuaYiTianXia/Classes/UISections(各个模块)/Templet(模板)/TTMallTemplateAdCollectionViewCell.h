@@ -18,9 +18,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) UIImageView *imagesView;
 /// 活动(副标题)
 @property (nonatomic, strong) UILabel *subtitleLabel;
-/// 精选活动(结束)
+/// 体验专区(结束)
 @property (nonatomic, strong) SCCustomMarginLabel *endAdLabel;
-/// 精选活动(标签)
+/// 体验专区(标签)
 @property (nonatomic, strong) UIImageView *imagesViewAd;
 @end
 

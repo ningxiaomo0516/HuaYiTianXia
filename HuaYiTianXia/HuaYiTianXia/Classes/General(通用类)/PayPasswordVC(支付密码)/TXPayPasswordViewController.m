@@ -214,7 +214,7 @@
 - (UIButton *)closeButton{
     if (!_closeButton) {
         _closeButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_closeButton setImage:kGetImage(@"c12_btn_close") forState:UIControlStateNormal];
+        [_closeButton setImage:kGetImage(@"c31_btn_close") forState:UIControlStateNormal];
         MV(weakSelf);
         [_closeButton lz_handleControlEvent:UIControlEventTouchUpInside withBlock:^{
             [weakSelf dismissedPopupView:weakSelf.closeButton];

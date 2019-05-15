@@ -292,8 +292,7 @@
  *
  *  @return 图片
  */
-+ (UIImage * _Nonnull)lz_setImageAlpha:(UIImage * _Nonnull)image alpha:(CGFloat)alpha
-{
++ (UIImage * _Nonnull)lz_setImageAlpha:(UIImage * _Nonnull)image alpha:(CGFloat)alpha {
     UIGraphicsBeginImageContextWithOptions(image.size, NO, 0.0f);
     
     CGContextRef ctx = UIGraphicsGetCurrentContext();

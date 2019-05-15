@@ -91,6 +91,7 @@
     kUserInfo.topupType = 1;
     [kUserInfo dump];
     TXChoosePayViewController *vc = [[TXChoosePayViewController alloc]initNewsRecordsModel:model];
+    vc.pageType = 1;
     [self sc_bottomPresentController:vc presentedHeight:IPHONE6_W(400) completeHandle:^(BOOL presented) {
         
     }];

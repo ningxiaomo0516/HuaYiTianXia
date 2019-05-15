@@ -13,6 +13,7 @@ static NSString* reuseIdentifier = @"TXUAVExperienceChildCollectionViewCell";
 @interface TXUAVExperienceChildTableViewCell()<UICollectionViewDelegate, UICollectionViewDataSource>
 @property (nonatomic, strong) UICollectionView * collectionView;
 @property (nonatomic, strong) UILabel * titleLabel;
+@property (nonatomic, strong) UILabel * courseLabel;
 /// 记录最后的height
 @property (nonatomic, assign) CGFloat endHeight;
 /// headerView的高度
@@ -36,7 +37,7 @@ static NSString* reuseIdentifier = @"TXUAVExperienceChildCollectionViewCell";
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         self.contentView.backgroundColor = [UIColor clearColor];
         self.selectionStyle = UITableViewCellSelectionStyleNone;
-        self.headerHeight = 40;
+        self.headerHeight = 70;
         [self initView];
     }
     return self;
@@ -50,9 +51,15 @@ static NSString* reuseIdentifier = @"TXUAVExperienceChildCollectionViewCell";
 - (void) initView{
     [self.contentView addSubview:self.titleLabel];
     [self.contentView addSubview:self.collectionView];
+    [self.contentView addSubview:self.courseLabel];
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.top.right.equalTo(self);
-        make.height.equalTo(@(self.headerHeight));
+        make.height.equalTo(@(40));
+    }];
+    [self.courseLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(@(15));
+        make.right.equalTo(self.mas_right).offset(-15);
+        make.top.equalTo(self.titleLabel.mas_bottom);
     }];
     self.collectionView.frame = CGRectMake(0, self.headerHeight, kScreenWidth, self.height+self.headerHeight);
 }
@@ -69,7 +76,12 @@ static NSString* reuseIdentifier = @"TXUAVExperienceChildCollectionViewCell";
 
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     TXUAVExperienceChildCollectionViewCell *tools = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
-    tools.courseModel = self.courseModel[indexPath.row];
+    FlightCourseModel *courseModel= self.courseModel[indexPath.row];
+    for (Flightmodels *model in courseModel.flightmodels) {
+        courseModel.modelID = model.kid;
+        courseModel.modelName = model.modelName;
+    }
+    tools.courseModel = courseModel;
     self.indexPath = self.indexPath;
     [self updateCollectionViewHeight:self.collectionView.collectionViewLayout.collectionViewContentSize.height+self.headerHeight];
     return tools;
@@ -134,5 +146,13 @@ static NSString* reuseIdentifier = @"TXUAVExperienceChildCollectionViewCell";
         _titleLabel.textAlignment = NSTextAlignmentCenter;
     }
     return _titleLabel;
+}
+
+
+- (UILabel *)courseLabel{
+    if (!_courseLabel) {
+        _courseLabel = [UILabel lz_labelWithTitle:@"课程标题" color:kTextColor51 font:kFontSizeMedium15];
+    }
+    return _courseLabel;
 }
 @end

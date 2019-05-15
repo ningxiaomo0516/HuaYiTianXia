@@ -144,7 +144,6 @@
     }];
     
     [self.saveButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.view);
         make.height.equalTo(@(IPHONE6_W(45)));
         make.left.equalTo(@(15));
         make.right.equalTo(self.view.mas_right).offset(-15);

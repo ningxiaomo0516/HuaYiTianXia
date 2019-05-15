@@ -9,9 +9,9 @@
 #import "TXUAVChildExperienceViewController.h"
 #import "TXMallCollectionViewCell.h"
 
-
+#import "TTSortButton.h"
 #import "TXMallUAVModel.h"
-
+NSInteger const kSortButtonBeginTag = 1000;
 static NSString* reuseIdentifierMall    = @"TXMallCollectionViewCell";
 
 @interface TXUAVChildExperienceViewController ()<UICollectionViewDelegate, UICollectionViewDataSource>
@@ -23,6 +23,10 @@ static NSString* reuseIdentifierMall    = @"TXMallCollectionViewCell";
 @property (nonatomic, assign) NSInteger pageIndex;
 @property (nonatomic, assign) NSInteger pageType;
 @property (nonatomic, strong) SCNoDataView *noDataView;
+/// 顶部排序
+@property (nonatomic, strong) UIView *headerView;
+@property (nonatomic, assign) NSInteger sortType;
+
 @end
 
 @implementation TXUAVChildExperienceViewController
@@ -38,6 +42,7 @@ static NSString* reuseIdentifierMall    = @"TXMallCollectionViewCell";
     // Do any additional setup after loading the view.
     self.pageSize = 20;
     self.pageIndex = 1;
+    self.sortType = 1;
     self.title = @"体验服务";
     [self initView];
     [self.view showLoadingViewWithText:@"加载中..."];
@@ -62,7 +67,7 @@ static NSString* reuseIdentifierMall    = @"TXMallCollectionViewCell";
     [parameter setObject:@(self.pageIndex) forKey:@"page"];     // 当前页
     [parameter setObject:@(self.pageSize) forKey:@"pageSize"];  // 每页条数
     [parameter setObject:@(self.pageType) forKey:@"type"];      // 每页条数
-    [parameter setObject:@(1) forKey:@"sortType"];              // 排序
+    [parameter setObject:@(self.sortType) forKey:@"sortType"];  // 排序
     [SCHttpTools postWithURLString:kHttpURL(@"flightproduct/flightProductPage") parameter:parameter success:^(id responseObject) {
         NSDictionary *result = responseObject;
         if ([result isKindOfClass:[NSDictionary class]]) {
@@ -100,9 +105,15 @@ static NSString* reuseIdentifierMall    = @"TXMallCollectionViewCell";
 }
 
 - (void) initView{
+    [self.view addSubview:self.headerView];
     [self.view addSubview:self.collectionView];
     [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.left.top.right.equalTo(self.view);
+        make.left.bottom.right.equalTo(self.view);
+        make.top.equalTo(self.headerView.mas_bottom);
+    }];
+    [self.headerView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.left.right.equalTo(self.view);
+        make.height.equalTo(@(40));
     }];
 }
 
@@ -208,4 +219,62 @@ static NSString* reuseIdentifierMall    = @"TXMallCollectionViewCell";
     return _dataArray;
 }
 
+- (UIView *)headerView{
+    if (!_headerView) {
+        _headerView = [UIView lz_viewWithColor:kWhiteColor];
+        NSArray *titleArray = @[@"热门", @"价格", @"新品"];
+        NSMutableArray *buttonArray = [NSMutableArray array];
+        for (int i = 0; i < titleArray.count; i++) {
+            TTSortButton *button = [[TTSortButton alloc] init];
+            [_headerView addSubview:button];
+            button.buttonTitle = titleArray[i];
+            button.tag = kSortButtonBeginTag + i;
+            MV(weakSelf)
+            [button lz_handleControlEvent:UIControlEventTouchUpInside withBlock:^{
+                [weakSelf sortButtonClicked:button dataArray:titleArray];
+            }];
+            [buttonArray addObject:button];
+            /// 默认选中第一个
+            button.selected = (i==0)?YES:NO;
+            /// 默认降序
+            button.hasAscending = NO;
+        }
+        
+        // 按钮等宽依次排列
+        [buttonArray mas_distributeViewsAlongAxis:MASAxisTypeHorizontal withFixedSpacing:0 leadSpacing:0 tailSpacing:0];
+        [buttonArray mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(0);
+            make.height.mas_equalTo(40);
+        }];
+    }
+    return _headerView;
+}
+
+
+- (void) sortButtonClicked:(TTSortButton *) sender dataArray:(NSArray*)dataArray{
+    for (int i = 0; i < dataArray.count; i++) {
+        TTSortButton *button = [self.headerView viewWithTag:(kSortButtonBeginTag + i)];
+        button.selected = (button.tag == sender.tag);
+    }
+    NSInteger idx = sender.tag - kSortButtonBeginTag;
+    TTLog(@"第%ld个按钮点击，状态：%@", (long)(idx), sender.isAscending ? @"升序" : @"降序");
+    //    查询排序方式 1:销量降序; 2:销量升序; 3:价格降序; 4:价格升序; 5:新品降序;6:新品升序
+    /// sender.isAscending 正反序反着用就对了
+    switch (idx) {
+        case 0:
+            self.sortType = sender.isAscending?1:2;
+            [self requestData];
+            break;
+        case 1:
+            self.sortType = sender.isAscending?3:4;
+            [self requestData];
+            break;
+        case 2:
+            self.sortType = sender.isAscending?5:6;
+            [self requestData];
+            break;
+        default:
+            break;
+    }
+}
 @end

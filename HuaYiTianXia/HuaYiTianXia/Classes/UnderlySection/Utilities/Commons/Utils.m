@@ -106,8 +106,7 @@
  *
  *  @return 生成的图片
  */
-+ (UIImage *) lz_imageWithColor:(UIColor *)color
-{
++ (UIImage *) lz_imageWithColor:(UIColor *)color{
     CGRect rect = CGRectMake(0.0f, 0.0f, 1.0f, 1.0f);   //图片尺寸
     UIGraphicsBeginImageContext(rect.size);             //填充画笔
     CGContextRef context = UIGraphicsGetCurrentContext();//根据所传颜色绘制

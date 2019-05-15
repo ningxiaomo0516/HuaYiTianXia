@@ -70,7 +70,7 @@ static NSString * const reuseIdentifierBanner   = @"TXMallGoodsBannerTableViewCe
 }
 
 - (void) handleControlEvent:(UIButton *) sender{
-    TXYuYueShenQingViewController *vc = [[TXYuYueShenQingViewController alloc] init];
+    TXYuYueShenQingViewController *vc = [[TXYuYueShenQingViewController alloc] initWidthRecommendedModel:self.recommendModel];
     TTPushVC(vc);
 }
 
