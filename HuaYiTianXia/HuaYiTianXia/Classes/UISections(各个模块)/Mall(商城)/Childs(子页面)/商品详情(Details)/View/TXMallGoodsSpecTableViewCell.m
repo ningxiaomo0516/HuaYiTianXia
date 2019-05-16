@@ -107,6 +107,8 @@
     if (!_tagView) {
         _tagView = [[TTTagView alloc] initWithFrame:CGRectMake(self.left, 0, self.width, 0)];
         _tagView.backgroundColor = kWhiteColor;
+        _tagView.isShowMore = NO;
+        _tagView.isOnClick = NO;
         _tagView.delegate = self;
     }
     return _tagView;

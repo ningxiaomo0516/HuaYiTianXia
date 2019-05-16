@@ -55,6 +55,11 @@
 #define kScreenBounds   ([UIScreen mainScreen].bounds)
 #define kScreenScale    [UIScreen mainScreen].scale
 
+/// 屏幕三分之一的高度
+#define kHeight3to1    kScreenHeight/3
+/// 屏幕三分之二的高度
+#define kHeight3to2    kScreenHeight-kHeight3to1
+
 #define kBorderWidth1px (kScreenScale>0.0?1.0/kScreenScale:1.0)
 
 /// 交叉后的宽度

@@ -87,11 +87,8 @@ static NSString* reuseIdentifierRecommend   = @"TXMallUAVRecommendCollectionView
 
 /// 点击collectionViewCell
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(didRecommendVideoSelectItemAtIndexPath:)]) {
-        [self.delegate didRecommendVideoSelectItemAtIndexPath:indexPath];
-    }
-    
-    self.selectBlock(self.listModel.hot[indexPath.row]);
+    MallUAVListModel *listModel = self.listModel.hot[indexPath.row];
+    self.selectBlock(listModel);
 }
 
 //布局协议对应的方法实现

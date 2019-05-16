@@ -181,8 +181,46 @@ static NSString* reuseIdentifierHot     = @"TXMallHotTableViewCell";
     return CGSizeMake(self.view.width,10);
 }
 
+/// 设置Header的尺寸
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section{
-    return CGSizeMake(0,0);
+    if (section==3) {
+        return CGSizeMake(self.view.width,40);
+    }else{
+        return CGSizeMake(0.0001f,0.0001f);
+    }
+}
+
+//  返回头视图
+- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {\
+    if (indexPath.section==3) {
+        UICollectionReusableView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"STCYHeaderViewSectioin3" forIndexPath:indexPath];
+        headerView.backgroundColor = kClearColor;
+        UILabel *titlelabel = [UILabel lz_labelWithTitle:@"" color:kTextColor51 font:kFontSizeScBold17];
+        [headerView addSubview:titlelabel];
+        [titlelabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.centerX.equalTo(headerView);
+            make.height.equalTo(@(30));
+        }];
+        titlelabel.text = @"精选商品";
+        UIView *leftView = [UIView lz_viewWithColor:kLinerViewColor];
+        UIView *rightView = [UIView lz_viewWithColor:kLinerViewColor];
+        [headerView addSubview:leftView];
+        [headerView addSubview:rightView];
+        [leftView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.equalTo(titlelabel);
+            make.height.equalTo(@(0.7));
+            make.width.equalTo(@(32));
+            make.right.equalTo(titlelabel.mas_left).offset(-5);
+        }];
+        [rightView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.height.width.equalTo(leftView);
+            make.left.equalTo(titlelabel.mas_right).offset(5);
+        }];
+        return headerView;
+    }else{
+        UICollectionReusableView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"STCYHeaderView" forIndexPath:indexPath];
+        return headerView;
+    }
 }
 
 - (UICollectionView *)collectionView{
@@ -208,6 +246,10 @@ static NSString* reuseIdentifierHot     = @"TXMallHotTableViewCell";
         [_collectionView registerClass:[TXMallBannerCollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifierBanner];
         [_collectionView registerClass:[TXMallCollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifierMall];
         [_collectionView registerClass:[TXMallHotTableViewCell class] forCellWithReuseIdentifier:reuseIdentifierHot];
+        //注册头视图
+        [_collectionView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"STCYHeaderView"];
+        //注册头视图
+        [_collectionView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"STCYHeaderViewSectioin3"];
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
         _collectionView.showsVerticalScrollIndicator = NO;

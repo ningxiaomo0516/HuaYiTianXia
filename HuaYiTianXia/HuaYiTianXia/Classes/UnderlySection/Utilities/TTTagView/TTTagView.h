@@ -31,6 +31,10 @@ NS_ASSUME_NONNULL_BEGIN
 /// 字体
 @property (nonatomic ,strong) UIFont *font;
 @property (nonatomic ,strong) UIButton *selectBtn;
+/// 默认显示多个
+@property (nonatomic ,assign) BOOL isShowMore;
+/// 是否需要点击事件
+@property (nonatomic ,assign) BOOL isOnClick;
 
 @end
 

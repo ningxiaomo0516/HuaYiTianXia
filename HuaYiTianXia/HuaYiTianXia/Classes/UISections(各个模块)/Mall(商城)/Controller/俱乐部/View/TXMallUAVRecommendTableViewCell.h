@@ -9,10 +9,13 @@
 #import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
-
+// 这里要定义一个block的别名(申明) 类型 ----> void (^) (NSString *text)
+typedef void(^TXMallUAVRecommendTableViewCellBlock) (MallUAVListModel *listModel);
 @interface TXMallUAVRecommendTableViewCell : UICollectionViewCell
 
 @property (nonatomic, strong) MallUAVModel *listModel;
+//定义一个block
+@property (nonatomic, copy) TXMallUAVRecommendTableViewCellBlock selectBlock;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -26,10 +26,13 @@
 #import "TXUAVExperienceMainViewController.h"
 /// 体验
 #import "TXUAVChildExperienceViewController.h"
-/// 培训详情
+/// 培训(课程)详情
 #import "TXUAVExperienceChildViewController.h"
 
 #import "TXBaseCollectionReusableHeaderView.h"
+/// 购机(体验)详情
+#import "TXUAVChildRecommendedViewController.h"
+#import "TXPurchaseAgreementViewController.h"
 
 static NSString* reuseIdentifier        = @"TXMallToolsCollectionViewCell";
 static NSString* reuseIdentifierBanner  = @"TXMallBannerCollectionViewCell";
@@ -154,17 +157,27 @@ static NSString *headerViewIdentifier       = @"TXBaseCollectionReusableHeaderVi
         tools.recordsModel = self.dataArray[indexPath.row];
         return tools;
     }else{
-        if (indexPath.section==2) {
+        MV(weakSelf)
+        if (indexPath.section==2) {/// 对应购机
             TXMallUAVRecommendTableViewCell *tools = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifierRecommend forIndexPath:indexPath];
+            tools.selectBlock = ^(MallUAVListModel * _Nonnull listModel) {
+                [weakSelf jumpRecommendDetails:listModel];
+            };
             tools.listModel = self.listArray;
             return tools;
-        }else if (indexPath.section==3) {
+        }else if (indexPath.section==3) {/// 对应培训课程
             TXMallUAVHotTableViewCell *tools = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifierHot forIndexPath:indexPath];
             tools.listModel = self.listArray;
+            tools.selectBlock = ^(MallUAVListModel * _Nonnull listModel) {
+                [weakSelf jumpCourseDetails:listModel];
+            };
             return tools;
         }else if (indexPath.section==4) {
             TXMallUAVAdTableViewCell *tools = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifierAd forIndexPath:indexPath];
             tools.listModel = self.listArray;
+            tools.selectBlock = ^(MallUAVListModel * _Nonnull listModel) {
+                [weakSelf jumpRecommendDetails:listModel];
+            };
             return tools;
         }else{
             TTTemplateThreeTableViewCell *tools = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifierUAV forIndexPath:indexPath];
@@ -175,14 +188,20 @@ static NSString *headerViewIdentifier       = @"TXBaseCollectionReusableHeaderVi
     }
 }
 
+//// 跳转购机详情或者体验详情
+- (void) jumpRecommendDetails:(MallUAVListModel *)listModel{
+    TXUAVChildRecommendedViewController *vc = [[TXUAVChildRecommendedViewController alloc] initListModel:listModel];
+    TTPushVC(vc);
+}
 
-/**
- 
- CourseListModel *listModel = self.dataArray[indexPath.row];
- TXUAVExperienceChildViewController *vc = [[TXUAVExperienceChildViewController alloc] initCourseListModel:listModel];
- TTPushVC(vc);
- 
- */
+//// 跳转培训(课程)详情
+- (void) jumpCourseDetails:(MallUAVListModel *)listModel{
+    CourseListModel *model = [[CourseListModel alloc] init];
+    model.kid = listModel.kid;
+    TXUAVExperienceChildViewController *vc = [[TXUAVExperienceChildViewController alloc] initCourseListModel:model];
+    TTPushVC(vc);
+}
+
 
 /// 点击collectionViewCell
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -200,11 +219,19 @@ static NSString *headerViewIdentifier       = @"TXBaseCollectionReusableHeaderVi
                 [parameter setObject:@"1" forKey:@"pageType"];
             }else if(indexPath.row==3){
                 [parameter setObject:@"3" forKey:@"pageType"];
+                /// 暂无跳转
+                return;
             }else{
                 [parameter setObject:@"0" forKey:@"pageType"];
             }
-            TXUAVRecommendedViewController *vc = [[TXUAVRecommendedViewController alloc] initParameter:parameter];
-            TTPushVC(vc);
+            
+            TXPurchaseAgreementViewController *vc = [[TXPurchaseAgreementViewController alloc] init];
+            CGFloat widht = (kScreenWidth - 50);
+            [self sc_centerPresentController:vc presentedSize:CGSizeMake(widht, kHeight3to2) completeHandle:^(BOOL presented) {
+                
+            }];
+//            TXUAVRecommendedViewController *vc = [[TXUAVRecommendedViewController alloc] initParameter:parameter];
+//            TTPushVC(vc);
         }
     }else if(indexPath.section==5){
         NewsRecordsModel *productModel = self.dataArray[indexPath.row];
@@ -265,39 +292,22 @@ static NSString *headerViewIdentifier       = @"TXBaseCollectionReusableHeaderVi
 
 //  返回头视图
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
-////    如果是头视图
-//    if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
-//        TXBaseCollectionReusableHeaderView *header=[collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:headerViewIdentifier forIndexPath:indexPath];
-////        //添加头视图的内容
-////        [self addContent];
-////        //头视图添加view
-////        [header addSubview:self.headerView];
-//        return header;
-//    }
-////    如果底部视图
-//        if([kind isEqualToString:UICollectionElementKindSectionFooter]){
-//
-//        }
-//    UICollectionReusableView *reusableview = nil;
-//    reusableview.backgroundColor = [UIColor redColor];
-//    return reusableview;
-    
-//    if (indexPath.section==5) {
-        UICollectionReusableView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"MGHeaderView" forIndexPath:indexPath];
-//        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, self.view.width*7/15)];
-//        [headerView addSubview:imageView];
-        headerView.backgroundColor = kWhiteColor;
-    UILabel *titlelabel = [UILabel lz_labelWithTitle:@"会员精选" color:kTextColor51 font:kFontSizeScBold17];
     if (indexPath.section==5) {
+        UICollectionReusableView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"MGHeaderView" forIndexPath:indexPath];
+        headerView.backgroundColor = kWhiteColor;
+        UILabel *titlelabel = [UILabel lz_labelWithTitle:@"" color:kTextColor51 font:kFontSizeScBold17];
         [headerView addSubview:titlelabel];
         [titlelabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(@(15));
             make.centerY.equalTo(headerView);
         }];
-    }
+        titlelabel.text = @"优秀产品";
         return headerView;
-//    }
-//    return nil;
+    }else{
+        UICollectionReusableView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"MGHeaderViewSection5" forIndexPath:indexPath];
+        
+        return headerView;
+    }
 }
 
 - (UICollectionView *)collectionView{
@@ -329,7 +339,8 @@ static NSString *headerViewIdentifier       = @"TXBaseCollectionReusableHeaderVi
         [_collectionView registerClass:[TXMallUAVRecommendTableViewCell class] forCellWithReuseIdentifier:reuseIdentifierRecommend];
 
         //注册头视图
-        [_collectionView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"MGHeaderView"];
+        [_collectionView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"MGHeaderView"];//注册头视图
+        [_collectionView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"MGHeaderViewSection5"];
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
         _collectionView.showsVerticalScrollIndicator = NO;

@@ -85,10 +85,9 @@ static NSString* reuseIdentifierAd          = @"TXMallUAVAdCollectionViewCell";
 }
 
 /// 点击collectionViewCell
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(didRecommendVideoSelectItemAtIndexPath:)]) {
-        [self.delegate didRecommendVideoSelectItemAtIndexPath:indexPath];
-    }
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    MallUAVListModel *model = self.listModel.jingxuan[indexPath.row];
+    self.selectBlock(model);
 }
 
 //布局协议对应的方法实现

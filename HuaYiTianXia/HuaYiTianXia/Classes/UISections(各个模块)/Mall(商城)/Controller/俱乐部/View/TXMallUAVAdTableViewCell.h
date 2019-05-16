@@ -10,18 +10,12 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class TXMallUAVAdTableViewCell;
-@protocol TXMallUAVAdTableViewCellDelegate <NSObject>
-
-/**
- * 点击UICollectionViewCell的代理方法
- */
-- (void)didRecommendVideoSelectItemAtIndexPath:(NSIndexPath *)indexPath;
-@end
-
+// 这里要定义一个block的别名(申明) 类型 ----> void (^) (NSString *text)
+typedef void(^TXMallUAVAdTableViewCellBlock) (MallUAVListModel *listModel);
 @interface TXMallUAVAdTableViewCell : UICollectionViewCell
-@property (nonatomic, weak) id<TXMallUAVAdTableViewCellDelegate> delegate;
 @property (nonatomic, strong) MallUAVModel *listModel;
+//定义一个block
+@property (nonatomic, copy) TXMallUAVAdTableViewCellBlock selectBlock;
 @end
 
 NS_ASSUME_NONNULL_END

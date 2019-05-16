@@ -16,9 +16,12 @@
     CGFloat height = 28;
     UIButton * markBtn;
     NSInteger count = 0;
-    if (_dataArray.count>0) {
+    if (self.isShowMore) {
+        count = _dataArray.count;
+    }else{
         count = 1;
     }
+    
     for (int i = 0; i < count; i++) {
         CGFloat width =  [self sizeWithString:_dataArray[i] maxWidth:self.width maxFont:kFontSizeMedium12].width + 25;
         UIButton *tagBtn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -34,13 +37,16 @@
         [tagBtn setTitle:_dataArray[i] forState:UIControlStateNormal];
         tagBtn.titleLabel.font = kFontSizeMedium13;
         [tagBtn setTitleColor:kTextColor51 forState:UIControlStateNormal];
-        [tagBtn setTitleColor:kTextColor51 forState:UIControlStateSelected];
+        [tagBtn setTitleColor:kThemeColor  forState:UIControlStateSelected];
         [tagBtn setBackgroundImage:imageColor(kTextColor227) forState:UIControlStateNormal];
         [tagBtn setBackgroundImage:imageColor(kTextColor227) forState:UIControlStateSelected];
         [self makeCornerRadius:3.0 borderColor:kTextColor227 layer:tagBtn.layer borderWidth:.5];
         markBtn = tagBtn;
         
-        [tagBtn addTarget:self action:@selector(onClickTo:) forControlEvents:UIControlEventTouchUpInside];
+        /// 添加点击事件
+        if (self.isOnClick) {
+            [tagBtn addTarget:self action:@selector(onClickTo:) forControlEvents:UIControlEventTouchUpInside];
+        }
         
         [self addSubview:markBtn];
     }
@@ -53,12 +59,19 @@
 - (void)onClickTo:(UIButton *)sender{
     if ([self.delegate respondsToSelector:@selector(handleSelectTag:)]) {
         if (!sender.isSelected) {
+//            self.selectBtn.selected = !self.selectBtn.selected;
+//            self.selectBtn.backgroundColor = kClearColor;
+//            [self.selectBtn setBorderColor:kThemeColor];
+//            [self.selectBtn setTitleColor:kTextColor51 forState:UIControlStateNormal];
+//            sender.selected = !sender.selected;
+////            sender.backgroundColor = kThemeColor;
+//            [sender setTitleColor:kRedColor forState:UIControlStateNormal];
+//            [sender setBorderColor:kThemeColor];
+//            self.selectBtn = sender;
             self.selectBtn.selected = !self.selectBtn.selected;
-//            self.selectBtn.backgroundColor = [UIColor clearColor];
-//            [self.selectBtn setTitleColor:kThemeColor forState:UIControlStateNormal];
+            [self.selectBtn setBorderColor:kClearColor];
             sender.selected = !sender.selected;
-//            sender.backgroundColor = kThemeColor;
-//            [sender setTitleColor:kWhiteColor forState:UIControlStateNormal];
+            [sender setBorderColor:kThemeColor];
             self.selectBtn = sender;
         }
         [self.delegate handleSelectTag:sender.titleLabel.text];
@@ -102,4 +115,13 @@
 //    NSDictionary *attrs = @{NSFontAttributeName : font};
 //    return [self boundingRectWithSize:maxSize options:NSStringDrawingUsesLineFragmentOrigin attributes:attrs context:nil].size;
 //}
+
+
+- (void)setIsShowMore:(BOOL)isShowMore{
+    _isShowMore = isShowMore;
+}
+
+- (void)setIsOnClick:(BOOL)isOnClick{
+    _isOnClick = isOnClick;
+}
 @end

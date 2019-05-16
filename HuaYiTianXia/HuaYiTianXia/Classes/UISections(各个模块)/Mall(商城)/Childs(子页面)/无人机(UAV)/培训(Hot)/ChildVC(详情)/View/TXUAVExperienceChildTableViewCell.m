@@ -13,7 +13,6 @@ static NSString* reuseIdentifier = @"TXUAVExperienceChildCollectionViewCell";
 @interface TXUAVExperienceChildTableViewCell()<UICollectionViewDelegate, UICollectionViewDataSource>
 @property (nonatomic, strong) UICollectionView * collectionView;
 @property (nonatomic, strong) UILabel * titleLabel;
-@property (nonatomic, strong) UILabel * courseLabel;
 /// 记录最后的height
 @property (nonatomic, assign) CGFloat endHeight;
 /// headerView的高度

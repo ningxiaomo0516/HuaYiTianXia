@@ -238,6 +238,9 @@
 		E77F874B2273F7CF004EB9C1 /* TXGiftDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E77F874A2273F7CF004EB9C1 /* TXGiftDataModel.m */; };
 		E77F87512274316C004EB9C1 /* TTRollLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = E77F87502274316C004EB9C1 /* TTRollLabel.m */; };
 		E782AB4E2285698000CE2F81 /* TXAddTitleAddressView.m in Sources */ = {isa = PBXBuildFile; fileRef = E782AB4D2285698000CE2F81 /* TXAddTitleAddressView.m */; };
+		E7832222228CF4D70081F6E0 /* TXCourseReservationView.m in Sources */ = {isa = PBXBuildFile; fileRef = E7832221228CF4D70081F6E0 /* TXCourseReservationView.m */; };
+		E7832225228D93A10081F6E0 /* TXUAVChildDetailsExperienceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7832224228D93A00081F6E0 /* TXUAVChildDetailsExperienceViewController.m */; };
+		E7832229228DA40B0081F6E0 /* TXPurchaseAgreementViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7832228228DA40B0081F6E0 /* TXPurchaseAgreementViewController.m */; };
 		E78333DB22487913005CAB91 /* TXLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E78333D922487913005CAB91 /* TXLoginViewController.m */; };
 		E78333DC22487913005CAB91 /* TXLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E78333DA22487913005CAB91 /* TXLoginViewController.xib */; };
 		E78333E0224884F1005CAB91 /* TXRegisteredViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E78333DE224884F1005CAB91 /* TXRegisteredViewController.m */; };
@@ -264,7 +267,6 @@
 		E78584052240C54300BBEA41 /* TYCyclePagerTransformLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = E78584012240C54200BBEA41 /* TYCyclePagerTransformLayout.m */; };
 		E78584082240C68500BBEA41 /* TXMineBannerCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E78584072240C68500BBEA41 /* TXMineBannerCollectionViewCell.m */; };
 		E78B8F7D225B32BC0052852C /* addr.json in Resources */ = {isa = PBXBuildFile; fileRef = E78B8F71225B32BC0052852C /* addr.json */; };
-		E78B8F7E225B32BC0052852C /* c31_btn_close@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E78B8F72225B32BC0052852C /* c31_btn_close@2x.png */; };
 		E78B8F7F225B32BC0052852C /* TTPickerHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = E78B8F74225B32BC0052852C /* TTPickerHeaderView.m */; };
 		E78B8F80225B32BC0052852C /* TTPickerListView.m in Sources */ = {isa = PBXBuildFile; fileRef = E78B8F76225B32BC0052852C /* TTPickerListView.m */; };
 		E78B8F81225B32BC0052852C /* TTPickerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E78B8F78225B32BC0052852C /* TTPickerModel.m */; };
@@ -806,6 +808,12 @@
 		E77F87502274316C004EB9C1 /* TTRollLabel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TTRollLabel.m; sourceTree = "<group>"; };
 		E782AB4C2285698000CE2F81 /* TXAddTitleAddressView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXAddTitleAddressView.h; sourceTree = "<group>"; };
 		E782AB4D2285698000CE2F81 /* TXAddTitleAddressView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXAddTitleAddressView.m; sourceTree = "<group>"; };
+		E7832220228CF4D70081F6E0 /* TXCourseReservationView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXCourseReservationView.h; sourceTree = "<group>"; };
+		E7832221228CF4D70081F6E0 /* TXCourseReservationView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXCourseReservationView.m; sourceTree = "<group>"; };
+		E7832223228D93A00081F6E0 /* TXUAVChildDetailsExperienceViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXUAVChildDetailsExperienceViewController.h; sourceTree = "<group>"; };
+		E7832224228D93A00081F6E0 /* TXUAVChildDetailsExperienceViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXUAVChildDetailsExperienceViewController.m; sourceTree = "<group>"; };
+		E7832227228DA40B0081F6E0 /* TXPurchaseAgreementViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXPurchaseAgreementViewController.h; sourceTree = "<group>"; };
+		E7832228228DA40B0081F6E0 /* TXPurchaseAgreementViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXPurchaseAgreementViewController.m; sourceTree = "<group>"; };
 		E78333D822487913005CAB91 /* TXLoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXLoginViewController.h; sourceTree = "<group>"; };
 		E78333D922487913005CAB91 /* TXLoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXLoginViewController.m; sourceTree = "<group>"; };
 		E78333DA22487913005CAB91 /* TXLoginViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TXLoginViewController.xib; sourceTree = "<group>"; };
@@ -856,7 +864,6 @@
 		E78584062240C68500BBEA41 /* TXMineBannerCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXMineBannerCollectionViewCell.h; sourceTree = "<group>"; };
 		E78584072240C68500BBEA41 /* TXMineBannerCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXMineBannerCollectionViewCell.m; sourceTree = "<group>"; };
 		E78B8F71225B32BC0052852C /* addr.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = addr.json; sourceTree = "<group>"; };
-		E78B8F72225B32BC0052852C /* c31_btn_close@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "c31_btn_close@2x.png"; sourceTree = "<group>"; };
 		E78B8F73225B32BC0052852C /* TTPickerHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTPickerHeaderView.h; sourceTree = "<group>"; };
 		E78B8F74225B32BC0052852C /* TTPickerHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTPickerHeaderView.m; sourceTree = "<group>"; };
 		E78B8F75225B32BC0052852C /* TTPickerListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTPickerListView.h; sourceTree = "<group>"; };
@@ -1687,6 +1694,8 @@
 				E74C0018228A98CB00576B86 /* TXUAVExperienceChildCollectionViewCell.m */,
 				E74C001A228AB71800576B86 /* TXVideoTableViewCell.h */,
 				E74C001B228AB71800576B86 /* TXVideoTableViewCell.m */,
+				E7832220228CF4D70081F6E0 /* TXCourseReservationView.h */,
+				E7832221228CF4D70081F6E0 /* TXCourseReservationView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1713,6 +1722,8 @@
 		E74C0021228AD94000576B86 /* ChildVC(子页面) */ = {
 			isa = PBXGroup;
 			children = (
+				E7832223228D93A00081F6E0 /* TXUAVChildDetailsExperienceViewController.h */,
+				E7832224228D93A00081F6E0 /* TXUAVChildDetailsExperienceViewController.m */,
 			);
 			path = "ChildVC(子页面)";
 			sourceTree = "<group>";
@@ -2517,6 +2528,15 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		E7832226228DA3F70081F6E0 /* 购买协议 */ = {
+			isa = PBXGroup;
+			children = (
+				E7832227228DA40B0081F6E0 /* TXPurchaseAgreementViewController.h */,
+				E7832228228DA40B0081F6E0 /* TXPurchaseAgreementViewController.m */,
+			);
+			path = "购买协议";
+			sourceTree = "<group>";
+		};
 		E78333CE224874D9005CAB91 /* Other(登录注册) */ = {
 			isa = PBXGroup;
 			children = (
@@ -2762,7 +2782,6 @@
 			isa = PBXGroup;
 			children = (
 				E78B8F71225B32BC0052852C /* addr.json */,
-				E78B8F72225B32BC0052852C /* c31_btn_close@2x.png */,
 				E78B8F73225B32BC0052852C /* TTPickerHeaderView.h */,
 				E78B8F74225B32BC0052852C /* TTPickerHeaderView.m */,
 				E78B8F75225B32BC0052852C /* TTPickerListView.h */,
@@ -3057,6 +3076,7 @@
 		E7C42E6D224B586C00F3FB1A /* General(通用类) */ = {
 			isa = PBXGroup;
 			children = (
+				E7832226228DA3F70081F6E0 /* 购买协议 */,
 				E7089EFA225DB89E00A7EF27 /* (支付选择) */,
 				E77F653D225C47DD0017B4C8 /* PayPasswordVC(支付密码) */,
 				E7C42E6F224B770200F3FB1A /* SCHttpTools(网络工具) */,
@@ -3514,7 +3534,6 @@
 				E7D732272268B21B006F171A /* ShareSDK.bundle in Resources */,
 				E7D07C672243CCBE00E3FFAF /* LZActionSheet.bundle in Resources */,
 				E74C954A22638442000CBAF0 /* wildcat_gif_1@2x.png in Resources */,
-				E78B8F7E225B32BC0052852C /* c31_btn_close@2x.png in Resources */,
 				E774DCE02272D9ED001A95B8 /* index.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3709,6 +3728,7 @@
 				E7759AE32244CDC3007DA6CF /* TXSwitchTableViewCell.m in Sources */,
 				E77326522254A03100FD665A /* TXWalletHeaderTableViewCell.m in Sources */,
 				E7269912223F7881003A5043 /* TXAgriculturalViewController.m in Sources */,
+				E7832222228CF4D70081F6E0 /* TXCourseReservationView.m in Sources */,
 				E72698B7223F7165003A5043 /* AppDelegate.m in Sources */,
 				E77F874B2273F7CF004EB9C1 /* TXGiftDataModel.m in Sources */,
 				E72699DA223F7F58003A5043 /* UIFont+Extension.m in Sources */,
@@ -3811,6 +3831,7 @@
 				E76579EE2276D6F400AFAEFE /* TXTicketQueryViewController.m in Sources */,
 				E72699F8223F8298003A5043 /* WMPageController.m in Sources */,
 				E72699E1223F7F58003A5043 /* UILabel+SCExtension.m in Sources */,
+				E7832229228DA40B0081F6E0 /* TXPurchaseAgreementViewController.m in Sources */,
 				E7ADB1EB22881C05008AC117 /* TTMallTemplateHotCollectionViewCell.m in Sources */,
 				E74C9532225CEA18000CBAF0 /* SCNoDataView.m in Sources */,
 				E74CFFD42289723700576B86 /* TXMallUAVHotTableViewCell.m in Sources */,
@@ -3837,6 +3858,7 @@
 				E78583C722408F1F00BBEA41 /* TXMineHeaderTableViewCell.m in Sources */,
 				E753D1F32249D3B200A2DD36 /* UIViewController+SCPopover.m in Sources */,
 				E74C0016228A95CE00576B86 /* TXUAVExperienceChildTableViewCell.m in Sources */,
+				E7832225228D93A10081F6E0 /* TXUAVChildDetailsExperienceViewController.m in Sources */,
 				E7691ED52255A809006A94D9 /* TXResetTradingViewController.m in Sources */,
 				E78583BA223F947600BBEA41 /* Utils.m in Sources */,
 				E74C0013228A953800576B86 /* TXUAVExperienceViewController.m in Sources */,

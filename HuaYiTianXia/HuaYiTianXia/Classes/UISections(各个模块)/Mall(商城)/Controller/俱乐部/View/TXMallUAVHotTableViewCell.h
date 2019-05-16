@@ -10,20 +10,9 @@
 #import "TXCourseModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
-@class TXMallUAVHotTableViewCell;
-@protocol TXMallUAVHotTableViewCellDelegate <NSObject>
-
-/**
- * 点击UICollectionViewCell的代理方法
- */
-- (void)didRecommendVideoSelectItemAtIndexPath:(NSIndexPath *)indexPath;
-@end
-
 // 这里要定义一个block的别名(申明) 类型 ----> void (^) (NSString *text)
-typedef void(^TXMallUAVHotTableViewCellBlock) (CourseListModel *model);
+typedef void(^TXMallUAVHotTableViewCellBlock) (MallUAVListModel *listModel);
 @interface TXMallUAVHotTableViewCell : UICollectionViewCell
-@property (nonatomic, weak) id<TXMallUAVHotTableViewCellDelegate> delegate;
-
 @property (nonatomic, strong) MallUAVModel *listModel;
 //定义一个block
 @property (nonatomic, copy) TXMallUAVHotTableViewCellBlock selectBlock;

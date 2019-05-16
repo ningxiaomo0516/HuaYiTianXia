@@ -1,25 +1,24 @@
 //
-//  TXUAVExperienceChildViewController.m
+//  TXUAVChildDetailsExperienceViewController.m
 //  HuaYiTianXia
 //
-//  Created by 宁小陌 on 2019/5/14.
+//  Created by 宁小陌 on 2019/5/16.
 //  Copyright © 2019年 宁小陌. All rights reserved.
 //
 
-#import "TXUAVExperienceChildViewController.h"
+#import "TXUAVChildDetailsExperienceViewController.h"
 #import "TXUAVExperienceChildTableViewCell.h"
 #import "TXMallGoodsBannerTableViewCell.h"
-#import "TXCourseModel.h"
-#import "TXVideoTableViewCell.h"
 #import "TXShareViewController.h"
 #import <WebKit/WebKit.h>
-#import "TXCourseChildModel.h"
-#import "TXCourseReservationView.h"
+#import "TXRecommendedModel.h"
+#import "TXUAVChildRecommendedTableViewCell.h"
+#import "TXYuYueShenQingViewController.h"
 
-static NSString * const reuseIdentifier = @"TXUAVExperienceChildTableViewCell";
-static NSString * const reuseIdentifierVideo = @"TXVideoTableViewCell";
-static NSString * const reuseIdentifierBanner = @"TXMallGoodsBannerTableViewCell";
-@interface TXUAVExperienceChildViewController ()<UITableViewDelegate,UITableViewDataSource,TXUAVExperienceChildTableViewCellDelegate,WKUIDelegate,WKNavigationDelegate>
+static NSString * const reuseIdentifier         = @"TXUAVExperienceChildTableViewCell";
+static NSString * const reuseIdentifierInfo     = @"TXUAVChildRecommendedTableViewCell";
+static NSString * const reuseIdentifierBanner   = @"TXMallGoodsBannerTableViewCell";
+@interface TXUAVChildDetailsExperienceViewController ()<UITableViewDelegate,UITableViewDataSource,TXUAVExperienceChildTableViewCellDelegate,WKUIDelegate,WKNavigationDelegate>
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *dataArray;
 @property (nonatomic, strong) NSMutableDictionary *heightAtIndexPath;//缓存高度
@@ -29,15 +28,16 @@ static NSString * const reuseIdentifierBanner = @"TXMallGoodsBannerTableViewCell
 @property (nonatomic, strong) WKWebView *wkWebView;
 @property (nonatomic, assign) BOOL isload;
 @property (nonatomic, strong) SCShareModel *shareModel;
-@property (nonatomic, strong) CourseListModel *courseListModel;
-@property (nonatomic, strong) TXCourseChildModel *courseModel;
+@property (nonatomic, strong) MallUAVListModel *listModel;
+@property (nonatomic, strong) TXRecommendedModel *recommendModel;
 @property (nonatomic, strong) UIButton *saveButton;
+
 @end
 
-@implementation TXUAVExperienceChildViewController
-- (id)initCourseListModel:(CourseListModel *)courseListModel{
+@implementation TXUAVChildDetailsExperienceViewController
+- (id)initListModel:(MallUAVListModel *)listModel{
     if ( self = [super init] ){
-        self.courseListModel = courseListModel;
+        self.listModel = listModel;
         self.webViewHeight = 300;
     }
     return self;
@@ -48,10 +48,10 @@ static NSString * const reuseIdentifierBanner = @"TXMallGoodsBannerTableViewCell
     // Do any additional setup after loading the view.
     [self initView];
     self.isload = NO;
-    self.title = @"培训详情";
+    self.title = @"商品详情";
     [self createWebView];
     [self.view showLoadingViewWithText:@"加载中..."];
-    [self requestPersonalCenterData];
+    [self requestCenterData];
     UIImage *rightImg = kGetImage(@"live_btn_share");
     rightImg = [rightImg imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithImage:rightImg
@@ -66,32 +66,23 @@ static NSString * const reuseIdentifierBanner = @"TXMallGoodsBannerTableViewCell
     TXShareViewController *vc = [[TXShareViewController alloc] init];
     CGFloat height = IPHONE6_W(150)+kTabBarHeight;
     vc.shareModel = self.shareModel;
-    [self sc_bottomPresentController:vc presentedHeight:height completeHandle:^(BOOL presented) {
-        if (presented) {
-            TTLog(@"弹出了");
-        }else{
-            TTLog(@"消失了");
-        }
-    }];
+    [self sc_bottomPresentController:vc presentedHeight:height completeHandle:nil];
 }
 
 - (void) handleControlEvent:(UIButton *) sender{
-//    TXCourseReservationView *view = [[TXCourseReservationView alloc] init];
-//    [view showInView:self.navigationController.view];
+    TXYuYueShenQingViewController *vc = [[TXYuYueShenQingViewController alloc] initWidthRecommendedModel:self.recommendModel];
+    TTPushVC(vc);
 }
 
-- (void) requestPersonalCenterData{
-    
+- (void) requestCenterData{
     NSMutableDictionary *parameter = [[NSMutableDictionary alloc] init];
-    [parameter setObject:@(self.courseListModel.kid.integerValue) forKey:@"id"];
-    [SCHttpTools postWithURLString:kHttpURL(@"flighttrain/flightTrainDetails") parameter:parameter success:^(id responseObject) {
+    [parameter setObject:@(self.listModel.kid.integerValue) forKey:@"id"];
+    [SCHttpTools postWithURLString:kHttpURL(@"flightproduct/flightProductDetails") parameter:parameter success:^(id responseObject) {
         NSDictionary *result = responseObject;
         if ([result isKindOfClass:[NSDictionary class]]) {
-            self.courseModel = [TXCourseChildModel mj_objectWithKeyValues:result];
-            if (self.courseModel.errorcode == 20000) {
-                
-            }else{
-                Toast(self.courseModel.message);
+            self.recommendModel = [TXRecommendedModel mj_objectWithKeyValues:result];
+            if (self.recommendModel.errorcode != 20000) {
+                Toast(self.recommendModel.message);
             }
             self.isload = YES;
         }else{
@@ -128,26 +119,18 @@ static NSString * const reuseIdentifierBanner = @"TXMallGoodsBannerTableViewCell
 #pragma mark - Table view data source
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if(indexPath.section==0){
-        /// 视频
-//        TXVideoTableViewCell * tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierVideo forIndexPath:indexPath];
-//        tools.imagesView.image = kGetImage(@"base_deprecated_activity");
-//        return tools;
-        /// banner
         TXMallGoodsBannerTableViewCell* tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierBanner forIndexPath:indexPath];
         tools.isPageControl = YES ;
-        tools.bannerArray = self.courseModel.data.banners;
+        tools.bannerArray = self.recommendModel.data.banners;
         return tools;
-    } else if (indexPath.section==1) {
-        TXUAVExperienceChildTableViewCell* tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
-        tools.delegate = self;
-        tools.indexPath = indexPath;
-        tools.courseLabel.text = self.courseModel.data.title;
-        tools.courseModel = self.courseModel.data.flightcourse;
+    }if(indexPath.section==1){
+        TXUAVChildRecommendedTableViewCell *tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierInfo forIndexPath:indexPath];
+        tools.dataModel = self.recommendModel.data;
         return tools;
     }else{
         UITableViewCell *webCell = [tableView dequeueReusableCellWithIdentifier:@"WebViewCell" forIndexPath:indexPath];
         //        培训产品传入:0，另外的传入:1
-        NSString *parameter = [NSString stringWithFormat:@"%@&type=0", self.courseListModel.kid];
+        NSString *parameter = [NSString stringWithFormat:@"%@&type=1", self.listModel.kid];
         NSString *URLStr = kAppendH5URL(DomainName, CourseDetailsH5, parameter);
         NSURL *url = [NSURL URLWithString:URLStr];
         self.shareModel.h5Url = URLStr;
@@ -163,7 +146,7 @@ static NSString * const reuseIdentifierBanner = @"TXMallGoodsBannerTableViewCell
 
 // 多少个分组 section
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return  3;
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -172,15 +155,7 @@ static NSString * const reuseIdentifierBanner = @"TXMallGoodsBannerTableViewCell
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section==0) return IPHONE6_W(180);
-    if (indexPath.section==1) {
-        if (self.heightAtIndexPath[indexPath]) {
-            NSNumber *num = self.heightAtIndexPath[indexPath];
-            /// collectionView 底部还有七个像素
-            return [num floatValue]+7;
-        }else {
-            return UITableViewAutomaticDimension;
-        }
-    }
+    if (indexPath.section==1) return IPHONE6_W(100);
     if (indexPath.section==2) return self.webViewHeight;
     return UITableViewAutomaticDimension;
 }
@@ -204,9 +179,8 @@ static NSString * const reuseIdentifierBanner = @"TXMallGoodsBannerTableViewCell
         _tableView.showsVerticalScrollIndicator = false;
         [_tableView setSeparatorInset:UIEdgeInsetsMake(0,0,0,0)];
         _tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
-        [_tableView registerClass:[TXUAVExperienceChildTableViewCell class] forCellReuseIdentifier:reuseIdentifier];
-        [_tableView registerClass:[TXVideoTableViewCell class] forCellReuseIdentifier:reuseIdentifierVideo];
         [_tableView registerClass:[TXMallGoodsBannerTableViewCell class] forCellReuseIdentifier:reuseIdentifierBanner];
+        [_tableView registerClass:[TXUAVChildRecommendedTableViewCell class] forCellReuseIdentifier:reuseIdentifierInfo];
         [_tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"WebViewCell"];
         _tableView.delegate = self;
         _tableView.dataSource = self;
@@ -295,7 +269,7 @@ static NSString * const reuseIdentifierBanner = @"TXMallGoodsBannerTableViewCell
         [_saveButton setTitleColor:kWhiteColor forState:UIControlStateNormal];
         _saveButton.titleLabel.font = kFontSizeMedium15;
         _saveButton.tag = 2;
-        [_saveButton setTitle:@"立即报名" forState:UIControlStateNormal];
+        [_saveButton setTitle:@"预约申请" forState:UIControlStateNormal];
         [_saveButton setBackgroundImage:kGetImage(@"c31_btn_tb") forState:UIControlStateNormal];
         MV(weakSelf);
         [_saveButton lz_handleControlEvent:UIControlEventTouchUpInside withBlock:^{

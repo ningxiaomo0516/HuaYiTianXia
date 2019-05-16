@@ -11,6 +11,7 @@
 
 #import "TTSortButton.h"
 #import "TXMallUAVModel.h"
+#import "TXUAVChildRecommendedViewController.h"
 NSInteger const kSortButtonBeginTag = 1000;
 static NSString* reuseIdentifierMall    = @"TXMallCollectionViewCell";
 
@@ -139,10 +140,9 @@ static NSString* reuseIdentifierMall    = @"TXMallCollectionViewCell";
 
 /// 点击collectionViewCell
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-//    NewsRecordsModel *productModel = self.dataArray[indexPath.row];
-//    TXMallGoodsDetailsViewController *vc = [[TXMallGoodsDetailsViewController alloc] initMallProductModel:productModel];
-//    vc.pageType = 0;
-//    TTPushVC(vc);
+    MallUAVListModel *listModel = self.dataArray[indexPath.row];
+    TXUAVChildRecommendedViewController *vc = [[TXUAVChildRecommendedViewController alloc] initListModel:listModel];
+    TTPushVC(vc);
 }
 
 //布局协议对应的方法实现

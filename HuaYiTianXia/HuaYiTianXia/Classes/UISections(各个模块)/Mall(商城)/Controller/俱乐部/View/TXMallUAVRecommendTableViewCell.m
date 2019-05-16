@@ -80,18 +80,17 @@ static NSString* reuseIdentifierRecommend   = @"TXMallUAVRecommendCollectionView
     return tools;
 }
 
-///// 点击collectionViewCell
-//- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-//    if (self.delegate && [self.delegate respondsToSelector:@selector(didRecommendVideoSelectItemAtIndexPath:)]) {
-//        [self.delegate didRecommendVideoSelectItemAtIndexPath:indexPath];
-//    }
-//}
-
 //布局协议对应的方法实现
 #pragma mark - UICollectionViewDelegateFlowLayout
 //设置每个一个Item（cell）的大小
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
     return CGSizeMake(self.height, self.height);
+}
+
+/// 点击collectionViewCell
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    MallUAVListModel *model = self.listModel.recommended[indexPath.row];
+    self.selectBlock(model);
 }
 
 //设置所有的cell组成的视图与section 上、左、下、右的间隔

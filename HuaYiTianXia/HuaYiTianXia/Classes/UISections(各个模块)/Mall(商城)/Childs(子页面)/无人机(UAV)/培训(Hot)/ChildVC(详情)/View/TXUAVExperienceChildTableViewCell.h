@@ -29,6 +29,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSIndexPath *indexPath;
 @property (nonatomic, strong) NSMutableArray<FlightCourseModel *> *courseModel;
 
+/// 课程标题
+@property (nonatomic, strong) UILabel * courseLabel;
+
 @end
 
 NS_ASSUME_NONNULL_END
