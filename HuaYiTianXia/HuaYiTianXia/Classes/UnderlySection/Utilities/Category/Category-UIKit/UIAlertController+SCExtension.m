@@ -25,9 +25,12 @@
         [cancelAction setValue:kTextColor51 forKey:@"_titleTextColor"];
 //        [deleteAction setValue:kTextColor51 forKey:@"_titleTextColor"];
     }
-    [alerController addAction:cancelAction];
-    [alerController addAction:deleteAction];
-    
+    if (cancelTitle.length!=0) {
+        [alerController addAction:cancelAction];
+    }
+    if (doTitle.length!=0) {
+        [alerController addAction:deleteAction];
+    }
     return alerController;
 }
 

@@ -48,7 +48,6 @@ static NSString * const reuseIdentifierBanner   = @"TXMallGoodsBannerTableViewCe
     // Do any additional setup after loading the view.
     [self initView];
     self.isload = NO;
-    self.title = @"商品详情";
     [self createWebView];
     [self.view showLoadingViewWithText:@"加载中..."];
     [self requestCenterData];
@@ -126,6 +125,9 @@ static NSString * const reuseIdentifierBanner   = @"TXMallGoodsBannerTableViewCe
     }if(indexPath.section==1){
         TXUAVChildRecommendedTableViewCell *tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierInfo forIndexPath:indexPath];
         tools.dataModel = self.recommendModel.data;
+        if ([self.title isEqualToString:@"体验详情"]) {
+            tools.paymentNumLabel.hidden = YES;
+        }
         return tools;
     }else{
         UITableViewCell *webCell = [tableView dequeueReusableCellWithIdentifier:@"WebViewCell" forIndexPath:indexPath];
@@ -155,7 +157,12 @@ static NSString * const reuseIdentifierBanner   = @"TXMallGoodsBannerTableViewCe
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section==0) return IPHONE6_W(180);
-    if (indexPath.section==1) return IPHONE6_W(100);
+    if (indexPath.section==1) {
+        if ([self.title isEqualToString:@"体验详情"]) {
+            return IPHONE6_W(70);
+        }
+        return IPHONE6_W(100);
+    }
     if (indexPath.section==2) return self.webViewHeight;
     return UITableViewAutomaticDimension;
 }

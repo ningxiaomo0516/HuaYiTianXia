@@ -161,7 +161,7 @@ static NSString *headerViewIdentifier       = @"TXBaseCollectionReusableHeaderVi
         if (indexPath.section==2) {/// 对应购机
             TXMallUAVRecommendTableViewCell *tools = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifierRecommend forIndexPath:indexPath];
             tools.selectBlock = ^(MallUAVListModel * _Nonnull listModel) {
-                [weakSelf jumpRecommendDetails:listModel];
+                [weakSelf jumpRecommendDetails:listModel titleText:@"商品详情"];
             };
             tools.listModel = self.listArray;
             return tools;
@@ -176,7 +176,7 @@ static NSString *headerViewIdentifier       = @"TXBaseCollectionReusableHeaderVi
             TXMallUAVAdTableViewCell *tools = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifierAd forIndexPath:indexPath];
             tools.listModel = self.listArray;
             tools.selectBlock = ^(MallUAVListModel * _Nonnull listModel) {
-                [weakSelf jumpRecommendDetails:listModel];
+                [weakSelf jumpRecommendDetails:listModel titleText:@"体验详情"];
             };
             return tools;
         }else{
@@ -189,8 +189,9 @@ static NSString *headerViewIdentifier       = @"TXBaseCollectionReusableHeaderVi
 }
 
 //// 跳转购机详情或者体验详情
-- (void) jumpRecommendDetails:(MallUAVListModel *)listModel{
+- (void) jumpRecommendDetails:(MallUAVListModel *)listModel titleText:(NSString *)titleText{
     TXUAVChildRecommendedViewController *vc = [[TXUAVChildRecommendedViewController alloc] initListModel:listModel];
+    vc.title = titleText;
     TTPushVC(vc);
 }
 
@@ -224,14 +225,8 @@ static NSString *headerViewIdentifier       = @"TXBaseCollectionReusableHeaderVi
             }else{
                 [parameter setObject:@"0" forKey:@"pageType"];
             }
-            
-            TXPurchaseAgreementViewController *vc = [[TXPurchaseAgreementViewController alloc] init];
-            CGFloat widht = (kScreenWidth - 50);
-            [self sc_centerPresentController:vc presentedSize:CGSizeMake(widht, kHeight3to2) completeHandle:^(BOOL presented) {
-                
-            }];
-//            TXUAVRecommendedViewController *vc = [[TXUAVRecommendedViewController alloc] initParameter:parameter];
-//            TTPushVC(vc);
+            TXUAVRecommendedViewController *vc = [[TXUAVRecommendedViewController alloc] initParameter:parameter];
+            TTPushVC(vc);
         }
     }else if(indexPath.section==5){
         NewsRecordsModel *productModel = self.dataArray[indexPath.row];

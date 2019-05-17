@@ -192,11 +192,11 @@
                         <action selector="saveBtnClick:" destination="-1" eventType="touchUpInside" id="TXZ-3A-YUu"/>
                     </connections>
                 </button>
-                <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="hNu-B3-hCA">
-                    <rect key="frame" x="78" y="271.5" width="219" height="31"/>
+                <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="hNu-B3-hCA">
+                    <rect key="frame" x="76.5" y="271.5" width="222" height="31"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zQ4-41-jq8">
-                            <rect key="frame" x="0.0" y="0.0" width="12" height="31"/>
+                            <rect key="frame" x="0.0" y="0.0" width="15" height="31"/>
                             <state key="normal" image="mine_btn_selected"/>
                             <state key="selected" image="mine_btn_normal"/>
                             <connections>
@@ -204,7 +204,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DO9-hu-Bjp">
-                            <rect key="frame" x="17" y="0.0" width="92" height="31"/>
+                            <rect key="frame" x="20" y="0.0" width="92" height="31"/>
                             <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="13"/>
                             <state key="normal" title="我已阅读并同意">
                                 <color key="titleColor" red="0.50196078430000002" green="0.50196078430000002" blue="0.50196078430000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -214,7 +214,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h7Q-pJ-QR1">
-                            <rect key="frame" x="114" y="0.0" width="105" height="31"/>
+                            <rect key="frame" x="117" y="0.0" width="105" height="31"/>
                             <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="13"/>
                             <state key="normal" title="《农保电子协议》">
                                 <color key="titleColor" red="0.1647058824" green="0.70588235290000001" blue="0.89411764709999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -255,7 +255,7 @@
         <image name="c11_btn_minus" width="33" height="30"/>
         <image name="c12_btn_o_close" width="17" height="17"/>
         <image name="c31_denglu" width="345" height="45"/>
-        <image name="mine_btn_normal" width="12" height="12"/>
-        <image name="mine_btn_selected" width="12" height="12"/>
+        <image name="mine_btn_normal" width="15" height="15"/>
+        <image name="mine_btn_selected" width="15" height="15"/>
     </resources>
 </document>

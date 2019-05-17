@@ -153,6 +153,7 @@ static NSString * const reuseIdentifier = @"TXUAVRecommendedTableViewCell";
 //    [self.signatureView addAnimate];
     MallUAVListModel *listModel = self.dataArray[indexPath.row];
     TXUAVChildRecommendedViewController *vc = [[TXUAVChildRecommendedViewController alloc] initListModel:listModel];
+    vc.title = @"商品详情";
     TTPushVC(vc);
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }

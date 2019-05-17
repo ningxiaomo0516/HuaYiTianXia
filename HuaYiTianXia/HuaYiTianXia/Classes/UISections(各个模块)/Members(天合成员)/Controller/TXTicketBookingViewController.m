@@ -114,7 +114,7 @@ static NSString* reuseIdentifierInfo = @"TXTicketInfoTableViewCell";
         UIAlertController *alerController = [UIAlertController addAlertReminderText:@"提示"
                                                                             message:@"是否立即实名认证?"
                                                                         cancelTitle:@"好的"
-                                                                            doTitle:@""//去设置
+                                                                            doTitle:@"去设置"//去设置
                                                                      preferredStyle:UIAlertControllerStyleAlert
                                                                         cancelBlock:nil doBlock:^{
                                                                             [self jumpSetRealNameRequest];

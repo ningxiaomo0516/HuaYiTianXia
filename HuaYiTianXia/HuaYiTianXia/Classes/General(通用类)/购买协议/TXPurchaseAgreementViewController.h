@@ -12,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface TXPurchaseAgreementViewController : TTBaseViewController
 @property (nonatomic, copy) NSString *webUrl;
+@property (nonatomic, copy) NSString *amountText;
 @end
 
 NS_ASSUME_NONNULL_END

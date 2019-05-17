@@ -55,7 +55,7 @@ NSString *const AviationShareH5 = @"yq/invation/ndex.html";
 /// 合作协议
 NSString *const CooperationAgreementH5 = @"yq/invation/cooperationAgreement.html";
 /// 农保电子协议
-NSString *const NBElectronicAgreementH5 = @"userHelp/nyzbAgrement.html";
+NSString *const NBElectronicAgreementH5 = @"userHelp/nyzbAgrement.html?id=";
 /// 培训详情(课程网页)
 NSString *const CourseDetailsH5 = @"userHelp/flightProductDetails.html?id=";
 

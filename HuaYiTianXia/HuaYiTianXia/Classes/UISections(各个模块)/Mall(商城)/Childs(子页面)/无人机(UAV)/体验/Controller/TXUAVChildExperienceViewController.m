@@ -142,6 +142,7 @@ static NSString* reuseIdentifierMall    = @"TXMallCollectionViewCell";
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     MallUAVListModel *listModel = self.dataArray[indexPath.row];
     TXUAVChildRecommendedViewController *vc = [[TXUAVChildRecommendedViewController alloc] initListModel:listModel];
+    vc.title = @"体验详情";
     TTPushVC(vc);
 }
 

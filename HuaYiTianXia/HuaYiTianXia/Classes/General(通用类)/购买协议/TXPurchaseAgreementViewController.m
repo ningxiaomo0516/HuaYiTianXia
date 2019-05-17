@@ -10,6 +10,7 @@
 #import <WebKit/WebKit.h>
 
 @interface TXPurchaseAgreementViewController ()<WKNavigationDelegate,WKUIDelegate>
+@property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) WKWebView *wkWebView;
 @property (nonatomic, strong) UIButton *reloadButton;
 @property (nonatomic, strong) UIProgressView *progress;
@@ -22,8 +23,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    [self.view lz_setCornerRadius:10.0];
     [self initView];
-    self.webUrl = @"http://www.baidu.com";
+    NSString *textStr = [NSString stringWithFormat:@"%@&money=%@",kUserInfo.userid,self.amountText];
+    self.webUrl = kAppendH5URL(DomainName, NBElectronicAgreementH5,textStr);
+//    self.webUrl = @"http://www.baidu.com";
     [self loadData];
 }
 
@@ -44,7 +48,10 @@
         self.wkWebView.hidden = NO;
         self.reloadButton.hidden = YES;
         [self.wkWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.webUrl]]];
-    }else if(sender.tag == 110){
+    }else if(sender.tag == 120){
+//        [self sc_dismissVC];
+        [kNotificationCenter postNotificationName:@"AgreeDealBlockNotice" object:nil];
+    }else{
         [self sc_dismissVC];
     }
 }
@@ -74,12 +81,13 @@
     }];
     [self.closeButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.height.equalTo(@(44));
-        make.bottom.left.equalTo(self.view);
-        make.right.equalTo(self.agreedButton.mas_left);
+        make.left.equalTo(@(10));
+        make.bottom.equalTo(self.view.mas_bottom).offset(-10);
+        make.right.equalTo(self.agreedButton.mas_left).offset(-5);
         make.width.equalTo(self.agreedButton);
     }];
     [self.agreedButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(self.view.mas_right);
+        make.right.equalTo(self.view.mas_right).offset(-10);
         make.width.height.centerY.equalTo(self.closeButton);
     }];
 }
@@ -90,6 +98,8 @@
     
     self.wkWebView.navigationDelegate = self;
     self.wkWebView.UIDelegate = self;
+    
+    self.view.backgroundColor = kWhiteColor;
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -161,9 +171,14 @@
     if (!_closeButton) {
         _closeButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [_closeButton setTitleColor:kTextColor51 forState:UIControlStateNormal];
-        [_closeButton setTitle:@"取消" forState:UIControlStateNormal];
+        [_closeButton setTitle:@"不同意" forState:UIControlStateNormal];
         _closeButton.titleLabel.font = kFontSizeMedium15;
         _closeButton.tag = 110;
+        [_closeButton lz_setCornerRadius:5.0];
+        [_closeButton setBorderColor:kColorWithRGB(214, 214, 214)];
+        [_closeButton setBorderWidth:1.0];
+        [_closeButton setBackgroundImage:imageColor(kWhiteColor) forState:UIControlStateNormal];
+        [_closeButton setBackgroundImage:imageColor(kTextColor244) forState:UIControlStateHighlighted];
         MV(weakSelf);
         [_closeButton lz_handleControlEvent:UIControlEventTouchUpInside withBlock:^{
             [weakSelf handleButtonTapped:weakSelf.closeButton];
@@ -175,10 +190,14 @@
 - (UIButton *)agreedButton{
     if (!_agreedButton) {
         _agreedButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_agreedButton setTitleColor:kTextColor51 forState:UIControlStateNormal];
+        [_agreedButton setTitleColor:kWhiteColor forState:UIControlStateNormal];
         [_agreedButton setTitle:@"确定" forState:UIControlStateNormal];
         _agreedButton.titleLabel.font = kFontSizeMedium15;
         _agreedButton.tag = 120;
+        [_agreedButton lz_setCornerRadius:5.0];
+        [_agreedButton setBorderColor:kTextColor51];
+        [_agreedButton setBackgroundImage:imageColor(kColorWithRGB(57, 148, 250)) forState:UIControlStateNormal];
+        [_agreedButton setBackgroundImage:imageColor(kColorWithRGB(51, 142, 244)) forState:UIControlStateHighlighted];
         MV(weakSelf);
         [_agreedButton lz_handleControlEvent:UIControlEventTouchUpInside withBlock:^{
             [weakSelf handleButtonTapped:weakSelf.agreedButton];
@@ -208,6 +227,13 @@
         DisableAutoAdjustScrollViewInsets(_wkWebView.scrollView, self);
     }
     return _wkWebView;
+}
+
+- (UILabel *)titleLabel{
+    if (!_titleLabel) {
+        _titleLabel = [UILabel lz_labelWithTitle:@"设备投资协议" color:kTextColor51 font:kFontSizeMedium15];
+    }
+    return _titleLabel;
 }
 
 @end

@@ -130,7 +130,7 @@ static NSString* reuseIdentifierMall = @"TXMallCollectionViewCell";
     if(indexPath.section==1){
         NewsRecordsModel *productModel = self.dataArray[indexPath.row];
         TXMallGoodsDetailsViewController *vc = [[TXMallGoodsDetailsViewController alloc] initMallProductModel:productModel];
-        vc.pageType = 0;
+        vc.pageType = 1;
         TTPushVC(vc);
     }
 }

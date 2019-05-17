@@ -364,7 +364,9 @@
         if ([result isKindOfClass:[NSDictionary class]]) {
             TXGeneralModel *model = [TXGeneralModel mj_objectWithKeyValues:result];
             if (model.errorcode == 20000) {
-                if (self.recommendedModel.data.deposit>0) {
+                TTLog(@"  --- %@",self.recommendedModel.data.deposit);
+                NSString *amountText = self.recommendedModel.data.deposit;
+                if (amountText.floatValue!=0) {
                     [self.showView addAnimate];
                 }else{
                     TXConventionSucceViewController *viewController = [[TXConventionSucceViewController alloc] init];

@@ -11,6 +11,7 @@
 #import "TXPayOrderVC.h"
 #import "TXWebViewController.h"
 #import "TXChoosePayViewController.h"
+#import "TXPurchaseAgreementViewController.h"
 
 @interface TXPayOrderViewController ()
 /// 关闭按钮
@@ -56,6 +57,7 @@
     
     // 注册通知(支付成功之后的处理)
     [kNotificationCenter addObserver:self selector:@selector(AlipaySuccessfulBlock) name:@"AlipaySuccessful" object:nil];
+    [kNotificationCenter addObserver:self selector:@selector(AgreeDealBlockNotice) name:@"AgreeDealBlockNotice" object:nil];
 }
 
 - (void)AlipaySuccessfulBlock{
@@ -118,6 +120,7 @@
     CGFloat price = [self.priceLabel.text floatValue];
     TTLog(@"price -- %f",price);
     self.priceLabel.text = [NSString stringWithFormat:@"%.2f",price += 1000.00];
+    self.totalPriceLabel.text = self.priceLabel.text;
 }
 
 /**
@@ -134,6 +137,7 @@
     }else{
         self.priceLabel.text = [NSString stringWithFormat:@"%.2f",price -= 1000.00];
     }
+    self.totalPriceLabel.text = self.priceLabel.text;
 }
 
 /**
@@ -143,15 +147,23 @@
  */
 - (IBAction)saveBtnClick:(id)sender {
     self.model.price = self.priceLabel.text;
-//    [self sc_dismissVC];
+    TXPurchaseAgreementViewController *vc = [[TXPurchaseAgreementViewController alloc] init];
+    vc.amountText = self.totalPriceLabel.text;
+    CGFloat widht = (kScreenWidth - 50);
+    [self sc_centerPresentController:vc presentedSize:CGSizeMake(widht, kHeight3to2) completeHandle:nil];
+}
+
+/// 用户点击同意按钮跳转至支付选择
+- (void) AgreeDealBlockNotice{
+    [self sc_dismissVC];
     int64_t delayInSeconds = 0.5;      // 延迟的时间
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
         self.model.purchaseType = 2;
-        TXChoosePayViewController *vc = [[TXChoosePayViewController alloc]initNewsRecordsModel:self.model];
+        TXChoosePayViewController *vc = [[TXChoosePayViewController alloc] initNewsRecordsModel:self.model];
         vc.pageType = 1;
         [self sc_bottomPresentController:vc presentedHeight:IPHONE6_W(400) completeHandle:^(BOOL presented) {
-
+            
         }];
     });
 }

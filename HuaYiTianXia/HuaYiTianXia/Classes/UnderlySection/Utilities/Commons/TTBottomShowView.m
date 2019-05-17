@@ -77,7 +77,7 @@ static NSString * const reuseIdentifierChoosePay = @"TXChoosePayTableViewCell";
     /// 前面文字颜色
     [mutableAttr addAttribute:NSForegroundColorAttributeName
                         value:kTextColor51
-                        range:NSMakeRange(0, amountText.length-text.length)];
+                        range:NSMakeRange(0, amountText.length-self.amountText.length)];
     self.subtitleLabel.attributedText = mutableAttr;
 }
 

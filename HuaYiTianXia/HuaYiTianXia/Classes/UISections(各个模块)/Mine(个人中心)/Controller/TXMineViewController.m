@@ -209,27 +209,29 @@ static NSString * const reuseIdentifierBanner = @"TXMineBannerTableViewCell";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     TXGeneralModel* model = self.dataArray[0][indexPath.row];
     NSString *className = model.showClass;
-    if ([model.showClass isEqualToString:@"TXRealNameViewController"]) {
-        if (kUserInfo.isValidation==0) {
-            TXRealNameViewController *vc = [[TXRealNameViewController alloc] init];
+    if (indexPath.section==2) {
+        if ([model.showClass isEqualToString:@"TXRealNameViewController"]) {
+            if (kUserInfo.isValidation==0) {
+                TXRealNameViewController *vc = [[TXRealNameViewController alloc] init];
+                vc.title = model.title;
+                vc.typePage = 0;
+                TTPushVC(vc);
+            }
+        }else if([model.showClass isEqualToString:@"TXWebViewController"]){
+            TXWebViewController *vc = [[TXWebViewController alloc] init];
             vc.title = model.title;
-            vc.typePage = 0;
+            vc.webUrl = kAppendH5URL(DomainName, InvataionH5,@"");
             TTPushVC(vc);
+        }else{
+            Class controller = NSClassFromString(className);
+            //    id controller = [[NSClassFromString(className) alloc] init];
+            if (controller &&  [controller isSubclassOfClass:[UIViewController class]]){
+                UIViewController *vc = [[controller alloc] init];
+                vc.title = model.title;
+                TTPushVC(vc);
+            }
         }
-    }else if([model.showClass isEqualToString:@"TXWebViewController"]){
-        TXWebViewController *vc = [[TXWebViewController alloc] init];
-        vc.title = model.title;
-        vc.webUrl = kAppendH5URL(DomainName, InvataionH5,@"");
-        TTPushVC(vc);
-    }else{
-        Class controller = NSClassFromString(className);
-        //    id controller = [[NSClassFromString(className) alloc] init];
-        if (controller &&  [controller isSubclassOfClass:[UIViewController class]]){
-            UIViewController *vc = [[controller alloc] init];
-            vc.title = model.title;
-            TTPushVC(vc);
-        }
-    }    
+    }
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
