@@ -126,6 +126,7 @@ static NSString * const reuseIdentifierGoodsH5 = @"TXGoodsH5TableViewCell";
     if (!webCell) {
         webCell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"WebViewCell"];
     }
+    webCell.contentView.backgroundColor = kClearColor;
     [webCell.contentView addSubview:self.scrollView];
     return webCell;
 }

@@ -239,7 +239,6 @@
 		E77F87512274316C004EB9C1 /* TTRollLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = E77F87502274316C004EB9C1 /* TTRollLabel.m */; };
 		E782AB4E2285698000CE2F81 /* TXAddTitleAddressView.m in Sources */ = {isa = PBXBuildFile; fileRef = E782AB4D2285698000CE2F81 /* TXAddTitleAddressView.m */; };
 		E7832222228CF4D70081F6E0 /* TXCourseReservationView.m in Sources */ = {isa = PBXBuildFile; fileRef = E7832221228CF4D70081F6E0 /* TXCourseReservationView.m */; };
-		E7832225228D93A10081F6E0 /* TXUAVChildDetailsExperienceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7832224228D93A00081F6E0 /* TXUAVChildDetailsExperienceViewController.m */; };
 		E7832229228DA40B0081F6E0 /* TXPurchaseAgreementViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7832228228DA40B0081F6E0 /* TXPurchaseAgreementViewController.m */; };
 		E78333DB22487913005CAB91 /* TXLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E78333D922487913005CAB91 /* TXLoginViewController.m */; };
 		E78333DC22487913005CAB91 /* TXLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E78333DA22487913005CAB91 /* TXLoginViewController.xib */; };
@@ -810,8 +809,6 @@
 		E782AB4D2285698000CE2F81 /* TXAddTitleAddressView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXAddTitleAddressView.m; sourceTree = "<group>"; };
 		E7832220228CF4D70081F6E0 /* TXCourseReservationView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXCourseReservationView.h; sourceTree = "<group>"; };
 		E7832221228CF4D70081F6E0 /* TXCourseReservationView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXCourseReservationView.m; sourceTree = "<group>"; };
-		E7832223228D93A00081F6E0 /* TXUAVChildDetailsExperienceViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXUAVChildDetailsExperienceViewController.h; sourceTree = "<group>"; };
-		E7832224228D93A00081F6E0 /* TXUAVChildDetailsExperienceViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXUAVChildDetailsExperienceViewController.m; sourceTree = "<group>"; };
 		E7832227228DA40B0081F6E0 /* TXPurchaseAgreementViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXPurchaseAgreementViewController.h; sourceTree = "<group>"; };
 		E7832228228DA40B0081F6E0 /* TXPurchaseAgreementViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXPurchaseAgreementViewController.m; sourceTree = "<group>"; };
 		E78333D822487913005CAB91 /* TXLoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXLoginViewController.h; sourceTree = "<group>"; };
@@ -1722,8 +1719,6 @@
 		E74C0021228AD94000576B86 /* ChildVC(子页面) */ = {
 			isa = PBXGroup;
 			children = (
-				E7832223228D93A00081F6E0 /* TXUAVChildDetailsExperienceViewController.h */,
-				E7832224228D93A00081F6E0 /* TXUAVChildDetailsExperienceViewController.m */,
 			);
 			path = "ChildVC(子页面)";
 			sourceTree = "<group>";
@@ -3858,7 +3853,6 @@
 				E78583C722408F1F00BBEA41 /* TXMineHeaderTableViewCell.m in Sources */,
 				E753D1F32249D3B200A2DD36 /* UIViewController+SCPopover.m in Sources */,
 				E74C0016228A95CE00576B86 /* TXUAVExperienceChildTableViewCell.m in Sources */,
-				E7832225228D93A10081F6E0 /* TXUAVChildDetailsExperienceViewController.m in Sources */,
 				E7691ED52255A809006A94D9 /* TXResetTradingViewController.m in Sources */,
 				E78583BA223F947600BBEA41 /* Utils.m in Sources */,
 				E74C0013228A953800576B86 /* TXUAVExperienceViewController.m in Sources */,
