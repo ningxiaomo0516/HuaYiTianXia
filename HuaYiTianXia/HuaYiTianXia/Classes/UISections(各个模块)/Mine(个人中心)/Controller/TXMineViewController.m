@@ -146,6 +146,7 @@ static NSString * const reuseIdentifierBanner = @"TXMineBannerTableViewCell";
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     self.navigationController.navigationBar.hidden = YES;
+    [self.tableView reloadData];
 }
 
 #pragma mark - Table view data source

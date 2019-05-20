@@ -53,7 +53,7 @@ NSString *const vrAgreementH5 = @"yq/invation/vrAgreement.html";
 /// 民航共享
 NSString *const AviationShareH5 = @"yq/invation/ndex.html";
 /// 合作协议
-NSString *const CooperationAgreementH5 = @"yq/invation/cooperationAgreement.html";
+NSString *const CooperationAgreementH5 = @"/userHelp/lookNyzbAgrement.html?id=";
 /// 农保电子协议
 NSString *const NBElectronicAgreementH5 = @"userHelp/nyzbAgrement.html?id=";
 /// 培训详情(课程网页)

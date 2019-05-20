@@ -225,20 +225,14 @@
     kShowMBProgressHUD(self.view);
     [SCHttpTools postWithURLString:kHttpURL(@"customer/Certification") parameter:parameter success:^(id responseObject) {
         NSDictionary *result = responseObject;
+        TTLog(@" ---- %@",[Utils lz_dataWithJSONObject:result]);
         if ([result isKindOfClass:[NSDictionary class]]) {
-            TTUserDataModel *model = [TTUserDataModel mj_objectWithKeyValues:result];
-            TTUserModel *userModel = model.data;
+            TXGeneralModel *model = [TXGeneralModel mj_objectWithKeyValues:result];
+            Toast(model.message);
             if (model.errorcode == 20000) {
-                self.nickNameTextField.text = userModel.username;
-                if (userModel.idnumber.length>14) {
-                    self.idnumberTextField.text = [SCSmallTools idCardNumber:userModel.idnumber];
-                }
-                self.sexLabel.text = (userModel.sex==0)?@"男":@"女";
-                [self.imageView1 sd_setImageWithURL:kGetImageURL(userModel.imgz) placeholderImage:kGetImage(VERTICALMAPBITMAP)];
-                [self.imageView2 sd_setImageWithURL:kGetImageURL(userModel.imgb) placeholderImage:kGetImage(VERTICALMAPBITMAP)];
-                [self.tableView reloadData];
-            }else{
-                Toast(model.message);
+                /// 更新实名认证本地状态
+                [kNotificationCenter postNotificationName:@"reloadMineData" object:nil];
+                [self.navigationController popViewControllerAnimated:YES];
             }
         }else{
             Toast(@"认证数据获取失败");
@@ -337,7 +331,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.row==1&&self.typePage==0) {
-        [self showSexActionSheet:@[@"女",@"男"]];
+        [self showSexActionSheet:@[@"男",@"女"]];
     }
     if (indexPath.row==4&&self.typePage==0) {
         [self.addTitleAddressView addAnimate];

@@ -65,10 +65,10 @@ static NSString * const reuseIdentifier = @"TXProductTableViewCell";
 }
 
 //// 跳转查看合同
-- (void) jumpWebViewController{
+- (void) jumpWebViewController:(NSString *)kid{
     TXWebViewController *vc = [[TXWebViewController alloc] init];
     vc.title = @"农用植保合作协议";
-    vc.webUrl = kAppendH5URL(DomainName, CooperationAgreementH5, @"");
+    vc.webUrl = kAppendH5URL(DomainName, CooperationAgreementH5, kid);
     TTPushVC(vc);
 }
 
@@ -89,7 +89,7 @@ static NSString * const reuseIdentifier = @"TXProductTableViewCell";
     cell.lookContractBtn.tag = indexPath.section;
     [cell.lookContractBtn lz_handleControlEvent:UIControlEventTouchUpInside withBlock:^{
         /// 查看合同
-        [self jumpWebViewController];
+        [self jumpWebViewController:cell.orderModel.kid];
     }];
     return cell;
 }

@@ -45,7 +45,7 @@ static NSString * const reuseIdentifierRollout = @"TXRolloutTableViewCell";
             TXGeneralModel *model = [TXGeneralModel mj_objectWithKeyValues:result];
             if (model.errorcode==20000) {
                 Toast(@"复投成功");
-                [kNotificationCenter addObserver:self selector:@selector(reloadData) name:@"reloadMineData" object:nil];
+                [kNotificationCenter postNotificationName:@"reloadMineData" object:nil];
                 [self.navigationController popViewControllerAnimated:YES];
             }else{
                 Toast(model.message);
