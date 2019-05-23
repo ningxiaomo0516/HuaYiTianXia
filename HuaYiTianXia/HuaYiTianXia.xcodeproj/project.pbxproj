@@ -227,7 +227,6 @@
 		E7759AE32244CDC3007DA6CF /* TXSwitchTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7759AE22244CDC3007DA6CF /* TXSwitchTableViewCell.m */; };
 		E7759AEA2244DD6C007DA6CF /* TXMembersBannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = E7759AE92244DD6C007DA6CF /* TXMembersBannerView.m */; };
 		E778DE64227065B800D6F0E7 /* TXPushMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E778DE63227065B800D6F0E7 /* TXPushMessageViewController.m */; };
-		E77BC13B224F6A31008440C9 /* TXTeamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E77BC13A224F6A31008440C9 /* TXTeamModel.m */; };
 		E77BC13F224F7321008440C9 /* TXOrderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E77BC13E224F7321008440C9 /* TXOrderModel.m */; };
 		E77F6539225C3A0E0017B4C8 /* TTNumbeKeyboard.bundle in Resources */ = {isa = PBXBuildFile; fileRef = E77F6533225C3A0E0017B4C8 /* TTNumbeKeyboard.bundle */; };
 		E77F653A225C3A0E0017B4C8 /* RYNumberKeyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = E77F6535225C3A0E0017B4C8 /* RYNumberKeyboard.m */; };
@@ -249,6 +248,13 @@
 		E78333FC2248D0B1005CAB91 /* SCCustomMarginLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = E78333FB2248D0B1005CAB91 /* SCCustomMarginLabel.m */; };
 		E78334082248DE2F005CAB91 /* TTPopupBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = E78334042248DE2F005CAB91 /* TTPopupBackgroundView.m */; };
 		E78334092248DE2F005CAB91 /* UIViewController+TTPopupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E78334062248DE2F005CAB91 /* UIViewController+TTPopupViewController.m */; };
+		E7837840229678BD0020C823 /* TXInvitationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7837839229678BC0020C823 /* TXInvitationViewController.m */; };
+		E7837841229678BD0020C823 /* TXInvitationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E783783C229678BC0020C823 /* TXInvitationModel.m */; };
+		E7837842229678BD0020C823 /* TXInvitationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E783783F229678BC0020C823 /* TXInvitationTableViewCell.m */; };
+		E783784822967BFF0020C823 /* TXMineTeamViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E783784722967BFF0020C823 /* TXMineTeamViewController.m */; };
+		E783784B22967C4F0020C823 /* TXMineTeamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E783784A22967C4F0020C823 /* TXMineTeamModel.m */; };
+		E783784E22967C630020C823 /* TXMineTeamTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E783784D22967C630020C823 /* TXMineTeamTableViewCell.m */; };
+		E7837851229680820020C823 /* TXMineTeamHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = E7837850229680820020C823 /* TXMineTeamHeaderView.m */; };
 		E78583BA223F947600BBEA41 /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = E78583B8223F947500BBEA41 /* Utils.m */; };
 		E78583BE223F967D00BBEA41 /* SCTableViewSectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = E78583BC223F967C00BBEA41 /* SCTableViewSectionHeaderView.m */; };
 		E78583C1223F98A800BBEA41 /* TXNewTemplateTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E78583C0223F98A800BBEA41 /* TXNewTemplateTableViewCell.m */; };
@@ -258,7 +264,6 @@
 		E78583CD22409E6D00BBEA41 /* TXMineBannerTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E78583CC22409E6D00BBEA41 /* TXMineBannerTableViewCell.m */; };
 		E78583D02240BD5A00BBEA41 /* TXGeneralModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E78583CF2240BD5A00BBEA41 /* TXGeneralModel.m */; };
 		E78583EF2240C29300BBEA41 /* TXOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E78583EE2240C29300BBEA41 /* TXOrderViewController.m */; };
-		E78583F22240C29E00BBEA41 /* TXTeamViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E78583F12240C29E00BBEA41 /* TXTeamViewController.m */; };
 		E78583F52240C2AF00BBEA41 /* TXWalletViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E78583F42240C2AF00BBEA41 /* TXWalletViewController.m */; };
 		E78583F82240C2BE00BBEA41 /* TXSetupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E78583F72240C2BE00BBEA41 /* TXSetupViewController.m */; };
 		E78584032240C54300BBEA41 /* TYPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = E78583FF2240C54200BBEA41 /* TYPageControl.m */; };
@@ -369,7 +374,6 @@
 		E7F1A7172242123A003FA216 /* TXRealNameViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7F1A7152242123A003FA216 /* TXRealNameViewController.xib */; };
 		E7F1A72B22423F92003FA216 /* TXPersonalInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7F1A72722423F91003FA216 /* TXPersonalInfoViewController.m */; };
 		E7F1A72C22423F92003FA216 /* TXAccountSecurityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7F1A72922423F91003FA216 /* TXAccountSecurityViewController.m */; };
-		E7F1A732224248D4003FA216 /* TXTeamTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7F1A731224248D4003FA216 /* TXTeamTableViewCell.m */; };
 		E7F1A73522427264003FA216 /* TTBaseNavImagesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7F1A73422427264003FA216 /* TTBaseNavImagesViewController.m */; };
 		E7FBBCD122642E76009B9FC2 /* TXRolloutHeaderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7FBBCD022642E76009B9FC2 /* TXRolloutHeaderTableViewCell.m */; };
 /* End PBXBuildFile section */
@@ -787,8 +791,6 @@
 		E7759AE92244DD6C007DA6CF /* TXMembersBannerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXMembersBannerView.m; sourceTree = "<group>"; };
 		E778DE62227065B800D6F0E7 /* TXPushMessageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXPushMessageViewController.h; sourceTree = "<group>"; };
 		E778DE63227065B800D6F0E7 /* TXPushMessageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXPushMessageViewController.m; sourceTree = "<group>"; };
-		E77BC139224F6A31008440C9 /* TXTeamModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXTeamModel.h; sourceTree = "<group>"; };
-		E77BC13A224F6A31008440C9 /* TXTeamModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXTeamModel.m; sourceTree = "<group>"; };
 		E77BC13D224F7321008440C9 /* TXOrderModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXOrderModel.h; sourceTree = "<group>"; };
 		E77BC13E224F7321008440C9 /* TXOrderModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXOrderModel.m; sourceTree = "<group>"; };
 		E77F6533225C3A0E0017B4C8 /* TTNumbeKeyboard.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = TTNumbeKeyboard.bundle; sourceTree = "<group>"; };
@@ -828,6 +830,20 @@
 		E78334042248DE2F005CAB91 /* TTPopupBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTPopupBackgroundView.m; sourceTree = "<group>"; };
 		E78334052248DE2F005CAB91 /* UIViewController+TTPopupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+TTPopupViewController.h"; sourceTree = "<group>"; };
 		E78334062248DE2F005CAB91 /* UIViewController+TTPopupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+TTPopupViewController.m"; sourceTree = "<group>"; };
+		E7837838229678BC0020C823 /* TXInvitationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXInvitationViewController.h; sourceTree = "<group>"; };
+		E7837839229678BC0020C823 /* TXInvitationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TXInvitationViewController.m; sourceTree = "<group>"; };
+		E783783B229678BC0020C823 /* TXInvitationModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXInvitationModel.h; sourceTree = "<group>"; };
+		E783783C229678BC0020C823 /* TXInvitationModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TXInvitationModel.m; sourceTree = "<group>"; };
+		E783783E229678BC0020C823 /* TXInvitationTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXInvitationTableViewCell.h; sourceTree = "<group>"; };
+		E783783F229678BC0020C823 /* TXInvitationTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TXInvitationTableViewCell.m; sourceTree = "<group>"; };
+		E783784622967BFF0020C823 /* TXMineTeamViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXMineTeamViewController.h; sourceTree = "<group>"; };
+		E783784722967BFF0020C823 /* TXMineTeamViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXMineTeamViewController.m; sourceTree = "<group>"; };
+		E783784922967C4F0020C823 /* TXMineTeamModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXMineTeamModel.h; sourceTree = "<group>"; };
+		E783784A22967C4F0020C823 /* TXMineTeamModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXMineTeamModel.m; sourceTree = "<group>"; };
+		E783784C22967C630020C823 /* TXMineTeamTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXMineTeamTableViewCell.h; sourceTree = "<group>"; };
+		E783784D22967C630020C823 /* TXMineTeamTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXMineTeamTableViewCell.m; sourceTree = "<group>"; };
+		E783784F229680820020C823 /* TXMineTeamHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXMineTeamHeaderView.h; sourceTree = "<group>"; };
+		E7837850229680820020C823 /* TXMineTeamHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXMineTeamHeaderView.m; sourceTree = "<group>"; };
 		E78583B8223F947500BBEA41 /* Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utils.m; sourceTree = "<group>"; };
 		E78583B9223F947600BBEA41 /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
 		E78583BC223F967C00BBEA41 /* SCTableViewSectionHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCTableViewSectionHeaderView.m; sourceTree = "<group>"; };
@@ -846,8 +862,6 @@
 		E78583CF2240BD5A00BBEA41 /* TXGeneralModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXGeneralModel.m; sourceTree = "<group>"; };
 		E78583ED2240C29300BBEA41 /* TXOrderViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXOrderViewController.h; sourceTree = "<group>"; };
 		E78583EE2240C29300BBEA41 /* TXOrderViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXOrderViewController.m; sourceTree = "<group>"; };
-		E78583F02240C29E00BBEA41 /* TXTeamViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXTeamViewController.h; sourceTree = "<group>"; };
-		E78583F12240C29E00BBEA41 /* TXTeamViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXTeamViewController.m; sourceTree = "<group>"; };
 		E78583F32240C2AF00BBEA41 /* TXWalletViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXWalletViewController.h; sourceTree = "<group>"; };
 		E78583F42240C2AF00BBEA41 /* TXWalletViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXWalletViewController.m; sourceTree = "<group>"; };
 		E78583F62240C2BE00BBEA41 /* TXSetupViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXSetupViewController.h; sourceTree = "<group>"; };
@@ -1053,8 +1067,6 @@
 		E7F1A72722423F91003FA216 /* TXPersonalInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TXPersonalInfoViewController.m; sourceTree = "<group>"; };
 		E7F1A72822423F91003FA216 /* TXPersonalInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXPersonalInfoViewController.h; sourceTree = "<group>"; };
 		E7F1A72922423F91003FA216 /* TXAccountSecurityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TXAccountSecurityViewController.m; sourceTree = "<group>"; };
-		E7F1A730224248D4003FA216 /* TXTeamTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXTeamTableViewCell.h; sourceTree = "<group>"; };
-		E7F1A731224248D4003FA216 /* TXTeamTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXTeamTableViewCell.m; sourceTree = "<group>"; };
 		E7F1A73322427264003FA216 /* TTBaseNavImagesViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TTBaseNavImagesViewController.h; sourceTree = "<group>"; };
 		E7F1A73422427264003FA216 /* TTBaseNavImagesViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TTBaseNavImagesViewController.m; sourceTree = "<group>"; };
 		E7FBBCCF22642E76009B9FC2 /* TXRolloutHeaderTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXRolloutHeaderTableViewCell.h; sourceTree = "<group>"; };
@@ -2465,15 +2477,6 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		E77BC138224F6A1B008440C9 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				E77BC139224F6A31008440C9 /* TXTeamModel.h */,
-				E77BC13A224F6A31008440C9 /* TXTeamModel.m */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
 		E77BC13C224F730D008440C9 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -2587,6 +2590,72 @@
 			path = TTPopupView;
 			sourceTree = "<group>";
 		};
+		E7837836229678BC0020C823 /* Invitation(我的邀请) */ = {
+			isa = PBXGroup;
+			children = (
+				E7837837229678BC0020C823 /* Controller */,
+				E783783A229678BC0020C823 /* Model */,
+				E783783D229678BC0020C823 /* View */,
+			);
+			path = "Invitation(我的邀请)";
+			sourceTree = "<group>";
+		};
+		E7837837229678BC0020C823 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				E7837838229678BC0020C823 /* TXInvitationViewController.h */,
+				E7837839229678BC0020C823 /* TXInvitationViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		E783783A229678BC0020C823 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				E783783B229678BC0020C823 /* TXInvitationModel.h */,
+				E783783C229678BC0020C823 /* TXInvitationModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		E783783D229678BC0020C823 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E783783E229678BC0020C823 /* TXInvitationTableViewCell.h */,
+				E783783F229678BC0020C823 /* TXInvitationTableViewCell.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		E783784322967BC00020C823 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				E783784922967C4F0020C823 /* TXMineTeamModel.h */,
+				E783784A22967C4F0020C823 /* TXMineTeamModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		E783784422967BC10020C823 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				E783784622967BFF0020C823 /* TXMineTeamViewController.h */,
+				E783784722967BFF0020C823 /* TXMineTeamViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		E783784522967BC10020C823 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E783784C22967C630020C823 /* TXMineTeamTableViewCell.h */,
+				E783784D22967C630020C823 /* TXMineTeamTableViewCell.m */,
+				E783784F229680820020C823 /* TXMineTeamHeaderView.h */,
+				E7837850229680820020C823 /* TXMineTeamHeaderView.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		E78583BB223F967800BBEA41 /* Templet(模板) */ = {
 			isa = PBXGroup;
 			children = (
@@ -2607,6 +2676,7 @@
 		E78583D12240C23D00BBEA41 /* Childs(子页面) */ = {
 			isa = PBXGroup;
 			children = (
+				E7837836229678BC0020C823 /* Invitation(我的邀请) */,
 				E778DE5F2270659500D6F0E7 /* PushMessage(消息) */,
 				E78583D22240C23D00BBEA41 /* RealName(实名认证) */,
 				E78583D62240C23D00BBEA41 /* Order(订单中心) */,
@@ -2681,29 +2751,11 @@
 		E78583DA2240C23D00BBEA41 /* Team(我的团队) */ = {
 			isa = PBXGroup;
 			children = (
-				E78583DB2240C23D00BBEA41 /* Controller */,
-				E77BC138224F6A1B008440C9 /* Model */,
-				E78583DD2240C23D00BBEA41 /* View */,
+				E783784422967BC10020C823 /* Controller */,
+				E783784322967BC00020C823 /* Model */,
+				E783784522967BC10020C823 /* View */,
 			);
 			path = "Team(我的团队)";
-			sourceTree = "<group>";
-		};
-		E78583DB2240C23D00BBEA41 /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				E78583F02240C29E00BBEA41 /* TXTeamViewController.h */,
-				E78583F12240C29E00BBEA41 /* TXTeamViewController.m */,
-			);
-			path = Controller;
-			sourceTree = "<group>";
-		};
-		E78583DD2240C23D00BBEA41 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				E7F1A730224248D4003FA216 /* TXTeamTableViewCell.h */,
-				E7F1A731224248D4003FA216 /* TXTeamTableViewCell.m */,
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 		E78583DE2240C23D00BBEA41 /* Wallet(我的钱包) */ = {
@@ -3627,6 +3679,7 @@
 				E7F1A70F224205A2003FA216 /* TTBaseSectionHeaderView.m in Sources */,
 				E7B4704422803A3000ADDC7A /* FMGroupsCityTableViewCell.m in Sources */,
 				E76D9C5222602EE8009D1A23 /* TXPayOrderViewController.m in Sources */,
+				E783784822967BFF0020C823 /* TXMineTeamViewController.m in Sources */,
 				E74CFFCE2289093800576B86 /* TXMallUAVAdCollectionViewCell.m in Sources */,
 				E76E681122818C2F00B035B9 /* UIView+TTEmpty.m in Sources */,
 				E7B4704B22803A7C00ADDC7A /* FMSelectedCityModel.m in Sources */,
@@ -3690,7 +3743,6 @@
 				E769B28A2277E4070049EF73 /* SCDropDownMenuView.m in Sources */,
 				E7C9FCF522675AA2008FD260 /* TXTicketOrderViewController.m in Sources */,
 				E78B8F80225B32BC0052852C /* TTPickerListView.m in Sources */,
-				E78583F22240C29E00BBEA41 /* TXTeamViewController.m in Sources */,
 				E72699E0223F7F58003A5043 /* UIView+SCTapped.m in Sources */,
 				E72699A9223F7ECC003A5043 /* NSString+PinYin.m in Sources */,
 				E7F1A7002241EF16003FA216 /* TXProductViewController.m in Sources */,
@@ -3741,6 +3793,7 @@
 				E78DCACF226575ED00252314 /* TTGuidePagesViewController.m in Sources */,
 				E7DCD612226DCC2B00AE8DE8 /* TXBecomeVipHeaderView.m in Sources */,
 				E74CFF702288360100576B86 /* TTTemplateThreeTableViewCell.m in Sources */,
+				E7837841229678BD0020C823 /* TXInvitationModel.m in Sources */,
 				E756988D2251BE460022EC49 /* TXAddressModel.m in Sources */,
 				E74C0032228B01F300576B86 /* TXYuYueShenQingViewController.m in Sources */,
 				E7691EEE2255F8C4006A94D9 /* TXForgetTradingViewController.m in Sources */,
@@ -3755,6 +3808,7 @@
 				E78DCAD92265BFEF00252314 /* TXMembersbleCollectionViewCell.m in Sources */,
 				E7B4706522803BBD00ADDC7A /* LZHanyuPinyinOutputFormat.m in Sources */,
 				E74CFFBA2289086B00576B86 /* TXMallHotTableViewCell.m in Sources */,
+				E783784B22967C4F0020C823 /* TXMineTeamModel.m in Sources */,
 				E74C964322678358000CBAF0 /* TXAdsViewController.m in Sources */,
 				E72699E2223F7F58003A5043 /* UIImage+Extension.m in Sources */,
 				E7F1A7092241F298003FA216 /* TXProductTableViewCell.m in Sources */,
@@ -3784,6 +3838,7 @@
 				E74C001C228AB71800576B86 /* TXVideoTableViewCell.m in Sources */,
 				E74C0019228A98CB00576B86 /* TXUAVExperienceChildCollectionViewCell.m in Sources */,
 				E78DCADC2265C70D00252314 /* TXTicketScreeningViewController.m in Sources */,
+				E7837851229680820020C823 /* TXMineTeamHeaderView.m in Sources */,
 				E7F1A72C22423F92003FA216 /* TXAccountSecurityViewController.m in Sources */,
 				E74CFFBD2289086B00576B86 /* TXShareViewController.m in Sources */,
 				E74CFFB62289086B00576B86 /* TXUAvCollectionViewCell.m in Sources */,
@@ -3852,6 +3907,7 @@
 				E7759AD62244BB65007DA6CF /* TXAddressAddViewController.m in Sources */,
 				E78583C722408F1F00BBEA41 /* TXMineHeaderTableViewCell.m in Sources */,
 				E753D1F32249D3B200A2DD36 /* UIViewController+SCPopover.m in Sources */,
+				E783784E22967C630020C823 /* TXMineTeamTableViewCell.m in Sources */,
 				E74C0016228A95CE00576B86 /* TXUAVExperienceChildTableViewCell.m in Sources */,
 				E7691ED52255A809006A94D9 /* TXResetTradingViewController.m in Sources */,
 				E78583BA223F947600BBEA41 /* Utils.m in Sources */,
@@ -3861,13 +3917,13 @@
 				E78DCAE62265D12000252314 /* NSDate+LZAdd.m in Sources */,
 				E74CFFDA2289726400576B86 /* TXMallUAVRecommendTableViewCell.m in Sources */,
 				E773264F22545BE400FD665A /* UIAlertController+SCExtension.m in Sources */,
-				E7F1A732224248D4003FA216 /* TXTeamTableViewCell.m in Sources */,
 				E74CFFC42289086B00576B86 /* TXShareToolsCollectionViewCell.m in Sources */,
 				E74CFFBE2289086B00576B86 /* TXBuyCountTableViewCell.m in Sources */,
 				E78DCAE52265D12000252314 /* LZDatePickerView.m in Sources */,
 				E769B2A0227820DF0049EF73 /* TXMessageChildAdsViewController.m in Sources */,
 				E74C000F228A953800576B86 /* TXUAVExperienceTableViewCell.m in Sources */,
 				E7759AB522447DC0007DA6CF /* SCLocalCacheTool.m in Sources */,
+				E7837840229678BD0020C823 /* TXInvitationViewController.m in Sources */,
 				E7759AEA2244DD6C007DA6CF /* TXMembersBannerView.m in Sources */,
 				E78583BE223F967D00BBEA41 /* SCTableViewSectionHeaderView.m in Sources */,
 				E7C9FCE722671023008FD260 /* TXTicketBookingViewController.m in Sources */,
@@ -3879,6 +3935,7 @@
 				E7AA9DD72243735A00C15483 /* TXEquityViewController.m in Sources */,
 				E774DCF122730FC6001A95B8 /* TXAdsGiftViewController.m in Sources */,
 				E750422F228C25CD00A34006 /* TXConventionSucceViewController.m in Sources */,
+				E7837842229678BD0020C823 /* TXInvitationTableViewCell.m in Sources */,
 				E7269A04223F8738003A5043 /* TXMainHeaderView.m in Sources */,
 				E782AB4E2285698000CE2F81 /* TXAddTitleAddressView.m in Sources */,
 				E74CFFCB2289091A00576B86 /* TXMallUAVHotCollectionViewCell.m in Sources */,
@@ -3889,7 +3946,6 @@
 				E753D1F22249D3B200A2DD36 /* SCPresentationController.m in Sources */,
 				E74C0012228A953800576B86 /* TXUAVExperienceMainViewController.m in Sources */,
 				E78583D02240BD5A00BBEA41 /* TXGeneralModel.m in Sources */,
-				E77BC13B224F6A31008440C9 /* TXTeamModel.m in Sources */,
 				E72699E5223F7F58003A5043 /* UITextField+Extension.m in Sources */,
 				E78DCAD62265BC9200252314 /* TTBannerModel.m in Sources */,
 				E774DCF622730FD9001A95B8 /* TXReceiveGiftListTableViewCell.m in Sources */,

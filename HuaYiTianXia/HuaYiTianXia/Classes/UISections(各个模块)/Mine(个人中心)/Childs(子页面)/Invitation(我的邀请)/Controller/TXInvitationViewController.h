@@ -1,5 +1,5 @@
 //
-//  TXTeamViewController.h
+//  TXInvitationViewController.h
 //  HuaYiTianXia
 //
 //  Created by 宁小陌 on 2019/3/19.
@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface TXTeamViewController : TTBaseTableViewController
+@interface TXInvitationViewController : TTBaseTableViewController
 
 @end
 

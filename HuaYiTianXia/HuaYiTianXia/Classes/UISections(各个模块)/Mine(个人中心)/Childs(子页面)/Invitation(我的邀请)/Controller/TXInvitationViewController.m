@@ -1,18 +1,18 @@
 //
-//  TXTeamViewController.m
+//  TXInvitationViewController.m
 //  HuaYiTianXia
 //
 //  Created by 宁小陌 on 2019/3/19.
 //  Copyright © 2019 宁小陌. All rights reserved.
 //
 
-#import "TXTeamViewController.h"
-#import "TXTeamTableViewCell.h"
-#import "TXTeamModel.h"
+#import "TXInvitationViewController.h"
+#import "TXInvitationTableViewCell.h"
+#import "TXInvitationModel.h"
 
-static NSString * const reuseIdentifier = @"TXTeamTableViewCell";
+static NSString * const reuseIdentifier = @"TXInvitationTableViewCell";
 
-@interface TXTeamViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface TXInvitationViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *dataArray;
 @property (nonatomic, strong) SCNoDataView *noDataView;
@@ -23,7 +23,7 @@ static NSString * const reuseIdentifier = @"TXTeamTableViewCell";
 @end
 
 
-@implementation TXTeamViewController
+@implementation TXInvitationViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -55,7 +55,7 @@ static NSString * const reuseIdentifier = @"TXTeamTableViewCell";
     [SCHttpTools postWithURLString:kHttpURL(@"customer/MyTeamNew") parameter:parameter success:^(id responseObject) {
         NSDictionary *result = responseObject;
         if ([result isKindOfClass:[NSDictionary class]]) {
-            TXTeamModel *model = [TXTeamModel mj_objectWithKeyValues:result];
+            TXInvitationModel *model = [TXInvitationModel mj_objectWithKeyValues:result];
             if (model.errorcode == 20000) {
                 if (self.pageIndex==1) {
                     [self.dataArray removeAllObjects];
@@ -65,7 +65,7 @@ static NSString * const reuseIdentifier = @"TXTeamTableViewCell";
                 Toast(model.message);
             }
         }else{
-            Toast(@"我的团队数据获取失败");
+            Toast(@"我的邀请数据获取失败");
         }
         [self analysisData];
         [self.view dismissLoadingView];
@@ -98,8 +98,8 @@ static NSString * const reuseIdentifier = @"TXTeamTableViewCell";
 
 #pragma mark - Table view data source
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    TXTeamTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
-    cell.teamModel = self.dataArray[indexPath.section];
+    TXInvitationTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
+    cell.invitationModel = self.dataArray[indexPath.section];
     return cell;
 }
 
@@ -130,7 +130,7 @@ static NSString * const reuseIdentifier = @"TXTeamTableViewCell";
     if (!_tableView) {
         _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
         _tableView.showsVerticalScrollIndicator = false;
-        [_tableView registerClass:[TXTeamTableViewCell class] forCellReuseIdentifier:reuseIdentifier];
+        [_tableView registerClass:[TXInvitationTableViewCell class] forCellReuseIdentifier:reuseIdentifier];
         [_tableView setSeparatorInset:UIEdgeInsetsMake(0,0,0,0)];
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _tableView.delegate = self;

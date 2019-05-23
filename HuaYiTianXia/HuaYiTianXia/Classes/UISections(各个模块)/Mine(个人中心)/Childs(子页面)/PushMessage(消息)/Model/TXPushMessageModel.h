@@ -80,7 +80,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *noID;
 /// 消息ID
 @property (nonatomic, copy) NSString *kid;
-/// 2：转出记录 3：转入记录 4：后台公告 5：通知 6：新闻详情 7：直接跳转到“我的团队”
+/// 2：转出记录 3：转入记录 4：后台公告 5：通知 6：新闻详情 7：直接跳转到“我邀请团队”
 @property (nonatomic, assign) NSInteger messageType;
 @end
 

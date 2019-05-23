@@ -7,11 +7,22 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "TTBaseTableViewController.h"
 NS_ASSUME_NONNULL_BEGIN
 
-@interface TXMineViewController : TTBaseViewController
+@interface TXMineViewController : TTBaseTableViewController
 
+@end
+
+@interface TXMineViewCell : UITableViewCell
+/// 标题
+@property (nonatomic, strong) UILabel *titleLabel;
+/// 副标题
+@property (nonatomic, strong) UILabel *subtitleLabel;
+/// 图片
+@property (nonatomic, strong) UIImageView *imagesView;
+/// 右边箭头
+@property (nonatomic, strong) UIImageView *imagesArrow;
 @end
 
 NS_ASSUME_NONNULL_END

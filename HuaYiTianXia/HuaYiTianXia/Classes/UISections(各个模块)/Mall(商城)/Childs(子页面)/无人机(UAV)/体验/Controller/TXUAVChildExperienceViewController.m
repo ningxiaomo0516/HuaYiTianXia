@@ -82,7 +82,7 @@ static NSString* reuseIdentifierMall    = @"TXMallCollectionViewCell";
                 Toast(model.message);
             }
         }else{
-            Toast(@"我的团队数据获取失败");
+            Toast(@"数据获取失败");
         }
         [self analysisData];
         [self.view dismissLoadingView];

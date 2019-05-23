@@ -1,35 +1,35 @@
 //
-//  TXTeamModel.m
+//  TXInvitationModel.m
 //  HuaYiTianXia
 //
 //  Created by 宁小陌 on 2019/3/30.
 //  Copyright © 2019年 宁小陌. All rights reserved.
 //
 
-#import "TXTeamModel.h"
+#import "TXInvitationModel.h"
 
-@implementation TXTeamModel
+@implementation TXInvitationModel
 + (NSDictionary *)replacedKeyFromPropertyName{
     return @{@"data"        : @"obj",
              @"errorcode"   : @"code",
              @"message"     : @"msg"};
 }
 + (NSDictionary *)objectClassInArray{
-    return @{@"data" : [TeamData class]};
+    return @{@"data" : [InvitationData class]};
 }
 @end
 
 
-@implementation TeamData
+@implementation InvitationData
 + (NSDictionary *)replacedKeyFromPropertyName{
     return @{@"list"        : @"records"};
 }
 + (NSDictionary *)objectClassInArray{
-    return @{@"list" : [TeamModel class]};
+    return @{@"list" : [InvitationModel class]};
 }
 @end
 
-@implementation TeamModel
+@implementation InvitationModel
 + (NSDictionary *)replacedKeyFromPropertyName{
     return @{@"uid"     : @"id",
              @"username": @"nickName",

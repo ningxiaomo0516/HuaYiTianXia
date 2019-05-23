@@ -1,14 +1,14 @@
 //
-//  TXTeamTableViewCell.m
+//  TXInvitationTableViewCell.m
 //  HuaYiTianXia
 //
 //  Created by 宁小陌 on 2019/3/20.
 //  Copyright © 2019 宁小陌. All rights reserved.
 //
 
-#import "TXTeamTableViewCell.h"
+#import "TXInvitationTableViewCell.h"
 
-@implementation TXTeamTableViewCell
+@implementation TXInvitationTableViewCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
@@ -30,12 +30,12 @@
     return self;
 }
 
-- (void)setTeamModel:(TeamModel *)teamModel{
-    _teamModel = teamModel;
-    [self.imagesView sd_setImageWithURL:kGetImageURL(self.teamModel.avatar) placeholderImage:kGetImage(VERTICALMAPBITMAP)];
-    self.titleLabel.text = [NSString stringWithFormat:@"昵称:%@",self.teamModel.username];
-    self.kidLabel.text = [NSString stringWithFormat:@"账号:%@",self.teamModel.uid];
-    self.telLabel.text = [NSString stringWithFormat:@"手机号码:%@",self.teamModel.mobile];
+- (void)setInvitationModel:(InvitationModel *)invitationModel{
+    _invitationModel = invitationModel;
+    [self.imagesView sd_setImageWithURL:kGetImageURL(self.invitationModel.avatar) placeholderImage:kGetImage(VERTICALMAPBITMAP)];
+    self.titleLabel.text = [NSString stringWithFormat:@"昵称:%@",self.invitationModel.username];
+    self.kidLabel.text = [NSString stringWithFormat:@"账号:%@",self.invitationModel.uid];
+    self.telLabel.text = [NSString stringWithFormat:@"手机号码:%@",self.invitationModel.mobile];
 }
 
 - (void) initView{

@@ -9,7 +9,6 @@
 #import "TXMineViewController.h"
 #import "TXMineHeaderView.h"
 #import "TXMineHeaderTableViewCell.h"
-#import "TXMineTableViewCell.h"
 #import "TXMineBannerTableViewCell.h"
 #import "TXGeneralModel.h"
 #import "TXRealNameViewController.h"
@@ -17,10 +16,10 @@
 #import "TXBecomeVipViewController.h"
 #import "TXPushViewController.h"
 #import "TXSetupViewController.h"
-#import "TXTeamViewController.h"
+#import "TXInvitationViewController.h"
 #import "TXLoginViewController.h"
 
-static NSString * const reuseIdentifier = @"TXMineTableViewCell";
+static NSString * const reuseIdentifier = @"TXMineViewCell";
 static NSString * const reuseIdentifierHeader = @"TXMineHeaderTableViewCell";
 static NSString * const reuseIdentifierBanner = @"TXMineBannerTableViewCell";
 
@@ -70,8 +69,8 @@ static NSString * const reuseIdentifierBanner = @"TXMineBannerTableViewCell";
 //    NSDictionary *resultDic = [infoNotification userInfo];
 //    NSString *kid = [resultDic lz_objectForKey:@"info"];
 //    NSString *messageType = [resultDic lz_objectForKey:@"messageType"];
-    TXTeamViewController *vc = [[TXTeamViewController alloc] init];
-    vc.title = @"我的团队";
+    TXInvitationViewController *vc = [[TXInvitationViewController alloc] init];
+    vc.title = @"我的邀请";
     [self jumpBecomeVipVC:vc];
     
     UITabBarController *tab=self.tabBarController;
@@ -151,8 +150,7 @@ static NSString * const reuseIdentifierBanner = @"TXMineBannerTableViewCell";
 
 #pragma mark - Table view data source
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    if (indexPath.section == 0) {
+        if (indexPath.section == 0) {
         TXMineHeaderTableViewCell* tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierHeader forIndexPath:indexPath];
         tools.userModel = self.userModel;
         return tools;
@@ -162,12 +160,13 @@ static NSString * const reuseIdentifierBanner = @"TXMineBannerTableViewCell";
         tools.bannerArray = self.bannerArray;
         return tools;
     }else{
-        TXMineTableViewCell* tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
-        TXGeneralModel* model = self.dataArray[0][indexPath.row];
+        TXMineViewCell* tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
+        TXGeneralModel* model = self.dataArray[indexPath.section][indexPath.row];
         model.index = indexPath.item;
         tools.titleLabel.text = model.title;
-        tools.linerView.hidden = NO;
-        if (indexPath.row==0){
+        NSString *imagesName = [NSString stringWithFormat:@"c44_%@",model.title];
+        tools.imagesView.image = kGetImage(imagesName);
+        if (indexPath.row==0&&indexPath.section==2){
             tools.subtitleLabel.textColor = HexString(@"#FF9B9B");
             if (kUserInfo.isValidation==2) {
                 tools.subtitleLabel.textColor = kTextColor153;
@@ -191,14 +190,20 @@ static NSString * const reuseIdentifierBanner = @"TXMineBannerTableViewCell";
 
 // 多少个分组 section
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 3;
+    return self.dataArray.count;
 }
 
 /// 返回多少
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (section!=2) return 1;
-    NSArray *subArray = [self.dataArray lz_safeObjectAtIndex:0];
+    if (section<2) return 1;
+    NSArray *subArray = [self.dataArray lz_safeObjectAtIndex:section];
     return subArray.count;
+}
+
+#pragma mark -- 设置Header高度
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    if (section<3) return 0.001f;
+    return 10.f;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -208,9 +213,9 @@ static NSString * const reuseIdentifierBanner = @"TXMineBannerTableViewCell";
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    TXGeneralModel* model = self.dataArray[0][indexPath.row];
+    TXGeneralModel* model = self.dataArray[indexPath.section][indexPath.row];
     NSString *className = model.showClass;
-    if (indexPath.section==2) {
+    if (indexPath.section>1) {
         if ([model.showClass isEqualToString:@"TXRealNameViewController"]) {
             if (kUserInfo.isValidation==0) {
                 TXRealNameViewController *vc = [[TXRealNameViewController alloc] init];
@@ -241,14 +246,14 @@ static NSString * const reuseIdentifierBanner = @"TXMineBannerTableViewCell";
         _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
         _tableView.showsVerticalScrollIndicator = false;
         [_tableView registerClass:[TXMineHeaderTableViewCell class] forCellReuseIdentifier:reuseIdentifierHeader];
-        [_tableView registerClass:[TXMineTableViewCell class] forCellReuseIdentifier:reuseIdentifier];
+        [_tableView registerClass:[TXMineViewCell class] forCellReuseIdentifier:reuseIdentifier];
         [_tableView registerClass:[TXMineBannerTableViewCell class] forCellReuseIdentifier:reuseIdentifierBanner];
 //        _tableView.bounces = NO;
         [_tableView setSeparatorInset:UIEdgeInsetsMake(0,IPHONE6_W(15),0,0)];
-        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+//        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _tableView.delegate = self;
         _tableView.dataSource = self;
-        _tableView.backgroundColor = kWhiteColor;
+        _tableView.backgroundColor = kClearColor;
     }
     return _tableView;
 }
@@ -323,11 +328,14 @@ static NSString * const reuseIdentifierBanner = @"TXMineBannerTableViewCell";
 - (NSMutableArray *)dataArray{
     if (!_dataArray) {
         _dataArray = [[NSMutableArray alloc] init];
-        NSArray* titleArr = @[@[@"实名认证",@"订单中心",@"我的钱包",
-                                @"推荐邀请",@"我的团队",@"设置"]];//TXOrderViewController
-        NSArray* classArr = @[@[@"TXRealNameViewController",@"TXProductViewController",
-                                @"TXWalletViewController",@"TXWebViewController",
-                                @"TXTeamViewController",@"TXSetupViewController"]];
+        NSArray* titleArr = @[@[],@[],
+                              @[@"实名认证",@"订单中心",@"我的钱包"],
+                              @[@"我的团队",@"我的邀请",@"推荐邀请"],
+                              @[@"设置"]];
+        NSArray* classArr = @[@[],@[],
+                              @[@"TXRealNameViewController",@"TXProductViewController",@"TXWalletViewController"],
+                              @[@"TXMineTeamViewController",@"TXInvitationViewController",@"TXWebViewController"],
+                              @[@"TXSetupViewController"]];
         for (int i=0; i<titleArr.count; i++) {
             NSArray *subTitlesArray = [titleArr lz_safeObjectAtIndex:i];
             NSArray *classArray = [classArr lz_safeObjectAtIndex:i];
@@ -355,4 +363,82 @@ static NSString * const reuseIdentifierBanner = @"TXMineBannerTableViewCell";
     [kNotificationCenter removeObserver:self];
 }
 
+@end
+
+
+@implementation TXMineViewCell
+- (void)awakeFromNib {
+    [super awakeFromNib];
+    // Initialization code
+}
+
+- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
+    [super setSelected:selected animated:animated];
+    
+    // Configure the view for the selected state
+}
+
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
+    if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
+        self.contentView.backgroundColor = [UIColor clearColor];
+        [self initView];
+    }
+    return self;
+}
+
+- (void) initView{
+    [self.contentView addSubview:self.imagesView];
+    [self.contentView addSubview:self.titleLabel];
+    [self.contentView addSubview:self.subtitleLabel];
+    [self.contentView addSubview:self.imagesArrow];
+    [self.imagesView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(@(IPHONE6_W(15)));
+        make.centerY.equalTo(self);
+    }];
+    
+    [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.imagesView.mas_right).offset(IPHONE6_W(10));
+        make.centerY.equalTo(self);
+    }];
+    
+    [self.subtitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(self.imagesArrow.mas_left);
+        make.centerY.equalTo(self);
+    }];
+    
+    [self.imagesArrow mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(self.mas_right).offset(IPHONE6_W(-15));
+        make.centerY.equalTo(self);
+    }];
+}
+
+- (UILabel *)titleLabel{
+    if (!_titleLabel) {
+        _titleLabel = [UILabel lz_labelWithTitle:@"" color:kTextColor51 font:kFontSizeMedium15];
+    }
+    return _titleLabel;
+}
+
+- (UILabel *)subtitleLabel{
+    if (!_subtitleLabel) {
+        _subtitleLabel = [UILabel lz_labelWithTitle:@"" color:kTextColor128 font:kFontSizeMedium15];
+        _subtitleLabel.hidden = YES;
+    }
+    return _subtitleLabel;
+}
+
+- (UIImageView *)imagesArrow{
+    if (!_imagesArrow) {
+        _imagesArrow = [[UIImageView alloc] init];
+        _imagesArrow.image = kGetImage(@"mine_btn_enter");
+    }
+    return _imagesArrow;
+}
+
+- (UIImageView *)imagesView{
+    if (!_imagesView) {
+        _imagesView = [[UIImageView alloc] init];
+    }
+    return _imagesView;
+}
 @end

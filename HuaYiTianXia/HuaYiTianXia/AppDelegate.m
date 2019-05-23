@@ -30,7 +30,7 @@
 
 #import "TXMessageChildViewController.h"
 #import "TXWebViewController.h"
-#import "TXTeamViewController.h"
+#import "TXInvitationViewController.h"
 #import "TXSetupViewController.h"
 @interface AppDelegate ()<WXApiDelegate,JPUSHRegisterDelegate>
 @property(nonatomic, strong)TTLocation* location;
@@ -460,7 +460,7 @@
 //    messageType等于4，使用H5页面，拼接公告地址
 //    messageType等于5，使用原生页面，标题、内容、时间
 //    messageType等于6，使用H5页面，拼接新闻地址
-//    messageType等于7，直接跳转“我的团队”（未登陆先登陆）
+//    messageType等于7，直接跳转“我的邀请”（未登陆先登陆）
     UITabBarController* tabVC = (UITabBarController*)application.keyWindow.rootViewController;
     LZNavigationController* navVC = tabVC.selectedViewController;
 
@@ -472,7 +472,7 @@
     }else if(pushModel.messageType==4||pushModel.messageType==6){
         [kNotificationCenter postNotificationName:@"dealwithNewPushMessage" object:nil userInfo:resultDic];
     }else if(pushModel.messageType==7){
-        TXTeamViewController *vc = [[TXTeamViewController alloc] init];
+        TXInvitationViewController *vc = [[TXInvitationViewController alloc] init];
         [navVC pushViewController:vc animated:YES];
         //// 提示登录
         [kNotificationCenter postNotificationName:@"dealwithTeamPushMessage" object:nil userInfo:resultDic];
