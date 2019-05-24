@@ -123,3 +123,115 @@
     return _insuredLabel;
 }
 @end
+
+
+@implementation TXTeamTableViewCell
+
+- (void)awakeFromNib {
+    [super awakeFromNib];
+    // Initialization code
+}
+
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
+    if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
+        self.contentView.backgroundColor = [UIColor clearColor];
+        [self initView];
+    }
+    return self;
+}
+
+
+
+- (void)setTeamModel:(TeamModel *)teamModel{
+    _teamModel = teamModel;
+    self.teamnameLabel.text = self.teamModel.name;
+    self.leadershipLabel.text = self.teamModel.leaderName;
+    self.dateLabel.text = self.teamModel.createTime;
+}
+
+- (void) initView{
+    [self.contentView addSubview:self.imagesRanking];
+    [self.contentView addSubview:self.labelRanking];
+    [self.contentView addSubview:self.teamnameLabel];
+    [self.contentView addSubview:self.leadershipLabel];
+    [self.contentView addSubview:self.dateLabel];
+    [self.contentView addSubview:self.joinButton];
+    [self.imagesRanking mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self);
+        make.centerX.equalTo(self.labelRanking);
+    }];
+    [self.labelRanking mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.centerY.equalTo(self);
+        make.right.equalTo(self.leadershipLabel.mas_left);
+    }];
+    
+    [self.teamnameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(@(IPHONE6_W(50)));
+        make.top.equalTo(@(IPHONE6_W(10)));
+    }];
+    
+    [self.leadershipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.teamnameLabel);
+        make.centerY.equalTo(self);
+    }];
+    [self.dateLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.teamnameLabel);
+        make.bottom.equalTo(self.mas_bottom).offset(IPHONE6_W(-10));
+    }];
+    [self.joinButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(self.mas_right).offset(IPHONE6_W(-15));
+        make.width.equalTo(@(IPHONE6_W(55)));
+        make.height.equalTo(@(IPHONE6_W(25)));
+        make.centerY.equalTo(self);
+    }];
+}
+
+- (UIImageView *)imagesRanking{
+    if (!_imagesRanking) {
+        _imagesRanking = [[UIImageView alloc] init];
+    }
+    return _imagesRanking;
+}
+
+- (UILabel *)labelRanking{
+    if (!_labelRanking) {
+        _labelRanking = [UILabel lz_labelWithTitle:@"" color:kTextColor51 font:kFontSizeMedium15];
+        _labelRanking.textAlignment = NSTextAlignmentCenter;
+    }
+    return _labelRanking;
+}
+
+- (UILabel *)teamnameLabel{
+    if (!_teamnameLabel) {
+        _teamnameLabel = [UILabel lz_labelWithTitle:@"" color:kTextColor51 font:kFontSizeScBold15];
+    }
+    return _teamnameLabel;
+}
+
+- (UILabel *)leadershipLabel{
+    if (!_leadershipLabel) {
+        _leadershipLabel = [UILabel lz_labelWithTitle:@"" color:kTextColor102 font:kFontSizeMedium12];
+    }
+    return _leadershipLabel;
+}
+
+- (UILabel *)dateLabel{
+    if (!_dateLabel) {
+        _dateLabel = [UILabel lz_labelWithTitle:@"" color:kTextColor153 font:kFontSizeMedium12];
+    }
+    return _dateLabel;
+}
+
+- (UIButton *)joinButton{
+    if (!_joinButton) {
+        _joinButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_joinButton setTitleColor:kWhiteColor forState:UIControlStateNormal];
+        _joinButton.titleLabel.font = kFontSizeMedium13;//[UIFont fontWithName:@"PingFang-SC-Heavy" size:13.0];
+        [_joinButton setTitle:@"+加入" forState:UIControlStateNormal];
+        [_joinButton lz_setCornerRadius:IPHONE6_W(25/2.0)];
+        [_joinButton setBackgroundImage:imageHexString(@"#596377") forState:UIControlStateNormal];
+        [_joinButton setBackgroundImage:imageHexStringAlpha(@"#596377",0.7) forState:UIControlStateHighlighted];
+    }
+    return _joinButton;
+}
+@end

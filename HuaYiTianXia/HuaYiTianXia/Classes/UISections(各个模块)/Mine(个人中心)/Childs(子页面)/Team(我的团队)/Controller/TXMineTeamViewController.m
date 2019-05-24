@@ -9,13 +9,17 @@
 #import "TXMineTeamViewController.h"
 #import "TXMineTeamTableViewCell.h"
 #import "TXMineTeamModel.h"
+#import "TXTeamTableView.h"
 
-static NSString * const reuseIdentifier = @"TXMineTeamTableViewCell";
+static NSString * const reuseIdentifierMineTeam = @"TXMineTeamTableViewCell";
+static NSString * const reuseIdentifierTeam = @"TXTeamTableViewCell";
+
 @interface TXMineTeamViewController ()<UITableViewDelegate,UITableViewDataSource,UISearchBarDelegate,UISearchResultsUpdating>
 @property (strong, nonatomic) UISearchController    *searchController;
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *dataArray;
 @property (nonatomic, strong) SCNoDataView *noDataView;
+
 /// 每页多少数据
 @property (nonatomic, assign) NSInteger pageSize;
 /// 当前页
@@ -47,14 +51,7 @@ static NSString * const reuseIdentifier = @"TXMineTeamTableViewCell";
             
         }
     }];
-    
-    /// 当为团队列表时添加上拉刷新
-    if (self.listType!=0) {
-        /// 上拉加载
-        self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
-            self.pageIndex++;// 页码+1
-        }];
-    }
+
 }
 
 - (void) initView{
@@ -65,8 +62,8 @@ static NSString * const reuseIdentifier = @"TXMineTeamTableViewCell";
     }];
 }
 
-- (void) requestTeamData{
-    [SCHttpTools postWithURLString:kHttpURL(@"customerteam/teamMember") parameter:nil success:^(id responseObject) {
+- (void) requestTeamData{ 
+    [SCHttpTools postWithURLString:kHttpURL(@"customerteam/teamMember") parameter:@{} success:^(id responseObject) {
         NSDictionary *result = responseObject;
         if ([result isKindOfClass:[NSDictionary class]]) {
             TXMineTeamModel *model = [TXMineTeamModel mj_objectWithKeyValues:result];
@@ -76,8 +73,19 @@ static NSString * const reuseIdentifier = @"TXMineTeamTableViewCell";
                     [self.view dismissLoadingView];
                     [self.tableView reloadData];
                 }else{
-                    /// 默认请求团队列表数据
-                    [self requestTeamListData];
+                    self.listType = 1;
+//                    /// 默认请求团队列表数据
+//                    [self requestTeamListData];
+//                    /// 上拉加载
+//                    self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+//                        self.pageIndex++;// 页码+1
+//                        [self requestTeamListData];
+//                    }];
+                    
+                    
+                    
+                    TXTeamTableView *teamTableView = [[TXTeamTableView alloc] initWithFrame:self.view.bounds controller:self];
+                    [self.view addSubview:teamTableView];
                 }
             }else{
                 Toast(model.message);
@@ -93,12 +101,15 @@ static NSString * const reuseIdentifier = @"TXMineTeamTableViewCell";
 }
 
 - (void) requestTeamListData{
-    [SCHttpTools postWithURLString:kHttpURL(@"customerteam/teamMember") parameter:nil success:^(id responseObject) {
+    NSMutableDictionary *parameter = [[NSMutableDictionary alloc] init];
+    [parameter setObject:@(self.pageIndex) forKey:@"page"];     // 当前页
+    [parameter setObject:@(self.pageSize) forKey:@"pageSize"];  // 每页条数
+    [SCHttpTools postWithURLString:kHttpURL(@"customerteam/teamList") parameter:parameter success:^(id responseObject) {
         NSDictionary *result = responseObject;
         if ([result isKindOfClass:[NSDictionary class]]) {
-            TXMineTeamModel *model = [TXMineTeamModel mj_objectWithKeyValues:result];
+            TeamDataModel *model = [TeamDataModel mj_objectWithKeyValues:result];
             if (model.errorcode == 20000) {
-                if (self.pageIndex==1) {
+                if (self.pageIndex==1||self.listType==0) {
                     [self.dataArray removeAllObjects];
                 }
                 [self.dataArray addObjectsFromArray:model.data.list];
@@ -107,12 +118,15 @@ static NSString * const reuseIdentifier = @"TXMineTeamTableViewCell";
             Toast(@"团队列表数据获取失败");
         }
         [self analysisData];
+        [self.tableView.mj_header endRefreshing];
+        [self.tableView.mj_footer endRefreshing];
         [self.view dismissLoadingView];
         [self.tableView reloadData];
     } failure:^(NSError *error) {
         [self.view dismissLoadingView];
+        [self.tableView.mj_header endRefreshing];
+        [self.tableView.mj_footer endRefreshing];
     }];
-                
 }
 
 - (void)analysisData {
@@ -136,11 +150,37 @@ static NSString * const reuseIdentifier = @"TXMineTeamTableViewCell";
     return _searchController;
 }
 
+- (void) joinTeamButtonClick:(UIButton *)sender{
+    [self.dataArray removeAllObjects];
+    [self.tableView reloadData];
+}
+
 #pragma mark - Table view data source
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    TXMineTeamTableViewCell* tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
-    tools.teamModel = self.dataArray[indexPath.row];
-    return tools;
+    if (self.listType==0) {
+        TXMineTeamTableViewCell* tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierMineTeam forIndexPath:indexPath];
+        tools.teamModel = self.dataArray[indexPath.row];
+        return tools;
+    }else{
+        TXTeamTableViewCell* tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierTeam forIndexPath:indexPath];
+        tools.teamModel = self.dataArray[indexPath.row];
+        MV(weakSelf)
+        [tools.joinButton lz_handleControlEvent:UIControlEventTouchUpInside withBlock:^{
+            [weakSelf joinTeamButtonClick:tools.joinButton];
+        }];
+        NSInteger idx = indexPath.row+1;
+        if (indexPath.row<3) {
+            tools.imagesRanking.hidden = NO;
+            tools.labelRanking.hidden = YES;
+            NSString *imagesName = [NSString stringWithFormat:@"c77_icon_no%ld",idx];
+            tools.imagesRanking.image = kGetImage(imagesName);
+        }else{
+            tools.labelRanking.hidden = NO;
+            tools.imagesRanking.hidden = YES;
+            tools.labelRanking.text = [NSString stringWithFormat:@"%ld",idx];
+        }
+        return tools;
+    }
 }
 
 // 多少个分组 section
@@ -158,7 +198,12 @@ static NSString * const reuseIdentifier = @"TXMineTeamTableViewCell";
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return IPHONE6_W(60);
+    if (self.listType==0) {
+        return IPHONE6_W(60);
+    }else{
+        TeamModel *teamModel = self.dataArray[indexPath.row];
+        return teamModel.leaderName.length>0?IPHONE6_W(80):IPHONE6_W(60);
+    }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -174,7 +219,8 @@ static NSString * const reuseIdentifier = @"TXMineTeamTableViewCell";
     if (!_tableView) {
         _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
         _tableView.showsVerticalScrollIndicator = false;
-        [_tableView registerClass:[TXMineTeamTableViewCell class] forCellReuseIdentifier:reuseIdentifier];
+        [_tableView registerClass:[TXMineTeamTableViewCell class] forCellReuseIdentifier:reuseIdentifierMineTeam];
+        [_tableView registerClass:[TXTeamTableViewCell class] forCellReuseIdentifier:reuseIdentifierTeam];
         [_tableView setSeparatorInset:UIEdgeInsetsMake(0,IPHONE6_W(15),0,0)];
         _tableView.delegate = self;
         _tableView.dataSource = self;

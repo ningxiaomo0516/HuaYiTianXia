@@ -34,3 +34,36 @@
 @implementation MineTeamModel
 
 @end
+
+
+
+@implementation TeamModel
++ (NSDictionary *)replacedKeyFromPropertyName{
+    return @{@"createTime"  : @"sysTime",
+             @"kid"         : @"id"};
+}
+@end
+
+@implementation TeamListModel
++ (NSDictionary *)objectClassInArray{
+    return @{@"list" : [TeamModel class]};
+}
++ (NSDictionary *)replacedKeyFromPropertyName{
+    return @{@"list"        : @"records"};
+}
+@end
+
+@implementation TeamDataModel
+
++ (NSDictionary *)replacedKeyFromPropertyName{
+    return @{@"data"        : @"obj",
+             @"errorcode"   : @"code",
+             @"message"     : @"msg"};
+}
++ (NSDictionary *)objectClassInArray{
+    return @{@"data" : [TeamListModel class]};
+}
+
+@end
+
+

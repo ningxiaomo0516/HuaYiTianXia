@@ -99,6 +99,7 @@
 #define kScaleFit (isIphone ? ((kScreenWidth < kScreenHeight) ? kScreenWidth / 375.0f : kScreenWidth / 667.0f) : 1.1f)
 
 #define imageHexString(hexString) [UIImage lz_imageWithColor:HexString(hexString)]
+#define imageHexStringAlpha(hexString,alpha) [UIImage lz_imageWithColor:[HexString(hexString) colorWithAlphaComponent:alpha]]
 #define imageColor(imageColor) [UIImage lz_imageWithColor:imageColor]
 #define HexString(hexString) [UIColor lz_colorWithHexString:hexString]
 //16:9

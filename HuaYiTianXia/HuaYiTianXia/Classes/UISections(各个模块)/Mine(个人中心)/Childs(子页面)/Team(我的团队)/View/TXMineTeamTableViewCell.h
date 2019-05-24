@@ -25,4 +25,21 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) MineTeamModel *teamModel;
 @end
 
+
+@interface TXTeamTableViewCell : UITableViewCell
+/// 排名图片
+@property (nonatomic, strong) UIImageView *imagesRanking;
+/// 排名数字
+@property (nonatomic, strong) UILabel *labelRanking;
+/// 团队名称
+@property (nonatomic, strong) UILabel *teamnameLabel;
+/// 团长名称
+@property (nonatomic, strong) UILabel *leadershipLabel;
+/// 团队创建日期
+@property (nonatomic, strong) UILabel *dateLabel;
+/// 加入按钮
+@property (nonatomic, strong) UIButton *joinButton;
+@property (nonatomic, strong) TeamModel *teamModel;
+@end
+
 NS_ASSUME_NONNULL_END

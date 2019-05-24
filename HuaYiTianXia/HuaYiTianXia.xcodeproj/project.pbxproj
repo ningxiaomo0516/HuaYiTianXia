@@ -321,6 +321,7 @@
 		E7B4706A22803BBD00ADDC7A /* NSString+PinYin4Cocoa.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B4706022803BBC00ADDC7A /* NSString+PinYin4Cocoa.m */; };
 		E7B4706B22803BBD00ADDC7A /* unicode_to_hanyu_pinyin.txt in Resources */ = {isa = PBXBuildFile; fileRef = E7B4706122803BBC00ADDC7A /* unicode_to_hanyu_pinyin.txt */; };
 		E7B4706E22803D7100ADDC7A /* FMTravelCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B4706D22803D7100ADDC7A /* FMTravelCollectionViewCell.m */; };
+		E7B4EE192297D66300C93A6D /* TXTeamTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B4EE182297D66300C93A6D /* TXTeamTableView.m */; };
 		E7C42E7E224B770200F3FB1A /* SCHttpTools.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C42E71224B770200F3FB1A /* SCHttpTools.m */; };
 		E7C42E7F224B770200F3FB1A /* SCHttpToolsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C42E73224B770200F3FB1A /* SCHttpToolsModel.m */; };
 		E7C42E80224B770200F3FB1A /* AFLoadDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C42E76224B770200F3FB1A /* AFLoadDataManager.m */; };
@@ -975,6 +976,8 @@
 		E7B4706122803BBC00ADDC7A /* unicode_to_hanyu_pinyin.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = unicode_to_hanyu_pinyin.txt; sourceTree = "<group>"; };
 		E7B4706C22803D7100ADDC7A /* FMTravelCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FMTravelCollectionViewCell.h; sourceTree = "<group>"; };
 		E7B4706D22803D7100ADDC7A /* FMTravelCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FMTravelCollectionViewCell.m; sourceTree = "<group>"; };
+		E7B4EE172297D66300C93A6D /* TXTeamTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXTeamTableView.h; sourceTree = "<group>"; };
+		E7B4EE182297D66300C93A6D /* TXTeamTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXTeamTableView.m; sourceTree = "<group>"; };
 		E7C42E70224B770200F3FB1A /* SCHttpTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCHttpTools.h; sourceTree = "<group>"; };
 		E7C42E71224B770200F3FB1A /* SCHttpTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCHttpTools.m; sourceTree = "<group>"; };
 		E7C42E72224B770200F3FB1A /* SCHttpToolsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCHttpToolsModel.h; sourceTree = "<group>"; };
@@ -2641,6 +2644,8 @@
 			children = (
 				E783784622967BFF0020C823 /* TXMineTeamViewController.h */,
 				E783784722967BFF0020C823 /* TXMineTeamViewController.m */,
+				E7B4EE172297D66300C93A6D /* TXTeamTableView.h */,
+				E7B4EE182297D66300C93A6D /* TXTeamTableView.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -3842,6 +3847,7 @@
 				E7F1A72C22423F92003FA216 /* TXAccountSecurityViewController.m in Sources */,
 				E74CFFBD2289086B00576B86 /* TXShareViewController.m in Sources */,
 				E74CFFB62289086B00576B86 /* TXUAvCollectionViewCell.m in Sources */,
+				E7B4EE192297D66300C93A6D /* TXTeamTableView.m in Sources */,
 				E769B2892277E4070049EF73 /* SCIndexPatch.m in Sources */,
 				E74C964922678575000CBAF0 /* TXVersionModel.m in Sources */,
 				E78583EF2240C29300BBEA41 /* TXOrderViewController.m in Sources */,

@@ -213,6 +213,7 @@ static NSString * const reuseIdentifierBanner = @"TXMineBannerTableViewCell";
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if(indexPath.section<2) return;
     TXGeneralModel* model = self.dataArray[indexPath.section][indexPath.row];
     NSString *className = model.showClass;
     if (indexPath.section>1) {
