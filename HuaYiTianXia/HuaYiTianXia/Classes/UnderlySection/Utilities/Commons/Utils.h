@@ -267,4 +267,6 @@
  *  @param jsonString        开始时间
  */
 + (NSDictionary *)dictionaryWithJsonString:(NSString *)jsonString;
+/// 判断当前字符串是否为空
++ (NSString *) isNull:(NSString *) parameter;
 @end

@@ -736,4 +736,16 @@
     return dic;
 }
 
++ (NSString *) isNull:(NSString *) parameter{
+    //（null）判断方法
+    if (parameter == nil) return @"0";
+    // <null>判断方法
+    if([parameter isEqual:[NSNull null]]) return @"0";
+    // "<null>"判断方法
+    if([parameter isEqualToString:@"<null>"]) return @"0";
+    // ""判断方法
+    if(parameter.length == 0) return @"0";
+    return parameter;
+}
+
 @end

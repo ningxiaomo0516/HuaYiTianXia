@@ -23,7 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface MineTeamDataModel : NSObject
 /// 团队表ID
 @property (nonatomic, copy) NSString *kid;
-/// 团队所以会员农保充值金额（需判断null，值为null时不显示）
+/// 团队所有会员农保充值金额（需判断null，值为null时不显示）
 @property (nonatomic, copy) NSString *money;
 /// 团队名称
 @property (nonatomic, copy) NSString *teamName;
@@ -44,7 +44,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 ///--------- 团队列表 ---------///
 @interface TeamModel : NSObject
-/// 成员名称
+/// 团队名称
 @property (nonatomic, copy) NSString *name;
 /// 团长名称
 @property (nonatomic, copy) NSString *leaderName;

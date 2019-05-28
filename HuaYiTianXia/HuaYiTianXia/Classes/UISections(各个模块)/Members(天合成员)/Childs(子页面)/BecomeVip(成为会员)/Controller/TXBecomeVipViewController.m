@@ -67,8 +67,8 @@ static NSString * const reuseIdentifierChoosePay = @"TXChoosePayTableViewCell";
                 TTLog(@" ---- -%@",[obj lz_objectForKey:@"money"]);
                 TTLog(@" ---- -%@",[obj lz_objectForKey:@"thMoney"]);
                 NSString *AmoutText1 = [NSString stringWithFormat:@"%@",[obj lz_objectForKey:@"thMoney"]];
-                self.topupAmount1 = [self isNull:AmoutText1];
-                self.topupAmount2 = [self isNull:AmoutText1];
+                self.topupAmount1 = [Utils isNull:AmoutText1];
+                self.topupAmount2 = [Utils isNull:AmoutText1];
                 [self.tableView reloadData];
             }else{
                 self.topupAmount1 = @"0";
@@ -84,18 +84,6 @@ static NSString * const reuseIdentifierChoosePay = @"TXChoosePayTableViewCell";
         kHideMBProgressHUD(self.view);
         [self.view dismissLoadingView];
     }];
-}
-
-- (NSString *) isNull:(NSString *) parameter{
-    //（null）判断方法
-    if (parameter == nil) return @"0";
-    // <null>判断方法
-    if([parameter isEqual:[NSNull null]]) return @"0";
-    // "<null>"判断方法
-    if([parameter isEqualToString:@"<null>"]) return @"0";
-    // ""判断方法
-    if(parameter.length == 0) return @"0";
-    return parameter;
 }
 
 /// 生成订单且支付

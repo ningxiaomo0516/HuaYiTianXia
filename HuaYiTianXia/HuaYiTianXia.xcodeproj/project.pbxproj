@@ -228,6 +228,7 @@
 		E7759AEA2244DD6C007DA6CF /* TXMembersBannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = E7759AE92244DD6C007DA6CF /* TXMembersBannerView.m */; };
 		E778DE64227065B800D6F0E7 /* TXPushMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E778DE63227065B800D6F0E7 /* TXPushMessageViewController.m */; };
 		E77BC13F224F7321008440C9 /* TXOrderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E77BC13E224F7321008440C9 /* TXOrderModel.m */; };
+		E77E1D81229D26D100DC4033 /* TXMineTeamSectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = E77E1D80229D26D100DC4033 /* TXMineTeamSectionView.m */; };
 		E77F6539225C3A0E0017B4C8 /* TTNumbeKeyboard.bundle in Resources */ = {isa = PBXBuildFile; fileRef = E77F6533225C3A0E0017B4C8 /* TTNumbeKeyboard.bundle */; };
 		E77F653A225C3A0E0017B4C8 /* RYNumberKeyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = E77F6535225C3A0E0017B4C8 /* RYNumberKeyboard.m */; };
 		E77F653B225C3A0E0017B4C8 /* RYNumberKeyboard.xib in Resources */ = {isa = PBXBuildFile; fileRef = E77F6536225C3A0E0017B4C8 /* RYNumberKeyboard.xib */; };
@@ -794,6 +795,8 @@
 		E778DE63227065B800D6F0E7 /* TXPushMessageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXPushMessageViewController.m; sourceTree = "<group>"; };
 		E77BC13D224F7321008440C9 /* TXOrderModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXOrderModel.h; sourceTree = "<group>"; };
 		E77BC13E224F7321008440C9 /* TXOrderModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXOrderModel.m; sourceTree = "<group>"; };
+		E77E1D7F229D26D100DC4033 /* TXMineTeamSectionView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXMineTeamSectionView.h; sourceTree = "<group>"; };
+		E77E1D80229D26D100DC4033 /* TXMineTeamSectionView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXMineTeamSectionView.m; sourceTree = "<group>"; };
 		E77F6533225C3A0E0017B4C8 /* TTNumbeKeyboard.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = TTNumbeKeyboard.bundle; sourceTree = "<group>"; };
 		E77F6534225C3A0E0017B4C8 /* RYNumberKeyboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYNumberKeyboard.h; sourceTree = "<group>"; };
 		E77F6535225C3A0E0017B4C8 /* RYNumberKeyboard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYNumberKeyboard.m; sourceTree = "<group>"; };
@@ -2657,6 +2660,8 @@
 				E783784D22967C630020C823 /* TXMineTeamTableViewCell.m */,
 				E783784F229680820020C823 /* TXMineTeamHeaderView.h */,
 				E7837850229680820020C823 /* TXMineTeamHeaderView.m */,
+				E77E1D7F229D26D100DC4033 /* TXMineTeamSectionView.h */,
+				E77E1D80229D26D100DC4033 /* TXMineTeamSectionView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -3940,6 +3945,7 @@
 				E7B4704722803A3000ADDC7A /* FMHotsCityTableViewCell.m in Sources */,
 				E7AA9DD72243735A00C15483 /* TXEquityViewController.m in Sources */,
 				E774DCF122730FC6001A95B8 /* TXAdsGiftViewController.m in Sources */,
+				E77E1D81229D26D100DC4033 /* TXMineTeamSectionView.m in Sources */,
 				E750422F228C25CD00A34006 /* TXConventionSucceViewController.m in Sources */,
 				E7837842229678BD0020C823 /* TXInvitationTableViewCell.m in Sources */,
 				E7269A04223F8738003A5043 /* TXMainHeaderView.m in Sources */,

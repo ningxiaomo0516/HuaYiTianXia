@@ -23,32 +23,18 @@
     return self;
 }
 
-- (NSString *) isNull:(NSString *) parameter{
-    //（null）判断方法
-    if (parameter == nil) return @"0";
-    // <null>判断方法
-    if([parameter isEqual:[NSNull null]]) return @"0";
-    // "<null>"判断方法
-    if([parameter isEqualToString:@"<null>"]) return @"0";
-    // ""判断方法
-    if(parameter.length == 0) return @"0";
-    return parameter;
-}
-
 - (void)setTeamModel:(MineTeamModel *)teamModel{
     _teamModel = teamModel;
     self.imagesAvatar.image = kGetImage(@"mine_icon_avatar");
     [self.imagesAvatar sd_setImageWithURL:kGetImageURL(self.teamModel.headImg) placeholderImage:kGetImage(VERTICALMAPBITMAP)];
     self.usernameLabel.text = self.teamModel.name;
-    TTLog(@"self.teamModel.mobile -- %@",self.teamModel.mobile);
-    TTLog(@"self.teamModel.mobile -- %@",kUserInfo.account);
     if (self.teamModel.mobile.integerValue==kUserInfo.account.integerValue) {
         self.mineLabel.text = @"(我)";
     }else{
         self.mineLabel.text = @"";
     }
     self.telphoneLabel.text = self.teamModel.mobile;
-    if ([self isNull:self.teamModel.asmoney].integerValue==0) {
+    if ([Utils isNull:self.teamModel.asmoney].integerValue==0) {
         self.insuredLabel.text = @"";
     }else{
         self.insuredLabel.text = [NSString stringWithFormat:@"投保金额%@元",self.teamModel.asmoney];

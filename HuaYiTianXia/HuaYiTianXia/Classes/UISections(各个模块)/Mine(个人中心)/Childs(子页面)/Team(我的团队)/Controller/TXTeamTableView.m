@@ -8,6 +8,7 @@
 
 #import "TXTeamTableView.h"
 #import "TXMineTeamTableViewCell.h"
+#import "TTBaseSectionHeaderView.h"
 
 static NSString * const reuseIdentifierTeam = @"TXTeamTableViewCell";
 
@@ -56,6 +57,7 @@ static NSString * const reuseIdentifierTeam = @"TXTeamTableViewCell";
     // 下拉刷新
     self.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         //将页码重新置为1
+        self.pageIndex = 1;
         [self requestTeamListData];
     }];
     self.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
@@ -95,7 +97,7 @@ static NSString * const reuseIdentifierTeam = @"TXTeamTableViewCell";
 }
 
 - (void)analysisData {
-    if (self.dataArray.count != 0) {
+    if (self.dataArray.count == 0) {
         self.noDataView.hidden = NO;
     }else {
         self.noDataView.hidden = YES;
@@ -103,35 +105,46 @@ static NSString * const reuseIdentifierTeam = @"TXTeamTableViewCell";
 }
 
 - (void) joinTeamButtonClick:(UIButton *)sender{
-    [self.dataArray removeAllObjects];
-    [self reloadData];
+    TeamModel *teamModel = self.dataArray[sender.tag];
+    NSString *messageText = [NSString stringWithFormat:@"请再次确认是否加入《%@》一经确认将无法更改!",teamModel.name];
+    // 退出登录提示
+    UIAlertController *alerController = [UIAlertController addAlertReminderText:@"特别提醒"
+                                                                        message:messageText
+                                                                    cancelTitle:@"取消"
+                                                                        doTitle:@"确定"
+                                                                 preferredStyle:UIAlertControllerStyleAlert
+                                                                    cancelBlock:nil doBlock:^{
+                                                                        [self joinTeamRequest:sender.tag];
+                                                                    }];
+    [self.vc presentViewController:alerController animated:YES completion:nil];
     
-//    NSMutableDictionary *parameter = [[NSMutableDictionary alloc] init];
-//    [parameter setObject:@(self.pageIndex) forKey:@"page"];     // 当前页
-//    [parameter setObject:@(self.pageSize) forKey:@"pageSize"];  // 每页条数
-//    [SCHttpTools postWithURLString:kHttpURL(@"customerteam/teamList") parameter:parameter success:^(id responseObject) {
-//        NSDictionary *result = responseObject;
-//        if ([result isKindOfClass:[NSDictionary class]]) {
-//            TeamDataModel *model = [TeamDataModel mj_objectWithKeyValues:result];
-//            if (model.errorcode == 20000) {
-//                if (self.pageIndex==1) {
-//                    [self.dataArray removeAllObjects];
-//                }
-//                [self.dataArray addObjectsFromArray:model.data.list];
-//            }
-//        }else{
-//            Toast(@"团队列表数据获取失败");
-//        }
-//        [self analysisData];
-//        [self.mj_header endRefreshing];
-//        [self.mj_footer endRefreshing];
-//        [self dismissLoadingView];
-//        [self reloadData];
-//    } failure:^(NSError *error) {
-//        [self dismissLoadingView];
-//        [self.mj_header endRefreshing];
-//        [self.mj_footer endRefreshing];
-//    }];
+}
+
+/// 加入团队数据请求
+- (void) joinTeamRequest:(NSInteger) idx{
+    kShowMBProgressHUD(self.vc.view);
+    TeamModel *teamModel = self.dataArray[idx];
+    NSMutableDictionary *parameter = [[NSMutableDictionary alloc] init];
+    [parameter setObject:teamModel.kid forKey:@"id"];     // 团队表ID
+    [SCHttpTools postWithURLString:kHttpURL(@"customerteam/selectTeam") parameter:parameter success:^(id responseObject) {
+        NSDictionary *result = responseObject;
+        if ([result isKindOfClass:[NSDictionary class]]) {
+            TXGeneralModel *model = [TXGeneralModel mj_objectWithKeyValues:result];
+            if (model.errorcode == 20000) {
+                Toast(@"加入团队成功");
+                [self.dataArray removeAllObjects];
+                self.typeBlock(teamModel);
+            }else{
+                Toast(@"加入团队失败");
+            }
+        }else{
+            Toast(@"加入团队失败");
+        }
+        [self reloadData];
+        kHideMBProgressHUD(self.vc.view);
+    } failure:^(NSError *error) {
+        kHideMBProgressHUD(self.vc.view);
+    }];
 }
 
 #pragma mark - Table view data source
@@ -139,6 +152,7 @@ static NSString * const reuseIdentifierTeam = @"TXTeamTableViewCell";
     TXTeamTableViewCell* tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierTeam forIndexPath:indexPath];
     tools.teamModel = self.dataArray[indexPath.row];
     MV(weakSelf)
+    tools.joinButton.tag = indexPath.row;
     [tools.joinButton lz_handleControlEvent:UIControlEventTouchUpInside withBlock:^{
         [weakSelf joinTeamButtonClick:tools.joinButton];
     }];
@@ -167,7 +181,23 @@ static NSString * const reuseIdentifierTeam = @"TXTeamTableViewCell";
 
 #pragma mark -- 设置Header高度
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return 10.0;
+    return 40.0;
+}
+
+// UITableView在Plain类型下，HeaderView和FooterView不悬浮和不停留的方法viewForHeaderInSection
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    TTBaseSectionHeaderView *sectionView = [[TTBaseSectionHeaderView alloc] init];
+    sectionView.section = section;
+    sectionView.tableView = tableView;
+    NSInteger idx = self.dataArray.count;
+    NSString *titleText = [NSString stringWithFormat:@"团队数量(%ld个)",idx];
+    UILabel *titleLable = [UILabel lz_labelWithTitle:titleText color:kTextColor51 font:kFontSizeMedium14];
+    [sectionView addSubview:titleLable];
+    [titleLable mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(@(15));
+        make.centerY.equalTo(sectionView);
+    }];
+    return sectionView;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
