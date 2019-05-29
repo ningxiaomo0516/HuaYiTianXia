@@ -130,13 +130,6 @@ static NSString * const reuseIdentifierReceiveAddress = @"TXReceiveAddressTableV
             return tools;
         }
         case 1:{
-//            UITableViewCell *webCell = [tableView dequeueReusableCellWithIdentifier:@"WebViewCell" forIndexPath:indexPath];
-////            NSString *str = kAppendH5URL(DomainName, GoodsDetailsH5, parameter);
-//            NSString *urlstr = [NSString stringWithFormat:@"http://192.168.1.5/libao/index.html?type=1&userID=%@",kUserInfo.userid];
-//            NSURL *url = [NSURL URLWithString:urlstr];
-//            NSURLRequest *urlRequest = [NSURLRequest requestWithURL:url];
-//            [self.webView loadRequest:urlRequest];
-//            [webCell.contentView addSubview:self.scrollView];
             UITableViewCell * webCell = [tableView dequeueReusableCellWithIdentifier:@"WebViewCell"];
             if (!webCell) {
                 webCell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"WebViewCell"];
@@ -247,7 +240,7 @@ static NSString * const reuseIdentifierReceiveAddress = @"TXReceiveAddressTableV
     self.webView.navigationDelegate = self;
     [self.webView sizeToFit];
     [self.webView.scrollView addObserver:self forKeyPath:@"contentSize" options:NSKeyValueObservingOptionNew context:nil];
-    NSString *str = [NSString stringWithFormat:@"http://192.168.1.5/libao/index2.html?id=%@",self.model.libaoId];
+    NSString *str = [NSString stringWithFormat:@"http://192.168.1.20/libao/index2.html?id=%@",self.model.libaoId];
     NSURL *url = [NSURL URLWithString:str];
     NSURLRequest *urlRequest = [NSURLRequest requestWithURL:url];
     [self.webView loadRequest:urlRequest];

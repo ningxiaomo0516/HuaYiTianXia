@@ -25,7 +25,6 @@ static NSString * const reuseIdentifiers = @"TXSystemTableViewCell";
 @property (nonatomic, strong) LZOptionSelectView *cellView;
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *dataArray;
-@property (nonatomic, strong) SCNoDataView *noDataView;
 /// 每页多少数据
 @property (nonatomic, assign) NSInteger pageSize;
 /// 当前页
@@ -348,22 +347,6 @@ static NSString * const reuseIdentifiers = @"TXSystemTableViewCell";
         _dataArray = [[NSMutableArray alloc] init];
     }
     return _dataArray;
-}
-
-- (SCNoDataView *)noDataView {
-    if (!_noDataView) {
-        _noDataView = [[SCNoDataView alloc] initWithFrame:self.view.bounds
-                                                imageName:@"c12_live_nodata"
-                                            tipsLabelText:@"暂无消息哦~"];
-        _noDataView.userInteractionEnabled = NO;
-        [self.view insertSubview:_noDataView aboveSubview:self.tableView];
-        [self.noDataView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.right.mas_offset(0);
-            make.centerY.mas_equalTo(self.view.mas_centerY);
-            make.height.mas_equalTo(150);
-        }];
-    }
-    return _noDataView;
 }
 
 - (void)dealloc{

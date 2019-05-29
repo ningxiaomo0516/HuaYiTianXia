@@ -13,12 +13,12 @@
 /// 支付是8081，其他是8082
 //NSString *const DynamicUrl = @"http://beta.api2.wed114.cn/?s=";
 //NSString *const DynamicUrl = @"http://192.168.1.22:8080/";
-//NSString *const DynamicUrl = @"http://192.168.0.5:80/hytx/";
-NSString *const DynamicUrl = @"http://47.107.179.43:80/hytx/";
+NSString *const DynamicUrl = @"http://192.168.1.20:80/hytx/";
+//NSString *const DynamicUrl = @"http://47.107.179.43:80/hytx/";
 
 
-NSString *const DomainName = @"http://47.107.179.43:80/";
-//NSString *const DomainName = @"http://192.168.0.5:80/";
+//NSString *const DomainName = @"http://47.107.179.43:80/";
+NSString *const DomainName = @"http://192.168.1.20:80/";
 
 NSString *const imageBaseUrl = @"//pic11.wed114.cn/";
 /*
@@ -87,7 +87,7 @@ NSString *const versionManage = @"http://47.107.179.43:80/hytx/upload/version";
 /// 引导页
 //NSString *const startPage = @"http://pandafile.sctv.com:42086/System/StartPage/StartPage.json";
 NSString *const startPage = @"http://47.107.179.43:80/hytx/startadver/GetStartadver";
-//NSString *const startPage = @"http://192.168.1.5:80/hytx/startadver/GetStartadver";
+//NSString *const startPage = @"http://192.168.1.20:80/hytx/startadver/GetStartadver";
 
 /// 获取熊猫钱包余额
 NSString *const getPandaBalance = @"/getPandaBalance";

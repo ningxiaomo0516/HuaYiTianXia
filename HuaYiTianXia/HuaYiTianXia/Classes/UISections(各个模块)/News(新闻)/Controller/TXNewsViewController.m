@@ -30,19 +30,32 @@
 }
 
 - (void) loadTabData{
+    kShowMBProgressHUD(self.view);
     [SCHttpTools getWithURLString:@"news/GetNewTab" parameter:nil success:^(id responseObject) {
         NSDictionary *result = responseObject;
         if ([result isKindOfClass:[NSDictionary class]]) {
             TTLog(@"result -- %@",result);
             TXNewsModel *tabModel = [TXNewsModel mj_objectWithKeyValues:result];
-            [self.titlesArray addObjectsFromArray:tabModel.data];
-            [self.view addSubview:self.setPageViewControllers];
+            if (tabModel.errorcode==20000) {
+                [self.titlesArray addObjectsFromArray:tabModel.data];
+                [self.view addSubview:self.setPageViewControllers];
+            }else{
+                
+            }
         }else{
             Toast(@"获取城市数据失败");
         }
+        self.loadFailedView.hidden = YES;
+        kHideMBProgressHUD(self.view);
     } failure:^(NSError *error) {
         TTLog(@" -- error -- %@",error);
+        kHideMBProgressHUD(self.view);
+        self.loadFailedView.hidden = NO;
     }];
+}
+
+- (void) reminderData{
+    [self loadTabData];
 }
 
 - (void)viewWillAppear:(BOOL)animated{

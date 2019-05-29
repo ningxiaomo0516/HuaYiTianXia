@@ -60,6 +60,10 @@ static NSString * const reuseIdentifierCurrent = @"FMCurrentCitysTableViewCell";
     [self loadCityDataModel];
 }
 
+- (void) reminderData{
+    [self loadCityDataModel];
+}
+
 - (void)setLeftNavBarItemWithImage:(NSString *)imageName {
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     [button setImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
@@ -136,9 +140,11 @@ static NSString * const reuseIdentifierCurrent = @"FMCurrentCitysTableViewCell";
             Toast(@"获取城市数据失败");
         }
         kHideMBProgressHUD(self.view);
+        self.loadFailedView.hidden = YES;
     } failure:^(NSError *error) {
         TTLog(@" -- error -- %@",error);
         kHideMBProgressHUD(self.view);
+        self.loadFailedView.hidden = NO;
     }];
 }
 

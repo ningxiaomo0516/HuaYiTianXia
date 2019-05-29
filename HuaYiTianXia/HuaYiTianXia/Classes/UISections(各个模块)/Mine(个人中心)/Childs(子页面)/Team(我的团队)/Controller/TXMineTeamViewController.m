@@ -60,7 +60,6 @@ static NSString * const reuseIdentifierTeam = @"TXTeamTableViewCell";
     self.pageSize = 20;
     self.pageIndex = 1;
     [self initView];
-    [self.view showLoadingViewWithText:@"加载中..."];
     [self requestTeamData];
     
     // 下拉刷新
@@ -77,6 +76,10 @@ static NSString * const reuseIdentifierTeam = @"TXTeamTableViewCell";
     self.tableView.tableHeaderView = self.headerView;
 }
 
+- (void) reminderData{
+    [self requestTeamData];
+}
+
 - (void) initView{
     [Utils lz_setExtraCellLineHidden:self.tableView];
     [self.view addSubview:self.tableView];
@@ -85,7 +88,8 @@ static NSString * const reuseIdentifierTeam = @"TXTeamTableViewCell";
     }];
 }
 
-- (void) requestTeamData{ 
+- (void) requestTeamData{
+    [self.view showLoadingViewWithText:@"加载中..."];
     [SCHttpTools postWithURLString:kHttpURL(@"customerteam/teamMember") parameter:@{} success:^(id responseObject) {
         NSDictionary *result = responseObject;
         if ([result isKindOfClass:[NSDictionary class]]) {
@@ -110,9 +114,12 @@ static NSString * const reuseIdentifierTeam = @"TXTeamTableViewCell";
         }
         [self.view dismissLoadingView];
         [self.tableView.mj_header endRefreshing];
+        self.tableView.hidden = NO;
+        self.loadFailedView.hidden = YES;
     } failure:^(NSError *error) {
         [self.view dismissLoadingView];
         [self.tableView.mj_header endRefreshing];
+        self.loadFailedView.hidden = NO;
     }];
 }
 
@@ -302,6 +309,7 @@ static NSString * const reuseIdentifierTeam = @"TXTeamTableViewCell";
         [_tableView setSeparatorInset:UIEdgeInsetsMake(0,IPHONE6_W(15),0,0)];
         _tableView.delegate = self;
         _tableView.dataSource = self;
+        _tableView.hidden = YES;
         _tableView.backgroundColor = kTableViewInSectionColor;
     }
     return _tableView;

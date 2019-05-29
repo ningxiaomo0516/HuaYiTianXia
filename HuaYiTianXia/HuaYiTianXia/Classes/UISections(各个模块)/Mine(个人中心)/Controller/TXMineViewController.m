@@ -227,7 +227,7 @@ static NSString * const reuseIdentifierBanner = @"TXMineBannerTableViewCell";
         }else if([model.showClass isEqualToString:@"TXWebViewController"]){
             TXWebViewController *vc = [[TXWebViewController alloc] init];
             vc.title = model.title;
-            vc.webUrl = kAppendH5URL(DomainName, InvataionH5,@"");
+            vc.webUrl = kAppendH5URL(DomainName, InvataionH5,kUserInfo.userid);
             TTPushVC(vc);
         }else{
             Class controller = NSClassFromString(className);

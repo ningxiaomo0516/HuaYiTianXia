@@ -15,7 +15,6 @@ static NSString * const reuseIdentifier = @"TXInvitationTableViewCell";
 @interface TXInvitationViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *dataArray;
-@property (nonatomic, strong) SCNoDataView *noDataView;
 /// 每页多少数据
 @property (nonatomic, assign) NSInteger pageSize;
 /// 当前页
@@ -126,7 +125,7 @@ static NSString * const reuseIdentifier = @"TXInvitationTableViewCell";
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
--(UITableView *)tableView{
+- (UITableView *)tableView{
     if (!_tableView) {
         _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
         _tableView.showsVerticalScrollIndicator = false;
@@ -138,22 +137,6 @@ static NSString * const reuseIdentifier = @"TXInvitationTableViewCell";
         _tableView.backgroundColor = kTableViewInSectionColor;
     }
     return _tableView;
-}
-
-- (SCNoDataView *)noDataView {
-    if (!_noDataView) {
-        _noDataView = [[SCNoDataView alloc] initWithFrame:self.view.bounds
-                                                imageName:@"c12_live_nodata"
-                                            tipsLabelText:@"暂无数据哦~"];
-        _noDataView.userInteractionEnabled = NO;
-        [self.view insertSubview:_noDataView aboveSubview:self.tableView];
-        [self.noDataView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.right.mas_offset(0);
-            make.centerY.mas_equalTo(self.view.mas_centerY);
-            make.height.mas_equalTo(150);
-        }];
-    }
-    return _noDataView;
 }
 
 - (NSMutableArray *)dataArray{

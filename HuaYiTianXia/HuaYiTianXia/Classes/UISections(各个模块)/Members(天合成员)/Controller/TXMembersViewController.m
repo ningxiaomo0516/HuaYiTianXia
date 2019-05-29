@@ -237,7 +237,7 @@ static NSString* reuseIdentifierMall = @"TXMembersbleCollectionViewCell";
                     @[@"机票预订",@"热门景区",@"超值酒店",@"网红美食"]];
         NSArray* classArr = @[@[],
                               @[@"TXBecomeVipViewController",@"TXTicketOrderViewController",@"礼包",@""],
-                              @[@"TXTicketQueryViewController",@"",@"",@""]];
+                              @[@"TXTicketQueryViewController",@"TXCharterSpellMachineViewController",@"",@""]];
         for (int i=0; i<imagesArr.count; i++) {
             NSArray *subTitlesArray = [titleArr lz_safeObjectAtIndex:i];
             NSArray *subImagesArray = [imagesArr lz_safeObjectAtIndex:i];

@@ -320,4 +320,5 @@
     NSDateComponents *theComponents = [calendar components:calendarUnit fromDate:inputDate];
     return [weekdays objectAtIndex:theComponents.weekday];
 }
+
 @end

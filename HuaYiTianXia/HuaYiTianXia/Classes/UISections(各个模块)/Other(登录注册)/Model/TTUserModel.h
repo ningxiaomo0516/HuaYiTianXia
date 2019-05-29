@@ -36,7 +36,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *idnumber;
 /// 头像
 @property (nonatomic, copy) NSString *avatar;
-/// ID
+/// 用户ID
 @property (nonatomic, copy) NSString *userid;
 /// 身份证背面
 @property (nonatomic, copy) NSString *imgb;

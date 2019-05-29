@@ -23,7 +23,6 @@ static NSString* reuseIdentifierMall    = @"TXMallCollectionViewCell";
 /// 当前页
 @property (nonatomic, assign) NSInteger pageIndex;
 @property (nonatomic, assign) NSInteger pageType;
-@property (nonatomic, strong) SCNoDataView *noDataView;
 /// 顶部排序
 @property (nonatomic, strong) UIView *headerView;
 @property (nonatomic, assign) NSInteger sortType;
@@ -195,22 +194,6 @@ static NSString* reuseIdentifierMall    = @"TXMallCollectionViewCell";
         _collectionView.bounces = YES;
     }
     return _collectionView;
-}
-
-- (SCNoDataView *)noDataView {
-    if (!_noDataView) {
-        _noDataView = [[SCNoDataView alloc] initWithFrame:self.view.bounds
-                                                imageName:@"c12_live_nodata"
-                                            tipsLabelText:@"暂无数据哦~"];
-        _noDataView.userInteractionEnabled = NO;
-        [self.view insertSubview:_noDataView aboveSubview:self.collectionView];
-        [self.noDataView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.right.mas_offset(0);
-            make.centerY.mas_equalTo(self.view.mas_centerY);
-            make.height.mas_equalTo(150);
-        }];
-    }
-    return _noDataView;
 }
 
 - (NSMutableArray *)dataArray{

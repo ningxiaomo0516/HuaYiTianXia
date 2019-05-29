@@ -170,6 +170,10 @@
 		E757D5BC226EE52800EA84B8 /* TXBecomeVipCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E757D5BB226EE52800EA84B8 /* TXBecomeVipCollectionViewCell.m */; };
 		E75F2EDD224DEE680091C52E /* TTTagView.m in Sources */ = {isa = PBXBuildFile; fileRef = E75F2EDC224DEE680091C52E /* TTTagView.m */; };
 		E75F2EE0224E1BE30091C52E /* TTUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E75F2EDF224E1BE30091C52E /* TTUserModel.m */; };
+		E7625B13229E1E3400A34EDF /* SCLoadFailedView.m in Sources */ = {isa = PBXBuildFile; fileRef = E7625B12229E1E3400A34EDF /* SCLoadFailedView.m */; };
+		E7625B1A229E2F0400A34EDF /* TXCharterSpellMachineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7625B19229E2F0400A34EDF /* TXCharterSpellMachineViewController.m */; };
+		E7625B1D229E2FD800A34EDF /* TXCharterSpellMachineView.m in Sources */ = {isa = PBXBuildFile; fileRef = E7625B1C229E2FD800A34EDF /* TXCharterSpellMachineView.m */; };
+		E7625B23229E929E00A34EDF /* TXCharterSpellMachineCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7625B22229E929E00A34EDF /* TXCharterSpellMachineCollectionViewCell.m */; };
 		E76579EE2276D6F400AFAEFE /* TXTicketQueryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E76579EC2276D6F400AFAEFE /* TXTicketQueryViewController.m */; };
 		E76579EF2276D6F400AFAEFE /* TXTicketQueryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E76579ED2276D6F400AFAEFE /* TXTicketQueryViewController.xib */; };
 		E76579F3227702A900AFAEFE /* TXPushMessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E76579F2227702A900AFAEFE /* TXPushMessageModel.m */; };
@@ -681,6 +685,14 @@
 		E75F2EDC224DEE680091C52E /* TTTagView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TTTagView.m; sourceTree = "<group>"; };
 		E75F2EDE224E1BE30091C52E /* TTUserModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TTUserModel.h; sourceTree = "<group>"; };
 		E75F2EDF224E1BE30091C52E /* TTUserModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TTUserModel.m; sourceTree = "<group>"; };
+		E7625B11229E1E3400A34EDF /* SCLoadFailedView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SCLoadFailedView.h; sourceTree = "<group>"; };
+		E7625B12229E1E3400A34EDF /* SCLoadFailedView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SCLoadFailedView.m; sourceTree = "<group>"; };
+		E7625B18229E2F0400A34EDF /* TXCharterSpellMachineViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXCharterSpellMachineViewController.h; sourceTree = "<group>"; };
+		E7625B19229E2F0400A34EDF /* TXCharterSpellMachineViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXCharterSpellMachineViewController.m; sourceTree = "<group>"; };
+		E7625B1B229E2FD800A34EDF /* TXCharterSpellMachineView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXCharterSpellMachineView.h; sourceTree = "<group>"; };
+		E7625B1C229E2FD800A34EDF /* TXCharterSpellMachineView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXCharterSpellMachineView.m; sourceTree = "<group>"; };
+		E7625B21229E929D00A34EDF /* TXCharterSpellMachineCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXCharterSpellMachineCollectionViewCell.h; sourceTree = "<group>"; };
+		E7625B22229E929E00A34EDF /* TXCharterSpellMachineCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXCharterSpellMachineCollectionViewCell.m; sourceTree = "<group>"; };
 		E76579EB2276D6F400AFAEFE /* TXTicketQueryViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXTicketQueryViewController.h; sourceTree = "<group>"; };
 		E76579EC2276D6F400AFAEFE /* TXTicketQueryViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXTicketQueryViewController.m; sourceTree = "<group>"; };
 		E76579ED2276D6F400AFAEFE /* TXTicketQueryViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TXTicketQueryViewController.xib; sourceTree = "<group>"; };
@@ -1281,6 +1293,7 @@
 		E72698CF223F737C003A5043 /* UISections(各个模块) */ = {
 			isa = PBXGroup;
 			children = (
+				E7625B14229E2EDC00A34EDF /* CharterSpell(包机拼机) */,
 				E78333CE224874D9005CAB91 /* Other(登录注册) */,
 				E78583BB223F967800BBEA41 /* Templet(模板) */,
 				E72698D8223F737C003A5043 /* News(新闻) */,
@@ -1766,6 +1779,8 @@
 			children = (
 				E74C9530225CEA18000CBAF0 /* SCNoDataView.h */,
 				E74C9531225CEA18000CBAF0 /* SCNoDataView.m */,
+				E7625B11229E1E3400A34EDF /* SCLoadFailedView.h */,
+				E7625B12229E1E3400A34EDF /* SCLoadFailedView.m */,
 			);
 			path = "无数据";
 			sourceTree = "<group>";
@@ -2191,6 +2206,43 @@
 				E75F2EDC224DEE680091C52E /* TTTagView.m */,
 			);
 			path = TTTagView;
+			sourceTree = "<group>";
+		};
+		E7625B14229E2EDC00A34EDF /* CharterSpell(包机拼机) */ = {
+			isa = PBXGroup;
+			children = (
+				E7625B15229E2EDC00A34EDF /* Controller */,
+				E7625B16229E2EDC00A34EDF /* Model */,
+				E7625B17229E2EDC00A34EDF /* View */,
+			);
+			path = "CharterSpell(包机拼机)";
+			sourceTree = "<group>";
+		};
+		E7625B15229E2EDC00A34EDF /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				E7625B18229E2F0400A34EDF /* TXCharterSpellMachineViewController.h */,
+				E7625B19229E2F0400A34EDF /* TXCharterSpellMachineViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		E7625B16229E2EDC00A34EDF /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		E7625B17229E2EDC00A34EDF /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E7625B1B229E2FD800A34EDF /* TXCharterSpellMachineView.h */,
+				E7625B1C229E2FD800A34EDF /* TXCharterSpellMachineView.m */,
+				E7625B21229E929D00A34EDF /* TXCharterSpellMachineCollectionViewCell.h */,
+				E7625B22229E929E00A34EDF /* TXCharterSpellMachineCollectionViewCell.m */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		E76579F02277028500AFAEFE /* Model */ = {
@@ -3659,6 +3711,7 @@
 				E7759AD322449557007DA6CF /* TXAddressTableViewCell.m in Sources */,
 				E75F2EDD224DEE680091C52E /* TTTagView.m in Sources */,
 				E78584082240C68500BBEA41 /* TXMineBannerCollectionViewCell.m in Sources */,
+				E7625B23229E929E00A34EDF /* TXCharterSpellMachineCollectionViewCell.m in Sources */,
 				E725D079225ED3CA00C233E7 /* TTBaseTableView.m in Sources */,
 				E74CFFB52289086B00576B86 /* TXMallToolsCollectionViewCell.m in Sources */,
 				E7759AC722448DA3007DA6CF /* TXConversionViewController.m in Sources */,
@@ -3672,6 +3725,7 @@
 				E757D5BC226EE52800EA84B8 /* TXBecomeVipCollectionViewCell.m in Sources */,
 				E76579F3227702A900AFAEFE /* TXPushMessageModel.m in Sources */,
 				E756989D225202AE0022EC49 /* TXWebViewController.m in Sources */,
+				E7625B13229E1E3400A34EDF /* SCLoadFailedView.m in Sources */,
 				E74CFFB32289086B00576B86 /* TXMallBannerCollectionViewCell.m in Sources */,
 				E7C42E7E224B770200F3FB1A /* SCHttpTools.m in Sources */,
 				E78333E0224884F1005CAB91 /* TXRegisteredViewController.m in Sources */,
@@ -3732,6 +3786,7 @@
 				E7759AE02244C59F007DA6CF /* TXAddressTextViewCell.m in Sources */,
 				E72699A6223F7ECC003A5043 /* NSString+URL.m in Sources */,
 				E78334082248DE2F005CAB91 /* TTPopupBackgroundView.m in Sources */,
+				E7625B1D229E2FD800A34EDF /* TXCharterSpellMachineView.m in Sources */,
 				E78B8F81225B32BC0052852C /* TTPickerModel.m in Sources */,
 				E74CFFC82289086B00576B86 /* TXShoppingTableViewCell.m in Sources */,
 				E7B4706922803BBD00ADDC7A /* LZPinYinSearch.m in Sources */,
@@ -3827,6 +3882,7 @@
 				E77F87482273F0EB004EB9C1 /* UIDevice+Extension.m in Sources */,
 				E7691EE32255DC4E006A94D9 /* SCVerCodeInputView.m in Sources */,
 				E72699D9223F7F58003A5043 /* UILabel+Extension.m in Sources */,
+				E7625B1A229E2F0400A34EDF /* TXCharterSpellMachineViewController.m in Sources */,
 				E72699A5223F7ECC003A5043 /* NSFileManager+Paths.m in Sources */,
 				E74CFFBB2289086B00576B86 /* TXMallUAVModel.m in Sources */,
 				E7C42E81224B770200F3FB1A /* AFSessionManager.m in Sources */,

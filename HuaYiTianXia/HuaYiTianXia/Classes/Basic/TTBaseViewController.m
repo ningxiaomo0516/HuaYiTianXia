@@ -32,6 +32,10 @@
     [self tapGesture];
 }
 
+- (void) reminderData{
+    
+}
+
 #pragma mark 给当前view添加识别手势
 #pragma mark -- 当前tableView中带有输入框点击背景关闭键盘
 - (void) addGesture:(UITableView *) tableView{
@@ -61,4 +65,36 @@
     self.navigationController.navigationBar.barStyle = UIBarStyleBlackTranslucent;
 }
 
+- (SCLoadFailedView *)loadFailedView{
+    if (!_loadFailedView) {
+        _loadFailedView = [[SCLoadFailedView alloc] initWithFrame:self.view.bounds imageName:@"" labelText:@""];
+        MV(weakSelf)
+        _loadFailedView.reminderBlock = ^{
+            [weakSelf reminderData];
+        };
+        [self.view insertSubview:_loadFailedView atIndex:10];
+        [self.loadFailedView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.mas_offset(0);
+            make.centerY.mas_equalTo(self.view.mas_centerY);
+            make.height.mas_equalTo(260);
+        }];
+    }
+    return _loadFailedView;
+}
+
+- (SCNoDataView *)noDataView {
+    if (!_noDataView) {
+        _noDataView = [[SCNoDataView alloc] initWithFrame:self.view.bounds
+                                                imageName:@"c12_live_nodata"
+                                            tipsLabelText:@"暂无数据哦~"];
+        _noDataView.userInteractionEnabled = NO;
+        [self.view insertSubview:_noDataView atIndex:10];
+        [self.noDataView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.mas_offset(0);
+            make.centerY.mas_equalTo(self.view.mas_centerY);
+            make.height.mas_equalTo(150);
+        }];
+    }
+    return _noDataView;
+}
 @end

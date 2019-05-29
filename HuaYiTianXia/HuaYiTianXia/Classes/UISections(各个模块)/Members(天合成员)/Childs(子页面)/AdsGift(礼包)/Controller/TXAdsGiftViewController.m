@@ -22,12 +22,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-//    NSString *urlStr = [[NSBundle mainBundle] pathForResource:@"index1.html" ofType:nil];
-//    NSString *localHtml = [NSString stringWithContentsOfFile:urlStr encoding:NSUTF8StringEncoding error:nil];
-//    NSURL *fileURL = [NSURL fileURLWithPath:urlStr];
-//    [self.webView loadHTMLString:localHtml baseURL:fileURL];
-//    NSString *url = [NSString stringWithFormat:@"http://192.168.1.5/libao/index.html?type=1&userID=%@",kUserInfo.userid];
-//    [self loadWebViewURLString:@"http://192.168.1.5/libao/index.html"];
     [self loadWebViewURLString:self.webURL];
     [self registLocationFunction];
     

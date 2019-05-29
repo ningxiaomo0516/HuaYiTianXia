@@ -13,7 +13,7 @@ typedef void (^WhenTappedBlock)(void);
 
 /*!
  @method
- @abstract 单击
+ @abstract 针对label或view的单击事件
  @param block 代码块
  */
 - (void)whenTapped:(WhenTappedBlock)block;

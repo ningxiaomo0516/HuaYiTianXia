@@ -30,7 +30,6 @@ TXMallGoodsSpecTableViewCellDelegate,WKUIDelegate,WKNavigationDelegate>
 @property (strong, nonatomic) UIButton *saveButton;
 @property (strong, nonatomic) UIView *footerView;
 
-@property (nonatomic, strong) SCNoDataView *noDataView;
 /// 列表页传过来的Model
 @property (strong, nonatomic) NewsRecordsModel *productModel;
 /// 产品详情
@@ -405,22 +404,6 @@ TXMallGoodsSpecTableViewCellDelegate,WKUIDelegate,WKNavigationDelegate>
         }];
     }
     return _saveButton;
-}
-
-- (SCNoDataView *)noDataView {
-    if (!_noDataView) {
-        _noDataView = [[SCNoDataView alloc] initWithFrame:self.view.bounds
-                                                imageName:@"c12_live_nodata"
-                                            tipsLabelText:@"数据加载失败~"];
-        _noDataView.userInteractionEnabled = NO;
-        [self.view insertSubview:_noDataView aboveSubview:self.tableView];
-        [self.noDataView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.right.mas_offset(0);
-            make.centerY.mas_equalTo(self.view.mas_centerY);
-            make.height.mas_equalTo(150);
-        }];
-    }
-    return _noDataView;
 }
 
 - (UIView *)footerView{
