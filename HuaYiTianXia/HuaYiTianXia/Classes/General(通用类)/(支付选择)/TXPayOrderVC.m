@@ -145,9 +145,8 @@
     
     [self.saveButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.height.equalTo(@(IPHONE6_W(45)));
-        make.left.equalTo(@(15));
-        make.right.equalTo(self.view.mas_right).offset(-15);
-        //        make.bottom.equalTo(self.view.mas_bottom).offset(-kiPhoneX_T(34));
+        make.left.equalTo(@(IPHONE6_W(15)));
+        make.right.equalTo(self.view.mas_right).offset(IPHONE6_W(-15));
         make.top.equalTo(self.tipsLabel.mas_bottom).offset(15);
     }];
 }
@@ -253,11 +252,9 @@
 - (UIButton *)saveButton{
     if (!_saveButton) {
         _saveButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_saveButton setTitleColor:kWhiteColor forState:UIControlStateNormal];
-        _saveButton.titleLabel.font = kFontSizeMedium15;
         _saveButton.tag = 2;
         [_saveButton setTitle:@"下一步" forState:UIControlStateNormal];
-        [_saveButton setBackgroundImage:kGetImage(@"c31_denglu") forState:UIControlStateNormal];
+        [Utils lz_setButtonWithBGImage:_saveButton cornerRadius:45/2.0];
         MV(weakSelf);
         [_saveButton lz_handleControlEvent:UIControlEventTouchUpInside withBlock:^{
             [weakSelf onClick:self.saveButton];

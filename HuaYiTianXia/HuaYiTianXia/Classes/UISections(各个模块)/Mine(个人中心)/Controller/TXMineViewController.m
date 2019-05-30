@@ -155,18 +155,19 @@ static NSString * const reuseIdentifierBanner = @"TXMineBannerTableViewCell";
         tools.userModel = self.userModel;
         return tools;
 
-    }else if (indexPath.section == 1){
+    }/*else if (indexPath.section == 1){
+      // 隐藏个人中心banner(2019-05-29)
         TXMineBannerTableViewCell* tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierBanner forIndexPath:indexPath];
         tools.bannerArray = self.bannerArray;
         return tools;
-    }else{
+    }*/else{
         TXMineViewCell* tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
         TXGeneralModel* model = self.dataArray[indexPath.section][indexPath.row];
         model.index = indexPath.item;
         tools.titleLabel.text = model.title;
         NSString *imagesName = [NSString stringWithFormat:@"c44_%@",model.title];
         tools.imagesView.image = kGetImage(imagesName);
-        if (indexPath.row==0&&indexPath.section==2){
+        if (indexPath.row==0&&indexPath.section==1){
             tools.subtitleLabel.textColor = HexString(@"#FF9B9B");
             if (kUserInfo.isValidation==2) {
                 tools.subtitleLabel.textColor = kTextColor153;
@@ -195,28 +196,28 @@ static NSString * const reuseIdentifierBanner = @"TXMineBannerTableViewCell";
 
 /// 返回多少
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (section<2) return 1;
+    if (section<1) return 1;
     NSArray *subArray = [self.dataArray lz_safeObjectAtIndex:section];
     return subArray.count;
 }
 
 #pragma mark -- 设置Header高度
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    if (section<3) return 0.001f;
+    if (section==0) return 0.001f;
     return 10.f;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section==0) return IPHONE6_W(126);
-    if (indexPath.section==1) return IPHONE6_W(180);
+    /**if (indexPath.section==1) return IPHONE6_W(180);*/
     return IPHONE6_W(50);
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    if(indexPath.section<2) return;
+    if(indexPath.section==0) return;
     TXGeneralModel* model = self.dataArray[indexPath.section][indexPath.row];
     NSString *className = model.showClass;
-    if (indexPath.section>1) {
+    if (indexPath.section>0) {
         if ([model.showClass isEqualToString:@"TXRealNameViewController"]) {
             if (kUserInfo.isValidation==0) {
                 TXRealNameViewController *vc = [[TXRealNameViewController alloc] init];
@@ -329,11 +330,11 @@ static NSString * const reuseIdentifierBanner = @"TXMineBannerTableViewCell";
 - (NSMutableArray *)dataArray{
     if (!_dataArray) {
         _dataArray = [[NSMutableArray alloc] init];
-        NSArray* titleArr = @[@[],@[],
+        NSArray* titleArr = @[@[],
                               @[@"实名认证",@"订单中心",@"我的钱包"],
                               @[@"我的团队",@"我的邀请",@"推荐邀请"],
                               @[@"设置"]];
-        NSArray* classArr = @[@[],@[],
+        NSArray* classArr = @[@[],
                               @[@"TXRealNameViewController",@"TXProductViewController",@"TXWalletViewController"],
                               @[@"TXMineTeamViewController",@"TXInvitationViewController",@"TXWebViewController"],
                               @[@"TXSetupViewController"]];

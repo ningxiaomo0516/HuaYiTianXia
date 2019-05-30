@@ -240,7 +240,7 @@ static NSString * const reuseIdentifierReceiveAddress = @"TXReceiveAddressTableV
     self.webView.navigationDelegate = self;
     [self.webView sizeToFit];
     [self.webView.scrollView addObserver:self forKeyPath:@"contentSize" options:NSKeyValueObservingOptionNew context:nil];
-    NSString *str = [NSString stringWithFormat:@"http://192.168.1.20/libao/index2.html?id=%@",self.model.libaoId];
+    NSString *str = [NSString stringWithFormat:@"%@libao/index2.html?id=%@",DomainName,self.model.libaoId];
     NSURL *url = [NSURL URLWithString:str];
     NSURLRequest *urlRequest = [NSURLRequest requestWithURL:url];
     [self.webView loadRequest:urlRequest];

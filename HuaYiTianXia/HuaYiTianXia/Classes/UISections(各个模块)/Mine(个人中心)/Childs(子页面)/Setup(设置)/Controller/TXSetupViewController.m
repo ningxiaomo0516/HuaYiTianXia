@@ -178,7 +178,7 @@ static NSString * const reuseIdentifier = @"TXMineTableViewCell";
 - (UIButton *)exitButton{
     if (!_exitButton) {
         _exitButton = [UIButton buttonWithType:UIButtonTypeSystem];
-        [_exitButton setTitleColor:kThemeColor forState:UIControlStateNormal];
+        [_exitButton setTitleColor:kThemeColorHex forState:UIControlStateNormal];
         _exitButton.titleLabel.font = kFontSizeMedium15;
         [_exitButton setTitle:@"退出登录" forState:UIControlStateNormal];
         [_exitButton setBackgroundColor:kWhiteColor];
@@ -201,7 +201,6 @@ static NSString * const reuseIdentifier = @"TXMineTableViewCell";
 - (NSMutableArray *)dataArray{
     if (!_dataArray) {
         _dataArray = [[NSMutableArray alloc] init];
-        TTLog(@"kVersioning - %@",kVersioning);
         NSArray* titleArr = @[@[@"用户使用协议",@"隐私政策",@"账户与安全",@"地址管理",@"操作手册"],@[@"当前版本"]];
         NSArray* indexArr = @[@[@"0",@"1",@"2",@"3",@"4"],@[]];
         NSArray* classArr = @[@[@"TXWebViewController",@"TXWebViewController",@"TXAccountSecurityViewController",

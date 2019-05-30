@@ -39,7 +39,7 @@
 - (UIImageView *)imagesView{
     if (!_imagesView) {
         _imagesView = [[UIImageView alloc] init];
-        _imagesView.image = kGetImage(@"main_header_bg");
+        _imagesView.image = imageHexString(@"#596377");
     }
     return _imagesView;
 }

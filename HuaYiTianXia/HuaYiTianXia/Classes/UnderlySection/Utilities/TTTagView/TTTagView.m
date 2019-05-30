@@ -37,7 +37,7 @@
         [tagBtn setTitle:_dataArray[i] forState:UIControlStateNormal];
         tagBtn.titleLabel.font = kFontSizeMedium13;
         [tagBtn setTitleColor:kTextColor51 forState:UIControlStateNormal];
-        [tagBtn setTitleColor:kThemeColor  forState:UIControlStateSelected];
+        [tagBtn setTitleColor:kThemeColorHex  forState:UIControlStateSelected];
         [tagBtn setBackgroundImage:imageColor(kTextColor227) forState:UIControlStateNormal];
         [tagBtn setBackgroundImage:imageColor(kTextColor227) forState:UIControlStateSelected];
         [self makeCornerRadius:3.0 borderColor:kTextColor227 layer:tagBtn.layer borderWidth:.5];
@@ -61,17 +61,17 @@
         if (!sender.isSelected) {
 //            self.selectBtn.selected = !self.selectBtn.selected;
 //            self.selectBtn.backgroundColor = kClearColor;
-//            [self.selectBtn setBorderColor:kThemeColor];
+//            [self.selectBtn setBorderColor:kThemeColorHex];
 //            [self.selectBtn setTitleColor:kTextColor51 forState:UIControlStateNormal];
 //            sender.selected = !sender.selected;
-////            sender.backgroundColor = kThemeColor;
+////            sender.backgroundColor = kThemeColorHex;
 //            [sender setTitleColor:kRedColor forState:UIControlStateNormal];
-//            [sender setBorderColor:kThemeColor];
+//            [sender setBorderColor:kThemeColorHex];
 //            self.selectBtn = sender;
             self.selectBtn.selected = !self.selectBtn.selected;
             [self.selectBtn setBorderColor:kClearColor];
             sender.selected = !sender.selected;
-            [sender setBorderColor:kThemeColor];
+            [sender setBorderColor:kThemeColorHex];
             self.selectBtn = sender;
         }
         [self.delegate handleSelectTag:sender.titleLabel.text];

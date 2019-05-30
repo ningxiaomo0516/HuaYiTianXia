@@ -40,7 +40,7 @@
     tapGesture.cancelsTouchesInView = NO;
 }
 
--(void)tapGesture {
+- (void)tapGesture {
     [kKeyWindow endEditing:YES];
 }
 - (void) setupNavigationBarTheme {
@@ -49,7 +49,7 @@
     [self.navigationController.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
     [self.navigationController.navigationBar setShadowImage:[[UIImage alloc] init]];
     
-    [self.navigationController.navigationBar setBackgroundImage:[kGetImage(@"main_header_bg") resizableImageWithCapInsets:UIEdgeInsetsMake(5, 1, 5, 1)] forBarMetrics:UIBarMetricsDefault];
+    [self.navigationController.navigationBar setBackgroundImage:[imageColor(kThemeColorHex) resizableImageWithCapInsets:UIEdgeInsetsMake(5, 1, 5, 1)] forBarMetrics:UIBarMetricsDefault];
     self.navigationController.navigationBar.tintColor = kWhiteColor;
     //去掉导航栏下边的投影
     self.navigationController.navigationBar.shadowImage = [imageColor(kClearColor) resizableImageWithCapInsets:UIEdgeInsetsMake(1, 1, 1, 1)];
@@ -60,7 +60,7 @@
     self.navigationController.navigationBar.barStyle = UIBarStyleBlackTranslucent;
     
     //设置Navigation Bar背景图片
-    UIImage *title_bg = kGetImage(@"main_header_bg");  //获取图片
+    UIImage *title_bg = imageColor(kThemeColorHex);  //获取图片
     CGSize titleSize = self.navigationController.navigationBar.bounds.size;  //获取Navigation Bar的位置和大小
     title_bg = [Utils lz_scaleToSize:title_bg size:titleSize];//设置图片的大小与Navigation Bar相同
     [self.navigationController.navigationBar setBackgroundImage:title_bg forBarMetrics:UIBarMetricsDefault];  //设置背景

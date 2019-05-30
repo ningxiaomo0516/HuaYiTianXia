@@ -105,7 +105,7 @@
 - (UIImageView *)imagesViewBG{
     if (!_imagesViewBG) {
         _imagesViewBG = [[UIImageView alloc] init];
-        _imagesViewBG.image = kGetImage(@"mine_bg_images");
+        _imagesViewBG.image = imageColor(kThemeColorHex);
     }
     return _imagesViewBG;
 }

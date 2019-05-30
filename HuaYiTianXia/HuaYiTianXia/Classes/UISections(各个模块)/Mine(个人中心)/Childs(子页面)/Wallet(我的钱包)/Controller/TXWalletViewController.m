@@ -68,7 +68,9 @@ static NSString * const reuseIdentifierHeader = @"TXWalletHeaderTableViewCell";
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if ((indexPath.section==1) && self.heightAtIndexPath[indexPath]) {
+    if(indexPath.section==0){
+        return 300;
+    }else if ((indexPath.section==1) && self.heightAtIndexPath[indexPath]) {
         NSNumber *num = self.heightAtIndexPath[indexPath];
         /// collectionView 底部还有七个像素
         return [num floatValue];

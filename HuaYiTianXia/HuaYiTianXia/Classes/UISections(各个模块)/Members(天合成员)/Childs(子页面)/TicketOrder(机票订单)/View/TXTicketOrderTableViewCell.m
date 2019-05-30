@@ -178,7 +178,7 @@
 
 - (UILabel *)o_statusLabel{
     if (!_o_statusLabel) {
-        _o_statusLabel = [UILabel lz_labelWithTitle:@"" color:kThemeColor font:kFontSizeMedium13];
+        _o_statusLabel = [UILabel lz_labelWithTitle:@"" color:kThemeColorHex font:kFontSizeMedium13];
     }
     return _o_statusLabel;
 }

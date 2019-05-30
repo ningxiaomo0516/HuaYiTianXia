@@ -166,10 +166,8 @@ static NSString * const reuseIdentifierRollout = @"TXRolloutTableViewCell";
 - (UIButton *)doneButton{
     if (!_doneButton) {
         _doneButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_doneButton setTitleColor:kWhiteColor forState:UIControlStateNormal];
-        _doneButton.titleLabel.font = kFontSizeMedium15;
         [_doneButton setTitle:@"完成" forState:UIControlStateNormal];
-        [_doneButton setBackgroundImage:kGetImage(@"c31_denglu") forState:UIControlStateNormal];
+        [Utils lz_setButtonWithBGImage:_doneButton cornerRadius:45/2.0];
         MV(weakSelf);
         [_doneButton lz_handleControlEvent:UIControlEventTouchUpInside withBlock:^{
             [weakSelf doneBtnClick:self.doneButton];

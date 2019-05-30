@@ -126,10 +126,10 @@
 - (UIButton *)lookContractBtn{
     if (!_lookContractBtn) {
         _lookContractBtn = [UIButton buttonWithType:UIButtonTypeSystem];
-        [_lookContractBtn setTitleColor:kThemeColor forState:UIControlStateNormal];
+        [_lookContractBtn setTitleColor:kThemeColorHex forState:UIControlStateNormal];
         [_lookContractBtn setTitle:@"查看合同" forState:UIControlStateNormal];
         _lookContractBtn.titleLabel.font = kFontSizeMedium12;
-        [_lookContractBtn setBorderColor:kThemeColor];
+        [_lookContractBtn setBorderColor:kThemeColorHex];
         [_lookContractBtn setBorderWidth:0.7];
         [_lookContractBtn lz_setCornerRadius:IPHONE6_W(5.0)];
     }

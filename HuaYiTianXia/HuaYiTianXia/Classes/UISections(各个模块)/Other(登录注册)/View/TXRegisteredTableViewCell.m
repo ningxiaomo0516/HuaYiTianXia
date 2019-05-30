@@ -94,11 +94,10 @@
 
 - (UIButton *)codeBtn{
     if (!_codeBtn) {
-        _codeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_codeBtn setTitleColor:kThemeColor forState:UIControlStateNormal];
+        _codeBtn = [UIButton buttonWithType:UIButtonTypeSystem];
+        [_codeBtn setTitleColor:kColorWithRGB(42, 180, 228) forState:UIControlStateNormal];
         _codeBtn.titleLabel.font = kFontSizeMedium13;
         [_codeBtn setTitle:@"获取短信验证码" forState:UIControlStateNormal];
-//        [_codeBtn setBackgroundImage:kGetImage(@"c31_btn_yzm") forState:UIControlStateNormal];
     }
     return _codeBtn;
 }

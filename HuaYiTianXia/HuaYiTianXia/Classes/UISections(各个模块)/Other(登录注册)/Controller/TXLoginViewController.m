@@ -25,9 +25,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"登录";
-    TTLog(@"kUserInfo.registrationID -- %@",kUserInfo.registrationID);
     // Do any additional setup after loading the view from its nib.
+    self.title = @"登录";
+    [self initView];
     [self.registerBtn lz_handleControlEvent:UIControlEventTouchUpInside withBlock:^{
         TXRegisteredViewController *vc = [[TXRegisteredViewController alloc] init];
         vc.title = @"注册";
@@ -60,6 +60,15 @@
                                                                 target:self
                                                                 action:@selector(didTapPopButton:)];
     self.navigationItem.leftBarButtonItem = leftItem;
+}
+
+- (void) initView{
+    [Utils lz_setButtonWithBGImage:self.loginBtn cornerRadius:self.loginBtn.height/2.0];
+    [self.registerBtn setBackgroundImage:imageColor(kClearColor) forState:UIControlStateNormal];
+    [self.registerBtn setBorderColor:kThemeColorHex];
+    [self.registerBtn lz_setCornerRadius:self.registerBtn.height/2.0];
+    [self.registerBtn setTitleColor:kThemeColorHex forState:UIControlStateNormal];
+    [self.forgetBtn setTitleColor:kThemeColorHex forState:UIControlStateNormal];
 }
 
 - (void) loginBtnClick:(UIButton *)sender{

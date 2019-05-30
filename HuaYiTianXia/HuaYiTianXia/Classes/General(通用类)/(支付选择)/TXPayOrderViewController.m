@@ -54,7 +54,7 @@
     }
     self.totalPriceLabel.text = self.model.price;
     self.priceLabel.text = self.model.price;
-    
+    [Utils lz_setButtonWithBGImage:self.saveButton cornerRadius:self.saveButton.height/2.0];
     // 注册通知(支付成功之后的处理)
     [kNotificationCenter addObserver:self selector:@selector(AlipaySuccessfulBlock) name:@"AlipaySuccessful" object:nil];
     [kNotificationCenter addObserver:self selector:@selector(AgreeDealBlockNotice) name:@"AgreeDealBlockNotice" object:nil];

@@ -52,7 +52,7 @@
         make.top.equalTo(self.tipsLabel.mas_bottom).offset(15);
         make.centerX.equalTo(self);
         make.width.equalTo(@(self.width/16*9));
-        make.height.equalTo(@(40));
+        make.height.equalTo(@(45));
     }];
 }
 
@@ -77,13 +77,9 @@
 - (UIButton *)reminderBtn{
     if (!_reminderBtn) {
         _reminderBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        _reminderBtn.titleLabel.font = kFontSizeMedium17;
-        [_reminderBtn setTitleColor:kWhiteColor forState:UIControlStateNormal];
-        _reminderBtn.backgroundColor = [UIColor clearColor];
-        [_reminderBtn lz_setCornerRadius:40.0/2];
-        [_reminderBtn setBackgroundImage:kGetImage(@"c31_denglu") forState:UIControlStateNormal];
-        [_reminderBtn addTarget:self action:@selector(reminderBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
         [_reminderBtn setTitle:@"重新加载" forState:UIControlStateNormal];
+        [Utils lz_setButtonWithBGImage:_reminderBtn cornerRadius:45/2.0];
+        [_reminderBtn addTarget:self action:@selector(reminderBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _reminderBtn;
 }

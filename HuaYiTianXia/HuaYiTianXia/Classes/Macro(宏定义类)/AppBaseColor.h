@@ -33,7 +33,13 @@
 #define kTableViewInSectionColor kColorWithRGB(244, 244, 244)
 
 /// 主题颜色
-#define kThemeColor HexString(@"#26B9FE")
+#define kThemeColorHex HexString(@"#596377")
+/// 一级页面主题颜色
+#define kThemeColorRGB kColorWithRGB(89,99,119)
+/// 暂时没有用
+#define kBaseColor  imageColor(kThemeColorHex)
+/// 公共按钮背景图(颜色)
+#define kButtonColorNormal imageColor(kThemeColorHex)
 
 
 #define kFontWithNameMedium     @"PingFang-SC-Medium"

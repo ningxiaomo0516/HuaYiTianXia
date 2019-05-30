@@ -22,10 +22,10 @@
         self.menuViewStyle = WMMenuViewStyleLine;/// 样式
         self.menuViewLayoutMode = WMMenuViewLayoutModeCenter;//居中模式
         self.menuItemWidth = kScreenWidth/3;/// 宽度
-        self.titleColorSelected = kThemeColor;
+        self.titleColorSelected = kThemeColorHex;
         self.titleColorNormal = kTextColor51;
         self.progressWidth = 20;
-        self.progressColor = kThemeColor;
+        self.progressColor = kThemeColorHex;
         self.menuBGColor = kClearColor;
         self.showOnNavigationBar = YES;
     }

@@ -125,15 +125,14 @@
  *  @param cornerRadius 圆角大小
  *  @return 返回已经设置好的内容
  */
-+ (UIButton *) lz_setButtonWithBGImage:(UIButton *) button cornerRadius:(CGFloat)cornerRadius{
-
-    button.tintColor = [UIColor whiteColor];
-//    button.titleLabel.font = kFontSizeMedium15;
-    button.layer.cornerRadius = cornerRadius;
-    button.layer.masksToBounds = YES;
-//    [button setBackgroundImage:[Utils lz_imageWithColor:kButtonColorNormal] forState:UIControlStateNormal];
-//    [button setBackgroundImage:[Utils lz_imageWithColor:kButtonColorHighlighted] forState:UIControlStateHighlighted];
-    return button;
++ (UIButton *) lz_setButtonWithBGImage:(UIButton *)sender cornerRadius:(CGFloat)cornerRadius{
+    sender.tintColor = kWhiteColor;
+    sender.titleLabel.font = kFontSizeMedium15;
+    sender.layer.cornerRadius = cornerRadius;
+    sender.layer.masksToBounds = YES;
+    [sender setBackgroundImage:kButtonColorNormal forState:UIControlStateNormal];
+//    [sender setBackgroundImage:kButtonColorHighlighted forState:UIControlStateHighlighted];
+    return sender;
 }
 
 /**

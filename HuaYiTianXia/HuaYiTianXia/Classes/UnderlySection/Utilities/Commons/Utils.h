@@ -56,7 +56,7 @@
  *  @param cornerRadius 圆角大小
  *  @return 返回已经设置好的内容
  */
-+ (UIButton *) lz_setButtonWithBGImage:(UIButton *) button cornerRadius:(CGFloat)cornerRadius;
++ (UIButton *) lz_setButtonWithBGImage:(UIButton *)sender cornerRadius:(CGFloat)cornerRadius;
 
 
 /**

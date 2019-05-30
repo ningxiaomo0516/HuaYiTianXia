@@ -149,8 +149,7 @@
 
 
 - (void) initView{
-    [self.searchButton setBackgroundImage:kGetImage(@"c31_denglu") forState:UIControlStateNormal];
-    
+    [Utils lz_setButtonWithBGImage:self.searchButton cornerRadius:self.searchButton.height/2.0];
     [self.view addSubview:self.navigationView];
     [self.navigationView addSubview:self.navigationBarView];
     [self.navigationBarView addSubview:self.leftButton];

@@ -143,10 +143,9 @@
     }];
     
     [self.saveButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.view);
         make.height.equalTo(@(IPHONE6_W(45)));
-        make.left.equalTo(@(50));
-        make.right.equalTo(self.view.mas_right).offset(-50);
+        make.left.equalTo(@(IPHONE6_W(50)));
+        make.right.equalTo(self.view.mas_right).offset(IPHONE6_W(-50));
         make.top.equalTo(self.cellViews.mas_bottom).offset(100);
     }];
 }
@@ -225,11 +224,9 @@
 - (UIButton *)saveButton{
     if (!_saveButton) {
         _saveButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_saveButton setTitleColor:kWhiteColor forState:UIControlStateNormal];
-        _saveButton.titleLabel.font = kFontSizeMedium15;
         _saveButton.tag = 2;
         [_saveButton setTitle:@"开始搜索" forState:UIControlStateNormal];
-        [_saveButton setBackgroundImage:kGetImage(@"c31_denglu") forState:UIControlStateNormal];
+        [Utils lz_setButtonWithBGImage:_saveButton cornerRadius:45/2.0];
         MV(weakSelf);
         [_saveButton lz_handleControlEvent:UIControlEventTouchUpInside withBlock:^{
             [weakSelf saveBtnClick];

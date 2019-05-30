@@ -36,9 +36,9 @@
     }];
     [self.saveButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.subtitleLabel.mas_bottom).offset(IPHONE6_W(15));
-        make.left.equalTo(@(15));
-        make.right.equalTo(self.mas_right).offset(-15);
-        make.height.equalTo(@(45));
+        make.left.equalTo(@(IPHONE6_W(15)));
+        make.right.equalTo(self.mas_right).offset(IPHONE6_W(-15));
+        make.height.equalTo(@(IPHONE6_W(45)));
     }];
     [self.imagesView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.centerX.equalTo(self);
@@ -73,10 +73,8 @@
 - (UIButton *)saveButton{
     if (!_saveButton) {
         _saveButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_saveButton setTitleColor:kWhiteColor forState:UIControlStateNormal];
-        _saveButton.titleLabel.font = kFontSizeMedium15;
         _saveButton.tag = 100;
-        [_saveButton setBackgroundImage:kGetImage(@"c31_denglu") forState:UIControlStateNormal];
+        [Utils lz_setButtonWithBGImage:_saveButton cornerRadius:45/2.0];
     }
     return _saveButton;
 }
