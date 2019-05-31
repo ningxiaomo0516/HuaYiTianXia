@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface TXCharterSpellMachineView : UIView
 /// 顶部View
 @property (nonatomic, strong) UIView    *headerView;
-/// 顶部View
+/// 顶部Nav View
 @property (nonatomic, strong) UIView    *headerNavView;
 /// 返回按钮
 @property (nonatomic, strong) UIButton  *backButton;

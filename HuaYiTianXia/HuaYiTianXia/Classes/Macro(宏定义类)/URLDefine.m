@@ -13,18 +13,19 @@
 /// 支付是8081，其他是8082
 //NSString *const DynamicUrl = @"http://beta.api2.wed114.cn/?s=";
 //NSString *const DynamicUrl = @"http://192.168.1.22:8080/";
-NSString *const DynamicUrl = @"http://192.168.1.20:80/hytx/";
-//NSString *const DynamicUrl = @"http://47.107.179.43:80/hytx/";
+//NSString *const DynamicUrl = @"http://192.168.1.20:80/hytx/";
+NSString *const DynamicUrl = @"http://47.107.179.43:80/hytx/";
 
 
-//NSString *const DomainName = @"http://47.107.179.43:80/";
-NSString *const DomainName = @"http://192.168.1.20:80/";
+NSString *const DomainName = @"http://47.107.179.43:80/";
+//NSString *const DomainName = @"http://192.168.1.20:80/";
 
 NSString *const imageBaseUrl = @"//pic11.wed114.cn/";
 /*
 新闻详情:http://47.107.179.43/yq/invation/newDetails.html?id=78
 商品详情 ：http://47.107.179.43/yq/invation/goodsDetails.html?id=59&status=1
-id为商品id，status为商品类型（（1：无人机商城产品（消费）；2：农用植保产品（购买）；3：VR产品（购买）；4：纵横矿机产品（购买）；5：共享飞行产品（购买）；6：生态农业商城产品（消费）））
+id为商品id，status为商品类型（（1：无人机商城产品（消费）；2：农用植保产品（购买）；3：VR产品（购买）；
+                            4：纵横矿机产品（购买）；5：共享飞行产品（购买）；6：生态农业商城产品（消费）））
 推荐邀请： http://47.107.179.43/yq/invation/invataion.html?id=1064    id为该会员账号的id
 用户协议：http://47.107.179.43/userHelp/userAgree.html
 操作手册： http://47.107.179.43/userHelp
@@ -33,6 +34,7 @@ id为商品id，status为商品类型（（1：无人机商城产品（消费）
 民航共享： http://47.107.179.43/yq/invation/ndex.html
 合作协议：http://47.107.179.43/yq/invation/cooperationAgreement.html
 推送详情: http://47.107.179.43/userHelp/allDetails.html
+包机详情: http://47.107.179.43/userHelp/flightDetails.html?id=1
 */
 /// 推送详情
 NSString *const PushDetailsH5 = @"userHelp/allDetails.html?id=";
@@ -58,6 +60,8 @@ NSString *const CooperationAgreementH5 = @"/userHelp/lookNyzbAgrement.html?id=";
 NSString *const NBElectronicAgreementH5 = @"userHelp/nyzbAgrement.html?id=";
 /// 培训详情(课程网页)
 NSString *const CourseDetailsH5 = @"userHelp/flightProductDetails.html?id=";
+/// 包机详情
+NSString *const CharterDetailsH5 = @"userHelp/flightDetails.html?id=";
 
 
 

@@ -108,10 +108,8 @@ static NSString * const reuseIdentifierBanner   = @"TXMallGoodsBannerTableViewCe
         make.bottom.equalTo(self.saveButton.mas_top);
     }];
     [self.saveButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.view);
+        make.left.right.centerX.equalTo(self.view);
         make.height.equalTo(@(IPHONE6_W(45)));
-        make.right.equalTo(self.view.mas_right).offset(IPHONE6_W(-15));
-        make.left.equalTo(@(IPHONE6_W(15)));
         make.bottom.equalTo(self.view.mas_bottom).offset(-kSafeAreaBottomHeight);
     }];
 }
@@ -276,7 +274,7 @@ static NSString * const reuseIdentifierBanner   = @"TXMallGoodsBannerTableViewCe
         _saveButton = [UIButton buttonWithType:UIButtonTypeCustom];
         _saveButton.tag = 2;
         [_saveButton setTitle:@"预约申请" forState:UIControlStateNormal];
-        [Utils lz_setButtonWithBGImage:_saveButton cornerRadius:45/2.0];
+        [Utils lz_setButtonWithBGImage:_saveButton cornerRadius:0];
         MV(weakSelf);
         [_saveButton lz_handleControlEvent:UIControlEventTouchUpInside withBlock:^{
             [weakSelf handleControlEvent:self.saveButton];

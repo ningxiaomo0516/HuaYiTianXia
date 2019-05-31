@@ -9,6 +9,9 @@
 #import "TXCharterSpellMachineViewController.h"
 #import "TXCharterSpellMachineView.h"
 #import "TXCharterSpellMachineCollectionViewCell.h"
+#import "TXCharterMachineModel.h"
+#import "TXCharterMachineViewController.h"
+#import "TXCharterMachineChildViewController.h"
 
 static NSString * const reuseIdentifier = @"TXCharterSpellMachineCollectionViewCell";
 @interface TXCharterSpellMachineViewController ()<UICollectionViewDelegate, UICollectionViewDataSource>
@@ -29,7 +32,8 @@ static NSString * const reuseIdentifier = @"TXCharterSpellMachineCollectionViewC
     [self initView];
     
     [self.headerView.searchView whenTapped:^{
-        Toast(@"搜索");
+        TXCharterMachineViewController *vc = [[TXCharterMachineViewController alloc] init];
+        TTPushVC(vc);
     }];
     [self.headerView.citylabel whenTapped:^{
         Toast(@"城市选择");
@@ -39,14 +43,14 @@ static NSString * const reuseIdentifier = @"TXCharterSpellMachineCollectionViewC
     self.pageIndex = 1;
     [self.view showLoadingViewWithText:@"加载中..."];
     [self requestCurrentData];
-    
+
     // 下拉刷新
     self.collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         //将页码重新置为1
         self.pageIndex = 1;
         [self requestCurrentData];
     }];
-    
+
     /// 上拉加载
     self.collectionView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
         self.pageIndex++;// 页码+1
@@ -78,15 +82,15 @@ static NSString * const reuseIdentifier = @"TXCharterSpellMachineCollectionViewC
     [SCHttpTools postWithURLString:URLString parameter:parameter success:^(id responseObject) {
         NSDictionary *result = responseObject;
         if ([result isKindOfClass:[NSDictionary class]]) {
-//            TXInvitationModel *model = [TXInvitationModel mj_objectWithKeyValues:result];
-//            if (model.errorcode == 20000) {
-//                if (self.pageIndex==1) {
-//                    [self.dataArray removeAllObjects];
-//                }
-//                [self.dataArray addObjectsFromArray:model.data.list];
-//            }else{
-//                Toast(model.message);
-//            }
+            TXCharterMachineModel *model = [TXCharterMachineModel mj_objectWithKeyValues:result];
+            if (model.errorcode == 20000) {
+                if (self.pageIndex==1) {
+                    [self.dataArray removeAllObjects];
+                }
+                [self.dataArray addObjectsFromArray:model.data.list];
+            }else{
+                Toast(model.message);
+            }
         }else{
             Toast(@"我的邀请数据获取失败");
         }
@@ -115,12 +119,12 @@ static NSString * const reuseIdentifier = @"TXCharterSpellMachineCollectionViewC
 
 // MARK:- ====UICollectionViewDataSource,UICollectionViewDelegate=====
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-    return 20;
+    return self.dataArray.count;
 }
 
 // 每个分区有多少个数据
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return 1;//self.dataArray.count;
+    return 1;
 }
 
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -132,18 +136,16 @@ static NSString * const reuseIdentifier = @"TXCharterSpellMachineCollectionViewC
     }else{
         tools.imagesRank.hidden = YES;
     }
-//    tools.bannerArray = self.bannerArray;
+    tools.machineModel = self.dataArray[indexPath.section];
     return tools;
 }
 
 /// 点击collectionViewCell
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    
-}
-
-/// 同一行的cell的间距
-- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
-    return 0;
+    TXCharterMachineChildViewController *vc = [[TXCharterMachineChildViewController alloc] init];
+    CharterMachineModel *model = self.dataArray[indexPath.section];
+    vc.webUrl = kAppendH5URL(DomainName, CharterDetailsH5,model.kid);
+    TTPushVC(vc);
 }
 
 /// 布局协议对应的方法实现
@@ -155,7 +157,8 @@ static NSString * const reuseIdentifier = @"TXCharterSpellMachineCollectionViewC
 
 /// 设置所有的cell组成的视图与section 上、左、下、右的间隔
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section{
-    return UIEdgeInsetsMake(15,15,0,15);
+    if(section==0)return UIEdgeInsetsMake(15,15,15 ,15);
+    return UIEdgeInsetsMake(0,15,15,15);
 }
 
 - (UICollectionView *)collectionView{
@@ -196,8 +199,10 @@ static NSString * const reuseIdentifier = @"TXCharterSpellMachineCollectionViewC
 
 - (TXCharterSpellMachineView *)headerView{
     if (!_headerView) {
-        CGRect rect = CGRectMake(0, 0, kScreenWidth, IPHONE6_W(150)+kNavBarHeight);
+//        CGRect rect = CGRectMake(0, 0, kScreenWidth, IPHONE6_W(150)+kNavBarHeight);
+        CGRect rect = CGRectMake(0, 0, kScreenWidth, kNavBarHeight);
         _headerView = [[TXCharterSpellMachineView alloc] initWithFrame:rect];
+        _headerView.buttonView.hidden = YES;
     }
     return _headerView ;
 }

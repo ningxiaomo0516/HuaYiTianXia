@@ -186,7 +186,7 @@
 - (UILabel *)searchText{
     if (!_searchText) {
         _searchText = [UILabel lz_labelWithTitle:@"" color:kTextColor204 font:kFontSizeMedium13];
-        _searchText.text = @"请输入您想搜索的内容";
+        _searchText.text = @"筛选查看更多信息";
     }
     return _searchText;
 }

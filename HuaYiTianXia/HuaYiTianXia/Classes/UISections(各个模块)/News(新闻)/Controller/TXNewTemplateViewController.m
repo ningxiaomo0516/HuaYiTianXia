@@ -79,7 +79,6 @@ static NSString * const reuseIdentifierSectionHeaderView = @"SCTableViewSectionH
 -(void)jumpNewDetailsBannerModel:(NSString*)webURL{
     TXWebViewController *vc = [[TXWebViewController alloc] init];
     vc.title = @"新闻详情";
-    TTLog(@" h5 url ---- %@",webURL);
     vc.webUrl = webURL;
     TTPushVC(vc);
 }

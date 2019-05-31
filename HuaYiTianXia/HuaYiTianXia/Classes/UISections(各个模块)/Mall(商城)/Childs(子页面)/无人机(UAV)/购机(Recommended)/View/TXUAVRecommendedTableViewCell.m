@@ -126,7 +126,6 @@
         _buyButton.titleLabel.font = kFontSizeMedium12;
         [_buyButton setTitle:@"立即购买" forState:UIControlStateNormal];
         [_buyButton setBackgroundImage:imageHexString(@"#F56C36") forState:UIControlStateNormal];
-        MV(weakSelf);
         [_buyButton lz_handleControlEvent:UIControlEventTouchUpInside withBlock:^{
 //            [weakSelf onClick:self.buyButton];
         }];

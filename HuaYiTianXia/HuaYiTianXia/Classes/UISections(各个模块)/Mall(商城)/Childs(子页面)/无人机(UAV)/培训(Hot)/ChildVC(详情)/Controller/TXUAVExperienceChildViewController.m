@@ -121,8 +121,6 @@ static NSString * const reuseIdentifierBanner = @"TXMallGoodsBannerTableViewCell
         make.centerX.equalTo(self.view);
         make.height.equalTo(@(IPHONE6_W(45)));
         make.left.right.equalTo(self.view);
-        make.left.equalTo(@(IPHONE6_W(15)));
-        make.right.equalTo(self.view.mas_right).offset(IPHONE6_W(-15));
         make.bottom.equalTo(self.view.mas_bottom).offset(-kSafeAreaBottomHeight);
     }];
 }
@@ -296,7 +294,7 @@ static NSString * const reuseIdentifierBanner = @"TXMallGoodsBannerTableViewCell
         _saveButton = [UIButton buttonWithType:UIButtonTypeCustom];
         _saveButton.tag = 2;
         [_saveButton setTitle:@"立即报名" forState:UIControlStateNormal];
-        [Utils lz_setButtonWithBGImage:_saveButton cornerRadius:45/2.0];
+        [Utils lz_setButtonWithBGImage:_saveButton cornerRadius:0];
         MV(weakSelf);
         [_saveButton lz_handleControlEvent:UIControlEventTouchUpInside withBlock:^{
             [weakSelf handleControlEvent:self.saveButton];

@@ -67,7 +67,9 @@
 
 - (SCLoadFailedView *)loadFailedView{
     if (!_loadFailedView) {
-        _loadFailedView = [[SCLoadFailedView alloc] initWithFrame:self.view.bounds imageName:@"" labelText:@""];
+        _loadFailedView = [[SCLoadFailedView alloc] initWithFrame:self.view.bounds
+                                                        imageName:@""
+                                                        labelText:@""];
         MV(weakSelf)
         _loadFailedView.reminderBlock = ^{
             [weakSelf reminderData];

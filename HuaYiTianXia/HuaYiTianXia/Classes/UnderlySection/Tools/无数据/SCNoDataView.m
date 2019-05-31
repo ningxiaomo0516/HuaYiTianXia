@@ -44,7 +44,6 @@
 - (UIImageView *)imagesView{
     if (!_imagesView) {
         _imagesView = [[UIImageView alloc] init];
-        _imagesView.image = kGetImage(@"");
     }
     return _imagesView;
 }

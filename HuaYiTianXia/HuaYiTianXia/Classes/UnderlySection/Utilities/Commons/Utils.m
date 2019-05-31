@@ -241,6 +241,23 @@
 }
 
 /**
+ *  获取n天后的日期
+ *
+ *  @return 返回字符串格式时间
+ */
++ (NSString*)lz_getNdayDate:(int) days{
+    NSDate *appointDate;    // 指定日期声明
+    NSTimeInterval oneDay = 24 * 60 * 60;  // 一天一共有多少秒
+    NSDate *currentDate = [NSDate date];
+    appointDate = [currentDate initWithTimeIntervalSinceNow:oneDay * days];
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyy-MM-dd"];
+    NSString *dateTime = [formatter stringFromDate:appointDate];
+    return dateTime;
+}
+
+/**
  *  获取当前时间的时间戳
  *
  *  @return 返回字符串格式时间时间戳

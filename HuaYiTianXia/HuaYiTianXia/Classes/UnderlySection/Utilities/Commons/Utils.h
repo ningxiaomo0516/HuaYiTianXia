@@ -100,7 +100,12 @@
  *  @return 返回字符串格式时间
  */
 + (NSString*)lz_getCurrentDate;
-
+/**
+ *  获取n天后的日期
+ *
+ *  @return 返回字符串格式时间
+ */
++ (NSString*)lz_getNdayDate:(int) days;
 /**
  *  获取当前时间的时间戳
  *

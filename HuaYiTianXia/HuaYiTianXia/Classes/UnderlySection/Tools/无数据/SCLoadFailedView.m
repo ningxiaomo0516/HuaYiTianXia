@@ -22,7 +22,7 @@
         }
         self.frame = frame;
         [self setupUI];
-        if (labelText.length>0) {
+        if (imageName.length>0) {
             self.imagesView.image = kGetImage(imageName);
         }else{
             self.imagesView.image = kGetImage(@"c12_live_loadFailed");

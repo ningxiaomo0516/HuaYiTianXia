@@ -178,7 +178,7 @@ static NSString * const reuseIdentifier = @"TXMineTableViewCell";
 - (UIButton *)exitButton{
     if (!_exitButton) {
         _exitButton = [UIButton buttonWithType:UIButtonTypeSystem];
-        [_exitButton setTitleColor:kThemeColorHex forState:UIControlStateNormal];
+        [_exitButton setTitleColor:kColorWithRGB(42, 180, 228) forState:UIControlStateNormal];
         _exitButton.titleLabel.font = kFontSizeMedium15;
         [_exitButton setTitle:@"退出登录" forState:UIControlStateNormal];
         [_exitButton setBackgroundColor:kWhiteColor];

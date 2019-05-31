@@ -196,8 +196,7 @@ TXMallGoodsSpecTableViewCellDelegate,WKUIDelegate,WKNavigationDelegate>
     }];
     [self.saveButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.height.equalTo(@(IPHONE6_W(45)));
-        make.left.equalTo(@(IPHONE6_W(15)));
-        make.right.equalTo(self.footerView.mas_right).offset(IPHONE6_W(-15));
+        make.right.left.equalTo(self.footerView);
     }];
     
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -396,7 +395,7 @@ TXMallGoodsSpecTableViewCellDelegate,WKUIDelegate,WKNavigationDelegate>
     if (!_saveButton) {
         _saveButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [_saveButton setTitle:@"立即购买" forState:UIControlStateNormal];
-        [Utils lz_setButtonWithBGImage:_saveButton cornerRadius:45/2.0];
+        [Utils lz_setButtonWithBGImage:_saveButton cornerRadius:0];
         MV(weakSelf);
         [_saveButton lz_handleControlEvent:UIControlEventTouchUpInside withBlock:^{
             [weakSelf saveBtnClick:self.saveButton];

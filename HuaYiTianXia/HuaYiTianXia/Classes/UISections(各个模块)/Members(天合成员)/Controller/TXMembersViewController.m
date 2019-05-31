@@ -16,10 +16,13 @@
 #import "TXTicketOrderViewController.h"
 #import "TXAdsModel.h"
 #import "TXAdsGiftViewController.h"
+#import "TXMembersbleSpellCollectionViewCell.h"
+#import "TXCharterSpellMachineViewController.h"
 
 static NSString* reuseIdentifier = @"TXMallToolsCollectionViewCell";
 static NSString* reuseIdentifierBanner = @"TXMallBannerCollectionViewCell";
 static NSString* reuseIdentifierMall = @"TXMembersbleCollectionViewCell";
+static NSString* reuseIdentifierSpell = @"TXMembersbleSpellCollectionViewCell";
 
 
 @interface TXMembersViewController ()<UICollectionViewDelegate, UICollectionViewDataSource>
@@ -119,6 +122,7 @@ static NSString* reuseIdentifierMall = @"TXMembersbleCollectionViewCell";
 
 // MARK:- ====UICollectionViewDataSource,UICollectionViewDelegate=====
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
+    TTLog(@"self.dataArray.count -- %ld",self.dataArray.count);
     return self.dataArray.count;
 }
 
@@ -137,6 +141,13 @@ static NSString* reuseIdentifierMall = @"TXMembersbleCollectionViewCell";
     }else if (indexPath.section==2) {
         TXMembersbleCollectionViewCell *tools = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifierMall forIndexPath:indexPath];
         tools.imagesView.image = kGetImage(templateModel.imageText);
+        return tools;
+    }else if(indexPath.section==3){
+        TXMembersbleSpellCollectionViewCell *tools = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifierSpell forIndexPath:indexPath];
+        [tools.spellButton lz_handleControlEvent:UIControlEventTouchUpInside withBlock:^{
+            TXCharterSpellMachineViewController *vc = [[TXCharterSpellMachineViewController alloc] init];
+            TTPushVC(vc);
+        }];
         return tools;
     }else{
         TXMallToolsCollectionViewCell *tools = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
@@ -175,19 +186,21 @@ static NSString* reuseIdentifierMall = @"TXMembersbleCollectionViewCell";
     CGFloat width = kScreenWidth/3;
     if (indexPath.section==0) return CGSizeMake(kScreenWidth, IPHONE6_W(180));
     else if (indexPath.section==1)return CGSizeMake(width, IPHONE6_W(95));
+    else if (indexPath.section==3)return CGSizeMake(kScreenWidth, IPHONE6_W(82));
     CGFloat margin = 10*3;
     return CGSizeMake((kScreenWidth-margin)/2, IPHONE6_W(74));
 }
 
 //设置所有的cell组成的视图与section 上、左、下、右的间隔
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section{
-    if (section==2) return UIEdgeInsetsMake(10,10,0,10);
+    if (section==1) return UIEdgeInsetsMake(10,0,0,0);
+    if (section==2) return UIEdgeInsetsMake(10,10,10,10);
     return UIEdgeInsetsMake(0,0,0,0);
 }
 
 //设置footer呈现的size, 如果布局是垂直方向的话，size只需设置高度，宽与collectionView一致
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section{
-    if (section==2) return CGSizeMake(0,10);
+    if (section==3) return CGSizeMake(0,10);
     return CGSizeMake(0,0);
 }
 
@@ -217,6 +230,7 @@ static NSString* reuseIdentifierMall = @"TXMembersbleCollectionViewCell";
         [_collectionView registerClass:[TXMallToolsCollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
         [_collectionView registerClass:[TXMallBannerCollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifierBanner];
         [_collectionView registerClass:[TXMembersbleCollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifierMall];
+        [_collectionView registerClass:[TXMembersbleSpellCollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifierSpell];
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
         _collectionView.showsVerticalScrollIndicator = NO;
@@ -232,12 +246,12 @@ static NSString* reuseIdentifierMall = @"TXMembersbleCollectionViewCell";
         NSArray* titleArr;
         NSArray* imagesArr;
 //        titleArr = @[@[],@[@"会员",@"订单",@"礼包",@"其他"],@[]];
-        titleArr = @[@[],@[@"会员",@"订单",@"礼包"],@[]];
+        titleArr = @[@[],@[@"会员",@"订单",@"礼包"],@[],@[]];
         imagesArr = @[@[@"banner"],@[@"c41_btn_members",@"c41_btn_order",@"c41_btn_gift"],//,@"c41_btn_other"
-                    @[@"机票预订",@"热门景区",@"超值酒店",@"网红美食"]];
+                    @[@"机票预订",@"热门景区",@"超值酒店",@"网红美食"],@[@"拼机"]];
         NSArray* classArr = @[@[],
                               @[@"TXBecomeVipViewController",@"TXTicketOrderViewController",@"礼包",@""],
-                              @[@"TXTicketQueryViewController",@"TXCharterSpellMachineViewController",@"",@""]];
+                              @[@"TXTicketQueryViewController",@"",@"",@""],@[]];
         for (int i=0; i<imagesArr.count; i++) {
             NSArray *subTitlesArray = [titleArr lz_safeObjectAtIndex:i];
             NSArray *subImagesArray = [imagesArr lz_safeObjectAtIndex:i];
