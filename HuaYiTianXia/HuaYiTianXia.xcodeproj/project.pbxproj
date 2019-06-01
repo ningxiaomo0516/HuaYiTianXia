@@ -204,6 +204,10 @@
 		E769B29D22780B930049EF73 /* TXMessageChildHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = E769B29C22780B930049EF73 /* TXMessageChildHeaderView.m */; };
 		E769B2A0227820DF0049EF73 /* TXMessageChildAdsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E769B29F227820DF0049EF73 /* TXMessageChildAdsViewController.m */; };
 		E769B2A4227837110049EF73 /* TTLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = E769B2A3227837110049EF73 /* TTLocation.m */; };
+		E76C617122A2383100997817 /* TXCharterOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E76C617022A2383100997817 /* TXCharterOrderViewController.m */; };
+		E76C617422A23AEA00997817 /* TXCharterOrderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E76C617322A23AEA00997817 /* TXCharterOrderTableViewCell.m */; };
+		E76C617722A2569600997817 /* TXCharterBaseInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E76C617622A2569600997817 /* TXCharterBaseInfoTableViewCell.m */; };
+		E76C617A22A26FFA00997817 /* TXCharterFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = E76C617922A26FFA00997817 /* TXCharterFooterView.m */; };
 		E76D9C4C226027DF009D1A23 /* TXPayOrderVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E76D9C4B226027DE009D1A23 /* TXPayOrderVC.m */; };
 		E76D9C5222602EE8009D1A23 /* TXPayOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E76D9C5022602EE8009D1A23 /* TXPayOrderViewController.m */; };
 		E76D9C5322602EE8009D1A23 /* TXPayOrderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E76D9C5122602EE8009D1A23 /* TXPayOrderViewController.xib */; };
@@ -760,6 +764,14 @@
 		E769B29F227820DF0049EF73 /* TXMessageChildAdsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXMessageChildAdsViewController.m; sourceTree = "<group>"; };
 		E769B2A2227837100049EF73 /* TTLocation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TTLocation.h; sourceTree = "<group>"; };
 		E769B2A3227837110049EF73 /* TTLocation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TTLocation.m; sourceTree = "<group>"; };
+		E76C616F22A2383100997817 /* TXCharterOrderViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXCharterOrderViewController.h; sourceTree = "<group>"; };
+		E76C617022A2383100997817 /* TXCharterOrderViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXCharterOrderViewController.m; sourceTree = "<group>"; };
+		E76C617222A23AEA00997817 /* TXCharterOrderTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXCharterOrderTableViewCell.h; sourceTree = "<group>"; };
+		E76C617322A23AEA00997817 /* TXCharterOrderTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXCharterOrderTableViewCell.m; sourceTree = "<group>"; };
+		E76C617522A2569600997817 /* TXCharterBaseInfoTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXCharterBaseInfoTableViewCell.h; sourceTree = "<group>"; };
+		E76C617622A2569600997817 /* TXCharterBaseInfoTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXCharterBaseInfoTableViewCell.m; sourceTree = "<group>"; };
+		E76C617822A26FFA00997817 /* TXCharterFooterView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXCharterFooterView.h; sourceTree = "<group>"; };
+		E76C617922A26FFA00997817 /* TXCharterFooterView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXCharterFooterView.m; sourceTree = "<group>"; };
 		E76D9C4A226027DE009D1A23 /* TXPayOrderVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXPayOrderVC.h; sourceTree = "<group>"; };
 		E76D9C4B226027DE009D1A23 /* TXPayOrderVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXPayOrderVC.m; sourceTree = "<group>"; };
 		E76D9C4F22602EE8009D1A23 /* TXPayOrderViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXPayOrderViewController.h; sourceTree = "<group>"; };
@@ -2253,6 +2265,8 @@
 				E729F7B422A0DA220029A335 /* TXCharterMachineViewController.m */,
 				E729F7BF22A12C9E0029A335 /* TXCharterMachineChildViewController.h */,
 				E729F7C022A12C9E0029A335 /* TXCharterMachineChildViewController.m */,
+				E76C616F22A2383100997817 /* TXCharterOrderViewController.h */,
+				E76C617022A2383100997817 /* TXCharterOrderViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -2279,6 +2293,12 @@
 				E729F7BA22A0DDF80029A335 /* TXCharterMachineCollectionViewCell.m */,
 				E729F7BC22A1187D0029A335 /* TXCharterMachineDateView.h */,
 				E729F7BD22A1187D0029A335 /* TXCharterMachineDateView.m */,
+				E76C617222A23AEA00997817 /* TXCharterOrderTableViewCell.h */,
+				E76C617322A23AEA00997817 /* TXCharterOrderTableViewCell.m */,
+				E76C617522A2569600997817 /* TXCharterBaseInfoTableViewCell.h */,
+				E76C617622A2569600997817 /* TXCharterBaseInfoTableViewCell.m */,
+				E76C617822A26FFA00997817 /* TXCharterFooterView.h */,
+				E76C617922A26FFA00997817 /* TXCharterFooterView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -3860,6 +3880,7 @@
 				E72699D8223F7F58003A5043 /* UIButton+Extension.m in Sources */,
 				E774DCF222730FC6001A95B8 /* TXReceiveGiftListViewController.m in Sources */,
 				E714F28B2271910600024FA3 /* TXPushTableViewCell.m in Sources */,
+				E76C617A22A26FFA00997817 /* TXCharterFooterView.m in Sources */,
 				E74CFFC52289086B00576B86 /* TXSubmitOrderViewController.m in Sources */,
 				E7691EE42255DC4E006A94D9 /* UIView+SCValidation.m in Sources */,
 				E7B4706A22803BBD00ADDC7A /* NSString+PinYin4Cocoa.m in Sources */,
@@ -3890,6 +3911,7 @@
 				E77F874B2273F7CF004EB9C1 /* TXGiftDataModel.m in Sources */,
 				E72699DA223F7F58003A5043 /* UIFont+Extension.m in Sources */,
 				E7B4706E22803D7100ADDC7A /* FMTravelCollectionViewCell.m in Sources */,
+				E76C617722A2569600997817 /* TXCharterBaseInfoTableViewCell.m in Sources */,
 				E726991B223F7D28003A5043 /* TTBaseViewController.m in Sources */,
 				E7759AD022449507007DA6CF /* TXAddressViewController.m in Sources */,
 				E7923CA6225341C40094D0C3 /* SCUploadImageModel.m in Sources */,
@@ -3919,11 +3941,13 @@
 				E7B4706522803BBD00ADDC7A /* LZHanyuPinyinOutputFormat.m in Sources */,
 				E74CFFBA2289086B00576B86 /* TXMallHotTableViewCell.m in Sources */,
 				E783784B22967C4F0020C823 /* TXMineTeamModel.m in Sources */,
+				E76C617422A23AEA00997817 /* TXCharterOrderTableViewCell.m in Sources */,
 				E74C964322678358000CBAF0 /* TXAdsViewController.m in Sources */,
 				E72699E2223F7F58003A5043 /* UIImage+Extension.m in Sources */,
 				E7F1A7092241F298003FA216 /* TXProductTableViewCell.m in Sources */,
 				E74CFFC02289086B00576B86 /* TXGoodsH5TableViewCell.m in Sources */,
 				E76E681422818C5900B035B9 /* TTEmptyBaseView.m in Sources */,
+				E76C617122A2383100997817 /* TXCharterOrderViewController.m in Sources */,
 				E77F87482273F0EB004EB9C1 /* UIDevice+Extension.m in Sources */,
 				E7691EE32255DC4E006A94D9 /* SCVerCodeInputView.m in Sources */,
 				E72699D9223F7F58003A5043 /* UILabel+Extension.m in Sources */,

@@ -9,6 +9,7 @@
 #import "TXCharterMachineChildViewController.h"
 #import <WebKit/WebKit.h>
 #import "TXShareViewController.h"
+#import "TXCharterOrderViewController.h"
 
 @interface TXCharterMachineChildViewController ()<WKNavigationDelegate,WKUIDelegate>
 @property (nonatomic, strong) WKWebView *wkWebView;
@@ -52,7 +53,8 @@
 }
 
 - (void) handleControlEvent:(UIButton *) sender{
-
+    TXCharterOrderViewController *vc = [[TXCharterOrderViewController alloc] init];
+    TTPushVC(vc);
 }
 
 /// 清除全部缓存
@@ -141,11 +143,6 @@
     [self.wkWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.webUrl]]];
 }
 
-- (void)didTapPopButton:(UIBarButtonItem *)barButtonItem {
-    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
-}
-
-
 - (void) initView{
     [self.view addSubview:self.wkWebView];
     [self.view addSubview:self.progress];
@@ -203,9 +200,6 @@
             [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
         }
     }
-    //    else {
-    //        [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
-    //    }
 }
 
 #pragma mark - WKNavigationDelegate

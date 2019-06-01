@@ -57,6 +57,18 @@
 #define kFontSizeDisplayMedium36 [UIFont fontWithName:kFontWithNameDisplayMedium size:36]
 //[UIFont systemFontOfSize:14 weight:UIFontWeightRegular]
 
+#define kFontSizeRegular10 [UIFont fontWithName:kFontWithNameRegular size:10]
+#define kFontSizeRegular11 [UIFont fontWithName:kFontWithNameRegular size:11]
+#define kFontSizeRegular12 [UIFont fontWithName:kFontWithNameRegular size:12]
+#define kFontSizeRegular13 [UIFont fontWithName:kFontWithNameRegular size:13]
+#define kFontSizeRegular14 [UIFont fontWithName:kFontWithNameRegular size:14]
+#define kFontSizeRegular15 [UIFont fontWithName:kFontWithNameRegular size:15]
+#define kFontSizeRegular16 [UIFont fontWithName:kFontWithNameRegular size:16]
+#define kFontSizeRegular17 [UIFont fontWithName:kFontWithNameRegular size:17]
+#define kFontSizeRegular18 [UIFont fontWithName:kFontWithNameRegular size:18]
+#define kFontSizeRegular19 [UIFont fontWithName:kFontWithNameRegular size:19]
+#define kFontSizeRegular20 [UIFont fontWithName:kFontWithNameRegular size:20]
+
 #define kFontWithNameSc12 [UIFont fontWithName:kFontWithNameSc size:12]
 
 #define kFontSizeScBold10 [UIFont fontWithName:kFontWithNameScBold size:10]

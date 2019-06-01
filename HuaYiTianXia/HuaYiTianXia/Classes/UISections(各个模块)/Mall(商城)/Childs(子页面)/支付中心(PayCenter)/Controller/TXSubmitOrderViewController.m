@@ -32,9 +32,9 @@ static NSString * const reuseIdentifierMessage = @"TXMessageChildTableViewCell";
 @property (nonatomic, strong) UIView        *footerView;
 /// 提交按钮
 @property (nonatomic, strong) UIButton      *submitButton;
-/// 提交按钮
+/// 金额总计文字
 @property (nonatomic, strong) UILabel       *totalTitleLabel;
-/// 提交按钮
+/// 总金额
 @property (nonatomic, strong) UILabel       *totalAmountLabel;
 /// 付款方式数组
 @property (nonatomic, strong) NSMutableArray *paymentArray;
