@@ -2,51 +2,35 @@
 //  TXSignatureView.h
 //  HuaYiTianXia
 //
-//  Created by 宁小陌 on 2019/5/13.
-//  Copyright © 2019年 宁小陌. All rights reserved.
+//  Created by 宁小陌 on 2019/6/5.
+//  Copyright © 2019 宁小陌. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
-
+// 这里要定义一个block的别名(申明) 类型 ----> void (^) (NSString *text)
+typedef void(^SignatureViewBlock) (NSString *imageURL);
 @interface TXSignatureView : UIView
-/**
- *  画布
- */
-{
-    CGPoint _start;
-    CGPoint _move;
-    CGMutablePathRef _path;
-    NSMutableArray *_pathArray;
-    CGFloat _lineWidth;
-    UIColor *_color;
-}
+//定义一个block
+@property (nonatomic, copy) SignatureViewBlock completionHandler;
 
-@property (nonatomic,assign)CGFloat lineWidth;/**< 线宽 */
 
-@property (nonatomic,strong)UIColor *color;/**< 线的颜色 */
 
-@property (nonatomic,strong)NSMutableArray *pathArray;
-@property(nonatomic,strong) UIView      *signatureView;
-- (void) addAnimate;
-- (UIView *) initSignatureView;
-/**
- 获取绘制的图片
- 
- @return 绘制的图片
- */
--(UIImage*)getDrawingImg;
-
-/**
- 撤销
- */
--(void)undo;
-
-/**
- 清空
- */
--(void)clear;
+/// 总价
+@property(nonatomic,strong) UILabel *priceLabel;
+/// 协议
+@property(nonatomic,strong) UILabel *termsLabel;
+/// 日期时间
+@property(nonatomic,strong) UILabel *datetimeLabel;
+/// 清除按钮
+@property(nonatomic,strong) UIButton *clearButton;
+/// 撤销按钮
+@property(nonatomic,strong) UIButton *revokeButton;
+/// 同意按钮
+@property(nonatomic,strong) UIButton *saveButton;
+/// 关闭按钮
+@property(nonatomic,strong) UIButton *closeButton;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -157,6 +157,7 @@ static NSString * const reuseIdentifier = @"TXChoosePayTableViewCell";
     [parameter setObject:@([self.recordsModel.price doubleValue]) forKey:@"priceMoney"];
     [parameter setObject:@(1) forKey:@"number"];
     [parameter setObject:@([self.recordsModel.kid integerValue]) forKey:@"proID"];
+    [parameter setObject:self.recordsModel.signatureURL forKey:@"imgurl"];
     [parameter setObject:@"" forKey:@"addressID"];
     [parameter setObject:@"" forKey:@"spec"];
     [parameter setObject:@"" forKey:@"color"];

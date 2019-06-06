@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		7137FC69930FD658EE126BC7 /* Pods_HuaYiTianXia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C62B83054FB57102771D140E /* Pods_HuaYiTianXia.framework */; };
+		E70807B622A5244C002C57E6 /* TXCharterOrderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E70807B522A5244C002C57E6 /* TXCharterOrderModel.m */; };
 		E7089EF6225D7C6C00A7EF27 /* TXMallEppoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7089EF5225D7C6C00A7EF27 /* TXMallEppoViewController.m */; };
 		E7089EF9225D7EFA00A7EF27 /* TXEppoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7089EF8225D7EFA00A7EF27 /* TXEppoTableViewCell.m */; };
 		E7089EFD225DB8E400A7EF27 /* TXChoosePayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7089EFC225DB8E400A7EF27 /* TXChoosePayViewController.m */; };
@@ -16,6 +17,7 @@
 		E714F2882271904B00024FA3 /* TXSystemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E714F2872271904B00024FA3 /* TXSystemViewController.m */; };
 		E714F28B2271910600024FA3 /* TXPushTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E714F28A2271910600024FA3 /* TXPushTableViewCell.m */; };
 		E714F28E227192F200024FA3 /* TXSystemTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E714F28D227192F200024FA3 /* TXSystemTableViewCell.m */; };
+		E720A5CD22A8C44A00331846 /* TTCustomPhotoAlbum.m in Sources */ = {isa = PBXBuildFile; fileRef = E720A5CC22A8C44A00331846 /* TTCustomPhotoAlbum.m */; };
 		E725D079225ED3CA00C233E7 /* TTBaseTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = E725D077225ED3CA00C233E7 /* TTBaseTableView.m */; };
 		E725D0DE225EF36400C233E7 /* c31_btn_zfb@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E725D0DA225EF36300C233E7 /* c31_btn_zfb@2x.png */; };
 		E725D0DF225EF36400C233E7 /* c31_btn_wxzf@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E725D0DB225EF36300C233E7 /* c31_btn_wxzf@2x.png */; };
@@ -87,6 +89,8 @@
 		E72699FD223F8298003A5043 /* bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E72699F7223F8297003A5043 /* bg.jpg */; };
 		E7269A00223F8472003A5043 /* TXNewTemplateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E72699FF223F8472003A5043 /* TXNewTemplateViewController.m */; };
 		E7269A04223F8738003A5043 /* TXMainHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = E7269A03223F8738003A5043 /* TXMainHeaderView.m */; };
+		E727FEF822A765C8001C5E63 /* TXBezierPath.m in Sources */ = {isa = PBXBuildFile; fileRef = E727FEF722A765C8001C5E63 /* TXBezierPath.m */; };
+		E727FEFB22A77049001C5E63 /* TXSignatureView.m in Sources */ = {isa = PBXBuildFile; fileRef = E727FEFA22A77049001C5E63 /* TXSignatureView.m */; };
 		E729F7B222A0CF030029A335 /* TXCharterMachineModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E729F7B122A0CF030029A335 /* TXCharterMachineModel.m */; };
 		E729F7B522A0DA220029A335 /* TXCharterMachineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E729F7B422A0DA220029A335 /* TXCharterMachineViewController.m */; };
 		E729F7B822A0DB5F0029A335 /* TXCharterMachineHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = E729F7B722A0DB5F0029A335 /* TXCharterMachineHeaderView.m */; };
@@ -165,7 +169,7 @@
 		E74CFFDA2289726400576B86 /* TXMallUAVRecommendTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E74CFFD92289726400576B86 /* TXMallUAVRecommendTableViewCell.m */; };
 		E74CFFE42289809600576B86 /* TXUAVRecommendedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E74CFFE32289809600576B86 /* TXUAVRecommendedViewController.m */; };
 		E74CFFE72289811B00576B86 /* TXUAVRecommendedTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E74CFFE62289811B00576B86 /* TXUAVRecommendedTableViewCell.m */; };
-		E74CFFF42289ACDE00576B86 /* TXSignatureView.m in Sources */ = {isa = PBXBuildFile; fileRef = E74CFFF32289ACDE00576B86 /* TXSignatureView.m */; };
+		E74CFFF42289ACDE00576B86 /* TXPaintView.m in Sources */ = {isa = PBXBuildFile; fileRef = E74CFFF32289ACDE00576B86 /* TXPaintView.m */; };
 		E74CFFFD228A719600576B86 /* TXCourseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E74CFFFC228A719600576B86 /* TXCourseModel.m */; };
 		E750422F228C25CD00A34006 /* TXConventionSucceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E750422E228C25CD00A34006 /* TXConventionSucceViewController.m */; };
 		E7504232228C528200A34006 /* TXBaseCollectionReusableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = E7504231228C528200A34006 /* TXBaseCollectionReusableHeaderView.m */; };
@@ -400,6 +404,8 @@
 		7BDC34BA99E71AF550F8F19E /* Pods-HuaYiTianXia.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HuaYiTianXia.release.xcconfig"; path = "Pods/Target Support Files/Pods-HuaYiTianXia/Pods-HuaYiTianXia.release.xcconfig"; sourceTree = "<group>"; };
 		C62B83054FB57102771D140E /* Pods_HuaYiTianXia.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HuaYiTianXia.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8A40D1AA3A1C66C50E33D9F /* Pods-HuaYiTianXia.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HuaYiTianXia.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HuaYiTianXia/Pods-HuaYiTianXia.debug.xcconfig"; sourceTree = "<group>"; };
+		E70807B422A5244C002C57E6 /* TXCharterOrderModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXCharterOrderModel.h; sourceTree = "<group>"; };
+		E70807B522A5244C002C57E6 /* TXCharterOrderModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXCharterOrderModel.m; sourceTree = "<group>"; };
 		E7089EF4225D7C6C00A7EF27 /* TXMallEppoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXMallEppoViewController.h; sourceTree = "<group>"; };
 		E7089EF5225D7C6C00A7EF27 /* TXMallEppoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXMallEppoViewController.m; sourceTree = "<group>"; };
 		E7089EF7225D7EFA00A7EF27 /* TXEppoTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXEppoTableViewCell.h; sourceTree = "<group>"; };
@@ -417,6 +423,8 @@
 		E714F28A2271910600024FA3 /* TXPushTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXPushTableViewCell.m; sourceTree = "<group>"; };
 		E714F28C227192F200024FA3 /* TXSystemTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXSystemTableViewCell.h; sourceTree = "<group>"; };
 		E714F28D227192F200024FA3 /* TXSystemTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXSystemTableViewCell.m; sourceTree = "<group>"; };
+		E720A5CB22A8C44A00331846 /* TTCustomPhotoAlbum.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TTCustomPhotoAlbum.h; sourceTree = "<group>"; };
+		E720A5CC22A8C44A00331846 /* TTCustomPhotoAlbum.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TTCustomPhotoAlbum.m; sourceTree = "<group>"; };
 		E725D076225ED3CA00C233E7 /* TTBaseTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTBaseTableView.h; sourceTree = "<group>"; };
 		E725D077225ED3CA00C233E7 /* TTBaseTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTBaseTableView.m; sourceTree = "<group>"; };
 		E725D0DA225EF36300C233E7 /* c31_btn_zfb@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "c31_btn_zfb@2x.png"; sourceTree = "<group>"; };
@@ -547,6 +555,10 @@
 		E72699FF223F8472003A5043 /* TXNewTemplateViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXNewTemplateViewController.m; sourceTree = "<group>"; };
 		E7269A02223F8738003A5043 /* TXMainHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXMainHeaderView.h; sourceTree = "<group>"; };
 		E7269A03223F8738003A5043 /* TXMainHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXMainHeaderView.m; sourceTree = "<group>"; };
+		E727FEF622A765C8001C5E63 /* TXBezierPath.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXBezierPath.h; sourceTree = "<group>"; };
+		E727FEF722A765C8001C5E63 /* TXBezierPath.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXBezierPath.m; sourceTree = "<group>"; };
+		E727FEF922A77049001C5E63 /* TXSignatureView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXSignatureView.h; sourceTree = "<group>"; };
+		E727FEFA22A77049001C5E63 /* TXSignatureView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXSignatureView.m; sourceTree = "<group>"; };
 		E729F7B022A0CF030029A335 /* TXCharterMachineModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXCharterMachineModel.h; sourceTree = "<group>"; };
 		E729F7B122A0CF030029A335 /* TXCharterMachineModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXCharterMachineModel.m; sourceTree = "<group>"; };
 		E729F7B322A0DA220029A335 /* TXCharterMachineViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXCharterMachineViewController.h; sourceTree = "<group>"; };
@@ -686,8 +698,8 @@
 		E74CFFE32289809600576B86 /* TXUAVRecommendedViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXUAVRecommendedViewController.m; sourceTree = "<group>"; };
 		E74CFFE52289811B00576B86 /* TXUAVRecommendedTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXUAVRecommendedTableViewCell.h; sourceTree = "<group>"; };
 		E74CFFE62289811B00576B86 /* TXUAVRecommendedTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXUAVRecommendedTableViewCell.m; sourceTree = "<group>"; };
-		E74CFFF22289ACDE00576B86 /* TXSignatureView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXSignatureView.h; sourceTree = "<group>"; };
-		E74CFFF32289ACDE00576B86 /* TXSignatureView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXSignatureView.m; sourceTree = "<group>"; };
+		E74CFFF22289ACDE00576B86 /* TXPaintView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXPaintView.h; sourceTree = "<group>"; };
+		E74CFFF32289ACDE00576B86 /* TXPaintView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXPaintView.m; sourceTree = "<group>"; };
 		E74CFFFB228A719600576B86 /* TXCourseModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXCourseModel.h; sourceTree = "<group>"; };
 		E74CFFFC228A719600576B86 /* TXCourseModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXCourseModel.m; sourceTree = "<group>"; };
 		E750422D228C25CD00A34006 /* TXConventionSucceViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXConventionSucceViewController.h; sourceTree = "<group>"; };
@@ -1196,6 +1208,15 @@
 			path = "(支付选择)";
 			sourceTree = "<group>";
 		};
+		E720A5CA22A8C42A00331846 /* 保存相册 */ = {
+			isa = PBXGroup;
+			children = (
+				E720A5CB22A8C44A00331846 /* TTCustomPhotoAlbum.h */,
+				E720A5CC22A8C44A00331846 /* TTCustomPhotoAlbum.m */,
+			);
+			path = "保存相册";
+			sourceTree = "<group>";
+		};
 		E725D074225ED3CA00C233E7 /* Alipay(支付宝) */ = {
 			isa = PBXGroup;
 			children = (
@@ -1540,6 +1561,7 @@
 		E72698E8223F737C003A5043 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				E720A5CA22A8C42A00331846 /* 保存相册 */,
 				E750422C228C256D00A34006 /* 预约成功 */,
 				E769B2A522783FE30049EF73 /* 城市选择 */,
 				E769B2A1227836F20049EF73 /* 城市定位 */,
@@ -2158,8 +2180,12 @@
 		E74CFFF12289ACD000576B86 /* SignatureView(画板签字) */ = {
 			isa = PBXGroup;
 			children = (
-				E74CFFF22289ACDE00576B86 /* TXSignatureView.h */,
-				E74CFFF32289ACDE00576B86 /* TXSignatureView.m */,
+				E74CFFF22289ACDE00576B86 /* TXPaintView.h */,
+				E74CFFF32289ACDE00576B86 /* TXPaintView.m */,
+				E727FEF622A765C8001C5E63 /* TXBezierPath.h */,
+				E727FEF722A765C8001C5E63 /* TXBezierPath.m */,
+				E727FEF922A77049001C5E63 /* TXSignatureView.h */,
+				E727FEFA22A77049001C5E63 /* TXSignatureView.m */,
 			);
 			path = "SignatureView(画板签字)";
 			sourceTree = "<group>";
@@ -2276,6 +2302,8 @@
 			children = (
 				E729F7B022A0CF030029A335 /* TXCharterMachineModel.h */,
 				E729F7B122A0CF030029A335 /* TXCharterMachineModel.m */,
+				E70807B422A5244C002C57E6 /* TXCharterOrderModel.h */,
+				E70807B522A5244C002C57E6 /* TXCharterOrderModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -3779,6 +3807,7 @@
 				E729F7BE22A1187D0029A335 /* TXCharterMachineDateView.m in Sources */,
 				E7AA9DDA22437A1700C15483 /* TXTopupViewController.m in Sources */,
 				E72699E8223F7F58003A5043 /* UIView+Extension.m in Sources */,
+				E70807B622A5244C002C57E6 /* TXCharterOrderModel.m in Sources */,
 				E769B2932277EDB20049EF73 /* UIView+Category.m in Sources */,
 				E74CFFE42289809600576B86 /* TXUAVRecommendedViewController.m in Sources */,
 				E769B29D22780B930049EF73 /* TXMessageChildHeaderView.m in Sources */,
@@ -3791,6 +3820,7 @@
 				E7C42E7E224B770200F3FB1A /* SCHttpTools.m in Sources */,
 				E78333E0224884F1005CAB91 /* TXRegisteredViewController.m in Sources */,
 				E7AA9DE2224394A600C15483 /* TXRolloutTableViewCell.m in Sources */,
+				E720A5CD22A8C44A00331846 /* TTCustomPhotoAlbum.m in Sources */,
 				E7269908223F754B003A5043 /* LZRootViewController.m in Sources */,
 				E72699DC223F7F58003A5043 /* UITableView+SCExtension.m in Sources */,
 				E7F1A7032241EF37003FA216 /* TXEarningsViewController.m in Sources */,
@@ -3814,7 +3844,7 @@
 				E7C9FCEA22671329008FD260 /* TXTicketBookingTableViewCell.m in Sources */,
 				E78B8F82225B32BC0052852C /* TTPickerView.m in Sources */,
 				E7DCD60F226DC8E100AE8DE8 /* TXBecomeVipViewController.m in Sources */,
-				E74CFFF42289ACDE00576B86 /* TXSignatureView.m in Sources */,
+				E74CFFF42289ACDE00576B86 /* TXPaintView.m in Sources */,
 				E72699F9223F8298003A5043 /* WMMenuItem.m in Sources */,
 				E78584032240C54300BBEA41 /* TYPageControl.m in Sources */,
 				E72699FC223F8298003A5043 /* WMProgressView.m in Sources */,
@@ -4008,6 +4038,7 @@
 				E77326582254A99900FD665A /* TXRolloutTypeTableViewCell.m in Sources */,
 				E78333DB22487913005CAB91 /* TXLoginViewController.m in Sources */,
 				E729F7BB22A0DDF80029A335 /* TXCharterMachineCollectionViewCell.m in Sources */,
+				E727FEFB22A77049001C5E63 /* TXSignatureView.m in Sources */,
 				E7D731F12268AB47006F171A /* SCShareModel.m in Sources */,
 				E7923CA5225341C40094D0C3 /* SCImagePicker.m in Sources */,
 				E72699DE223F7F58003A5043 /* UIBarButtonItem+Extension.m in Sources */,
@@ -4085,6 +4116,7 @@
 				E769B2922277EDB20049EF73 /* LZOptionSelectView.m in Sources */,
 				E753D1F22249D3B200A2DD36 /* SCPresentationController.m in Sources */,
 				E74C0012228A953800576B86 /* TXUAVExperienceMainViewController.m in Sources */,
+				E727FEF822A765C8001C5E63 /* TXBezierPath.m in Sources */,
 				E78583D02240BD5A00BBEA41 /* TXGeneralModel.m in Sources */,
 				E72699E5223F7F58003A5043 /* UITextField+Extension.m in Sources */,
 				E78DCAD62265BC9200252314 /* TTBannerModel.m in Sources */,

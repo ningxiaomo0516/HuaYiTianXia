@@ -14,7 +14,6 @@
     if (self = [super initWithFrame:frame]) {
         self.backgroundColor = kClearColor;
         [self initView];
-        TTLog(@" -- %f",self.width);
     }
     return self;
 }

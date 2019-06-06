@@ -8,6 +8,7 @@
 
 #import "TXPurchaseAgreementViewController.h"
 #import <WebKit/WebKit.h>
+#import "TXSignatureView.h"
 
 @interface TXPurchaseAgreementViewController ()<WKNavigationDelegate,WKUIDelegate>
 @property (nonatomic, strong) UILabel *titleLabel;
@@ -191,7 +192,7 @@
     if (!_agreedButton) {
         _agreedButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [_agreedButton setTitleColor:kWhiteColor forState:UIControlStateNormal];
-        [_agreedButton setTitle:@"确定" forState:UIControlStateNormal];
+        [_agreedButton setTitle:@"同意" forState:UIControlStateNormal];
         _agreedButton.titleLabel.font = kFontSizeMedium15;
         _agreedButton.tag = 120;
         [_agreedButton lz_setCornerRadius:5.0];

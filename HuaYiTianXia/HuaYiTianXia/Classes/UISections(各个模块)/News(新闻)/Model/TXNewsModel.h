@@ -115,6 +115,10 @@ NS_ASSUME_NONNULL_BEGIN
 /// 支付中心需要的购买数量
 @property (nonatomic, assign) NSInteger buyCount;
 
+/// 签名的图片地址
+@property (nonatomic, copy) NSString *signatureURL;
+
+
 @end
 
 @interface NewsBannerModel : NSObject

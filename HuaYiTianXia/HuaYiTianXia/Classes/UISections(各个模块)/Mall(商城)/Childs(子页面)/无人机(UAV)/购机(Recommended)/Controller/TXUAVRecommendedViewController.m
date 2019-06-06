@@ -9,7 +9,6 @@
 #import "TXUAVRecommendedViewController.h"
 #import "TXUAVRecommendedTableViewCell.h"
 #import "TXMallUAVModel.h"
-#import "TXSignatureView.h"
 #import "TXUAVChildRecommendedViewController.h"
 #import "TTSortButton.h"
 
@@ -24,8 +23,6 @@ static NSString * const reuseIdentifier = @"TXUAVRecommendedTableViewCell";
 /// 当前页
 @property (nonatomic, assign) NSInteger pageIndex;
 @property (nonatomic, assign) NSInteger pageType;
-/// 画板签字
-@property (nonatomic, strong) TXSignatureView *signatureView;
 @property (nonatomic, assign) BOOL isSelect;
 @property (nonatomic, assign) NSInteger sortType;
 @end
@@ -61,12 +58,6 @@ static NSString * const reuseIdentifier = @"TXUAVRecommendedTableViewCell";
         self.pageIndex++;// 页码+1
         [self requestData];
     }];
-    self.signatureView = [[TXSignatureView alloc] init];
-    [self.view addSubview:[self.signatureView initSignatureView]];
-    
-    TXSignatureView *signatureView = [[TXSignatureView alloc] init];
-    [self.signatureView addSubview:signatureView];
-    signatureView.frame = CGRectMake(0, kScreenHeight/3, kScreenWidth, kScreenHeight - kScreenHeight/3);
 }
 
 - (void) requestData{

@@ -12,6 +12,7 @@
 #import "TXWebViewController.h"
 #import "TXChoosePayViewController.h"
 #import "TXPurchaseAgreementViewController.h"
+#import "TXSignatureView.h"
 
 @interface TXPayOrderViewController ()
 /// 关闭按钮
@@ -156,16 +157,27 @@
 /// 用户点击同意按钮跳转至支付选择
 - (void) AgreeDealBlockNotice{
     [self sc_dismissVC];
-    int64_t delayInSeconds = 0.5;      // 延迟的时间
-    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
-    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        self.model.purchaseType = 2;
-        TXChoosePayViewController *vc = [[TXChoosePayViewController alloc] initNewsRecordsModel:self.model];
-        vc.pageType = 1;
-        [self sc_bottomPresentController:vc presentedHeight:IPHONE6_W(400) completeHandle:^(BOOL presented) {
-            
-        }];
-    });
+    TXSignatureView *signatureView = [[TXSignatureView alloc] init];
+    signatureView.height = kCrossScreenHeight;
+    signatureView.width = kCrossScreenWidth;
+    signatureView.priceLabel.text = [NSString stringWithFormat:@"￥%@",self.priceLabel.text];
+    //// 添加画板
+    [kKeyWindow addSubview:signatureView];
+    MV(weakSelf)
+    signatureView.completionHandler = ^(NSString * _Nonnull imageURL) {
+        int64_t delayInSeconds = 0.5;      // 延迟的时间
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+            TTLog(@"imageURL --- %@",imageURL);
+            weakSelf.model.purchaseType = 2;
+            weakSelf.model.signatureURL = imageURL;
+            TXChoosePayViewController *vc = [[TXChoosePayViewController alloc] initNewsRecordsModel:weakSelf.model];
+            vc.pageType = 1;
+            [weakSelf sc_bottomPresentController:vc presentedHeight:IPHONE6_W(400) completeHandle:^(BOOL presented) {
+                
+            }];
+        });
+    };
 }
 
 - (void)dealloc{

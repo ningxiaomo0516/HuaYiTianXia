@@ -11,12 +11,15 @@
 #import "TXCharterBaseInfoTableViewCell.h"
 #import "TTBaseSectionHeaderView.h"
 #import "TXCharterFooterView.h"
+#import "TXChoosePayTableViewCell.h"
 static NSString * const reuseIdentifier = @"TXCharterOrderTableViewCell";
 static NSString * const reuseIdentifierInfo = @"TXCharterBaseInfoTableViewCell";
+static NSString * const reuseIdentifierPay = @"TXChoosePayTableViewCell";
 
 @interface TXCharterOrderViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *dataArray;
+@property (nonatomic, strong) NSMutableArray *payArray;
 @property (nonatomic, assign) BOOL isDefault;
 /// 底部视图
 @property (nonatomic, strong) TXCharterFooterView *footerView;
@@ -92,6 +95,14 @@ static NSString * const reuseIdentifierInfo = @"TXCharterBaseInfoTableViewCell";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section==0) {
         TXCharterOrderTableViewCell *tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
+        return tools;
+    }else if(indexPath.section==4){
+        TXGeneralModel *model = self.payArray[indexPath.row];
+        TXChoosePayTableViewCell *tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierPay forIndexPath:indexPath];
+        tools.titleLabel.text = model.title;
+        tools.linerView.hidden = YES;
+        tools.selectedBtn.hidden = NO;
+        tools.imagesView.image = kGetImage(model.imageText);
         return tools;
     }else{
         TXCharterBaseInfoTableViewCell *tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierInfo forIndexPath:indexPath];
@@ -187,8 +198,11 @@ static NSString * const reuseIdentifierInfo = @"TXCharterBaseInfoTableViewCell";
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if(indexPath.section==4){
+        
+    }else{
+        [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    }
 }
 
 #pragma mark ----- getter/setter
@@ -199,6 +213,7 @@ static NSString * const reuseIdentifierInfo = @"TXCharterBaseInfoTableViewCell";
         [_tableView setSeparatorInset:UIEdgeInsetsMake(0, 15, 0, 15)];
         [_tableView registerClass:[TXCharterOrderTableViewCell class] forCellReuseIdentifier:reuseIdentifier];
         [_tableView registerClass:[TXCharterBaseInfoTableViewCell class] forCellReuseIdentifier:reuseIdentifierInfo];
+        [_tableView registerClass:[TXChoosePayTableViewCell class] forCellReuseIdentifier:reuseIdentifierPay];
         //1 禁用系统自带的分割线
         _tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
         _tableView.delegate = self;
@@ -244,5 +259,20 @@ static NSString * const reuseIdentifierInfo = @"TXCharterBaseInfoTableViewCell";
         }
     }
     return _dataArray;
+}
+
+- (NSMutableArray *)payArray{
+    if (!_payArray) {
+        _payArray = [[NSMutableArray alloc] init];
+        NSArray* titleArr = @[@"支付宝",@"微信支付"];
+        NSArray* classArr = @[@"c31_btn_zfb",@"c31_btn_wxzf"];
+        for (int j = 0; j < titleArr.count; j ++) {
+            TXGeneralModel *generalModel = [[TXGeneralModel alloc] init];
+            generalModel.title = [titleArr lz_safeObjectAtIndex:j];
+            generalModel.imageText = [classArr lz_safeObjectAtIndex:j];
+            [_payArray addObject:generalModel];
+        }
+    }
+    return _payArray;
 }
 @end
