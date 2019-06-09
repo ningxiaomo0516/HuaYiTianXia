@@ -27,32 +27,40 @@
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         [self initView];
         
-        self.models_label.text = @"机型  挑战者650";
-        self.seatLabel.text = @"12座";
-        
-        self.dep_city_label.text = @"科威特";
-        self.dep_airport_label.text = @"科威特国际机场";
-        self.arv_city_label.text = @"尼斯";
-        self.arv_airport_label.text = @"尼斯蓝色海洋国际机场";
-        self.imagesView.image = kGetImage(@"lv01_btn_飞机");
-        self.duration_label.text = @"6h30min";
-        
-        self.dep_terminal_label.text = @"T1 航站楼 VIP";
-        self.arv_terminal_label.text = @"T2 航站楼 VIP";
         self.dep_terminal_label_t.text = @"航站楼";
         self.arv_terminal_label_t.text = @"航站楼";
         
+        self.imagesView.image = kGetImage(@"lv01_btn_飞机");
+        
         self.dep_time_label_t.text = @"出发";
-        self.dep_time_label.text = @"12:00";
-        self.dep_date_label.text = @"计划 2019-05-24";
         self.dep_datetime_label.text = @"实际  --";
         
         self.arv_time_label_t.text = @"到达";
-        self.arv_time_label.text = @"18:30";
-        self.arv_date_label.text = @"计划 2019-05-24";
         self.arv_datetime_label.text = @"实际  --";
     }
     return self;
+}
+
+- (void)setOrderModel:(CharterOrderModel *)orderModel{
+    _orderModel = orderModel;
+    
+    self.dep_city_label.text    = self.orderModel.depCity;
+    self.dep_airport_label.text = self.orderModel.depAirport;
+    self.arv_city_label.text    = self.orderModel.arvCity;
+    self.arv_airport_label.text = self.orderModel.arvAirport;
+    self.seatLabel.text         = [NSString stringWithFormat:@"%@座",self.orderModel.totalSeats];
+    
+    self.duration_label.text    = self.orderModel.duration;
+    self.models_label.text      = [NSString stringWithFormat:@"机型   %@",self.orderModel.aircraft];
+    
+    self.dep_terminal_label.text = self.orderModel.depTerminal;
+    self.arv_terminal_label.text = self.orderModel.arvTerminal;
+    
+    self.dep_time_label.text = self.orderModel.depHour;
+    self.dep_date_label.text = [NSString stringWithFormat:@"计划 %@",self.orderModel.depDate];
+    
+    self.arv_time_label.text = self.orderModel.arvHour;
+    self.arv_date_label.text = [NSString stringWithFormat:@"计划 %@",self.orderModel.arvDate];
 }
 
 - (void) initView{

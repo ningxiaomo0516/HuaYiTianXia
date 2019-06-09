@@ -99,6 +99,11 @@
 		E729F7C122A12C9E0029A335 /* TXCharterMachineChildViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E729F7C022A12C9E0029A335 /* TXCharterMachineChildViewController.m */; };
 		E729F7C422A131B00029A335 /* TXMembersbleSpellCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E729F7C322A131B00029A335 /* TXMembersbleSpellCollectionViewCell.m */; };
 		E729F7C722A154010029A335 /* TXBaseFooterButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = E729F7C622A154010029A335 /* TXBaseFooterButtonView.m */; };
+		E73D9ADF22ACED2C00034F5F /* TXInvoiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E73D9ADE22ACED2C00034F5F /* TXInvoiceViewController.m */; };
+		E73D9AE222ACED7800034F5F /* TXAddInvoiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E73D9AE122ACED7800034F5F /* TXAddInvoiceViewController.m */; };
+		E73D9AE522ACF9D100034F5F /* TXInvoiceTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E73D9AE422ACF9D100034F5F /* TXInvoiceTableViewCell.m */; };
+		E73D9AE822ACFACF00034F5F /* MusicModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E73D9AE722ACFACF00034F5F /* MusicModel.m */; };
+		E73D9AEB22AD0F3D00034F5F /* TXInvoiceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E73D9AEA22AD0F3D00034F5F /* TXInvoiceModel.m */; };
 		E74C000F228A953800576B86 /* TXUAVExperienceTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E74C0003228A953800576B86 /* TXUAVExperienceTableViewCell.m */; };
 		E74C0010228A953800576B86 /* TXUAVExperienceTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E74C0004228A953800576B86 /* TXUAVExperienceTableViewCell.xib */; };
 		E74C0011228A953800576B86 /* TXUAVExperienceChildViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E74C0008228A953800576B86 /* TXUAVExperienceChildViewController.m */; };
@@ -575,6 +580,16 @@
 		E729F7C322A131B00029A335 /* TXMembersbleSpellCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXMembersbleSpellCollectionViewCell.m; sourceTree = "<group>"; };
 		E729F7C522A154010029A335 /* TXBaseFooterButtonView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXBaseFooterButtonView.h; sourceTree = "<group>"; };
 		E729F7C622A154010029A335 /* TXBaseFooterButtonView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXBaseFooterButtonView.m; sourceTree = "<group>"; };
+		E73D9ADD22ACED2C00034F5F /* TXInvoiceViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXInvoiceViewController.h; sourceTree = "<group>"; };
+		E73D9ADE22ACED2C00034F5F /* TXInvoiceViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXInvoiceViewController.m; sourceTree = "<group>"; };
+		E73D9AE022ACED7800034F5F /* TXAddInvoiceViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXAddInvoiceViewController.h; sourceTree = "<group>"; };
+		E73D9AE122ACED7800034F5F /* TXAddInvoiceViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXAddInvoiceViewController.m; sourceTree = "<group>"; };
+		E73D9AE322ACF9D100034F5F /* TXInvoiceTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXInvoiceTableViewCell.h; sourceTree = "<group>"; };
+		E73D9AE422ACF9D100034F5F /* TXInvoiceTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXInvoiceTableViewCell.m; sourceTree = "<group>"; };
+		E73D9AE622ACFACE00034F5F /* MusicModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MusicModel.h; sourceTree = "<group>"; };
+		E73D9AE722ACFACF00034F5F /* MusicModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MusicModel.m; sourceTree = "<group>"; };
+		E73D9AE922AD0F3D00034F5F /* TXInvoiceModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXInvoiceModel.h; sourceTree = "<group>"; };
+		E73D9AEA22AD0F3D00034F5F /* TXInvoiceModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXInvoiceModel.m; sourceTree = "<group>"; };
 		E74C0002228A953800576B86 /* TXUAVExperienceTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXUAVExperienceTableViewCell.h; sourceTree = "<group>"; };
 		E74C0003228A953800576B86 /* TXUAVExperienceTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TXUAVExperienceTableViewCell.m; sourceTree = "<group>"; };
 		E74C0004228A953800576B86 /* TXUAVExperienceTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TXUAVExperienceTableViewCell.xib; sourceTree = "<group>"; };
@@ -2293,6 +2308,10 @@
 				E729F7C022A12C9E0029A335 /* TXCharterMachineChildViewController.m */,
 				E76C616F22A2383100997817 /* TXCharterOrderViewController.h */,
 				E76C617022A2383100997817 /* TXCharterOrderViewController.m */,
+				E73D9ADD22ACED2C00034F5F /* TXInvoiceViewController.h */,
+				E73D9ADE22ACED2C00034F5F /* TXInvoiceViewController.m */,
+				E73D9AE022ACED7800034F5F /* TXAddInvoiceViewController.h */,
+				E73D9AE122ACED7800034F5F /* TXAddInvoiceViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -2304,6 +2323,10 @@
 				E729F7B122A0CF030029A335 /* TXCharterMachineModel.m */,
 				E70807B422A5244C002C57E6 /* TXCharterOrderModel.h */,
 				E70807B522A5244C002C57E6 /* TXCharterOrderModel.m */,
+				E73D9AE622ACFACE00034F5F /* MusicModel.h */,
+				E73D9AE722ACFACF00034F5F /* MusicModel.m */,
+				E73D9AE922AD0F3D00034F5F /* TXInvoiceModel.h */,
+				E73D9AEA22AD0F3D00034F5F /* TXInvoiceModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2327,6 +2350,8 @@
 				E76C617622A2569600997817 /* TXCharterBaseInfoTableViewCell.m */,
 				E76C617822A26FFA00997817 /* TXCharterFooterView.h */,
 				E76C617922A26FFA00997817 /* TXCharterFooterView.m */,
+				E73D9AE322ACF9D100034F5F /* TXInvoiceTableViewCell.h */,
+				E73D9AE422ACF9D100034F5F /* TXInvoiceTableViewCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -3855,9 +3880,11 @@
 				E7D731F02268AB47006F171A /* SCLoginTools.m in Sources */,
 				E7C42E82224B770200F3FB1A /* HttpModel.m in Sources */,
 				E769B2A4227837110049EF73 /* TTLocation.m in Sources */,
+				E73D9ADF22ACED2C00034F5F /* TXInvoiceViewController.m in Sources */,
 				E78584042240C54300BBEA41 /* TYCyclePagerView.m in Sources */,
 				E74CFFC32289086B00576B86 /* TXMallGoodsSpecTableViewCell.m in Sources */,
 				E7089EFD225DB8E400A7EF27 /* TXChoosePayViewController.m in Sources */,
+				E73D9AE222ACED7800034F5F /* TXAddInvoiceViewController.m in Sources */,
 				E729F7B822A0DB5F0029A335 /* TXCharterMachineHeaderView.m in Sources */,
 				E726997E223F7E4B003A5043 /* SCLoadingLabel.m in Sources */,
 				E74CFFC22289086B00576B86 /* TXMallGoodsDetailsTableViewCell.m in Sources */,
@@ -3920,6 +3947,7 @@
 				E75F2EE0224E1BE30091C52E /* TTUserModel.m in Sources */,
 				E7B4706322803BBD00ADDC7A /* LZChineseInclude.m in Sources */,
 				E774DCF322730FC6001A95B8 /* TXReceiveGiftViewController.m in Sources */,
+				E73D9AE822ACFACF00034F5F /* MusicModel.m in Sources */,
 				E78333E72248A963005CAB91 /* TXRegisterTableViewCell.m in Sources */,
 				E74CFFB72289086B00576B86 /* TXMallViewController.m in Sources */,
 				E7759ADD2244C0D7007DA6CF /* SCTextView.m in Sources */,
@@ -4039,6 +4067,7 @@
 				E78333DB22487913005CAB91 /* TXLoginViewController.m in Sources */,
 				E729F7BB22A0DDF80029A335 /* TXCharterMachineCollectionViewCell.m in Sources */,
 				E727FEFB22A77049001C5E63 /* TXSignatureView.m in Sources */,
+				E73D9AE522ACF9D100034F5F /* TXInvoiceTableViewCell.m in Sources */,
 				E7D731F12268AB47006F171A /* SCShareModel.m in Sources */,
 				E7923CA5225341C40094D0C3 /* SCImagePicker.m in Sources */,
 				E72699DE223F7F58003A5043 /* UIBarButtonItem+Extension.m in Sources */,
@@ -4059,6 +4088,7 @@
 				E753D1F12249D3B200A2DD36 /* SCPopoverAnimator.m in Sources */,
 				E726990F223F786B003A5043 /* TXMineViewController.m in Sources */,
 				E78583F82240C2BE00BBEA41 /* TXSetupViewController.m in Sources */,
+				E73D9AEB22AD0F3D00034F5F /* TXInvoiceModel.m in Sources */,
 				E74C0028228AEEB800576B86 /* TXUAVChildRecommendedViewController.m in Sources */,
 				E72699D6223F7F58003A5043 /* UIView+IBExtension.m in Sources */,
 				E78DCAEC2265E2A700252314 /* TXTicketListViewController.m in Sources */,

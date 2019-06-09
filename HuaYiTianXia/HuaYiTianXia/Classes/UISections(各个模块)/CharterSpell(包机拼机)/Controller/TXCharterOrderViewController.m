@@ -14,6 +14,7 @@
 #import "TXChoosePayTableViewCell.h"
 
 #import "TXCharterOrderModel.h"
+#import "TXInvoiceViewController.h"
 
 static NSString * const reuseIdentifier = @"TXCharterOrderTableViewCell";
 static NSString * const reuseIdentifierInfo = @"TXCharterBaseInfoTableViewCell";
@@ -101,6 +102,7 @@ static NSString * const reuseIdentifierPay = @"TXChoosePayTableViewCell";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section==0) {
         TXCharterOrderTableViewCell *tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
+        tools.orderModel = self.orderModel;
         return tools;
     }else if(indexPath.section==4){
         TXGeneralModel *model = self.payArray[indexPath.row];
@@ -118,6 +120,17 @@ static NSString * const reuseIdentifierPay = @"TXChoosePayTableViewCell";
             tools.titleLabel.textColor = kTextColor153;
         }else if (indexPath.section==2) {
             tools.subtitleLabel.hidden = NO;
+            switch (indexPath.row) {
+                case 0:
+                    tools.subtitleLabel.text = [NSString stringWithFormat:@"￥%@",self.orderModel.referenceprice];
+                    break;
+                case 1:
+                    tools.subtitleLabel.text = [NSString stringWithFormat:@"￥%@",self.orderModel.price];
+                    break;
+                case 2:
+                    tools.subtitleLabel.text = [NSString stringWithFormat:@"￥%@",self.orderModel.needDeposit];
+                    break;
+            }
         }else if(indexPath.section==3 ){
             tools.imagesArrow.hidden = NO;
         }
@@ -142,13 +155,8 @@ static NSString * const reuseIdentifierPay = @"TXChoosePayTableViewCell";
 
 /// 返回多少
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    
-//    if(section==3){
-//        return self.isDefault?2:1;
-//    }else{
-        NSArray *subArray = [self.dataArray lz_safeObjectAtIndex:section];
-        return subArray.count;
-//    }
+    NSArray *subArray = [self.dataArray lz_safeObjectAtIndex:section];
+    return subArray.count;
 }
 
 #pragma mark -- 设置Header高度
@@ -206,6 +214,9 @@ static NSString * const reuseIdentifierPay = @"TXChoosePayTableViewCell";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if(indexPath.section==4){
         
+    }else if(indexPath.section==3){
+        TXInvoiceViewController *vc = [[TXInvoiceViewController alloc] init];
+        TTPushVC(vc);
     }else{
         [tableView deselectRowAtIndexPath:indexPath animated:YES];
     }
