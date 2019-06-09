@@ -64,11 +64,15 @@ static AFHTTPSessionManager* manager_ = nil;
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         if (responseObject) {
             NSDictionary *result = responseObject;
-            TXGeneralModel *model = [TXGeneralModel mj_objectWithKeyValues:result];
-            if (model.errorcode==22000) {
-                [kUserInfo logout];
+            if ([result isKindOfClass:[NSDictionary class]]) {
+                TXGeneralModel *model = [TXGeneralModel mj_objectWithKeyValues:result];
+                if (model.errorcode==22000) {
+                    [kUserInfo logout];
+                }
+                success(result);
+            }else{
+                Toast(@"数据格式错误");
             }
-            success(result);
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         if (error && failure) {
@@ -121,11 +125,15 @@ static AFHTTPSessionManager* manager_ = nil;
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         if (responseObject) {
             NSDictionary *result = responseObject;
-            TXGeneralModel *model = [TXGeneralModel mj_objectWithKeyValues:result];
-            if (model.errorcode==22000) {
-                [kUserInfo logout];
+            if ([result isKindOfClass:[NSDictionary class]]) {
+                TXGeneralModel *model = [TXGeneralModel mj_objectWithKeyValues:result];
+                if (model.errorcode==22000) {
+                    [kUserInfo logout];
+                }
+                success(result);
+            }else{
+                Toast(@"数据格式错误");
             }
-            success(result);
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         Toast(@"哎哟~您的网络有问题,\n请检查网络设置");
@@ -289,8 +297,11 @@ static AFHTTPSessionManager* manager_ = nil;
 //                TTLog(@" -- -%@",result[@"sid"]);
 //                kUserInfo.sid = result[@"sid"];
 //                [kUserInfo dump];
+                success(responseObject);
+            }else{
+                Toast(@"数据格式错误");
             }
-            success(responseObject);
+            
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         if (error) {
@@ -401,7 +412,11 @@ static AFHTTPSessionManager* manager_ = nil;
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         if (responseObject) {
             NSDictionary *result = responseObject;
-            success(result);
+            if ([result isKindOfClass:[NSDictionary class]]) {
+                success(result);
+            }else{
+                Toast(@"数据格式错误");
+            }
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         if (error && failure) {

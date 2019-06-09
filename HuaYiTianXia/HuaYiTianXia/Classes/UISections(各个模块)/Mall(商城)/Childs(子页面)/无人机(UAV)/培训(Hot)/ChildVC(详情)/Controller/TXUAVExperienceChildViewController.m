@@ -86,17 +86,13 @@ static NSString * const reuseIdentifierBanner = @"TXMallGoodsBannerTableViewCell
     [parameter setObject:@(self.courseListModel.kid.integerValue) forKey:@"id"];
     [SCHttpTools postWithURLString:kHttpURL(@"flighttrain/flightTrainDetails") parameter:parameter success:^(id responseObject) {
         NSDictionary *result = responseObject;
-        if ([result isKindOfClass:[NSDictionary class]]) {
-            self.courseModel = [TXCourseChildModel mj_objectWithKeyValues:result];
-            if (self.courseModel.errorcode == 20000) {
-                
-            }else{
-                Toast(self.courseModel.message);
-            }
-            self.isload = YES;
+        self.courseModel = [TXCourseChildModel mj_objectWithKeyValues:result];
+        if (self.courseModel.errorcode == 20000) {
+            
         }else{
-            Toast(@"数据获取失败");
+            Toast(self.courseModel.message);
         }
+        self.isload = YES;
         [self.view dismissLoadingView];
         [self.tableView reloadData];
         [self.tableView.mj_header endRefreshing];

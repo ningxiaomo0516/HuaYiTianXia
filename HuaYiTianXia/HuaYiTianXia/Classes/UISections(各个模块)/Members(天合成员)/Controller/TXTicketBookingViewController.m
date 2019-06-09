@@ -80,14 +80,12 @@ static NSString* reuseIdentifierInfo = @"TXTicketInfoTableViewCell";
 //
     [SCHttpTools postWithURLString:URLString parameter:parameter success:^(id responseObject) {
         NSDictionary *result = responseObject;
-        if ([result isKindOfClass:[NSDictionary class]]) {
-            TXTicketModel *model = [TXTicketModel mj_objectWithKeyValues:result];
-            if (model.errorcode==20000) {
-                TTLog(@" result --- %@",[Utils lz_dataWithJSONObject:result]);
-                [self.navigationController popViewControllerAnimated:YES];
-            }
-            Toast(model.message);
+        TXTicketModel *model = [TXTicketModel mj_objectWithKeyValues:result];
+        if (model.errorcode==20000) {
+            TTLog(@" result --- %@",[Utils lz_dataWithJSONObject:result]);
+            [self.navigationController popViewControllerAnimated:YES];
         }
+        Toast(model.message);
         kHideMBProgressHUD(self.view);
     } failure:^(NSError *error) {
         TTLog(@"机票查询信息 -- %@", error);
@@ -146,24 +144,22 @@ static NSString* reuseIdentifierInfo = @"TXTicketInfoTableViewCell";
     [SCHttpTools getWithURLString:URLString parameter:nil success:^(id responseObject) {
         NSDictionary *result = responseObject;
         kShowMBProgressHUD(self.view);
-        if ([result isKindOfClass:[NSDictionary class]]) {
-            TTUserDataModel *model = [TTUserDataModel mj_objectWithKeyValues:result];
-            kHideMBProgressHUD(self.view);
-            if (model.errorcode==20000) {
-                TTLog(@" result --- %@",[Utils lz_dataWithJSONObject:result]);
-                /// 暂不调用支付密码界面
-                kUserInfo.balance = model.data.balance;
-                kUserInfo.vrcurrency = model.data.vrcurrency;
-                [kUserInfo dump];
-                TXPayPasswordViewController *viewController = [[TXPayPasswordViewController alloc] init];
-                viewController.pageType = 4;
-                viewController.tipsText = @"";
-                viewController.integralText = kUserInfo.balance;
-                viewController.delegate = self;
-                [self presentPopupViewController:viewController animationType:TTPopupViewAnimationFade];
-            }else{
-                Toast(model.message);
-            }
+        TTUserDataModel *model = [TTUserDataModel mj_objectWithKeyValues:result];
+        kHideMBProgressHUD(self.view);
+        if (model.errorcode==20000) {
+            TTLog(@" result --- %@",[Utils lz_dataWithJSONObject:result]);
+            /// 暂不调用支付密码界面
+            kUserInfo.balance = model.data.balance;
+            kUserInfo.vrcurrency = model.data.vrcurrency;
+            [kUserInfo dump];
+            TXPayPasswordViewController *viewController = [[TXPayPasswordViewController alloc] init];
+            viewController.pageType = 4;
+            viewController.tipsText = @"";
+            viewController.integralText = kUserInfo.balance;
+            viewController.delegate = self;
+            [self presentPopupViewController:viewController animationType:TTPopupViewAnimationFade];
+        }else{
+            Toast(model.message);
         }
     } failure:^(NSError *error) {
         TTLog(@"余额查询信息 -- %@", error);

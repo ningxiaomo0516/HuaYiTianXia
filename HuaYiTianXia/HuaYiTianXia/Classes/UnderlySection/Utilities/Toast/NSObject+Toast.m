@@ -36,9 +36,9 @@
     textLabel.numberOfLines = 0;
     textLabel.textAlignment = NSTextAlignmentCenter;
     [textLabel sizeToFit];
-    if(textLabel.frame.size.width >= (kScreenWidth-TOAST_TEXT_MARGIN_LEFT_RIGHT*2)) {
+    if(textLabel.frame.size.width >= (kCrossScreenWidth-TOAST_TEXT_MARGIN_LEFT_RIGHT*2)) {
         CGRect rect = textLabel.frame;
-        rect.size.width = (kScreenWidth-TOAST_TEXT_MARGIN_LEFT_RIGHT*2);
+        rect.size.width = (kCrossScreenWidth-TOAST_TEXT_MARGIN_LEFT_RIGHT*2);
         textLabel.frame = rect;
         [textLabel sizeToFit];
     }
@@ -77,11 +77,11 @@
 
 
 - (void)tt_make:(NSString*)text duration:(CGFloat)duration position:(CGPoint)point {
-    [self tt_make:text duration:duration backgroundColor:[UIColor blackColor] position:CGPointMake(kScreenWidth/2, TOAST_POSITION_Y)];
+    [self tt_make:text duration:duration backgroundColor:[UIColor blackColor] position:CGPointMake(kCrossScreenWidth/2, TOAST_POSITION_Y)];
 }
 
 - (void)tt_make:(NSString*)text {
-    [self tt_make:text duration:TOAST_ANIMATION_DURATION position:CGPointMake(kScreenWidth/2, TOAST_POSITION_Y)];
+    [self tt_make:text duration:TOAST_ANIMATION_DURATION position:CGPointMake(kCrossScreenWidth/2, TOAST_POSITION_Y)];
 }
 
 

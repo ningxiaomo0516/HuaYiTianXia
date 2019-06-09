@@ -53,20 +53,16 @@ static NSString * const reuseIdentifierRollout = @"TXRolloutTableViewCell";
     [parameter setObject:self.amountText forKey:@"arcurrency"];
     [SCHttpTools postWithURLString:URLString parameter:parameter success:^(id responseObject) {
         NSDictionary *result = responseObject;
-        if ([result isKindOfClass:[NSDictionary class]]) {
-            TTLog(@"result -- %@",result);
-            TXGeneralModel *model = [TXGeneralModel mj_objectWithKeyValues:result];
-            if (model.errorcode==20000) {
-                Toast(@"转换成功");
-                [kNotificationCenter postNotificationName:@"reloadMineData" object:nil];
-                [self.navigationController popViewControllerAnimated:YES];
-            }else{
-                Toast(model.message);
-            }
+        TTLog(@"result -- %@",result);
+        TXGeneralModel *model = [TXGeneralModel mj_objectWithKeyValues:result];
+        if (model.errorcode==20000) {
+            Toast(@"转换成功");
+            [kNotificationCenter postNotificationName:@"reloadMineData" object:nil];
+            [self.navigationController popViewControllerAnimated:YES];
         }else{
-            Toast(@"获取城市数据失败");
+            Toast(model.message);
         }
-        kHideMBProgressHUD(self.view);;
+    kHideMBProgressHUD(self.view);;
     } failure:^(NSError *error) {
         TTLog(@"error --- %@",error);
         kHideMBProgressHUD(self.view);;

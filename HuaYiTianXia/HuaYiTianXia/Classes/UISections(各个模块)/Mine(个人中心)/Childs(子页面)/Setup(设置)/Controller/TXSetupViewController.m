@@ -52,20 +52,16 @@ static NSString * const reuseIdentifier = @"TXMineTableViewCell";
     [parameter setObject:registerid forKey:@"jg_deviceID"];
     [SCHttpTools getWithURLString:kHttpURL(@"customer/outlogin") parameter:parameter success:^(id responseObject) {
         NSDictionary *result = responseObject;
-        if ([result isKindOfClass:[NSDictionary class]]) {
-            TTUserDataModel *model = [TTUserDataModel mj_objectWithKeyValues:result];
-            if (model.errorcode == 20000) {
-                TTLog(@"result ---- %@",[Utils lz_dataWithJSONObject:result]);
-                [self.navigationController popToRootViewControllerAnimated:YES];
-                [[AppDelegate appDelegate] jumpMainVC];
-                [kUserInfo logout];
-                [kUserInfo dump];
-                Toast(@"退出登录成功");
-            }else{
-                Toast(model.message);
-            }
+        TTUserDataModel *model = [TTUserDataModel mj_objectWithKeyValues:result];
+        if (model.errorcode == 20000) {
+            TTLog(@"result ---- %@",[Utils lz_dataWithJSONObject:result]);
+            [self.navigationController popToRootViewControllerAnimated:YES];
+            [[AppDelegate appDelegate] jumpMainVC];
+            [kUserInfo logout];
+            [kUserInfo dump];
+            Toast(@"退出登录成功");
         }else{
-            Toast(@"个人中心数据获取失败");
+            Toast(model.message);
         }
         kHideMBProgressHUD(self.view);
     } failure:^(NSError *error) {

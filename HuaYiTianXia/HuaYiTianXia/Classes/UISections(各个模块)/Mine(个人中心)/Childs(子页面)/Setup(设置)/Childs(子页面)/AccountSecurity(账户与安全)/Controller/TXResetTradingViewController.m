@@ -65,18 +65,16 @@
                 kShowMBProgressHUD(weakSelf.view);
                 [SCHttpTools postWithURLString:kHttpURL(@"customer/TranPwdVerif") parameter:parameter success:^(id responseObject) {
                     NSDictionary *result = responseObject;
-                    if ([result isKindOfClass:[NSDictionary class]]) {
-                        TXGeneralModel *model = [TXGeneralModel mj_objectWithKeyValues:result];
-                        if (model.errorcode == 20000) {
-                            TXResetTradingViewController *vc = [[TXResetTradingViewController alloc] init];
-                            vc.titleLabel.text = @"重置交易密码";
-                            vc.subtitleLabel.text = @"设置6位数字支付密码";
-                            vc.saveButton.hidden = NO;
-                            vc.pageType = 1;
-                            [weakSelf.navigationController pushViewController:vc animated:YES];
-                        }else{
-                            [weakSelf tt_make:@"交易密码验证失败"];
-                        }
+                    TXGeneralModel *model = [TXGeneralModel mj_objectWithKeyValues:result];
+                    if (model.errorcode == 20000) {
+                        TXResetTradingViewController *vc = [[TXResetTradingViewController alloc] init];
+                        vc.titleLabel.text = @"重置交易密码";
+                        vc.subtitleLabel.text = @"设置6位数字支付密码";
+                        vc.saveButton.hidden = NO;
+                        vc.pageType = 1;
+                        [weakSelf.navigationController pushViewController:vc animated:YES];
+                    }else{
+                        [weakSelf tt_make:@"交易密码验证失败"];
                     }
                     kHideMBProgressHUD(weakSelf.view);
                 } failure:^(NSError *error) {
@@ -106,23 +104,19 @@
     [parameter setObject:self.passwords forKey:@"confirmpwd"];
     [SCHttpTools postWithURLString:kHttpURL(@"customer/AddTranPwd") parameter:parameter success:^(id responseObject) {
         NSDictionary *result = responseObject;
-        if ([result isKindOfClass:[NSDictionary class]]) {
-            TXGeneralModel *model = [TXGeneralModel mj_objectWithKeyValues:result];
-            if (model.errorcode == 20000) {
-                kUserInfo.tranPwd = 1;
-                [kUserInfo dump];
-                /// 返回指定的VC
-                [self.navigationController popToRootViewControllerAnimated:YES];
+        TXGeneralModel *model = [TXGeneralModel mj_objectWithKeyValues:result];
+        if (model.errorcode == 20000) {
+            kUserInfo.tranPwd = 1;
+            [kUserInfo dump];
+            /// 返回指定的VC
+            [self.navigationController popToRootViewControllerAnimated:YES];
 //                for (UIViewController *tempVC in self.navigationController.viewControllers) {
 //                    if ([tempVC isKindOfClass:[TXSetupViewController class]]) {
 //                        [self.navigationController popToViewController:tempVC animated:YES];
 //                    }
 //                }
-            }else{
-                Toast(@"交易密码验证失败");
-            }
         }else{
-            Toast(@"交易密码设置失败");
+            Toast(@"交易密码验证失败");
         }
         kHideMBProgressHUD(self.view);
     } failure:^(NSError *error) {

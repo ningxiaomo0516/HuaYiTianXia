@@ -75,15 +75,11 @@ static NSString * const reuseIdentifier = @"TXRolloutTableViewCell";
     [parameter setObject:self.repeatPassword forKey:@"confirmpwd"];
     [SCHttpTools postWithURLString:kHttpURL(@"customer/UpdatePwd") parameter:parameter success:^(id responseObject) {
         NSDictionary *result = responseObject;
-        if ([result isKindOfClass:[NSDictionary class]]) {
-            TTLog(@"result -- %@",result);
-            TXGeneralModel *model = [TXGeneralModel mj_objectWithKeyValues:result];
-            if (model.errorcode==20000) {
-                Toast(@"重置密码成功");
-                [self.navigationController popViewControllerAnimated:YES];
-            }else{
-                Toast(@"重置密码失败");
-            }
+        TTLog(@"result -- %@",result);
+        TXGeneralModel *model = [TXGeneralModel mj_objectWithKeyValues:result];
+        if (model.errorcode==20000) {
+            Toast(@"重置密码成功");
+            [self.navigationController popViewControllerAnimated:YES];
         }else{
             Toast(@"重置密码失败");
         }

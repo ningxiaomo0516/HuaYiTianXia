@@ -33,17 +33,13 @@
     kShowMBProgressHUD(self.view);
     [SCHttpTools getWithURLString:@"news/GetNewTab" parameter:nil success:^(id responseObject) {
         NSDictionary *result = responseObject;
-        if ([result isKindOfClass:[NSDictionary class]]) {
-            TTLog(@"result -- %@",result);
-            TXNewsModel *tabModel = [TXNewsModel mj_objectWithKeyValues:result];
-            if (tabModel.errorcode==20000) {
-                [self.titlesArray addObjectsFromArray:tabModel.data];
-                [self.view addSubview:self.setPageViewControllers];
-            }else{
-                
-            }
+        TTLog(@"result -- %@",result);
+        TXNewsModel *tabModel = [TXNewsModel mj_objectWithKeyValues:result];
+        if (tabModel.errorcode==20000) {
+            [self.titlesArray addObjectsFromArray:tabModel.data];
+            [self.view addSubview:self.setPageViewControllers];
         }else{
-            Toast(@"获取城市数据失败");
+            
         }
         self.loadFailedView.hidden = YES;
         kHideMBProgressHUD(self.view);

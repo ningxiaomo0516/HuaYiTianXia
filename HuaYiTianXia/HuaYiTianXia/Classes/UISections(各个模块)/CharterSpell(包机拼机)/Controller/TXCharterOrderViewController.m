@@ -12,6 +12,9 @@
 #import "TTBaseSectionHeaderView.h"
 #import "TXCharterFooterView.h"
 #import "TXChoosePayTableViewCell.h"
+
+#import "TXCharterOrderModel.h"
+
 static NSString * const reuseIdentifier = @"TXCharterOrderTableViewCell";
 static NSString * const reuseIdentifierInfo = @"TXCharterBaseInfoTableViewCell";
 static NSString * const reuseIdentifierPay = @"TXChoosePayTableViewCell";
@@ -23,49 +26,52 @@ static NSString * const reuseIdentifierPay = @"TXChoosePayTableViewCell";
 @property (nonatomic, assign) BOOL isDefault;
 /// 底部视图
 @property (nonatomic, strong) TXCharterFooterView *footerView;
+/// 机票信息
+@property (nonatomic, strong) CharterMachineModel *ticketTodel;
+@property (nonatomic, strong) CharterOrderModel *orderModel;
 
 @end
 
 @implementation TXCharterOrderViewController
-
+- (instancetype)initTicketModel:(CharterMachineModel *)ticketTodel{
+    if (self = [super init]){
+        self.ticketTodel = ticketTodel;
+    }
+    return self;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.title = @"填写订单";
     self.isDefault = YES;
     [self initView];
-    
+    TTLog(@"self.ticketTodel --- %@",self.ticketTodel.kid);
+    [self.view showLoadingViewWithText:@"请稍后..."];
+    [self requestTicketOrderData];
 }
 
 - (void) requestTicketOrderData{
-//    NSMutableDictionary *parameter = [[NSMutableDictionary alloc] init];
-//    [parameter setObject:@(self.pageIndex) forKey:@"page"];     // 当前页
-//    [parameter setObject:@(self.pageSize) forKey:@"pageSize"];  // 每页条数
-//    [SCHttpTools postWithURLString:kHttpURL(@"aircraftorder/GetAircraftorder") parameter:parameter success:^(id responseObject) {
-//        NSDictionary *result = responseObject;
-//        if ([result isKindOfClass:[NSDictionary class]]) {
-//            TXTicketOrderModel *model = [TXTicketOrderModel mj_objectWithKeyValues:result];
-//            if (model.errorcode == 20000) {
-//                TTLog(@" result --- %@",[Utils lz_dataWithJSONObject:result]);
-//                [self.dataArray addObjectsFromArray:model.data.list];
-//            }else{
-//                Toast(model.message);
-//            }
-//            [self analysisData];
-//            [self.tableView reloadData];
-//            [self.tableView.mj_header endRefreshing];
-//            [self.tableView.mj_footer endRefreshing];
-//            [self.view dismissLoadingView];
-//        }else{
-//            Toast(@"个人中心数据获取失败");
-//        }
-//        [self.view dismissLoadingView];
-//    } failure:^(NSError *error) {
-//        TTLog(@" -- error -- %@",error);
-//        [self.tableView.mj_header endRefreshing];
-//        [self.tableView.mj_footer endRefreshing];
-//        [self.view dismissLoadingView];
-//    }];
+    NSMutableDictionary *parameter = [[NSMutableDictionary alloc] init];
+    [parameter setObject:self.ticketTodel.kid forKey:@"id"];  // 机票信息ID
+    NSString *URLString = @"aircraftinformation/queryAircraftinDetails";
+    [SCHttpTools postWithURLString:kHttpURL(URLString) parameter:parameter success:^(id responseObject) {
+        NSDictionary *result = responseObject;
+        TTLog(@"result -- %@",[Utils lz_dataWithJSONObject:result]);
+        TXCharterOrderModel *model = [TXCharterOrderModel mj_objectWithKeyValues:result];
+        if (model.errorcode == 20000) {
+            self.orderModel = model.data;
+            self.tableView.hidden = NO;
+        }else{
+            self.noDataView.hidden = NO;
+        }
+        [self.tableView reloadData];
+        [self.view dismissLoadingView];
+        [self.view dismissLoadingView];
+    } failure:^(NSError *error) {
+        TTLog(@" -- error -- %@",error);
+        [self.view dismissLoadingView];
+        self.noDataView.hidden = YES;
+    }];
 }
 
 - (void) initView{
@@ -217,6 +223,7 @@ static NSString * const reuseIdentifierPay = @"TXChoosePayTableViewCell";
         //1 禁用系统自带的分割线
         _tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
         _tableView.delegate = self;
+        _tableView.hidden = YES;
         _tableView.dataSource = self;
         _tableView.backgroundColor = kViewColorNormal;
         _tableView.rowHeight = UITableViewAutomaticDimension;

@@ -40,18 +40,14 @@ static NSString * const reuseIdentifierRollout = @"TXRolloutTableViewCell";
     [parameter setObject:self.amountText forKey:@"money"];
     [SCHttpTools postWithURLString:kHttpURL(@"customer/DoubleThrow") parameter:parameter success:^(id responseObject) {
         NSDictionary *result = responseObject;
-        if ([result isKindOfClass:[NSDictionary class]]) {
-            TTLog(@"result -- %@",result);
-            TXGeneralModel *model = [TXGeneralModel mj_objectWithKeyValues:result];
-            if (model.errorcode==20000) {
-                Toast(@"复投成功");
-                [kNotificationCenter postNotificationName:@"reloadMineData" object:nil];
-                [self.navigationController popViewControllerAnimated:YES];
-            }else{
-                Toast(model.message);
-            }
+        TTLog(@"result -- %@",result);
+        TXGeneralModel *model = [TXGeneralModel mj_objectWithKeyValues:result];
+        if (model.errorcode==20000) {
+            Toast(@"复投成功");
+            [kNotificationCenter postNotificationName:@"reloadMineData" object:nil];
+            [self.navigationController popViewControllerAnimated:YES];
         }else{
-            Toast(@"获取城市数据失败");
+            Toast(model.message);
         }
     } failure:^(NSError *error) {
         TTLog(@"error --- %@",error);

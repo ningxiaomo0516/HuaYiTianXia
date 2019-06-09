@@ -104,18 +104,14 @@ static NSString * const reuseIdentifierSectionHeaderView = @"SCTableViewSectionH
     [parameter setObject:@(1) forKey:@"status"];
     [SCHttpTools postWithURLString:@"notice/GetNotice" parameter:parameter success:^(id responseObject) {
         NSDictionary *result = responseObject;
-        if ([result isKindOfClass:[NSDictionary class]]) {
-            TTLog(@"result -- %@",result);
-            TXNewsArrayModel *model = [TXNewsArrayModel mj_objectWithKeyValues:result];
-            if (model.errorcode==20000&&model.data.content!=nil) {
-                self.rollText = model.data.content;
-                TTLog(@"model.content -- %@",model.data.content);
-                self.horizontalMarquee.text = model.data.content;
-            }
-            [self.tableView reloadData];
-        }else{
-            Toast(@"获取城市数据失败");
+        TTLog(@"result -- %@",result);
+        TXNewsArrayModel *model = [TXNewsArrayModel mj_objectWithKeyValues:result];
+        if (model.errorcode==20000&&model.data.content!=nil) {
+            self.rollText = model.data.content;
+            TTLog(@"model.content -- %@",model.data.content);
+            self.horizontalMarquee.text = model.data.content;
         }
+        [self.tableView reloadData];
     } failure:^(NSError *error) {
         TTLog(@" -- error -- %@",error);
     }];
@@ -130,19 +126,15 @@ static NSString * const reuseIdentifierSectionHeaderView = @"SCTableViewSectionH
 //    TTLog(@"parameter -- %@",parameter);
     [SCHttpTools postWithURLString:@"news/GetNew" parameter:parameter success:^(id responseObject) {
         NSDictionary *result = responseObject;
-        if ([result isKindOfClass:[NSDictionary class]]) {
 //            TTLog(@"result -- %@",result);
-            if (self.pageIndex==1) {
-                [self.dataArray removeAllObjects];
-                [self.bannerArray removeAllObjects];
-            }
-            TXNewsArrayModel *model = [TXNewsArrayModel mj_objectWithKeyValues:result];
-            [self.dataArray addObjectsFromArray:model.data.records];
-            [self.bannerArray addObjectsFromArray:model.banners];
-            [self.tableView reloadData];
-        }else{
-            Toast(@"获取新闻数据失败");
+        if (self.pageIndex==1) {
+            [self.dataArray removeAllObjects];
+            [self.bannerArray removeAllObjects];
         }
+        TXNewsArrayModel *model = [TXNewsArrayModel mj_objectWithKeyValues:result];
+        [self.dataArray addObjectsFromArray:model.data.records];
+        [self.bannerArray addObjectsFromArray:model.banners];
+        [self.tableView reloadData];
         [self.tableView.mj_header endRefreshing];
         [self.tableView.mj_footer endRefreshing];
         [self.view dismissLoadingView];

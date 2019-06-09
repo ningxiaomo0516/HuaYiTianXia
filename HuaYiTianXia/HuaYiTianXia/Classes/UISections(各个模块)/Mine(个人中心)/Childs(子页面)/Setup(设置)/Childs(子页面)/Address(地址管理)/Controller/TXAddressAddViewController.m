@@ -102,14 +102,12 @@ static NSString * const reuseIdentifierSwitch = @"TXSwitchTableViewCell";
     [parameter setObject:self.isDefault forKey:@"status"];
     [SCHttpTools postWithURLString:kHttpURL(@"address/AddAddress") parameter:parameter success:^(id responseObject) {
         NSDictionary *result = responseObject;
-        if ([result isKindOfClass:[NSDictionary class]]) {
-            TXGeneralModel *model = [TXGeneralModel mj_objectWithKeyValues:result];
-            if (model.errorcode == 20000) {
-                Toast(@"添加成功");
-                [self.navigationController popViewControllerAnimated:YES];
-            }else{
-                Toast(@"添加失败");
-            }
+        TXGeneralModel *model = [TXGeneralModel mj_objectWithKeyValues:result];
+        if (model.errorcode == 20000) {
+            Toast(@"添加成功");
+            [self.navigationController popViewControllerAnimated:YES];
+        }else{
+            Toast(@"添加失败");
         }
         kHideMBProgressHUD(self.view);;
     } failure:^(NSError *error) {

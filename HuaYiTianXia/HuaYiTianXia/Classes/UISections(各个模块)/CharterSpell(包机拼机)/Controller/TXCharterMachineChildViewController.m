@@ -17,10 +17,17 @@
 @property (nonatomic, strong) UIProgressView *progress;
 @property (nonatomic, strong) SCShareModel *shareModel;
 @property (nonatomic, strong) UIButton *saveButton;
+@property (nonatomic, strong) CharterMachineModel *ticketTodel;
+
 @end
 
 @implementation TXCharterMachineChildViewController
-
+- (id)initTicketModel:(CharterMachineModel *)ticketTodel{
+    if ( self = [super init] ){
+        self.ticketTodel = ticketTodel;
+    }
+    return self;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -53,7 +60,7 @@
 }
 
 - (void) handleControlEvent:(UIButton *) sender{
-    TXCharterOrderViewController *vc = [[TXCharterOrderViewController alloc] init];
+    TXCharterOrderViewController *vc = [[TXCharterOrderViewController alloc] initTicketModel:self.ticketTodel];
     TTPushVC(vc);
 }
 

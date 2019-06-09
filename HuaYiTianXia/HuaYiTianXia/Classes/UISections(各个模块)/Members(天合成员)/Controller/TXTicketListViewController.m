@@ -45,21 +45,19 @@ static NSString* reuseIdentifier = @"TXTicketListTableViewCell";
 - (void) GetTicketDataRequest{
     [SCHttpTools getTicketWithURLString:self.URLString parameter:self.parameter success:^(id responseObject) {
         NSDictionary *result = responseObject;
-        if ([result isKindOfClass:[NSDictionary class]]) {
-            TXTicketModel *model = [TXTicketModel mj_objectWithKeyValues:result];
-            if (model.errorcode==0) {
-                /// 查询列表
-                for (TicketModel *ticketModel in model.data) {
-                    for (TicketPricesModel *priceModel in ticketModel.prices) {
-                        if ([priceModel.discount isEqualToString:@"全价"]) {
-                            [self.dataArray addObject:ticketModel];
-                        }
+        TXTicketModel *model = [TXTicketModel mj_objectWithKeyValues:result];
+        if (model.errorcode==0) {
+            /// 查询列表
+            for (TicketModel *ticketModel in model.data) {
+                for (TicketPricesModel *priceModel in ticketModel.prices) {
+                    if ([priceModel.discount isEqualToString:@"全价"]) {
+                        [self.dataArray addObject:ticketModel];
                     }
                 }
-                [self.tableView reloadData];
-            }else{
-                Toast(model.message);
             }
+            [self.tableView reloadData];
+        }else{
+            Toast(model.message);
         }
         [self.view dismissLoadingView];
     } failure:^(NSError *error) {

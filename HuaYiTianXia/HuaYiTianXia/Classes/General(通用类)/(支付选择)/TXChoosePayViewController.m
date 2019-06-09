@@ -167,23 +167,21 @@ static NSString * const reuseIdentifier = @"TXChoosePayTableViewCell";
     [self sc_dismissVC];
     [SCHttpTools postWithURLString:kHttpURL(@"orderform/PayFrom") parameter:parameter success:^(id responseObject) {
         NSDictionary *result = responseObject;
-        if ([result isKindOfClass:[NSDictionary class]]) {
-            TXGeneralModel *model = [TXGeneralModel mj_objectWithKeyValues:result];
-            if (model.errorcode == 20000) {
-                if (idx==0) {/// 支付宝支付
-                    [AlipayManager doAlipayPay:model];
-                }else if(idx==1){/// 微信支付
-                    NSString *str = [Utils lz_dataWithJSONObject:result];
-                    TTLog(@"str == %@",str);
-                    [AlipayManager doWechatPay:model];
-                }else{
-                    Toast(@"未知支付");
-                }
-            }else if(idx==2){
-                Toast(@"支付成功");
+        TXGeneralModel *model = [TXGeneralModel mj_objectWithKeyValues:result];
+        if (model.errorcode == 20000) {
+            if (idx==0) {/// 支付宝支付
+                [AlipayManager doAlipayPay:model];
+            }else if(idx==1){/// 微信支付
+                NSString *str = [Utils lz_dataWithJSONObject:result];
+                TTLog(@"str == %@",str);
+                [AlipayManager doWechatPay:model];
             }else{
-                Toast(model.message);
+                Toast(@"未知支付");
             }
+        }else if(idx==2){
+            Toast(@"支付成功");
+        }else{
+            Toast(model.message);
         }
         kHideMBProgressHUD(self.view);;
     } failure:^(NSError *error) {
@@ -207,27 +205,25 @@ static NSString * const reuseIdentifier = @"TXChoosePayTableViewCell";
     NSString *URLString = kHttpURL(@"customer/Balance");
     [SCHttpTools getWithURLString:URLString parameter:nil success:^(id responseObject) {
         NSDictionary *result = responseObject;
-        if ([result isKindOfClass:[NSDictionary class]]) {
-            TTUserDataModel *model = [TTUserDataModel mj_objectWithKeyValues:result];
-            if (model.errorcode==20000) {
-                TTLog(@" result --- %@",[Utils lz_dataWithJSONObject:result]);
-                kUserInfo.balance = model.data.balance;
-                kUserInfo.vrcurrency = model.data.vrcurrency;
-                [kUserInfo dump];
-                if ([model.data.balance integerValue]<[self.recordsModel.totalPrice integerValue]) {
-                    Toast(@"余额不足");
-                }else{
-                    [self GenerateOrderData:idx];
-                    TXPayPasswordViewController *viewController = [[TXPayPasswordViewController alloc] init];
-                    viewController.pageType = 4;
-                    viewController.tipsText = @"";
-                    viewController.integralText = kUserInfo.balance;
-                    viewController.delegate = self;
-                    [self presentPopupViewController:viewController animationType:TTPopupViewAnimationFade];
-                }
+        TTUserDataModel *model = [TTUserDataModel mj_objectWithKeyValues:result];
+        if (model.errorcode==20000) {
+            TTLog(@" result --- %@",[Utils lz_dataWithJSONObject:result]);
+            kUserInfo.balance = model.data.balance;
+            kUserInfo.vrcurrency = model.data.vrcurrency;
+            [kUserInfo dump];
+            if ([model.data.balance integerValue]<[self.recordsModel.totalPrice integerValue]) {
+                Toast(@"余额不足");
             }else{
-                Toast(model.message);
+                [self GenerateOrderData:idx];
+                TXPayPasswordViewController *viewController = [[TXPayPasswordViewController alloc] init];
+                viewController.pageType = 4;
+                viewController.tipsText = @"";
+                viewController.integralText = kUserInfo.balance;
+                viewController.delegate = self;
+                [self presentPopupViewController:viewController animationType:TTPopupViewAnimationFade];
             }
+        }else{
+            Toast(model.message);
         }
         kHideMBProgressHUD(self.view);
     } failure:^(NSError *error) {

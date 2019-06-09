@@ -39,16 +39,14 @@
     [parameter setObject:@(self.messageModel.outID) forKey:@"outID"];
     [SCHttpTools postWithURLString:kHttpURL(@"notice/getNoticeDetails") parameter:parameter success:^(id responseObject) {
         NSDictionary *result = responseObject;
-        if ([result isKindOfClass:[NSDictionary class]]) {
-            TXPushMessageModel *model = [TXPushMessageModel mj_objectWithKeyValues:result];
-            if (model.errorcode == 20000 && model.data != nil) {
-                TTLog(@" result --- %@",[Utils lz_dataWithJSONObject:result]);
-                self.titlelabel.text = model.data.title;
-                self.datelabel.text = model.data.datetime;
-                self.subtitlelabel.attributedText = [UILabel changeIndentationSpaceForLabel:model.data.content spaceWidth:30.0];
-            }else{
-                Toast(model.message);
-            }
+        TXPushMessageModel *model = [TXPushMessageModel mj_objectWithKeyValues:result];
+        if (model.errorcode == 20000 && model.data != nil) {
+            TTLog(@" result --- %@",[Utils lz_dataWithJSONObject:result]);
+            self.titlelabel.text = model.data.title;
+            self.datelabel.text = model.data.datetime;
+            self.subtitlelabel.attributedText = [UILabel changeIndentationSpaceForLabel:model.data.content spaceWidth:30.0];
+        }else{
+            Toast(model.message);
         }
         [self.scrollView setHidden:NO];
         [self.view dismissLoadingView];

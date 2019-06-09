@@ -72,14 +72,12 @@ static NSString * const reuseIdentifierReceiveAddress = @"TXReceiveAddressTableV
     [parameter setObject:self.addressModel.sid forKey:@"addressID"];
     [SCHttpTools postWithURLString:kHttpURL(@"parcel/UserToParcel") parameter:parameter success:^(id responseObject) {
         NSDictionary *result = responseObject;
-        if ([result isKindOfClass:[NSDictionary class]]) {
-            TTUserDataModel *model = [TTUserDataModel mj_objectWithKeyValues:result];
-            if (model.errorcode==20000) {
-                Toast(@"礼包领取成功");
-                [self.navigationController popViewControllerAnimated:YES];
-            }else{
-                Toast(model.message);
-            }
+        TTUserDataModel *model = [TTUserDataModel mj_objectWithKeyValues:result];
+        if (model.errorcode==20000) {
+            Toast(@"礼包领取成功");
+            [self.navigationController popViewControllerAnimated:YES];
+        }else{
+            Toast(model.message);
         }
         kHideMBProgressHUD(self.view);
     } failure:^(NSError *error) {

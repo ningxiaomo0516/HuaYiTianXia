@@ -10,6 +10,7 @@
 #import "TXPaintView.h"
 #import "TTCustomPhotoAlbum.h"
 #import "SCUploadImageModel.h"
+#import "SCCustomMarginLabel.h"
 
 @interface TXSignatureView ()
 
@@ -20,7 +21,8 @@
 @property(nonatomic,strong) TXPaintView *paintView;
 /// 是否签名，默认为NO
 @property(nonatomic,assign) BOOL isSignature;
-
+/** 全屏暂停提示 */
+@property (nonatomic, strong) SCCustomMarginLabel       *tipsLabel;
 @end
 
 @implementation TXSignatureView
@@ -79,7 +81,18 @@
     if (!image_s) {
         [self upload:image_s button:sender];
     }else{
-        Toast(@"同意之前请先签字");
+        [self addSubview:self.tipsLabel];
+        // 全屏暂停提示
+        [self.tipsLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.centerX.equalTo(self);
+        }];
+        self.tipsLabel.text = @"同意之前请先签字";
+        self.tipsLabel.hidden = NO;
+        int64_t delayInSeconds = 2.0;      // 延迟的时间
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+            self.tipsLabel.hidden = YES;
+        });
     }
     //参数1:图片对象
     //参数2:成功方法绑定的target
@@ -90,26 +103,23 @@
 //    [[TTCustomPhotoAlbum shareInstance] saveToNewThumb:image_s];
 }
 
+/// 上传签名图片
 - (void) upload:(UIImage *) image button:(UIButton *)sender{
     kShowMBProgressHUD(self);
     [SCHttpTools postImageWithURLString:uploadFile parameter:nil image:image success:^(id result) {
         SCUploadImageModel *model = [SCUploadImageModel mj_objectWithKeyValues:result];
-        if ([result isKindOfClass:[NSDictionary class]]) {
-            if (model.errorcode == 20000) {
-                TTLog(@"图片上传%@",[Utils lz_dataWithJSONObject:result]);
-                if (self.completionHandler) {
-                    if (model.data.count>0) {
-                        self.completionHandler(model.data[0].imageURL);
-                        [self closeAction:sender];
-                    }else{
-                        Toast(@"图片上传成功,但没返回数据");
-                    }
+        if (model.errorcode == 20000) {
+            TTLog(@"图片上传%@",[Utils lz_dataWithJSONObject:result]);
+            if (self.completionHandler) {
+                if (model.data.count>0) {
+                    self.completionHandler(model.data[0].imageURL);
+                    [self closeAction:sender];
+                }else{
+                    Toast(@"图片上传成功,但没返回数据");
                 }
-            }else {
-                Toast(model.message);
             }
         }else {
-            Toast(@"图片上传失败");
+            Toast(model.message);
         }
         kHideMBProgressHUD(self);;
     } failure:^(NSError *error) {
@@ -307,5 +317,21 @@
         _paintView.lineColor = kTextColor51;
     }
     return _paintView;
+}
+
+/** 全屏暂停的提示 */
+- (SCCustomMarginLabel *) tipsLabel{
+    if (!_tipsLabel) {
+        _tipsLabel = [[SCCustomMarginLabel alloc] init];
+        _tipsLabel.backgroundColor = kColorWithRGBA(0, 0, 0, 0.7);
+        _tipsLabel.layer.cornerRadius = 5.0;
+        _tipsLabel.clipsToBounds = YES;
+        _tipsLabel.hidden = YES;
+        _tipsLabel.textAlignment = NSTextAlignmentCenter;
+        _tipsLabel.textColor = kWhiteColor;
+        _tipsLabel.font = kFontSizeMedium13;
+        _tipsLabel.edgeInsets    = UIEdgeInsetsMake(5.f, 8.f, 5.f, 8.f); // 设置左内边距
+    }
+    return _tipsLabel;
 }
 @end

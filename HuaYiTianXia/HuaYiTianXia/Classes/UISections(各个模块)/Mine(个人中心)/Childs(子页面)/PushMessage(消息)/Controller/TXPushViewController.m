@@ -141,19 +141,17 @@ static NSString * const reuseIdentifiers = @"TXSystemTableViewCell";
 - (void) loadMessageData:(NSDictionary *)parameter{
     [SCHttpTools postWithURLString:kHttpURL(@"notice/noticePage") parameter:parameter success:^(id responseObject) {
         NSDictionary *result = responseObject;
-        if ([result isKindOfClass:[NSDictionary class]]) {
-            TXPushMessageModel *model = [TXPushMessageModel mj_objectWithKeyValues:result];
-            if (model.errorcode == 20000) {
-                TTLog(@" result --- %@",[Utils lz_dataWithJSONObject:result]);
-                if (self.pageIndex == 1) {
-                    [self.dataArray removeAllObjects];
-                }
-                [self.dataArray addObjectsFromArray:model.data.list];
-            }else{
-                Toast(model.message);
+        TXPushMessageModel *model = [TXPushMessageModel mj_objectWithKeyValues:result];
+        if (model.errorcode == 20000) {
+            TTLog(@" result --- %@",[Utils lz_dataWithJSONObject:result]);
+            if (self.pageIndex == 1) {
+                [self.dataArray removeAllObjects];
             }
-            [self analysisData];
+            [self.dataArray addObjectsFromArray:model.data.list];
+        }else{
+            Toast(model.message);
         }
+        [self analysisData];
 //        self.tableView.tt_emptyView = [TTEmptyView emptyViewWithImagesText:@"noData"
 //                                                                 titleText:@"暂无数据"
 //                                                                detailText:@""];
@@ -316,13 +314,11 @@ static NSString * const reuseIdentifiers = @"TXSystemTableViewCell";
     [parameter setObject:parameterArray forKey:@"ids"];
     [SCHttpTools postWithURLString:kHttpURL(@"notice/insertNoticeRead") parameter:parameter success:^(id responseObject) {
         NSDictionary *result = responseObject;
-        if ([result isKindOfClass:[NSDictionary class]]) {
-            TTLog(@"不做任何提示");
-            /// 修改已读状态
-            if (messageModel.hasRead==0) messageModel.hasRead = 1;
+        TTLog(@"不做任何提示---%@",result);
+        /// 修改已读状态
+        if (messageModel.hasRead==0) messageModel.hasRead = 1;
 //            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-            [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationFade];
-        }
+        [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationFade];
     } failure:^(NSError *error) {
     }];
 }

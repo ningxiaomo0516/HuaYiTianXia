@@ -303,24 +303,22 @@
     [parameter setObject:@"" forKey:@"currency"];
     [SCHttpTools postWithURLString:kHttpURL(@"orderform/PayFrom") parameter:parameter success:^(id responseObject) {
         NSDictionary *result = responseObject;
-        if ([result isKindOfClass:[NSDictionary class]]) {
-            TXGeneralModel *model = [TXGeneralModel mj_objectWithKeyValues:result];
-            if (model.errorcode == 20000) {
-                if (idx==0) {/// 支付宝支付
-                    [AlipayManager doAlipayPay:model];
-                }else if(idx==1){/// 微信支付
-                    NSString *str = [Utils lz_dataWithJSONObject:result];
-                    TTLog(@"str == %@",str);
-                    [AlipayManager doWechatPay:model];
-                }else if(idx==2){
-                    Toast(@"支付成功");
-                    [self.navigationController popViewControllerAnimated:YES];
-                }else{
-                    Toast(@"未知支付");
-                }
+        TXGeneralModel *model = [TXGeneralModel mj_objectWithKeyValues:result];
+        if (model.errorcode == 20000) {
+            if (idx==0) {/// 支付宝支付
+                [AlipayManager doAlipayPay:model];
+            }else if(idx==1){/// 微信支付
+                NSString *str = [Utils lz_dataWithJSONObject:result];
+                TTLog(@"str == %@",str);
+                [AlipayManager doWechatPay:model];
+            }else if(idx==2){
+                Toast(@"支付成功");
+                [self.navigationController popViewControllerAnimated:YES];
             }else{
-                Toast(model.message);
+                Toast(@"未知支付");
             }
+        }else{
+            Toast(model.message);
         }
         kHideMBProgressHUD(self.view);;
     } failure:^(NSError *error) {
@@ -361,27 +359,23 @@
     MV(weakSelf)
     [SCHttpTools postWithURLString:kHttpURL(@"flightproduct/flightProductPage") parameter:parameter success:^(id responseObject) {
         NSDictionary *result = responseObject;
-        if ([result isKindOfClass:[NSDictionary class]]) {
-            TXGeneralModel *model = [TXGeneralModel mj_objectWithKeyValues:result];
-            if (model.errorcode == 20000) {
-                TTLog(@"  --- %@",self.recommendedModel.data.deposit);
-                NSString *amountText = self.recommendedModel.data.deposit;
-                if (amountText.floatValue!=0) {
-                    [self.showView addAnimate];
-                }else{
-                    TXConventionSucceViewController *viewController = [[TXConventionSucceViewController alloc] init];
-                    [weakSelf sc_centerPresentController:viewController presentedSize:CGSizeMake(IPHONE6_W(280), IPHONE6_W(260)) completeHandle:^(BOOL presented) {
-                        if (presented) {
-                            TTLog(@"弹出");
-                        }else{
-                            TTLog(@"消失");
-                            [weakSelf.navigationController popViewControllerAnimated:YES];
-                        }
-                    }];
-                }
+        TXGeneralModel *model = [TXGeneralModel mj_objectWithKeyValues:result];
+        if (model.errorcode == 20000) {
+            TTLog(@"  --- %@",self.recommendedModel.data.deposit);
+            NSString *amountText = self.recommendedModel.data.deposit;
+            if (amountText.floatValue!=0) {
+                [self.showView addAnimate];
+            }else{
+                TXConventionSucceViewController *viewController = [[TXConventionSucceViewController alloc] init];
+                [weakSelf sc_centerPresentController:viewController presentedSize:CGSizeMake(IPHONE6_W(280), IPHONE6_W(260)) completeHandle:^(BOOL presented) {
+                    if (presented) {
+                        TTLog(@"弹出");
+                    }else{
+                        TTLog(@"消失");
+                        [weakSelf.navigationController popViewControllerAnimated:YES];
+                    }
+                }];
             }
-        }else{
-            Toast(@"获取产品详情数据失败");
         }
         kHideMBProgressHUD(self.view);
     } failure:^(NSError *error) {

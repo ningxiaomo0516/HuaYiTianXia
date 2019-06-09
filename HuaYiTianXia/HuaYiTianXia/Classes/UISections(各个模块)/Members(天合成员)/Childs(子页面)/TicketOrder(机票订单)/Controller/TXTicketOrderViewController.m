@@ -58,22 +58,17 @@ static NSString * const reuseIdentifier = @"TXTicketOrderTableViewCell";
     [parameter setObject:@(self.pageSize) forKey:@"pageSize"];  // 每页条数
     [SCHttpTools postWithURLString:kHttpURL(@"aircraftorder/GetAircraftorder") parameter:parameter success:^(id responseObject) {
         NSDictionary *result = responseObject;
-        if ([result isKindOfClass:[NSDictionary class]]) {
-            TXTicketOrderModel *model = [TXTicketOrderModel mj_objectWithKeyValues:result];
-            if (model.errorcode == 20000) {
-                TTLog(@" result --- %@",[Utils lz_dataWithJSONObject:result]);
-                [self.dataArray addObjectsFromArray:model.data.list];
-            }else{
-                Toast(model.message);
-            }
-            [self analysisData];
-            [self.tableView reloadData];
-            [self.tableView.mj_header endRefreshing];
-            [self.tableView.mj_footer endRefreshing];
-            [self.view dismissLoadingView];
+        TXTicketOrderModel *model = [TXTicketOrderModel mj_objectWithKeyValues:result];
+        if (model.errorcode == 20000) {
+            TTLog(@" result --- %@",[Utils lz_dataWithJSONObject:result]);
+            [self.dataArray addObjectsFromArray:model.data.list];
         }else{
-            Toast(@"个人中心数据获取失败");
+            Toast(model.message);
         }
+        [self analysisData];
+        [self.tableView reloadData];
+        [self.tableView.mj_header endRefreshing];
+        [self.tableView.mj_footer endRefreshing];
         [self.view dismissLoadingView];
     } failure:^(NSError *error) {
         TTLog(@" -- error -- %@",error);

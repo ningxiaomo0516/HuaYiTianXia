@@ -92,24 +92,19 @@ static NSString * const reuseIdentifierTeam = @"TXTeamTableViewCell";
     [self.view showLoadingViewWithText:@"加载中..."];
     [SCHttpTools postWithURLString:kHttpURL(@"customerteam/teamMember") parameter:@{} success:^(id responseObject) {
         NSDictionary *result = responseObject;
-        if ([result isKindOfClass:[NSDictionary class]]) {
-            TXMineTeamModel *model = [TXMineTeamModel mj_objectWithKeyValues:result];
-            if (model.errorcode == 20000) {
-                if (model.data.list.count>0) {
-                    [self.dataArray removeAllObjects];
-                    /// 对数据的处理
-                    [self processData:model.data];
-                    self.title = @"团队成员";
-                }else{
-                    self.teamTableView.hidden = NO;
-                    self.title = @"加入团队";
-                }
+        TXMineTeamModel *model = [TXMineTeamModel mj_objectWithKeyValues:result];
+        if (model.errorcode == 20000) {
+            if (model.data.list.count>0) {
+                [self.dataArray removeAllObjects];
+                /// 对数据的处理
+                [self processData:model.data];
+                self.title = @"团队成员";
             }else{
-                Toast(model.message);
-                [self.view dismissLoadingView];
+                self.teamTableView.hidden = NO;
+                self.title = @"加入团队";
             }
         }else{
-            Toast(@"我的团队数据获取失败");
+            Toast(model.message);
             [self.view dismissLoadingView];
         }
         [self.view dismissLoadingView];
@@ -124,7 +119,7 @@ static NSString * const reuseIdentifierTeam = @"TXTeamTableViewCell";
 }
 
 - (void) processData:(MineTeamDataModel *)model{
-    NSString *titleText = [NSString stringWithFormat:@"%@(%ld人)",model.teamName,model.list.count];
+    NSString *titleText = [NSString stringWithFormat:@"%@(%lu人)",model.teamName,(unsigned long)model.list.count];
     self.titleLable.text = titleText;
     NSString *subtitleText = [NSString stringWithFormat:@"投保总金额:%@元",[Utils isNull:model.money]];
     self.subtitleLable.text = subtitleText;

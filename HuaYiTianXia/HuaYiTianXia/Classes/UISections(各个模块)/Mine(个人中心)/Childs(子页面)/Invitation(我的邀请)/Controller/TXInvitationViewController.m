@@ -53,18 +53,14 @@ static NSString * const reuseIdentifier = @"TXInvitationTableViewCell";
     [parameter setObject:@(self.pageSize) forKey:@"pageSize"];  // 每页条数
     [SCHttpTools postWithURLString:kHttpURL(@"customer/MyTeamNew") parameter:parameter success:^(id responseObject) {
         NSDictionary *result = responseObject;
-        if ([result isKindOfClass:[NSDictionary class]]) {
-            TXInvitationModel *model = [TXInvitationModel mj_objectWithKeyValues:result];
-            if (model.errorcode == 20000) {
-                if (self.pageIndex==1) {
-                    [self.dataArray removeAllObjects];
-                }
-                [self.dataArray addObjectsFromArray:model.data.list];
-            }else{
-                Toast(model.message);
+        TXInvitationModel *model = [TXInvitationModel mj_objectWithKeyValues:result];
+        if (model.errorcode == 20000) {
+            if (self.pageIndex==1) {
+                [self.dataArray removeAllObjects];
             }
+            [self.dataArray addObjectsFromArray:model.data.list];
         }else{
-            Toast(@"我的邀请数据获取失败");
+            Toast(model.message);
         }
         [self analysisData];
         [self.view dismissLoadingView];

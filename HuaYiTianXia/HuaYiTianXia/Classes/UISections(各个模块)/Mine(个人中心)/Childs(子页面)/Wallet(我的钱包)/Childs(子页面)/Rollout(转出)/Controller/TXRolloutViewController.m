@@ -60,17 +60,13 @@ static NSString * const reuseIdentifierHeader = @"TXRolloutHeaderTableViewCell";
     [parameter setObject:self.amountText forKey:@"money"];
     [SCHttpTools postWithURLString:kHttpURL(@"customer/TurnOut") parameter:parameter success:^(id responseObject) {
         NSDictionary *result = responseObject;
-        if ([result isKindOfClass:[NSDictionary class]]) {
-            TTLog(@"result -- %@",result);
-            TXGeneralModel *model = [TXGeneralModel mj_objectWithKeyValues:result];
-            if (model.errorcode==20000) {
-                Toast(model.message);
-                [self.navigationController popViewControllerAnimated:YES];
-            }else{
-                Toast(model.message);
-            }
+        TTLog(@"result -- %@",result);
+        TXGeneralModel *model = [TXGeneralModel mj_objectWithKeyValues:result];
+        if (model.errorcode==20000) {
+            Toast(model.message);
+            [self.navigationController popViewControllerAnimated:YES];
         }else{
-            Toast(@"获取城市数据失败");
+            Toast(model.message);
         }
         kHideMBProgressHUD(self.view);;
     } failure:^(NSError *error) {
@@ -108,20 +104,18 @@ static NSString * const reuseIdentifierHeader = @"TXRolloutHeaderTableViewCell";
 - (void) validationPayeeInfo:(NSDictionary *)parameter{
     [SCHttpTools postWithURLString:kHttpURL(@"customer/MobileToUser") parameter:parameter success:^(id responseObject) {
         NSDictionary *result = responseObject;
-        if ([result isKindOfClass:[NSDictionary class]]) {
-            TXGeneralModel *model = [TXGeneralModel mj_objectWithKeyValues:result];
-            if (model.errorcode == 20000) {
-                TicketOrderModel *userModel = [TicketOrderModel mj_objectWithKeyValues:result[@"obj"]];
-                TXPayPasswordViewController *viewController = [[TXPayPasswordViewController alloc] init];
-                viewController.pageType = 0;
-                viewController.tipsText = self.currencyText;
-                viewController.integralText = self.amountText;
-                viewController.realnameText = userModel.username;
-                viewController.delegate = self;
-                [self presentPopupViewController:viewController animationType:TTPopupViewAnimationFade];
-            }else{
-                Toast(model.message);
-            }
+        TXGeneralModel *model = [TXGeneralModel mj_objectWithKeyValues:result];
+        if (model.errorcode == 20000) {
+            TicketOrderModel *userModel = [TicketOrderModel mj_objectWithKeyValues:result[@"obj"]];
+            TXPayPasswordViewController *viewController = [[TXPayPasswordViewController alloc] init];
+            viewController.pageType = 0;
+            viewController.tipsText = self.currencyText;
+            viewController.integralText = self.amountText;
+            viewController.realnameText = userModel.username;
+            viewController.delegate = self;
+            [self presentPopupViewController:viewController animationType:TTPopupViewAnimationFade];
+        }else{
+            Toast(model.message);
         }
         kHideMBProgressHUD(self.view);;
     } failure:^(NSError *error) {

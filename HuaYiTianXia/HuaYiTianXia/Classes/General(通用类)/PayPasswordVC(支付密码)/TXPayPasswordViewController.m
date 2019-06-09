@@ -94,27 +94,25 @@
     [parameter setObject:self.passwordText forKey:@"tranPwd"];
     [SCHttpTools postWithURLString:kHttpURL(@"customer/TranPwdVerif") parameter:parameter success:^(id responseObject) {
         NSDictionary *result = responseObject;
-        if ([result isKindOfClass:[NSDictionary class]]) {
-            TXGeneralModel *model = [TXGeneralModel mj_objectWithKeyValues:result];
-            if (model.errorcode == 20000) {
-                [self sc_dismissVC];
-                TTLog(@"当前页面需要执行的相关推送 -- %@",self.dataArray[self.pageType]);
-                if (self.pageType == 0 ) {  //// 转出
-                    [kNotificationCenter postNotificationName:@"transferRequest" object:nil];
-                }else if (self.pageType == 1 ) { //// 复投
-                    [kNotificationCenter postNotificationName:@"repeatcCastRequest" object:nil];
-                }else if (self.pageType == 2 ) { /// 转换
-                    [kNotificationCenter postNotificationName:@"conversionRequest" object:nil];
-                }else if(self.pageType == 3 ){ /// 商城余额购买
-                    [kNotificationCenter postNotificationName:@"mallBalanceRequest" object:nil];
-                }else if(self.pageType == 4 ){ /// 新增机票购买
-                    [kNotificationCenter postNotificationName:@"buyTicketRequest" object:nil];
-                }else{
-                    Toast(@"未知页面");
-                }
+        TXGeneralModel *model = [TXGeneralModel mj_objectWithKeyValues:result];
+        if (model.errorcode == 20000) {
+            [self sc_dismissVC];
+            TTLog(@"当前页面需要执行的相关推送 -- %@",self.dataArray[self.pageType]);
+            if (self.pageType == 0 ) {  //// 转出
+                [kNotificationCenter postNotificationName:@"transferRequest" object:nil];
+            }else if (self.pageType == 1 ) { //// 复投
+                [kNotificationCenter postNotificationName:@"repeatcCastRequest" object:nil];
+            }else if (self.pageType == 2 ) { /// 转换
+                [kNotificationCenter postNotificationName:@"conversionRequest" object:nil];
+            }else if(self.pageType == 3 ){ /// 商城余额购买
+                [kNotificationCenter postNotificationName:@"mallBalanceRequest" object:nil];
+            }else if(self.pageType == 4 ){ /// 新增机票购买
+                [kNotificationCenter postNotificationName:@"buyTicketRequest" object:nil];
             }else{
-                Toast(@"密码错误");
+                Toast(@"未知页面");
             }
+        }else{
+            Toast(@"密码错误");
         }
     } failure:^(NSError *error) {
         TTLog(@"error --- %@",error);

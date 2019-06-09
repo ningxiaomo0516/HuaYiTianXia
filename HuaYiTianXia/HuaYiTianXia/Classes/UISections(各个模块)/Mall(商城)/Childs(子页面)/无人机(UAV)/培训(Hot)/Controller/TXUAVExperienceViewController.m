@@ -61,24 +61,20 @@ static NSString * const reuseIdentifier = @"TXUAVExperienceTableViewCell";
     [parameter setObject:@(1) forKey:@"type"];  // 每页条数
     [SCHttpTools postWithURLString:kHttpURL(@"flighttrain/flightTrainPage") parameter:parameter success:^(id responseObject) {
         NSDictionary *result = responseObject;
-        if ([result isKindOfClass:[NSDictionary class]]) {
-            TXCourseModel *courseModel = [TXCourseModel mj_objectWithKeyValues:result];
-            if (courseModel.errorcode == 20000) {
-                if (self.pageIndex==1) {
-                    [self.dataArray removeAllObjects];
-                    [self.totalSizeArray removeAllObjects];
+        TXCourseModel *courseModel = [TXCourseModel mj_objectWithKeyValues:result];
+        if (courseModel.errorcode == 20000) {
+            if (self.pageIndex==1) {
+                [self.dataArray removeAllObjects];
+                [self.totalSizeArray removeAllObjects];
+            }
+            [self.dataArray addObjectsFromArray:courseModel.data.list];
+            for (CourseListModel *listModel in courseModel.data.list) {
+                if (listModel.flightcourse.count>0) {
+                    [self.totalSizeArray addObject:listModel];
                 }
-                [self.dataArray addObjectsFromArray:courseModel.data.list];
-                for (CourseListModel *listModel in courseModel.data.list) {
-                    if (listModel.flightcourse.count>0) {
-                        [self.totalSizeArray addObject:listModel];
-                    }
-                }
-            }else{
-                Toast(courseModel.message);
             }
         }else{
-            Toast(@"数据获取失败");
+            Toast(courseModel.message);
         }
         [self analysisData];
         [self.view dismissLoadingView];

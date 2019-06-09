@@ -44,24 +44,22 @@ static NSString * const reuseIdentifier = @"TXMessageChildTableViewCell";
     [parameter setObject:@(self.messageModel.outID) forKey:@"outID"];
     [SCHttpTools postWithURLString:kHttpURL(@"notice/getTransferDetails") parameter:parameter success:^(id responseObject) {
         NSDictionary *result = responseObject;
-        if ([result isKindOfClass:[NSDictionary class]]) {
-            TXPushMessageModel *model = [TXPushMessageModel mj_objectWithKeyValues:result];
-            if (model.errorcode == 20000 && model.data != nil) {
-                TTLog(@" result --- %@",[Utils lz_dataWithJSONObject:result]);
-                [self.dataArray addObject:model.data.remarks];
-                [self.dataArray addObject:model.data.realname];
-                [self.dataArray addObject:model.data.account];
-                [self.dataArray addObject:model.data.orderid];
-                [self.dataArray addObject:model.data.tradingTime];
-                self.headerView.nicknameLabel.text = model.data.nickname;
-                self.headerView.amountLabel.text = model.data.tradingAmount;
-                self.headerView.statusLabel.text = @"交易成功";
-                [self.headerView.imagesViewAvatar sc_setImageWithUrlString:model.data.avatarURL
-                                                          placeholderImage:kGetImage(@"mine_icon_avatar")
-                                                                  isAvatar:false];
-            }else{
-                Toast(model.message);
-            }
+        TXPushMessageModel *model = [TXPushMessageModel mj_objectWithKeyValues:result];
+        if (model.errorcode == 20000 && model.data != nil) {
+            TTLog(@" result --- %@",[Utils lz_dataWithJSONObject:result]);
+            [self.dataArray addObject:model.data.remarks];
+            [self.dataArray addObject:model.data.realname];
+            [self.dataArray addObject:model.data.account];
+            [self.dataArray addObject:model.data.orderid];
+            [self.dataArray addObject:model.data.tradingTime];
+            self.headerView.nicknameLabel.text = model.data.nickname;
+            self.headerView.amountLabel.text = model.data.tradingAmount;
+            self.headerView.statusLabel.text = @"交易成功";
+            [self.headerView.imagesViewAvatar sc_setImageWithUrlString:model.data.avatarURL
+                                                      placeholderImage:kGetImage(@"mine_icon_avatar")
+                                                              isAvatar:false];
+        }else{
+            Toast(model.message);
         }
         [self.tableView reloadData];
         [self.tableView setHidden:NO];

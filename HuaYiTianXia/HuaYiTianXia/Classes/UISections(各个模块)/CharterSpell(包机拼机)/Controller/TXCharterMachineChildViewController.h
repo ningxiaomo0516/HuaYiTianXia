@@ -7,11 +7,13 @@
 //
 
 #import "TTBaseViewController.h"
+#import "TXCharterMachineModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface TXCharterMachineChildViewController : TTBaseViewController
 @property (nonatomic, copy) NSString *webUrl;
+- (id)initTicketModel:(CharterMachineModel *)ticketTodel;
 @end
 
 NS_ASSUME_NONNULL_END

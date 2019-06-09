@@ -93,22 +93,19 @@ static NSString *headerViewIdentifier       = @"TXBaseCollectionReusableHeaderVi
     TTLog(@"parameter -- %@",parameter);
     [SCHttpTools postWithURLString:@"shopproduct/GetShopPro" parameter:parameter success:^(id responseObject) {
         NSDictionary *result = responseObject;
-        if ([result isKindOfClass:[NSDictionary class]]) {
-            TTLog(@"result -- %@",result);
-            if (self.pageIndex==1) {
-                [self.dataArray removeAllObjects];
-                [self.bannerArray removeAllObjects];
-            }
-            TXNewsArrayModel *model = [TXNewsArrayModel mj_objectWithKeyValues:result];
-            [self.dataArray addObjectsFromArray:model.data.records];
-            if (self.pageIndex==1) {
-                [self.bannerArray addObjectsFromArray:model.banners];
-                self.listArray = model.listArray;
-            }
-            [self.collectionView reloadData];
-        }else{
-            Toast(@"获取城市数据失败");
+        TTLog(@"result -- %@",result);
+        if (self.pageIndex==1) {
+            [self.dataArray removeAllObjects];
+            [self.bannerArray removeAllObjects];
         }
+        TXNewsArrayModel *model = [TXNewsArrayModel mj_objectWithKeyValues:result];
+        [self.dataArray addObjectsFromArray:model.data.records];
+        if (self.pageIndex==1) {
+            [self.bannerArray addObjectsFromArray:model.banners];
+            self.listArray = model.listArray;
+        }
+        [self.collectionView reloadData];
+        
         [self.collectionView.mj_header endRefreshing];
         [self.collectionView.mj_footer endRefreshing];
         [self.view dismissLoadingView];

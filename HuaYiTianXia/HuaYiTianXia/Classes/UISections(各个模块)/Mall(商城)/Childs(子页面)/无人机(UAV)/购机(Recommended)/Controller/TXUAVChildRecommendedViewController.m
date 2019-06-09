@@ -78,15 +78,11 @@ static NSString * const reuseIdentifierBanner   = @"TXMallGoodsBannerTableViewCe
     [parameter setObject:@(self.listModel.kid.integerValue) forKey:@"id"];
     [SCHttpTools postWithURLString:kHttpURL(@"flightproduct/flightProductDetails") parameter:parameter success:^(id responseObject) {
         NSDictionary *result = responseObject;
-        if ([result isKindOfClass:[NSDictionary class]]) {
-            self.recommendModel = [TXRecommendedModel mj_objectWithKeyValues:result];
-            if (self.recommendModel.errorcode != 20000) {
-                Toast(self.recommendModel.message);
-            }
-            self.isload = YES;
-        }else{
-            Toast(@"数据获取失败");
+        self.recommendModel = [TXRecommendedModel mj_objectWithKeyValues:result];
+        if (self.recommendModel.errorcode != 20000) {
+            Toast(self.recommendModel.message);
         }
+        self.isload = YES;
         [self.view dismissLoadingView];
         [self.tableView reloadData];
         [self.tableView.mj_header endRefreshing];

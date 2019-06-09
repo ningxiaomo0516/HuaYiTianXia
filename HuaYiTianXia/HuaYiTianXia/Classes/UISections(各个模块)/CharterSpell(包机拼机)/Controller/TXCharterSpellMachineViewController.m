@@ -81,18 +81,14 @@ static NSString * const reuseIdentifier = @"TXCharterSpellMachineCollectionViewC
     NSString *URLString = kHttpURL(@"aircraftinformation/queryHomeAircraftinList");
     [SCHttpTools postWithURLString:URLString parameter:parameter success:^(id responseObject) {
         NSDictionary *result = responseObject;
-        if ([result isKindOfClass:[NSDictionary class]]) {
-            TXCharterMachineModel *model = [TXCharterMachineModel mj_objectWithKeyValues:result];
-            if (model.errorcode == 20000) {
-                if (self.pageIndex==1) {
-                    [self.dataArray removeAllObjects];
-                }
-                [self.dataArray addObjectsFromArray:model.data.list];
-            }else{
-                Toast(model.message);
+        TXCharterMachineModel *model = [TXCharterMachineModel mj_objectWithKeyValues:result];
+        if (model.errorcode == 20000) {
+            if (self.pageIndex==1) {
+                [self.dataArray removeAllObjects];
             }
+            [self.dataArray addObjectsFromArray:model.data.list];
         }else{
-            Toast(@"我的邀请数据获取失败");
+            Toast(model.message);
         }
         [self analysisData];
         [self.view dismissLoadingView];
@@ -142,8 +138,8 @@ static NSString * const reuseIdentifier = @"TXCharterSpellMachineCollectionViewC
 
 /// 点击collectionViewCell
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    TXCharterMachineChildViewController *vc = [[TXCharterMachineChildViewController alloc] init];
     CharterMachineModel *model = self.dataArray[indexPath.section];
+    TXCharterMachineChildViewController *vc = [[TXCharterMachineChildViewController alloc] initTicketModel:model];
     vc.webUrl = kAppendH5URL(DomainName, CharterDetailsH5,model.kid);
     TTPushVC(vc);
 }

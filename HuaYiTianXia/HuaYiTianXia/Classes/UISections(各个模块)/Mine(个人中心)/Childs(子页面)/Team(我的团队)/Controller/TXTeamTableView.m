@@ -73,16 +73,12 @@ static NSString * const reuseIdentifierTeam = @"TXTeamTableViewCell";
     [parameter setObject:@(self.pageSize) forKey:@"pageSize"];  // 每页条数
     [SCHttpTools postWithURLString:kHttpURL(@"customerteam/teamList") parameter:parameter success:^(id responseObject) {
         NSDictionary *result = responseObject;
-        if ([result isKindOfClass:[NSDictionary class]]) {
-            TeamDataModel *model = [TeamDataModel mj_objectWithKeyValues:result];
-            if (model.errorcode == 20000) {
-                if (self.pageIndex==1) {
-                    [self.dataArray removeAllObjects];
-                }
-                [self.dataArray addObjectsFromArray:model.data.list];
+        TeamDataModel *model = [TeamDataModel mj_objectWithKeyValues:result];
+        if (model.errorcode == 20000) {
+            if (self.pageIndex==1) {
+                [self.dataArray removeAllObjects];
             }
-        }else{
-            Toast(@"团队列表数据获取失败");
+            [self.dataArray addObjectsFromArray:model.data.list];
         }
         [self analysisData];
         [self.mj_header endRefreshing];
@@ -128,15 +124,11 @@ static NSString * const reuseIdentifierTeam = @"TXTeamTableViewCell";
     [parameter setObject:teamModel.kid forKey:@"id"];     // 团队表ID
     [SCHttpTools postWithURLString:kHttpURL(@"customerteam/selectTeam") parameter:parameter success:^(id responseObject) {
         NSDictionary *result = responseObject;
-        if ([result isKindOfClass:[NSDictionary class]]) {
-            TXGeneralModel *model = [TXGeneralModel mj_objectWithKeyValues:result];
-            if (model.errorcode == 20000) {
-                Toast(@"加入团队成功");
-                [self.dataArray removeAllObjects];
-                self.typeBlock(teamModel);
-            }else{
-                Toast(@"加入团队失败");
-            }
+        TXGeneralModel *model = [TXGeneralModel mj_objectWithKeyValues:result];
+        if (model.errorcode == 20000) {
+            Toast(@"加入团队成功");
+            [self.dataArray removeAllObjects];
+            self.typeBlock(teamModel);
         }else{
             Toast(@"加入团队失败");
         }

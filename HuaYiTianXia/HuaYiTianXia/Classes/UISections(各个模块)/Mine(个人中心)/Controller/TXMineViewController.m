@@ -101,41 +101,37 @@ static NSString * const reuseIdentifierBanner = @"TXMineBannerTableViewCell";
 - (void) requestPersonalCenterData{
     [SCHttpTools getWithURLString:kHttpURL(@"customer/Wallet") parameter:nil success:^(id responseObject) {
         NSDictionary *result = responseObject;
-        if ([result isKindOfClass:[NSDictionary class]]) {
-            TTUserDataModel *model = [TTUserDataModel mj_objectWithKeyValues:result];
-            if (model.errorcode == 20000) {
-                TTLog(@"result ---- %@",[Utils lz_dataWithJSONObject:[result lz_objectForKey:@"obj"]]);
-                self.userModel = model.data;
-                kUserInfo.totalAssets = model.data.totalAssets;
-                kUserInfo.arcurrency = model.data.arcurrency;
-                kUserInfo.vrcurrency = model.data.vrcurrency;
-                kUserInfo.stockRight = model.data.stockRight;
-                kUserInfo.username = model.data.username;
-                kUserInfo.balance = model.data.balance;
-                kUserInfo.avatar = model.data.avatar;
-                kUserInfo.isValidation = model.data.isValidation;
-                [kUserInfo dump];
-                [self.headerView.imagesViewAvatar sc_setImageWithUrlString:model.data.avatar
-                                                          placeholderImage:kGetImage(@"mine_icon_avatar")
-                                                                  isAvatar:false];
-                NSAttributedString *attributedText;
-                if ([model.data.userTypeName isEqualToString:@"天合会员"]) {
-                   attributedText = [SCSmallTools sc_initImageWithText:model.data.userTypeName imageName:@"c7_普通用户" fontWithSize:kFontSizeMedium13];
-                }else{
-                    attributedText = [SCSmallTools sc_initImageWithText:model.data.userTypeName imageName:@"c7_黄金会员" fontWithSize:kFontSizeMedium13];
-                }
-                
-                self.headerView.levelLabel.attributedText = attributedText;
-                self.headerView.nicknameLabel.text = model.data.username;
-                self.headerView.titleLabel.text = model.data.companyname.length>0?model.data.companyname:@"分公司筹建中";
-                self.headerView.numberLabel.text = [NSString stringWithFormat:@"人数：%@/30",model.data.joined.length>0?model.data.joined:@"0"];
-                [self.bannerArray addObjectsFromArray:model.data.banners];
-                [self.tableView reloadData];
+        TTUserDataModel *model = [TTUserDataModel mj_objectWithKeyValues:result];
+        if (model.errorcode == 20000) {
+            TTLog(@"result ---- %@",[Utils lz_dataWithJSONObject:[result lz_objectForKey:@"obj"]]);
+            self.userModel = model.data;
+            kUserInfo.totalAssets = model.data.totalAssets;
+            kUserInfo.arcurrency = model.data.arcurrency;
+            kUserInfo.vrcurrency = model.data.vrcurrency;
+            kUserInfo.stockRight = model.data.stockRight;
+            kUserInfo.username = model.data.username;
+            kUserInfo.balance = model.data.balance;
+            kUserInfo.avatar = model.data.avatar;
+            kUserInfo.isValidation = model.data.isValidation;
+            [kUserInfo dump];
+            [self.headerView.imagesViewAvatar sc_setImageWithUrlString:model.data.avatar
+                                                      placeholderImage:kGetImage(@"mine_icon_avatar")
+                                                              isAvatar:false];
+            NSAttributedString *attributedText;
+            if ([model.data.userTypeName isEqualToString:@"天合会员"]) {
+               attributedText = [SCSmallTools sc_initImageWithText:model.data.userTypeName imageName:@"c7_普通用户" fontWithSize:kFontSizeMedium13];
             }else{
-                Toast(model.message);
+                attributedText = [SCSmallTools sc_initImageWithText:model.data.userTypeName imageName:@"c7_黄金会员" fontWithSize:kFontSizeMedium13];
             }
+            
+            self.headerView.levelLabel.attributedText = attributedText;
+            self.headerView.nicknameLabel.text = model.data.username;
+            self.headerView.titleLabel.text = model.data.companyname.length>0?model.data.companyname:@"分公司筹建中";
+            self.headerView.numberLabel.text = [NSString stringWithFormat:@"人数：%@/30",model.data.joined.length>0?model.data.joined:@"0"];
+            [self.bannerArray addObjectsFromArray:model.data.banners];
+            [self.tableView reloadData];
         }else{
-            Toast(@"个人中心数据获取失败");
+            Toast(model.message);
         }
     } failure:^(NSError *error) {
         TTLog(@" -- error -- %@",error);

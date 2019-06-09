@@ -60,18 +60,14 @@
     kShowMBProgressHUD(self.view);
     [SCHttpTools postWithURLString:kHttpURL(@"customer/VerifTranPwd") parameter:parameter success:^(id responseObject) {
         NSDictionary *result = responseObject;
-        if ([result isKindOfClass:[NSDictionary class]]) {
-            TXGeneralModel *model = [TXGeneralModel mj_objectWithKeyValues:result];
-            if (model.errorcode == 20000) {
-                Toast(@"身份验证成功");
-                TXResetTradingViewController *vc = [[TXResetTradingViewController alloc] init];
-                vc.pageType = 0;
-                TTPushVC(vc);
-            }else{
-                Toast(model.message);
-            }
+        TXGeneralModel *model = [TXGeneralModel mj_objectWithKeyValues:result];
+        if (model.errorcode == 20000) {
+            Toast(@"身份验证成功");
+            TXResetTradingViewController *vc = [[TXResetTradingViewController alloc] init];
+            vc.pageType = 0;
+            TTPushVC(vc);
         }else{
-            Toast(@"身份验证失败");
+            Toast(model.message);
         }
         kHideMBProgressHUD(self.view);
     } failure:^(NSError *error) {

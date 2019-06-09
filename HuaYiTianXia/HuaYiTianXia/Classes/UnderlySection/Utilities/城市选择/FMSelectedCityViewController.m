@@ -126,19 +126,15 @@ static NSString * const reuseIdentifierCurrent = @"FMCurrentCitysTableViewCell";
     NSString *URLString = [NSString stringWithFormat:@"%@CityData.json",DomainName];
     [SCHttpTools getTicketWithURLString:URLString parameter:nil success:^(id responseObject) {
         NSDictionary *result = responseObject;
-        if ([result isKindOfClass:[NSDictionary class]]) {
-            FMSelectedCityModel *model = [FMSelectedCityModel mj_objectWithKeyValues:result];
-            if (model.errcode == 0) {
-                self.cityModel = model.data;
-                [self.itemModelArray removeAllObjects];
-                [self initData];
-            }else {
-                Toast([result lz_objectForKey:@"message"]);
-            }
-            [self.tableView reloadData];
-        }else{
-            Toast(@"获取城市数据失败");
+        FMSelectedCityModel *model = [FMSelectedCityModel mj_objectWithKeyValues:result];
+        if (model.errcode == 0) {
+            self.cityModel = model.data;
+            [self.itemModelArray removeAllObjects];
+            [self initData];
+        }else {
+            Toast([result lz_objectForKey:@"message"]);
         }
+        [self.tableView reloadData];
         kHideMBProgressHUD(self.view);
         self.loadFailedView.hidden = YES;
     } failure:^(NSError *error) {

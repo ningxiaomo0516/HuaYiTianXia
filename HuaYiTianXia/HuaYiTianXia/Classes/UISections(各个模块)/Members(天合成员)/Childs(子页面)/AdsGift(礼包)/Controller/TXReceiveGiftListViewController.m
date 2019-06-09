@@ -57,22 +57,18 @@ static NSString * const reuseIdentifier = @"TXReceiveGiftListTableViewCell";
     [parameter setObject:@(self.pageSize) forKey:@"pageSize"];  // 每页条数
     [SCHttpTools postWithURLString:kHttpURL(@"parcel/ParcelList") parameter:parameter success:^(id responseObject) {
         NSDictionary *result = responseObject;
-        if ([result isKindOfClass:[NSDictionary class]]) {
-            TXGiftDataModel *model = [TXGiftDataModel mj_objectWithKeyValues:result];
-            if (model.errorcode == 20000) {
-                if (self.pageIndex==1) {
-                    [self.dataArray removeAllObjects];
-                }
-                [self.dataArray addObjectsFromArray:model.data.records];
-            }else{
-                Toast(model.message);
+        TXGiftDataModel *model = [TXGiftDataModel mj_objectWithKeyValues:result];
+        if (model.errorcode == 20000) {
+            if (self.pageIndex==1) {
+                [self.dataArray removeAllObjects];
             }
-            [self analysisData];
-            [self.tableView reloadData];
-            [self.tableView.mj_header endRefreshing];
+            [self.dataArray addObjectsFromArray:model.data.records];
         }else{
-            Toast(@"个人中心数据获取失败");
+            Toast(model.message);
         }
+        [self analysisData];
+        [self.tableView reloadData];
+        [self.tableView.mj_header endRefreshing];
         [self.view dismissLoadingView];
     } failure:^(NSError *error) {
         TTLog(@" -- error -- %@",error);

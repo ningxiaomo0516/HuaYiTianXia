@@ -88,25 +88,21 @@
 - (void) requestRealNameData{
     [SCHttpTools getWithURLString:kHttpURL(@"customer/UserData") parameter:nil success:^(id responseObject) {
         NSDictionary *result = responseObject;
-        if ([result isKindOfClass:[NSDictionary class]]) {
-            TTUserDataModel *model = [TTUserDataModel mj_objectWithKeyValues:result];
-            TTUserModel *userModel = model.data;
-            if (model.errorcode == 20000) {
-                self.nickNameTextField.text = userModel.username;
-                if (userModel.idnumber.length<15) {
-                    self.idnumberTextField.text = @"未填写";
-                }else{
-                    self.idnumberTextField.text = [SCSmallTools idCardNumber:userModel.idnumber];
-                }
-                self.sexLabel.text = (userModel.sex==0)?@"男":@"女";
-                [self.imageView1 sd_setImageWithURL:kGetImageURL(userModel.imgz) placeholderImage:kGetImage(VERTICALMAPBITMAP)];
-                [self.imageView2 sd_setImageWithURL:kGetImageURL(userModel.imgb) placeholderImage:kGetImage(VERTICALMAPBITMAP)];
-                [self.tableView reloadData];
+        TTUserDataModel *model = [TTUserDataModel mj_objectWithKeyValues:result];
+        TTUserModel *userModel = model.data;
+        if (model.errorcode == 20000) {
+            self.nickNameTextField.text = userModel.username;
+            if (userModel.idnumber.length<15) {
+                self.idnumberTextField.text = @"未填写";
             }else{
-                Toast(model.message);
+                self.idnumberTextField.text = [SCSmallTools idCardNumber:userModel.idnumber];
             }
+            self.sexLabel.text = (userModel.sex==0)?@"男":@"女";
+            [self.imageView1 sd_setImageWithURL:kGetImageURL(userModel.imgz) placeholderImage:kGetImage(VERTICALMAPBITMAP)];
+            [self.imageView2 sd_setImageWithURL:kGetImageURL(userModel.imgb) placeholderImage:kGetImage(VERTICALMAPBITMAP)];
+            [self.tableView reloadData];
         }else{
-            Toast(@"认证数据获取失败");
+            Toast(model.message);
         }
     } failure:^(NSError *error) {
         TTLog(@" -- error -- %@",error);
@@ -226,16 +222,12 @@
     [SCHttpTools postWithURLString:kHttpURL(@"customer/Certification") parameter:parameter success:^(id responseObject) {
         NSDictionary *result = responseObject;
         TTLog(@" ---- %@",[Utils lz_dataWithJSONObject:result]);
-        if ([result isKindOfClass:[NSDictionary class]]) {
-            TXGeneralModel *model = [TXGeneralModel mj_objectWithKeyValues:result];
-            Toast(model.message);
-            if (model.errorcode == 20000) {
-                /// 更新实名认证本地状态
-                [kNotificationCenter postNotificationName:@"reloadMineData" object:nil];
-                [self.navigationController popViewControllerAnimated:YES];
-            }
-        }else{
-            Toast(@"认证数据获取失败");
+        TXGeneralModel *model = [TXGeneralModel mj_objectWithKeyValues:result];
+        Toast(model.message);
+        if (model.errorcode == 20000) {
+            /// 更新实名认证本地状态
+            [kNotificationCenter postNotificationName:@"reloadMineData" object:nil];
+            [self.navigationController popViewControllerAnimated:YES];
         }
         kHideMBProgressHUD(self.view);;
     } failure:^(NSError *error) {

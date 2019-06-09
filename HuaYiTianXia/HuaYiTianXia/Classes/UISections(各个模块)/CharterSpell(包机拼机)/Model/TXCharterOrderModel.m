@@ -9,5 +9,22 @@
 #import "TXCharterOrderModel.h"
 
 @implementation TXCharterOrderModel
++ (NSDictionary *)replacedKeyFromPropertyName{
+    return @{@"data"        : @"obj",
+             @"errorcode"   : @"code",
+             @"message"     : @"msg"};
+}
++ (NSDictionary *)objectClassInArray{
+    return @{@"data" : [CharterOrderModel class]};
+}
+@end
+
+@implementation CharterOrderModel
+
++ (NSDictionary *)replacedKeyFromPropertyName{
+    return @{@"kid"         : @"id",
+             @"arvCity"     : @"destination",
+             @"depCity"     : @"origin"};
+}
 
 @end

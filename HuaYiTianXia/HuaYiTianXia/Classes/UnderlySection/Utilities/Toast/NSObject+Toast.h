@@ -12,7 +12,7 @@
 #define TOAST_TEXT_MARGIN_TOP_BOTTOM  12.0f
 #define TOAST_TEXT_MARGIN_LEFT_RIGHT  15.0f
 //默认toast位置Y
-#define TOAST_POSITION_Y   (kScreenHeight/2)
+#define TOAST_POSITION_Y   (kCrossScreenHeight/2)
 
 //字体
 #define TOAST_TEXT_FONTSIZE         kFontSizeMedium13

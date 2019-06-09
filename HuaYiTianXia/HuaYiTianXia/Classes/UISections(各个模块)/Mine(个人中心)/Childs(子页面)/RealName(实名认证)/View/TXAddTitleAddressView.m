@@ -148,20 +148,17 @@
 #pragma mark ------ 获取接口地址 ------
 - (void) getCityData:(NSInteger)parentId{
     kShowMBProgressHUD(self);
-//    NSMutableDictionary *parameter = [[NSMutableDictionary alloc] init];
     [SCHttpTools getWithURLString:@"city/getList" parameter:@{@"parentId":@(parentId)} success:^(id responseObject) {
         NSDictionary *result = responseObject;
-        if ([result isKindOfClass:[NSDictionary class]]) {
-            TXCityData *model = [TXCityData mj_objectWithKeyValues:result];
-            if (model.errorcode == 20000) {
-                if (model.list.count == 0) {
-                    [self tapBtnAndcancelBtnClick];
-                    self.selectBlock(self.selectValue, self.selectID);
-                }
-                self.dataArray = model.list;
-            }else{
-                Toast(@"获取数据失败");
+        TXCityData *model = [TXCityData mj_objectWithKeyValues:result];
+        if (model.errorcode == 20000) {
+            if (model.list.count == 0) {
+                [self tapBtnAndcancelBtnClick];
+                self.selectBlock(self.selectValue, self.selectID);
             }
+            self.dataArray = model.list;
+        }else{
+            Toast(@"获取数据失败");
         }
         [self.tableView reloadData];
         kHideMBProgressHUD(self);

@@ -78,16 +78,11 @@ TXMallGoodsSpecTableViewCellDelegate,WKUIDelegate,WKNavigationDelegate>
     
     [SCHttpTools postWithURLString:@"shopproduct/GetShopDetails" parameter:parameter success:^(id responseObject) {
         NSDictionary *result = responseObject;
-        if ([result isKindOfClass:[NSDictionary class]]) {
-            self.productData = [NewsModel mj_objectWithKeyValues:result];
-            self.isload = YES;
-            self.tableView.hidden = NO;
-            [self.tableView reloadData];
-            self.noDataView.hidden = YES;
-        }else{
-            Toast(@"获取产品详情数据失败");
-            self.noDataView.hidden = NO;
-        }
+        self.productData = [NewsModel mj_objectWithKeyValues:result];
+        self.isload = YES;
+        self.tableView.hidden = NO;
+        [self.tableView reloadData];
+        self.noDataView.hidden = YES;
         [self.view dismissLoadingView];
     } failure:^(NSError *error) {
         TTLog(@" -- error -- %@",error);
@@ -98,7 +93,7 @@ TXMallGoodsSpecTableViewCellDelegate,WKUIDelegate,WKNavigationDelegate>
 
 /// 立即投保
 - (void) saveBtnClick:(UIButton *)sender{
-    TTLog(@"self.pageType -- %ld",self.pageType);
+    TTLog(@"self.pageType -- %ld",(long)self.pageType);
     if (kUserInfo.isLogin) {
         if (self.pageType == 0) {
             ///// 记录当前是商城购买

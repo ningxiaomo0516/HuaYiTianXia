@@ -59,22 +59,20 @@ static NSString * const reuseIdentifierChoosePay = @"TXChoosePayTableViewCell";
 - (void) getTopupAmount{
     [SCHttpTools getWithURLString:kHttpURL(@"customer/THGetMoney") parameter:nil success:^(id responseObject) {
         NSDictionary *result = responseObject;
-        if ([result isKindOfClass:[NSDictionary class]]) {
-            TTUserDataModel *model = [TTUserDataModel mj_objectWithKeyValues:result];
-            if (model.errorcode==20000) {
-                TTLog(@" result --- %@",[Utils lz_dataWithJSONObject:result]);
-                NSDictionary *obj = [result lz_objectForKey:@"obj"];
-                TTLog(@" ---- -%@",[obj lz_objectForKey:@"money"]);
-                TTLog(@" ---- -%@",[obj lz_objectForKey:@"thMoney"]);
-                NSString *AmoutText1 = [NSString stringWithFormat:@"%@",[obj lz_objectForKey:@"thMoney"]];
-                self.topupAmount1 = [Utils isNull:AmoutText1];
-                self.topupAmount2 = [Utils isNull:AmoutText1];
-                [self.tableView reloadData];
-            }else{
-                self.topupAmount1 = @"0";
-                self.topupAmount2 = @"0";
-                Toast(model.message);
-            }
+        TTUserDataModel *model = [TTUserDataModel mj_objectWithKeyValues:result];
+        if (model.errorcode==20000) {
+            TTLog(@" result --- %@",[Utils lz_dataWithJSONObject:result]);
+            NSDictionary *obj = [result lz_objectForKey:@"obj"];
+            TTLog(@" ---- -%@",[obj lz_objectForKey:@"money"]);
+            TTLog(@" ---- -%@",[obj lz_objectForKey:@"thMoney"]);
+            NSString *AmoutText1 = [NSString stringWithFormat:@"%@",[obj lz_objectForKey:@"thMoney"]];
+            self.topupAmount1 = [Utils isNull:AmoutText1];
+            self.topupAmount2 = [Utils isNull:AmoutText1];
+            [self.tableView reloadData];
+        }else{
+            self.topupAmount1 = @"0";
+            self.topupAmount2 = @"0";
+            Toast(model.message);
         }
         self.tableView.hidden = NO;
         kHideMBProgressHUD(self.view);
@@ -116,24 +114,22 @@ static NSString * const reuseIdentifierChoosePay = @"TXChoosePayTableViewCell";
     [parameter setObject:@"" forKey:@"currency"];
     [SCHttpTools postWithURLString:kHttpURL(@"orderform/PayFrom") parameter:parameter success:^(id responseObject) {
         NSDictionary *result = responseObject;
-        if ([result isKindOfClass:[NSDictionary class]]) {
-            TXGeneralModel *model = [TXGeneralModel mj_objectWithKeyValues:result];
-            if (model.errorcode == 20000) {
-                if (idx==0) {/// 支付宝支付
-                    [AlipayManager doAlipayPay:model];
-                }else if(idx==1){/// 微信支付
-                    NSString *str = [Utils lz_dataWithJSONObject:result];
-                    TTLog(@"str == %@",str);
-                    [AlipayManager doWechatPay:model];
-                }else if(idx==2){
-                    Toast(@"支付成功");
-                    [self.navigationController popViewControllerAnimated:YES];
-                }else{
-                    Toast(@"未知支付");
-                }
+        TXGeneralModel *model = [TXGeneralModel mj_objectWithKeyValues:result];
+        if (model.errorcode == 20000) {
+            if (idx==0) {/// 支付宝支付
+                [AlipayManager doAlipayPay:model];
+            }else if(idx==1){/// 微信支付
+                NSString *str = [Utils lz_dataWithJSONObject:result];
+                TTLog(@"str == %@",str);
+                [AlipayManager doWechatPay:model];
+            }else if(idx==2){
+                Toast(@"支付成功");
+                [self.navigationController popViewControllerAnimated:YES];
             }else{
-                Toast(model.message);
+                Toast(@"未知支付");
             }
+        }else{
+            Toast(model.message);
         }
         kHideMBProgressHUD(self.view);;
     } failure:^(NSError *error) {

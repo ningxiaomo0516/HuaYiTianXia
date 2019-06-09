@@ -84,21 +84,17 @@
     kShowMBProgressHUD(self.controller.view);
     [SCHttpTools postImageWithURLString:uploadFile parameter:nil image:image success:^(id result) {
         SCUploadImageModel *model = [SCUploadImageModel mj_objectWithKeyValues:result];
-        if ([result isKindOfClass:[NSDictionary class]]) {
-            if (model.errorcode == 20000) {
-                TTLog(@"图片上传%@",[Utils lz_dataWithJSONObject:result]);
-                if (self.completionHandler) {
-                    if (model.data.count>0) {
-                        self.completionHandler(image,model.data[0].imageURL);
-                    }else{
-                        Toast(@"图片上传数据错误");
-                    }
+        if (model.errorcode == 20000) {
+            TTLog(@"图片上传%@",[Utils lz_dataWithJSONObject:result]);
+            if (self.completionHandler) {
+                if (model.data.count>0) {
+                    self.completionHandler(image,model.data[0].imageURL);
+                }else{
+                    Toast(@"图片上传数据错误");
                 }
-            }else {
-                Toast(model.message);
             }
         }else {
-            Toast(@"图片上传失败");
+            Toast(model.message);
         }
         kHideMBProgressHUD(self.controller.view);;
     } failure:^(NSError *error) {

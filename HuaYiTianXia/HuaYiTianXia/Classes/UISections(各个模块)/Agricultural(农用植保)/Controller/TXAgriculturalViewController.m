@@ -83,20 +83,16 @@ static NSString * const reuseIdentifierGoodsH5 = @"TXGoodsH5TableViewCell";
     [parameter setObject:@(1) forKey:@"type"];
     [SCHttpTools postWithURLString:kHttpURL(@"parcel/ControlParcel") parameter:parameter success:^(id responseObject) {
         NSDictionary *result = responseObject;
-        if ([result isKindOfClass:[NSDictionary class]]) {
-            TTAdsData *model = [TTAdsData mj_objectWithKeyValues:result];
-            if (model.errorcode == 20000) {
-                /// 礼包活动是否结束1:活动继续，进入礼包界面，2:活动终止,无法进入礼包界面
-                if (model.data.status==1) {
-                    TXAdsGiftViewController *vc = [[TXAdsGiftViewController alloc] init];
-                    vc.webURL = [NSString stringWithFormat:@"%@libao/index.html?type=1&userID=%@", DomainName,kUserInfo.userid];
-                    TTPushVC(vc);
-                }else{
-                    Toast(@"礼包活动已结束");
-                }
+        TTAdsData *model = [TTAdsData mj_objectWithKeyValues:result];
+        if (model.errorcode == 20000) {
+            /// 礼包活动是否结束1:活动继续，进入礼包界面，2:活动终止,无法进入礼包界面
+            if (model.data.status==1) {
+                TXAdsGiftViewController *vc = [[TXAdsGiftViewController alloc] init];
+                vc.webURL = [NSString stringWithFormat:@"%@libao/index.html?type=1&userID=%@", DomainName,kUserInfo.userid];
+                TTPushVC(vc);
+            }else{
+                Toast(@"礼包活动已结束");
             }
-        }else{
-            Toast(@"获取礼包数据失败");
         }
         kHideMBProgressHUD(self.view);
     } failure:^(NSError *error) {
