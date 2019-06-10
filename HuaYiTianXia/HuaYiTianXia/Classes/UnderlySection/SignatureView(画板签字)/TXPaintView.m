@@ -17,6 +17,7 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
         self.backgroundColor = [UIColor clearColor];
+        self.hasSignature = NO;
     }
     return self;
 }
@@ -37,21 +38,25 @@
 
 - (void)clear {
     [self.paths removeAllObjects];
-    
+    [self isSignature];
     [self setNeedsDisplay];
 }
 
 - (void)undo {
     [self.paths removeLastObject];
-    
+    [self isSignature];
     [self setNeedsDisplay];
 }
 
 - (void)erease{
     self.lineColor = [UIColor whiteColor];
 }
-#pragma mark - Handle Touches
 
+- (void) isSignature{
+    self.hasSignature = self.paths.count>0?YES:NO;
+}
+
+#pragma mark - Handle Touches
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     UITouch *touch = [touches anyObject];
     CGPoint startPoint = [touch locationInView:touch.view];
@@ -67,6 +72,7 @@
     }
     [path moveToPoint:startPoint];
     [self.paths addObject:path];
+    [self isSignature];
     [self setNeedsDisplay];
 }
 

@@ -42,7 +42,7 @@ static NSString * const reuseIdentifiers = @"TXRegisteredTableViewCell";
 - (void) initView{
     [self.view addSubview:self.tableView];
     NSInteger count = self.lz_navigationController.lz_viewControllers.count;
-    TTLog(@"count = %ld",count);
+    TTLog(@"count = %ld",(long)count);
     [self.footerView addSubview:self.saveButton];
     self.tableView.tableFooterView = self.footerView;
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {

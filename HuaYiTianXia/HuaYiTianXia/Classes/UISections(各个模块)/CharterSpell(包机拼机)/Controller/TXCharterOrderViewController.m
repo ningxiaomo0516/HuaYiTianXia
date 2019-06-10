@@ -15,6 +15,7 @@
 
 #import "TXCharterOrderModel.h"
 #import "TXInvoiceViewController.h"
+#import "TXAddressViewController.h"
 
 static NSString * const reuseIdentifier = @"TXCharterOrderTableViewCell";
 static NSString * const reuseIdentifierInfo = @"TXCharterBaseInfoTableViewCell";
@@ -30,6 +31,9 @@ static NSString * const reuseIdentifierPay = @"TXChoosePayTableViewCell";
 /// 机票信息
 @property (nonatomic, strong) CharterMachineModel *ticketTodel;
 @property (nonatomic, strong) CharterOrderModel *orderModel;
+
+@property (nonatomic, copy) InvoiceModel *invoiceMode;
+@property (nonatomic, copy) AddressModel *addressModel;
 
 @end
 
@@ -133,6 +137,11 @@ static NSString * const reuseIdentifierPay = @"TXChoosePayTableViewCell";
             }
         }else if(indexPath.section==3 ){
             tools.imagesArrow.hidden = NO;
+            if (indexPath.row==0) {
+                tools.titleLabel.text = (self.invoiceMode.invoiceTaxNumber.length==0)?model.title:self.invoiceMode.invoiceTaxNumber;
+            }else if(indexPath.row==1){
+                tools.titleLabel.text = (self.addressModel.username.length==0)?model.title:self.addressModel.username;
+            }
         }
         if (indexPath.section==3||indexPath.section==4) {
             tools.selectionStyle = UITableViewCellSelectionStyleDefault;
@@ -212,14 +221,33 @@ static NSString * const reuseIdentifierPay = @"TXChoosePayTableViewCell";
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    MV(weakSelf)
     if(indexPath.section==4){
         
     }else if(indexPath.section==3){
-        TXInvoiceViewController *vc = [[TXInvoiceViewController alloc] init];
-        TTPushVC(vc);
+        if (indexPath.row==0) {
+            TXInvoiceViewController *vc = [[TXInvoiceViewController alloc] init];
+            vc.selectBlock = ^(InvoiceModel * _Nonnull invoiceModel) {
+                weakSelf.invoiceMode = invoiceModel;
+                //一个cell刷新
+            };
+            TTPushVC(vc);
+        }else{
+            TXAddressViewController *vc = [[TXAddressViewController alloc] init];
+            MV(weakSelf)
+            vc.selectedAddressBlock = ^(AddressModel * _Nonnull model) {
+                weakSelf.addressModel = model;
+            };
+            TTPushVC(vc);
+        }
+        NSInteger row = indexPath.row;
+        NSInteger section = indexPath.section;
+        NSIndexPath *indexPath=[NSIndexPath indexPathForRow:row inSection:section];
+        [tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationNone];
     }else{
-        [tableView deselectRowAtIndexPath:indexPath animated:YES];
+        
     }
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 #pragma mark ----- getter/setter

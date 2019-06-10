@@ -47,14 +47,23 @@ static NSString * const reuseIdentifier = @"TXInvoiceTableViewCell";
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         [self getInvoiceDataRuquest];
     }];
+    MV(weakSelf)
+    [self.increaseBtn lz_handleControlEvent:UIControlEventTouchUpInside withBlock:^{
+        TXAddInvoiceViewController *vc = [[TXAddInvoiceViewController alloc] init];
+        vc.invoiceBlock = ^{
+            [weakSelf getInvoiceDataRuquest];
+        };
+        vc.title = @"新增发票";
+        TTPushVC(vc);
+    }];
 }
 
 - (void) getInvoiceDataRuquest{
-    [SCHttpTools getWithURLString:@"invoice/queryInvoiceList" parameter:@{} success:^(id responseObject) {
+    [SCHttpTools getWithURLString:kHttpURL(@"invoice/queryInvoiceList") parameter:nil success:^(id responseObject) {
         NSDictionary *result = responseObject;
-        TTLog(@"result -- %@",result);
         TXInvoiceModel *model = [TXInvoiceModel mj_objectWithKeyValues:result];
         if (model.errorcode==20000) {
+            [self.dataArray removeAllObjects];
             [self.dataArray addObjectsFromArray:model.list];
         }else{
             Toast(model.message);
@@ -84,14 +93,18 @@ static NSString * const reuseIdentifier = @"TXInvoiceTableViewCell";
     if (!tools) {
         tools = [[TXInvoiceTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
     }
+    InvoiceModel *musicModel = [self.dataArray objectAtIndex:indexPath.row];
     tools.selectionStyle = UITableViewCellSelectionStyleNone;
     tools.editBtn.tag = indexPath.row;
+    MV(weakSelf)
     [tools.editBtn lz_handleControlEvent:UIControlEventTouchUpInside withBlock:^{
-        TXAddInvoiceViewController *vc = [[TXAddInvoiceViewController alloc] init];
+        TXAddInvoiceViewController *vc = [[TXAddInvoiceViewController alloc] initInvoiceModel:musicModel];
         vc.title = @"修改发票";
+        vc.invoiceBlock = ^{
+            [weakSelf getInvoiceDataRuquest];
+        };
         TTPushVC(vc);
     }];
-    InvoiceModel *musicModel = [self.dataArray objectAtIndex:indexPath.row];
     tools.titleLabel.text = musicModel.invoiceTaxNumber;
     if ([self.chooseContent isEqualToString:tools.titleLabel.text]) {
         [tools updateCellWithState:YES];
@@ -111,10 +124,12 @@ static NSString * const reuseIdentifier = @"TXInvoiceTableViewCell";
     TXInvoiceTableViewCell * cell = [tableView cellForRowAtIndexPath:indexPath];
     [cell updateCellWithState:!cell.isSelected];
     self.chooseContent = cell.titleLabel.text;
-    MusicModel *musicModel = [self.dataArray objectAtIndex:indexPath.row];
+    InvoiceModel *musicModel = [self.dataArray objectAtIndex:indexPath.row];
     _currentSelectIndex = indexPath;
-    NSString *chooseContent = [NSString stringWithFormat:@"%@---%@",self.chooseContent,musicModel.kid];
-    Toast(chooseContent);
+    if (self.selectBlock) {
+        self.selectBlock(musicModel);
+        [self.navigationController popViewControllerAnimated:YES];
+    }
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 

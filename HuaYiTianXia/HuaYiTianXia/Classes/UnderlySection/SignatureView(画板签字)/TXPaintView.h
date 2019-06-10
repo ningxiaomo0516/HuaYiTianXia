@@ -19,7 +19,8 @@ NS_ASSUME_NONNULL_BEGIN
  The line color of the path. Default is `[UIColor whiteColor]`.
  */
 @property (nonatomic, strong) UIColor *lineColor;
-
+/// 是否已签名
+@property (nonatomic, assign) BOOL hasSignature;
 /**
  Clear all paths.
  */

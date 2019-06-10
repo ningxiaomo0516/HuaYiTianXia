@@ -15,7 +15,7 @@
              @"message"     : @"msg"};
 }
 + (NSDictionary *)objectClassInArray{
-    return @{@"data" : [InvoiceModel class]};
+    return @{@"list" : [InvoiceModel class]};
 }
 @end
 

@@ -76,9 +76,9 @@
 
 #pragma mark________________生成图片
 - (void)saveAction:(UIButton *)sender {
-    UIImage *image = [self imageWithUIView:self.paintView];
-    UIImage *image_s = [self compressImage:image];
-    if (!image_s) {
+    if (self.paintView.hasSignature) {
+        UIImage *image = [self imageWithUIView:self.paintView];
+        UIImage *image_s = [self compressImage:image];
         [self upload:image_s button:sender];
     }else{
         [self addSubview:self.tipsLabel];
