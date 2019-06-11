@@ -33,7 +33,7 @@
         _saveButton = [UIButton buttonWithType:UIButtonTypeCustom];
         _saveButton.tag = 2;
         [_saveButton setTitle:@"预约申请" forState:UIControlStateNormal];
-        [Utils lz_setButtonWithBGImage:_saveButton cornerRadius:0];
+        [Utils lz_setButtonWithBGImage:_saveButton isRadius:YES];
     }
     return _saveButton;
 }

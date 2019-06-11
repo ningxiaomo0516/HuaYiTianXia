@@ -97,6 +97,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *coverimg;
 /// 产品价格
 @property (nonatomic, copy) NSString *price;
+/// 产品积分
+@property (nonatomic, copy) NSString *vrcurrency;
 /// 产品规格《规格数组（首页取第一个）》
 @property (nonatomic, strong) NSArray *prospec;
 /// 商城简介(详情内容)

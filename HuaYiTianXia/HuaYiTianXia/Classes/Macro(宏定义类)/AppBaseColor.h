@@ -18,29 +18,32 @@
 
 /// TabBar 默认颜色和选择颜色
 //#define kTabBarColorNormal kColorWithRGB(136,136,136)
-#define kTabBarColorNormal kColorWithRGB(51,51,51)
+#define kTabBarColorNormal kColorWithRGB(102,102,102)
 #define kTabBarColorSelected kThemeColorHex
 
 //#define kNavigationColorNormal kColorWithRGB(255,65,99)
 #define kNavigationColorNormal kColorWithRGB(255, 255, 255)
-#define kViewColorNormal kColorWithRGB(244, 244, 244)
+#define kViewColorNormal kColorWithRGB(248, 248, 248)
 #define kTextColor244 kColorWithRGB(244, 244, 244)
 
 #define kLinerViewColor kColorWithRGB(221, 221, 221)
 #define kLinerViewHeight 0.5
 
 /// TableView in Section background color
-#define kTableViewInSectionColor kColorWithRGB(244, 244, 244)
+#define kTableViewInSectionColor kColorWithRGB(248, 248, 248)
 
 /// 主题颜色
-#define kThemeColorHex HexString(@"#596377")
+#define kColorHexString @"#7F0505"
+#define kThemeColorHex HexString(kColorHexString)
 /// 一级页面主题颜色
-#define kThemeColorRGB kColorWithRGB(89,99,119)
+#define kThemeColorRGB kColorWithRGB(127, 5, 5)
 /// 暂时没有用
-#define kBaseColor  imageColor(kThemeColorHex)
+#define kImageColor  imageColor(kThemeColorHex)
 /// 公共按钮背景图(颜色)
 #define kButtonColorNormal imageColor(kThemeColorHex)
 
+/// 所有价格通用颜色
+#define kPriceColor kColorWithRGB(183, 1, 1)
 
 #define kFontWithNameMedium     @"PingFang-SC-Medium"
 #define kFontWithNameScBold     @"PingFang-SC-Bold"

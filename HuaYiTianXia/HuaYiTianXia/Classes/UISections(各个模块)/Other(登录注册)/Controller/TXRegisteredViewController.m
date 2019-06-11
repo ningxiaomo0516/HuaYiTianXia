@@ -20,10 +20,17 @@ static NSString * const reuseIdentifiers = @"TXRegisteredTableViewCell";
 @property (strong, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) UIView *footerView;
 @property (strong, nonatomic) NSMutableArray *dataArray;
+@property (strong, nonatomic) UILabel *titlelabel;
 /// 手机号
 @property (copy, nonatomic) NSString *telphone;
 /// 验证码
 @property (copy, nonatomic) NSString *validationCode;
+/// 密码
+@property (copy, nonatomic) NSString *password;
+/// 确认密码
+@property (copy, nonatomic) NSString *passwords;
+/// 邀请码
+@property (copy, nonatomic) NSString *invitationCode;
 
 @end
 
@@ -34,24 +41,31 @@ static NSString * const reuseIdentifiers = @"TXRegisteredTableViewCell";
     // Do any additional setup after loading the view from its nib.
     [self addGesture:self.tableView];
     [self initView];
+    [self getIntegral];
 }
 
 - (void) initView{
     [self.view addSubview:self.tableView];
-    
     [self.footerView addSubview:self.saveButton];
     self.tableView.tableFooterView = self.footerView;
+    
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.bottom.left.right.equalTo(self.view);
     }];
-    
     [self.saveButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(@(30));
         make.left.equalTo(@(IPHONE6_W(15)));
         make.right.equalTo(self.view.mas_right).offset(IPHONE6_W(-15));
         make.height.equalTo(@(45));
     }];
-
+    
+    if (self.pageType==0) {
+        [self.footerView addSubview:self.titlelabel];
+        [self.titlelabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerX.equalTo(self.view);
+            make.top.equalTo(self.saveButton.mas_bottom).offset(16);
+        }];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -59,8 +73,28 @@ static NSString * const reuseIdentifiers = @"TXRegisteredTableViewCell";
     self.view.backgroundColor = kWhiteColor;
 }
 
+/// 获取注册成功即送298VH
+- (void) getIntegral{
+    [SCHttpTools getWithURLString:@"upload/regVHIntegral" parameter:nil success:^(id responseObject) {
+        NSDictionary *result = responseObject;
+        TXGeneralModel *generalModel = [TXGeneralModel mj_objectWithKeyValues:result];
+        if (generalModel.errorcode==20000) {
+            NSAttributedString *attributedText;
+            attributedText = [SCSmallTools sc_initImageWithText:generalModel.obj
+                                                      imageName:@"live_btn_marks"
+                                                   fontWithSize:kFontSizeMedium15];
+            self.titlelabel.attributedText = attributedText;
+        }else{
+            Toast(generalModel.message);
+        }
+    } failure:^(NSError *error) {
+        
+    }];
+}
+
 /** 保存 */
 - (void) saveBtnClick:(UIButton *) sender{
+    /// 0:注册 1:找回密码
     if (self.telphone.length == 0) {
         Toast(@"请输入电话号码");
         return;
@@ -74,6 +108,28 @@ static NSString * const reuseIdentifiers = @"TXRegisteredTableViewCell";
         Toast(@"请输入验证码");
         return;
     }
+
+    if (self.pageType==0) {
+        if (self.password.length == 0) {
+            Toast(@"请输入登录密码");
+            return;
+        }
+        if (self.password.length < 6) {
+            Toast(@"登录密码不能少于6位");
+            return;
+        }
+        if (self.passwords.length == 0) {
+            Toast(@"请输入确认密码");
+            return;
+        }
+        if (self.passwords != self.password) {
+            Toast(@"确认密码与密码不一致");
+            return;
+        }
+    }
+    
+    kShowMBProgressHUD(self.view);
+    /// 先校验验证码再修改密码
     if (self.pageType==0) {
         [self checkCodeisCorrect:@"customer/SMSContrast"];
     }else if(self.pageType==1){
@@ -81,33 +137,58 @@ static NSString * const reuseIdentifiers = @"TXRegisteredTableViewCell";
     }
 }
 
+/// 设置密码
+- (void) setupPasswordRequest:(NSString *)URLString parameter:(NSDictionary *)parameter{
+    [SCHttpTools postWithURLString:URLString parameter:parameter success:^(id responseObject) {
+        if (responseObject){
+            NSDictionary *result = responseObject;
+            TXGeneralModel *generalModel = [TXGeneralModel mj_objectWithKeyValues:result];
+            if (generalModel.errorcode == 20000) {
+                if (self.pageType==0) {
+                    TTLog(@"密码设置成功");
+                }else if(self.pageType==1){
+                    TTLog(@"新密码密码设置成功");
+                }
+                [self.navigationController popToRootViewControllerAnimated:YES];
+            }
+            Toast(generalModel.message);
+        }
+        kHideMBProgressHUD(self.view);;
+    } failure:^(NSError *error) {
+        TTLog(@"error --- %@",error);
+        kHideMBProgressHUD(self.view);;
+    }];
+}
+
 - (void) checkCodeisCorrect:(NSString *)URLString{
     NSMutableDictionary *parameter = [[NSMutableDictionary alloc] init];
     [parameter setObject:self.telphone forKey:@"mobile"];
     [parameter setObject:self.validationCode forKey:@"smsCode"];
     [SCHttpTools postWithURLString:URLString parameter:parameter success:^(id responseObject) {
-        if (responseObject){
-            id result = responseObject;
-            if (result) {
-//                [MBProgressHUD hideHUDForView:self.view];
-                TXGeneralModel *generalModel = [TXGeneralModel mj_objectWithKeyValues:result];
-                if (generalModel.errorcode == 20000) {
-                    TXRegisterPasswordViewController *vc = [[TXRegisterPasswordViewController alloc] init];
-                    vc.pageType = self.pageType;
-                    vc.telphone = self.telphone;
-                    if (self.pageType==0) {
-                        vc.title = @"设置密码";
-                    }else{
-                        vc.title = @"设置密码";
-                    }
-                    TTPushVC(vc);
-                }else{
-                    Toast(generalModel.message);
-                }
+        NSDictionary *result = responseObject;
+        TXGeneralModel *generalModel = [TXGeneralModel mj_objectWithKeyValues:result];
+        if (generalModel.errorcode == 20000) {
+            if (self.pageType==0) {
+                NSMutableDictionary *parameter = [[NSMutableDictionary alloc] init];
+                [parameter setObject:self.telphone forKey:@"mobile"];
+                [parameter setObject:self.password forKey:@"pwd"];
+                [parameter setObject:self.passwords forKey:@"confirmpwd"];
+                [parameter setObject:self.invitationCode forKey:@"inviteCode"];
+                [self setupPasswordRequest:@"customer/register" parameter:parameter];
+            }else{
+                TXRegisterPasswordViewController *vc = [[TXRegisterPasswordViewController alloc] init];
+                vc.pageType = self.pageType;
+                vc.telphone = self.telphone;
+                vc.title = @"设置密码";
+                TTPushVC(vc);
             }
+        }else{
+            Toast(generalModel.message);
         }
+        kHideMBProgressHUD(self.view);
     } failure:^(NSError *error) {
         TTLog(@"error --- %@",error);
+        kHideMBProgressHUD(self.view);
     }];
 }
 
@@ -127,31 +208,26 @@ static NSString * const reuseIdentifiers = @"TXRegisteredTableViewCell";
     }
     NSMutableDictionary *parameter = [[NSMutableDictionary alloc] init];
     [parameter setObject:self.telphone forKey:@"mobile"];
+    /// 0:注册 1:找回密码
     if (self.pageType==0) {
         [parameter setObject:@"0" forKey:@"type"];
     }else{
         [parameter setObject:@"1" forKey:@"type"];
     }
-//    [MBProgressHUD showMessage:@"" toView:self.view];
     kShowMBProgressHUD(self.view);
     [SCHttpTools postWithURLString:@"customer/sendSMS" parameter:parameter success:^(id responseObject) {
         if (responseObject){
             id result = responseObject;
-            if (result) {
-//                [MBProgressHUD hideHUDForView:self.view];
-                TXGeneralModel *generalModel = [TXGeneralModel mj_objectWithKeyValues:result];
-                if (generalModel.errorcode == 20000) {
-                    Toast(@"验证码已发送至您的手机,请注意查收!");
-                    [SCSmallTools countdown:sender];
-                }else{
-                    Toast(generalModel.message);
-                }
+            TXGeneralModel *generalModel = [TXGeneralModel mj_objectWithKeyValues:result];
+            if (generalModel.errorcode == 20000) {
+                Toast(@"验证码已发送至您的手机,请注意查收!");
+                [SCSmallTools countdown:sender];
+            }else{
+                Toast(generalModel.message);
             }
         }
         kHideMBProgressHUD(self.view);;
     } failure:^(NSError *error) {
-        
-//        [MBProgressHUD hideHUDForView:self.view];
         Toast(@"验证码发送失败");
         TTLog(@"error --- %@",error);
         kHideMBProgressHUD(self.view);;
@@ -161,14 +237,7 @@ static NSString * const reuseIdentifiers = @"TXRegisteredTableViewCell";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     TXGeneralModel *model = self.dataArray[indexPath.row];
-    if (indexPath.row==0) {
-        TXRegisterTableViewCell *tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
-        tools.titleLabel.text = model.title;
-        tools.textField.placeholder = model.imageText;
-        tools.textField.tag = indexPath.row;
-        [tools.textField addTarget:self action:@selector(textFieldWithText:) forControlEvents:UIControlEventEditingChanged];
-        return tools;
-    }else{
+    if (indexPath.row==1) {
         TXRegisteredTableViewCell* tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifiers forIndexPath:indexPath];
         TXGeneralModel *model = self.dataArray[indexPath.row];
         tools.titleLabel.text = model.title;
@@ -181,12 +250,29 @@ static NSString * const reuseIdentifiers = @"TXRegisteredTableViewCell";
         }];
         [tools.textField addTarget:self action:@selector(textFieldWithText:) forControlEvents:UIControlEventEditingChanged];
         return tools;
+    }else{
+        TXRegisterTableViewCell *tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
+        tools.titleLabel.text = model.title;
+        tools.textField.placeholder = model.imageText;
+        tools.textField.tag = indexPath.row;
+        [tools.textField addTarget:self action:@selector(textFieldWithText:) forControlEvents:UIControlEventEditingChanged];
+        return tools;
     }
+}
+
+#pragma mark -- 设置Header高度
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    return 10.f;
 }
 
 /// 返回多少
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.dataArray.count;
+    /// 0:注册 1:找回密码
+    if (self.pageType==0) {
+        return self.dataArray.count;
+    }else{
+        return 2;
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -215,7 +301,7 @@ static NSString * const reuseIdentifiers = @"TXRegisteredTableViewCell";
         _tableView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
         _tableView.delegate = self;
         _tableView.dataSource = self;
-        _tableView.backgroundColor = kClearColor;
+        _tableView.backgroundColor = kViewColorNormal;
     }
     return _tableView;
 }
@@ -224,7 +310,7 @@ static NSString * const reuseIdentifiers = @"TXRegisteredTableViewCell";
     if (!_saveButton) {
         _saveButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [_saveButton setTitle:@"下一步" forState:UIControlStateNormal];
-        [Utils lz_setButtonWithBGImage:_saveButton cornerRadius:45.0/2];
+        [Utils lz_setButtonWithBGImage:_saveButton isRadius:YES];
         MV(weakSelf);
         [_saveButton lz_handleControlEvent:UIControlEventTouchUpInside withBlock:^{
             [weakSelf saveBtnClick:self.saveButton];
@@ -241,12 +327,18 @@ static NSString * const reuseIdentifiers = @"TXRegisteredTableViewCell";
     return _footerView;
 }
 
+- (UILabel *)titlelabel{
+    if (!_titlelabel) {
+        _titlelabel = [UILabel lz_labelWithTitle:@"" color:kThemeColorRGB font:kFontSizeMedium15];
+    }
+    return _titlelabel;
+}
+
 - (NSArray *)dataArray{
     if (!_dataArray) {
         _dataArray = [[NSMutableArray alloc] init];
-        
-        NSArray* titleArr = @[@"手机号",@"验证码"];
-        NSArray* classArr = @[@"请输入手机号码",@"请输入验证码"];
+        NSArray* titleArr = @[@"手机号",@"验证码",@"密码",@"确认密码",@"邀请码"];
+        NSArray* classArr = @[@"请输入手机号码",@"请输入验证码",@"请输入登录密码",@"请再次输入密码",@"邀请码（选填）"];
         for (int j = 0; j < titleArr.count; j ++) {
             TXGeneralModel *generalModel = [[TXGeneralModel alloc] init];
             generalModel.title = [titleArr lz_safeObjectAtIndex:j];
@@ -264,6 +356,15 @@ static NSString * const reuseIdentifiers = @"TXRegisteredTableViewCell";
             break;
         case 1:
             self.validationCode = textField.text;
+            break;
+        case 2:
+            self.password = textField.text;
+            break;
+        case 3:
+            self.passwords = textField.text;
+            break;
+        case 4:
+            self.invitationCode = textField.text;
             break;
         default:
             break;

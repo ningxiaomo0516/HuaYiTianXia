@@ -199,7 +199,7 @@ static NSString * const reuseIdentifierPay = @"TXChoosePayTableViewCell";
         if (section==2) titleLabel.text = @"售价";
         if (section==3) {
             UISwitch *isSwitch = [[UISwitch alloc] init];
-            isSwitch.onTintColor = HexString(@"#26B9FE");
+            isSwitch.onTintColor = kThemeColorHex;
             /// 设置按钮处于关闭状态时边框的颜色
             isSwitch.tintColor = kTextColor238;
             [sectionView addSubview:isSwitch];

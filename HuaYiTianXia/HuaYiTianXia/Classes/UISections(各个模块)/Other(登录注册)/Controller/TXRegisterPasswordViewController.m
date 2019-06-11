@@ -24,8 +24,6 @@ static NSString * const reuseIdentifiers = @"TXRegisteredTableViewCell";
 @property (copy, nonatomic) NSString *password;
 /// 确认密码
 @property (copy, nonatomic) NSString *passwords;
-/// 邀请码
-@property (copy, nonatomic) NSString *invitationCode;
 
 @end
 
@@ -36,7 +34,6 @@ static NSString * const reuseIdentifiers = @"TXRegisteredTableViewCell";
     // Do any additional setup after loading the view from its nib.
     [self addGesture:self.tableView];
     [self initView];
-    self.invitationCode = @"";
 }
 
 - (void) initView{
@@ -66,11 +63,11 @@ static NSString * const reuseIdentifiers = @"TXRegisteredTableViewCell";
 /** 保存 */
 - (void) saveBtnClick:(UIButton *) sender{
     if (self.password.length == 0) {
-        Toast(@"请输入登录密码");
+        Toast(@"请输入新密码");
         return;
     }
     if (self.password.length < 6) {
-        Toast(@"登录密码不能少于6位");
+        Toast(@"新密码不能少于6位");
         return;
     }
     if (self.passwords.length == 0) {
@@ -87,12 +84,7 @@ static NSString * const reuseIdentifiers = @"TXRegisteredTableViewCell";
     [parameter setObject:self.telphone forKey:@"mobile"];
     [parameter setObject:self.password forKey:@"pwd"];
     [parameter setObject:self.passwords forKey:@"confirmpwd"];
-    if (self.pageType==0) {
-        [parameter setObject:self.invitationCode forKey:@"inviteCode"];
-        [self setupPasswordRequest:@"customer/register" parameter:parameter];
-    }else{
-        [self setupPasswordRequest:@"customer/FindPwd" parameter:parameter];
-    }
+    [self setupPasswordRequest:@"customer/FindPwd" parameter:parameter];
 }
 
 - (void) updatePasswordRequest{
@@ -107,11 +99,7 @@ static NSString * const reuseIdentifiers = @"TXRegisteredTableViewCell";
             if (result) {
                 TXGeneralModel *generalModel = [TXGeneralModel mj_objectWithKeyValues:result];
                 if (generalModel.errorcode == 20000) {
-                    if (self.pageType==0) {
-                        TTLog(@"密码设置成功");
-                    }else if(self.pageType==1){
-                        TTLog(@"新密码密码设置成功");
-                    }
+                    TTLog(@"新密码密码设置成功");
                     [self.navigationController popToRootViewControllerAnimated:YES];
                 }
                 Toast(generalModel.message);
@@ -140,7 +128,7 @@ static NSString * const reuseIdentifiers = @"TXRegisteredTableViewCell";
 
 /// 返回多少
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return (self.pageType==0)?self.dataArray.count:2;
+    return self.dataArray.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -170,7 +158,7 @@ static NSString * const reuseIdentifiers = @"TXRegisteredTableViewCell";
         [_saveButton setTitleColor:kWhiteColor forState:UIControlStateNormal];
         _saveButton.titleLabel.font = kFontSizeMedium15;
         [_saveButton setTitle:@"完成" forState:UIControlStateNormal];
-        [Utils lz_setButtonWithBGImage:_saveButton cornerRadius:45/2.0];
+        [Utils lz_setButtonWithBGImage:_saveButton isRadius:YES];
         MV(weakSelf);
         [_saveButton lz_handleControlEvent:UIControlEventTouchUpInside withBlock:^{
             [weakSelf saveBtnClick:self.saveButton];
@@ -191,8 +179,8 @@ static NSString * const reuseIdentifiers = @"TXRegisteredTableViewCell";
     if (!_dataArray) {
         _dataArray = [[NSMutableArray alloc] init];
         
-        NSArray* titleArr = @[@"密码",@"确认密码",@"邀请码"];
-        NSArray* classArr = @[@"请输入登录密码",@"请再次输入密码",@"邀请码（选填）"];
+        NSArray* titleArr = @[@"新密码",@"确认密码"];
+        NSArray* classArr = @[@"请输入新密码",@"请再次输入密码"];
         for (int j = 0; j < titleArr.count; j ++) {
             TXGeneralModel *generalModel = [[TXGeneralModel alloc] init];
             generalModel.title = [titleArr lz_safeObjectAtIndex:j];
@@ -210,9 +198,6 @@ static NSString * const reuseIdentifiers = @"TXRegisteredTableViewCell";
             break;
         case 1:
             self.passwords = textField.text;
-            break;
-        case 2:
-            self.invitationCode = textField.text;
             break;
         default:
             break;

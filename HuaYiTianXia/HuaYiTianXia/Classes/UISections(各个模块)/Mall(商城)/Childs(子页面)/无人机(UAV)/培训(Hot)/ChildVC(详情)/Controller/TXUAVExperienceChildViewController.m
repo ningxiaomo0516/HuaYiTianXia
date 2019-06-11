@@ -290,7 +290,7 @@ static NSString * const reuseIdentifierBanner = @"TXMallGoodsBannerTableViewCell
         _saveButton = [UIButton buttonWithType:UIButtonTypeCustom];
         _saveButton.tag = 2;
         [_saveButton setTitle:@"立即报名" forState:UIControlStateNormal];
-        [Utils lz_setButtonWithBGImage:_saveButton cornerRadius:0];
+        [Utils lz_setButtonWithBGImage:_saveButton isRadius:NO];
         MV(weakSelf);
         [_saveButton lz_handleControlEvent:UIControlEventTouchUpInside withBlock:^{
             [weakSelf handleControlEvent:self.saveButton];

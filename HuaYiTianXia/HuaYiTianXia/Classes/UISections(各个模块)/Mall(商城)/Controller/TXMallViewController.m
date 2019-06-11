@@ -46,13 +46,13 @@
 -(UIView *)setPageViewControllers {
     WMPageController *pageController = [self p_defaultController];
     pageController.titleFontName = @"PingFang-SC-Medium";
-    pageController.titleSizeNormal = 14;  /// 默认字体大小
+    pageController.titleSizeNormal = 15;  /// 默认字体大小
     pageController.titleSizeSelected = 16;/// 选中字体大小
     pageController.menuViewStyle = WMMenuViewStyleLine;/// 样式
     pageController.menuViewLayoutMode = WMMenuViewLayoutModeCenter;//居中模式
     pageController.menuItemWidth = kScreenWidth/4;/// 宽度
     pageController.titleColorSelected = kWhiteColor;//HexString(@"#FF4163");
-    pageController.titleColorNormal = [kWhiteColor colorWithAlphaComponent:0.5];
+    pageController.titleColorNormal = kWhiteColor;
     pageController.progressWidth = 20;
     pageController.progressColor = kWhiteColor;
     pageController.menuBGColor = kClearColor;
@@ -65,7 +65,7 @@
 }
 
 - (WMPageController *)p_defaultController {
-    NSArray *titles = @[@"俱乐部",@"生态产业"];
+    NSArray *titles = @[@"俱乐部",@"生态圈"];
     NSArray *kidArray = @[@"1",@"6"];
     NSArray *classArray = @[@"TXUAvCollectionViewController",@"TXMallCollectionViewController"];
 //    1：无人机商城产品（消费）；2：农用植保产品（购买）；3：VR产品（购买）；4：纵横矿机产品（购买）；5：共享飞行产品（购买）；6：生态农业商城产品（消费）

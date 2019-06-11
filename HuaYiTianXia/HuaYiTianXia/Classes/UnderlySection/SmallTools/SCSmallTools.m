@@ -162,7 +162,7 @@
 
 
 // 实现图文混排的方法
-+ (NSAttributedString *) sc_initImageWithText:(NSString *) textStr imageName:(NSString *)imageName fontWithSize:(UIFont *)fontSize{
++ (NSAttributedString *) sc_initImageWithText:(NSString *)textStr imageName:(NSString *)imageName fontWithSize:(UIFont *)fontSize{
     
     // NSTextAttachment可以将图片转换为富文本内容
     NSTextAttachment *attachment = [[NSTextAttachment alloc] init];

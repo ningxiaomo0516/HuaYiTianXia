@@ -78,7 +78,7 @@
     if (!_reminderBtn) {
         _reminderBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         [_reminderBtn setTitle:@"重新加载" forState:UIControlStateNormal];
-        [Utils lz_setButtonWithBGImage:_reminderBtn cornerRadius:45/2.0];
+        [Utils lz_setButtonWithBGImage:_reminderBtn isRadius:YES];
         [_reminderBtn addTarget:self action:@selector(reminderBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _reminderBtn;

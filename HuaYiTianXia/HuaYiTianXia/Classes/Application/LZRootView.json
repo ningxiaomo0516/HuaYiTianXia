@@ -13,19 +13,19 @@
         "controllerName":"TXMallViewController",
     },
     {
-        "title":"农用植保",
+        "title":"农保",
         "imageName":"tab_coin_nor",
         "imageSelectName":"tab_coin_press",
         "controllerName":"TXAgriculturalViewController",
      },
     {
-        "title":"天合成员",
+        "title":"天合",
         "imageName":"tab_flight_nor",
         "imageSelectName":"tab_flight_press",
         "controllerName":"TXMembersViewController",
     },
      {
-        "title":"个人中心",
+        "title":"我的",
         "imageName":"tab_mine_nor",
         "imageSelectName":"tab_mine_press",
         "controllerName":"TXMineViewController",

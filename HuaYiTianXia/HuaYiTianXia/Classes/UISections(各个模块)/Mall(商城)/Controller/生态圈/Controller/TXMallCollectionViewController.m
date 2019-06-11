@@ -21,17 +21,10 @@ static NSString* reuseIdentifierMall    = @"TXMallCollectionViewCell";
 static NSString* reuseIdentifierHot     = @"TXMallHotTableViewCell";
 
 @interface TXMallCollectionViewController ()<UICollectionViewDelegate, UICollectionViewDataSource>
-{
-@private
-    UICollectionView * _collectionView;
-    UIImageView * _iconImageView;
-    UILabel * _titleLabel;
-}
-@property(nonatomic,strong,readonly)UICollectionView * collectionView;
+@property (nonatomic, strong) UICollectionView * collectionView;
 @property (nonatomic, strong) NSMutableArray *dataArray;
 @property (nonatomic, strong) NSMutableArray *toolsArray;
 @property (nonatomic, strong) NSMutableArray *bannerArray;
-
 /// 每页多少数据
 @property (nonatomic, assign) NSInteger pageSize;
 /// 当前页
@@ -139,7 +132,7 @@ static NSString* reuseIdentifierHot     = @"TXMallHotTableViewCell";
 /// 点击collectionViewCell
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section==1) {
-        Toast(@"系统持续开放中");
+//        Toast(@"系统持续开放中");
     }else if(indexPath.section==3){
         NewsRecordsModel *productModel = self.dataArray[indexPath.row];
         TXMallGoodsDetailsViewController *vc = [[TXMallGoodsDetailsViewController alloc] initMallProductModel:productModel];
@@ -162,7 +155,7 @@ static NSString* reuseIdentifierHot     = @"TXMallHotTableViewCell";
     else if (indexPath.section==1)return CGSizeMake(width, IPHONE6_W(95));
     else if (indexPath.section==2)return CGSizeMake(kScreenWidth, IPHONE6_W(95*2+30));
     CGFloat margin = 10*3;
-    return CGSizeMake((kScreenWidth-margin)/2, IPHONE6_W(230));
+    return CGSizeMake((kScreenWidth-margin)/2, IPHONE6_W(240));
 }
 
 //设置所有的cell组成的视图与section 上、左、下、右的间隔

@@ -25,7 +25,7 @@
 -(UIView *)setPageViewControllers {
     WMPageController *pageController = [self p_defaultController];
     pageController.titleFontName = @"PingFang-SC-Medium";
-    pageController.titleSizeNormal = 14;  /// 默认字体大小
+    pageController.titleSizeNormal = 15;  /// 默认字体大小
     pageController.titleSizeSelected = 16;/// 选中字体大小
     pageController.menuViewStyle = WMMenuViewStyleLine;/// 样式
     pageController.menuViewLayoutMode = WMMenuViewLayoutModeCenter;//居中模式

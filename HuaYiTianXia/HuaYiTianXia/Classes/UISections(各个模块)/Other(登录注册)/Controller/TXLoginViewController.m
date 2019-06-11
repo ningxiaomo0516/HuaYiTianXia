@@ -63,10 +63,10 @@
 }
 
 - (void) initView{
-    [Utils lz_setButtonWithBGImage:self.loginBtn cornerRadius:self.loginBtn.height/2.0];
+    [Utils lz_setButtonWithBGImage:self.loginBtn isRadius:YES];
     [self.registerBtn setBackgroundImage:imageColor(kClearColor) forState:UIControlStateNormal];
     [self.registerBtn setBorderColor:kThemeColorHex];
-    [self.registerBtn lz_setCornerRadius:self.registerBtn.height/2.0];
+    [self.registerBtn lz_setCornerRadius:5.0];
     [self.registerBtn setTitleColor:kThemeColorHex forState:UIControlStateNormal];
     [self.forgetBtn setTitleColor:kThemeColorHex forState:UIControlStateNormal];
 }

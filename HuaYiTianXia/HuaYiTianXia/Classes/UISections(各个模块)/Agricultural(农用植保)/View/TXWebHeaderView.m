@@ -73,7 +73,7 @@
     if (!_saveButton) {
         _saveButton = [UIButton buttonWithType:UIButtonTypeCustom];
         _saveButton.tag = 100;
-        [Utils lz_setButtonWithBGImage:_saveButton cornerRadius:45/2.0];
+        [Utils lz_setButtonWithBGImage:_saveButton isRadius:YES];
     }
     return _saveButton;
 }

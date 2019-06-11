@@ -183,7 +183,7 @@
     if (!_saveButton) {
         _saveButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [_saveButton setTitle:@"完成" forState:UIControlStateNormal];
-        [Utils lz_setButtonWithBGImage:_saveButton cornerRadius:45/2.0];
+        [Utils lz_setButtonWithBGImage:_saveButton isRadius:YES];
         _saveButton.hidden = YES;
         MV(weakSelf);
         [_saveButton lz_handleControlEvent:UIControlEventTouchUpInside withBlock:^{

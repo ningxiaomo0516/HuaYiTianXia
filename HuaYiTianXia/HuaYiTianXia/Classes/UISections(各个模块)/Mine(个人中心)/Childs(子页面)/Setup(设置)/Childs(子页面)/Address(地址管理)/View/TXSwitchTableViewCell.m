@@ -55,7 +55,7 @@
     if (!_isSwitch) {
         _isSwitch = [[UISwitch alloc] init];
         /// 设置开关处于开启时的状态
-        _isSwitch.onTintColor = HexString(@"#26B9FE");
+        _isSwitch.onTintColor = kThemeColorHex;
         /// 设置按钮处于关闭状态时边框的颜色
         _isSwitch.tintColor = kTextColor238;
         /// 设置开关的状态钮颜色

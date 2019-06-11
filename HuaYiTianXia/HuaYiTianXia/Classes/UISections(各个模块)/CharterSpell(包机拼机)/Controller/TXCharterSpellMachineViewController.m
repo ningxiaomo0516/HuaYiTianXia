@@ -38,7 +38,9 @@ static NSString * const reuseIdentifier = @"TXCharterSpellMachineCollectionViewC
     [self.headerView.citylabel whenTapped:^{
         Toast(@"城市选择");
     }];
-    
+    [self.headerView.backButton lz_handleControlEvent:UIControlEventTouchUpInside withBlock:^{
+        [self.navigationController popViewControllerAnimated:YES];
+    }];
     self.pageSize = 20;
     self.pageIndex = 1;
     [self.view showLoadingViewWithText:@"加载中..."];
@@ -127,7 +129,7 @@ static NSString * const reuseIdentifier = @"TXCharterSpellMachineCollectionViewC
     TXCharterSpellMachineCollectionViewCell *tools = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
     if (indexPath.section<3) {
         NSInteger idx = indexPath.section+1;
-        NSString *imagesName = [NSString stringWithFormat:@"lv28_btn_no%ld",idx];
+        NSString *imagesName = [NSString stringWithFormat:@"lv28_btn_no%ld",(long)idx];
         tools.imagesRank.image = kGetImage(imagesName);
     }else{
         tools.imagesRank.hidden = YES;

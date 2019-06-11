@@ -55,6 +55,8 @@ static NSString * const reuseIdentifierGoodsH5 = @"TXGoodsH5TableViewCell";
     self.headerView.imagesView.image = kGetImage(@"c41_live_nongbao");
     [self.headerView.saveButton setTitle:@"农用植保" forState:UIControlStateNormal];
     [self.headerView.receiveBtn setImage:kGetImage(@"c41_live_椭圆") forState:UIControlStateNormal];
+    self.headerView.imagesView.hidden = YES;
+    self.headerView.receiveBtn.hidden = YES;
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -184,7 +186,7 @@ static NSString * const reuseIdentifierGoodsH5 = @"TXGoodsH5TableViewCell";
 
 - (TXWebHeaderView *)headerView{
     if (!_headerView) {
-        _headerView = [[TXWebHeaderView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, IPHONE6_W(340))];
+        _headerView = [[TXWebHeaderView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, IPHONE6_W(190))];// IPHONE6_W(340)
     }
     return _headerView;
 }

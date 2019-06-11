@@ -7,9 +7,9 @@
 //
 
 #import "TXMallHotTableViewCell.h"
-#import "TXMembersbleCollectionViewCell.h"
+#import "TXMembersCollectionViewCell.h"
 
-static NSString* reuseIdentifier        = @"TXMembersbleCollectionViewCell";
+static NSString* reuseIdentifier        = @"MembersCollectionViewCell";
 
 @interface TXMallHotTableViewCell()<UICollectionViewDelegate, UICollectionViewDataSource>
 
@@ -51,7 +51,7 @@ static NSString* reuseIdentifier        = @"TXMembersbleCollectionViewCell";
 }
 
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    TXMembersbleCollectionViewCell *tools = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
+    MembersCollectionViewCell *tools = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
     NSString *imagsName = [NSString stringWithFormat:@"c09_mall_hot%ld",indexPath.row+1];
     tools.imagesView.image = kGetImage(imagsName);
     return tools;
@@ -107,7 +107,7 @@ static NSString* reuseIdentifier        = @"TXMembersbleCollectionViewCell";
         
         _collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:flowLayout];
         _collectionView.backgroundColor = [UIColor clearColor];
-        [_collectionView registerClass:[TXMembersbleCollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
+        [_collectionView registerClass:[MembersCollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
         _collectionView.showsVerticalScrollIndicator = NO;

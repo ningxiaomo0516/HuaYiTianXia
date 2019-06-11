@@ -99,7 +99,7 @@ static NSString * const reuseIdentifier = @"TXEppoTableViewCell";
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return IPHONE6_W(225);
+    return IPHONE6_W(240);
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{

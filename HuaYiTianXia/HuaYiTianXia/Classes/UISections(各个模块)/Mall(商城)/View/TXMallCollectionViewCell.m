@@ -7,6 +7,7 @@
 //
 
 #import "TXMallCollectionViewCell.h"
+#import "SCDeleteLineLabel.h"
 
 @implementation TXMallCollectionViewCell
 - (instancetype)initWithFrame:(CGRect)frame {
@@ -25,7 +26,16 @@
     self.titleLabel.text = recordsModel.title;
     self.subtitleLabel.text = recordsModel.synopsis;
     self.marketPriceLabel.text = [NSString stringWithFormat:@"￥%@",recordsModel.price];
-    self.currentPriceLabel.text = @"";
+    NSArray *priceArray = [recordsModel.price componentsSeparatedByString:@"."];
+    if (priceArray.count>1) {
+        if ([Utils isNull:recordsModel.vrcurrency]) {
+            
+        }
+        NSString *x_price = priceArray[0];
+        NSInteger hybridPrice = x_price.integerValue - [Utils isNull:recordsModel.vrcurrency].integerValue;
+        NSString *h_price = [NSString stringWithFormat:@"￥%ld.%@ + %@VH",hybridPrice,priceArray[1],[Utils isNull:recordsModel.vrcurrency]];
+        self.currentPriceLabel.text = h_price;
+    }
 }
 
 - (void)setupUI {
@@ -40,21 +50,20 @@
     }];
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(@(7));
-        make.centerX.equalTo(self);
-        make.top.equalTo(self.imagesView.mas_bottom).offset(8);
+        make.right.equalTo(self.mas_right).offset(-7);
+        make.top.equalTo(self.imagesView.mas_bottom).offset(6);
     }];
     [self.subtitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.titleLabel);
-        make.right.equalTo(self.mas_right).offset(-7);
-        make.top.equalTo(self.titleLabel.mas_bottom).offset(5);
+        make.right.left.equalTo(self.titleLabel);
+        make.top.equalTo(self.titleLabel.mas_bottom).offset(4);
+    }];
+    [self.currentPriceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.left.equalTo(self.titleLabel);
+        make.bottom.equalTo(self.marketPriceLabel.mas_top);
     }];
     [self.marketPriceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(self.mas_bottom).offset(-10);
         make.left.equalTo(self.titleLabel);
-    }];
-    [self.currentPriceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(self.mas_right).offset(-7);
-        make.centerY.equalTo(self.marketPriceLabel);
     }];
 }
 
@@ -76,23 +85,26 @@
 
 - (UILabel *)subtitleLabel{
     if (!_subtitleLabel) {
-        _subtitleLabel = [UILabel lz_labelWithTitle:@"" color:kTextColor153 font:kFontSizeMedium13];
+        _subtitleLabel = [UILabel lz_labelWithTitle:@"" color:kTextColor102 font:kFontSizeMedium12];
         _subtitleLabel.numberOfLines = 1;
     }
     return _subtitleLabel;
 }
 
-- (UILabel *)marketPriceLabel{
+- (SCDeleteLineLabel *)marketPriceLabel{
     if (!_marketPriceLabel) {
-//        _marketPriceLabel = [UILabel lz_labelWithTitle:@"" color:kTextColor153 font:kFontSizeMedium13];
-        _marketPriceLabel = [UILabel lz_labelWithTitle:@"" color:HexString(@"#F56C36") font:kFontSizeMedium13];
+        _marketPriceLabel = [[SCDeleteLineLabel alloc] init];
+        _marketPriceLabel.textColor = kTextColor153;
+        _marketPriceLabel.font = kFontSizeMedium12;
+        _marketPriceLabel.numberOfLines = 1;
     }
     return _marketPriceLabel;
 }
 
 - (UILabel *)currentPriceLabel{
     if (!_currentPriceLabel) {
-        _currentPriceLabel = [UILabel lz_labelWithTitle:@"" color:HexString(@"#2DAFF7") font:kFontSizeMedium13];
+        _currentPriceLabel = [UILabel lz_labelWithTitle:@"" color:kPriceColor font:kFontSizeMedium15];
+        _currentPriceLabel.numberOfLines = 1;
     }
     return _currentPriceLabel;
 }

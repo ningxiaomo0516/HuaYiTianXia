@@ -30,9 +30,6 @@
         make.right.equalTo(self.mas_right).offset(IPHONE6_W(-5));
         make.bottom.equalTo(self.mas_bottom).offset(-5);
     }];
-    
-    self.imagesView.image = kGetImage(@"推荐_____组");
-    self.titleLabel.text = @"不过请注意此处动画所修改的目标属性应该是目标属性应该是";
     self.titleLabel.textColor = kWhiteColor;
 }
 

@@ -254,7 +254,7 @@
         _saveButton = [UIButton buttonWithType:UIButtonTypeCustom];
         _saveButton.tag = 2;
         [_saveButton setTitle:@"下一步" forState:UIControlStateNormal];
-        [Utils lz_setButtonWithBGImage:_saveButton cornerRadius:45/2.0];
+        [Utils lz_setButtonWithBGImage:_saveButton isRadius:YES];
         MV(weakSelf);
         [_saveButton lz_handleControlEvent:UIControlEventTouchUpInside withBlock:^{
             [weakSelf onClick:self.saveButton];

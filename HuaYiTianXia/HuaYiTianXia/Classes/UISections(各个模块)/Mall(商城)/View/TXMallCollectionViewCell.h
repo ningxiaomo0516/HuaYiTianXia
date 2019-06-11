@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "TXNewsModel.h"
+#import "SCDeleteLineLabel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -19,7 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// 副标题(内容)
 @property (nonatomic, strong) UILabel *subtitleLabel;
 /// 原始价格
-@property (nonatomic, strong) UILabel *marketPriceLabel;
+@property (nonatomic, strong) SCDeleteLineLabel *marketPriceLabel;
 /// 当前价格
 @property (nonatomic, strong) UILabel *currentPriceLabel;
 

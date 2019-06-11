@@ -63,7 +63,7 @@
 
 - (UIView *)lineView{
     if (!_lineView) {
-        _lineView = [UIView lz_viewWithColor:[UIColor lz_colorWithHexString:@"#26B9FE"]];
+        _lineView = [UIView lz_viewWithColor:kThemeColorRGB];
         _lineView.hidden = YES;
     }
     return _lineView;
@@ -71,7 +71,7 @@
 
 - (UILabel *)titleLabel{
     if (!_titleLabel) {
-        _titleLabel = [UILabel lz_labelWithTitle:@"" color:kTextColor51 font:kFontSizeMedium14];
+        _titleLabel = [UILabel lz_labelWithTitle:@"" color:kThemeColorRGB font:kFontSizeMedium14];
         _titleLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     };
     return _titleLabel;

@@ -30,7 +30,7 @@
     UITabBarItem *tabBarItem = [UITabBarItem appearance];
     /// 设置TabBar背景颜色
     [[UITabBar appearance] setBarTintColor:[UIColor whiteColor]];
-    textAttrs[NSFontAttributeName] = [UIFont systemFontOfSize:10];
+    textAttrs[NSFontAttributeName] = [UIFont systemFontOfSize:12];
     [tabBarItem setTitleTextAttributes:textAttrs forState:UIControlStateNormal];
     [tabBarItem setTitleTextAttributes:selectedTextAttrs forState:UIControlStateSelected];
 }
@@ -160,7 +160,7 @@
 
 - (void)showBadge {
     for (UITabBarItem *item in self.tabBar.items) {
-        if ([item.title isEqualToString:@"个人中心"]) {
+        if ([item.title isEqualToString:@"我的"]) {
             NSInteger tag = [self.tabBar.items indexOfObject:item];
             [self.tabBar showBadgeOnItemIndex:tag];
         }
@@ -168,7 +168,7 @@
 }
 - (void)dismissBadge {
     for (UITabBarItem *item in self.tabBar.items) {
-        if ([item.title isEqualToString:@"个人中心"]) {
+        if ([item.title isEqualToString:@"我的"]) {
             NSInteger tag = [self.tabBar.items indexOfObject:item];
             [self.tabBar hideBadgeOnItemIndex:tag];
         }

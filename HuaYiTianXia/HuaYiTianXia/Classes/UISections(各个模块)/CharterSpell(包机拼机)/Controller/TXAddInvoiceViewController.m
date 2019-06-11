@@ -221,7 +221,7 @@
         [_saveButton setTitleColor:kWhiteColor forState:UIControlStateNormal];
         _saveButton.titleLabel.font = kFontSizeMedium15;
         [_saveButton setTitle:@"保存" forState:UIControlStateNormal];
-        [Utils lz_setButtonWithBGImage:_saveButton cornerRadius:45/2.0];
+        [Utils lz_setButtonWithBGImage:_saveButton isRadius:YES];
         MV(weakSelf);
         [_saveButton lz_handleControlEvent:UIControlEventTouchUpInside withBlock:^{
             [weakSelf saveBtnClick:self.saveButton];

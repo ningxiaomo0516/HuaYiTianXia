@@ -142,7 +142,7 @@ static NSString* reuseIdentifierMall = @"TXMallCollectionViewCell";
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section==0) return CGSizeMake(kScreenWidth, IPHONE6_W(125));
     CGFloat margin = 10*3;
-    return CGSizeMake((kScreenWidth-margin)/2, IPHONE6_W(230));
+    return CGSizeMake((kScreenWidth-margin)/2, IPHONE6_W(240));
 }
 
 //设置所有的cell组成的视图与section 上、左、下、右的间隔

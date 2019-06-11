@@ -215,8 +215,8 @@
         _joinButton.titleLabel.font = kFontSizeMedium13;//[UIFont fontWithName:@"PingFang-SC-Heavy" size:13.0];
         [_joinButton setTitle:@"+加入" forState:UIControlStateNormal];
         [_joinButton lz_setCornerRadius:IPHONE6_W(25/2.0)];
-        [_joinButton setBackgroundImage:imageHexString(@"#596377") forState:UIControlStateNormal];
-        [_joinButton setBackgroundImage:imageHexStringAlpha(@"#596377",0.7) forState:UIControlStateHighlighted];
+        [_joinButton setBackgroundImage:imageHexString(kColorHexString) forState:UIControlStateNormal];
+        [_joinButton setBackgroundImage:imageHexStringAlpha(kColorHexString,0.7) forState:UIControlStateHighlighted];
     }
     return _joinButton;
 }

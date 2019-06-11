@@ -52,11 +52,11 @@
 /**
  *  设置公共按钮背景图
  *
- *  @param button 需要设置的按钮
- *  @param cornerRadius 圆角大小
+ *  @param sender 需要设置的按钮
+ *  @param isRadius YES:圆角 NO:不需要圆角
  *  @return 返回已经设置好的内容
  */
-+ (UIButton *) lz_setButtonWithBGImage:(UIButton *)sender cornerRadius:(CGFloat)cornerRadius;
++ (UIButton *) lz_setButtonWithBGImage:(UIButton *)sender isRadius:(BOOL)isRadius;
 
 
 /**

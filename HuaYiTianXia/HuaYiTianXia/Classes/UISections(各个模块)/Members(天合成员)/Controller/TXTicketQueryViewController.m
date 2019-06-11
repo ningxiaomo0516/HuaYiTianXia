@@ -149,7 +149,7 @@
 
 
 - (void) initView{
-    [Utils lz_setButtonWithBGImage:self.searchButton cornerRadius:self.searchButton.height/2.0];
+    [Utils lz_setButtonWithBGImage:self.searchButton isRadius:YES];
     [self.view addSubview:self.navigationView];
     [self.navigationView addSubview:self.navigationBarView];
     [self.navigationBarView addSubview:self.leftButton];

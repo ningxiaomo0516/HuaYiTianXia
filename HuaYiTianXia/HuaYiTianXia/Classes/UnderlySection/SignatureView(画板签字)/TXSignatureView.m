@@ -283,7 +283,7 @@
 - (UIButton *)saveButton{
     if (!_saveButton) {
         _saveButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [Utils lz_setButtonWithBGImage:_saveButton cornerRadius:5.0];
+        [Utils lz_setButtonWithBGImage:_saveButton isRadius:YES];
         [_saveButton setTitle:@"同意签字" forState:UIControlStateNormal];
     }
     return _saveButton;

@@ -153,7 +153,7 @@ static NSString* reuseIdentifierAd          = @"TXMallUAVAdCollectionViewCell";
 
 - (UILabel *)headerTitle {
     if (!_headerTitle) {
-        _headerTitle = [UILabel lz_labelWithTitle:@"" color:kTextColor12 font:kFontSizeScBold17];
+        _headerTitle = [UILabel lz_labelWithTitle:@"" color:kThemeColorHex font:kFontSizeScBold17];
     }
     return _headerTitle;
 }

@@ -1,8 +1,8 @@
 //
-//  TXMembersbleSpellCollectionViewCell.h
+//  TXMembersCollectionViewCell.h
 //  HuaYiTianXia
 //
-//  Created by 宁小陌 on 2019/5/31.
+//  Created by 宁小陌 on 2019/4/16.
 //  Copyright © 2019年 宁小陌. All rights reserved.
 //
 
@@ -10,9 +10,12 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface TXMembersbleSpellCollectionViewCell : UICollectionViewCell
+@interface TXMembersCollectionViewCell : UICollectionViewCell
+@end
+
+@interface MembersCollectionViewCell : UICollectionViewCell
+/// 图片
 @property (nonatomic, strong) UIImageView *imagesView;
-@property (nonatomic, strong) UIButton *spellButton;
 @end
 
 NS_ASSUME_NONNULL_END

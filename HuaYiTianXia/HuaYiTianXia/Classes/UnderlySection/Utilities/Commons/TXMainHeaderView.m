@@ -39,7 +39,7 @@
 - (UIImageView *)imagesView{
     if (!_imagesView) {
         _imagesView = [[UIImageView alloc] init];
-        _imagesView.image = imageHexString(@"#596377");
+        _imagesView.image = kButtonColorNormal;
     }
     return _imagesView;
 }

@@ -72,13 +72,13 @@
 -(UIView *)setPageViewControllers {
     WMPageController *pageController = [self p_defaultController];
     pageController.titleFontName = @"PingFang-SC-Medium";
-    pageController.titleSizeNormal = 14;  /// 默认字体大小
+    pageController.titleSizeNormal = 15;  /// 默认字体大小
     pageController.titleSizeSelected = 16;/// 选中字体大小
     pageController.menuViewStyle = WMMenuViewStyleLine;/// 样式
     pageController.menuViewLayoutMode = WMMenuViewLayoutModeCenter;//居中模式
     pageController.menuItemWidth = kScreenWidth/4;/// 宽度
-    pageController.titleColorSelected = kWhiteColor;//HexString(@"#FF4163");
-    pageController.titleColorNormal = [kWhiteColor colorWithAlphaComponent:0.5];
+    pageController.titleColorSelected = kWhiteColor;
+    pageController.titleColorNormal = kWhiteColor;
     pageController.progressWidth = 20;
     pageController.progressColor = kWhiteColor;
     pageController.menuBGColor = kClearColor;
