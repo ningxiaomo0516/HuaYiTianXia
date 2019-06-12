@@ -49,7 +49,7 @@
     }];
     [btn2 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(self.view.mas_centerX).offset(IPHONE6_W(-5));
-        make.top.equalTo(self.subtitleLabel.mas_bottom).offset(23);
+        make.top.equalTo(self.subtitleLabel.mas_bottom).offset(21);
     }];
     [btn3 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.view.mas_centerX).offset(IPHONE6_W(5));
