@@ -14,6 +14,7 @@
 #import "TXMallGoodsDetailsViewController.h"
 #import "TXNewsModel.h"
 #import "TXMallHotTableViewCell.h"
+#import "TXEppoListViewController.h"
 
 static NSString* reuseIdentifier        = @"TXMallToolsCollectionViewCell";
 static NSString* reuseIdentifierBanner  = @"TXMallBannerCollectionViewCell";
@@ -132,7 +133,12 @@ static NSString* reuseIdentifierHot     = @"TXMallHotTableViewCell";
 /// 点击collectionViewCell
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section==1) {
-//        Toast(@"系统持续开放中");
+        TXEppoListViewController *vc = [[TXEppoListViewController alloc] init];
+        TXGeneralModel* templateModel = self.toolsArray[indexPath.row];
+        vc.title = templateModel.title;
+        vc.idx = indexPath.row+1;
+        vc.status = [self.title integerValue];
+        TTPushVC(vc);
     }else if(indexPath.section==3){
         NewsRecordsModel *productModel = self.dataArray[indexPath.row];
         TXMallGoodsDetailsViewController *vc = [[TXMallGoodsDetailsViewController alloc] initMallProductModel:productModel];

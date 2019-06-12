@@ -9,7 +9,6 @@
 #import "TXAgriculturalViewController.h"
 #import "TXGoodsH5TableViewCell.h"
 #import "TXWebHeaderView.h"
-#import "TXMallEppoViewController.h"
 #import "TXAdsModel.h"
 #import "TXAdsGiftViewController.h"
 #import "TXEppoListViewController.h"
@@ -22,7 +21,6 @@ static NSString * const reuseIdentifierGoodsH5 = @"TXGoodsH5TableViewCell";
 @property (assign, nonatomic) CGFloat webViewHeight;
 @property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, strong) WKWebView *webView;
-
 @end
 
 @implementation TXAgriculturalViewController
@@ -67,8 +65,10 @@ static NSString * const reuseIdentifierGoodsH5 = @"TXGoodsH5TableViewCell";
 - (void) saveBtnClick:(UIButton *) sender{
     TTLog(@"sender.tag -- %ld",sender.tag);
     if (sender.tag == 100) {
-//        TXMallEppoViewController *vc = [[TXMallEppoViewController alloc] init];
         TXEppoListViewController *vc = [[TXEppoListViewController alloc] init];
+        vc.status = 2;
+        vc.idx = 0;
+        vc.title = @"农用植保";
         TTPushVC(vc);
     }else if (sender.tag == 200){
         [self getGiftData];

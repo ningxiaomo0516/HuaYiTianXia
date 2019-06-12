@@ -91,7 +91,6 @@
 - (UIImageView *)imagesView {
     if (!_imagesView) {
         _imagesView = [[UIImageView alloc] init];
-        _imagesView.image = kGetImage(@"c16_btn_address");
     }
     return _imagesView;
 }

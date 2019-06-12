@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		7137FC69930FD658EE126BC7 /* Pods_HuaYiTianXia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C62B83054FB57102771D140E /* Pods_HuaYiTianXia.framework */; };
 		E70807B622A5244C002C57E6 /* TXCharterOrderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E70807B522A5244C002C57E6 /* TXCharterOrderModel.m */; };
-		E7089EF6225D7C6C00A7EF27 /* TXMallEppoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7089EF5225D7C6C00A7EF27 /* TXMallEppoViewController.m */; };
 		E7089EF9225D7EFA00A7EF27 /* TXEppoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7089EF8225D7EFA00A7EF27 /* TXEppoTableViewCell.m */; };
 		E7089EFD225DB8E400A7EF27 /* TXChoosePayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7089EFC225DB8E400A7EF27 /* TXChoosePayViewController.m */; };
 		E714F2822271574200024FA3 /* TXBaseNavPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E714F2812271574200024FA3 /* TXBaseNavPageViewController.m */; };
@@ -98,6 +97,8 @@
 		E729F7BE22A1187D0029A335 /* TXCharterMachineDateView.m in Sources */ = {isa = PBXBuildFile; fileRef = E729F7BD22A1187D0029A335 /* TXCharterMachineDateView.m */; };
 		E729F7C122A12C9E0029A335 /* TXCharterMachineChildViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E729F7C022A12C9E0029A335 /* TXCharterMachineChildViewController.m */; };
 		E729F7C722A154010029A335 /* TXBaseFooterButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = E729F7C622A154010029A335 /* TXBaseFooterButtonView.m */; };
+		E72B09E422B102D100345C1B /* TXRedEnvelopeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E72B09E322B102D100345C1B /* TXRedEnvelopeViewController.m */; };
+		E72B09E722B1141900345C1B /* TXCountyGenerationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E72B09E622B1141900345C1B /* TXCountyGenerationViewController.m */; };
 		E73D9ADF22ACED2C00034F5F /* TXInvoiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E73D9ADE22ACED2C00034F5F /* TXInvoiceViewController.m */; };
 		E73D9AE222ACED7800034F5F /* TXAddInvoiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E73D9AE122ACED7800034F5F /* TXAddInvoiceViewController.m */; };
 		E73D9AE522ACF9D100034F5F /* TXInvoiceTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E73D9AE422ACF9D100034F5F /* TXInvoiceTableViewCell.m */; };
@@ -411,8 +412,6 @@
 		D8A40D1AA3A1C66C50E33D9F /* Pods-HuaYiTianXia.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HuaYiTianXia.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HuaYiTianXia/Pods-HuaYiTianXia.debug.xcconfig"; sourceTree = "<group>"; };
 		E70807B422A5244C002C57E6 /* TXCharterOrderModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXCharterOrderModel.h; sourceTree = "<group>"; };
 		E70807B522A5244C002C57E6 /* TXCharterOrderModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXCharterOrderModel.m; sourceTree = "<group>"; };
-		E7089EF4225D7C6C00A7EF27 /* TXMallEppoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXMallEppoViewController.h; sourceTree = "<group>"; };
-		E7089EF5225D7C6C00A7EF27 /* TXMallEppoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXMallEppoViewController.m; sourceTree = "<group>"; };
 		E7089EF7225D7EFA00A7EF27 /* TXEppoTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXEppoTableViewCell.h; sourceTree = "<group>"; };
 		E7089EF8225D7EFA00A7EF27 /* TXEppoTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXEppoTableViewCell.m; sourceTree = "<group>"; };
 		E7089EFB225DB8E400A7EF27 /* TXChoosePayViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXChoosePayViewController.h; sourceTree = "<group>"; };
@@ -578,6 +577,10 @@
 		E729F7C022A12C9E0029A335 /* TXCharterMachineChildViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXCharterMachineChildViewController.m; sourceTree = "<group>"; };
 		E729F7C522A154010029A335 /* TXBaseFooterButtonView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXBaseFooterButtonView.h; sourceTree = "<group>"; };
 		E729F7C622A154010029A335 /* TXBaseFooterButtonView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXBaseFooterButtonView.m; sourceTree = "<group>"; };
+		E72B09E222B102D100345C1B /* TXRedEnvelopeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXRedEnvelopeViewController.h; sourceTree = "<group>"; };
+		E72B09E322B102D100345C1B /* TXRedEnvelopeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXRedEnvelopeViewController.m; sourceTree = "<group>"; };
+		E72B09E522B1141900345C1B /* TXCountyGenerationViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXCountyGenerationViewController.h; sourceTree = "<group>"; };
+		E72B09E622B1141900345C1B /* TXCountyGenerationViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXCountyGenerationViewController.m; sourceTree = "<group>"; };
 		E73D9ADD22ACED2C00034F5F /* TXInvoiceViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXInvoiceViewController.h; sourceTree = "<group>"; };
 		E73D9ADE22ACED2C00034F5F /* TXInvoiceViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXInvoiceViewController.m; sourceTree = "<group>"; };
 		E73D9AE022ACED7800034F5F /* TXAddInvoiceViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXAddInvoiceViewController.h; sourceTree = "<group>"; };
@@ -1367,6 +1370,8 @@
 		E72698CF223F737C003A5043 /* UISections(各个模块) */ = {
 			isa = PBXGroup;
 			children = (
+				E72B09DE22B1026100345C1B /* Envelope(红包) */,
+				E72B09DA22B0F8AA00345C1B /* Logistic(物流) */,
 				E7625B14229E2EDC00A34EDF /* CharterSpell(包机拼机) */,
 				E78333CE224874D9005CAB91 /* Other(登录注册) */,
 				E78583BB223F967800BBEA41 /* Templet(模板) */,
@@ -1427,8 +1432,8 @@
 			isa = PBXGroup;
 			children = (
 				E72698D5223F737C003A5043 /* Controller */,
-				E74C952B225B8567000CBAF0 /* View */,
 				E72698D6223F737C003A5043 /* Model */,
+				E74C952B225B8567000CBAF0 /* View */,
 			);
 			path = "Agricultural(农用植保)";
 			sourceTree = "<group>";
@@ -1438,10 +1443,10 @@
 			children = (
 				E7269910223F7881003A5043 /* TXAgriculturalViewController.h */,
 				E7269911223F7881003A5043 /* TXAgriculturalViewController.m */,
-				E7089EF4225D7C6C00A7EF27 /* TXMallEppoViewController.h */,
-				E7089EF5225D7C6C00A7EF27 /* TXMallEppoViewController.m */,
 				E7ACCE2B227EDC1B00CFB662 /* TXEppoListViewController.h */,
 				E7ACCE2C227EDC1B00CFB662 /* TXEppoListViewController.m */,
+				E72B09E522B1141900345C1B /* TXCountyGenerationViewController.h */,
+				E72B09E622B1141900345C1B /* TXCountyGenerationViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1756,6 +1761,70 @@
 				E7CCDEE7228C04120017A684 /* TTBottomShowView.m */,
 			);
 			path = Commons;
+			sourceTree = "<group>";
+		};
+		E72B09DA22B0F8AA00345C1B /* Logistic(物流) */ = {
+			isa = PBXGroup;
+			children = (
+				E72B09DB22B0F8AA00345C1B /* Controller */,
+				E72B09DC22B0F8AA00345C1B /* Model */,
+				E72B09DD22B0F8AA00345C1B /* View */,
+			);
+			path = "Logistic(物流)";
+			sourceTree = "<group>";
+		};
+		E72B09DB22B0F8AA00345C1B /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		E72B09DC22B0F8AA00345C1B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		E72B09DD22B0F8AA00345C1B /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		E72B09DE22B1026100345C1B /* Envelope(红包) */ = {
+			isa = PBXGroup;
+			children = (
+				E72B09DF22B1026100345C1B /* Controller */,
+				E72B09E022B1026100345C1B /* Model */,
+				E72B09E122B1026100345C1B /* View */,
+			);
+			path = "Envelope(红包)";
+			sourceTree = "<group>";
+		};
+		E72B09DF22B1026100345C1B /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				E72B09E222B102D100345C1B /* TXRedEnvelopeViewController.h */,
+				E72B09E322B102D100345C1B /* TXRedEnvelopeViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		E72B09E022B1026100345C1B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		E72B09E122B1026100345C1B /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		E74C0001228A953800576B86 /* View */ = {
@@ -3890,7 +3959,6 @@
 				E74CFFC22289086B00576B86 /* TXMallGoodsDetailsTableViewCell.m in Sources */,
 				E7B4704322803A3000ADDC7A /* FMCurrentCitysTableViewCell.m in Sources */,
 				E7F1A7162242123A003FA216 /* TXRealNameViewController.m in Sources */,
-				E7089EF6225D7C6C00A7EF27 /* TXMallEppoViewController.m in Sources */,
 				E7B57E7F22AF9B62001308CA /* TXMallCollectionViewController.m in Sources */,
 				E7C42E80224B770200F3FB1A /* AFLoadDataManager.m in Sources */,
 				E7D07C622243C8B600E3FFAF /* NSObject+Toast.m in Sources */,
@@ -4074,6 +4142,7 @@
 				E725D119225F2CC800C233E7 /* AlipayManager.m in Sources */,
 				E7C42E7F224B770200F3FB1A /* SCHttpToolsModel.m in Sources */,
 				E7C9FCFB2267607E008FD260 /* TXTicketOrderModel.m in Sources */,
+				E72B09E422B102D100345C1B /* TXRedEnvelopeViewController.m in Sources */,
 				E74CFFFD228A719600576B86 /* TXCourseModel.m in Sources */,
 				E76579EE2276D6F400AFAEFE /* TXTicketQueryViewController.m in Sources */,
 				E72699F8223F8298003A5043 /* WMPageController.m in Sources */,
@@ -4082,6 +4151,7 @@
 				E7ADB1EB22881C05008AC117 /* TTMallTemplateHotCollectionViewCell.m in Sources */,
 				E74C9532225CEA18000CBAF0 /* SCNoDataView.m in Sources */,
 				E74CFFD42289723700576B86 /* TXMallUAVHotTableViewCell.m in Sources */,
+				E72B09E722B1141900345C1B /* TXCountyGenerationViewController.m in Sources */,
 				E7AA9DCD22436F4D00C15483 /* TXTransactionRecordsTableViewCell.m in Sources */,
 				E78DCAD22265760300252314 /* TTGuidePages.m in Sources */,
 				E753D1F12249D3B200A2DD36 /* SCPopoverAnimator.m in Sources */,

@@ -117,13 +117,11 @@ static NSString * const reuseIdentifierReceiveAddress = @"TXReceiveAddressTableV
     switch (indexPath.section) {
         case 0: {
             TXReceiveAddressTableViewCell*tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierReceiveAddress forIndexPath:indexPath];
-            tools.nicknameLabel.text = self.addressModel.username;//@"李阿九";
-            tools.telphoneLabel.text = self.addressModel.telphone;//@"13566667888";
-            tools.addressLabel.text = self.addressModel.address;//@"四川 成都 高新区 环球中心W6区 1518室";
-            tools.addButton.userInteractionEnabled = NO;
-            if ((self.addressNum==0)&&(!self.addressModel.isDefault)) {
-                tools.imagesView.hidden = YES;
-                tools.imagesView.hidden = NO;
+            if (self.addressNum>0) {
+                tools.addrModel = self.addressModel;
+                tools.addButton.hidden = YES;
+            }else{
+                tools.addButton.hidden = NO;
             }
             return tools;
         }

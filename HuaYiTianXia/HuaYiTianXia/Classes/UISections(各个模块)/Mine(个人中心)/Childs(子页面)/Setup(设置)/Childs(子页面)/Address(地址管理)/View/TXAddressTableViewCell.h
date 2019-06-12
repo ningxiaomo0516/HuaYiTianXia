@@ -12,8 +12,10 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface TXAddressTableViewCell : UITableViewCell
-/// 图片
-@property (nonatomic, strong) UIImageView *imagesView;
+/// 人-图标
+@property (nonatomic, strong) UIImageView *imagesFace;
+/// 地址-图标
+@property (nonatomic, strong) UIImageView *imagesAddr;
 /// 右边箭头
 @property (nonatomic, strong) UIImageView *imagesArrow;
 /// 昵称

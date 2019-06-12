@@ -16,7 +16,7 @@
         "title":"农保",
         "imageName":"tab_coin_nor",
         "imageSelectName":"tab_coin_press",
-        "controllerName":"TXAgriculturalViewController",
+        "controllerName":"TXCountyGenerationViewController",
      },
     {
         "title":"天合",

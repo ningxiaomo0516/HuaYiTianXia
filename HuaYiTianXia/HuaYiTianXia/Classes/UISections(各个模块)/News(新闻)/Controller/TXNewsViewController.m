@@ -11,6 +11,7 @@
 #import "TXNewTemplateViewController.h"
 #import "TXMainHeaderView.h"
 #import "TXNewsModel.h"
+#import "TXRedEnvelopeViewController.h"
 
 @interface TXNewsViewController ()<WMPageControllerDelegate>
 @property (nonatomic, strong) TXMainHeaderView *headerView;
@@ -27,6 +28,14 @@
     [self loadTabData];
     self.menuHeight = 40;
     [self initView];
+    [self hongbao];
+}
+
+- (void) hongbao{
+    TXRedEnvelopeViewController *vc = [[TXRedEnvelopeViewController alloc] init];
+    [self sc_centerPresentController:vc presentedSize:CGSizeMake(kScreenWidth, kScreenHeight) completeHandle:^(BOOL presented) {
+        
+    }];
 }
 
 - (void) loadTabData{

@@ -258,7 +258,7 @@ static NSString *headerViewIdentifier       = @"TXBaseCollectionReusableHeaderVi
     else if (indexPath.section==1)return CGSizeMake(width, IPHONE6_W(95));
     else if (indexPath.section<5)return CGSizeMake(kScreenWidth, height);
     CGFloat margin = 10*3;
-    return CGSizeMake((kScreenWidth-margin)/2, IPHONE6_W(230));
+    return CGSizeMake((kScreenWidth-margin)/2, IPHONE6_W(240));
 }
 
 //设置所有的cell组成的视图与section 上、左、下、右的间隔

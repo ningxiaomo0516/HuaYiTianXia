@@ -18,12 +18,14 @@
 #import "TXChoosePayViewController.h"
 #import "TXPayPasswordViewController.h"
 #import "AlipayManager.h"
+#import "TXSwitchTableViewCell.h"
 
 static NSString * const reuseIdentifierReceiveAddress = @"TXReceiveAddressTableViewCell";
 static NSString * const reuseIdentifierShopping = @"TXShoppingTableViewCell";
 static NSString * const reuseIdentifierChoosePay = @"TXChoosePayTableViewCell";
 static NSString * const reuseIdentifierPurchase = @"TXPurchaseQuantityTableViewCell";
 static NSString * const reuseIdentifierMessage = @"TXMessageChildTableViewCell";
+static NSString * const reuseIdentifierSwitch = @"TXSwitchTableViewCell";
 
 @interface TXSubmitOrderViewController ()<UITableViewDelegate,UITableViewDataSource,TTPopupViewDelegate>
 @property (nonatomic, strong) UITableView *tableView;
@@ -48,7 +50,8 @@ static NSString * const reuseIdentifierMessage = @"TXMessageChildTableViewCell";
 @property (nonatomic, assign) BOOL isSelected;
 /// 0:支付宝 1:微信支付 2:余额支付
 @property (nonatomic, assign) NSInteger payType;
-
+/// 是否开启积分抵用
+@property (nonatomic, assign) BOOL isOpen;
 @end
 
 @implementation TXSubmitOrderViewController
@@ -65,6 +68,7 @@ static NSString * const reuseIdentifierMessage = @"TXMessageChildTableViewCell";
     self.title = @"支付中心";
     [self initView];
     _isSelected = NO;
+    _isOpen = YES;
     self.addressModel = [[AddressModel alloc] init];
     NSInteger totalAmount = self.model.buyCount*[self.model.price integerValue];
     self.totalAmountLabel.text = [NSString stringWithFormat:@"%ld.00",(long)totalAmount];
@@ -188,8 +192,9 @@ static NSString * const reuseIdentifierMessage = @"TXMessageChildTableViewCell";
                 for (AddressModel *model in addressModel.data) {
                     if (model.isDefault) {
                         self.addressModel = model;
-                        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-                        [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationFade];
+                        // 一个section刷新   
+                        NSIndexSet *indexSet= [[NSIndexSet alloc] initWithIndex:0];
+                        [self.tableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationFade];
                     }
                 }
                 [self.tableView reloadData];
@@ -255,88 +260,92 @@ static NSString * const reuseIdentifierMessage = @"TXMessageChildTableViewCell";
     NSInteger totalAmount = self.model.buyCount*[self.model.price integerValue];
     self.totalAmountLabel.text = [NSString stringWithFormat:@"%ld.00",(long)totalAmount];
     self.model.totalPrice = [NSString stringWithFormat:@"%ld",(long)totalAmount];
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:2];
-    [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationFade];
+    // 一个section刷新
+    NSIndexSet *indexSet = [[NSIndexSet alloc] initWithIndex:2];
+    [self.tableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
+- (void)valueSwitchChanged:(UISwitch *)isSwitch{
+    if (isSwitch.on) {// 打开
+        self.isOpen = YES;
+    }else{// 关闭
+        self.isOpen = NO;
+    }
+}
 
 #pragma mark - Table view data source
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    switch (indexPath.section) {
-        case 0: {
-            TXReceiveAddressTableViewCell*tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierReceiveAddress forIndexPath:indexPath];
-            tools.nicknameLabel.text = self.addressModel.username;//@"李阿九";
-            tools.telphoneLabel.text = self.addressModel.telphone;//@"13566667888";
-            tools.addressLabel.text = self.addressModel.address;//@"四川 成都 高新区 环球中心W6区 1518室";
-            tools.addButton.userInteractionEnabled = NO;
-            if ((self.addressNum==0)&&(!self.addressModel.isDefault)) {
-                tools.imagesView.hidden = YES;
-                tools.imagesView.hidden = NO;
-            }
-            return tools;
+    NSInteger idx = indexPath.section;
+    if (idx==0) {
+        TXReceiveAddressTableViewCell*tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierReceiveAddress forIndexPath:indexPath];
+        if (self.addressNum>0) {
+            tools.addrModel = self.addressModel;
+            tools.addButton.hidden = YES;
+        }else{
+            tools.addButton.hidden = NO;
         }
-            break;
-        case 1: {
-            TXShoppingTableViewCell *tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierShopping forIndexPath:indexPath];
-            tools.model = self.model;
-            return tools;
-        }
-            break;
-        case 2: {
-            TXPurchaseQuantityTableViewCell *tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierPurchase forIndexPath:indexPath];
-            MV(weakSelf)
-            [tools.reductionBtn lz_handleControlEvent:UIControlEventTouchUpInside withBlock:^{
-                [weakSelf onClickBtn:tools.reductionBtn];
-            }];
-            [tools.increaseBtn lz_handleControlEvent:UIControlEventTouchUpInside withBlock:^{
-                [weakSelf onClickBtn:tools.increaseBtn];
-            }];
-            tools.quantityLabel.text = [NSString stringWithFormat:@"%ld",(long)self.model.buyCount];
-            return tools;
-        }
-            break;
-        case 3: {
-            TXMessageChildTableViewCell* tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierMessage forIndexPath:indexPath];
-            tools.titleLabel.text = @"可用VH积分";
-            tools.subtitleLabel.text = kUserInfo.vrcurrency;
-            return tools;
-        }
-            break;
-        case 4: {
-            TXGeneralModel *model = self.paymentArray[indexPath.row];
-            TXChoosePayTableViewCell *tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierChoosePay forIndexPath:indexPath];
-            tools.titleLabel.text = model.title;
-            tools.imagesView.image = kGetImage(model.imageText);
-            tools.linerView.hidden = (indexPath.row!=self.paymentArray.count-1)?NO:YES;
-            tools.selectedBtn.hidden = NO;
-            return tools;
-        }
-            break;
+        return tools;
+    }else if(idx==1){
+        TXShoppingTableViewCell *tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierShopping forIndexPath:indexPath];
+        tools.model = self.model;
+        return tools;
+    }else if(idx==2){
+        TXPurchaseQuantityTableViewCell *tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierPurchase forIndexPath:indexPath];
+        MV(weakSelf)
+        [tools.reductionBtn lz_handleControlEvent:UIControlEventTouchUpInside withBlock:^{
+            [weakSelf onClickBtn:tools.reductionBtn];
+        }];
+        [tools.increaseBtn lz_handleControlEvent:UIControlEventTouchUpInside withBlock:^{
+            [weakSelf onClickBtn:tools.increaseBtn];
+        }];
+        tools.quantityLabel.text = [NSString stringWithFormat:@"%ld",(long)self.model.buyCount];
+        return tools;
+    }else if(idx==3){
+        TXMessageChildTableViewCell* tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierMessage forIndexPath:indexPath];
+        tools.titleLabel.text = @"可用VH积分";
+        tools.subtitleLabel.text = kUserInfo.vrcurrency;
+        return tools;
+    }else if(idx == 4){
+        TXSwitchTableViewCell* tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierSwitch forIndexPath:indexPath];
+        tools.titleLabel.text = @"可抵扣200VH";
+        tools.isSwitch.on = self.isOpen;
+        [tools.isSwitch addTarget:self action:@selector(valueSwitchChanged:) forControlEvents:(UIControlEventValueChanged)];
+        return tools;
+    }else if(idx==5){
+        TXGeneralModel *model = self.paymentArray[indexPath.row];
+        TXChoosePayTableViewCell *tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierChoosePay forIndexPath:indexPath];
+        tools.titleLabel.text = model.title;
+        tools.imagesView.image = kGetImage(model.imageText);
+        tools.linerView.hidden = (indexPath.row!=self.paymentArray.count-1)?NO:YES;
+        tools.selectedBtn.hidden = NO;
+        return tools;
+    }else{
+        return [UITableViewCell new];
     }
-    return [UITableViewCell new];
 }
 
 // 多少个分组 section
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 5;
+    return 6;
 }
 
 /// 返回多少
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (section==4) return self.paymentArray.count;
+    if (section==5) return self.paymentArray.count;
     return 1;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section==0) return IPHONE6_W(70);
+    if (indexPath.section==0) return IPHONE6_W(83);
     if (indexPath.section==1) return IPHONE6_W(120);
     return IPHONE6_W(50);
 }
 
 #pragma mark -- 设置Header高度
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    if (section==0||section==2||section==3) return 0;
-    return 10;
+    if (section==1||section==5) return 10.0;
+    if (section==3||section==4) return 0.7;
+    return 0.0;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -350,7 +359,7 @@ static NSString * const reuseIdentifierMessage = @"TXMessageChildTableViewCell";
         };
         TTPushVC(vc);
         [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    }else if (indexPath.section==3){
+    }else if (indexPath.section==5){
         _isSelected = YES;
         _payType = indexPath.row;
     }
@@ -365,6 +374,7 @@ static NSString * const reuseIdentifierMessage = @"TXMessageChildTableViewCell";
         [_tableView registerClass:[TXChoosePayTableViewCell class] forCellReuseIdentifier:reuseIdentifierChoosePay];
         [_tableView registerClass:[TXPurchaseQuantityTableViewCell class] forCellReuseIdentifier:reuseIdentifierPurchase];
         [_tableView registerClass:[TXMessageChildTableViewCell class] forCellReuseIdentifier:reuseIdentifierMessage];
+        [_tableView registerClass:[TXSwitchTableViewCell class] forCellReuseIdentifier:reuseIdentifierSwitch];
 
         [_tableView setSeparatorInset:UIEdgeInsetsMake(0,0,0,0)];
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;

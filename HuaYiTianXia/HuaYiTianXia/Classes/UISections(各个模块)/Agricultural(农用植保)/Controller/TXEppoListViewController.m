@@ -42,7 +42,6 @@ static NSString* reuseIdentifierMall = @"TXMallCollectionViewCell";
     // Do any additional setup after loading the view.
     self.pageSize = 20;
     self.pageIndex = 1;
-    self.title = @"农用植保";
     [self initView];
     [self.view showLoadingViewWithText:@"加载中..."];
     [self requestData];
@@ -63,7 +62,10 @@ static NSString* reuseIdentifierMall = @"TXMallCollectionViewCell";
     NSMutableDictionary *parameter = [[NSMutableDictionary alloc] init];
     [parameter setObject:@(self.pageIndex) forKey:@"page"];     // 当前页
     [parameter setObject:@(self.pageSize) forKey:@"pageSize"];  // 每页条数
-    [parameter setObject:@(2) forKey:@"status"];  // 页面类型
+    [parameter setObject:@(self.status) forKey:@"status"];      // 页面类型
+    if (self.idx!=0) {
+        [parameter setObject:@(self.idx) forKey:@"productType"];    // 1:农业 2:蔬菜 3:水果 4:其他
+    }
     
     TTLog(@"parameter -- %@",parameter);
     [SCHttpTools postWithURLString:@"shopproduct/GetShopPro" parameter:parameter success:^(id responseObject) {

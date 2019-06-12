@@ -11,7 +11,10 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface TXEppoListViewController : TTBaseViewController
-
+/// productType 1:农业 2:蔬菜 3:水果 4:其他
+@property (nonatomic, assign) NSInteger idx;
+/// 2:农用植保产品(购买) 6:生态农业商城产品(消费)
+@property (nonatomic, assign) NSInteger status;
 @end
 
 NS_ASSUME_NONNULL_END
