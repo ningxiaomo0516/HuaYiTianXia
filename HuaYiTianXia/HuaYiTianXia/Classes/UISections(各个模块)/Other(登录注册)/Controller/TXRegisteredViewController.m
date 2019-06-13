@@ -42,6 +42,7 @@ static NSString * const reuseIdentifiers = @"TXRegisteredTableViewCell";
     [self addGesture:self.tableView];
     [self initView];
     [self getIntegral];
+    self.invitationCode = @"";
 }
 
 - (void) initView{
@@ -173,7 +174,9 @@ static NSString * const reuseIdentifiers = @"TXRegisteredTableViewCell";
                 [parameter setObject:self.telphone forKey:@"mobile"];
                 [parameter setObject:self.password forKey:@"pwd"];
                 [parameter setObject:self.passwords forKey:@"confirmpwd"];
-                [parameter setObject:self.invitationCode forKey:@"inviteCode"];
+                if (self.invitationCode.length !=0) {
+                    [parameter setObject:self.invitationCode forKey:@"inviteCode"];
+                }
                 [self setupPasswordRequest:@"customer/register" parameter:parameter];
             }else{
                 TXRegisterPasswordViewController *vc = [[TXRegisterPasswordViewController alloc] init];
@@ -255,6 +258,9 @@ static NSString * const reuseIdentifiers = @"TXRegisteredTableViewCell";
         tools.titleLabel.text = model.title;
         tools.textField.placeholder = model.imageText;
         tools.textField.tag = indexPath.row;
+        if (indexPath.row==2||indexPath.row==3) {
+            tools.textField.secureTextEntry = YES;
+        }
         [tools.textField addTarget:self action:@selector(textFieldWithText:) forControlEvents:UIControlEventEditingChanged];
         return tools;
     }

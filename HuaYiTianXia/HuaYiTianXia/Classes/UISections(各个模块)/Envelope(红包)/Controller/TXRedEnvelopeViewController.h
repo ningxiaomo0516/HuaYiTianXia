@@ -11,7 +11,11 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface TXRedEnvelopeViewController : UIViewController
-
+@property (nonatomic, strong) UIImageView   *imagesView;
+@property (nonatomic, strong) UIButton      *closeBtn;
+@property (nonatomic, strong) UIImageView   *imagesTitle;
+@property (nonatomic, strong) UIButton      *linquBtn;
+@property (nonatomic, strong) UILabel       *titlelabel;
 @end
 
 NS_ASSUME_NONNULL_END

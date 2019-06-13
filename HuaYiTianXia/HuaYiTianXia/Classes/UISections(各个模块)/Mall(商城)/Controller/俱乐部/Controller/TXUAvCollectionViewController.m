@@ -84,6 +84,11 @@ static NSString *headerViewIdentifier       = @"TXBaseCollectionReusableHeaderVi
     }];
 }
 
+- (void) viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+}
+
 - (void) loadMallData{
     NSMutableDictionary *parameter = [[NSMutableDictionary alloc] init];
     [parameter setObject:@([self.title integerValue]) forKey:@"status"];

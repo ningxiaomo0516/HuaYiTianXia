@@ -66,7 +66,9 @@ static NSString* reuseIdentifierMall = @"TXMallCollectionViewCell";
     if (self.idx!=0) {
         [parameter setObject:@(self.idx) forKey:@"productType"];    // 1:农业 2:蔬菜 3:水果 4:其他
     }
-    
+    if (self.status==2) {/// 区域表ID（农业值保必传）
+        [parameter setObject:@(self.regionalID) forKey:@"regionalID"];
+    }
     TTLog(@"parameter -- %@",parameter);
     [SCHttpTools postWithURLString:@"shopproduct/GetShopPro" parameter:parameter success:^(id responseObject) {
         NSDictionary *result = responseObject;

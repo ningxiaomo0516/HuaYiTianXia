@@ -283,7 +283,7 @@ TXMallGoodsSpecTableViewCellDelegate,WKUIDelegate,WKNavigationDelegate>
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section==0) {
         if (indexPath.row==0) return IPHONE6_W(250);
-        else return IPHONE6_W(90);
+        else return IPHONE6_W(115);
     }
     if (indexPath.section==1) return IPHONE6_W(50);
     if (indexPath.section==2) return IPHONE6_W(50);

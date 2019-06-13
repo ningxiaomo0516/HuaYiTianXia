@@ -34,13 +34,23 @@
     _model = model;
     self.titleLabel.text = model.title;
     self.subtitleLabel.text = model.synopsis;
-    self.priceLabel.text = [NSString stringWithFormat:@"产品价格:%@",model.price];
+    self.marketPriceLabel.text = [NSString stringWithFormat:@"￥%@",model.price];
+    NSString *icon = @"￥";
+    NSString *amountText = @"12859 + 600VH";
+    NSString *str = [NSString stringWithFormat:@"%@%@",icon,amountText];
+    NSMutableAttributedString *mutableAttr = [[NSMutableAttributedString alloc] initWithString:str];
+    // 前面文字大小
+    [mutableAttr addAttribute:NSFontAttributeName
+                        value:kFontSizeMedium15
+                        range:NSMakeRange(0, icon.length)];
+    self.priceLabel.attributedText = mutableAttr;
 }
 
 - (void) initView{
     [self addSubview:self.titleLabel];
     [self addSubview:self.subtitleLabel];
     [self addSubview:self.priceLabel];
+    [self addSubview:self.marketPriceLabel];
     
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(@(IPHONE6_W(15)));
@@ -54,7 +64,11 @@
     }];
     [self.priceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(self.titleLabel);
-        make.top.equalTo(self.subtitleLabel.mas_bottom).offset(5);
+        make.top.equalTo(self.subtitleLabel.mas_bottom);
+    }];
+    [self.marketPriceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.titleLabel);
+        make.top.equalTo(self.priceLabel.mas_bottom);
     }];
 }
 
@@ -75,8 +89,17 @@
 
 - (UILabel *)priceLabel{
     if (!_priceLabel) {
-        _priceLabel = [UILabel lz_labelWithTitle:@"" color:HexString(@"#F56C36")  font:kFontSizeMedium15];
+        _priceLabel = [UILabel lz_labelWithTitle:@"" color:kPriceColor  font:kFontSizeMedium25];
+//        _priceLabel.font = [UIFont boldSystemFontOfSize:25.0];
     }
     return _priceLabel;
+}
+
+- (SCDeleteLineLabel *)marketPriceLabel{
+    if (!_marketPriceLabel) {
+        _marketPriceLabel = [[SCDeleteLineLabel alloc] init];
+        _marketPriceLabel.textColor = kTextColor153;
+    }
+    return _marketPriceLabel;
 }
 @end

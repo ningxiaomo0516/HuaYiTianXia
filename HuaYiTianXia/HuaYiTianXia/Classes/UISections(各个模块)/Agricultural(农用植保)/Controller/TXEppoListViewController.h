@@ -15,6 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) NSInteger idx;
 /// 2:农用植保产品(购买) 6:生态农业商城产品(消费)
 @property (nonatomic, assign) NSInteger status;
+/// 区域ID
+@property (nonatomic, assign) NSInteger regionalID;
 @end
 
 NS_ASSUME_NONNULL_END

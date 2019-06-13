@@ -85,7 +85,7 @@ static NSString * const reuseIdentifierSectionHeaderView = @"SCTableViewSectionH
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
     // 开启跑马灯
     [self.horizontalMarquee marqueeOfSettingWithState:MarqueeStart_H];
 }

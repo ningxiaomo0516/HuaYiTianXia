@@ -26,6 +26,7 @@
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     self.view.backgroundColor = kViewColorNormal;
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
@@ -58,7 +59,7 @@
     self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName:kWhiteColor};
     self.navigationController.navigationBar.translucent = NO;// NavigationBar 是否透明
     self.navigationController.navigationBar.barStyle = UIBarStyleBlackTranslucent;
-    
+//    self.navigationController.navigationBar.barStyle = UIBarStyleBlackOpaque;
     //设置Navigation Bar背景图片
     UIImage *title_bg = imageColor(kThemeColorHex);  //获取图片
     CGSize titleSize = self.navigationController.navigationBar.bounds.size;  //获取Navigation Bar的位置和大小

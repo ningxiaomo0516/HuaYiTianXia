@@ -16,6 +16,7 @@
 		E714F2882271904B00024FA3 /* TXSystemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E714F2872271904B00024FA3 /* TXSystemViewController.m */; };
 		E714F28B2271910600024FA3 /* TXPushTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E714F28A2271910600024FA3 /* TXPushTableViewCell.m */; };
 		E714F28E227192F200024FA3 /* TXSystemTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E714F28D227192F200024FA3 /* TXSystemTableViewCell.m */; };
+		E719F66722B24DD90023E539 /* TXMessagePopupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E719F66622B24DD90023E539 /* TXMessagePopupViewController.m */; };
 		E720A5CD22A8C44A00331846 /* TTCustomPhotoAlbum.m in Sources */ = {isa = PBXBuildFile; fileRef = E720A5CC22A8C44A00331846 /* TTCustomPhotoAlbum.m */; };
 		E725D079225ED3CA00C233E7 /* TTBaseTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = E725D077225ED3CA00C233E7 /* TTBaseTableView.m */; };
 		E725D0DE225EF36400C233E7 /* c31_btn_zfb@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E725D0DA225EF36300C233E7 /* c31_btn_zfb@2x.png */; };
@@ -311,6 +312,7 @@
 		E78DCAE92265DEA400252314 /* TXTicketModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E78DCAE82265DEA400252314 /* TXTicketModel.m */; };
 		E78DCAEC2265E2A700252314 /* TXTicketListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E78DCAEB2265E2A700252314 /* TXTicketListViewController.m */; };
 		E78DCAEF2265E5C700252314 /* TXTicketListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E78DCAEE2265E5C700252314 /* TXTicketListTableViewCell.m */; };
+		E791B73F22B1DF8700D35755 /* TXHongBaoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E791B73E22B1DF8700D35755 /* TXHongBaoModel.m */; };
 		E7923CA5225341C40094D0C3 /* SCImagePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = E7923CA2225341C40094D0C3 /* SCImagePicker.m */; };
 		E7923CA6225341C40094D0C3 /* SCUploadImageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E7923CA4225341C40094D0C3 /* SCUploadImageModel.m */; };
 		E7923CAA22535CF30094D0C3 /* SCTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = E7923CA922535CF30094D0C3 /* SCTextField.m */; };
@@ -427,6 +429,8 @@
 		E714F28A2271910600024FA3 /* TXPushTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXPushTableViewCell.m; sourceTree = "<group>"; };
 		E714F28C227192F200024FA3 /* TXSystemTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXSystemTableViewCell.h; sourceTree = "<group>"; };
 		E714F28D227192F200024FA3 /* TXSystemTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXSystemTableViewCell.m; sourceTree = "<group>"; };
+		E719F66522B24DD90023E539 /* TXMessagePopupViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXMessagePopupViewController.h; sourceTree = "<group>"; };
+		E719F66622B24DD90023E539 /* TXMessagePopupViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXMessagePopupViewController.m; sourceTree = "<group>"; };
 		E720A5CB22A8C44A00331846 /* TTCustomPhotoAlbum.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TTCustomPhotoAlbum.h; sourceTree = "<group>"; };
 		E720A5CC22A8C44A00331846 /* TTCustomPhotoAlbum.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TTCustomPhotoAlbum.m; sourceTree = "<group>"; };
 		E725D076225ED3CA00C233E7 /* TTBaseTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTBaseTableView.h; sourceTree = "<group>"; };
@@ -984,6 +988,8 @@
 		E78DCAEB2265E2A700252314 /* TXTicketListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXTicketListViewController.m; sourceTree = "<group>"; };
 		E78DCAED2265E5C700252314 /* TXTicketListTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXTicketListTableViewCell.h; sourceTree = "<group>"; };
 		E78DCAEE2265E5C700252314 /* TXTicketListTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXTicketListTableViewCell.m; sourceTree = "<group>"; };
+		E791B73D22B1DF8700D35755 /* TXHongBaoModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXHongBaoModel.h; sourceTree = "<group>"; };
+		E791B73E22B1DF8700D35755 /* TXHongBaoModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXHongBaoModel.m; sourceTree = "<group>"; };
 		E7923CA1225341C40094D0C3 /* SCImagePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCImagePicker.h; sourceTree = "<group>"; };
 		E7923CA2225341C40094D0C3 /* SCImagePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCImagePicker.m; sourceTree = "<group>"; };
 		E7923CA3225341C40094D0C3 /* SCUploadImageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCUploadImageModel.h; sourceTree = "<group>"; };
@@ -1226,6 +1232,15 @@
 			path = "(支付选择)";
 			sourceTree = "<group>";
 		};
+		E719F66422B24D4D0023E539 /* Popup(弹窗模块) */ = {
+			isa = PBXGroup;
+			children = (
+				E719F66522B24DD90023E539 /* TXMessagePopupViewController.h */,
+				E719F66622B24DD90023E539 /* TXMessagePopupViewController.m */,
+			);
+			path = "Popup(弹窗模块)";
+			sourceTree = "<group>";
+		};
 		E720A5CA22A8C42A00331846 /* 保存相册 */ = {
 			isa = PBXGroup;
 			children = (
@@ -1330,6 +1345,7 @@
 		E72698CB223F737C003A5043 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				E719F66422B24D4D0023E539 /* Popup(弹窗模块) */,
 				E774DCDD2272D9ED001A95B8 /* H5 */,
 				E725D0D9225EF31300C233E7 /* Resources */,
 				E72698E9223F737C003A5043 /* Application */,
@@ -3418,6 +3434,8 @@
 			children = (
 				E7C42E85224B7EFA00F3FB1A /* TXNewsModel.h */,
 				E7C42E86224B7EFA00F3FB1A /* TXNewsModel.m */,
+				E791B73D22B1DF8700D35755 /* TXHongBaoModel.h */,
+				E791B73E22B1DF8700D35755 /* TXHongBaoModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -3941,6 +3959,7 @@
 				E74CFFF42289ACDE00576B86 /* TXPaintView.m in Sources */,
 				E72699F9223F8298003A5043 /* WMMenuItem.m in Sources */,
 				E78584032240C54300BBEA41 /* TYPageControl.m in Sources */,
+				E791B73F22B1DF8700D35755 /* TXHongBaoModel.m in Sources */,
 				E72699FC223F8298003A5043 /* WMProgressView.m in Sources */,
 				E77F87512274316C004EB9C1 /* TTRollLabel.m in Sources */,
 				E74C964C226785FA000CBAF0 /* TXAdsModel.m in Sources */,
@@ -4067,6 +4086,7 @@
 				E7B4706522803BBD00ADDC7A /* LZHanyuPinyinOutputFormat.m in Sources */,
 				E783784B22967C4F0020C823 /* TXMineTeamModel.m in Sources */,
 				E76C617422A23AEA00997817 /* TXCharterOrderTableViewCell.m in Sources */,
+				E719F66722B24DD90023E539 /* TXMessagePopupViewController.m in Sources */,
 				E74C964322678358000CBAF0 /* TXAdsViewController.m in Sources */,
 				E72699E2223F7F58003A5043 /* UIImage+Extension.m in Sources */,
 				E7F1A7092241F298003FA216 /* TXProductTableViewCell.m in Sources */,

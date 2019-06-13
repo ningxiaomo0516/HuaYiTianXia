@@ -12,6 +12,7 @@
 #import "TXMainHeaderView.h"
 #import "TXNewsModel.h"
 #import "TXRedEnvelopeViewController.h"
+#import "TXHongBaoModel.h"
 
 @interface TXNewsViewController ()<WMPageControllerDelegate>
 @property (nonatomic, strong) TXMainHeaderView *headerView;
@@ -28,11 +29,29 @@
     [self loadTabData];
     self.menuHeight = 40;
     [self initView];
-    [self hongbao];
+    /// 已登录才能获取红包
+    if (kUserInfo.isLogin) {
+        [self get_hb_request];
+    }
 }
 
-- (void) hongbao{
+- (void) get_hb_request{
+    [SCHttpTools getWithURLString:kHttpURL(@"redpacket/redPacketRange") parameter:nil success:^(id responseObject) {
+        NSDictionary *result = responseObject;
+        TXHongBaoModel *model = [TXHongBaoModel mj_objectWithKeyValues:result];
+        if (model.errorcode==20000) {
+            HongBaoModel *hb = model.data;
+            NSString *titleText = [NSString stringWithFormat:@"%@-%@VH",hb.redpacketstart,hb.redpacketend];
+            [self hongbao:titleText];
+        }
+    } failure:^(NSError *error) {
+        
+    }];
+}
+
+- (void) hongbao:(NSString *)titleText{
     TXRedEnvelopeViewController *vc = [[TXRedEnvelopeViewController alloc] init];
+    vc.titlelabel.text = titleText;
     [self sc_centerPresentController:vc presentedSize:CGSizeMake(kScreenWidth, kScreenHeight) completeHandle:^(BOOL presented) {
         
     }];
@@ -66,6 +85,7 @@
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     self.navigationController.navigationBar.hidden = YES;
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
 }
 
 #pragma mark ---- 界面布局设置

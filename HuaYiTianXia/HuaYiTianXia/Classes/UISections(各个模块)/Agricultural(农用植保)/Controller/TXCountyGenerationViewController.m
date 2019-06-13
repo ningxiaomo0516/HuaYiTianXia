@@ -7,6 +7,10 @@
 //
 
 #import "TXCountyGenerationViewController.h"
+#import "TXWebViewController.h"
+#import "TXEppoListViewController.h"
+#import "TXMessagePopupViewController.h"
+#import "TXLoginViewController.h"
 
 @interface TXCountyGenerationViewController ()<UIScrollViewDelegate,UITextFieldDelegate>
 @property (strong, nonatomic) UIScrollView  *scrollView;
@@ -25,20 +29,114 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self initView];
-    
+    [self initButton];
     self.titleLabel.text = @"一县一代理独家经营";
     self.subtitleLabel.text = @"农用科技化、现代化";
     self.tipslabel.text = @"备注：选择区域代表市场会员所在的地区，同时代表子公司开设地区。";
     self.imagesView.image = kGetImage(@"区域划分");
 //    NSArray *imgArray = @[@"华东",@"华中",@"西北",@"东北"];
 //    NSArray *imgArrays = @[@"华南",@"华北",@"西南"];
-    UIButton *btn1 = [self createWithButton:@"华东"];
-    UIButton *btn2 = [self createWithButton:@"华中"];
-    UIButton *btn3 = [self createWithButton:@"西北"];
-    UIButton *btn4 = [self createWithButton:@"东北"];
-    UIButton *btn5 = [self createWithButton:@"华南"];
-    UIButton *btn6 = [self createWithButton:@"华北"];
-    UIButton *btn7 = [self createWithButton:@"西南"];
+    
+    UIImage *rightImg = kGetImage(@"更多");
+    rightImg = [rightImg imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithImage:rightImg
+                                                                  style:UIBarButtonItemStylePlain
+                                                                 target:self
+                                                                 action:@selector(didTapMoreButton:)];
+    self.navigationItem.rightBarButtonItem = rightItem;
+}
+
+/// 点击右上角的加号弹出菜单选项
+- (void)didTapMoreButton:(UIBarButtonItem *)barButtonItem {
+    NSString *webURL = kAppendH5URL(DomainName, AgencyCompanyH5, @"");
+    TXWebViewController *vc = [[TXWebViewController alloc] init];
+    vc.title = @"更多";
+    vc.webUrl = webURL;
+    TTPushVC(vc);
+}
+
+- (void) jumpSetRealNameRequest{
+    
+}
+
+- (void) handleControl:(UIButton *)sender{
+    /// 第一步:判断是否登录
+    if (kUserInfo.isLogin) {
+        /// 0：未认证 1：认证中 2：已认证 3：认证失败
+        /// 第二步:判断是否实名认证
+        switch (kUserInfo.isValidation) {
+            case 1:{
+                Toast(@"实名认证审核中,请稍后再试!");
+            }
+                break;
+            case 2:{
+                /// 第三步:判断所属区域
+                [self get_:sender.tag];
+            }
+                break;
+            default:{
+                // 立即认证提示
+                UIAlertController *alerController = [UIAlertController addAlertReminderText:@"提示"
+                                                                                    message:@"是否立即实名认证?"
+                                                                                cancelTitle:@"好的"
+                                                                                    doTitle:@"去设置"//去设置
+                                                                             preferredStyle:UIAlertControllerStyleAlert
+                                                                                cancelBlock:nil doBlock:^{
+                                                                                    [self jumpSetRealNameRequest];
+                                                                                }];
+                [self presentViewController:alerController animated:YES completion:nil];
+            }
+                break;
+        }
+    }else{
+        TXLoginViewController *view = [[TXLoginViewController alloc] init];
+        LZNavigationController *navigation = [[LZNavigationController alloc] initWithRootViewController:view];
+        [self presentViewController:navigation animated:YES completion:^{
+            TTLog(@"登录界面");
+        }];
+    }
+}
+
+- (void) get_:(NSInteger)idx{
+    kShowMBProgressHUD(self.view);
+    NSMutableDictionary *parameter = [[NSMutableDictionary alloc] init];
+    [parameter setObject:@(idx) forKey:@"id"];
+    [SCHttpTools postWithURLString:kHttpURL(@"regionalagent/userToRegionalJudge") parameter:parameter success:^(id responseObject) {
+        NSDictionary *result = responseObject;
+        kHideMBProgressHUD(self.view);
+        TXGeneralModel *model = [TXGeneralModel mj_objectWithKeyValues:result];
+        if (model.errorcode==20000) {
+            TXEppoListViewController *vc = [[TXEppoListViewController alloc] init];
+            vc.status = 2;
+            vc.idx = 0;
+            vc.regionalID = idx;
+            vc.title = @"农用植保";
+            TTPushVC(vc);
+        }else if(model.errorcode==11){
+            TXMessagePopupViewController *vc = [[TXMessagePopupViewController alloc] init];
+            CGFloat width = kScreenWidth - IPHONE6_W(45*2);
+            CGFloat height = IPHONE6_W(200);
+            vc.contentLable.text = model.message;
+            [self sc_centerPresentController:vc presentedSize:CGSizeMake(width, height) completeHandle:^(BOOL presented) {
+                NSString *message = presented?@"弹出":@"消失";
+                TTLog(@"消息弹出控制器 --- %@",message);
+            }];
+        }else{
+            Toast(model.message);
+        }
+    } failure:^(NSError *error) {
+        kHideMBProgressHUD(self.view);
+    }];
+}
+
+- (void) initButton{
+    UIButton *btn1 = [self createWithButton:@"华东" idx:1];
+    UIButton *btn2 = [self createWithButton:@"华中" idx:2];
+    UIButton *btn3 = [self createWithButton:@"西北" idx:3];
+    UIButton *btn4 = [self createWithButton:@"东北" idx:4];
+    UIButton *btn5 = [self createWithButton:@"华南" idx:5];
+    UIButton *btn6 = [self createWithButton:@"华北" idx:6];
+    UIButton *btn7 = [self createWithButton:@"西南" idx:7];
     NSArray *btnArray = @[btn1,btn2,btn3,btn4,btn5,btn6,btn7];
     for (int i=0; i<btnArray.count; i++) {
         [self.headerView addSubview:btnArray[i]];
@@ -169,9 +267,14 @@
     return _imagesView;
 }
 
-- (UIButton *) createWithButton:(NSString *) imagesName{
+- (UIButton *) createWithButton:(NSString *) imagesName idx:(NSInteger)idx{
     UIButton *sender = [UIButton buttonWithType:UIButtonTypeCustom];
+    sender.tag = idx;
     [sender setImage:kGetImage(imagesName) forState:UIControlStateNormal];
+    MV(weakSelf)
+    [sender lz_handleControlEvent:UIControlEventTouchUpInside withBlock:^{
+        [weakSelf handleControl:sender];
+    }];
     return sender;
 }
 @end

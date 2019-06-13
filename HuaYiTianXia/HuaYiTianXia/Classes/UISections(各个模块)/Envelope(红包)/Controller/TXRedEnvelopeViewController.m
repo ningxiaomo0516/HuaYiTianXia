@@ -7,13 +7,9 @@
 //
 
 #import "TXRedEnvelopeViewController.h"
+#import "TXHongBaoModel.h"
 
 @interface TXRedEnvelopeViewController ()
-@property (nonatomic, strong) UIImageView   *imagesView;
-@property (nonatomic, strong) UIButton      *closeBtn;
-@property (nonatomic, strong) UIImageView   *imagesTitle;
-@property (nonatomic, strong) UIButton      *linqunBtn;
-@property (nonatomic, strong) UILabel       *titlelabel;
 
 @end
 
@@ -23,11 +19,34 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self initView];
-    self.titlelabel.text = @"5-50VH";
     [self.closeBtn lz_handleControlEvent:UIControlEventTouchUpInside withBlock:^{
         [self sc_dismissVC];
     }];
-    [self.linqunBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+    MV(weakSelf);
+    [self.linquBtn lz_handleControlEvent:UIControlEventTouchUpInside withBlock:^{
+        if (weakSelf.linquBtn.tag==200) {
+            [weakSelf sc_dismissVC];
+        }else{
+            [weakSelf linqu_hb_request];
+        }
+    }];
+}
+
+- (void) linqu_hb_request{
+    [SCHttpTools getWithURLString:kHttpURL(@"redpacket/getRedPacket") parameter:nil success:^(id responseObject) {
+        NSDictionary *result = responseObject;
+        TXGeneralModel *model = [TXGeneralModel mj_objectWithKeyValues:result];
+        if (model.errorcode==20000) {
+            self.linquBtn.tag = 200;
+            [self.linquBtn setImage:kGetImage(@"c77_btn_确定") forState:UIControlStateNormal];
+            self.imagesTitle.image = kGetImage(@"c77_img_恭喜您");
+            NSString *titleText = [NSString stringWithFormat:@"获得%@VH",model.obj];
+            self.titlelabel.text = titleText;
+            self.closeBtn.hidden = YES;
+        }else{
+            Toast(@"今日红包已领取,请明天再来~");
+        }
+    } failure:^(NSError *error) {
         
     }];
 }
@@ -38,7 +57,7 @@
     [self.view addSubview:self.closeBtn];
     [self.view addSubview:self.imagesTitle];
     [self.view addSubview:self.titlelabel];
-    [self.view addSubview:self.linqunBtn];
+    [self.view addSubview:self.linquBtn];
     [self.imagesView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(@(IPHONE6_W(8)));
         make.right.equalTo(self.view.mas_right).offset(IPHONE6_W(-37));
@@ -52,7 +71,7 @@
         make.centerX.equalTo(self.imagesView).offset(15);
         make.top.equalTo(self.imagesView.mas_top).offset(99);
     }];
-    [self.linqunBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.linquBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.imagesView).offset(10);
         make.bottom.equalTo(self.imagesView.mas_bottom).offset(-112);
     }];
@@ -78,12 +97,12 @@
     return _closeBtn;
 }
 
-- (UIButton *)linqunBtn{
-    if (!_linqunBtn) {
-        _linqunBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_linqunBtn setImage:kGetImage(@"live_btn_envelope") forState:UIControlStateNormal];
+- (UIButton *)linquBtn{
+    if (!_linquBtn) {
+        _linquBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_linquBtn setImage:kGetImage(@"live_btn_envelope") forState:UIControlStateNormal];
     }
-    return _linqunBtn;
+    return _linquBtn;
 }
 
 - (UIImageView *)imagesTitle{
