@@ -36,7 +36,7 @@
     self.subtitleLabel.text = model.synopsis;
     self.marketPriceLabel.text = [NSString stringWithFormat:@"￥%@",model.price];
     NSString *icon = @"￥";
-    NSString *amountText = @"12859 + 600VH";
+    NSString *amountText = [NSString stringWithFormat:@"%@ + %@VH",model.nowprice,model.vrcurrency];//@"12859 + 600VH";
     NSString *str = [NSString stringWithFormat:@"%@%@",icon,amountText];
     NSMutableAttributedString *mutableAttr = [[NSMutableAttributedString alloc] initWithString:str];
     // 前面文字大小
@@ -90,7 +90,6 @@
 - (UILabel *)priceLabel{
     if (!_priceLabel) {
         _priceLabel = [UILabel lz_labelWithTitle:@"" color:kPriceColor  font:kFontSizeMedium25];
-//        _priceLabel.font = [UIFont boldSystemFontOfSize:25.0];
     }
     return _priceLabel;
 }

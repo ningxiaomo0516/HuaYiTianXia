@@ -50,11 +50,36 @@
         self.reloadButton.hidden = YES;
         [self.wkWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.webUrl]]];
     }else if(sender.tag == 120){
-//        [self sc_dismissVC];
-        [kNotificationCenter postNotificationName:@"AgreeDealBlockNotice" object:nil];
+        [self sc_dismissVC];
+        [self showSignatureView];
     }else{
         [self sc_dismissVC];
     }
+}
+
+- (void) showSignatureView{
+    TXSignatureView *signatureView = [[TXSignatureView alloc] init];
+    signatureView.height = kCrossScreenHeight;
+    signatureView.width = kCrossScreenWidth;
+    signatureView.priceLabel.text = [NSString stringWithFormat:@"￥%@",self.amountText];
+    //// 添加画板
+    [kKeyWindow addSubview:signatureView];
+    MV(weakSelf)
+    signatureView.completionHandler = ^(NSString * _Nonnull imageURL) {
+        int64_t delayInSeconds = 0.5;      // 延迟的时间
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+            TTLog(@"imageURL --- %@",imageURL);
+            weakSelf.completionHandler(imageURL);
+//            weakSelf.model.purchaseType = 2;
+//            weakSelf.model.signatureURL = imageURL;
+//            TXChoosePayViewController *vc = [[TXChoosePayViewController alloc] initNewsRecordsModel:weakSelf.model];
+//            vc.pageType = 1;
+//            [weakSelf sc_bottomPresentController:vc presentedHeight:IPHONE6_W(400) completeHandle:^(BOOL presented) {
+//
+//            }];
+        });
+    };
 }
 
 - (void)didTapPopButton:(UIBarButtonItem *)barButtonItem {

@@ -55,7 +55,9 @@ static NSString * const reuseIdentifier = @"TXAddressTableViewCell";
             [self.dataArray addObjectsFromArray:model.data.mutableCopy];
             [self.tableView reloadData];
         }else{
-            Toast(model.message);
+            if (model) {
+                Toast(model.message);
+            }
         }
     }
     [self.view dismissLoadingView];

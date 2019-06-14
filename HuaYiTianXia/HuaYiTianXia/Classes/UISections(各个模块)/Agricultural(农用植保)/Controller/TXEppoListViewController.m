@@ -129,6 +129,7 @@ static NSString* reuseIdentifierMall = @"TXMallCollectionViewCell";
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     if(indexPath.section==1){
         NewsRecordsModel *productModel = self.dataArray[indexPath.row];
+        productModel.regionalID = self.regionalID;
         TXMallGoodsDetailsViewController *vc = [[TXMallGoodsDetailsViewController alloc] initMallProductModel:productModel];
         vc.pageType = 1;
         TTPushVC(vc);

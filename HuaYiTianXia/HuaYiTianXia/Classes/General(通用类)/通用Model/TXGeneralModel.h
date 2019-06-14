@@ -42,4 +42,22 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, copy)NSString* noncestr;
 @end
 
+@class RegionalModel;
+@interface RegionalPromptModel : NSObject
+/// 消息提示
+@property(nonatomic, copy)NSString* message;
+/// 错误Code
+@property(nonatomic, assign)NSInteger errorcode;
+/// 区域提示Model
+@property(nonatomic, strong)RegionalModel *data;
+@end
+
+@interface RegionalModel : NSObject
+/// 消息提示
+@property(nonatomic, copy)NSString* kid;
+/// 错误Code
+@property(nonatomic, copy)NSString *regional;
+
+@property(nonatomic, copy)NSString *regionalagentMsg;
+@end
 NS_ASSUME_NONNULL_END

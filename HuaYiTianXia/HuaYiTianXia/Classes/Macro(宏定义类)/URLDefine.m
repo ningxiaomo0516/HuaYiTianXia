@@ -35,34 +35,36 @@ id为商品id，status为商品类型（（1：无人机商城产品（消费）
 合作协议：http://47.107.179.43/yq/invation/cooperationAgreement.html
 推送详情: http://47.107.179.43/userHelp/allDetails.html
 包机详情: http://47.107.179.43/userHelp/flightDetails.html?id=1
+积分不足帮助：http://47.107.179.43/userHelp/vhHelp.html
 */
 /// 推送详情
-NSString *const PushDetailsH5 = @"userHelp/allDetails.html?id=";
+NSString *const PushDetailsH5           = @"userHelp/allDetails.html?id=";
 /// 新闻详情
-NSString *const NewsDetailsH5 = @"yq/invation/newDetails.html?id=";
+NSString *const NewsDetailsH5           = @"yq/invation/newDetails.html?id=";
 /// 商品详情
-NSString *const GoodsDetailsH5 = @"yq/invation/goodsDetails.html?id=";
+NSString *const GoodsDetailsH5          = @"yq/invation/goodsDetails.html?id=";
 /// 推荐邀请
-NSString *const InvataionH5 = @"yq/invation/invataion.html?id=";
+NSString *const InvataionH5             = @"yq/invation/invataion.html?id=";
 /// 用户协议
-NSString *const UserAgreeH5 = @"userHelp/userAgree.html";
+NSString *const UserAgreeH5             = @"userHelp/userAgree.html";
 /// 操作手册
-NSString *const UserHelpH5 = @"userHelp";
+NSString *const UserHelpH5              = @"userHelp";
 /// 一县一代理(农用植保)
-NSString *const AgencyCompanyH5 = @"agencyCompany";
+NSString *const AgencyCompanyH5         = @"agencyCompany";
 /// 合同协议
-NSString *const vrAgreementH5 = @"yq/invation/vrAgreement.html";
+NSString *const vrAgreementH5           = @"yq/invation/vrAgreement.html";
 /// 民航共享
-NSString *const AviationShareH5 = @"yq/invation/ndex.html";
+NSString *const AviationShareH5         = @"yq/invation/ndex.html";
 /// 合作协议
-NSString *const CooperationAgreementH5 = @"/userHelp/lookNyzbAgrement.html?id=";
+NSString *const CooperationAgreementH5  = @"/userHelp/lookNyzbAgrement.html?id=";
 /// 农保电子协议
 NSString *const NBElectronicAgreementH5 = @"userHelp/nyzbAgrement.html?id=";
 /// 培训详情(课程网页)
-NSString *const CourseDetailsH5 = @"userHelp/flightProductDetails.html?id=";
+NSString *const CourseDetailsH5         = @"userHelp/flightProductDetails.html?id=";
 /// 包机详情
-NSString *const CharterDetailsH5 = @"userHelp/flightDetails.html?id=";
-
+NSString *const CharterDetailsH5        = @"userHelp/flightDetails.html?id=";
+/// 积分不足帮助
+NSString *const VHHelpH5                = @"userHelp/vhHelp.html";
 
 
 /// 0:测试环境 1:生产环境

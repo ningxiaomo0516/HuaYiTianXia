@@ -57,7 +57,7 @@
 
 - (UILabel *)titlelabel{
     if (!_titlelabel) {
-        _titlelabel = [UILabel lz_labelWithTitle:@"0" color:HexString(@"#26B5FE") font:kFontSizeMedium17];
+        _titlelabel = [UILabel lz_labelWithTitle:@"0" color:kPriceColor font:kFontSizeMedium17];
     }
     return _titlelabel;
 }

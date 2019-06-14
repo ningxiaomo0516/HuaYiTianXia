@@ -312,6 +312,7 @@
 		E78DCAE92265DEA400252314 /* TXTicketModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E78DCAE82265DEA400252314 /* TXTicketModel.m */; };
 		E78DCAEC2265E2A700252314 /* TXTicketListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E78DCAEB2265E2A700252314 /* TXTicketListViewController.m */; };
 		E78DCAEF2265E5C700252314 /* TXTicketListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E78DCAEE2265E5C700252314 /* TXTicketListTableViewCell.m */; };
+		E78EA60122B381980082497F /* TXPayNBViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E78EA60022B381980082497F /* TXPayNBViewController.m */; };
 		E791B73F22B1DF8700D35755 /* TXHongBaoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E791B73E22B1DF8700D35755 /* TXHongBaoModel.m */; };
 		E7923CA5225341C40094D0C3 /* SCImagePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = E7923CA2225341C40094D0C3 /* SCImagePicker.m */; };
 		E7923CA6225341C40094D0C3 /* SCUploadImageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E7923CA4225341C40094D0C3 /* SCUploadImageModel.m */; };
@@ -988,6 +989,8 @@
 		E78DCAEB2265E2A700252314 /* TXTicketListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXTicketListViewController.m; sourceTree = "<group>"; };
 		E78DCAED2265E5C700252314 /* TXTicketListTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXTicketListTableViewCell.h; sourceTree = "<group>"; };
 		E78DCAEE2265E5C700252314 /* TXTicketListTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXTicketListTableViewCell.m; sourceTree = "<group>"; };
+		E78EA5FF22B381980082497F /* TXPayNBViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXPayNBViewController.h; sourceTree = "<group>"; };
+		E78EA60022B381980082497F /* TXPayNBViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXPayNBViewController.m; sourceTree = "<group>"; };
 		E791B73D22B1DF8700D35755 /* TXHongBaoModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXHongBaoModel.h; sourceTree = "<group>"; };
 		E791B73E22B1DF8700D35755 /* TXHongBaoModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXHongBaoModel.m; sourceTree = "<group>"; };
 		E7923CA1225341C40094D0C3 /* SCImagePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCImagePicker.h; sourceTree = "<group>"; };
@@ -1447,6 +1450,7 @@
 		E72698D4223F737C003A5043 /* Agricultural(农用植保) */ = {
 			isa = PBXGroup;
 			children = (
+				E78EA5FC22B381430082497F /* 支付中心(PayCenter) */,
 				E72698D5223F737C003A5043 /* Controller */,
 				E72698D6223F737C003A5043 /* Model */,
 				E74C952B225B8567000CBAF0 /* View */,
@@ -3111,6 +3115,31 @@
 			path = "LZBasePickerView(日期选择)";
 			sourceTree = "<group>";
 		};
+		E78EA5FC22B381430082497F /* 支付中心(PayCenter) */ = {
+			isa = PBXGroup;
+			children = (
+				E78EA5FD22B381430082497F /* Controller */,
+				E78EA5FE22B381430082497F /* View */,
+			);
+			path = "支付中心(PayCenter)";
+			sourceTree = "<group>";
+		};
+		E78EA5FD22B381430082497F /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				E78EA5FF22B381980082497F /* TXPayNBViewController.h */,
+				E78EA60022B381980082497F /* TXPayNBViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		E78EA5FE22B381430082497F /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		E7923CA0225341C40094D0C3 /* SCImagePicker(选择头像) */ = {
 			isa = PBXGroup;
 			children = (
@@ -4110,6 +4139,7 @@
 				E7B4706822803BBD00ADDC7A /* LZPinyinHelper.m in Sources */,
 				E7C42E83224B770200F3FB1A /* NetWorkAnalysisTool.m in Sources */,
 				E72699A2223F7ECC003A5043 /* NSString+SCExtension.m in Sources */,
+				E78EA60122B381980082497F /* TXPayNBViewController.m in Sources */,
 				E74CFFD72289725200576B86 /* TXMallUAVAdTableViewCell.m in Sources */,
 				E7ADB1EE22882D1B008AC117 /* TTMallTemplateAdCollectionViewCell.m in Sources */,
 				E7759AC422448158007DA6CF /* TXRepeatCastTemplateTableViewCell.m in Sources */,

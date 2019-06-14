@@ -10,9 +10,13 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+// 这里要定义一个block的别名(申明) 类型 ----> void (^) (NSString *text)
+typedef void(^PurchaseAgreementBlock) (NSString *imageURL);
 @interface TXPurchaseAgreementViewController : TTBaseViewController
 @property (nonatomic, copy) NSString *webUrl;
 @property (nonatomic, copy) NSString *amountText;
+//定义一个block
+@property (nonatomic, copy) PurchaseAgreementBlock completionHandler;
 @end
 
 NS_ASSUME_NONNULL_END

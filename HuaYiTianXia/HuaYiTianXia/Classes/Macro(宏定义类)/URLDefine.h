@@ -40,6 +40,8 @@ extern NSString *const NBElectronicAgreementH5;
 extern NSString *const CourseDetailsH5;
 /// 包机详情
 extern NSString *const CharterDetailsH5;
+/// 积分不足帮助
+extern NSString *const VHHelpH5;
 
 
 /// 0:测试环境 1:生产环境

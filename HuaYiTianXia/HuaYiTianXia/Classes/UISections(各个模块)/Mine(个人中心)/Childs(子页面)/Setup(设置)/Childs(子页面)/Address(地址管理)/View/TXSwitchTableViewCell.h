@@ -14,6 +14,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UISwitch *isSwitch;
 
+@property (nonatomic, strong) UILabel *subtitleLabel;
+@property (nonatomic, strong) UIButton *helpButton;
+
+- (void) showlabel;
 @end
 
 NS_ASSUME_NONNULL_END

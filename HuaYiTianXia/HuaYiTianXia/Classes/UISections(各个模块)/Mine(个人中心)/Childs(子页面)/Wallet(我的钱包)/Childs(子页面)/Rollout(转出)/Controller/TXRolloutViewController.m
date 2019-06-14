@@ -203,7 +203,7 @@ static NSString * const reuseIdentifierHeader = @"TXRolloutHeaderTableViewCell";
     if (indexPath.section==1) {
         return IPHONE6_W(55);
     }else {
-        return UITableViewAutomaticDimension;
+        return IPHONE6_W(150);
     }
 }
 

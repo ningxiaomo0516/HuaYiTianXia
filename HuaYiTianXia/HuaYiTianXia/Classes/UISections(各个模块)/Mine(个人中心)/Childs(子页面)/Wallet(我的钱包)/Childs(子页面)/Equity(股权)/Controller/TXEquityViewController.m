@@ -63,7 +63,9 @@ static NSString * const reuseIdentifier = @"TXEarningsTableViewCell";
         [self.dataArray addObjectsFromArray:model.data.list.mutableCopy];
         [self.tableView reloadData];
     }else{
-        Toast(model.message);
+        if (model) {
+            Toast(model.message);
+        }
     }
     //处理返回的SuccessData 数据之后刷新table
     [self.tableView reloadData];

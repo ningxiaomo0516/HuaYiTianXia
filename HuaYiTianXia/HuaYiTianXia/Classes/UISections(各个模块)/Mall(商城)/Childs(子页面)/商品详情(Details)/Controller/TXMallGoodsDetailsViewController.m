@@ -18,6 +18,7 @@
 #import "TXChoosePayViewController.h"
 #import "TXLoginViewController.h"
 #import <WebKit/WebKit.h>
+#import "TXPayNBViewController.h"
 
 static NSString * const reuseIdentifierBanner   = @"TXMallGoodsBannerTableViewCell";
 static NSString * const reuseIdentifierDetails  = @"TXMallGoodsDetailsTableViewCell";
@@ -74,8 +75,10 @@ TXMallGoodsSpecTableViewCellDelegate,WKUIDelegate,WKNavigationDelegate>
 - (void) loadMallGoodsDetailsData{
     NSMutableDictionary *parameter = [[NSMutableDictionary alloc] init];
     [parameter setObject:@(self.productModel.status) forKey:@"status"];
-    [parameter setObject:self.productModel.kid forKey:@"id"];  // 每页条数
-    
+    [parameter setObject:self.productModel.kid forKey:@"id"];
+    if (self.productModel.status==2) {/// 区域表ID（农业值保必传）
+        [parameter setObject:@(self.productModel.regionalID) forKey:@"regionalID"];
+    }
     [SCHttpTools postWithURLString:@"shopproduct/GetShopDetails" parameter:parameter success:^(id responseObject) {
         NSDictionary *result = responseObject;
         self.productData = [NewsModel mj_objectWithKeyValues:result];
@@ -103,20 +106,22 @@ TXMallGoodsSpecTableViewCellDelegate,WKUIDelegate,WKNavigationDelegate>
             TTPushVC(vc);
         }else if(self.pageType == 1){
             if (kUserInfo.isValidation==2) {
-                ///// 记录当前是农保购买
-                kUserInfo.topupType = 3;
-                [kUserInfo dump];
-                TXPayOrderViewController *vc = [[TXPayOrderViewController alloc] initNewsRecordsModel:self.model];
-                vc.totalPriceBlock = ^(NSString * _Nonnull totalPrice) {
-                    //            model.price = totalPrice;
-                };
-                [self sc_bottomPresentController:vc presentedHeight:IPHONE6_W(kiPhoneX_T(420)) completeHandle:^(BOOL presented) {
-                    if (presented) {
-                        TTLog(@"弹出了");
-                    }else{
-                        TTLog(@"消失了");
-                    }
-                }];
+//                ///// 记录当前是农保购买
+//                kUserInfo.topupType = 3;
+//                [kUserInfo dump];
+//                TXPayOrderViewController *vc = [[TXPayOrderViewController alloc] initNewsRecordsModel:self.model];
+//                vc.totalPriceBlock = ^(NSString * _Nonnull totalPrice) {
+//                    //            model.price = totalPrice;
+//                };
+//                [self sc_bottomPresentController:vc presentedHeight:IPHONE6_W(kiPhoneX_T(420)) completeHandle:^(BOOL presented) {
+//                    if (presented) {
+//                        TTLog(@"弹出了");
+//                    }else{
+//                        TTLog(@"消失了");
+//                    }
+//                }];
+                TXPayNBViewController *vc = [[TXPayNBViewController alloc] initNewsRecordsModel:self.model];
+                TTPushVC(vc);
             }else if(kUserInfo.isValidation==1){
                 Toast(@"实名认证审核中,请稍后再试!");
             }else{

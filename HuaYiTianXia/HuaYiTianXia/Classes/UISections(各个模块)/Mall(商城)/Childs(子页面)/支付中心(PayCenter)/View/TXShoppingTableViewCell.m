@@ -51,6 +51,15 @@
     
     self.subtitleLabel.text = self.model.synopsis;
     self.priceLabel.text = [NSString stringWithFormat:@"￥%@",model.price];
+    NSString *icon = @"￥";
+    NSString *amountText = [NSString stringWithFormat:@"%@ + %@VH",model.nowprice,model.vrcurrency];
+    NSString *str = [NSString stringWithFormat:@"%@%@",icon,amountText];
+    NSMutableAttributedString *mutableAttr = [[NSMutableAttributedString alloc] initWithString:str];
+    // 前面文字大小
+    [mutableAttr addAttribute:NSFontAttributeName
+                        value:kFontSizeMedium15
+                        range:NSMakeRange(0, icon.length)];
+    self.currentPriceLabel.attributedText = mutableAttr;
 }
 
 - (void) initView{
@@ -59,7 +68,7 @@
     [self addSubview:self.specLabel];
     [self addSubview:self.subtitleLabel];
     [self addSubview:self.priceLabel];
-    
+    [self addSubview:self.currentPriceLabel];
     [self.imagesView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.height.width.equalTo(@(IPHONE6_W(100)));
         make.left.equalTo(@(IPHONE6_W(15)));
@@ -74,14 +83,17 @@
     
     [self.specLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.titleLabel);
-        make.top.equalTo(self.titleLabel.mas_bottom).offset(IPHONE6_W(4));
+        make.top.equalTo(self.titleLabel.mas_bottom).offset(IPHONE6_W(3));
     }];
     
     [self.subtitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(self.titleLabel);
-        make.top.equalTo(self.specLabel.mas_bottom).offset(IPHONE6_W(4));
+        make.top.equalTo(self.specLabel.mas_bottom).offset(IPHONE6_W(3));
     }];
-    
+    [self.currentPriceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.titleLabel);
+        make.bottom.equalTo(self.priceLabel.mas_top);
+    }];
     [self.priceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.titleLabel);
         make.bottom.equalTo(self.imagesView.mas_bottom).offset(3);
@@ -118,11 +130,19 @@
     return _subtitleLabel;
 }
 
-- (UILabel *)priceLabel{
+- (UILabel *)currentPriceLabel{
+    if (!_currentPriceLabel) {
+        _currentPriceLabel = [UILabel lz_labelWithTitle:@"" color:kPriceColor font:kFontSizeMedium17];
+    }
+    return _currentPriceLabel;
+}
+
+- (SCDeleteLineLabel *)priceLabel{
     if (!_priceLabel) {
-        _priceLabel = [UILabel lz_labelWithTitle:@"" color:kColorWithRGB(211, 0, 0) font:kFontSizeMedium13];
+        _priceLabel = [[SCDeleteLineLabel alloc] init];
+        _priceLabel.font = kFontSizeMedium13;
+        _priceLabel.textColor = kTextColor153;
     }
     return _priceLabel;
 }
-
 @end

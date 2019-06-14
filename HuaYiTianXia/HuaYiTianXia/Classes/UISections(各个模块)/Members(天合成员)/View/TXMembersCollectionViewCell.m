@@ -51,13 +51,8 @@ static NSString* reuseIdentifier = @"MembersCollectionViewCell";
 /// 点击collectionViewCell
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     TXGeneralModel* model = self.dataArray[indexPath.row];
-    NSString *className = model.showClass;
-    Class controller = NSClassFromString(className);
-    //    id controller = [[NSClassFromString(className) alloc] init];
-    if (controller &&  [controller isSubclassOfClass:[UIViewController class]]){
-        UIViewController *vc = [[controller alloc] init];
-        vc.title = model.title;
-//        TTPushVC(vc);
+    if (self.typeBlock) {
+        self.typeBlock(model);
     }
 }
 
@@ -94,7 +89,7 @@ static NSString* reuseIdentifier = @"MembersCollectionViewCell";
     if (!_dataArray) {
         _dataArray = [[NSMutableArray alloc] init];
         NSArray* imagesArr = @[@"机票预订",@"热门景点",@"超值酒店",@"网红美食",@"包机服务",@"拼机服务"];
-        NSArray* classArr = @[@"TXTicketQueryViewController",@"",@"",@"",@"",@""];
+        NSArray* classArr = @[@"TXTicketQueryViewController",@"",@"",@"",@"TXCharterSpellMachineViewController",@""];
         for (int i=0; i<imagesArr.count; i++) {
             TXGeneralModel* templateModel = [[TXGeneralModel alloc] init];
             templateModel.imageText = [imagesArr lz_safeObjectAtIndex:i];

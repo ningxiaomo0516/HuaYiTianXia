@@ -19,6 +19,7 @@
 #import "TXPayPasswordViewController.h"
 #import "AlipayManager.h"
 #import "TXSwitchTableViewCell.h"
+#import "TXWebViewController.h"
 
 static NSString * const reuseIdentifierReceiveAddress = @"TXReceiveAddressTableViewCell";
 static NSString * const reuseIdentifierShopping = @"TXShoppingTableViewCell";
@@ -307,7 +308,18 @@ static NSString * const reuseIdentifierSwitch = @"TXSwitchTableViewCell";
         return tools;
     }else if(idx == 4){
         TXSwitchTableViewCell* tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierSwitch forIndexPath:indexPath];
-        tools.titleLabel.text = @"可抵扣200VH";
+        tools.titleLabel.text = [NSString stringWithFormat:@"可抵扣积分%@VH",self.model.vrcurrency];
+        if (kUserInfo.vrcurrency.integerValue<self.model.vrcurrency.integerValue) {
+            [tools showlabel];
+            [tools.helpButton lz_handleControlEvent:UIControlEventTouchUpInside withBlock:^{
+                NSString *webURL = kAppendH5URL(DomainName, VHHelpH5, @"");
+                TXWebViewController *vc = [[TXWebViewController alloc] init];
+                vc.title = @"帮助";
+                vc.webUrl = webURL;
+                TTPushVC(vc);
+            }];
+        }
+        
         tools.isSwitch.on = self.isOpen;
         [tools.isSwitch addTarget:self action:@selector(valueSwitchChanged:) forControlEvents:(UIControlEventValueChanged)];
         return tools;

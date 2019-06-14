@@ -18,6 +18,14 @@
     [self initView];
     [self.view lz_setCornerRadius:5.0];
 //    self.contentLable.text = @"尊敬的会员，您属于西南地区请进入西南地区购买。";
+    [self.cancelButton lz_handleControlEvent:UIControlEventTouchUpInside withBlock:^{
+        [self sc_dismissVC];
+    }];
+}
+
+- (void) viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
 }
 
 - (void) initView{

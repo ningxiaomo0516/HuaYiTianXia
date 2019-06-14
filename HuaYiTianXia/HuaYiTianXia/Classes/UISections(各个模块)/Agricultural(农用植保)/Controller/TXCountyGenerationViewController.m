@@ -50,7 +50,7 @@
 - (void)didTapMoreButton:(UIBarButtonItem *)barButtonItem {
     NSString *webURL = kAppendH5URL(DomainName, AgencyCompanyH5, @"");
     TXWebViewController *vc = [[TXWebViewController alloc] init];
-    vc.title = @"更多";
+    vc.title = @"一县一代";
     vc.webUrl = webURL;
     TTPushVC(vc);
 }
@@ -104,19 +104,19 @@
     [SCHttpTools postWithURLString:kHttpURL(@"regionalagent/userToRegionalJudge") parameter:parameter success:^(id responseObject) {
         NSDictionary *result = responseObject;
         kHideMBProgressHUD(self.view);
-        TXGeneralModel *model = [TXGeneralModel mj_objectWithKeyValues:result];
+        RegionalPromptModel *model = [RegionalPromptModel mj_objectWithKeyValues:result];
         if (model.errorcode==20000) {
-            TXEppoListViewController *vc = [[TXEppoListViewController alloc] init];
-            vc.status = 2;
-            vc.idx = 0;
-            vc.regionalID = idx;
-            vc.title = @"农用植保";
-            TTPushVC(vc);
+            [self jumpChildViewController:idx];
         }else if(model.errorcode==11){
             TXMessagePopupViewController *vc = [[TXMessagePopupViewController alloc] init];
             CGFloat width = kScreenWidth - IPHONE6_W(45*2);
             CGFloat height = IPHONE6_W(200);
-            vc.contentLable.text = model.message;
+            vc.contentLable.text = model.data.regionalagentMsg;
+            MV(weakSelf)
+            [vc.enterButton lz_handleControlEvent:UIControlEventTouchUpInside withBlock:^{
+                [weakSelf sc_dismissVC];
+                [weakSelf jumpChildViewController:model.data.kid.integerValue];
+            }];
             [self sc_centerPresentController:vc presentedSize:CGSizeMake(width, height) completeHandle:^(BOOL presented) {
                 NSString *message = presented?@"弹出":@"消失";
                 TTLog(@"消息弹出控制器 --- %@",message);
@@ -129,14 +129,25 @@
     }];
 }
 
+- (void) jumpChildViewController:(NSInteger)idx{
+    TXEppoListViewController *vc = [[TXEppoListViewController alloc] init];
+    vc.status = 2;
+    vc.idx = 0;
+    vc.regionalID = idx;
+    vc.title = @"农用植保";
+    TTPushVC(vc);
+}
+
 - (void) initButton{
+    
+    // 1:华东 2:华南 3:华中 4:华北 5:西北 6:西南 7:东北
     UIButton *btn1 = [self createWithButton:@"华东" idx:1];
-    UIButton *btn2 = [self createWithButton:@"华中" idx:2];
-    UIButton *btn3 = [self createWithButton:@"西北" idx:3];
-    UIButton *btn4 = [self createWithButton:@"东北" idx:4];
-    UIButton *btn5 = [self createWithButton:@"华南" idx:5];
-    UIButton *btn6 = [self createWithButton:@"华北" idx:6];
-    UIButton *btn7 = [self createWithButton:@"西南" idx:7];
+    UIButton *btn2 = [self createWithButton:@"华中" idx:3];
+    UIButton *btn3 = [self createWithButton:@"西北" idx:5];
+    UIButton *btn4 = [self createWithButton:@"东北" idx:7];
+    UIButton *btn5 = [self createWithButton:@"华南" idx:2];
+    UIButton *btn6 = [self createWithButton:@"华北" idx:4];
+    UIButton *btn7 = [self createWithButton:@"西南" idx:6];
     NSArray *btnArray = @[btn1,btn2,btn3,btn4,btn5,btn6,btn7];
     for (int i=0; i<btnArray.count; i++) {
         [self.headerView addSubview:btnArray[i]];

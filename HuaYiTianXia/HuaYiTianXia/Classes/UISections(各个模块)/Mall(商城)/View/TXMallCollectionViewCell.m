@@ -26,16 +26,7 @@
     self.titleLabel.text = recordsModel.title;
     self.subtitleLabel.text = recordsModel.synopsis;
     self.marketPriceLabel.text = [NSString stringWithFormat:@"￥%@",recordsModel.price];
-    NSArray *priceArray = [recordsModel.price componentsSeparatedByString:@"."];
-    if (priceArray.count>1) {
-        if ([Utils isNull:recordsModel.vrcurrency]) {
-            
-        }
-        NSString *x_price = priceArray[0];
-        NSInteger hybridPrice = x_price.integerValue - [Utils isNull:recordsModel.vrcurrency].integerValue;
-        NSString *h_price = [NSString stringWithFormat:@"￥%ld.%@ + %@VH",hybridPrice,priceArray[1],[Utils isNull:recordsModel.vrcurrency]];
-        self.currentPriceLabel.text = h_price;
-    }
+    self.currentPriceLabel.text = [NSString stringWithFormat:@"￥%@ + %@VH",recordsModel.nowprice,recordsModel.vrcurrency];
 }
 
 - (void)setupUI {

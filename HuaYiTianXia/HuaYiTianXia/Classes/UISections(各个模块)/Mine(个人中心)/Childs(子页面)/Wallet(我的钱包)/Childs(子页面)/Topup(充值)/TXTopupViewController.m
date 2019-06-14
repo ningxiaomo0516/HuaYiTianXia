@@ -133,7 +133,7 @@
     for (NSInteger j = 0; j < [self.btnArray count]; j++) {
         UIButton *btn = self.btnArray[j] ;
         if (sender.tag == j) {
-            btn.backgroundColor = HexString(@"#8ED9FC");
+            btn.backgroundColor = kThemeColorHex;
             btn.selected = YES;
         } else {
             btn.selected = NO;
@@ -160,12 +160,12 @@
     for (NSInteger i = 0; i < self.markArray.count; i++) {
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
         btn.backgroundColor = kClearColor;
-        [btn setBorderColor:HexString(@"#8ED9FC")];
+        [btn setBorderColor:kThemeColorHex];
         [btn setBorderWidth:1.0];
         [btn lz_setCornerRadius:5.0];
         btn.clipsToBounds = YES;
         btn.titleLabel.font = kFontSizeMedium15;
-        [btn setTitleColor:HexString(@"#30322F") forState:UIControlStateNormal];
+        [btn setTitleColor:kTextColor51 forState:UIControlStateNormal];
         [btn setTitleColor:kWhiteColor forState:UIControlStateSelected];
         [btn addTarget:self action:@selector(chooseMark:) forControlEvents:UIControlEventTouchUpInside];
         NSInteger col = i % maxCol; //列

@@ -97,6 +97,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *coverimg;
 /// 产品价格
 @property (nonatomic, copy) NSString *price;
+/// 现价
+@property (nonatomic, copy) NSString *nowprice;
 /// 产品积分
 @property (nonatomic, copy) NSString *vrcurrency;
 /// 产品规格《规格数组（首页取第一个）》
@@ -120,7 +122,8 @@ NS_ASSUME_NONNULL_BEGIN
 /// 签名的图片地址
 @property (nonatomic, copy) NSString *signatureURL;
 
-
+/// 区域ID
+@property (nonatomic, assign) NSInteger regionalID;
 @end
 
 @interface NewsBannerModel : NSObject

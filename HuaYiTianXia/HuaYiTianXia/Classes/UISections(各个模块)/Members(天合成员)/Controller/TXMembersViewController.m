@@ -16,7 +16,6 @@
 #import "TXTicketOrderViewController.h"
 #import "TXAdsModel.h"
 #import "TXAdsGiftViewController.h"
-#import "TXCharterSpellMachineViewController.h"
 
 static NSString* reuseIdentifier = @"TXMallToolsCollectionViewCell";
 static NSString* reuseIdentifierBanner = @"TXMallBannerCollectionViewCell";
@@ -48,8 +47,6 @@ static NSString* reuseIdentifierMall = @"TXMembersCollectionViewCell";
 
 - (void) viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-//    self.navigationController.navigationBar.alpha = 0.1;
-//    self.navigationController.navigationBar.translucent = YES;// NavigationBar 是否透明
 }
 
 - (void) loadMallData{
@@ -126,14 +123,30 @@ static NSString* reuseIdentifierMall = @"TXMembersCollectionViewCell";
         tools.bannerArray = self.bannerArray;
         return tools;
     }else if (indexPath.section==2) {
+        MV(weakSelf)
         TXMembersCollectionViewCell *tools = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifierMall forIndexPath:indexPath];
 //        tools.imagesView.image = kGetImage(templateModel.imageText);
+        tools.typeBlock = ^(TXGeneralModel * _Nonnull model) {
+            [weakSelf jumpToolsView:model];
+        };
         return tools;
     }else{
         TXMallToolsCollectionViewCell *tools = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
         tools.titleLabel.text = templateModel.title;
         tools.imagesView.image = kGetImage(templateModel.imageText);
         return tools;
+    }
+}
+
+/// tools 跳转
+- (void) jumpToolsView:(TXGeneralModel *)model{
+    NSString *className = model.showClass;
+    Class controller = NSClassFromString(className);
+    //    id controller = [[NSClassFromString(className) alloc] init];
+    if (controller &&  [controller isSubclassOfClass:[UIViewController class]]){
+        UIViewController *vc = [[controller alloc] init];
+        vc.title = model.title;
+        TTPushVC(vc);
     }
 }
 
@@ -221,11 +234,11 @@ static NSString* reuseIdentifierMall = @"TXMembersCollectionViewCell";
         _dataArray = [[NSMutableArray alloc] init];
         NSArray* titleArr = @[@[],@[@"会员",@"订单",@"礼包",@"其它"],@[]];
         NSArray*imagesArr = @[@[@"banner"],
-                              @[@"c41_btn_members",@"c41_btn_order",@"c41_btn_gift",@"c41_btn_other"],//,@"c41_btn_other"
+                              @[@"c41_btn_members",@"c41_btn_order",@"c41_btn_gift",@"c41_btn_other"],
                               @[@"section 2"]];
         NSArray* classArr = @[@[],
                               @[@"TXBecomeVipViewController",@"TXTicketOrderViewController",@"礼包",@""],
-                              @[@"TXTicketQueryViewController",@"",@"",@"",@"",@""]];
+                              @[]];
         for (int i=0; i<imagesArr.count; i++) {
             NSArray *subTitlesArray = [titleArr lz_safeObjectAtIndex:i];
             NSArray *subImagesArray = [imagesArr lz_safeObjectAtIndex:i];
