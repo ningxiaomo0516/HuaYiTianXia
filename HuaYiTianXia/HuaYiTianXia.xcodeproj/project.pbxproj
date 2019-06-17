@@ -224,6 +224,9 @@
 		E76E681122818C2F00B035B9 /* UIView+TTEmpty.m in Sources */ = {isa = PBXBuildFile; fileRef = E76E681022818C2F00B035B9 /* UIView+TTEmpty.m */; };
 		E76E681422818C5900B035B9 /* TTEmptyBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = E76E681322818C5900B035B9 /* TTEmptyBaseView.m */; };
 		E76E681722818C7B00B035B9 /* TTEmptyView.m in Sources */ = {isa = PBXBuildFile; fileRef = E76E681622818C7B00B035B9 /* TTEmptyView.m */; };
+		E771EDE422B3D82E00AC33CA /* TXLogisticViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E771EDE322B3D82E00AC33CA /* TXLogisticViewController.m */; };
+		E771EDE722B3D84900AC33CA /* TXLogisticTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E771EDE622B3D84900AC33CA /* TXLogisticTableViewCell.m */; };
+		E771EDEA22B3DBA900AC33CA /* TXLogisticProductCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E771EDE922B3DBA900AC33CA /* TXLogisticProductCell.m */; };
 		E773264F22545BE400FD665A /* UIAlertController+SCExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = E773264E22545BE400FD665A /* UIAlertController+SCExtension.m */; };
 		E77326522254A03100FD665A /* TXWalletHeaderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E77326512254A03100FD665A /* TXWalletHeaderTableViewCell.m */; };
 		E77326552254A87D00FD665A /* TXRolloutTypeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E77326542254A87D00FD665A /* TXRolloutTypeViewController.m */; };
@@ -817,6 +820,12 @@
 		E76E681522818C7B00B035B9 /* TTEmptyView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TTEmptyView.h; sourceTree = "<group>"; };
 		E76E681622818C7B00B035B9 /* TTEmptyView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TTEmptyView.m; sourceTree = "<group>"; };
 		E76E681822818C9000B035B9 /* TTEmptyViewHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TTEmptyViewHeader.h; sourceTree = "<group>"; };
+		E771EDE222B3D82E00AC33CA /* TXLogisticViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXLogisticViewController.h; sourceTree = "<group>"; };
+		E771EDE322B3D82E00AC33CA /* TXLogisticViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXLogisticViewController.m; sourceTree = "<group>"; };
+		E771EDE522B3D84900AC33CA /* TXLogisticTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXLogisticTableViewCell.h; sourceTree = "<group>"; };
+		E771EDE622B3D84900AC33CA /* TXLogisticTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXLogisticTableViewCell.m; sourceTree = "<group>"; };
+		E771EDE822B3DBA900AC33CA /* TXLogisticProductCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXLogisticProductCell.h; sourceTree = "<group>"; };
+		E771EDE922B3DBA900AC33CA /* TXLogisticProductCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXLogisticProductCell.m; sourceTree = "<group>"; };
 		E773264D22545BE300FD665A /* UIAlertController+SCExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertController+SCExtension.h"; sourceTree = "<group>"; };
 		E773264E22545BE400FD665A /* UIAlertController+SCExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertController+SCExtension.m"; sourceTree = "<group>"; };
 		E77326502254A03100FD665A /* TXWalletHeaderTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXWalletHeaderTableViewCell.h; sourceTree = "<group>"; };
@@ -1389,8 +1398,8 @@
 		E72698CF223F737C003A5043 /* UISections(各个模块) */ = {
 			isa = PBXGroup;
 			children = (
+				E771EDDE22B3D7E700AC33CA /* Logistic(物流) */,
 				E72B09DE22B1026100345C1B /* Envelope(红包) */,
-				E72B09DA22B0F8AA00345C1B /* Logistic(物流) */,
 				E7625B14229E2EDC00A34EDF /* CharterSpell(包机拼机) */,
 				E78333CE224874D9005CAB91 /* Other(登录注册) */,
 				E78583BB223F967800BBEA41 /* Templet(模板) */,
@@ -1781,37 +1790,6 @@
 				E7CCDEE7228C04120017A684 /* TTBottomShowView.m */,
 			);
 			path = Commons;
-			sourceTree = "<group>";
-		};
-		E72B09DA22B0F8AA00345C1B /* Logistic(物流) */ = {
-			isa = PBXGroup;
-			children = (
-				E72B09DB22B0F8AA00345C1B /* Controller */,
-				E72B09DC22B0F8AA00345C1B /* Model */,
-				E72B09DD22B0F8AA00345C1B /* View */,
-			);
-			path = "Logistic(物流)";
-			sourceTree = "<group>";
-		};
-		E72B09DB22B0F8AA00345C1B /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Controller;
-			sourceTree = "<group>";
-		};
-		E72B09DC22B0F8AA00345C1B /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		E72B09DD22B0F8AA00345C1B /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 		E72B09DE22B1026100345C1B /* Envelope(红包) */ = {
@@ -2532,6 +2510,43 @@
 				E76E681322818C5900B035B9 /* TTEmptyBaseView.m */,
 			);
 			path = TTEmptyView;
+			sourceTree = "<group>";
+		};
+		E771EDDE22B3D7E700AC33CA /* Logistic(物流) */ = {
+			isa = PBXGroup;
+			children = (
+				E771EDDF22B3D7E700AC33CA /* Controller */,
+				E771EDE022B3D7E700AC33CA /* Model */,
+				E771EDE122B3D7E700AC33CA /* View */,
+			);
+			path = "Logistic(物流)";
+			sourceTree = "<group>";
+		};
+		E771EDDF22B3D7E700AC33CA /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				E771EDE222B3D82E00AC33CA /* TXLogisticViewController.h */,
+				E771EDE322B3D82E00AC33CA /* TXLogisticViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		E771EDE022B3D7E700AC33CA /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		E771EDE122B3D7E700AC33CA /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E771EDE522B3D84900AC33CA /* TXLogisticTableViewCell.h */,
+				E771EDE622B3D84900AC33CA /* TXLogisticTableViewCell.m */,
+				E771EDE822B3DBA900AC33CA /* TXLogisticProductCell.h */,
+				E771EDE922B3DBA900AC33CA /* TXLogisticProductCell.m */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		E774DCDD2272D9ED001A95B8 /* H5 */ = {
@@ -4110,6 +4125,7 @@
 				E7759AC122447FD2007DA6CF /* TXRepeatCastViewController.m in Sources */,
 				E7C42E87224B7EFA00F3FB1A /* TXNewsModel.m in Sources */,
 				E7269907223F754B003A5043 /* UIViewController+LZNavigationController.m in Sources */,
+				E771EDE422B3D82E00AC33CA /* TXLogisticViewController.m in Sources */,
 				E7DCD615226DCDD800AE8DE8 /* TXBecomeVipTableViewCell.m in Sources */,
 				E78DCAD92265BFEF00252314 /* TXMembersCollectionViewCell.m in Sources */,
 				E7B4706522803BBD00ADDC7A /* LZHanyuPinyinOutputFormat.m in Sources */,
@@ -4168,6 +4184,7 @@
 				E74C0025228AD97700576B86 /* TXUAVChildExperienceViewController.m in Sources */,
 				E77326552254A87D00FD665A /* TXRolloutTypeViewController.m in Sources */,
 				E72699DB223F7F58003A5043 /* UINavigationBar+SCExtension.m in Sources */,
+				E771EDEA22B3DBA900AC33CA /* TXLogisticProductCell.m in Sources */,
 				E74CFFB42289086B00576B86 /* TXMallCollectionViewCell.m in Sources */,
 				E78B8F83225B32BC0052852C /* MyCollectionViewCell.m in Sources */,
 				E78583CD22409E6D00BBEA41 /* TXMineBannerTableViewCell.m in Sources */,
@@ -4193,6 +4210,7 @@
 				E7C42E7F224B770200F3FB1A /* SCHttpToolsModel.m in Sources */,
 				E7C9FCFB2267607E008FD260 /* TXTicketOrderModel.m in Sources */,
 				E72B09E422B102D100345C1B /* TXRedEnvelopeViewController.m in Sources */,
+				E771EDE722B3D84900AC33CA /* TXLogisticTableViewCell.m in Sources */,
 				E74CFFFD228A719600576B86 /* TXCourseModel.m in Sources */,
 				E76579EE2276D6F400AFAEFE /* TXTicketQueryViewController.m in Sources */,
 				E72699F8223F8298003A5043 /* WMPageController.m in Sources */,

@@ -159,7 +159,7 @@ static NSString * const reuseIdentifierSectionHeaderView = @"SCTableViewSectionH
         make.bottom.equalTo(self.view.mas_bottom).offset(-kTabBarHeight);
     }];
 }
-//setImagesDidOnClickCallBlock
+
 #pragma mark - Table view data sourceFMMerchantsHomeAddressTableViewCell
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     MV(weakSelf)
