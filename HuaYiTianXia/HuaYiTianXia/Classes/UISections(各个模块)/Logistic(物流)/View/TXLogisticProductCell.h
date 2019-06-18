@@ -20,6 +20,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) UILabel       *address_label;
 
 
+@property (nonatomic, strong) UILabel       *order_label_no_title;
+@property (nonatomic, strong) UILabel       *courier_label_title;
+@property (nonatomic, strong) UILabel       *address_label_title;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -259,7 +259,7 @@ static NSString *headerViewIdentifier       = @"TXBaseCollectionReusableHeaderVi
         // 150图片加文字高度，40位顶部title高度
         height = 150+40;
     }
-    if (indexPath.section==0) return CGSizeMake(kScreenWidth, IPHONE6_W(180));
+    if (indexPath.section==0) return CGSizeMake(kScreenWidth, IPHONE6_W(165));
     else if (indexPath.section==1)return CGSizeMake(width, IPHONE6_W(95));
     else if (indexPath.section<5)return CGSizeMake(kScreenWidth, height);
     CGFloat margin = 10*3;

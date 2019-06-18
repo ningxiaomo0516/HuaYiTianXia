@@ -31,7 +31,8 @@
     return @{@"sid"     : @"id",
              @"address" : @"adder",
              @"telphone": @"phot",
-             @"username": @"userName"};
+             @"username": @"userName",
+             @"province": @"provinces"};
 }
 @end
 

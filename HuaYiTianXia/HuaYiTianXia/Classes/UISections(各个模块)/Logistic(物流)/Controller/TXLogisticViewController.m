@@ -25,6 +25,7 @@ static NSString * const reuseIdentifierProduct = @"TXLogisticProductCell";
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self initView];
+    self.title = @"物流跟踪";
 }
 
 - (void) initView{
@@ -35,19 +36,47 @@ static NSString * const reuseIdentifierProduct = @"TXLogisticProductCell";
     }];
 }
 
+- (void) get_data{
+    NSMutableDictionary *parameter = [[NSMutableDictionary alloc] init];
+    [parameter setObject:@"" forKey:@"orderNo"];
+    [parameter setObject:@"" forKey:@"abbreviation"];
+    [parameter setObject:@"" forKey:@"logisticsNo"];
+    [SCHttpTools postWithURLString:kHttpURL(@"expresscompany/queryExpressInfo") parameter:parameter success:^(id responseObject) {
+        NSDictionary *result = responseObject;
+        
+    } failure:^(NSError *error) {
+        
+    }];
+}
+
 #pragma mark - Table view data sourceFMMerchantsHomeAddressTableViewCell
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
-        TXLogisticProductCell *tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
+        TXLogisticProductCell *tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierProduct forIndexPath:indexPath];
         return tools;
     }else{
         TXLogisticTableViewCell  *tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
+        if (indexPath.row==0) {
+            tools.imagesView.image = kGetImage(@"签收");
+            tools.date_label.text = @"06-11";
+            tools.time_label.text = @"05:16";
+            tools.title_label.text = @"已签收";
+            tools.subtitle_label.text = @"签收人凭提货码签收";
+        }else{
+            tools.imagesView.image = kGetImage(@"派送");
+            tools.date_label.text = @"06-11";
+            tools.time_label.text = @"05:16";
+            tools.title_label.text = @"已签收";
+            tools.subtitle_label.text = @"【成都市】成都市高新区便民服务服务部派件员小何：电话12354565446正在为您派件";
+        }
+        
         return tools;
     }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 80;
+    if (indexPath.section==0) return IPHONE6_W(160);
+    return UITableViewAutomaticDimension;
 }
 
 // 多少个分组 section
@@ -60,20 +89,13 @@ static NSString * const reuseIdentifierProduct = @"TXLogisticProductCell";
     if (section == 0) return 1;
     return 5;
 }
-
-#pragma mark -------------- 设置Header高度 --------------
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    if(section==0) return IPHONE6_W(155);
-    return 44.0f;
-}
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 #pragma mark ----- getter/setter
--(UITableView *)tableView{
+- (UITableView *)tableView{
     if (!_tableView) {
         _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
         _tableView.showsVerticalScrollIndicator = false;
@@ -82,6 +104,7 @@ static NSString * const reuseIdentifierProduct = @"TXLogisticProductCell";
         [_tableView registerClass:[TXLogisticProductCell class] forCellReuseIdentifier:reuseIdentifierProduct];
         //1 禁用系统自带的分割线
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        _tableView.estimatedRowHeight = 200;
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.backgroundColor = kViewColorNormal;

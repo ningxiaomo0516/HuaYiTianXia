@@ -95,10 +95,10 @@ static NSString * const reuseIdentifierSwitch = @"TXSwitchTableViewCell";
 - (void) saveAddressRequest{
     kShowMBProgressHUD(self.view);
     NSMutableDictionary *parameter = [[NSMutableDictionary alloc] init];
-    NSString *addressText = kStringFormat(self.citytext, self.address);
     [parameter setObject:self.username forKey:@"userName"];
     [parameter setObject:self.telphone forKey:@"phot"];
-    [parameter setObject:addressText forKey:@"adder"];
+    [parameter setObject:self.citytext forKey:@"provinces"];
+    [parameter setObject:self.address forKey:@"adder"];
     [parameter setObject:self.isDefault forKey:@"status"];
     [SCHttpTools postWithURLString:kHttpURL(@"address/AddAddress") parameter:parameter success:^(id responseObject) {
         NSDictionary *result = responseObject;
@@ -123,6 +123,7 @@ static NSString * const reuseIdentifierSwitch = @"TXSwitchTableViewCell";
     [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
 }
 
+/// 城市选择
 - (NSMutableArray<TTPickerModel *> *)tt_pickerView:(TTPickerView *)pickerView didSelcetedTier:(NSInteger)tier selcetedValue:(TTPickerModel *)value{
     __block NSMutableArray *tempTown = [NSMutableArray array];
     [value.child enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {

@@ -18,7 +18,8 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 @interface AddressModel : NSObject
-
+/// 省
+@property (nonatomic, copy) NSString *province;
 /// 收货地址ID
 @property (nonatomic, copy) NSString *sid;
 /// 收货地址

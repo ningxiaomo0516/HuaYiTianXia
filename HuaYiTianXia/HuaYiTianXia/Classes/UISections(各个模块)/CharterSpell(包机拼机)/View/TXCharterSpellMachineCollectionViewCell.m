@@ -235,7 +235,7 @@
 
 - (UILabel *)priceLabel{
     if (!_priceLabel) {
-        _priceLabel = [self createLabelColor:HexString(@"#EDD08E") font:kFontSizeScBold22];
+        _priceLabel = [self createLabelColor:kPriceColor font:kFontSizeScBold22];
         _priceLabel.font = [UIFont boldSystemFontOfSize:22.0];
     }
     return _priceLabel;

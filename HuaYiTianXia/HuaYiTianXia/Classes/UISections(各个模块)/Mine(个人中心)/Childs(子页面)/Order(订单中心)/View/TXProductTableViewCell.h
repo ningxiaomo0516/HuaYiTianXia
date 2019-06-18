@@ -26,6 +26,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) UIButton *lookContractBtn;
 /// 订单数据
 @property (nonatomic, strong) OrderModel *orderModel;
+
+/// 图片
+@property (nonatomic, strong) UILabel *attributedText;
 @end
 
 NS_ASSUME_NONNULL_END

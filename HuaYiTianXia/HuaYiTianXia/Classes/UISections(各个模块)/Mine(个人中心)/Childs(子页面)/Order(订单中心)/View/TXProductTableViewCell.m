@@ -43,6 +43,10 @@
     self.contentLabel.text = self.orderModel.spec;
     self.priceLabel.text = kStringFormat(@"￥", self.orderModel.totalMoney);
     self.dateTimeLabel.text = self.orderModel.time;
+    
+    NSAttributedString *attributedText;
+    attributedText = [SCSmallTools sc_initImageWithText:@"0.0" imageName:@"c9_btn_coin" fontWithSize:kFontSizeMedium13];
+    self.attributedText.attributedText = attributedText;
 }
 
 - (void) initView{
@@ -52,7 +56,7 @@
     [self addSubview:self.priceLabel];
     [self addSubview:self.dateTimeLabel];
     [self addSubview:self.lookContractBtn];
-    
+    [self addSubview:self.attributedText];
     
     [self.imagesView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(@(IPHONE6_W(15)));
@@ -84,6 +88,10 @@
         make.right.equalTo(self.mas_right).offset(IPHONE6_W(-15));
         make.height.equalTo(@(IPHONE6_W(27)));
         make.width.equalTo(@(IPHONE6_W(65)));
+    }];
+    [self.attributedText mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.priceLabel.mas_right).offset(5);
+        make.centerY.equalTo(self.priceLabel);
     }];
 }
 
@@ -118,9 +126,16 @@
 }
 - (UILabel *)priceLabel{
     if (!_priceLabel) {
-        _priceLabel = [UILabel lz_labelWithTitle:@"" color:HexString(@"2DAFF7") font:kFontSizeMedium12];
+        _priceLabel = [UILabel lz_labelWithTitle:@"" color:kPriceColor font:kFontSizeMedium12];
     }
     return _priceLabel;
+}
+
+- (UILabel *)attributedText{
+    if (!_attributedText) {
+        _attributedText = [UILabel lz_labelWithTitle:@"" color:kPriceColor font:kFontSizeMedium12];
+    }
+    return _attributedText;
 }
 
 - (UIButton *)lookContractBtn{

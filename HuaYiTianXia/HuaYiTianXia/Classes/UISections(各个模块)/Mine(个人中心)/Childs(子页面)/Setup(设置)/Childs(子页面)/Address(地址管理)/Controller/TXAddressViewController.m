@@ -97,7 +97,8 @@ static NSString * const reuseIdentifier = @"TXAddressTableViewCell";
     AddressModel *model = self.dataArray[indexPath.section];
     tools.addressModel = model;
     if (model.isDefault) {
-        kUserInfo.receivedGoodsAddr = model.address;
+        NSString *addressText = kStringFormat(model.province, model.address);
+        kUserInfo.receivedGoodsAddr = addressText;
         kUserInfo.receivedUserName = model.username;
         kUserInfo.receivedTelphone = model.telphone;
         

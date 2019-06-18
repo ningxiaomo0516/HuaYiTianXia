@@ -333,6 +333,7 @@
 		E7ACCE2D227EDC1B00CFB662 /* TXEppoListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7ACCE2C227EDC1B00CFB662 /* TXEppoListViewController.m */; };
 		E7ADB1EB22881C05008AC117 /* TTMallTemplateHotCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7ADB1EA22881C05008AC117 /* TTMallTemplateHotCollectionViewCell.m */; };
 		E7ADB1EE22882D1B008AC117 /* TTMallTemplateAdCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7ADB1ED22882D1B008AC117 /* TTMallTemplateAdCollectionViewCell.m */; };
+		E7B23C2122B8E54C002EBE2D /* TXLogisticModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B23C2022B8E54C002EBE2D /* TXLogisticModel.m */; };
 		E7B4704322803A3000ADDC7A /* FMCurrentCitysTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B4703722803A2F00ADDC7A /* FMCurrentCitysTableViewCell.m */; };
 		E7B4704422803A3000ADDC7A /* FMGroupsCityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B4703C22803A3000ADDC7A /* FMGroupsCityTableViewCell.m */; };
 		E7B4704522803A3000ADDC7A /* FMCitySectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B4703D22803A3000ADDC7A /* FMCitySectionView.m */; };
@@ -1034,6 +1035,8 @@
 		E7ADB1EA22881C05008AC117 /* TTMallTemplateHotCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TTMallTemplateHotCollectionViewCell.m; sourceTree = "<group>"; };
 		E7ADB1EC22882D1B008AC117 /* TTMallTemplateAdCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TTMallTemplateAdCollectionViewCell.h; sourceTree = "<group>"; };
 		E7ADB1ED22882D1B008AC117 /* TTMallTemplateAdCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TTMallTemplateAdCollectionViewCell.m; sourceTree = "<group>"; };
+		E7B23C1F22B8E54C002EBE2D /* TXLogisticModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXLogisticModel.h; sourceTree = "<group>"; };
+		E7B23C2022B8E54C002EBE2D /* TXLogisticModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXLogisticModel.m; sourceTree = "<group>"; };
 		E7B4703722803A2F00ADDC7A /* FMCurrentCitysTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMCurrentCitysTableViewCell.m; sourceTree = "<group>"; };
 		E7B4703822803A2F00ADDC7A /* FMHotsCityTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMHotsCityTableViewCell.h; sourceTree = "<group>"; };
 		E7B4703922803A2F00ADDC7A /* FMCityCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCityCollectionViewCell.h; sourceTree = "<group>"; };
@@ -2534,6 +2537,8 @@
 		E771EDE022B3D7E700AC33CA /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				E7B23C1F22B8E54C002EBE2D /* TXLogisticModel.h */,
+				E7B23C2022B8E54C002EBE2D /* TXLogisticModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -4177,6 +4182,7 @@
 				E78583CA22409D5A00BBEA41 /* TXMineTableViewCell.m in Sources */,
 				E78583C4223FA3C000BBEA41 /* TXMineHeaderView.m in Sources */,
 				E75698982251EBA30022EC49 /* TXWalletModel.m in Sources */,
+				E7B23C2122B8E54C002EBE2D /* TXLogisticModel.m in Sources */,
 				E7B4706422803BBD00ADDC7A /* LZChineseToPinyinResource.m in Sources */,
 				E7B4704622803A3000ADDC7A /* FMCityCollectionViewCell.m in Sources */,
 				E7B4704822803A3000ADDC7A /* FMSelectedCityViewController.m in Sources */,
