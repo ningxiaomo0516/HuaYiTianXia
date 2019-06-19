@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TXLogisticModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -15,10 +16,13 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) UILabel *time_label;
 
 @property (nonatomic, strong) UIImageView *imagesView;
+@property (nonatomic, strong) UIImageView *imagesView_s;
 
 @property (nonatomic, strong) UILabel *title_label;
 @property (nonatomic, strong) UILabel *subtitle_label;
 @property (nonatomic, strong) UIView *linerView;
+
+@property (nonatomic, strong) TracesList *tracesModel;
 @end
 
 NS_ASSUME_NONNULL_END

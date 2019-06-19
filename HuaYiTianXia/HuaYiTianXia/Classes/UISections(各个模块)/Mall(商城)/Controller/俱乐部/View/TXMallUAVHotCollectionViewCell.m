@@ -15,6 +15,7 @@
         [self setupUI];
         self.imagesView.image = kGetImage(@"base_deprecated_activity");
         self.titleLabel.text = @"无人机体验";
+        [self.contentView lz_setCornerRadius:5.0];
     }
     return self;
 }

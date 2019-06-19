@@ -22,12 +22,15 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) UILabel *priceLabel;
 /// 日期时间
 @property (nonatomic, strong) UILabel *dateTimeLabel;
-/// 日期时间
+/// 查看合同
 @property (nonatomic, strong) UIButton *lookContractBtn;
+/// 查看物流
+@property (nonatomic, strong) UIButton *lookLogisticBtn;
 /// 订单数据
 @property (nonatomic, strong) OrderModel *orderModel;
 
 /// 图片
+@property (nonatomic, strong) UIImageView *image_coin;
 @property (nonatomic, strong) UILabel *attributedText;
 @end
 

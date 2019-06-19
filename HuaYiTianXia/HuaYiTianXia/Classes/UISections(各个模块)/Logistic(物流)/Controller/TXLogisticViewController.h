@@ -7,11 +7,12 @@
 //
 
 #import "TTBaseTableViewController.h"
+#import "TXOrderModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface TXLogisticViewController : TTBaseTableViewController
-
+- (instancetype)initWithOrderModel:(OrderModel *)orderModel;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -226,10 +226,12 @@
     if (!_scrollView) {
         _scrollView = [[UIScrollView alloc] init];
         _scrollView.frame = self.view.bounds;
+        _scrollView.height = kScreenHeight - kNavBarHeight - kTabBarHeight;
         _scrollView.delegate = self;
+        _scrollView.userInteractionEnabled = NO;
         _scrollView.backgroundColor = kViewColorNormal;
         _scrollView.showsVerticalScrollIndicator = NO;
-        _scrollView.contentSize = CGSizeMake(kScreenWidth, kScreenHeight+1);
+        _scrollView.contentSize = CGSizeMake(kScreenWidth, kScreenHeight);
         _scrollView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
         _scrollView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
     }

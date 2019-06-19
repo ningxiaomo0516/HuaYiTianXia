@@ -31,6 +31,8 @@ NS_ASSUME_NONNULL_BEGIN
 @interface OrderModel : NSObject
 /// 订单id
 @property (nonatomic, copy) NSString *kid;
+/// 产品id
+@property (nonatomic, copy) NSString *proID;
 /// 时间
 @property (nonatomic, copy) NSString *housTime;
 /// 金额
@@ -49,5 +51,12 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *totalCurrency;
 /// 产品所属分类 如：2：农用植保产品；3：VR产品；
 @property (nonatomic, assign) NSInteger status;
+/// 物流单号（请判断null，如为null表示 无物流信息，不显示物流查看按钮）
+@property (nonatomic, copy) NSString *logisticsNo;
+/// 物流公司编号（用于查询物流信息）
+@property (nonatomic, copy) NSString *abbreviation;
+/// 商品简介
+@property (nonatomic, copy) NSString *synopsis;
+
 @end
 NS_ASSUME_NONNULL_END

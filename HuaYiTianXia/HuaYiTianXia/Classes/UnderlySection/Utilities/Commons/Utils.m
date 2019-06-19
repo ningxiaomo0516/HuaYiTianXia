@@ -285,7 +285,6 @@
 + (NSInteger)getDateDifferenceWithNowDateStr:(NSString*)nowDateStr deadlineStr:(NSString*)deadlineStr {
     
     NSInteger timeDifference = 0;
-    
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"yy-MM-dd HH:mm:ss"];
     NSDate *nowDate = [formatter dateFromString:nowDateStr];
@@ -293,8 +292,19 @@
     NSTimeInterval oldTime = [nowDate timeIntervalSince1970];
     NSTimeInterval newTime = [deadline timeIntervalSince1970];
     timeDifference = newTime - oldTime;
-    
     return timeDifference;
+}
+/**
+ *  时间转时间戳
+ *  dateTime 日期时间
+ *  @return 时间戳
+ */
++ (NSInteger)lz_getDateTimeWithTimetamp:(NSString*)dateTime{
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yy-MM-dd HH:mm:ss"];
+    NSDate *nowDate = [formatter dateFromString:dateTime];
+    NSTimeInterval timetamp = [nowDate timeIntervalSince1970];
+    return timetamp;
 }
 
 /**

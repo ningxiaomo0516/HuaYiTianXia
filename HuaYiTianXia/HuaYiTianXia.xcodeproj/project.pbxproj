@@ -372,6 +372,7 @@
 		E7CC89BA2264658C003D0EF7 /* TTImageButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E7CC89B92264658C003D0EF7 /* TTImageButton.m */; };
 		E7CCDEE5228BC2F30017A684 /* TTSortButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E7CCDEE4228BC2F30017A684 /* TTSortButton.m */; };
 		E7CCDEE8228C04120017A684 /* TTBottomShowView.m in Sources */ = {isa = PBXBuildFile; fileRef = E7CCDEE7228C04120017A684 /* TTBottomShowView.m */; };
+		E7CF5EA122BA328F0093DDA8 /* TXMallClubSectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = E7CF5EA022BA328F0093DDA8 /* TXMallClubSectionView.m */; };
 		E7D07C622243C8B600E3FFAF /* NSObject+Toast.m in Sources */ = {isa = PBXBuildFile; fileRef = E7D07C612243C8B600E3FFAF /* NSObject+Toast.m */; };
 		E7D07C672243CCBE00E3FFAF /* LZActionSheet.bundle in Resources */ = {isa = PBXBuildFile; fileRef = E7D07C642243CCBE00E3FFAF /* LZActionSheet.bundle */; };
 		E7D07C682243CCBE00E3FFAF /* LZActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = E7D07C662243CCBE00E3FFAF /* LZActionSheet.m */; };
@@ -1113,6 +1114,8 @@
 		E7CCDEE4228BC2F30017A684 /* TTSortButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TTSortButton.m; sourceTree = "<group>"; };
 		E7CCDEE6228C04120017A684 /* TTBottomShowView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TTBottomShowView.h; sourceTree = "<group>"; };
 		E7CCDEE7228C04120017A684 /* TTBottomShowView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TTBottomShowView.m; sourceTree = "<group>"; };
+		E7CF5E9F22BA328F0093DDA8 /* TXMallClubSectionView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXMallClubSectionView.h; sourceTree = "<group>"; };
+		E7CF5EA022BA328F0093DDA8 /* TXMallClubSectionView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXMallClubSectionView.m; sourceTree = "<group>"; };
 		E7D07C602243C8B600E3FFAF /* NSObject+Toast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Toast.h"; sourceTree = "<group>"; };
 		E7D07C612243C8B600E3FFAF /* NSObject+Toast.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Toast.m"; sourceTree = "<group>"; };
 		E7D07C642243CCBE00E3FFAF /* LZActionSheet.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = LZActionSheet.bundle; sourceTree = "<group>"; };
@@ -2062,6 +2065,8 @@
 				E74CFFD62289725200576B86 /* TXMallUAVAdTableViewCell.m */,
 				E74CFFD82289726400576B86 /* TXMallUAVRecommendTableViewCell.h */,
 				E74CFFD92289726400576B86 /* TXMallUAVRecommendTableViewCell.m */,
+				E7CF5E9F22BA328F0093DDA8 /* TXMallClubSectionView.h */,
+				E7CF5EA022BA328F0093DDA8 /* TXMallClubSectionView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -4234,6 +4239,7 @@
 				E73D9AEB22AD0F3D00034F5F /* TXInvoiceModel.m in Sources */,
 				E74C0028228AEEB800576B86 /* TXUAVChildRecommendedViewController.m in Sources */,
 				E72699D6223F7F58003A5043 /* UIView+IBExtension.m in Sources */,
+				E7CF5EA122BA328F0093DDA8 /* TXMallClubSectionView.m in Sources */,
 				E78DCAEC2265E2A700252314 /* TXTicketListViewController.m in Sources */,
 				E77BC13F224F7321008440C9 /* TXOrderModel.m in Sources */,
 				E769B29A227807600049EF73 /* TXMessageChildTableViewCell.m in Sources */,

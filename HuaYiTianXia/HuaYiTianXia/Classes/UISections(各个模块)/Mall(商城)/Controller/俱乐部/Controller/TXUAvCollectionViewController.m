@@ -251,13 +251,14 @@ static NSString *headerViewIdentifier       = @"TXBaseCollectionReusableHeaderVi
     CGFloat height = 0;
     if (indexPath.section==2) {
         // 两个显示，40位顶部title高度，10为底部间距
-        height = (kScreenWidth-15*2-10)/2+40+10;
+//        height = (kScreenWidth-15*2-10)/2+40+10;
+        height = 192+40;
     }else if (indexPath.section==3){
         // 110图片加文字高度，40位顶部title高度
-        height = 110+40;
+        height = 192+40;
     }else if(indexPath.section==4){
         // 150图片加文字高度，40位顶部title高度
-        height = 150+40;
+        height = 192+40;
     }
     if (indexPath.section==0) return CGSizeMake(kScreenWidth, IPHONE6_W(165));
     else if (indexPath.section==1)return CGSizeMake(width, IPHONE6_W(95));
@@ -292,13 +293,20 @@ static NSString *headerViewIdentifier       = @"TXBaseCollectionReusableHeaderVi
     if (indexPath.section==5) {
         UICollectionReusableView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"MGHeaderView" forIndexPath:indexPath];
         headerView.backgroundColor = kWhiteColor;
-        UILabel *titlelabel = [UILabel lz_labelWithTitle:@"" color:kTextColor51 font:kFontSizeScBold17];
-        [headerView addSubview:titlelabel];
-        [titlelabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        UIImageView *imagesView = [[UIImageView alloc] init];
+        imagesView.image = kGetImage(@"c21_icon_精选");
+        [headerView addSubview:imagesView];
+        [imagesView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(@(15));
             make.centerY.equalTo(headerView);
         }];
-        titlelabel.text = @"优秀产品";
+        UILabel *titlelabel = [UILabel lz_labelWithTitle:@"" color:HexString(@"#FDC348") font:kFontSizeScBold17];
+        [headerView addSubview:titlelabel];
+        [titlelabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(imagesView.mas_right).offset(5);
+            make.centerY.equalTo(headerView);
+        }];
+        titlelabel.text = @"精选";
         return headerView;
     }else{
         UICollectionReusableView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"MGHeaderViewSection5" forIndexPath:indexPath];

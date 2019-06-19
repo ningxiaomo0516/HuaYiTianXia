@@ -21,25 +21,32 @@
     // Configure the view for the selected state
 }
 
-
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         self.contentView.backgroundColor = [UIColor clearColor];
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         [self initView];
-        self.imagesView.image = kGetImage(@"test_work");
         self.titleLabel.text = @"迷你加湿器";
         self.subtitleLabel.text = @"深层排浊 持久保湿 鲜活在线";
-        self.order_label_no.text = @"02356552665";
         self.order_label_no_title.text = @"订单编号：";
-        
-        self.courier_label.text = @"天天快递";
         self.courier_label_title.text = @"物流公司：";
         
-        self.address_label.text = @"成都市高新区大鼎广场301";
         self.address_label_title.text = @"收货地址：";
+        [self.imagesView lz_setCornerRadius:5.0];
     }
     return self;
+}
+
+- (void)setLogisticData:(LogisticData *)logisticData{
+    _logisticData = logisticData;
+    [self.imagesView sd_setImageWithURL:kGetImageURL(self.logisticData.imageText)
+                       placeholderImage:kGetImage(VERTICALMAPBITMAP)];;
+    self.subtitleLabel.text = self.logisticData.pro_subtitle;
+    self.titleLabel.text = self.logisticData.pro_title;
+    
+    self.order_label_no.text = self.logisticData.logisticsNo;
+    self.courier_label.text = self.logisticData.name;
+    self.address_label.text = self.logisticData.receivingAddress;
 }
 
 - (void) initView{
@@ -62,11 +69,11 @@
     
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.imagesView.mas_right).offset(15);
-        make.top.equalTo(self.imagesView.mas_top).offset(-3);
+        make.top.equalTo(self.imagesView.mas_top).offset(5);
     }];
     [self.subtitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.titleLabel);
-        make.bottom.equalTo(self.imagesView.mas_bottom);
+        make.bottom.equalTo(self.imagesView.mas_bottom).offset(-5);
     }];
     
     [self.order_label_no_title mas_makeConstraints:^(MASConstraintMaker *make) {

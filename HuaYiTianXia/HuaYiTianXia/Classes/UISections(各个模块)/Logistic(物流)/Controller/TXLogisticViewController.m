@@ -9,23 +9,33 @@
 #import "TXLogisticViewController.h"
 #import "TXLogisticTableViewCell.h"
 #import "TXLogisticProductCell.h"
+#import "TXLogisticModel.h"
 
 static NSString * const reuseIdentifier = @"TXLogisticTableViewCell";
 static NSString * const reuseIdentifierProduct = @"TXLogisticProductCell";
 
 @interface TXLogisticViewController ()<UITableViewDelegate,UITableViewDataSource>
-@property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, strong) UITableView   *tableView;
+@property (nonatomic, strong) OrderModel    *orderModel;
+@property (nonatomic, strong) LogisticData  *logisticData;
 @property (nonatomic, strong) NSMutableArray *dataArray;
-
+@property (nonatomic, strong) UIView        *footerView;
 @end
 
 @implementation TXLogisticViewController
-
+- (instancetype)initWithOrderModel:(OrderModel *)orderModel{
+    if (self = [super init]) {
+        _orderModel = orderModel;
+    }
+    return self;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self initView];
     self.title = @"物流跟踪";
+    [self.view showLoadingViewWithText:@"加载中..."];
+    [self get_data];
 }
 
 - (void) initView{
@@ -38,14 +48,29 @@ static NSString * const reuseIdentifierProduct = @"TXLogisticProductCell";
 
 - (void) get_data{
     NSMutableDictionary *parameter = [[NSMutableDictionary alloc] init];
-    [parameter setObject:@"" forKey:@"orderNo"];
-    [parameter setObject:@"" forKey:@"abbreviation"];
-    [parameter setObject:@"" forKey:@"logisticsNo"];
+    [parameter setObject:self.orderModel.kid forKey:@"orderNo"];
+    [parameter setObject:self.orderModel.abbreviation forKey:@"abbreviation"];
+    [parameter setObject:self.orderModel.logisticsNo forKey:@"logisticsNo"];
     [SCHttpTools postWithURLString:kHttpURL(@"expresscompany/queryExpressInfo") parameter:parameter success:^(id responseObject) {
         NSDictionary *result = responseObject;
-        
+        TXLogisticModel *model = [TXLogisticModel mj_objectWithKeyValues:result];
+        if (model.errorcode == 20000) {
+            self.logisticData = model.data;
+            self.logisticData.pro_title = self.orderModel.title;
+            self.logisticData.pro_subtitle = self.orderModel.synopsis;
+            self.logisticData.imageText = self.orderModel.coverimg;
+            /// 倒序数组数据
+            NSArray *arr = [[model.data.logisticInfo.list reverseObjectEnumerator] allObjects];
+            [self.dataArray addObjectsFromArray:arr];
+            [self.tableView reloadData];
+            self.tableView.hidden = NO;
+            if (model.data.logisticInfo.list.count==0) {
+                self.tableView.tableFooterView = self.footerView;
+            }
+        }
+        [self.view dismissLoadingView];
     } failure:^(NSError *error) {
-        
+        [self.view dismissLoadingView];
     }];
 }
 
@@ -53,23 +78,13 @@ static NSString * const reuseIdentifierProduct = @"TXLogisticProductCell";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
         TXLogisticProductCell *tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierProduct forIndexPath:indexPath];
+        tools.logisticData = self.logisticData;
         return tools;
     }else{
         TXLogisticTableViewCell  *tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
-        if (indexPath.row==0) {
-            tools.imagesView.image = kGetImage(@"签收");
-            tools.date_label.text = @"06-11";
-            tools.time_label.text = @"05:16";
-            tools.title_label.text = @"已签收";
-            tools.subtitle_label.text = @"签收人凭提货码签收";
-        }else{
-            tools.imagesView.image = kGetImage(@"派送");
-            tools.date_label.text = @"06-11";
-            tools.time_label.text = @"05:16";
-            tools.title_label.text = @"已签收";
-            tools.subtitle_label.text = @"【成都市】成都市高新区便民服务服务部派件员小何：电话12354565446正在为您派件";
-        }
-        
+        TracesList *tracesModel = self.dataArray[indexPath.row];
+        tracesModel.state = self.logisticData.logisticInfo.State;
+        tools.tracesModel = tracesModel;
         return tools;
     }
 }
@@ -87,7 +102,7 @@ static NSString * const reuseIdentifierProduct = @"TXLogisticProductCell";
 /// 返回多少
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section == 0) return 1;
-    return 5;
+    return self.dataArray.count;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
@@ -109,6 +124,7 @@ static NSString * const reuseIdentifierProduct = @"TXLogisticProductCell";
         _tableView.dataSource = self;
         _tableView.backgroundColor = kViewColorNormal;
         _tableView.rowHeight = UITableViewAutomaticDimension;
+        _tableView.hidden = YES;
     }
     return _tableView;
 }
@@ -120,4 +136,18 @@ static NSString * const reuseIdentifierProduct = @"TXLogisticProductCell";
     return _dataArray;
 }
 
+- (UIView *)footerView{
+    if (!_footerView) {
+        _footerView = [UIView lz_viewWithColor:kClearColor];
+        _footerView.frame = CGRectMake(0, 0, kScreenWidth, self.view.height/3);
+        UIView *boxView = [UIView lz_viewWithColor:kClearColor];
+        boxView.frame = CGRectMake(0, 80, kScreenWidth, self.view.height/3);
+        SCNoDataView *footerView = [[SCNoDataView alloc] initWithFrame:boxView.bounds
+                                                             imageName:@"c12_live_nodata"
+                                                         tipsLabelText:@"暂无数据哦~"];
+        [boxView addSubview:footerView];
+        [_footerView addSubview:boxView];
+    }
+    return _footerView;
+}
 @end

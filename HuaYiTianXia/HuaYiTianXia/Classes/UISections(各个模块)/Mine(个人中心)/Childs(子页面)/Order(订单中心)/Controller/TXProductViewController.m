@@ -10,6 +10,7 @@
 #import "TXProductTableViewCell.h"
 #import "TXOrderModel.h"
 #import "TXWebViewController.h"
+#import "TXLogisticViewController.h"
 
 static NSString * const reuseIdentifier = @"TXProductTableViewCell";
 
@@ -70,6 +71,12 @@ static NSString * const reuseIdentifier = @"TXProductTableViewCell";
     TTPushVC(vc);
 }
 
+/// 跳转查看物流
+- (void) jumpLogisticViewController:(OrderModel *)orderModel{
+    TXLogisticViewController *vc = [[TXLogisticViewController alloc] initWithOrderModel:orderModel];
+    TTPushVC(vc);
+}
+
 - (void) initView{
     
     [Utils lz_setExtraCellLineHidden:self.tableView];
@@ -82,14 +89,18 @@ static NSString * const reuseIdentifier = @"TXProductTableViewCell";
 
 #pragma mark - Table view data source
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    TXProductTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
-    cell.orderModel = self.dataArray[indexPath.section];
-    cell.lookContractBtn.tag = indexPath.section;
-    [cell.lookContractBtn lz_handleControlEvent:UIControlEventTouchUpInside withBlock:^{
+    TXProductTableViewCell* tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
+    tools.orderModel = self.dataArray[indexPath.section];
+    tools.lookContractBtn.tag = indexPath.section;
+    [tools.lookContractBtn lz_handleControlEvent:UIControlEventTouchUpInside withBlock:^{
         /// 查看合同
-        [self jumpWebViewController:cell.orderModel.kid];
+        [self jumpWebViewController:tools.orderModel.kid];
     }];
-    return cell;
+    [tools.lookLogisticBtn lz_handleControlEvent:UIControlEventTouchUpInside withBlock:^{
+        /// 查看物流
+        [self jumpLogisticViewController:tools.orderModel];
+    }];
+    return tools;
 }
 
 // 多少个分组 section

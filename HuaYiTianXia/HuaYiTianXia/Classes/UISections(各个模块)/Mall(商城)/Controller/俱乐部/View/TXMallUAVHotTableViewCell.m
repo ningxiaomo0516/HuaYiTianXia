@@ -10,6 +10,7 @@
 #import "TXMallUAVHotCollectionViewCell.h"
 #import "TXMallUAVAdCollectionViewCell.h"
 #import "TXMallUAVRecommendCollectionViewCell.h"
+#import "TXMallClubSectionView.h"
 
 static NSString* reuseIdentifierHot         = @"TXMallUAVHotCollectionViewCell";
 static NSString* reuseIdentifierAd          = @"TXMallUAVAdCollectionViewCell";
@@ -19,11 +20,7 @@ static NSString* reuseIdentifierRecommend   = @"TXMallUAVRecommendCollectionView
 
 @property (nonatomic, strong) UICollectionView *collectionView;
 /// headerView的高度
-@property (nonatomic, strong) UIView *headerView;
-/// headerView的高度
-@property (nonatomic, strong) UILabel *headerTitle;
-/// headerView的高度
-@property (nonatomic, strong) UILabel *headerSubtitle;
+@property (nonatomic, strong) TXMallClubSectionView *headerView;
 @property (nonatomic, assign) CGFloat height;
 @end
 
@@ -40,32 +37,20 @@ static NSString* reuseIdentifierRecommend   = @"TXMallUAVRecommendCollectionView
 - (void)setListModel:(MallUAVModel *)listModel{
     _listModel = listModel;
     [self initView];
-    self.headerTitle.text = @"当下热门";
-    self.height = 110;
+    self.headerView.headerTitle.text = @"热门";
+    self.headerView.headerTitle.textColor = HexString(@"#FF6C00");
+    self.headerView.headerIcon.image = kGetImage(@"c21_icon_热门");
+    self.height = 192;
     self.collectionView.frame = CGRectMake(0, 40, kScreenWidth, self.height);
     [self.collectionView reloadData];
 }
 
 - (void) initView{
-    [self addSubview:self.collectionView];
-    
-    [self addSubview:self.headerView];
-    [self.headerView addSubview:self.headerTitle];
-    [self.headerView addSubview:self.headerSubtitle];
-    
+    [self.contentView addSubview:self.collectionView];
+    [self.contentView addSubview:self.headerView];
     [self.headerView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.top.equalTo(self);
+        make.left.right.top.equalTo(self.contentView);
         make.height.equalTo(@(40));
-    }];
-    
-    [self.headerTitle mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(@(15));
-        make.centerY.equalTo(self.headerView);
-    }];
-    
-    [self.headerSubtitle mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.headerTitle.mas_right).offset(7);
-        make.centerY.equalTo(self.headerView);
     }];
 }
 
@@ -95,7 +80,7 @@ static NSString* reuseIdentifierRecommend   = @"TXMallUAVRecommendCollectionView
 #pragma mark - UICollectionViewDelegateFlowLayout
 //设置每个一个Item（cell）的大小
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
-    CGFloat width = (kScreenWidth-15*2-10)/2;
+    CGFloat width = (kScreenWidth-15*2)/2;
     return CGSizeMake(width, self.height);
 }
 
@@ -147,24 +132,12 @@ static NSString* reuseIdentifierRecommend   = @"TXMallUAVRecommendCollectionView
     return _collectionView;
 }
 
-- (UIView *)headerView{
+- (TXMallClubSectionView *)headerView{
     if (!_headerView) {
-        _headerView = [UIView lz_viewWithColor:kWhiteColor];
+        _headerView = [[TXMallClubSectionView alloc] init];
+        _headerView.backgroundColor = kClearColor;
     }
     return _headerView;
 }
 
-- (UILabel *)headerTitle {
-    if (!_headerTitle) {
-        _headerTitle = [UILabel lz_labelWithTitle:@"" color:kThemeColorHex font:kFontSizeScBold17];
-    }
-    return _headerTitle;
-}
-
-- (UILabel *)headerSubtitle {
-    if (!_headerSubtitle) {
-        _headerSubtitle = [UILabel lz_labelWithTitle:@"" color:kTextColor153 font:kFontSizeMedium12];
-    }
-    return _headerSubtitle;
-}
 @end

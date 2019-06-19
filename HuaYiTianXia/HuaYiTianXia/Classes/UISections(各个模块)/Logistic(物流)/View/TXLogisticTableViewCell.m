@@ -31,14 +31,74 @@
         self.contentView.backgroundColor = [UIColor clearColor];
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         [self initView];
-        self.imagesView.image = kGetImage(@"发货");
-        
-        self.date_label.text = @"06-11";
-        self.time_label.text = @"05:16";
-        self.title_label.text = @"已签收";
-        self.subtitle_label.text = @"【成都市】成都市高新区便民服务服务部派件员小何：电话12354565446正在为您派件";
     }
     return self;
+}
+
+- (void)setTracesModel:(TracesList *)tracesModel{
+    _tracesModel = tracesModel;
+    /// 物流状态：2-在途中,3-已签收,4-问题件（0时不显示状态轴）
+    /// 1-已揽收，
+    /// 2-在途中， 201-到达派件城市， 202-派件中， 211-已放入快递柜或驿站，
+    /// 3-已签收， 311-已取出快递柜或驿站，
+    /// 4-问题件， 401-发货无信息， 402-超时未签收， 403-超时未更新， 404-拒收（退件）， 412-快递柜或驿站超时未取
+    /** 发货,发货中,揽件,揽件中,派送,派送中,签收,运输,运输中 */
+    self.imagesView.hidden = NO;
+    switch (tracesModel.state) {
+        case 0:
+            Toast(@"不需要显示时间轴");
+            break;
+        case 1:
+            self.imagesView.image = kGetImage(@"揽件");
+            self.title_label.text = @"已揽件";
+            break;
+        case 2:
+            self.title_label.text = @"运输中";
+            self.imagesView.image = kGetImage(@"运输");
+//            self.imagesView_s.image = kGetImage(@"运输中");
+            break;
+        case 3:
+            self.title_label.text = @"已签收";
+            self.imagesView.image = kGetImage(@"签收");
+            break;
+        case 4:
+        {
+            if (tracesModel.Action==401) {
+                Toast(@"发货无信息");
+            }else if(tracesModel.Action==402){
+                self.imagesView.image = kGetImage(@"签收");
+                self.title_label.text = @"超时未签收";
+            }else if(tracesModel.Action==403){
+                self.title_label.text = @"超时未更新";
+                self.imagesView.image = kGetImage(@"签收");
+            }else if(tracesModel.Action==404){
+                self.title_label.text = @"拒收(退件)";
+                self.imagesView.image = kGetImage(@"签收");
+            }else if(tracesModel.Action==412){
+                self.title_label.text = @"快递柜或驿站超时未取";
+                self.imagesView.image = kGetImage(@"签收");
+            }
+        }
+            break;
+        default:
+            Toast(@"物流状态出错了!");
+            break;
+    }
+    /// 时分
+    NSString *formatTime = @"HH:mm";
+    /// 月日
+    NSString *formatDate = @"MM-dd";
+    /// 得到时间戳
+    NSInteger timestamp = [Utils lz_getDateTimeWithTimetamp:self.tracesModel.AcceptTime];
+    NSString *timestamp_str = [NSString stringWithFormat:@"%ld",timestamp];
+    /// 得到时间
+    NSString * time= [Utils lz_timeWithTimeIntervalString:timestamp_str formatter:formatTime];
+    /// 得到日期
+    NSString * date= [Utils lz_timeWithTimeIntervalString:timestamp_str formatter:formatDate];
+    
+    self.date_label.text = date;
+    self.time_label.text = time;
+    self.subtitle_label.text = self.tracesModel.AcceptStation;
 }
 
 - (void) initView{
@@ -47,6 +107,7 @@
     
     [self.contentView addSubview:self.linerView];
     [self.contentView addSubview:self.imagesView];
+    [self.contentView addSubview:self.imagesView_s];
     
     [self.contentView addSubview:self.title_label];
     [self.contentView addSubview:self.subtitle_label];
@@ -57,6 +118,9 @@
         make.left.equalTo(@(IPHONE6_W(70)));
         make.top.equalTo(@(margin));
         make.height.width.equalTo(@(35));
+    }];
+    [self.imagesView_s mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.centerX.width.height.equalTo(self.imageView);
     }];
     [self.date_label mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.equalTo(@(IPHONE6_W(70)));
@@ -105,8 +169,17 @@
 - (UIImageView *)imagesView{
     if (!_imagesView) {
         _imagesView = [[UIImageView alloc] init];
+        _imagesView.hidden = YES;
     }
     return _imagesView;
+}
+
+- (UIImageView *)imagesView_s{
+    if (!_imagesView_s) {
+        _imagesView_s = [[UIImageView alloc] init];
+        _imagesView_s.hidden = YES;
+    }
+    return _imagesView_s;
 }
 
 - (UILabel *)title_label{

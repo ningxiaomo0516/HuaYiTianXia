@@ -15,7 +15,6 @@
 #import "TXWebViewController.h"
 #import <JhtMarquee/JhtVerticalMarquee.h>
 #import <JhtMarquee/JhtHorizontalMarquee.h>
-#import "TXLogisticViewController.h"
 
 
 static NSString * const reuseIdentifier = @"TXNewTemplateTableViewCell";
@@ -234,12 +233,9 @@ static NSString * const reuseIdentifierSectionHeaderView = @"SCTableViewSectionH
     if (((self.bannerArray.count>0&&indexPath.section==0)||(indexPath.section==1&&self.rollText.length))) {
         
     }else{
-//        NewsRecordsModel *model = self.dataArray[indexPath.row];
-//        NSString *webURL = kAppendH5URL(DomainName, NewsDetailsH5, model.kid)
-//        [self jumpNewDetailsBannerModel:webURL];
-        
-        TXLogisticViewController *vc = [[TXLogisticViewController alloc] init];
-        TTPushVC(vc);
+        NewsRecordsModel *model = self.dataArray[indexPath.row];
+        NSString *webURL = kAppendH5URL(DomainName, NewsDetailsH5, model.kid)
+        [self jumpNewDetailsBannerModel:webURL];
     }
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }

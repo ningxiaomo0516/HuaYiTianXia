@@ -120,6 +120,12 @@
  *  @return 时间戳差值
  */
 + (NSInteger)getDateDifferenceWithNowDateStr:(NSString*)nowDateStr deadlineStr:(NSString*)deadlineStr;
+/**
+ *  时间转时间戳
+ *  dateTime 日期时间
+ *  @return 时间戳
+ */
++ (NSInteger)lz_getDateTimeWithTimetamp:(NSString*)dateTime;
 
 /**
  *  据图片名将图片保存到ImageFile文件夹中
