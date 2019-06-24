@@ -49,7 +49,7 @@
     
 }
 - (UILabel *)textLabel{
-    if (_textlabel == nil) {
+    if (!_textlabel) {
         _textlabel = [UILabel lz_labelWithTitle:@"" color:[UIColor lz_colorWithHex:0x808080] font:kFontSizeMedium12];
         _textlabel.numberOfLines = 0;
     }

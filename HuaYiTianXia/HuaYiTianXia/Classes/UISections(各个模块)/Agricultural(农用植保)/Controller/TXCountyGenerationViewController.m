@@ -34,8 +34,6 @@
     self.subtitleLabel.text = @"农用科技化、现代化";
     self.tipslabel.text = @"备注：选择区域代表市场会员所在的地区，同时代表子公司开设地区。";
     self.imagesView.image = kGetImage(@"区域划分");
-//    NSArray *imgArray = @[@"华东",@"华中",@"西北",@"东北"];
-//    NSArray *imgArrays = @[@"华南",@"华北",@"西南"];
     
     UIImage *rightImg = kGetImage(@"更多");
     rightImg = [rightImg imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
@@ -224,14 +222,12 @@
 
 - (UIScrollView *)scrollView{
     if (!_scrollView) {
-        _scrollView = [[UIScrollView alloc] init];
+        _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight-kNavBarHeight-kTabBarHeight)];
         _scrollView.frame = self.view.bounds;
-        _scrollView.height = kScreenHeight - kNavBarHeight - kTabBarHeight;
         _scrollView.delegate = self;
-        _scrollView.userInteractionEnabled = NO;
         _scrollView.backgroundColor = kViewColorNormal;
         _scrollView.showsVerticalScrollIndicator = NO;
-        _scrollView.contentSize = CGSizeMake(kScreenWidth, kScreenHeight);
+        _scrollView.contentSize = CGSizeMake(kScreenWidth, kScreenHeight-kNavBarHeight-kTabBarHeight+1);
         _scrollView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
         _scrollView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
     }

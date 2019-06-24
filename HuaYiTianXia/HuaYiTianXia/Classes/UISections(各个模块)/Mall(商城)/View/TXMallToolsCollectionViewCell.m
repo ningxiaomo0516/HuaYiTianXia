@@ -9,6 +9,17 @@
 #import "TXMallToolsCollectionViewCell.h"
 
 @implementation TXMallToolsCollectionViewCell
+/// 方块视图的缓存池标示
++ (NSString *)reuseIdentifier{
+    static NSString *reuseIdentifier = @"TXMallToolsCollectionViewCell";
+    return reuseIdentifier;
+}
+
+/// 获取方块视图对象
++ (instancetype)cellWithCollectionView:(UICollectionView *)collectionView forIndexPath:(NSIndexPath *)indexPath{
+    TXMallToolsCollectionViewCell *tools=[collectionView dequeueReusableCellWithReuseIdentifier:[TXMallToolsCollectionViewCell reuseIdentifier] forIndexPath:indexPath];
+    return tools;
+}
 
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self == [super initWithFrame:frame]) {

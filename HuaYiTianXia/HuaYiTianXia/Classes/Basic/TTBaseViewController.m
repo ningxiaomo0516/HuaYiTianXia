@@ -66,6 +66,11 @@
     self.navigationController.navigationBar.barStyle = UIBarStyleBlackTranslucent;
 }
 
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
 - (SCLoadFailedView *)loadFailedView{
     if (!_loadFailedView) {
         _loadFailedView = [[SCLoadFailedView alloc] initWithFrame:self.view.bounds

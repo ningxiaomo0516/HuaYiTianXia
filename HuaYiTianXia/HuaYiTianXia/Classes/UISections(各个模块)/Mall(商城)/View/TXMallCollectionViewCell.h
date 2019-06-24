@@ -13,6 +13,10 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface TXMallCollectionViewCell : UICollectionViewCell
+/// 方块视图的缓存池标示
++ (NSString *)reuseIdentifier;
+/// 获取方块视图对象
++ (instancetype)cellWithCollectionView:(UICollectionView *)collectionView forIndexPath:(NSIndexPath *)indexPath;
 /// 图片
 @property (nonatomic, strong) UIImageView *imagesView;
 /// 标题

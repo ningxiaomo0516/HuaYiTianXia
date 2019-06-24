@@ -67,7 +67,7 @@
 - (WMPageController *)p_defaultController {
     NSArray *titles = @[@"俱乐部",@"生态圈"];
     NSArray *kidArray = @[@"1",@"6"];
-    NSArray *classArray = @[@"TXUAvCollectionViewController",@"TXMallCollectionViewController"];
+    NSArray *classArray = @[@"TXClubCollectionViewController",@"TXMallCollectionViewController"];
 //    1：无人机商城产品（消费）；2：农用植保产品（购买）；3：VR产品（购买）；4：纵横矿机产品（购买）；5：共享飞行产品（购买）；6：生态农业商城产品（消费）
 
     NSMutableArray *viewControllers = [[NSMutableArray alloc] init];

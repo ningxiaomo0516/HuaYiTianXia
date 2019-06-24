@@ -10,6 +10,18 @@
 #import "SCDeleteLineLabel.h"
 
 @implementation TXMallCollectionViewCell
+/// 方块视图的缓存池标示
++ (NSString *)reuseIdentifier{
+    static NSString *reuseIdentifier = @"TXMallCollectionViewCell";
+    return reuseIdentifier;
+}
+
+/// 获取方块视图对象
++ (instancetype)cellWithCollectionView:(UICollectionView *)collectionView forIndexPath:(NSIndexPath *)indexPath{
+    TXMallCollectionViewCell *tools=[collectionView dequeueReusableCellWithReuseIdentifier:[TXMallCollectionViewCell reuseIdentifier] forIndexPath:indexPath];
+    return tools;
+}
+
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self == [super initWithFrame:frame]) {
         self.contentView.backgroundColor = kWhiteColor;

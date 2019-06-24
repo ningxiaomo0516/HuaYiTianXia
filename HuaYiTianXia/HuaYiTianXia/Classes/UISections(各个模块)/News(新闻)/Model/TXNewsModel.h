@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class TXNewsTabModel,NewsModel,NewsRecordsModel,NewsBannerModel,MallUAVModel,MallUAVListModel;
+@class TXNewsTabModel,NewsModel,NewsRecordsModel,NewsBannerModel,MallClubModel,MallClubListModel;
 @interface TXNewsModel : NSObject
 /// 状态 21000统一异常情况,22000登录超时，23000账号冻结，20000请求成功，另外的状态请直接输出msg
 @property (nonatomic, copy) NSString *message;
@@ -35,7 +35,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// banner 集合
 @property (nonatomic, strong) NSMutableArray<NewsBannerModel *> *banners;
 /// 商城 --- 俱乐部
-@property (nonatomic, strong) MallUAVModel *listArray;
+@property (nonatomic, strong) MallClubModel *listArray;
 @end
 
 @interface NewsModel : NSObject
@@ -140,20 +140,20 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 
-@interface MallUAVModel : NSObject
+@interface MallClubModel : NSObject
 /// 购机(推荐)
-@property (nonatomic, strong) NSMutableArray<MallUAVListModel *> *recommended;//buyingMachine;
+@property (nonatomic, strong) NSMutableArray<MallClubListModel *> *recommended;//buyingMachine;
 /// 活动(预留字段)
-@property (nonatomic, strong) NSMutableArray<MallUAVListModel *> *activity;
+@property (nonatomic, strong) NSMutableArray<MallClubListModel *> *activity;
 /// 体验（体验专区）
-@property (nonatomic, strong) NSMutableArray<MallUAVListModel *> *jingxuan;///experience;
+@property (nonatomic, strong) NSMutableArray<MallClubListModel *> *jingxuan;///experience;
 ///培训(当下热门）,请注意培训无简介 --- 对应课程
-@property (nonatomic, strong) NSMutableArray<MallUAVListModel *> *hot;//train;
+@property (nonatomic, strong) NSMutableArray<MallClubListModel *> *hot;//train;
 @property (nonatomic, assign) NSInteger sectionType;
 
 @end
 
-@interface MallUAVListModel : NSObject
+@interface MallClubListModel : NSObject
 /// 当前ID
 @property (nonatomic, copy) NSString *kid;
 /// 标题
@@ -171,7 +171,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *endPrice;
 /// 已报名或预约人数
 @property (nonatomic, copy) NSString *signup;
-
 @end
 
 NS_ASSUME_NONNULL_END

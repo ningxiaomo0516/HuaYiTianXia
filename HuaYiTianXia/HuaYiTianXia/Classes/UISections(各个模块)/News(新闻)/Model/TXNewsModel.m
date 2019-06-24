@@ -37,7 +37,7 @@
 + (NSDictionary *)objectClassInArray{
     return @{@"data"        : [NewsModel class],
              @"banners"     : [NewsBannerModel class],
-             @"listArray"   : [MallUAVModel class]};
+             @"listArray"   : [MallClubModel class]};
 }
 @end
 
@@ -79,21 +79,21 @@
 @end
 
 
-@implementation MallUAVModel
+@implementation MallClubModel
 + (NSDictionary *)replacedKeyFromPropertyName{
     return @{@"recommended" : @"buyingMachine",
              @"jingxuan"    : @"experience",
              @"hot"         : @"train"};
 }
 + (NSDictionary *)objectClassInArray{
-    return @{@"recommended" : [MallUAVListModel class],
-             @"activity"    : [MallUAVListModel class],
-             @"jingxuan"    : [MallUAVListModel class],
-             @"hot"         : [MallUAVListModel class]};
+    return @{@"recommended" : [MallClubListModel class],
+             @"activity"    : [MallClubListModel class],
+             @"jingxuan"    : [MallClubListModel class],
+             @"hot"         : [MallClubListModel class]};
 }
 @end
 
-@implementation MallUAVListModel
+@implementation MallClubListModel
 
 + (NSDictionary *)replacedKeyFromPropertyName{
     return @{@"kid" : @"id"};
