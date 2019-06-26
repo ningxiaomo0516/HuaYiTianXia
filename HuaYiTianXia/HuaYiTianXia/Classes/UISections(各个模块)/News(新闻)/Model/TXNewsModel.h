@@ -89,6 +89,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *title;
 /// 新闻 简介(内容)（详情HTML）
 @property (nonatomic, copy) NSString *content;
+/// 图片数组
+@property (nonatomic, copy) NSString *images;
 
 //// --------------- mall model --------------- ////
 /// 颜色数组（首页 取第一个）

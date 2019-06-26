@@ -124,7 +124,7 @@ static NSString * const reuseIdentifierBanner = @"TXMineBannerTableViewCell";
                 attributedText = [SCSmallTools sc_initImageWithText:model.data.userTypeName imageName:@"c7_黄金会员" fontWithSize:kFontSizeMedium13];
             }
             
-            self.headerView.levelLabel.attributedText = attributedText;
+//            self.headerView.levelLabel.attributedText = attributedText;
             self.headerView.nicknameLabel.text = model.data.username;
             self.headerView.titleLabel.text = model.data.companyname.length>0?model.data.companyname:@"分公司筹建中";
             self.headerView.numberLabel.text = [NSString stringWithFormat:@"人数：%@/30",model.data.joined.length>0?model.data.joined:@"0"];
@@ -151,7 +151,6 @@ static NSString * const reuseIdentifierBanner = @"TXMineBannerTableViewCell";
         TXMineHeaderTableViewCell* tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierHeader forIndexPath:indexPath];
         tools.userModel = self.userModel;
         return tools;
-
     }/*else if (indexPath.section == 1){
       // 隐藏个人中心banner(2019-05-29)
         TXMineBannerTableViewCell* tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierBanner forIndexPath:indexPath];
@@ -294,7 +293,7 @@ static NSString * const reuseIdentifierBanner = @"TXMineBannerTableViewCell";
 - (TXMineHeaderView *)headerView{
     if (!_headerView) {
         _headerView = [[TXMineHeaderView alloc] init];
-        CGFloat height = IPHONE6_W(325)+kSafeAreaBottomHeight;
+        CGFloat height = IPHONE6_W(240)+kSafeAreaBottomHeight;
         _headerView.frame = CGRectMake(0, 0, kScreenWidth, height);
     }
     return _headerView;

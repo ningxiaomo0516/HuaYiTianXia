@@ -55,7 +55,8 @@
 
 @implementation NewsRecordsModel
 + (NSDictionary *)replacedKeyFromPropertyName{
-    return @{@"kid" : @"id"};
+    return @{@"kid"     : @"id",
+             @"images"  : @"newImgArray"};
 }
 + (NSDictionary *)objectClassInArray{
     return @{@"banners" : [NewsBannerModel class]};

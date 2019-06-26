@@ -83,7 +83,7 @@
         [self.view insertSubview:_loadFailedView atIndex:10];
         [self.loadFailedView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.right.mas_offset(0);
-            make.centerY.mas_equalTo(self.view.mas_centerY);
+            make.centerY.mas_equalTo(self.view.mas_centerY).offset(-100);
             make.height.mas_equalTo(260);
         }];
     }

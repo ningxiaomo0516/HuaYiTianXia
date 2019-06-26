@@ -7,11 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "TTBaseTableViewController.h"
+#import "TTBaseNavImagesTableViewController.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface TXNewTemplateViewController : TTBaseTableViewController
+@interface TXNewTemplateViewController : TTBaseNavImagesTableViewController
 
 @end
 

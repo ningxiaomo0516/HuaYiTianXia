@@ -16,9 +16,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    self.view.backgroundColor = kViewColorNormal;
-    self.lz_fullScreenPopGestureEnabled = NO;
     // 设置UINavigationBar的主题
     [self setupNavigationBarTheme];
 }
@@ -29,21 +26,6 @@
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
 }
 
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
-    [self tapGesture];
-}
-
-#pragma mark 给当前view添加识别手势
-#pragma mark -- 当前tableView中带有输入框点击背景关闭键盘
-- (void) addGesture:(UITableView *) tableView{
-    UITapGestureRecognizer *tapGesture=[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGesture)];
-    [tableView addGestureRecognizer:tapGesture];
-    tapGesture.cancelsTouchesInView = NO;
-}
-
-- (void)tapGesture {
-    [kKeyWindow endEditing:YES];
-}
 - (void) setupNavigationBarTheme {
     
     // 1.去掉背景图片和底部线条

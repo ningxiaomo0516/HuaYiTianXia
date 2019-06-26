@@ -9,10 +9,10 @@
 #import "TXMallViewController.h"
 #import "WMPageController.h"
 #import "TXMallCollectionViewController.h"
-#import "TXMainHeaderView.h"
+#import "TXMallHeaderView.h"
 
 @interface TXMallViewController ()<WMPageControllerDelegate>
-@property (nonatomic, strong) TXMainHeaderView *headerView;
+@property (nonatomic, strong) TXMallHeaderView *headerView;
 @property (nonatomic, assign) CGFloat menuHeight;
 
 @end
@@ -35,7 +35,6 @@
 #pragma mark ---- 界面布局设置
 - (void)initView{
     [self.view addSubview:self.headerView];
-    self.headerView.titlesLabel.hidden = YES;
     [self.headerView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.right.equalTo(self.view);
         make.height.equalTo(@(kNavBarHeight));
@@ -91,9 +90,9 @@
     return pageVC;
 }
 
-- (TXMainHeaderView *)headerView{
+- (TXMallHeaderView *)headerView{
     if (!_headerView) {
-        _headerView = [[TXMainHeaderView alloc] init];
+        _headerView = [[TXMallHeaderView alloc] init];
     }
     return _headerView;
 }

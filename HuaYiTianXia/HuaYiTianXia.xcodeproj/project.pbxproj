@@ -34,6 +34,8 @@
 		E72086DC22C0CAE800F2F78C /* TXClubChildRecommendedTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E72086CB22C0CAE700F2F78C /* TXClubChildRecommendedTableViewCell.m */; };
 		E72086DD22C0CAE800F2F78C /* TXClubRecommendedTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E72086CC22C0CAE700F2F78C /* TXClubRecommendedTableViewCell.m */; };
 		E720A5CD22A8C44A00331846 /* TTCustomPhotoAlbum.m in Sources */ = {isa = PBXBuildFile; fileRef = E720A5CC22A8C44A00331846 /* TTCustomPhotoAlbum.m */; };
+		E72109F222C31AD800E38209 /* TXNewMultipleImageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E72109F122C31AD800E38209 /* TXNewMultipleImageTableViewCell.m */; };
+		E72109F522C3506B00E38209 /* TXMallHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = E72109F422C3506B00E38209 /* TXMallHeaderView.m */; };
 		E725718922BCBACB006A787C /* TXClubCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E725718822BCBACB006A787C /* TXClubCollectionViewCell.m */; };
 		E725718C22BCBB56006A787C /* TXClubCollectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = E725718B22BCBB56006A787C /* TXClubCollectionHeaderView.m */; };
 		E725718F22BCBB73006A787C /* TXClubCollectionFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = E725718E22BCBB73006A787C /* TXClubCollectionFooterView.m */; };
@@ -109,7 +111,6 @@
 		E72699FC223F8298003A5043 /* WMProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = E72699F5223F8297003A5043 /* WMProgressView.m */; };
 		E72699FD223F8298003A5043 /* bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E72699F7223F8297003A5043 /* bg.jpg */; };
 		E7269A00223F8472003A5043 /* TXNewTemplateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E72699FF223F8472003A5043 /* TXNewTemplateViewController.m */; };
-		E7269A04223F8738003A5043 /* TXMainHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = E7269A03223F8738003A5043 /* TXMainHeaderView.m */; };
 		E727FEF822A765C8001C5E63 /* TXBezierPath.m in Sources */ = {isa = PBXBuildFile; fileRef = E727FEF722A765C8001C5E63 /* TXBezierPath.m */; };
 		E727FEFB22A77049001C5E63 /* TXSignatureView.m in Sources */ = {isa = PBXBuildFile; fileRef = E727FEFA22A77049001C5E63 /* TXSignatureView.m */; };
 		E729F7B222A0CF030029A335 /* TXCharterMachineModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E729F7B122A0CF030029A335 /* TXCharterMachineModel.m */; };
@@ -462,6 +463,10 @@
 		E72086CD22C0CAE700F2F78C /* TXClubChildRecommendedTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXClubChildRecommendedTableViewCell.h; sourceTree = "<group>"; };
 		E720A5CB22A8C44A00331846 /* TTCustomPhotoAlbum.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TTCustomPhotoAlbum.h; sourceTree = "<group>"; };
 		E720A5CC22A8C44A00331846 /* TTCustomPhotoAlbum.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TTCustomPhotoAlbum.m; sourceTree = "<group>"; };
+		E72109F022C31AD800E38209 /* TXNewMultipleImageTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXNewMultipleImageTableViewCell.h; sourceTree = "<group>"; };
+		E72109F122C31AD800E38209 /* TXNewMultipleImageTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXNewMultipleImageTableViewCell.m; sourceTree = "<group>"; };
+		E72109F322C3506B00E38209 /* TXMallHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXMallHeaderView.h; sourceTree = "<group>"; };
+		E72109F422C3506B00E38209 /* TXMallHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXMallHeaderView.m; sourceTree = "<group>"; };
 		E725718722BCBACB006A787C /* TXClubCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXClubCollectionViewCell.h; sourceTree = "<group>"; };
 		E725718822BCBACB006A787C /* TXClubCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXClubCollectionViewCell.m; sourceTree = "<group>"; };
 		E725718A22BCBB56006A787C /* TXClubCollectionHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXClubCollectionHeaderView.h; sourceTree = "<group>"; };
@@ -600,8 +605,6 @@
 		E72699F7223F8297003A5043 /* bg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = bg.jpg; sourceTree = "<group>"; };
 		E72699FE223F8472003A5043 /* TXNewTemplateViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXNewTemplateViewController.h; sourceTree = "<group>"; };
 		E72699FF223F8472003A5043 /* TXNewTemplateViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXNewTemplateViewController.m; sourceTree = "<group>"; };
-		E7269A02223F8738003A5043 /* TXMainHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXMainHeaderView.h; sourceTree = "<group>"; };
-		E7269A03223F8738003A5043 /* TXMainHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXMainHeaderView.m; sourceTree = "<group>"; };
 		E727FEF622A765C8001C5E63 /* TXBezierPath.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXBezierPath.h; sourceTree = "<group>"; };
 		E727FEF722A765C8001C5E63 /* TXBezierPath.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXBezierPath.m; sourceTree = "<group>"; };
 		E727FEF922A77049001C5E63 /* TXSignatureView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXSignatureView.h; sourceTree = "<group>"; };
@@ -1634,6 +1637,8 @@
 			children = (
 				E78583BF223F98A800BBEA41 /* TXNewTemplateTableViewCell.h */,
 				E78583C0223F98A800BBEA41 /* TXNewTemplateTableViewCell.m */,
+				E72109F022C31AD800E38209 /* TXNewMultipleImageTableViewCell.h */,
+				E72109F122C31AD800E38209 /* TXNewMultipleImageTableViewCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1905,8 +1910,6 @@
 			children = (
 				E78583B9223F947600BBEA41 /* Utils.h */,
 				E78583B8223F947500BBEA41 /* Utils.m */,
-				E7269A02223F8738003A5043 /* TXMainHeaderView.h */,
-				E7269A03223F8738003A5043 /* TXMainHeaderView.m */,
 				E7CCDEE6228C04120017A684 /* TTBottomShowView.h */,
 				E7CCDEE7228C04120017A684 /* TTBottomShowView.m */,
 			);
@@ -2050,6 +2053,8 @@
 				E74CFF7B2289086B00576B86 /* TXMallCollectionViewCell.m */,
 				E74CFF7C2289086B00576B86 /* TXMallToolsCollectionViewCell.h */,
 				E74CFF7D2289086B00576B86 /* TXMallToolsCollectionViewCell.m */,
+				E72109F322C3506B00E38209 /* TXMallHeaderView.h */,
+				E72109F422C3506B00E38209 /* TXMallHeaderView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -4109,6 +4114,7 @@
 				E72086D722C0CAE800F2F78C /* TXClubChildExperienceViewController.m in Sources */,
 				E714F28E227192F200024FA3 /* TXSystemTableViewCell.m in Sources */,
 				E7504232228C528200A34006 /* TXBaseCollectionReusableHeaderView.m in Sources */,
+				E72109F222C31AD800E38209 /* TXNewMultipleImageTableViewCell.m in Sources */,
 				E774DCDC2272D21A001A95B8 /* TTWebViewController.m in Sources */,
 				E7B4706822803BBD00ADDC7A /* LZPinyinHelper.m in Sources */,
 				E725718C22BCBB56006A787C /* TXClubCollectionHeaderView.m in Sources */,
@@ -4131,6 +4137,7 @@
 				E78334092248DE2F005CAB91 /* UIViewController+TTPopupViewController.m in Sources */,
 				E78583CA22409D5A00BBEA41 /* TXMineTableViewCell.m in Sources */,
 				E78583C4223FA3C000BBEA41 /* TXMineHeaderView.m in Sources */,
+				E72109F522C3506B00E38209 /* TXMallHeaderView.m in Sources */,
 				E75698982251EBA30022EC49 /* TXWalletModel.m in Sources */,
 				E7B23C2122B8E54C002EBE2D /* TXLogisticModel.m in Sources */,
 				E7B4706422803BBD00ADDC7A /* LZChineseToPinyinResource.m in Sources */,
@@ -4224,7 +4231,6 @@
 				E77E1D81229D26D100DC4033 /* TXMineTeamSectionView.m in Sources */,
 				E750422F228C25CD00A34006 /* TXConventionSucceViewController.m in Sources */,
 				E7837842229678BD0020C823 /* TXInvitationTableViewCell.m in Sources */,
-				E7269A04223F8738003A5043 /* TXMainHeaderView.m in Sources */,
 				E72086D922C0CAE800F2F78C /* TXYuYueShenQingViewController.m in Sources */,
 				E72086DA22C0CAE800F2F78C /* TXClubRecommendedViewController.m in Sources */,
 				E782AB4E2285698000CE2F81 /* TXAddTitleAddressView.m in Sources */,

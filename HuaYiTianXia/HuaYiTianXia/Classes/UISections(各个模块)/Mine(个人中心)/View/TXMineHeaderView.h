@@ -12,20 +12,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface TXMineHeaderView : UIView
 /// 头像
-@property (nonatomic, strong) UIImageView *imagesViewAvatar;
+@property (nonatomic, strong) UIImageView   *imagesViewAvatar;
 /// 头像背景
-@property (nonatomic, strong) UIImageView *imagesViewAvatar_BG;
+@property (nonatomic, strong) UIView        *avatarView;
 /// 背景图
-@property (nonatomic, strong) UIImageView *imagesView_BG;
-/// 底部View
-@property (nonatomic, strong) UIView *footerView;
-/// 盒子View
-@property (nonatomic, strong) UIView *boxView;
-@property (nonatomic, strong) UIImageView *imagesViewBox;
+@property (nonatomic, strong) UIImageView   *imagesView_BG;
 /// 用户昵称
-@property (nonatomic, strong) UILabel *nicknameLabel;
+@property (nonatomic, strong) UILabel       *nicknameLabel;
 /// 等级图标
-@property (nonatomic, strong) UILabel *levelLabel;
+@property (nonatomic, strong) UIImageView   *images_level;
 /// 等级图标
 //@property (nonatomic, strong) UILabel *levelLabel;
 /// 升级按钮

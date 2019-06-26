@@ -11,13 +11,12 @@
 #import "SCTableViewSectionHeaderView.h"
 #import "TXNewTemplateTableViewCell.h"
 #import "TXMallGoodsBannerTableViewCell.h"
+#import "TXNewMultipleImageTableViewCell.h"
 #import "TXNewsModel.h"
 #import "TXWebViewController.h"
 #import <JhtMarquee/JhtVerticalMarquee.h>
 #import <JhtMarquee/JhtHorizontalMarquee.h>
 
-
-static NSString * const reuseIdentifier = @"TXNewTemplateTableViewCell";
 static NSString * const reuseIdentifierBanner = @"TXMallGoodsBannerTableViewCell";
 static NSString * const reuseIdentifierSectionHeaderView = @"SCTableViewSectionHeaderView";
 
@@ -123,17 +122,17 @@ static NSString * const reuseIdentifierSectionHeaderView = @"SCTableViewSectionH
     [parameter setObject:@(self.pageIndex) forKey:@"page"];     // 当前页
     [parameter setObject:@(self.pageSize) forKey:@"pageSize"];  // 每页条数
 
-//    TTLog(@"parameter -- %@",parameter);
     [SCHttpTools postWithURLString:@"news/GetNew" parameter:parameter success:^(id responseObject) {
         NSDictionary *result = responseObject;
-//            TTLog(@"result -- %@",result);
-        if (self.pageIndex==1) {
-            [self.dataArray removeAllObjects];
-            [self.bannerArray removeAllObjects];
-        }
         TXNewsArrayModel *model = [TXNewsArrayModel mj_objectWithKeyValues:result];
-        [self.dataArray addObjectsFromArray:model.data.records];
-        [self.bannerArray addObjectsFromArray:model.banners];
+        if (model.errorcode==20000) {
+            if (self.pageIndex==1) {
+                [self.dataArray removeAllObjects];
+                [self.bannerArray removeAllObjects];
+            }
+            [self.dataArray addObjectsFromArray:model.data.records];
+            [self.bannerArray addObjectsFromArray:model.banners];
+        }
         [self.tableView reloadData];
         [self.tableView.mj_header endRefreshing];
         [self.tableView.mj_footer endRefreshing];
@@ -155,8 +154,7 @@ static NSString * const reuseIdentifierSectionHeaderView = @"SCTableViewSectionH
 #pragma mark ---- 约束布局
 - (void) initViewConstraints{
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.right.equalTo(self.view);
-        make.bottom.equalTo(self.view.mas_bottom).offset(-kTabBarHeight);
+        make.bottom.top.left.right.equalTo(self.view);
     }];
 }
 
@@ -178,11 +176,26 @@ static NSString * const reuseIdentifierSectionHeaderView = @"SCTableViewSectionH
         tools.backgroundColor = kWhiteColor;
         [tools.contentView addSubview:self.horizontalMarquee];
         tools.selectionStyle = UITableViewCellSelectionStyleNone;
+        UIImageView *imagesView = [[UIImageView alloc] init];
+        [tools.contentView addSubview:imagesView];
+        imagesView.image = kGetImage(@"c77_通知");
+        [imagesView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(@(IPHONE6_W(15)));
+            make.centerY.equalTo(tools.contentView);
+        }];
+        [self.horizontalMarquee mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.equalTo(tools.contentView);
+            make.left.equalTo(imagesView.mas_right).offset(5);
+        }];
         // 开启跑马灯
         [self.horizontalMarquee marqueeOfSettingWithState:MarqueeStart_H];
         return tools;
     }else{
-        TXNewTemplateTableViewCell  *tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
+//        TXNewMultipleImageTableViewCell
+//        if (<#condition#>) {
+//            <#statements#>
+//        }
+        TXNewTemplateTableViewCell *tools=[TXNewTemplateTableViewCell cellWithTableViewCell:tableView forIndexPath:indexPath];
         tools.recordsModel = self.dataArray[indexPath.row];
         return tools;
     }
@@ -190,9 +203,9 @@ static NSString * const reuseIdentifierSectionHeaderView = @"SCTableViewSectionH
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if((self.rollText.length>0&&indexPath.section==1)){
-        return IPHONE6_W(50);
+        return IPHONE6_W(25);
     }else{
-        return (self.bannerArray.count>0&&indexPath.section==0)?(kScreenWidth)*9/16:IPHONE6_W(108);
+        return (self.bannerArray.count>0&&indexPath.section==0)?IPHONE6_W(165):UITableViewAutomaticDimension;
     }
 }
 
@@ -215,17 +228,11 @@ static NSString * const reuseIdentifierSectionHeaderView = @"SCTableViewSectionH
     if ((self.bannerArray.count>0&&section==0)||(self.rollText.length>0&&section==1)) {
         return 0.f;
     }else{
-        return 44.0f;
-    }
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
-    if ((self.bannerArray.count>0&&section==0)) {
-        return 10.f;
-    }else if (self.rollText.length > 0 && section == 1) {
-        return 10.0f;
-    }else{
-        return 0.0f;
+        if (self.bannerArray.count==0&&(self.rollText.length>0&&section==0)) {
+            return 0.0f;
+        }else{
+            return 10.0f;
+        }
     }
 }
 
@@ -240,35 +247,15 @@ static NSString * const reuseIdentifierSectionHeaderView = @"SCTableViewSectionH
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
-#pragma mark -------------- 设置组头 --------------
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    SCTableViewSectionHeaderView *headerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:reuseIdentifierSectionHeaderView];
-    if (self.bannerArray.count>0&&section==2) {
-        NSString *titleTextStr = @"新闻动态";
-        NSString *subtitleTestStr = @"";
-        headerView.lineView.hidden = NO;
-        headerView.titleLabel.text = titleTextStr;
-        headerView.subtitleLabel.text = subtitleTestStr;
-    }else if((self.rollText.length>0&&section==1)){
-        return [UIView new];
-    }else{
-        NSString *titleTextStr = @"新闻动态";
-        NSString *subtitleTestStr = @"";
-        headerView.lineView.hidden = NO;
-        headerView.titleLabel.text = titleTextStr;
-        headerView.subtitleLabel.text = subtitleTestStr;
-    }
-    return headerView;
-}
-
 #pragma mark ----- getter/setter
 -(UITableView *)tableView{
     if (!_tableView) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
+        _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
         _tableView.showsVerticalScrollIndicator = false;
-        [_tableView setSeparatorInset:UIEdgeInsetsMake(0, 15, 0, 15)];
+        [_tableView setSeparatorInset:UIEdgeInsetsMake(0, 15, 0, 0)];
         [_tableView registerClass:[SCTableViewSectionHeaderView class] forHeaderFooterViewReuseIdentifier:reuseIdentifierSectionHeaderView];
-        [_tableView registerClass:[TXNewTemplateTableViewCell class] forCellReuseIdentifier:reuseIdentifier];
+        [_tableView registerClass:[TXNewTemplateTableViewCell class] forCellReuseIdentifier:[TXNewTemplateTableViewCell reuseIdentifier]];
+        [_tableView registerClass:[TXNewMultipleImageTableViewCell class] forCellReuseIdentifier:[TXNewMultipleImageTableViewCell reuseIdentifier]];
         [_tableView registerClass:[TXMallGoodsBannerTableViewCell class] forCellReuseIdentifier:reuseIdentifierBanner];
         [_tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"TTRollLabelWebViewCell"];
         
@@ -299,11 +286,11 @@ static NSString * const reuseIdentifierSectionHeaderView = @"SCTableViewSectionH
 /** 横向 跑马灯 */
 - (JhtHorizontalMarquee *)horizontalMarquee {
     if (!_horizontalMarquee) {
-        _horizontalMarquee = [[JhtHorizontalMarquee alloc] initWithFrame:CGRectMake(IPHONE6_W(15), 0, self.view.width-IPHONE6_W(30), IPHONE6_W(50)) singleScrollDuration:0.0];
+        _horizontalMarquee = [[JhtHorizontalMarquee alloc] initWithFrame:CGRectMake(IPHONE6_W(15), 0, self.view.width-IPHONE6_W(30), IPHONE6_W(25)) singleScrollDuration:0.0];
         _horizontalMarquee.tag = 100;
         _horizontalMarquee.backgroundColor = kClearColor;
-        _horizontalMarquee.textColor = kTextColor51;
-        _horizontalMarquee.font = kFontSizeMedium15;
+        _horizontalMarquee.textColor = kThemeColorHex;
+        _horizontalMarquee.font = kFontSizeMedium10;
     }
     
     return _horizontalMarquee;

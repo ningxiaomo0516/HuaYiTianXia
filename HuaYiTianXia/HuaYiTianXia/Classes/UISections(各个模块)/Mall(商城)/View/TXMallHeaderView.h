@@ -1,8 +1,8 @@
 //
-//  TTBaseNavImagesViewController.h
+//  TXMallHeaderView.h
 //  HuaYiTianXia
 //
-//  Created by 宁小陌 on 2019/3/20.
+//  Created by 宁小陌 on 2019/6/26.
 //  Copyright © 2019 宁小陌. All rights reserved.
 //
 
@@ -10,9 +10,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface TTBaseNavImagesViewController : TTBaseViewController
-
-
+@interface TXMallHeaderView : UIView
+@property (nonatomic, strong) UIImageView *imagesView;
 @end
 
 NS_ASSUME_NONNULL_END
