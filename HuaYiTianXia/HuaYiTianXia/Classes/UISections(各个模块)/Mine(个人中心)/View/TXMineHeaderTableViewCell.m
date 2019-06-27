@@ -33,196 +33,191 @@
     _userModel = userModel;
     [self initView];
     self.totalAssetsLabel.text = self.userModel.totalAssets;
-    self.vrAssetsLabel.text = self.userModel.vrcurrency;
-    self.arAssetsLabel.text = self.userModel.arcurrency;
+    self.vhAssetsLabel.text = self.userModel.vrcurrency;
+    self.ahAssetsLabel.text = self.userModel.arcurrency;
     self.eqAssetsLabel.text = self.userModel.stockRight;
+    self.vhAssetsTips.text = [NSString stringWithFormat:@"农保可用%@",self.userModel.exclusiveVH];
 }
 
 - (void) initView{
-    self.imagesViewBG.hidden = YES;
-    [self addSubview:self.imagesViewBG];
-    [self.imagesViewBG mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.top.bottom.equalTo(self);
-    }];
-    
     [self addSubview:self.totalAssetsLabel];
     [self addSubview:self.totalAssetsTipsLabel];
     
-    [self addSubview:self.vrBoxView];
-    [self addSubview:self.arBoxView];
+    [self addSubview:self.vhBoxView];
+    [self addSubview:self.ahBoxView];
     [self addSubview:self.eqBoxView];
+    [self.vhBoxView addSubview:self.vhAssetsLabel];
+    [self.vhBoxView addSubview:self.vhAssetsTipsLabel];
+    [self.vhBoxView addSubview:self.vhAssetsTips];
     
-    [self.vrBoxView addSubview:self.vrAssetsLabel];
-    [self.vrBoxView addSubview:self.vrAssetsTipsLabel];
-    
-    [self.vrBoxView addSubview:self.linerView];
-    [self.eqBoxView addSubview:self.linersView];
-    
-    [self.arBoxView addSubview:self.arAssetsLabel];
-    [self.arBoxView addSubview:self.arAssetsTipsLabel];
+    [self.ahBoxView addSubview:self.ahAssetsLabel];
+    [self.ahBoxView addSubview:self.ahAssetsTipsLabel];
+    [self.ahBoxView addSubview:self.ahAssetsTips];
     
     [self.eqBoxView addSubview:self.eqAssetsLabel];
     [self.eqBoxView addSubview:self.eqAssetsTipsLabel];
+    [self.eqBoxView addSubview:self.eqAssetsTips];
+    
+    CGFloat margin = IPHONE6_W(6);
+    [self.totalAssetsTipsLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(@(margin));
+        make.centerX.equalTo(self);
+    }];
     
     [self.totalAssetsLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.centerX.equalTo(self);
+        make.centerX.equalTo(self.totalAssetsTipsLabel);
+        make.top.equalTo(self.totalAssetsTipsLabel.mas_bottom);
     }];
     
-    [self.totalAssetsTipsLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.totalAssetsLabel);
-        make.top.equalTo(self.totalAssetsLabel.mas_bottom);
-    }];
-    
-    [self.vrBoxView mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.vhBoxView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.bottom.equalTo(self);
         make.height.equalTo(@(IPHONE6_W(65)));
-        make.width.equalTo(self.arBoxView.mas_width);
-        make.right.equalTo(self.arBoxView.mas_left);
+        make.width.equalTo(self.ahBoxView.mas_width);
+        make.right.equalTo(self.ahBoxView.mas_left);
     }];
-    [self.arBoxView mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.ahBoxView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(self);
         make.right.equalTo(self.eqBoxView.mas_left);
         make.width.equalTo(self.eqBoxView.mas_width);
-        make.height.equalTo(self.vrBoxView);
+        make.height.equalTo(self.vhBoxView);
     }];
     [self.eqBoxView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.bottom.equalTo(self);
-        make.width.equalTo(self.vrBoxView.mas_width);
-        make.height.equalTo(self.vrBoxView);
-    }];
-    [self.vrAssetsLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.vrBoxView);
-        make.bottom.equalTo(self.vrAssetsTipsLabel.mas_top).offset(-5);
-    }];
-
-    [self.vrAssetsTipsLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.vrBoxView);
-        make.bottom.equalTo(self.vrBoxView.mas_bottom).offset(-8);
-    }];
-
-    [self.arAssetsLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.arBoxView);
-        make.bottom.equalTo(self.arAssetsTipsLabel.mas_top).offset(-5);
-    }];
-
-    [self.arAssetsTipsLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.arBoxView);
-        make.bottom.equalTo(self.arBoxView.mas_bottom).offset(-8);
+        make.width.equalTo(self.vhBoxView.mas_width);
+        make.height.equalTo(self.vhBoxView);
     }];
     
-    [self.linerView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(self.vrBoxView.mas_right);
-        make.height.equalTo(@(IPHONE6_W(37)));
-        make.width.equalTo(@(IPHONE6_W(0.7)));
-        make.bottom.equalTo(self.mas_bottom).offset(-12);
+    [self.vhAssetsTipsLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self.vhBoxView);
+        make.top.equalTo(@(margin));
     }];
-    [self.linersView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.eqBoxView);
-        make.bottom.height.width.equalTo(self.linerView);
+    
+    [self.vhAssetsLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.centerY.equalTo(self.vhBoxView);
     }];
-    [self.eqAssetsLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.eqBoxView);
-        make.bottom.equalTo(self.eqAssetsTipsLabel.mas_top).offset(-5);
+    
+    [self.vhAssetsTips mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self.vhBoxView);
+        make.bottom.equalTo(self.vhBoxView.mas_bottom).offset(-margin);
+    }];
+
+    [self.ahAssetsTipsLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self.ahBoxView);
+        make.top.equalTo(@(margin));
+    }];
+    
+    [self.ahAssetsLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.centerY.equalTo(self.ahBoxView);
+    }];
+    
+    [self.ahAssetsTips mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self.ahBoxView);
+        make.centerY.equalTo(self.vhAssetsTips);
     }];
     
     [self.eqAssetsTipsLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.eqBoxView);
-        make.bottom.equalTo(self.eqBoxView.mas_bottom).offset(-8);
+        make.top.equalTo(@(margin));
+    }];
+    [self.eqAssetsLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.centerY.equalTo(self.eqBoxView);
+    }];
+    [self.eqAssetsTips mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self.eqBoxView);
+        make.centerY.equalTo(self.vhAssetsTips);
     }];
 }
 
-- (UIImageView *)imagesViewBG{
-    if (!_imagesViewBG) {
-        _imagesViewBG = [[UIImageView alloc] init];
-        _imagesViewBG.image = imageColor(kThemeColorHex);
-    }
-    return _imagesViewBG;
-}
-
-
 - (UILabel *)totalAssetsLabel{
     if (!_totalAssetsLabel) {
-        _totalAssetsLabel = [UILabel lz_labelWithTitle:@"" color:kTextColor102 font:kFontSizeMedium30];
+        _totalAssetsLabel = [UILabel lz_labelWithTitle:@"" color:kThemeColorHex font:kFontSizeScBold24];
     }
     return _totalAssetsLabel;
 }
 
 - (UILabel *)totalAssetsTipsLabel{
     if (!_totalAssetsTipsLabel) {
-        _totalAssetsTipsLabel = [UILabel lz_labelWithTitle:@"我的资产" color:kTextColor102 font:kFontSizeMedium14];
+        _totalAssetsTipsLabel = [UILabel lz_labelWithTitle:@"我的资产" color:kTextColor102 font:kFontSizeMedium15];
     }
     return _totalAssetsTipsLabel;
 }
 
-- (UILabel *)vrAssetsLabel{
-    if (!_vrAssetsLabel) {
-        _vrAssetsLabel = [UILabel lz_labelWithTitle:@"0" color:kTextColor102 font:kFontSizeScBold20];
+- (UILabel *)vhAssetsLabel{
+    if (!_vhAssetsLabel) {
+        _vhAssetsLabel = [UILabel lz_labelWithTitle:@"0" color:kThemeColorHex font:kFontSizeMedium16];
     }
-    return _vrAssetsLabel;
+    return _vhAssetsLabel;
 }
 
-- (UILabel *)vrAssetsTipsLabel{
-    if (!_vrAssetsTipsLabel) {
-        _vrAssetsTipsLabel = [UILabel lz_labelWithTitle:@"VH积分" color:[kTextColor102 colorWithAlphaComponent:0.5] font:kFontSizeMedium14];
+- (UILabel *)vhAssetsTipsLabel{
+    if (!_vhAssetsTipsLabel) {
+        _vhAssetsTipsLabel = [UILabel lz_labelWithTitle:@"VH" color:kTextColor51 font:kFontSizeMedium12];
     }
-    return _vrAssetsTipsLabel;
+    return _vhAssetsTipsLabel;
 }
 
-- (UIView *)linerView {
-    if (!_linerView) {
-        _linerView = [UIView lz_viewWithColor:kTextColor102];
+- (UILabel *)vhAssetsTips{
+    if (!_vhAssetsTips) {
+        _vhAssetsTips = [UILabel lz_labelWithTitle:@"农保可用4000" color:kTextColor102 font:kFontSizeMedium10];
     }
-    return _linerView;
+    return _vhAssetsTips;
 }
 
-- (UILabel *)arAssetsLabel{
-    if (!_arAssetsLabel) {
-        _arAssetsLabel = [UILabel lz_labelWithTitle:@"0" color:kTextColor102 font:kFontSizeScBold20];
+- (UILabel *)ahAssetsLabel{
+    if (!_ahAssetsLabel) {
+        _ahAssetsLabel = [UILabel lz_labelWithTitle:@"0" color:kThemeColorHex font:kFontSizeMedium16];
     }
-    return _arAssetsLabel;
+    return _ahAssetsLabel;
 }
 
-- (UILabel *)arAssetsTipsLabel {
-    if (!_arAssetsTipsLabel) {
-        _arAssetsTipsLabel = [UILabel lz_labelWithTitle:@"AH积分" color:[kTextColor102 colorWithAlphaComponent:0.5] font:kFontSizeMedium14];
+- (UILabel *)ahAssetsTipsLabel {
+    if (!_ahAssetsTipsLabel) {
+        _ahAssetsTipsLabel = [UILabel lz_labelWithTitle:@"AH" color:kTextColor51 font:kFontSizeMedium12];
     }
-    return _arAssetsTipsLabel;
+    return _ahAssetsTipsLabel;
 }
 
-- (UIView *)linersView {
-    if (!_linersView) {
-        _linersView = [UIView lz_viewWithColor:kTextColor102];
+- (UILabel *)ahAssetsTips{
+    if (!_ahAssetsTips) {
+        _ahAssetsTips = [UILabel lz_labelWithTitle:@"-" color:kTextColor102 font:kFontSizeMedium10];
     }
-    return _linersView;
+    return _ahAssetsTips;
 }
 
 - (UILabel *)eqAssetsLabel{
     if (!_eqAssetsLabel) {
-        _eqAssetsLabel = [UILabel lz_labelWithTitle:@"0" color:kTextColor102 font:kFontSizeScBold20];
+        _eqAssetsLabel = [UILabel lz_labelWithTitle:@"0" color:kThemeColorHex font:kFontSizeMedium16];
     }
     return _eqAssetsLabel;
 }
 
 - (UILabel *)eqAssetsTipsLabel {
     if (!_eqAssetsTipsLabel) {
-        _eqAssetsTipsLabel = [UILabel lz_labelWithTitle:@"股权数" color:[kTextColor102 colorWithAlphaComponent:0.5] font:kFontSizeMedium14];
+        _eqAssetsTipsLabel = [UILabel lz_labelWithTitle:@"股权数" color:kTextColor51 font:kFontSizeMedium12];
     }
     return _eqAssetsTipsLabel;
 }
 
-
-- (UIView *)vrBoxView{
-    if (!_vrBoxView) {
-        _vrBoxView = [UIView lz_viewWithColor:kClearColor];
+- (UILabel *)eqAssetsTips{
+    if (!_eqAssetsTips) {
+        _eqAssetsTips = [UILabel lz_labelWithTitle:@"-" color:kTextColor102 font:kFontSizeMedium10];
     }
-    return _vrBoxView;
+    return _eqAssetsTips;
 }
 
-- (UIView *)arBoxView {
-    if (!_arBoxView) {
-        _arBoxView = [UIView lz_viewWithColor:kClearColor];
+
+- (UIView *)vhBoxView{
+    if (!_vhBoxView) {
+        _vhBoxView = [UIView lz_viewWithColor:kClearColor];
     }
-    return _arBoxView;
+    return _vhBoxView;
+}
+
+- (UIView *)ahBoxView {
+    if (!_ahBoxView) {
+        _ahBoxView = [UIView lz_viewWithColor:kClearColor];
+    }
+    return _ahBoxView;
 }
 
 - (UIView *)eqBoxView{

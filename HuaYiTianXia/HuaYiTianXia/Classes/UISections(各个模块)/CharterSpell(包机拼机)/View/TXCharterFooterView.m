@@ -19,7 +19,6 @@
 
 - (void) initView{
     [self addSubview:self.submitButton];
-    [self addSubview:self.totalTitleLabel];
     [self addSubview:self.totalAmountLabel];
     [self.submitButton mas_makeConstraints:^(MASConstraintMaker *make) {
         CGFloat height = IPHONE6_W(35);
@@ -34,11 +33,6 @@
         make.right.equalTo(self.submitButton.mas_left).offset(-15);
         make.centerY.equalTo(self.submitButton);
     }];
-    
-    [self.totalTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(self.totalAmountLabel.mas_left).offset(-10);
-        make.centerY.equalTo(self.submitButton);
-    }];
 }
 
 - (UIButton *)submitButton{
@@ -49,26 +43,15 @@
         [_submitButton setTitle:@"立即支付" forState:UIControlStateNormal];
         [_submitButton setBackgroundImage:kButtonColorNormal forState:UIControlStateNormal];
         [_submitButton lz_setCornerRadius:3.0];
-        MV(weakSelf);
-        [_submitButton lz_handleControlEvent:UIControlEventTouchUpInside withBlock:^{
-//            [weakSelf submitBtnClick:self.submitButton];
-        }];
     }
     return _submitButton;
 }
 
 - (UILabel *)totalAmountLabel{
     if (!_totalAmountLabel) {
-        _totalAmountLabel = [UILabel lz_labelWithTitle:@"" color:kColorWithRGB(211, 0, 0) font:kFontSizeMedium15];
+        _totalAmountLabel = [UILabel lz_labelWithTitle:@"" color:kPriceColor font:kFontSizeMedium24];
     }
     return _totalAmountLabel;
-}
-
-- (UILabel *)totalTitleLabel{
-    if (!_totalTitleLabel) {
-        _totalTitleLabel = [UILabel lz_labelWithTitle:@"总计:" color:kTextColor102 font:kFontSizeMedium15];
-    }
-    return _totalTitleLabel;
 }
 
 @end

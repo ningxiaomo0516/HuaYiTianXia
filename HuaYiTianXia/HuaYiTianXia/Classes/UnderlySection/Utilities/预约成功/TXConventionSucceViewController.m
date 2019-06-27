@@ -73,7 +73,6 @@
         [_closeButton setBackgroundImage:imageHexString(@"#FF4163") forState:UIControlStateNormal];
         MV(weakSelf);
         [_closeButton lz_handleControlEvent:UIControlEventTouchUpInside withBlock:^{
-//            [weakSelf dismissedPopupView:weakSelf.closeButton];
             [weakSelf sc_dismissVC];
         }];
     }

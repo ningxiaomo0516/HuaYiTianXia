@@ -14,7 +14,6 @@
 #import "TXShareViewController.h"
 #import "TXSubmitOrderViewController.h"
 #import "TXWebViewController.h"
-#import "TXPayOrderViewController.h"
 #import "TXChoosePayViewController.h"
 #import "TXLoginViewController.h"
 #import <WebKit/WebKit.h>
@@ -106,20 +105,9 @@ TXMallGoodsSpecTableViewCellDelegate,WKUIDelegate,WKNavigationDelegate>
             TTPushVC(vc);
         }else if(self.pageType == 1){
             if (kUserInfo.isValidation==2) {
-//                ///// 记录当前是农保购买
-//                kUserInfo.topupType = 3;
-//                [kUserInfo dump];
-//                TXPayOrderViewController *vc = [[TXPayOrderViewController alloc] initNewsRecordsModel:self.model];
-//                vc.totalPriceBlock = ^(NSString * _Nonnull totalPrice) {
-//                    //            model.price = totalPrice;
-//                };
-//                [self sc_bottomPresentController:vc presentedHeight:IPHONE6_W(kiPhoneX_T(420)) completeHandle:^(BOOL presented) {
-//                    if (presented) {
-//                        TTLog(@"弹出了");
-//                    }else{
-//                        TTLog(@"消失了");
-//                    }
-//                }];
+                ///// 记录当前是农保购买
+                kUserInfo.topupType = 3;
+                [kUserInfo dump];
                 TXPayNBViewController *vc = [[TXPayNBViewController alloc] initNewsRecordsModel:self.model];
                 TTPushVC(vc);
             }else if(kUserInfo.isValidation==1){

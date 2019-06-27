@@ -46,6 +46,12 @@ static NSString * const reuseIdentifierBanner = @"TXMineBannerTableViewCell";
     if (kUserInfo.isLogin) {
         [self requestPersonalCenterData];
     }
+    
+    // 下拉刷新
+    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        [self requestPersonalCenterData];
+    }];
+    
     // 注册通知
     [kNotificationCenter addObserver:self selector:@selector(reloadUserName) name:@"reloadUserName" object:nil];
     [kNotificationCenter addObserver:self selector:@selector(reloadData) name:@"reloadMineData" object:nil];
@@ -117,24 +123,42 @@ static NSString * const reuseIdentifierBanner = @"TXMineBannerTableViewCell";
             [self.headerView.imagesViewAvatar sc_setImageWithUrlString:model.data.avatar
                                                       placeholderImage:kGetImage(@"mine_icon_avatar")
                                                               isAvatar:false];
-            NSAttributedString *attributedText;
-            if ([model.data.userTypeName isEqualToString:@"天合会员"]) {
-               attributedText = [SCSmallTools sc_initImageWithText:model.data.userTypeName imageName:@"c7_普通用户" fontWithSize:kFontSizeMedium13];
-            }else{
-                attributedText = [SCSmallTools sc_initImageWithText:model.data.userTypeName imageName:@"c7_黄金会员" fontWithSize:kFontSizeMedium13];
+            if (model.data.usertype==0) {
+                self.headerView.images_level.image = kGetImage(@"");
+            }else if (model.data.usertype==1){
+                NSInteger thGrade = model.data.thGrade.integerValue;
+                if (thGrade==0) {
+                    TTLog(@"普通天合会员");
+                }else if (thGrade==1){
+                    self.headerView.images_level.image = kGetImage(@"c77_黄金");
+                }else if (thGrade==2){
+                    self.headerView.images_level.image = kGetImage(@"c77_白钻");
+                }else if (thGrade==3){
+                    self.headerView.images_level.image = kGetImage(@"c77_黑钻");
+                }
             }
-            
-//            self.headerView.levelLabel.attributedText = attributedText;
             self.headerView.nicknameLabel.text = model.data.username;
-            self.headerView.titleLabel.text = model.data.companyname.length>0?model.data.companyname:@"分公司筹建中";
-            self.headerView.numberLabel.text = [NSString stringWithFormat:@"人数：%@/30",model.data.joined.length>0?model.data.joined:@"0"];
+            NSString *companyname = model.data.companyname.length>0?model.data.companyname:@"分公司筹建中";
+            NSString *joined = model.data.joined.length>0?model.data.joined:@"0";
+            NSString *totalPeople = model.data.totalPeople.length>0?model.data.totalPeople:@"0";
+            NSString *numberLabel = [NSString stringWithFormat:@"(人数:%@/%@)",joined,totalPeople];
+            NSString *companyText = [NSString stringWithFormat:@"%@%@",companyname,numberLabel];
+            NSMutableAttributedString *mutableAttr = [[NSMutableAttributedString alloc] initWithString:companyText];
+            // 后面文字大小
+            [mutableAttr addAttribute:NSFontAttributeName
+                                value:kFontSizeMedium10
+                                range:NSMakeRange(companyname.length, companyText.length-companyname.length)];
+            self.headerView.titleLabel.attributedText = mutableAttr;
+
             [self.bannerArray addObjectsFromArray:model.data.banners];
             [self.tableView reloadData];
         }else{
             Toast(model.message);
         }
+        [self.tableView.mj_header endRefreshing];
     } failure:^(NSError *error) {
         TTLog(@" -- error -- %@",error);
+        [self.tableView.mj_header endRefreshing];
     }];
 }
 

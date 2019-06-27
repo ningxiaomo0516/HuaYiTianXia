@@ -19,7 +19,7 @@
     if (self.isShowMore) {
         count = _dataArray.count;
     }else{
-        count = 1;
+        count = _dataArray.count>0?1:0;
     }
     
     for (int i = 0; i < count; i++) {

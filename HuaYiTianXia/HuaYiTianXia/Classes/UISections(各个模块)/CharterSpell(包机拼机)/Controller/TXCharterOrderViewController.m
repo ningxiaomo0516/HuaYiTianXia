@@ -16,6 +16,7 @@
 #import "TXCharterOrderModel.h"
 #import "TXInvoiceViewController.h"
 #import "TXAddressViewController.h"
+#import "TXChoosePaySingleView.h"
 
 static NSString * const reuseIdentifier = @"TXCharterOrderTableViewCell";
 static NSString * const reuseIdentifierInfo = @"TXCharterBaseInfoTableViewCell";
@@ -32,8 +33,14 @@ static NSString * const reuseIdentifierPay = @"TXChoosePayTableViewCell";
 @property (nonatomic, strong) CharterMachineModel *ticketTodel;
 @property (nonatomic, strong) CharterOrderModel *orderModel;
 
-@property (nonatomic, copy) InvoiceModel *invoiceMode;
-@property (nonatomic, copy) AddressModel *addressModel;
+@property (nonatomic, strong) InvoiceModel *invoiceMode;
+@property (nonatomic, strong) AddressModel *addressModel;
+
+/// 协议的View
+@property (nonatomic, strong) UIView *tableFooterView;
+@property (nonatomic, strong) UIButton *tableFooterBtn;
+
+@property (nonatomic, strong) TXChoosePaySingleView *paySingleView;
 
 @end
 
@@ -53,6 +60,14 @@ static NSString * const reuseIdentifierPay = @"TXChoosePayTableViewCell";
     TTLog(@"self.ticketTodel --- %@",self.ticketTodel.kid);
     [self.view showLoadingViewWithText:@"请稍后..."];
     [self requestTicketOrderData];
+    MV(weakSelf)
+    [self.footerView.submitButton lz_handleControlEvent:UIControlEventTouchUpInside withBlock:^{
+        [weakSelf saveDataRequest];
+    }];
+}
+
+- (void) saveDataRequest{
+    
 }
 
 - (void) requestTicketOrderData{
@@ -65,6 +80,7 @@ static NSString * const reuseIdentifierPay = @"TXChoosePayTableViewCell";
         TXCharterOrderModel *model = [TXCharterOrderModel mj_objectWithKeyValues:result];
         if (model.errorcode == 20000) {
             self.orderModel = model.data;
+            [self setValueText:model.data];
             self.tableView.hidden = NO;
         }else{
             self.noDataView.hidden = NO;
@@ -79,10 +95,26 @@ static NSString * const reuseIdentifierPay = @"TXChoosePayTableViewCell";
     }];
 }
 
+- (void) setValueText:(CharterOrderModel *) model{
+    NSString *text = @"合计:";
+    NSString *amountText =  [NSString stringWithFormat:@"%@￥%@",text,model.needDeposit];
+
+    
+    NSMutableAttributedString *mutableAttr = [[NSMutableAttributedString alloc] initWithString:amountText];
+    /// 前面文字颜色
+    [mutableAttr addAttribute:NSForegroundColorAttributeName value:kTextColor51 range:NSMakeRange(0, text.length)];
+    /// 前面文字大小
+    [mutableAttr addAttribute:NSFontAttributeName value:kFontSizeMedium15 range:NSMakeRange(0, text.length)];
+    self.footerView.totalAmountLabel.attributedText = mutableAttr;
+}
+
 - (void) initView{
     [Utils lz_setExtraCellLineHidden:self.tableView];
     [self.view addSubview:self.tableView];
     [self.view addSubview:self.footerView];
+    self.tableView.tableFooterView = self.tableFooterView;
+    [self.tableFooterView addSubview:self.tableFooterBtn];
+    [self.tableFooterView addSubview:self.paySingleView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.right.equalTo(self.view);
         make.bottom.equalTo(self.footerView.mas_top);
@@ -91,6 +123,11 @@ static NSString * const reuseIdentifierPay = @"TXChoosePayTableViewCell";
         make.left.right.equalTo(self.view);
         make.bottom.equalTo(self.view);
         make.height.equalTo(@(kTabBarHeight));
+    }];
+
+    [self.tableFooterBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(self.tableFooterView.mas_right).offset(-15);
+        make.top.equalTo(self.paySingleView.mas_bottom).offset(15);
     }];
 }
 
@@ -188,7 +225,7 @@ static NSString * const reuseIdentifierPay = @"TXChoosePayTableViewCell";
         UIView *linerView = [UIView lz_viewWithColor:kLinerViewColor];
         linerView.frame = CGRectMake(0, 39.5, kScreenWidth, 0.4);
         [sectionView addSubview:linerView];
-        UILabel *titleLabel = [UILabel lz_labelWithTitle:@"" color:kTextColor153 font:kFontSizeMedium13];
+        UILabel *titleLabel = [UILabel lz_labelWithTitle:@"" color:kTextColor51 font:kFontSizeMedium13];
         [sectionView addSubview:titleLabel];
         [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(@(15));
@@ -202,6 +239,7 @@ static NSString * const reuseIdentifierPay = @"TXChoosePayTableViewCell";
             isSwitch.onTintColor = kThemeColorHex;
             /// 设置按钮处于关闭状态时边框的颜色
             isSwitch.tintColor = kTextColor238;
+            isSwitch.on = self.isDefault;
             [sectionView addSubview:isSwitch];
             [isSwitch addTarget:self action:@selector(valueSwitchChanged:) forControlEvents:(UIControlEventValueChanged)];
             [isSwitch mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -226,28 +264,33 @@ static NSString * const reuseIdentifierPay = @"TXChoosePayTableViewCell";
         
     }else if(indexPath.section==3){
         if (indexPath.row==0) {
-            TXInvoiceViewController *vc = [[TXInvoiceViewController alloc] init];
-            vc.selectBlock = ^(InvoiceModel * _Nonnull invoiceModel) {
-                weakSelf.invoiceMode = invoiceModel;
-                //一个cell刷新
-            };
-            TTPushVC(vc);
+            if (self.isDefault) {
+                TXInvoiceViewController *vc = [[TXInvoiceViewController alloc] init];
+                vc.selectBlock = ^(InvoiceModel * _Nonnull invoiceModel) {
+                    weakSelf.invoiceMode = invoiceModel;
+                    [self refreshTableView:tableView indexPath:indexPath];
+                };
+                TTPushVC(vc);
+            }
         }else{
             TXAddressViewController *vc = [[TXAddressViewController alloc] init];
             MV(weakSelf)
             vc.selectedAddressBlock = ^(AddressModel * _Nonnull model) {
                 weakSelf.addressModel = model;
+                [self refreshTableView:tableView indexPath:indexPath];
             };
             TTPushVC(vc);
         }
-        NSInteger row = indexPath.row;
-        NSInteger section = indexPath.section;
-        NSIndexPath *indexPath=[NSIndexPath indexPathForRow:row inSection:section];
-        [tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationNone];
     }else{
         
     }
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+/// 刷新单个Cell
+- (void) refreshTableView:(UITableView *)tableView indexPath:(NSIndexPath *)indexPath{
+    NSIndexPath *indexPaths = [NSIndexPath indexPathForRow:indexPath.row inSection:indexPath.section];
+    [tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPaths,nil] withRowAnimation:UITableViewRowAnimationNone];
 }
 
 #pragma mark ----- getter/setter
@@ -255,7 +298,7 @@ static NSString * const reuseIdentifierPay = @"TXChoosePayTableViewCell";
     if (!_tableView) {
         _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
         _tableView.showsVerticalScrollIndicator = false;
-        [_tableView setSeparatorInset:UIEdgeInsetsMake(0, 15, 0, 15)];
+        [_tableView setSeparatorInset:UIEdgeInsetsMake(0, 15, 0, 0)];
         [_tableView registerClass:[TXCharterOrderTableViewCell class] forCellReuseIdentifier:reuseIdentifier];
         [_tableView registerClass:[TXCharterBaseInfoTableViewCell class] forCellReuseIdentifier:reuseIdentifierInfo];
         [_tableView registerClass:[TXChoosePayTableViewCell class] forCellReuseIdentifier:reuseIdentifierPay];
@@ -276,6 +319,46 @@ static NSString * const reuseIdentifierPay = @"TXChoosePayTableViewCell";
         _footerView = [[TXCharterFooterView alloc] initWithFrame:rect];
     }
     return _footerView;
+}
+
+- (UIView *)tableFooterView{
+    if (!_tableFooterView) {
+        _tableFooterView = [[UIView alloc] init];
+        _tableFooterView.frame = CGRectMake(0, 0, kScreenWidth, 60+200);
+    }
+    return _tableFooterView;
+}
+
+- (TXChoosePaySingleView *)paySingleView {
+    if (!_paySingleView) {
+        _paySingleView = [TXChoosePaySingleView initTableWithFrame:CGRectMake(0, 0, kScreenWidth, 100)];
+//        _paySingleView.dataArray = self.dataArray;
+//        _paySingleView.chooseContent = self.selectMusicStr;
+        [_paySingleView reloadData];
+        //选中内容
+        _paySingleView.chooseBlock = ^(NSString *chooseContent,NSString *muiscID){
+            TTLog(@"数据：%@ ；第%@行",chooseContent,muiscID);
+        };
+    }
+    return _paySingleView;
+}
+
+- (UIButton *)tableFooterBtn{
+    if (!_tableFooterBtn) {
+        _tableFooterBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_tableFooterBtn setTitleColor:kTextColor51 forState:UIControlStateNormal];
+        _tableFooterBtn.titleLabel.font = kFontSizeMedium14;
+        _tableFooterBtn.selected = YES;
+        [_tableFooterBtn setTitle:@"我已同意包机协议" forState:UIControlStateNormal];
+        [_tableFooterBtn setImage:kGetImage(@"mine_btn_normal") forState:UIControlStateNormal];
+        [_tableFooterBtn setImage:kGetImage(@"mine_btn_selected") forState:UIControlStateSelected];
+        [Utils lz_setButtonTitleWithImageEdgeInsets:_tableFooterBtn postition:kMVImagePositionLeft spacing:5.0];
+        MV(weakSelf)
+        [_tableFooterBtn lz_handleControlEvent:UIControlEventTouchUpInside withBlock:^{
+            weakSelf.tableFooterBtn.selected = !weakSelf.tableFooterBtn.selected;
+        }];
+    }
+    return _tableFooterBtn;
 }
 
 - (NSMutableArray *)dataArray{

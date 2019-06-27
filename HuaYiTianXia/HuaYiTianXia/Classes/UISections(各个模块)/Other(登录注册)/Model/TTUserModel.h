@@ -78,7 +78,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) NSInteger tranPwd;
 
 
-/// 天合会员当前级别
+/// 天合会员当前级别 1:黄金；2：白钻；3：黑钻
 @property (nonatomic, copy) NSString *thGrade;
 /// 天合会员总登记数
 @property (nonatomic, copy) NSString *thGradeCount;
@@ -94,6 +94,12 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *userTypeName;
 /// 会员类型 0：普通会员 1：天合会员
 @property (nonatomic, assign) NSInteger usertype;
+/// 团队表ID，当次参数为0时，点击customerTeamName调用“会员选择团队”接口，大于0时，点击customerTeamName调用“团队成员”接口
+@property (nonatomic, assign) NSInteger customerTeamID;
+/// 团队名称
+@property (nonatomic, copy) NSString *customerTeamName;
+/// 农保专用VH，此字段的值只能用于购买农保
+@property (nonatomic, copy) NSString *exclusiveVH;
 
 @property (nonatomic, strong) NSMutableArray<NewsBannerModel *> *banners;
 

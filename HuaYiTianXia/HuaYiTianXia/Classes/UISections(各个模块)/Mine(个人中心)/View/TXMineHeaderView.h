@@ -25,10 +25,8 @@ NS_ASSUME_NONNULL_BEGIN
 //@property (nonatomic, strong) UILabel *levelLabel;
 /// 升级按钮
 @property (nonatomic, strong) UIButton *upgradeButton;
-/// 公司名称
+/// 公司名称(公司人数)
 @property (nonatomic, strong) UILabel *titleLabel;
-/// 公司人数
-@property (nonatomic, strong) UILabel *numberLabel;
 @end
 
 NS_ASSUME_NONNULL_END

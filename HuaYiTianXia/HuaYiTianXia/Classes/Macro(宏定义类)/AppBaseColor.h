@@ -45,14 +45,24 @@
 /// 所有价格通用颜色
 #define kPriceColor kColorWithRGB(183, 1, 1)
 
-#define kFontWithNameMedium     @"PingFang-SC-Medium"
-#define kFontWithNameScBold     @"PingFang-SC-Bold"
-#define kFontWithNameSc         @"PingFang-SC"
-#define kFontWithNameRegular    @"PingFang-SC-Regular"
-#define kFontWithNameDisplayRegular    @"SanFranciscoDisplay-Regular"
-#define kFontWithNameDisplayMedium    @"SanFranciscoDisplay-Medium"
 
-#define kFontWithNameMicrosoftYaHei    @"MicrosoftYaHei-Regular"
+/**
+ 苹方-简 中黑体 PingFangSC-Medium
+ 苹方-简 中粗体 PingFangSC-Semibold
+ 苹方-简 细体 PingFangSC-Light
+ 苹方-简 极细体 PingFangSC-Ultralight
+ 苹方-简 常规体 PingFangSC-Regular
+ 苹方-简 纤细体 PingFangSC-Thin
+ */
+#define kFontWithNameMedium             @"PingFangSC-Medium"
+#define kFontWithNamePingFangSCBold     @"PingFangSC-Semibold"
+#define kFontWithNameHelveticaBold      @"Helvetica-Bold"
+#define kFontWithNamePingFangSC         @"PingFangSC"
+#define kFontWithNameRegular            @"PingFangSC-Regular"
+#define kFontWithNameDisplayRegular     @"SanFranciscoDisplay-Regular"
+#define kFontWithNameDisplayMedium      @"SanFranciscoDisplay-Medium"
+
+#define kFontWithNameMicrosoftYaHei     @"MicrosoftYaHei-Regular"
 #define kFontSizeMicrosoftYaHei10 [UIFont fontWithName:kFontWithNameMicrosoftYaHei size:10]
 
 #define kFontSizeDisplayRegular12 [UIFont fontWithName:kFontWithNameDisplayRegular size:12]
@@ -72,18 +82,19 @@
 #define kFontSizeRegular19 [UIFont fontWithName:kFontWithNameRegular size:19]
 #define kFontSizeRegular20 [UIFont fontWithName:kFontWithNameRegular size:20]
 
-#define kFontWithNameSc12 [UIFont fontWithName:kFontWithNameSc size:12]
+#define kFontWithNameSc12 [UIFont fontWithName:kFontWithNamePingFangSC size:12]
 
-#define kFontSizeScBold10 [UIFont fontWithName:kFontWithNameScBold size:10]
-#define kFontSizeScBold12 [UIFont fontWithName:kFontWithNameScBold size:12]
-#define kFontSizeScBold13 [UIFont fontWithName:kFontWithNameScBold size:13]
-#define kFontSizeScBold14 [UIFont fontWithName:kFontWithNameScBold size:14]
-#define kFontSizeScBold15 [UIFont fontWithName:kFontWithNameScBold size:15]
-#define kFontSizeScBold16 [UIFont fontWithName:kFontWithNameScBold size:16]
-#define kFontSizeScBold17 [UIFont fontWithName:kFontWithNameScBold size:17]
-#define kFontSizeScBold20 [UIFont fontWithName:kFontWithNameScBold size:20]
-#define kFontSizeScBold22 [UIFont fontWithName:kFontWithNameScBold size:22]
-#define kFontSizeScBold33 [UIFont fontWithName:kFontWithNameScBold size:33]
+#define kFontSizeScBold10 [UIFont fontWithName:kFontWithNamePingFangSCBold size:10]
+#define kFontSizeScBold12 [UIFont fontWithName:kFontWithNamePingFangSCBold size:12]
+#define kFontSizeScBold13 [UIFont fontWithName:kFontWithNamePingFangSCBold size:13]
+#define kFontSizeScBold14 [UIFont fontWithName:kFontWithNamePingFangSCBold size:14]
+#define kFontSizeScBold15 [UIFont fontWithName:kFontWithNamePingFangSCBold size:15]
+#define kFontSizeScBold16 [UIFont fontWithName:kFontWithNamePingFangSCBold size:16]
+#define kFontSizeScBold17 [UIFont fontWithName:kFontWithNamePingFangSCBold size:17]
+#define kFontSizeScBold20 [UIFont fontWithName:kFontWithNamePingFangSCBold size:20]
+#define kFontSizeScBold22 [UIFont fontWithName:kFontWithNamePingFangSCBold size:22]
+#define kFontSizeScBold24 [UIFont fontWithName:kFontWithNamePingFangSCBold size:24]
+#define kFontSizeScBold33 [UIFont fontWithName:kFontWithNamePingFangSCBold size:33]
 
 
 #define kFontSizeMedium10 [UIFont fontWithName:kFontWithNameMedium size:10]

@@ -47,9 +47,9 @@ static NSString * const reuseIdentifierSwitch = @"TXSwitchTableViewCell";
         NSString *text = @"合计:";
         NSString *amountText;
         if (self.model.vrcurrency.integerValue>kUserInfo.vrcurrency.integerValue) {
-            amountText = [NSString stringWithFormat:@"%@%@",text,model.price];
+            amountText = [NSString stringWithFormat:@"%@￥%@",text,model.price];
         }else{
-            amountText = [NSString stringWithFormat:@"%@%@",text,model.nowprice];
+            amountText = [NSString stringWithFormat:@"%@￥%@",text,model.nowprice];
         }
         
         NSMutableAttributedString *mutableAttr = [[NSMutableAttributedString alloc] initWithString:amountText];

@@ -196,7 +196,6 @@ static TTUserModel *userModel = nil;
         [TTUserModel shared].receivedUserName       = [aDecoder decodeObjectForKey:receivedUserName];
         [TTUserModel shared].receivedTelphone       = [aDecoder decodeObjectForKey:receivedTelphone];
 
-        
         [TTUserModel shared].thGrade                = [aDecoder decodeObjectForKey:thGrade];
         [TTUserModel shared].thGradeCount           = [aDecoder decodeObjectForKey:thGradeCount];
         [TTUserModel shared].thGradeName            = [aDecoder decodeObjectForKey:thGradeName];

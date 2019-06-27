@@ -14,25 +14,21 @@
     if (self = [super initWithFrame:frame]) {
         [self initView];
         self.backgroundColor = kWhiteColor;
-        self.imagesViewAvatar.image = kGetImage(@"user1");
         if (kiPhoneX) {
             self.imagesView_BG.image = kGetImage(@"c7_mine_背景_x");
         }else{
             self.imagesView_BG.image = kGetImage(@"c7_mine_背景");
         }
-        self.images_level.image = kGetImage(@"c77_黑钻");
     }
     return self;
 }
 
 - (void) initView{
-
     [self addSubview:self.imagesView_BG];
     [self addSubview:self.nicknameLabel];
     [self addSubview:self.images_level];
     [self addSubview:self.upgradeButton];
     [self addSubview:self.titleLabel];
-    [self addSubview:self.numberLabel];
     [self addSubview:self.avatarView];
     [self.avatarView addSubview:self.imagesViewAvatar];
     
@@ -53,27 +49,22 @@
     
     [self.nicknameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self);
-        make.top.equalTo(self.avatarView.mas_bottom).offset(10);
+        make.top.equalTo(self.avatarView.mas_bottom).offset(IPHONE6_W(7));
     }];
     
     [self.images_level mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self.nicknameLabel);
-        make.left.equalTo(self.nicknameLabel.mas_right).offset(5);
+        make.left.equalTo(self.nicknameLabel.mas_right).offset(IPHONE6_W(4));
     }];
     
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self);
-        make.top.equalTo(self.nicknameLabel.mas_bottom).offset(5);
-    }];
-    
-    [self.numberLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo(self.titleLabel);
-        make.left.equalTo(self.numberLabel.mas_right).offset(5);
+        make.top.equalTo(self.nicknameLabel.mas_bottom).offset(IPHONE6_W(4));
     }];
     
     [self.upgradeButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self);
-        make.top.equalTo(self.titleLabel.mas_bottom).offset(5);
+        make.top.equalTo(self.titleLabel.mas_bottom).offset(IPHONE6_W(4));
     }];
     
 }
@@ -81,7 +72,7 @@
 - (UIImageView *)imagesViewAvatar{
     if (!_imagesViewAvatar) {
         _imagesViewAvatar = [[UIImageView alloc] init];
-        [_imagesViewAvatar lz_setCornerRadius:(IPHONE6_W(95))/2.0];
+        [_imagesViewAvatar lz_setCornerRadius:(IPHONE6_W(90))/2.0];
     }
     return _imagesViewAvatar;
 }
@@ -89,7 +80,7 @@
 - (UIView *)avatarView{
     if (!_avatarView) {
         _avatarView = [UIView lz_viewWithColor:[kWhiteColor colorWithAlphaComponent:0.15]];
-        [_avatarView lz_setCornerRadius:(IPHONE6_W(90))/2.0];
+        [_avatarView lz_setCornerRadius:(IPHONE6_W(95))/2.0];
     }
     return _avatarView;
 }
@@ -129,13 +120,5 @@
     }
     return _titleLabel;
 }
-
-- (UILabel *)numberLabel{
-    if (!_numberLabel) {
-        _numberLabel = [UILabel lz_labelWithTitle:@"" color:kWhiteColor font:kFontSizeMedium10];
-    }
-    return _numberLabel;
-}
-
 
 @end

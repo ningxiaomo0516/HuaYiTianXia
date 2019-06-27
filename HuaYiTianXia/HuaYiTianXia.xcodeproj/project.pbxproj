@@ -120,6 +120,7 @@
 		E729F7BE22A1187D0029A335 /* TXCharterMachineDateView.m in Sources */ = {isa = PBXBuildFile; fileRef = E729F7BD22A1187D0029A335 /* TXCharterMachineDateView.m */; };
 		E729F7C122A12C9E0029A335 /* TXCharterMachineChildViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E729F7C022A12C9E0029A335 /* TXCharterMachineChildViewController.m */; };
 		E729F7C722A154010029A335 /* TXBaseFooterButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = E729F7C622A154010029A335 /* TXBaseFooterButtonView.m */; };
+		E72AEE0122C4C9C90081F0AE /* TXChoosePaySingleView.m in Sources */ = {isa = PBXBuildFile; fileRef = E72AEE0022C4C9C90081F0AE /* TXChoosePaySingleView.m */; };
 		E72B09E422B102D100345C1B /* TXRedEnvelopeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E72B09E322B102D100345C1B /* TXRedEnvelopeViewController.m */; };
 		E72B09E722B1141900345C1B /* TXCountyGenerationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E72B09E622B1141900345C1B /* TXCountyGenerationViewController.m */; };
 		E73D9ADF22ACED2C00034F5F /* TXInvoiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E73D9ADE22ACED2C00034F5F /* TXInvoiceViewController.m */; };
@@ -213,9 +214,6 @@
 		E76C617422A23AEA00997817 /* TXCharterOrderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E76C617322A23AEA00997817 /* TXCharterOrderTableViewCell.m */; };
 		E76C617722A2569600997817 /* TXCharterBaseInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E76C617622A2569600997817 /* TXCharterBaseInfoTableViewCell.m */; };
 		E76C617A22A26FFA00997817 /* TXCharterFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = E76C617922A26FFA00997817 /* TXCharterFooterView.m */; };
-		E76D9C4C226027DF009D1A23 /* TXPayOrderVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E76D9C4B226027DE009D1A23 /* TXPayOrderVC.m */; };
-		E76D9C5222602EE8009D1A23 /* TXPayOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E76D9C5022602EE8009D1A23 /* TXPayOrderViewController.m */; };
-		E76D9C5322602EE8009D1A23 /* TXPayOrderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E76D9C5122602EE8009D1A23 /* TXPayOrderViewController.xib */; };
 		E76E6809228173D100B035B9 /* AppDelegate+TXReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = E76E6808228173D100B035B9 /* AppDelegate+TXReachability.m */; };
 		E76E680D22817E5A00B035B9 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = E76E680B22817E5900B035B9 /* Reachability.m */; };
 		E76E681122818C2F00B035B9 /* UIView+TTEmpty.m in Sources */ = {isa = PBXBuildFile; fileRef = E76E681022818C2F00B035B9 /* UIView+TTEmpty.m */; };
@@ -623,6 +621,8 @@
 		E729F7C022A12C9E0029A335 /* TXCharterMachineChildViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXCharterMachineChildViewController.m; sourceTree = "<group>"; };
 		E729F7C522A154010029A335 /* TXBaseFooterButtonView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXBaseFooterButtonView.h; sourceTree = "<group>"; };
 		E729F7C622A154010029A335 /* TXBaseFooterButtonView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXBaseFooterButtonView.m; sourceTree = "<group>"; };
+		E72AEDFF22C4C9C90081F0AE /* TXChoosePaySingleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXChoosePaySingleView.h; sourceTree = "<group>"; };
+		E72AEE0022C4C9C90081F0AE /* TXChoosePaySingleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TXChoosePaySingleView.m; sourceTree = "<group>"; };
 		E72B09E222B102D100345C1B /* TXRedEnvelopeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXRedEnvelopeViewController.h; sourceTree = "<group>"; };
 		E72B09E322B102D100345C1B /* TXRedEnvelopeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXRedEnvelopeViewController.m; sourceTree = "<group>"; };
 		E72B09E522B1141900345C1B /* TXCountyGenerationViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXCountyGenerationViewController.h; sourceTree = "<group>"; };
@@ -794,11 +794,6 @@
 		E76C617622A2569600997817 /* TXCharterBaseInfoTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXCharterBaseInfoTableViewCell.m; sourceTree = "<group>"; };
 		E76C617822A26FFA00997817 /* TXCharterFooterView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXCharterFooterView.h; sourceTree = "<group>"; };
 		E76C617922A26FFA00997817 /* TXCharterFooterView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXCharterFooterView.m; sourceTree = "<group>"; };
-		E76D9C4A226027DE009D1A23 /* TXPayOrderVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXPayOrderVC.h; sourceTree = "<group>"; };
-		E76D9C4B226027DE009D1A23 /* TXPayOrderVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXPayOrderVC.m; sourceTree = "<group>"; };
-		E76D9C4F22602EE8009D1A23 /* TXPayOrderViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXPayOrderViewController.h; sourceTree = "<group>"; };
-		E76D9C5022602EE8009D1A23 /* TXPayOrderViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXPayOrderViewController.m; sourceTree = "<group>"; };
-		E76D9C5122602EE8009D1A23 /* TXPayOrderViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TXPayOrderViewController.xib; sourceTree = "<group>"; };
 		E76E6807228173D100B035B9 /* AppDelegate+TXReachability.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AppDelegate+TXReachability.h"; sourceTree = "<group>"; };
 		E76E6808228173D100B035B9 /* AppDelegate+TXReachability.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "AppDelegate+TXReachability.m"; sourceTree = "<group>"; };
 		E76E680B22817E5900B035B9 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
@@ -1223,11 +1218,8 @@
 			children = (
 				E7089EFB225DB8E400A7EF27 /* TXChoosePayViewController.h */,
 				E7089EFC225DB8E400A7EF27 /* TXChoosePayViewController.m */,
-				E76D9C4F22602EE8009D1A23 /* TXPayOrderViewController.h */,
-				E76D9C5022602EE8009D1A23 /* TXPayOrderViewController.m */,
-				E76D9C5122602EE8009D1A23 /* TXPayOrderViewController.xib */,
-				E76D9C4A226027DE009D1A23 /* TXPayOrderVC.h */,
-				E76D9C4B226027DE009D1A23 /* TXPayOrderVC.m */,
+				E72AEDFF22C4C9C90081F0AE /* TXChoosePaySingleView.h */,
+				E72AEE0022C4C9C90081F0AE /* TXChoosePaySingleView.m */,
 			);
 			path = "(支付选择)";
 			sourceTree = "<group>";
@@ -3810,7 +3802,6 @@
 				E7269905223F754B003A5043 /* LZRootView.json in Resources */,
 				E74C9636226384A0000CBAF0 /* TTHUDManager_right@2x.png in Resources */,
 				E74C9639226384A0000CBAF0 /* TTHUDManager_error@2x.png in Resources */,
-				E76D9C5322602EE8009D1A23 /* TXPayOrderViewController.xib in Resources */,
 				E74C9637226384A0000CBAF0 /* TTHUDManager_tip@2x.png in Resources */,
 				E74C954722638442000CBAF0 /* wildcat_gif_6@2x.png in Resources */,
 				E74C963B226384A0000CBAF0 /* TTHUDManager_error@3x.png in Resources */,
@@ -3950,7 +3941,6 @@
 				E72699A3223F7ECC003A5043 /* NSString+LZPinYin.m in Sources */,
 				E7F1A70F224205A2003FA216 /* TTBaseSectionHeaderView.m in Sources */,
 				E7B4704422803A3000ADDC7A /* FMGroupsCityTableViewCell.m in Sources */,
-				E76D9C5222602EE8009D1A23 /* TXPayOrderViewController.m in Sources */,
 				E783784822967BFF0020C823 /* TXMineTeamViewController.m in Sources */,
 				E76E681122818C2F00B035B9 /* UIView+TTEmpty.m in Sources */,
 				E7B4704B22803A7C00ADDC7A /* FMSelectedCityModel.m in Sources */,
@@ -4109,7 +4099,6 @@
 				E7C42E81224B770200F3FB1A /* AFSessionManager.m in Sources */,
 				E72699DF223F7F58003A5043 /* UILabel+ChangeLineSpaceAndWordSpace.m in Sources */,
 				E7269906223F754B003A5043 /* LZNavigationController.m in Sources */,
-				E76D9C4C226027DF009D1A23 /* TXPayOrderVC.m in Sources */,
 				E72699A8223F7ECC003A5043 /* NSDate+Extensions.m in Sources */,
 				E72086D722C0CAE800F2F78C /* TXClubChildExperienceViewController.m in Sources */,
 				E714F28E227192F200024FA3 /* TXSystemTableViewCell.m in Sources */,
@@ -4238,6 +4227,7 @@
 				E76E681722818C7B00B035B9 /* TTEmptyView.m in Sources */,
 				E725719622BCC069006A787C /* SCBannerModel.m in Sources */,
 				E74C001F228AC7BC00576B86 /* TXCourseChildModel.m in Sources */,
+				E72AEE0122C4C9C90081F0AE /* TXChoosePaySingleView.m in Sources */,
 				E7B57E8022AF9B62001308CA /* TXMallHotTableViewCell.m in Sources */,
 				E769B2922277EDB20049EF73 /* LZOptionSelectView.m in Sources */,
 				E753D1F22249D3B200A2DD36 /* SCPresentationController.m in Sources */,
