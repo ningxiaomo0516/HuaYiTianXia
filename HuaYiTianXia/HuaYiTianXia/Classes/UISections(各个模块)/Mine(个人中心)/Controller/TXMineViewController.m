@@ -124,7 +124,7 @@ static NSString * const reuseIdentifierBanner = @"TXMineBannerTableViewCell";
                                                       placeholderImage:kGetImage(@"mine_icon_avatar")
                                                               isAvatar:false];
             if (model.data.usertype==0) {
-                self.headerView.images_level.image = kGetImage(@"");
+
             }else if (model.data.usertype==1){
                 NSInteger thGrade = model.data.thGrade.integerValue;
                 if (thGrade==0) {

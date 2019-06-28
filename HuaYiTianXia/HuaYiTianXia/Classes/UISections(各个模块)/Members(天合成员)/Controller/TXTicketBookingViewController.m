@@ -67,17 +67,36 @@ static NSString* reuseIdentifierInfo = @"TXTicketInfoTableViewCell";
     NSMutableDictionary *parameter = [[NSMutableDictionary alloc] init];
     [parameter setObject:self.ticketModel.dep_city forKey:@"origin"];
     [parameter setObject:self.ticketModel.arv_city forKey:@"destination"];
+    /// 实际订票价格
     [parameter setObject:self.priceLabel.text forKey:@"orderprice"];
+    /// APP提交价格(需支付价格)
     [parameter setObject:self.priceLabel.text forKey:@"price"];
+    /// 备注
     [parameter setObject:@"" forKey:@"remarks"];
-    [parameter setObject:self.ticketModel.flight_number forKey:@"flightNumber"];// 航班号
-    [parameter setObject:self.ticketModel.arv_time forKey:@"depTime"];/// 起飞时间
-    [parameter setObject:self.ticketModel.dep_time forKey:@"arvTime"];/// 到达时间
-    [parameter setObject:self.ticketModel.airline forKey:@"airline"];/// 航空公司
-    [parameter setObject:self.ticketModel.model forKey:@"aircraft"]; /// 飞机类型
-    [parameter setObject:self.ticketModel.dep_airport forKey:@"depAirport"];/// 起飞机场
-    [parameter setObject:self.ticketModel.arv_airport forKey:@"arvAirport"];/// 到达机场
-//
+    /// 航班号
+    [parameter setObject:self.ticketModel.flight_number forKey:@"flightNumber"];
+    /// 起飞时间
+    [parameter setObject:self.ticketModel.arv_time forKey:@"depTime"];
+    /// 到达时间
+    [parameter setObject:self.ticketModel.dep_time forKey:@"arvTime"];
+    /// 航空公司
+    [parameter setObject:self.ticketModel.airline forKey:@"airline"];
+    /// 飞机类型
+    [parameter setObject:self.ticketModel.model forKey:@"aircraft"];
+    /// 起飞机场
+    [parameter setObject:self.ticketModel.dep_airport forKey:@"depAirport"];
+    /// 到达机场
+    [parameter setObject:self.ticketModel.arv_airport forKey:@"arvAirport"];
+
+    /// 到达航站楼
+    [parameter setObject:self.ticketModel.arv_airport_term forKey:@"arvTerminal"];
+    /// 起飞航站楼
+    [parameter setObject:self.ticketModel.dep_airport_term forKey:@"depTerminal"];
+    /// 1:天合成员飞机订票 2:包机订票 3:拼机订票(默认1)
+    [parameter setObject:@(1) forKey:@"type"];
+    /// 支付方式 0:支付宝 1:微信 2:余额支付
+    [parameter setObject:@(2) forKey:@"payType"];
+
     [SCHttpTools postWithURLString:URLString parameter:parameter success:^(id responseObject) {
         NSDictionary *result = responseObject;
         TXTicketModel *model = [TXTicketModel mj_objectWithKeyValues:result];

@@ -162,7 +162,7 @@ static NSString* reuseIdentifierHot     = @"TXMallHotTableViewCell";
 //设置每个一个Item（cell）的大小
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
     CGFloat width = (kScreenWidth-2)/4;
-    if (indexPath.section==0) return CGSizeMake(kScreenWidth, IPHONE6_W(180));
+    if (indexPath.section==0) return CGSizeMake(kScreenWidth, IPHONE6_W(165));
     else if (indexPath.section==1)return CGSizeMake(width, IPHONE6_W(95));
     else if (indexPath.section==2)return CGSizeMake(kScreenWidth, IPHONE6_W(95*2+30));
     CGFloat margin = 10*3;

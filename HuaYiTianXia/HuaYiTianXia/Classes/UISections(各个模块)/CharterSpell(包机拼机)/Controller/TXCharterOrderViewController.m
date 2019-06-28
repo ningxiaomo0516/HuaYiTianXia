@@ -11,21 +11,19 @@
 #import "TXCharterBaseInfoTableViewCell.h"
 #import "TTBaseSectionHeaderView.h"
 #import "TXCharterFooterView.h"
-#import "TXChoosePayTableViewCell.h"
 
 #import "TXCharterOrderModel.h"
 #import "TXInvoiceViewController.h"
 #import "TXAddressViewController.h"
 #import "TXChoosePaySingleView.h"
+#import "TXTicketModel.h"
 
 static NSString * const reuseIdentifier = @"TXCharterOrderTableViewCell";
 static NSString * const reuseIdentifierInfo = @"TXCharterBaseInfoTableViewCell";
-static NSString * const reuseIdentifierPay = @"TXChoosePayTableViewCell";
 
 @interface TXCharterOrderViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *dataArray;
-@property (nonatomic, strong) NSMutableArray *payArray;
 @property (nonatomic, assign) BOOL isDefault;
 /// 底部视图
 @property (nonatomic, strong) TXCharterFooterView *footerView;
@@ -41,6 +39,8 @@ static NSString * const reuseIdentifierPay = @"TXChoosePayTableViewCell";
 @property (nonatomic, strong) UIButton *tableFooterBtn;
 
 @property (nonatomic, strong) TXChoosePaySingleView *paySingleView;
+@property (nonatomic, assign) NSInteger sectionHeaderHeight;
+@property (nonatomic, strong) ChoosePayModel *pay_model;
 
 @end
 
@@ -56,6 +56,7 @@ static NSString * const reuseIdentifierPay = @"TXChoosePayTableViewCell";
     // Do any additional setup after loading the view.
     self.title = @"填写订单";
     self.isDefault = YES;
+    self.sectionHeaderHeight = 40.f;
     [self initView];
     TTLog(@"self.ticketTodel --- %@",self.ticketTodel.kid);
     [self.view showLoadingViewWithText:@"请稍后..."];
@@ -67,7 +68,77 @@ static NSString * const reuseIdentifierPay = @"TXChoosePayTableViewCell";
 }
 
 - (void) saveDataRequest{
+    NSString *invoiceID,*addressID = @"";
+    if (self.isDefault) {
+        if (!self.invoiceMode) {
+            Toast(@"请选择发票抬头!");
+            return;
+        }else{
+            invoiceID = self.invoiceMode.kid;
+        }
+        if (!self.addressModel) {
+            Toast(@"请选择收货地址!");
+            return;
+        }else{
+            addressID = self.addressModel.sid;
+        }
+    }else{
+        invoiceID = @"";
+        addressID = @"";
+    }
     
+    kShowMBProgressHUD(self.view);
+    NSString *URLString = kHttpURL(@"aircraftorder/AddAircraftorder");
+    NSMutableDictionary *parameter = [[NSMutableDictionary alloc] init];
+    [parameter setObject:self.orderModel.depCity forKey:@"origin"];
+    [parameter setObject:self.orderModel.arvCity forKey:@"destination"];
+    /// 实际订票价格
+    [parameter setObject:self.orderModel.needDeposit forKey:@"orderprice"];
+    /// APP提交价格(需支付价格)
+    [parameter setObject:self.orderModel.needDeposit forKey:@"price"];
+    /// 备注
+    [parameter setObject:@"" forKey:@"remarks"];
+    /// 航班号(无航班号)
+    [parameter setObject:@"" forKey:@"flightNumber"];
+    /// 起飞时间
+    [parameter setObject:self.orderModel.arvTime forKey:@"depTime"];
+    /// 到达时间
+    [parameter setObject:self.orderModel.depTime forKey:@"arvTime"];
+    /// 航空公司
+    [parameter setObject:self.orderModel.airline forKey:@"airline"];
+    /// 飞机类型
+    [parameter setObject:self.orderModel.aircraft forKey:@"aircraft"];
+    /// 起飞机场
+    [parameter setObject:self.orderModel.depAirport forKey:@"depAirport"];
+    /// 到达机场
+    [parameter setObject:self.orderModel.arvAirport forKey:@"arvAirport"];
+    
+    /// 到达航站楼
+    [parameter setObject:self.orderModel.arvTerminal forKey:@"arvTerminal"];
+    /// 起飞航站楼
+    [parameter setObject:self.orderModel.depTerminal forKey:@"depTerminal"];
+    /// 1:天合成员飞机订票 2:包机订票 3:拼机订票(默认1)
+    [parameter setObject:@(2) forKey:@"type"];
+    /// 支付方式 0:支付宝 1:微信 2:余额支付
+    [parameter setObject:@(self.pay_model.kid.integerValue) forKey:@"payType"];
+    /// 发票表ID
+    [parameter setObject:@(invoiceID.integerValue) forKey:@"invoiceID"];
+    /// 收货地址表ID
+    [parameter setObject:@(addressID.integerValue) forKey:@"addressID"];
+    
+    [SCHttpTools postWithURLString:URLString parameter:parameter success:^(id responseObject) {
+        NSDictionary *result = responseObject;
+        TXTicketModel *model = [TXTicketModel mj_objectWithKeyValues:result];
+        if (model.errorcode==20000) {
+            TTLog(@" result --- %@",[Utils lz_dataWithJSONObject:result]);
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+        Toast(model.message);
+        kHideMBProgressHUD(self.view);
+    } failure:^(NSError *error) {
+        TTLog(@"机票查询信息 -- %@", error);
+        kHideMBProgressHUD(self.view);
+    }];
 }
 
 - (void) requestTicketOrderData{
@@ -82,6 +153,7 @@ static NSString * const reuseIdentifierPay = @"TXChoosePayTableViewCell";
             self.orderModel = model.data;
             [self setValueText:model.data];
             self.tableView.hidden = NO;
+            self.footerView.hidden = NO;
         }else{
             self.noDataView.hidden = NO;
         }
@@ -114,7 +186,6 @@ static NSString * const reuseIdentifierPay = @"TXChoosePayTableViewCell";
     [self.view addSubview:self.footerView];
     self.tableView.tableFooterView = self.tableFooterView;
     [self.tableFooterView addSubview:self.tableFooterBtn];
-    [self.tableFooterView addSubview:self.paySingleView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.right.equalTo(self.view);
         make.bottom.equalTo(self.footerView.mas_top);
@@ -127,7 +198,7 @@ static NSString * const reuseIdentifierPay = @"TXChoosePayTableViewCell";
 
     [self.tableFooterBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(self.tableFooterView.mas_right).offset(-15);
-        make.top.equalTo(self.paySingleView.mas_bottom).offset(15);
+        make.top.equalTo(@(5));
     }];
 }
 
@@ -146,12 +217,12 @@ static NSString * const reuseIdentifierPay = @"TXChoosePayTableViewCell";
         tools.orderModel = self.orderModel;
         return tools;
     }else if(indexPath.section==4){
-        TXGeneralModel *model = self.payArray[indexPath.row];
-        TXChoosePayTableViewCell *tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierPay forIndexPath:indexPath];
-        tools.titleLabel.text = model.title;
-        tools.linerView.hidden = YES;
-        tools.selectedBtn.hidden = NO;
-        tools.imagesView.image = kGetImage(model.imageText);
+        static NSString * reuseIdentifierPaySingleView = @"self.paySingleView";
+        UITableViewCell *tools = (UITableViewCell*)[tableView dequeueReusableCellWithIdentifier:reuseIdentifierPaySingleView];
+        if (!tools) {
+            tools = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifierPaySingleView];
+        }
+        [tools.contentView addSubview:self.paySingleView];
         return tools;
     }else{
         TXCharterBaseInfoTableViewCell *tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierInfo forIndexPath:indexPath];
@@ -172,12 +243,12 @@ static NSString * const reuseIdentifierPay = @"TXChoosePayTableViewCell";
                     tools.subtitleLabel.text = [NSString stringWithFormat:@"￥%@",self.orderModel.needDeposit];
                     break;
             }
-        }else if(indexPath.section==3 ){
+        }else if(indexPath.section==3){
             tools.imagesArrow.hidden = NO;
             if (indexPath.row==0) {
                 tools.titleLabel.text = (self.invoiceMode.invoiceTaxNumber.length==0)?model.title:self.invoiceMode.invoiceTaxNumber;
             }else if(indexPath.row==1){
-                tools.titleLabel.text = (self.addressModel.username.length==0)?model.title:self.addressModel.username;
+                tools.titleLabel.text = (self.addressModel.username.length==0)?model.title:self.addressModel.address;
             }
         }
         if (indexPath.section==3||indexPath.section==4) {
@@ -191,6 +262,7 @@ static NSString * const reuseIdentifierPay = @"TXChoosePayTableViewCell";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section==0) return IPHONE6_W(240);
+    if (indexPath.section==4) return 140;
     return IPHONE6_W(50);
 }
 
@@ -207,8 +279,8 @@ static NSString * const reuseIdentifierPay = @"TXChoosePayTableViewCell";
 
 #pragma mark -- 设置Header高度
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    if (section==0) return 0.0001f;
-    return 40.f;
+    if (section==0||section==4) return 0.0001f;
+    return self.sectionHeaderHeight;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
@@ -219,7 +291,7 @@ static NSString * const reuseIdentifierPay = @"TXChoosePayTableViewCell";
 // UITableView在Plain类型下，HeaderView和FooterView不悬浮和不停留的方法viewForHeaderInSection
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     UIView *sectionView = [UIView lz_viewWithColor:kWhiteColor];
-    CGFloat height = section==0?0.0001f:40.f;
+    CGFloat height = section==0?0.0001f:self.sectionHeaderHeight;
     sectionView.frame = CGRectMake(0, 0, kScreenWidth, height);
     if (section!=0) {
         UIView *linerView = [UIView lz_viewWithColor:kLinerViewColor];
@@ -231,7 +303,7 @@ static NSString * const reuseIdentifierPay = @"TXChoosePayTableViewCell";
             make.left.equalTo(@(15));
             make.centerY.equalTo(sectionView);
         }];
-        
+
         if (section==1) titleLabel.text = @"联系人信息";
         if (section==2) titleLabel.text = @"售价";
         if (section==3) {
@@ -248,7 +320,7 @@ static NSString * const reuseIdentifierPay = @"TXChoosePayTableViewCell";
             }];
             titleLabel.text = @"报销凭证";
         }
-        if (section==4) titleLabel.text = @"选择支付方式";
+//        if (section==4) titleLabel.text = @"选择支付方式";
     }
     return sectionView;
 }
@@ -287,6 +359,18 @@ static NSString * const reuseIdentifierPay = @"TXChoosePayTableViewCell";
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
+/// 使用 UITableViewStylePlain 的情况下,系统默认会有黏滞效果.使用如下方法去除黏滞效果:
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    if (scrollView == self.tableView){
+        CGFloat sectionHeaderHeight = self.sectionHeaderHeight; //sectionHeaderHeight
+        if (scrollView.contentOffset.y<=sectionHeaderHeight&&scrollView.contentOffset.y>=0) {
+            scrollView.contentInset = UIEdgeInsetsMake(-scrollView.contentOffset.y, 0, 0, 0);
+        } else if (scrollView.contentOffset.y>=sectionHeaderHeight) {
+            scrollView.contentInset = UIEdgeInsetsMake(-sectionHeaderHeight, 0, 0, 0);
+        }
+    }
+}
+
 /// 刷新单个Cell
 - (void) refreshTableView:(UITableView *)tableView indexPath:(NSIndexPath *)indexPath{
     NSIndexPath *indexPaths = [NSIndexPath indexPathForRow:indexPath.row inSection:indexPath.section];
@@ -301,7 +385,6 @@ static NSString * const reuseIdentifierPay = @"TXChoosePayTableViewCell";
         [_tableView setSeparatorInset:UIEdgeInsetsMake(0, 15, 0, 0)];
         [_tableView registerClass:[TXCharterOrderTableViewCell class] forCellReuseIdentifier:reuseIdentifier];
         [_tableView registerClass:[TXCharterBaseInfoTableViewCell class] forCellReuseIdentifier:reuseIdentifierInfo];
-        [_tableView registerClass:[TXChoosePayTableViewCell class] forCellReuseIdentifier:reuseIdentifierPay];
         //1 禁用系统自带的分割线
         _tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
         _tableView.delegate = self;
@@ -317,6 +400,7 @@ static NSString * const reuseIdentifierPay = @"TXChoosePayTableViewCell";
     if (!_footerView) {
         CGRect rect = CGRectMake(0, 0, kScreenWidth, kTabBarHeight);
         _footerView = [[TXCharterFooterView alloc] initWithFrame:rect];
+        _footerView.hidden = YES;
     }
     return _footerView;
 }
@@ -324,20 +408,22 @@ static NSString * const reuseIdentifierPay = @"TXChoosePayTableViewCell";
 - (UIView *)tableFooterView{
     if (!_tableFooterView) {
         _tableFooterView = [[UIView alloc] init];
-        _tableFooterView.frame = CGRectMake(0, 0, kScreenWidth, 60+200);
+        _tableFooterView.frame = CGRectMake(0, 0, kScreenWidth, 60);
     }
     return _tableFooterView;
 }
 
 - (TXChoosePaySingleView *)paySingleView {
     if (!_paySingleView) {
-        _paySingleView = [TXChoosePaySingleView initTableWithFrame:CGRectMake(0, 0, kScreenWidth, 100)];
+        _paySingleView = [TXChoosePaySingleView initTableWithFrame:CGRectMake(0, 0, kScreenWidth, 140)];
 //        _paySingleView.dataArray = self.dataArray;
 //        _paySingleView.chooseContent = self.selectMusicStr;
         [_paySingleView reloadData];
         //选中内容
-        _paySingleView.chooseBlock = ^(NSString *chooseContent,NSString *muiscID){
-            TTLog(@"数据：%@ ；第%@行",chooseContent,muiscID);
+        MV(weakSelf)
+        _paySingleView.chooseBlock = ^(ChoosePayModel * _Nonnull model) {
+            TTLog(@"数据：%@ ；第%@行",model.titleName,model.kid);
+            weakSelf.pay_model = model;
         };
     }
     return _paySingleView;
@@ -356,6 +442,11 @@ static NSString * const reuseIdentifierPay = @"TXChoosePayTableViewCell";
         MV(weakSelf)
         [_tableFooterBtn lz_handleControlEvent:UIControlEventTouchUpInside withBlock:^{
             weakSelf.tableFooterBtn.selected = !weakSelf.tableFooterBtn.selected;
+            if (weakSelf.tableFooterBtn.selected) {
+                [self->_tableFooterBtn setImage:kGetImage(@"mine_btn_selected") forState:UIControlStateSelected];
+            }else{
+                [self->_tableFooterBtn setImage:kGetImage(@"mine_btn_normal") forState:UIControlStateNormal];
+            }
         }];
     }
     return _tableFooterBtn;
@@ -368,12 +459,12 @@ static NSString * const reuseIdentifierPay = @"TXChoosePayTableViewCell";
                               @[kUserInfo.realname,kUserInfo.phone],
                               @[@"原价",@"特惠价",@"订金"],
                               @[@"请选择发票抬头",@"请选择收货地址"],
-                              @[@"支付宝",@"微信支付"]];
+                              @[@"支付方式"]];
         NSArray* classArr = @[@[@""],
                               @[@"",@"",@""],
                               @[@"",@"",@""],
                               @[@"",@"TXSetupViewController",@""],
-                              @[@"",@""]];
+                              @[@""]];
         for (int i=0; i<titleArr.count; i++) {
             NSArray *subTitlesArray = [titleArr lz_safeObjectAtIndex:i];
             NSArray *classArray = [classArr lz_safeObjectAtIndex:i];
@@ -390,18 +481,4 @@ static NSString * const reuseIdentifierPay = @"TXChoosePayTableViewCell";
     return _dataArray;
 }
 
-- (NSMutableArray *)payArray{
-    if (!_payArray) {
-        _payArray = [[NSMutableArray alloc] init];
-        NSArray* titleArr = @[@"支付宝",@"微信支付"];
-        NSArray* classArr = @[@"c31_btn_zfb",@"c31_btn_wxzf"];
-        for (int j = 0; j < titleArr.count; j ++) {
-            TXGeneralModel *generalModel = [[TXGeneralModel alloc] init];
-            generalModel.title = [titleArr lz_safeObjectAtIndex:j];
-            generalModel.imageText = [classArr lz_safeObjectAtIndex:j];
-            [_payArray addObject:generalModel];
-        }
-    }
-    return _payArray;
-}
 @end

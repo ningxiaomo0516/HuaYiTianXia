@@ -7,9 +7,7 @@
 //
 
 #import "TXChoosePaySingleView.h"
-static NSString * const reuseIdentifier = @"MVChooseTableViewCell";
 @interface TXChoosePaySingleView()
-@property(nonatomic,strong)NSDictionary *cellDic;//设置cell的identifier，防止重用
 @end
 
 @class ChoosePayModel;
@@ -32,8 +30,7 @@ static NSString * const reuseIdentifier = @"MVChooseTableViewCell";
     [Utils lz_setExtraCellLineHidden:self.tableView];
     [self addSubview:self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.top.equalTo(self);
-        make.height.equalTo(@(100));
+        make.bottom.left.right.top.equalTo(self);
     }];
 }
 
@@ -46,52 +43,67 @@ static NSString * const reuseIdentifier = @"MVChooseTableViewCell";
     return self.dataArray.count;
 }
 
+#pragma mark -- 设置Header高度
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    return 40.f;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    NSString *identifier = [NSString stringWithFormat:@"reuseIdentifier%ld",(long)indexPath.row];
-    TXChoosePayCell * tools = [tableView dequeueReusableCellWithIdentifier:identifier];
-    if (!tools) {
-        tools = [[TXChoosePayCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
-    }
-    tools.selectionStyle = UITableViewCellSelectionStyleNone;
+    TXChoosePayCell *tools = [TXChoosePayCell cellWithTableViewCell:tableView forIndexPath:indexPath];
     tools.payModel = [self.dataArray objectAtIndex:indexPath.row];
-    if ([self.chooseContent isEqualToString:tools.titleLabel.text]) {
+    /// 默认选中第一行
+    if (self.index == indexPath.row ||indexPath.row==0) {
         [tools updateCellWithStatus:YES];
+        _currentSelectIndex = indexPath;
+        self.index = indexPath.row;
     } else{
         [tools updateCellWithStatus:NO];
     }
     return tools;
 }
 
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+#pragma mark -------------- 设置组头 --------------
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    TXChoosePayHeaderView *sectionView = [[TXChoosePayHeaderView alloc] init];
+    sectionView.section = section;
+    sectionView.tableView = tableView;
+    sectionView.titleLabel.text = @"选择支付方式";
+    return sectionView;
+}
+
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if (_currentSelectIndex!=nil&&_currentSelectIndex != indexPath) {
         NSIndexPath *  beforIndexPath = [NSIndexPath indexPathForRow:_currentSelectIndex.row inSection:0];
-        //如果之前decell在当前屏幕，把之前选中cell的状态取消掉
+        //如果之前的cell在当前屏幕，把之前选中cell的状态取消掉
         TXChoosePayCell * tools = [tableView cellForRowAtIndexPath:beforIndexPath];
         [tools updateCellWithStatus:NO];
-        tools.titleLabel.textColor = kColorWithRGB(34, 34, 34);
     }
     TXChoosePayCell *tools = [tableView cellForRowAtIndexPath:indexPath];
-    tools.titleLabel.textColor = kColorWithRGB(255, 65, 99);
-    [tools updateCellWithStatus:!tools.isSelected];
-    self.chooseContent = tools.titleLabel.text;
-    ChoosePayModel *musicModel = [self.dataArray objectAtIndex:indexPath.row];
-    _currentSelectIndex = indexPath;
-    _chooseBlock(self.chooseContent,musicModel.kid);
+    if (self.index != indexPath.row) {
+        [tools updateCellWithStatus:!tools.isSelected];
+        self.index = indexPath.row;
+        ChoosePayModel *musicModel = [self.dataArray objectAtIndex:indexPath.row];
+        _currentSelectIndex = indexPath;
+        self.chooseBlock(musicModel);
+    }else{
+        TTLog(@"点击的是当前选中行");
+    }
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 - (UITableView *)tableView{
     if (!_tableView) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 0, 0) style:UITableViewStylePlain];
+        _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
         _tableView.showsVerticalScrollIndicator = false;
-        [_tableView registerClass:[TXChoosePayCell class] forCellReuseIdentifier:reuseIdentifier];
-        // 拖动tableView时收起键盘
-        _tableView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
-        [_tableView setSeparatorInset:UIEdgeInsetsMake(0,0,0,0)];
+        [_tableView setSeparatorInset:UIEdgeInsetsMake(0, 15, 0, 0)];
+        [_tableView registerClass:[TXChoosePayCell class] forCellReuseIdentifier:[TXChoosePayCell reuseIdentifier]];
         //1 禁用系统自带的分割线
         _tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.backgroundColor = kViewColorNormal;
+        _tableView.rowHeight = UITableViewAutomaticDimension;
     }
     return _tableView;
 }
@@ -132,11 +144,24 @@ static NSString * const reuseIdentifier = @"MVChooseTableViewCell";
     CGContextStrokeRect(context, CGRectMake(0, rect.size.height - 0.5, rect.size.width, 0.5));
 }
 
+/// Cell视图的缓存池标示
++ (NSString *)reuseIdentifier{
+    static NSString *reuseIdentifier = @"TXChoosePayCell";
+    return reuseIdentifier;
+}
+
+/// 获取Cell视图对象
++ (instancetype)cellWithTableViewCell:(UITableView *)tableView forIndexPath:(NSIndexPath *)indexPath{
+    NSString *reuseIdentifier = [TXChoosePayCell reuseIdentifier];
+    TXChoosePayCell* tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
+    return tools;
+}
+
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        [self initView];
         self.backgroundColor = [UIColor clearColor];
+        [self initView];
     }
     return self;
 }
@@ -145,29 +170,26 @@ static NSString * const reuseIdentifier = @"MVChooseTableViewCell";
     _payModel = payModel;
     self.imagesView.image = kGetImage(payModel.imageName);
     self.titleLabel.text = self.payModel.titleName;
-    self.selectBtn.hidden = YES;
 }
 
 - (void)initView{
-    [self.contentView addSubview:self.imagesView];
-    [self.contentView addSubview:self.titleLabel];
-    [self.contentView addSubview:self.selectBtn];
+    [self addSubview:self.imagesView];
+    [self addSubview:self.titleLabel];
+    [self addSubview:self.selectBtn];
     CGFloat margin = IPHONE6_W(15);
     [self.imagesView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(@(margin));
-        make.centerY.equalTo(self.contentView);
+        make.centerY.equalTo(self);
     }];
     
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.imagesView.mas_right).offset(5);
-        make.centerY.equalTo(self.contentView);
+        make.left.equalTo(self.imagesView.mas_right).offset(10);
+        make.centerY.equalTo(self);
     }];
     
     [self.selectBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.right.equalTo(self.contentView.mas_right).offset(-margin);
-//        make.centerY.centerX.equalTo(self.contentView);
-        make.left.equalTo(@(margin));
-        make.centerY.equalTo(self.contentView);
+        make.right.equalTo(self.mas_right).offset(-margin);
+        make.centerY.equalTo(self);
     }];
 }
 
@@ -213,4 +235,48 @@ static NSString * const reuseIdentifier = @"MVChooseTableViewCell";
 @implementation ChoosePayModel
 
 
+@end
+
+
+@implementation TXChoosePayHeaderView
+- (void)setFrame:(CGRect)frame{
+    CGRect sectionRect = [self.tableView rectForSection:self.section];
+    CGRect newFrame = CGRectMake(CGRectGetMinX(frame), CGRectGetMinY(sectionRect), CGRectGetWidth(frame), CGRectGetHeight(frame));
+    [self initView];
+    self.backgroundView = ({
+        UIView *view = [[UIView alloc] initWithFrame:self.bounds];
+        view.backgroundColor = kWhiteColor;
+        view;
+    });
+    [super setFrame:newFrame];
+}
+
+- (void) initView{
+    [self addSubview:self.titleLabel];
+    [self addSubview:self.linerView];
+    
+    [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(self);
+        make.left.equalTo(@(15));
+    }];
+    [self.linerView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.height.equalTo(@(kLinerViewHeight));
+        make.left.bottom.right.equalTo(self);
+    }];
+}
+
+- (UILabel *)titleLabel{
+    if (!_titleLabel) {
+        _titleLabel = [UILabel lz_labelWithTitle:@"" color:kTextColor51 font:kFontSizeMedium14];
+        _titleLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    };
+    return _titleLabel;
+}
+
+- (UIView *)linerView{
+    if (!_linerView) {
+        _linerView = [UIView lz_viewWithColor:kLinerViewColor];
+    }
+    return _linerView;
+}
 @end

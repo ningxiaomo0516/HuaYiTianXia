@@ -8,7 +8,6 @@
 //
 
 #import "TXNewTemplateViewController.h"
-#import "SCTableViewSectionHeaderView.h"
 #import "TXNewTemplateTableViewCell.h"
 #import "TXMallGoodsBannerTableViewCell.h"
 #import "TXNewMultipleImageTableViewCell.h"
@@ -18,7 +17,6 @@
 #import <JhtMarquee/JhtHorizontalMarquee.h>
 
 static NSString * const reuseIdentifierBanner = @"TXMallGoodsBannerTableViewCell";
-static NSString * const reuseIdentifierSectionHeaderView = @"SCTableViewSectionHeaderView";
 
 @interface TXNewTemplateViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) UITableView *tableView;
@@ -253,7 +251,6 @@ static NSString * const reuseIdentifierSectionHeaderView = @"SCTableViewSectionH
         _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
         _tableView.showsVerticalScrollIndicator = false;
         [_tableView setSeparatorInset:UIEdgeInsetsMake(0, 15, 0, 0)];
-        [_tableView registerClass:[SCTableViewSectionHeaderView class] forHeaderFooterViewReuseIdentifier:reuseIdentifierSectionHeaderView];
         [_tableView registerClass:[TXNewTemplateTableViewCell class] forCellReuseIdentifier:[TXNewTemplateTableViewCell reuseIdentifier]];
         [_tableView registerClass:[TXNewMultipleImageTableViewCell class] forCellReuseIdentifier:[TXNewMultipleImageTableViewCell reuseIdentifier]];
         [_tableView registerClass:[TXMallGoodsBannerTableViewCell class] forCellReuseIdentifier:reuseIdentifierBanner];
