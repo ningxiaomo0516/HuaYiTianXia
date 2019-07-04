@@ -16,6 +16,15 @@
 		E714F2882271904B00024FA3 /* TXSystemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E714F2872271904B00024FA3 /* TXSystemViewController.m */; };
 		E714F28B2271910600024FA3 /* TXPushTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E714F28A2271910600024FA3 /* TXPushTableViewCell.m */; };
 		E714F28E227192F200024FA3 /* TXSystemTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E714F28D227192F200024FA3 /* TXSystemTableViewCell.m */; };
+		E719D14322CC8353003EAE0E /* UIButton+EnlargeTouchArea.m in Sources */ = {isa = PBXBuildFile; fileRef = E719D14222CC8353003EAE0E /* UIButton+EnlargeTouchArea.m */; };
+		E719D14D22CC8407003EAE0E /* btn_circle.png in Resources */ = {isa = PBXBuildFile; fileRef = E719D14722CC8407003EAE0E /* btn_circle.png */; };
+		E719D14E22CC8407003EAE0E /* btn_circle@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = E719D14822CC8407003EAE0E /* btn_circle@3x.png */; };
+		E719D14F22CC8407003EAE0E /* btn_circle@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E719D14922CC8407003EAE0E /* btn_circle@2x.png */; };
+		E719D15022CC8407003EAE0E /* btn_point.png in Resources */ = {isa = PBXBuildFile; fileRef = E719D14A22CC8407003EAE0E /* btn_point.png */; };
+		E719D15122CC8407003EAE0E /* btn_point@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E719D14B22CC8407003EAE0E /* btn_point@2x.png */; };
+		E719D15222CC8407003EAE0E /* btn_point@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = E719D14C22CC8407003EAE0E /* btn_point@3x.png */; };
+		E719D15522CC8562003EAE0E /* TTChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = E719D15422CC8562003EAE0E /* TTChartView.m */; };
+		E719D15922CC88F1003EAE0E /* TXChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E719D15822CC88F1003EAE0E /* TXChartViewController.m */; };
 		E719F66722B24DD90023E539 /* TXMessagePopupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E719F66622B24DD90023E539 /* TXMessagePopupViewController.m */; };
 		E72086CE22C0CAE800F2F78C /* TXClubExperienceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E72086A722C0CAE700F2F78C /* TXClubExperienceViewController.m */; };
 		E72086CF22C0CAE800F2F78C /* TXClubExperienceMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E72086A822C0CAE700F2F78C /* TXClubExperienceMainViewController.m */; };
@@ -251,6 +260,7 @@
 		E778DE64227065B800D6F0E7 /* TXPushMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E778DE63227065B800D6F0E7 /* TXPushMessageViewController.m */; };
 		E77BC13F224F7321008440C9 /* TXOrderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E77BC13E224F7321008440C9 /* TXOrderModel.m */; };
 		E77E1D81229D26D100DC4033 /* TXMineTeamSectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = E77E1D80229D26D100DC4033 /* TXMineTeamSectionView.m */; };
+		E77F5F4522CDAC350032C21C /* TXChartModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E77F5F4422CDAC350032C21C /* TXChartModel.m */; };
 		E77F6539225C3A0E0017B4C8 /* TTNumbeKeyboard.bundle in Resources */ = {isa = PBXBuildFile; fileRef = E77F6533225C3A0E0017B4C8 /* TTNumbeKeyboard.bundle */; };
 		E77F653A225C3A0E0017B4C8 /* RYNumberKeyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = E77F6535225C3A0E0017B4C8 /* RYNumberKeyboard.m */; };
 		E77F653B225C3A0E0017B4C8 /* RYNumberKeyboard.xib in Resources */ = {isa = PBXBuildFile; fileRef = E77F6536225C3A0E0017B4C8 /* RYNumberKeyboard.xib */; };
@@ -427,6 +437,18 @@
 		E714F28A2271910600024FA3 /* TXPushTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXPushTableViewCell.m; sourceTree = "<group>"; };
 		E714F28C227192F200024FA3 /* TXSystemTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXSystemTableViewCell.h; sourceTree = "<group>"; };
 		E714F28D227192F200024FA3 /* TXSystemTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXSystemTableViewCell.m; sourceTree = "<group>"; };
+		E719D14122CC8353003EAE0E /* UIButton+EnlargeTouchArea.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIButton+EnlargeTouchArea.h"; sourceTree = "<group>"; };
+		E719D14222CC8353003EAE0E /* UIButton+EnlargeTouchArea.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIButton+EnlargeTouchArea.m"; sourceTree = "<group>"; };
+		E719D14722CC8407003EAE0E /* btn_circle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_circle.png; sourceTree = "<group>"; };
+		E719D14822CC8407003EAE0E /* btn_circle@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_circle@3x.png"; sourceTree = "<group>"; };
+		E719D14922CC8407003EAE0E /* btn_circle@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_circle@2x.png"; sourceTree = "<group>"; };
+		E719D14A22CC8407003EAE0E /* btn_point.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_point.png; sourceTree = "<group>"; };
+		E719D14B22CC8407003EAE0E /* btn_point@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_point@2x.png"; sourceTree = "<group>"; };
+		E719D14C22CC8407003EAE0E /* btn_point@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_point@3x.png"; sourceTree = "<group>"; };
+		E719D15322CC8562003EAE0E /* TTChartView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TTChartView.h; sourceTree = "<group>"; };
+		E719D15422CC8562003EAE0E /* TTChartView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TTChartView.m; sourceTree = "<group>"; };
+		E719D15722CC88F1003EAE0E /* TXChartViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXChartViewController.h; sourceTree = "<group>"; };
+		E719D15822CC88F1003EAE0E /* TXChartViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXChartViewController.m; sourceTree = "<group>"; };
 		E719F66522B24DD90023E539 /* TXMessagePopupViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXMessagePopupViewController.h; sourceTree = "<group>"; };
 		E719F66622B24DD90023E539 /* TXMessagePopupViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXMessagePopupViewController.m; sourceTree = "<group>"; };
 		E72086A722C0CAE700F2F78C /* TXClubExperienceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TXClubExperienceViewController.m; sourceTree = "<group>"; };
@@ -868,6 +890,8 @@
 		E77BC13E224F7321008440C9 /* TXOrderModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXOrderModel.m; sourceTree = "<group>"; };
 		E77E1D7F229D26D100DC4033 /* TXMineTeamSectionView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXMineTeamSectionView.h; sourceTree = "<group>"; };
 		E77E1D80229D26D100DC4033 /* TXMineTeamSectionView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXMineTeamSectionView.m; sourceTree = "<group>"; };
+		E77F5F4322CDAC350032C21C /* TXChartModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXChartModel.h; sourceTree = "<group>"; };
+		E77F5F4422CDAC350032C21C /* TXChartModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXChartModel.m; sourceTree = "<group>"; };
 		E77F6533225C3A0E0017B4C8 /* TTNumbeKeyboard.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = TTNumbeKeyboard.bundle; sourceTree = "<group>"; };
 		E77F6534225C3A0E0017B4C8 /* RYNumberKeyboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYNumberKeyboard.h; sourceTree = "<group>"; };
 		E77F6535225C3A0E0017B4C8 /* RYNumberKeyboard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYNumberKeyboard.m; sourceTree = "<group>"; };
@@ -1222,6 +1246,48 @@
 				E72AEE0022C4C9C90081F0AE /* TXChoosePaySingleView.m */,
 			);
 			path = "(支付选择)";
+			sourceTree = "<group>";
+		};
+		E719D14422CC83DD003EAE0E /* 折线图 */ = {
+			isa = PBXGroup;
+			children = (
+				E719D14622CC83FA003EAE0E /* images */,
+				E719D14522CC83FA003EAE0E /* View */,
+			);
+			path = "折线图";
+			sourceTree = "<group>";
+		};
+		E719D14522CC83FA003EAE0E /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E719D15322CC8562003EAE0E /* TTChartView.h */,
+				E719D15422CC8562003EAE0E /* TTChartView.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		E719D14622CC83FA003EAE0E /* images */ = {
+			isa = PBXGroup;
+			children = (
+				E719D14722CC8407003EAE0E /* btn_circle.png */,
+				E719D14922CC8407003EAE0E /* btn_circle@2x.png */,
+				E719D14822CC8407003EAE0E /* btn_circle@3x.png */,
+				E719D14A22CC8407003EAE0E /* btn_point.png */,
+				E719D14B22CC8407003EAE0E /* btn_point@2x.png */,
+				E719D14C22CC8407003EAE0E /* btn_point@3x.png */,
+			);
+			path = images;
+			sourceTree = "<group>";
+		};
+		E719D15622CC88CE003EAE0E /* Chart(折线图) */ = {
+			isa = PBXGroup;
+			children = (
+				E719D15722CC88F1003EAE0E /* TXChartViewController.h */,
+				E719D15822CC88F1003EAE0E /* TXChartViewController.m */,
+				E77F5F4322CDAC350032C21C /* TXChartModel.h */,
+				E77F5F4422CDAC350032C21C /* TXChartModel.m */,
+			);
+			path = "Chart(折线图)";
 			sourceTree = "<group>";
 		};
 		E719F66422B24D4D0023E539 /* Popup(弹窗模块) */ = {
@@ -1728,6 +1794,7 @@
 		E72698E8223F737C003A5043 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				E719D14422CC83DD003EAE0E /* 折线图 */,
 				E720A5CA22A8C42A00331846 /* 保存相册 */,
 				E750422C228C256D00A34006 /* 预约成功 */,
 				E769B2A522783FE30049EF73 /* 城市选择 */,
@@ -1815,6 +1882,8 @@
 				E72699BE223F7F54003A5043 /* UIBarButtonItem+Extension.m */,
 				E72699B6223F7F53003A5043 /* UIButton+Extension.h */,
 				E72699AF223F7F52003A5043 /* UIButton+Extension.m */,
+				E719D14122CC8353003EAE0E /* UIButton+EnlargeTouchArea.h */,
+				E719D14222CC8353003EAE0E /* UIButton+EnlargeTouchArea.m */,
 				E72699B8223F7F53003A5043 /* UIButton+MVImagePosition.h */,
 				E72699AB223F7F52003A5043 /* UIButton+MVImagePosition.m */,
 				E72699C1223F7F55003A5043 /* UIColor+Extension.h */,
@@ -2881,6 +2950,7 @@
 		E78583D12240C23D00BBEA41 /* Childs(子页面) */ = {
 			isa = PBXGroup;
 			children = (
+				E719D15622CC88CE003EAE0E /* Chart(折线图) */,
 				E7837836229678BC0020C823 /* Invitation(我的邀请) */,
 				E778DE5F2270659500D6F0E7 /* PushMessage(消息) */,
 				E78583D22240C23D00BBEA41 /* RealName(实名认证) */,
@@ -3800,6 +3870,7 @@
 				E725D0E9225F117A00C233E7 /* AlipaySDK.bundle in Resources */,
 				E7D732242268B21B006F171A /* WeiboSDK.bundle in Resources */,
 				E7269905223F754B003A5043 /* LZRootView.json in Resources */,
+				E719D15122CC8407003EAE0E /* btn_point@2x.png in Resources */,
 				E74C9636226384A0000CBAF0 /* TTHUDManager_right@2x.png in Resources */,
 				E74C9639226384A0000CBAF0 /* TTHUDManager_error@2x.png in Resources */,
 				E74C9637226384A0000CBAF0 /* TTHUDManager_tip@2x.png in Resources */,
@@ -3808,10 +3879,12 @@
 				E7B4706B22803BBD00ADDC7A /* unicode_to_hanyu_pinyin.txt in Resources */,
 				E77F6539225C3A0E0017B4C8 /* TTNumbeKeyboard.bundle in Resources */,
 				E725D0E1225EF36400C233E7 /* c31_btn_wxzf@3x.png in Resources */,
+				E719D15222CC8407003EAE0E /* btn_point@3x.png in Resources */,
 				E74C9638226384A0000CBAF0 /* TTHUDManager_info@3x.png in Resources */,
 				E74C954B22638442000CBAF0 /* wildcat_gif_3@2x.png in Resources */,
 				E74C963A226384A0000CBAF0 /* TTHUDManager_info@2x.png in Resources */,
 				E7D7322E2268B8DF006F171A /* 微信分享的SDK.txt in Resources */,
+				E719D14D22CC8407003EAE0E /* btn_circle.png in Resources */,
 				E7F1A7172242123A003FA216 /* TXRealNameViewController.xib in Resources */,
 				E72698C2223F7167003A5043 /* LaunchScreen.storyboard in Resources */,
 				E725D0DE225EF36400C233E7 /* c31_btn_zfb@2x.png in Resources */,
@@ -3822,11 +3895,13 @@
 				E7D732222268B21B006F171A /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
 				E725D0DF225EF36400C233E7 /* c31_btn_wxzf@2x.png in Resources */,
 				E72699FD223F8298003A5043 /* bg.jpg in Resources */,
+				E719D14F22CC8407003EAE0E /* btn_circle@2x.png in Resources */,
 				E74C954622638442000CBAF0 /* wildcat_gif_2@2x.png in Resources */,
 				E74C954C22638442000CBAF0 /* wildcat_gif_5@2x.png in Resources */,
 				E7691EDD2255D3FA006A94D9 /* TXSetupTradingViewController.xib in Resources */,
 				E74C9635226384A0000CBAF0 /* TTHUDManager_right@3x.png in Resources */,
 				E72698BF223F7167003A5043 /* Assets.xcassets in Resources */,
+				E719D14E22CC8407003EAE0E /* btn_circle@3x.png in Resources */,
 				E74C963C226384A0000CBAF0 /* TTHUDManager_tip@3x.png in Resources */,
 				E72086D522C0CAE800F2F78C /* TXClubExperienceTableViewCell.xib in Resources */,
 				E78333DC22487913005CAB91 /* TXLoginViewController.xib in Resources */,
@@ -3834,6 +3909,7 @@
 				E725D0E0225EF36400C233E7 /* c31_btn_zfb@3x.png in Resources */,
 				E7D732192268B21B006F171A /* ShareSDKConfigFile.bundle in Resources */,
 				E7691EEF2255F8C4006A94D9 /* TXForgetTradingViewController.xib in Resources */,
+				E719D15022CC8407003EAE0E /* btn_point.png in Resources */,
 				E78B8F7D225B32BC0052852C /* addr.json in Resources */,
 				E74C954822638442000CBAF0 /* wildcat_gif_4@2x.png in Resources */,
 				E7D732272268B21B006F171A /* ShareSDK.bundle in Resources */,
@@ -3998,6 +4074,7 @@
 				E725718F22BCBB73006A787C /* TXClubCollectionFooterView.m in Sources */,
 				E7B4706222803BBD00ADDC7A /* LZChineseSort.m in Sources */,
 				E7269980223F7E4B003A5043 /* UIView+SCLoadingView.m in Sources */,
+				E719D15922CC88F1003EAE0E /* TXChartViewController.m in Sources */,
 				E7AA9DCA22436DA700C15483 /* TXTransactionRecordsViewController.m in Sources */,
 				E7C9FCED22673BC7008FD260 /* TXTicketInfoTableViewCell.m in Sources */,
 				E7CCDEE8228C04120017A684 /* TTBottomShowView.m in Sources */,
@@ -4089,6 +4166,7 @@
 				E74CFFC02289086B00576B86 /* TXGoodsH5TableViewCell.m in Sources */,
 				E76E681422818C5900B035B9 /* TTEmptyBaseView.m in Sources */,
 				E76C617122A2383100997817 /* TXCharterOrderViewController.m in Sources */,
+				E77F5F4522CDAC350032C21C /* TXChartModel.m in Sources */,
 				E77F87482273F0EB004EB9C1 /* UIDevice+Extension.m in Sources */,
 				E7691EE32255DC4E006A94D9 /* SCVerCodeInputView.m in Sources */,
 				E72086D022C0CAE800F2F78C /* TXClubExperienceChildViewController.m in Sources */,
@@ -4230,10 +4308,12 @@
 				E72AEE0122C4C9C90081F0AE /* TXChoosePaySingleView.m in Sources */,
 				E7B57E8022AF9B62001308CA /* TXMallHotTableViewCell.m in Sources */,
 				E769B2922277EDB20049EF73 /* LZOptionSelectView.m in Sources */,
+				E719D15522CC8562003EAE0E /* TTChartView.m in Sources */,
 				E753D1F22249D3B200A2DD36 /* SCPresentationController.m in Sources */,
 				E727FEF822A765C8001C5E63 /* TXBezierPath.m in Sources */,
 				E78583D02240BD5A00BBEA41 /* TXGeneralModel.m in Sources */,
 				E72699E5223F7F58003A5043 /* UITextField+Extension.m in Sources */,
+				E719D14322CC8353003EAE0E /* UIButton+EnlargeTouchArea.m in Sources */,
 				E78DCAD62265BC9200252314 /* TTBannerModel.m in Sources */,
 				E774DCF622730FD9001A95B8 /* TXReceiveGiftListTableViewCell.m in Sources */,
 			);

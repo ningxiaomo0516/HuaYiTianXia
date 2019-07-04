@@ -30,6 +30,7 @@
 #import "UIScreen+Extension.h"
 #import "UIButton+MVImagePosition.h"
 #import "UIButton+Extension.h"
+#import "UIButton+EnlargeTouchArea.h"
 #import "UIScrollView+Extension.h"
 #import "UIColor+Extension.h"
 #import "UIFont+Extension.h"

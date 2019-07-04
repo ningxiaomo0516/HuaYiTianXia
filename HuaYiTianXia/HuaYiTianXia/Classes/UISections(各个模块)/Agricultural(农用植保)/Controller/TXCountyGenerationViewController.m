@@ -218,18 +218,30 @@
         make.top.equalTo(self.imagesView.mas_bottom).offset(IPHONE6_W(12));
         make.right.left.equalTo(self.imagesView);
     }];
+    
+    self.scrollView.contentSize = CGSizeMake(kScreenWidth, 1000);
 }
 
 - (UIScrollView *)scrollView{
     if (!_scrollView) {
-        _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight-kNavBarHeight-kTabBarHeight)];
+//        _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight-kNavBarHeight-kTabBarHeight)];
+//        _scrollView.frame = self.view.bounds;
+//        _scrollView.delegate = self;
+//        _scrollView.backgroundColor = kViewColorNormal;
+//        _scrollView.showsVerticalScrollIndicator = NO;
+//        _scrollView.contentSize = CGSizeMake(kScreenWidth, kScreenHeight-kNavBarHeight-kTabBarHeight+1);
+//        _scrollView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
+//        _scrollView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
+        
+        _scrollView = [[UIScrollView alloc] init];
         _scrollView.frame = self.view.bounds;
         _scrollView.delegate = self;
         _scrollView.backgroundColor = kViewColorNormal;
         _scrollView.showsVerticalScrollIndicator = NO;
-        _scrollView.contentSize = CGSizeMake(kScreenWidth, kScreenHeight-kNavBarHeight-kTabBarHeight+1);
+        _scrollView.contentSize = CGSizeMake(kScreenWidth, kScreenHeight+1);
         _scrollView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
         _scrollView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
+
     }
     return _scrollView;
 }

@@ -18,6 +18,7 @@
 #import "TXSetupViewController.h"
 #import "TXInvitationViewController.h"
 #import "TXLoginViewController.h"
+#import "TXChartViewController.h"
 
 static NSString * const reuseIdentifier = @"TXMineViewCell";
 static NSString * const reuseIdentifierHeader = @"TXMineHeaderTableViewCell";
@@ -234,10 +235,10 @@ static NSString * const reuseIdentifierBanner = @"TXMineBannerTableViewCell";
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    if(indexPath.section==0) return;
-    TXGeneralModel* model = self.dataArray[indexPath.section][indexPath.row];
-    NSString *className = model.showClass;
+//    if(indexPath.section==0) return;
     if (indexPath.section>0) {
+        TXGeneralModel* model = self.dataArray[indexPath.section][indexPath.row];
+        NSString *className = model.showClass;
         if ([model.showClass isEqualToString:@"TXRealNameViewController"]) {
             if (kUserInfo.isValidation==0) {
                 TXRealNameViewController *vc = [[TXRealNameViewController alloc] init];
@@ -259,6 +260,9 @@ static NSString * const reuseIdentifierBanner = @"TXMineBannerTableViewCell";
                 TTPushVC(vc);
             }
         }
+    }else{
+        TXChartViewController *vc = [[TXChartViewController alloc] init];
+        TTPushVC(vc);
     }
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
