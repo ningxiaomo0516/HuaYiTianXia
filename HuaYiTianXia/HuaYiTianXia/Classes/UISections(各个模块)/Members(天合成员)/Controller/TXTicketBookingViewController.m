@@ -28,9 +28,7 @@ static NSString* reuseIdentifierInfo = @"TXTicketInfoTableViewCell";
 @property (nonatomic, strong) UIView *footerView;
 @property (nonatomic, strong) UIView *boxView;
 @property (nonatomic, strong) UILabel *priceLabel;
-@property (nonatomic, strong) UILabel *priceTipsLabel;
 @property (nonatomic, strong) UIButton *payButton;
-@property (nonatomic, strong) UILabel *titleLabel;
 /// 是否选择了机票
 @property (nonatomic, assign) NSInteger isSelected;
 /// 单选，当前选中的行
@@ -56,6 +54,7 @@ static NSString* reuseIdentifierInfo = @"TXTicketInfoTableViewCell";
     // Do any additional setup after loading the view.
     self.title = @"机票预订";
     [self initView];
+    [self setAttribute:@"0"];
     // 注册通知
     [kNotificationCenter addObserver:self selector:@selector(dealwithNotice) name:@"buyTicketRequest" object:nil];
 }
@@ -67,18 +66,27 @@ static NSString* reuseIdentifierInfo = @"TXTicketInfoTableViewCell";
     NSMutableDictionary *parameter = [[NSMutableDictionary alloc] init];
     [parameter setObject:self.ticketModel.dep_city forKey:@"origin"];
     [parameter setObject:self.ticketModel.arv_city forKey:@"destination"];
+
+    /// 根据 / 分割字符串
+    NSArray *priceArray = [URLString componentsSeparatedByString:@"%:"];
+    NSString *priceText = priceArray.count>1 ? priceArray[1] : @"0";
     /// 实际订票价格
-    [parameter setObject:self.priceLabel.text forKey:@"orderprice"];
+    [parameter setObject:priceText forKey:@"orderprice"];
     /// APP提交价格(需支付价格)
-    [parameter setObject:self.priceLabel.text forKey:@"price"];
+    [parameter setObject:priceText forKey:@"price"];
     /// 备注
     [parameter setObject:@"" forKey:@"remarks"];
     /// 航班号
     [parameter setObject:self.ticketModel.flight_number forKey:@"flightNumber"];
+    
+    NSString *formatDate = @"yyyy-MM-dd HH:mm:ss"; /// 年月日
+    /// 得到日期
+    NSString *arv_time= [Utils lz_timeWithTimeIntervalString:self.ticketModel.arv_time formatter:formatDate];
+    NSString *dep_time= [Utils lz_timeWithTimeIntervalString:self.ticketModel.dep_time formatter:formatDate];
     /// 起飞时间
-    [parameter setObject:self.ticketModel.arv_time forKey:@"depTime"];
+    [parameter setObject:dep_time forKey:@"depTime"];
     /// 到达时间
-    [parameter setObject:self.ticketModel.dep_time forKey:@"arvTime"];
+    [parameter setObject:arv_time forKey:@"arvTime"];
     /// 航空公司
     [parameter setObject:self.ticketModel.airline forKey:@"airline"];
     /// 飞机类型
@@ -97,7 +105,7 @@ static NSString* reuseIdentifierInfo = @"TXTicketInfoTableViewCell";
     /// 支付方式 0:支付宝 1:微信 2:余额支付
     [parameter setObject:@(2) forKey:@"payType"];
 
-    [SCHttpTools postWithURLString:URLString parameter:parameter success:^(id responseObject) {
+    [SCHttpTools  postWithURLString:URLString parameter:parameter success:^(id responseObject) {
         NSDictionary *result = responseObject;
         TXTicketModel *model = [TXTicketModel mj_objectWithKeyValues:result];
         if (model.errorcode==20000) {
@@ -149,9 +157,7 @@ static NSString* reuseIdentifierInfo = @"TXTicketInfoTableViewCell";
     [self.view addSubview:self.tableView];
     [self.view addSubview:self.footerView];
     [self.footerView addSubview:self.boxView];
-    [self.footerView addSubview:self.titleLabel];
     [self.footerView addSubview:self.priceLabel];
-    [self.footerView addSubview:self.priceTipsLabel];
     [self.footerView addSubview:self.payButton];
     
     [self initViewConstraints];
@@ -206,16 +212,8 @@ static NSString* reuseIdentifierInfo = @"TXTicketInfoTableViewCell";
         make.left.right.top.equalTo(self.footerView);
         make.height.equalTo(@(49));
     }];
-    [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(@(15));
-        make.centerY.equalTo(self.boxView);
-    }];
-    [self.priceTipsLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.titleLabel.mas_right);
-        make.centerY.equalTo(self.boxView);
-    }];
     [self.priceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.priceTipsLabel.mas_right);
+        make.left.equalTo(@(15));
         make.centerY.equalTo(self.boxView);
     }];
     [self.payButton mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -272,8 +270,9 @@ static NSString* reuseIdentifierInfo = @"TXTicketInfoTableViewCell";
 //    self.cellStr=cellStr;
     self.isSelected = YES;
     TicketPricesModel *priceModel = self.dataArray[selectedIndexPath.section];
-    self.priceLabel.text = priceModel.price;
-
+    
+    [self setAttribute:priceModel.price];
+    
     TXTicketBookingTableViewCell *toolsed = [self.tableView cellForRowAtIndexPath:_selectedIndexPath];
     toolsed.imagesSelected.image = [Utils lz_imageWithColor:kClearColor];
     //记录当前选中的位置索引
@@ -281,6 +280,17 @@ static NSString* reuseIdentifierInfo = @"TXTicketInfoTableViewCell";
     //当前选择的打勾
     TXTicketBookingTableViewCell *tools = [self.tableView cellForRowAtIndexPath:selectedIndexPath];
     tools.imagesSelected.image = kGetImage(@"使用中");
+}
+
+- (void) setAttribute:(NSString *) price{
+    NSString *text = @"订单总价￥:";
+    NSString *amountText =  [NSString stringWithFormat:@"%@%@",text,price];
+    NSMutableAttributedString *mutableAttr = [[NSMutableAttributedString alloc] initWithString:amountText];
+    /// 前面文字颜色
+    [mutableAttr addAttribute:NSForegroundColorAttributeName value:kTextColor153 range:NSMakeRange(0, text.length)];
+    /// 前面文字大小
+    [mutableAttr addAttribute:NSFontAttributeName value:kFontSizeMedium25 range:NSMakeRange(text.length, price.length)];
+    self.priceLabel.attributedText = mutableAttr;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -293,7 +303,6 @@ static NSString* reuseIdentifierInfo = @"TXTicketInfoTableViewCell";
             return IPHONE6_W(50);
         }
     }
-    
 }
 
 // 多少个分组 section
@@ -373,23 +382,9 @@ static NSString* reuseIdentifierInfo = @"TXTicketInfoTableViewCell";
 
 - (UILabel *)priceLabel{
     if (!_priceLabel) {
-        _priceLabel = [UILabel lz_labelWithTitle:@"0" color:HexString(@"#FD9141") font:kFontSizeMedium25];
+        _priceLabel = [UILabel lz_labelWithTitle:@"" color:kPriceColor font:kFontSizeMedium15];
     }
     return _priceLabel;
-}
-
-- (UILabel *)priceTipsLabel{
-    if (!_priceTipsLabel) {
-        _priceTipsLabel = [UILabel lz_labelWithTitle:@"￥:" color:HexString(@"#FD9141") font:kFontSizeMedium15];
-    }
-    return _priceTipsLabel;
-}
-
-- (UILabel *)titleLabel{
-    if (!_titleLabel) {
-        _titleLabel = [UILabel lz_labelWithTitle:@"订单总价" color:kTextColor204 font:kFontSizeMedium15];
-    }
-    return _titleLabel;
 }
 
 - (UIButton *)payButton{
@@ -399,7 +394,7 @@ static NSString* reuseIdentifierInfo = @"TXTicketInfoTableViewCell";
         _payButton.titleLabel.font = kFontSizeMedium15;
         _payButton.tag = 2;
         [_payButton setTitle:@"付款" forState:UIControlStateNormal];
-        [_payButton setBackgroundImage:imageHexString(@"#00ADFF") forState:UIControlStateNormal];
+        [_payButton setBackgroundImage:kButtonColorNormal forState:UIControlStateNormal];
         MV(weakSelf);
         [_payButton lz_handleControlEvent:UIControlEventTouchUpInside withBlock:^{
             [weakSelf submitOnClick];

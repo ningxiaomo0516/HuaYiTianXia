@@ -383,7 +383,7 @@
         [_curveView addSubview:leftLabel];
         
         if (_style == ChatViewStyleMatrixCurve || _style == ChatViewStyleMatrixBroken) {
-            UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(leftLabel.center.x - 0.5, 0, 1, _lineView.bounds.size.height)];
+            UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(leftLabel.center.x - 0.5, 0, 0.5, _lineView.bounds.size.height)];
             label.backgroundColor = kTextColor238;
             [_curveView addSubview:label];
             [_curveView sendSubviewToBack:label];
@@ -425,11 +425,10 @@
 /// 背景线
 - (void)addBackGroundLines {
     CGFloat magrginHeight = (_lineView.bounds.size.height)/ (_countY - 1);
-    CGFloat labelWith = _lineView.bounds.size.width;
+    CGFloat labelWith = _lineView.bounds.size.width-32;
     _yMargin = magrginHeight;
-    
     for (int i = 0;i< _countY ;i++ ) {
-        UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(0, magrginHeight *i, labelWith, 1)];
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, magrginHeight *i, labelWith, 0.5)];
         label.backgroundColor = kTextColor238;
         [_lineView addSubview:label];
     }

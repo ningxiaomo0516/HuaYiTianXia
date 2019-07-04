@@ -17,6 +17,7 @@
 #import "TXAddressViewController.h"
 #import "TXChoosePaySingleView.h"
 #import "TXTicketModel.h"
+#import "AlipayManager.h"
 
 static NSString * const reuseIdentifier = @"TXCharterOrderTableViewCell";
 static NSString * const reuseIdentifierInfo = @"TXCharterBaseInfoTableViewCell";
@@ -128,9 +129,18 @@ static NSString * const reuseIdentifierInfo = @"TXCharterBaseInfoTableViewCell";
     
     [SCHttpTools postWithURLString:URLString parameter:parameter success:^(id responseObject) {
         NSDictionary *result = responseObject;
-        TXTicketModel *model = [TXTicketModel mj_objectWithKeyValues:result];
+        TXGeneralModel *model = [TXGeneralModel mj_objectWithKeyValues:result];
         if (model.errorcode==20000) {
+            if (self.pay_model.kid.integerValue==0) {
+                [AlipayManager doAlipayPay:model];
+            }else if(self.pay_model.kid.integerValue==1){
+                NSString *str = [Utils lz_dataWithJSONObject:result];
+                TTLog(@"str == %@",str);
+                [AlipayManager doWechatPay:model];
+            }
             TTLog(@" result --- %@",[Utils lz_dataWithJSONObject:result]);
+        }else if(model.errorcode==200305){
+            Toast(@"支付成功");
             [self.navigationController popViewControllerAnimated:YES];
         }
         Toast(model.message);
@@ -320,7 +330,6 @@ static NSString * const reuseIdentifierInfo = @"TXCharterBaseInfoTableViewCell";
             }];
             titleLabel.text = @"报销凭证";
         }
-//        if (section==4) titleLabel.text = @"选择支付方式";
     }
     return sectionView;
 }
@@ -457,7 +466,7 @@ static NSString * const reuseIdentifierInfo = @"TXCharterBaseInfoTableViewCell";
         _dataArray = [[NSMutableArray alloc] init];
         NSArray* titleArr = @[@[@""],
                               @[kUserInfo.realname,kUserInfo.phone],
-                              @[@"原价",@"特惠价",@"订金"],
+                              @[@"原价",@"特惠价",@"定金"],
                               @[@"请选择发票抬头",@"请选择收货地址"],
                               @[@"支付方式"]];
         NSArray* classArr = @[@[@""],
