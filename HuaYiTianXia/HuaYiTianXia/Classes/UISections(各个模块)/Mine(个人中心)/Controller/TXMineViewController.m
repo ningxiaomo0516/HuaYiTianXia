@@ -24,6 +24,8 @@ static NSString * const reuseIdentifier = @"TXMineViewCell";
 static NSString * const reuseIdentifierHeader = @"TXMineHeaderTableViewCell";
 static NSString * const reuseIdentifierBanner = @"TXMineBannerTableViewCell";
 
+
+#define HeaderHeight IPHONE6_W(240)+kSafeAreaBottomHeight
 @interface TXMineViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) TXMineHeaderView *headerView;
 @property (nonatomic, strong) UITableView *tableView;
@@ -209,6 +211,15 @@ static NSString * const reuseIdentifierBanner = @"TXMineBannerTableViewCell";
         return tools;
     }
 }
+
+//- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+//    CGFloat offsetY = scrollView.contentOffset.y;
+//    if (offsetY < 0) {
+//        CGFloat totalOffsetY = HeaderHeight + ABS(offsetY);
+//        CGFloat f = totalOffsetY / HeaderHeight;
+//        self.headerView.imagesView_BG.frame = CGRectMake(- (kScreenWidth * f - kScreenWidth) / 2, offsetY, kScreenWidth * f, totalOffsetY);
+//    }
+//}
 
 // 多少个分组 section
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
