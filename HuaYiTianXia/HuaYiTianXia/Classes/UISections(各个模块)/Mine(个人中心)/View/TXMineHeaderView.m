@@ -102,7 +102,7 @@
 
 - (UILabel *)nicknameLabel{
     if (!_nicknameLabel) {
-        _nicknameLabel = [UILabel lz_labelWithTitle:@"华翼天下" color:kWhiteColor font:kFontSizeMedium16];
+        _nicknameLabel = [UILabel lz_labelWithTitle:@"杨美玲" color:kWhiteColor font:kFontSizeRegular16];
     }
     return _nicknameLabel;
 }
