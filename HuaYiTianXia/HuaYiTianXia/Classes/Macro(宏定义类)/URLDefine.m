@@ -13,12 +13,12 @@
 /// 支付是8081，其他是8082
 //NSString *const DynamicUrl = @"http://beta.api2.wed114.cn/?s=";
 //NSString *const DynamicUrl = @"http://192.168.1.14:8080/hytx/";
-//NSString *const DynamicUrl = @"http://192.168.1.20:80/hytx/";
+//NSString *const DynamicUrl = @"http://192.168.1.14:8080/hytx/";
 NSString *const DynamicUrl = @"http://47.107.179.43:80/hytx/";
 
 
 NSString *const DomainName = @"http://47.107.179.43:80/";
-//NSString *const DomainName = @"http://192.168.1.20:80/";
+//NSString *const DomainName = @"http://192.168.1.14:8080/";
 //NSString *const DomainName = @"http://192.168.1.14:8080/";
 
 NSString *const imageBaseUrl = @"//pic11.wed114.cn/";

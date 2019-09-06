@@ -249,14 +249,18 @@
  *
  *  @return 返回字符串格式时间
  */
-+ (NSString*)lz_getNdayDate:(int) days{
++ (NSString*)lz_getNdayDate:(int)days isShowTime:(BOOL)isShowTime{
     NSDate *appointDate;    // 指定日期声明
     NSTimeInterval oneDay = 24 * 60 * 60;  // 一天一共有多少秒
     NSDate *currentDate = [NSDate date];
     appointDate = [currentDate initWithTimeIntervalSinceNow:oneDay * days];
     
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"yyy-MM-dd"];
+    if (isShowTime) {
+        [formatter setDateFormat:@"yyy-MM-dd HH:mm:ss"];
+    }else{
+        [formatter setDateFormat:@"yyy-MM-dd"];
+    }
     NSString *dateTime = [formatter stringFromDate:appointDate];
     return dateTime;
 }

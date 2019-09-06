@@ -17,7 +17,7 @@
         /// 获取当前日期
         [self.startDateButton setTitle:[Utils lz_getCurrentDate] forState:UIControlStateNormal];
         /// 获取七天后的日期
-        [self.endDateButton setTitle:[Utils lz_getNdayDate:7] forState:UIControlStateNormal];
+        [self.endDateButton setTitle:[Utils lz_getNdayDate:7 isShowTime:NO] forState:UIControlStateNormal];
         
     }
     return self;

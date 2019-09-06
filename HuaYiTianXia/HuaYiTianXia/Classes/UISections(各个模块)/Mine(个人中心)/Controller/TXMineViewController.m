@@ -174,52 +174,32 @@ static NSString * const reuseIdentifierBanner = @"TXMineBannerTableViewCell";
 
 #pragma mark - Table view data source
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-        if (indexPath.section == 0) {
-        TXMineHeaderTableViewCell* tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierHeader forIndexPath:indexPath];
-        tools.userModel = self.userModel;
-        return tools;
-    }/*else if (indexPath.section == 1){
-      // 隐藏个人中心banner(2019-05-29)
-        TXMineBannerTableViewCell* tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierBanner forIndexPath:indexPath];
-        tools.bannerArray = self.bannerArray;
-        return tools;
-    }*/else{
-        TXMineViewCell* tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
-        TXGeneralModel* model = self.dataArray[indexPath.section][indexPath.row];
-        model.index = indexPath.item;
-        tools.titleLabel.text = model.title;
-        NSString *imagesName = [NSString stringWithFormat:@"c44_%@",model.title];
-        tools.imagesView.image = kGetImage(imagesName);
-        if (indexPath.row==0&&indexPath.section==1){
-            tools.subtitleLabel.textColor = HexString(@"#FF9B9B");
-            if (kUserInfo.isValidation==2) {
-                tools.subtitleLabel.textColor = kTextColor153;
-                tools.subtitleLabel.text = @"已认证";
-                tools.imagesArrow.hidden = YES;
-            }else if (kUserInfo.isValidation==1) {
-                tools.subtitleLabel.text = @"认证中";
-            }else if (kUserInfo.isValidation==3) {
-                tools.subtitleLabel.text = @"认证失败";
-            }else{
-                tools.subtitleLabel.text = @"未实名认证";
-            }
-            tools.subtitleLabel.hidden = NO;
+    TXMineViewCell* tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
+    TXGeneralModel* model = self.dataArray[indexPath.section][indexPath.row];
+    model.index = indexPath.item;
+    tools.titleLabel.text = model.title;
+    NSString *imagesName = [NSString stringWithFormat:@"c44_%@",model.title];
+    tools.imagesView.image = kGetImage(imagesName);
+    if (indexPath.row==0&&indexPath.section==0){
+        tools.subtitleLabel.textColor = HexString(@"#FF9B9B");
+        if (kUserInfo.isValidation==2) {
+            tools.subtitleLabel.textColor = kTextColor153;
+            tools.subtitleLabel.text = @"已认证";
+            tools.imagesArrow.hidden = YES;
+        }else if (kUserInfo.isValidation==1) {
+            tools.subtitleLabel.text = @"认证中";
+        }else if (kUserInfo.isValidation==3) {
+            tools.subtitleLabel.text = @"认证失败";
         }else{
-            tools.imagesArrow.hidden = NO;
-            tools.subtitleLabel.hidden = YES;
+            tools.subtitleLabel.text = @"未实名认证";
         }
-        return tools;
+        tools.subtitleLabel.hidden = NO;
+    }else{
+        tools.imagesArrow.hidden = NO;
+        tools.subtitleLabel.hidden = YES;
     }
+    return tools;
 }
-
-//- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-//    CGFloat offsetY = scrollView.contentOffset.y;
-//    if (offsetY < 0) {
-//        CGFloat totalOffsetY = HeaderHeight + ABS(offsetY);
-//        CGFloat f = totalOffsetY / HeaderHeight;
-//        self.headerView.imagesView_BG.frame = CGRectMake(- (kScreenWidth * f - kScreenWidth) / 2, offsetY, kScreenWidth * f, totalOffsetY);
-//    }
-//}
 
 // 多少个分组 section
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -228,52 +208,42 @@ static NSString * const reuseIdentifierBanner = @"TXMineBannerTableViewCell";
 
 /// 返回多少
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (section<1) return 1;
     NSArray *subArray = [self.dataArray lz_safeObjectAtIndex:section];
     return subArray.count;
 }
 
 #pragma mark -- 设置Header高度
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    if (section==0) return 0.001f;
     return 10.f;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section==0) return IPHONE6_W(126);
-    /**if (indexPath.section==1) return IPHONE6_W(180);*/
     return IPHONE6_W(50);
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-//    if(indexPath.section==0) return;
-    if (indexPath.section>0) {
-        TXGeneralModel* model = self.dataArray[indexPath.section][indexPath.row];
-        NSString *className = model.showClass;
-        if ([model.showClass isEqualToString:@"TXRealNameViewController"]) {
-            if (kUserInfo.isValidation==0) {
-                TXRealNameViewController *vc = [[TXRealNameViewController alloc] init];
-                vc.title = model.title;
-                vc.typePage = 0;
-                TTPushVC(vc);
-            }
-        }else if([model.showClass isEqualToString:@"TXWebViewController"]){
-            TXWebViewController *vc = [[TXWebViewController alloc] init];
+    TXGeneralModel* model = self.dataArray[indexPath.section][indexPath.row];
+    NSString *className = model.showClass;
+    if ([model.showClass isEqualToString:@"TXRealNameViewController"]) {
+        if (kUserInfo.isValidation==0) {
+            TXRealNameViewController *vc = [[TXRealNameViewController alloc] init];
             vc.title = model.title;
-            vc.webUrl = kAppendH5URL(DomainName, InvataionH5,kUserInfo.userid);
+            vc.typePage = 0;
             TTPushVC(vc);
-        }else{
-            Class controller = NSClassFromString(className);
-            //    id controller = [[NSClassFromString(className) alloc] init];
-            if (controller &&  [controller isSubclassOfClass:[UIViewController class]]){
-                UIViewController *vc = [[controller alloc] init];
-                vc.title = model.title;
-                TTPushVC(vc);
-            }
         }
-    }else{
-        TXChartViewController *vc = [[TXChartViewController alloc] init];
+    }else if([model.showClass isEqualToString:@"TXWebViewController"]){
+        TXWebViewController *vc = [[TXWebViewController alloc] init];
+        vc.title = model.title;
+        vc.webUrl = kAppendH5URL(DomainName, InvataionH5,kUserInfo.userid);
         TTPushVC(vc);
+    }else{
+        Class controller = NSClassFromString(className);
+        //    id controller = [[NSClassFromString(className) alloc] init];
+        if (controller &&  [controller isSubclassOfClass:[UIViewController class]]){
+            UIViewController *vc = [[controller alloc] init];
+            vc.title = model.title;
+            TTPushVC(vc);
+        }
     }
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
@@ -365,12 +335,11 @@ static NSString * const reuseIdentifierBanner = @"TXMineBannerTableViewCell";
 - (NSMutableArray *)dataArray{
     if (!_dataArray) {
         _dataArray = [[NSMutableArray alloc] init];
-        NSArray* titleArr = @[@[],
-                              @[@"实名认证",@"订单中心",@"我的钱包"],
+        NSArray* titleArr = @[
+                              @[@"实名认证",@"订单中心"],
                               @[@"我的团队",@"我的邀请",@"推荐邀请"],
                               @[@"设置"]];
-        NSArray* classArr = @[@[],
-                              @[@"TXRealNameViewController",@"TXProductViewController",@"TXWalletViewController"],
+        NSArray* classArr = @[@[@"TXRealNameViewController",@"TXProductViewController"],
                               @[@"TXMineTeamViewController",@"TXInvitationViewController",@"TXWebViewController"],
                               @[@"TXSetupViewController"]];
         for (int i=0; i<titleArr.count; i++) {

@@ -12,6 +12,7 @@
 #import "TXRolloutTableViewCell.h"
 #import "TXTicketInfoTableViewCell.h"
 #import "TXPayPasswordViewController.h"
+#import "TXChoosePaySingleView.h"
 
 static NSString* reuseIdentifier = @"TXTicketBookingTableViewCell";
 static NSString* reuseIdentifierRollout = @"TXRolloutTableViewCell";
@@ -34,6 +35,8 @@ static NSString* reuseIdentifierInfo = @"TXTicketInfoTableViewCell";
 /// 单选，当前选中的行
 @property (nonatomic, assign) NSIndexPath *selectedIndexPath;
 
+@property (nonatomic, strong) TXChoosePaySingleView *paySingleView;
+@property (nonatomic, strong) ChoosePayModel *pay_model;
 @end
 
 @implementation TXTicketBookingViewController
@@ -246,6 +249,14 @@ static NSString* reuseIdentifierInfo = @"TXTicketInfoTableViewCell";
         }
         toolsTicket.delegate=self;
         return toolsTicket;
+    }else if(indexPath.section==self.dataArray.count+1){
+        static NSString * reuseIdentifier = @"reuseIdentifierPaySingleView";
+        UITableViewCell *tools = (UITableViewCell*)[tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
+        if (!tools) {
+            tools = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
+        }
+        [tools.contentView addSubview:self.paySingleView];
+        return tools;
     }else{
         if (indexPath.row==0) {
             TXTicketInfoTableViewCell *tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierInfo forIndexPath:indexPath];
@@ -296,6 +307,8 @@ static NSString* reuseIdentifierInfo = @"TXTicketInfoTableViewCell";
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section<self.dataArray.count){
          return 95;
+    }else if(indexPath.section==self.dataArray.count+1){
+        return 140;
     }else{
         if (indexPath.row==0) {
             return IPHONE6_W(70);
@@ -307,11 +320,12 @@ static NSString* reuseIdentifierInfo = @"TXTicketInfoTableViewCell";
 
 // 多少个分组 section
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return self.dataArray.count+1;
+    return self.dataArray.count+2;
 }
 
 /// 返回多少
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    if (section==self.dataArray.count+1) return 1;
     if (section<self.dataArray.count) return 1;
     return self.itemArray.count;
 }
@@ -403,4 +417,19 @@ static NSString* reuseIdentifierInfo = @"TXTicketInfoTableViewCell";
     return _payButton;
 }
 
+- (TXChoosePaySingleView *)paySingleView {
+    if (!_paySingleView) {
+        _paySingleView = [TXChoosePaySingleView initTableWithFrame:CGRectMake(0, 0, kScreenWidth, 140)];
+        //        _paySingleView.dataArray = self.dataArray;
+        //        _paySingleView.chooseContent = self.selectMusicStr;
+        [_paySingleView reloadData];
+        //选中内容
+        MV(weakSelf)
+        _paySingleView.chooseBlock = ^(ChoosePayModel * _Nonnull model) {
+            TTLog(@"数据：%@ ；第%@行",model.titleName,model.kid);
+            weakSelf.pay_model = model;
+        };
+    }
+    return _paySingleView;
+}
 @end

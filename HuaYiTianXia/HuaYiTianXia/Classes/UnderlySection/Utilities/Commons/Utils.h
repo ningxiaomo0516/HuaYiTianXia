@@ -105,7 +105,7 @@
  *
  *  @return 返回字符串格式时间
  */
-+ (NSString*)lz_getNdayDate:(int) days;
++ (NSString*)lz_getNdayDate:(int) days isShowTime:(BOOL)isShowTime;
 /**
  *  获取当前时间的时间戳
  *

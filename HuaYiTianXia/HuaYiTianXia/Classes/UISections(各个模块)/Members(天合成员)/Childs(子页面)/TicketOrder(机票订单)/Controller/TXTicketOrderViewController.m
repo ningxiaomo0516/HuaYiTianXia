@@ -8,6 +8,7 @@
 
 #import "TXTicketOrderViewController.h"
 #import "TXTicketOrderModel.h"
+#import "TTBaseSectionHeaderView.h"
 #import "TXTicketOrderTableViewCell.h"
 
 static NSString * const reuseIdentifier = @"TXTicketOrderTableViewCell";
@@ -120,6 +121,15 @@ static NSString * const reuseIdentifier = @"TXTicketOrderTableViewCell";
  - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
      return 10.f;
  }
+
+#pragma mark -- Section HearderView Title
+// UITableView在Plain类型下，HeaderView和FooterView不悬浮和不停留的方法viewForHeaderInSection
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    TTBaseSectionHeaderView *sectionView = [[TTBaseSectionHeaderView alloc] init];
+    sectionView.section = section;
+    sectionView.tableView = tableView;
+    return sectionView;
+}
  
  - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
      

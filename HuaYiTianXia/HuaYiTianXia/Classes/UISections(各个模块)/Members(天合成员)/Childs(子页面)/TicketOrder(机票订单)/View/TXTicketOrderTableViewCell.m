@@ -42,7 +42,11 @@
     NSArray *arrayTime = [self.orderModel.depTime componentsSeparatedByString:@" "];
     NSString *depTime = arrayTime.count>1?arrayTime[1]:@"";
     NSString *flightNumber = self.orderModel.flightNumber;
-    self.o_datetime_label.text = [NSString stringWithFormat:@"%@至%@ (%@)",arvTime,depTime,flightNumber];
+    if (flightNumber.length>0) {
+        self.o_datetime_label.text = [NSString stringWithFormat:@"%@至%@ (%@)",arvTime,depTime,flightNumber];
+    }else{
+        self.o_datetime_label.text = [NSString stringWithFormat:@"%@至%@",arvTime,depTime];
+    }
 
     self.dep_city_label.text = self.orderModel.origin;
     self.arv_city_label.text = self.orderModel.destination;

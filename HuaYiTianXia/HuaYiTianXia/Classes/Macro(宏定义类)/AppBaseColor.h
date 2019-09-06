@@ -97,6 +97,7 @@
 #define kFontSizeScBold33 [UIFont fontWithName:kFontWithNamePingFangSCBold size:33]
 
 
+#define kFontSizeMedium9 [UIFont fontWithName:kFontWithNameMedium size:9]
 #define kFontSizeMedium10 [UIFont fontWithName:kFontWithNameMedium size:10]
 #define kFontSizeMedium11 [UIFont fontWithName:kFontWithNameMedium size:11]
 #define kFontSizeMedium12 [UIFont fontWithName:kFontWithNameMedium size:12]
@@ -105,6 +106,7 @@
 #define kFontSizeMedium15 [UIFont fontWithName:kFontWithNameMedium size:15]
 #define kFontSizeMedium16 [UIFont fontWithName:kFontWithNameMedium size:16]
 #define kFontSizeMedium17 [UIFont fontWithName:kFontWithNameMedium size:17]
+#define kFontSizeMedium18 [UIFont fontWithName:kFontWithNameMedium size:18]
 #define kFontSizeMedium19 [UIFont fontWithName:kFontWithNameMedium size:19]
 #define kFontSizeMedium20 [UIFont fontWithName:kFontWithNameMedium size:20]
 #define kFontSizeMedium21 [UIFont fontWithName:kFontWithNameMedium size:21]

@@ -127,6 +127,10 @@ static NSString * const reuseIdentifiers = @"TXRegisteredTableViewCell";
             Toast(@"确认密码与密码不一致");
             return;
         }
+        if (self.invitationCode.length==0) {
+            Toast(@"请填写邀请码");
+            return;
+        }
     }
     
     kShowMBProgressHUD(self.view);
@@ -344,7 +348,7 @@ static NSString * const reuseIdentifiers = @"TXRegisteredTableViewCell";
     if (!_dataArray) {
         _dataArray = [[NSMutableArray alloc] init];
         NSArray* titleArr = @[@"手机号",@"验证码",@"密码",@"确认密码",@"邀请码"];
-        NSArray* classArr = @[@"请输入手机号码",@"请输入验证码",@"请输入登录密码",@"请再次输入密码",@"邀请码（选填）"];
+        NSArray* classArr = @[@"请输入手机号码",@"请输入验证码",@"请输入登录密码",@"请再次输入密码",@"邀请码（必填）"];
         for (int j = 0; j < titleArr.count; j ++) {
             TXGeneralModel *generalModel = [[TXGeneralModel alloc] init];
             generalModel.title = [titleArr lz_safeObjectAtIndex:j];

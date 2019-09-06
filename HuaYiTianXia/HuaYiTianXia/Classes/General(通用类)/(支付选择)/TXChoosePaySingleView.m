@@ -99,7 +99,7 @@
         [_tableView setSeparatorInset:UIEdgeInsetsMake(0, 15, 0, 0)];
         [_tableView registerClass:[TXChoosePayCell class] forCellReuseIdentifier:[TXChoosePayCell reuseIdentifier]];
         //1 禁用系统自带的分割线
-        _tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.backgroundColor = kViewColorNormal;

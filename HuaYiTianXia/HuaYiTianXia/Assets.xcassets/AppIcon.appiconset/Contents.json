@@ -33,13 +33,13 @@
     {
       "size" : "40x40",
       "idiom" : "iphone",
-      "filename" : "c11_2000iPhoneSpootlight7_40pt@3x.png",
+      "filename" : "c11_2000iPhoneApp_60pt@2x.png",
       "scale" : "3x"
     },
     {
       "size" : "60x60",
       "idiom" : "iphone",
-      "filename" : "c11_2000iPhoneApp_60pt@2x.png",
+      "filename" : "c11_2000iPhoneSpootlight7_40pt@3x.png",
       "scale" : "2x"
     },
     {

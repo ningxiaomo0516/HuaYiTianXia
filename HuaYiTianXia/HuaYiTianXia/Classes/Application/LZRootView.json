@@ -1,34 +1,29 @@
 
 [
     {
-        "title":"新闻",
+        "title":"首页",
         "imageName":"tab_home_nor",
         "imageSelectName":"tab_home_press",
-        "controllerName":"TXNewsViewController",
+        "controllerName":"TXMainViewController",
     },
     {
-        "title":"商城",
-        "imageName":"tab_business_nor",
-        "imageSelectName":"tab_business_press",
-        "controllerName":"TXMallViewController",
+        "title":"尊享",
+        "imageName":"tab_honour_nor",
+        "imageSelectName":"tab_honour_press",
+        "controllerName":"TXTicketQueryViewController",
     },
     {
-        "title":"农保",
-        "imageName":"tab_coin_nor",
-        "imageSelectName":"tab_coin_press",
-        "controllerName":"TXCountyGenerationViewController",
-     },
-    {
-        "title":"天合",
-        "imageName":"tab_flight_nor",
-        "imageSelectName":"tab_flight_press",
-        "controllerName":"TXMembersViewController",
+        "title":"行程",
+        "imageName":"tab_trip_nor",
+        "imageSelectName":"tab_trip_press",
+        "controllerName":"TXTicketOrderViewController",
     },
-     {
+    {
         "title":"我的",
         "imageName":"tab_mine_nor",
         "imageSelectName":"tab_mine_press",
         "controllerName":"TXMineViewController",
     }
 ]
+
 

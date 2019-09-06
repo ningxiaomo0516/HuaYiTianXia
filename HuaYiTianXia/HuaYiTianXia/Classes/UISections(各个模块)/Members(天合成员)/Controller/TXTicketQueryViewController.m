@@ -10,6 +10,7 @@
 #import "LZDatePickerView.h"
 #import "TXTicketListViewController.h"
 #import "FMSelectedCityViewController.h"
+#import "TXLoginViewController.h"
 
 
 @interface TXTicketQueryViewController ()
@@ -53,9 +54,9 @@
     NSString* province = [kUserDefaults objectForKey:@"city"];
     self.dep_city_label.text = province;
     self.arv_city_label.text = @"北京";
-    self.date_select_label.text = [Utils lz_getCurrentDate];
+    self.date_select_label.text = [Utils lz_getNdayDate:3 isShowTime:NO];
     /// 根据当前日期转换星期
-    self.week_select_label.text = [SCSmallTools tt_weekdayStringFromDate:[Utils lz_getCurrentDate]];
+    self.week_select_label.text = [SCSmallTools tt_weekdayStringFromDate:[Utils lz_getNdayDate:3 isShowTime:NO]];
     self.dep_city_btn.tag = 100;
     self.arv_city_btn.tag = 200;
     MV(weakSelf)
@@ -101,7 +102,8 @@
 /// 选择机票查询日期
 - (void) showDataPicker{
     [self tapGesture];
-    NSString *minDateStr = [Utils lz_getCurrentTime];
+    
+    NSString *minDateStr = [Utils lz_getNdayDate:3 isShowTime:YES];
     NSString *maxDateStr = @"";
     NSString *defaultSelValue = self.date_select_label.text;
     MV(weakSelf)
@@ -125,6 +127,15 @@
 
 /** 保存 */
 - (void) searchBtnClick{
+    
+    if (!kUserInfo.isLogin) {
+        TXLoginViewController *vc = [[TXLoginViewController alloc] init];
+        LZNavigationController *navigation = [[LZNavigationController alloc] initWithRootViewController:vc];
+        [self presentViewController:navigation animated:YES completion:^{
+            TTLog(@"登录界面");
+        }];
+        return;
+    }
     
     NSString *startPlace= self.dep_city_label.text;
     NSString *endPlace = self.arv_city_label.text;
@@ -197,6 +208,7 @@
         [_leftButton lz_handleControlEvent:UIControlEventTouchUpInside withBlock:^{
             [weakSelf.navigationController popViewControllerAnimated:YES];
         }];
+        _leftButton.hidden = YES;
     }
     return _leftButton;
 }
