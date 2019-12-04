@@ -221,9 +221,9 @@ static NSString* reuseIdentifier = @"TXBecomeVipCollectionViewCell";
     if (!_dataArray) {
         _dataArray = [[NSMutableArray alloc] init];
         NSArray* titleArr = @[@"黄金会员",@"白钻会员",@"黑钻会员"];
-        NSArray* imagesArr = @[@"￥10,000",@"￥100,000",@"￥300,000"];
+        NSArray* imagesArr = @[@"￥100,000",@"￥500,000",@"￥1,000,000"];
         NSArray* classArr = @[@"个人版",@"终身版",@"企业版"];
-        NSArray* priceArr = @[@"1000",@"100000",@"300000"];
+        NSArray* priceArr = @[@"100000",@"500000",@"1000000"];
         for (int j = 0; j < titleArr.count; j ++) {
             TXGeneralModel* templateModel = [[TXGeneralModel alloc] init];
             templateModel.title = [titleArr lz_safeObjectAtIndex:j];

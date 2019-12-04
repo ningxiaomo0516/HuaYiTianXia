@@ -44,15 +44,17 @@ static NSString * const reuseIdentifierChoosePay = @"TXChoosePayTableViewCell";
 }
 
 - (void) submitClick:(UIButton *)sender{
-    if (self.topupAmount.length==0) {
-        Toast(@"请输入充值金额");
-        return;
-    }
-    if (self.payType == -1) {
-        Toast(@"请输选择支付方式");
-        return;
-    }
-    [self GenerateOrderData:self.payType];
+    Toast(@"线下缴费，请联系客服人员ii");
+    return;
+//    if (self.topupAmount.length==0) {
+//        Toast(@"请输入充值金额");
+//        return;
+//    }
+//    if (self.payType == -1) {
+//        Toast(@"请输选择支付方式");
+//        return;
+//    }
+//    [self GenerateOrderData:self.payType];
 }
 
 /// 天合成员充值金额获取

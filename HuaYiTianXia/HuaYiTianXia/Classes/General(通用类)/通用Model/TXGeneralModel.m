@@ -39,3 +39,11 @@
     return @{@"kid"     : @"id"};
 }
 @end
+
+@implementation RealnameModel
++ (NSDictionary *)replacedKeyFromPropertyName{
+    return @{@"message"     : @"msg",
+             @"errorcode"   : @"code"};
+}
+
+@end

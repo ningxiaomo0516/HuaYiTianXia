@@ -109,10 +109,12 @@ static NSString * const reuseIdentifier = @"TXMineTableViewCell";
         NSArray* titleArr = [NSArray new];
         NSArray* classArr = [NSArray new];
         if (kUserInfo.tranPwd==0) {
-            titleArr = @[@"个人资料",@"认证资料",@"重置登录密码",@"设置交易密码"];
+//            titleArr = @[@"个人资料",@"认证资料",@"重置登录密码",@"设置交易密码"];
+            titleArr = @[@"个人资料",@"认证资料",@"修改密码"];
             classArr = @[@"TXPersonalInfoViewController",@"TXRealNameViewController",@"TXResetPwdViewController",@"TXSetupTradingViewController"];
         }else if(kUserInfo.tranPwd==1){
-            titleArr = @[@"个人资料",@"认证资料",@"重置登录密码",@"重置交易密码",@"忘记交易密码"];
+//            titleArr = @[@"个人资料",@"认证资料",@"重置登录密码",@"重置交易密码",@"忘记交易密码"];
+            titleArr = @[@"个人资料",@"认证资料",@"修改密码"];
             classArr = @[@"TXPersonalInfoViewController",@"TXRealNameViewController",
                          @"TXResetPwdViewController",@"TXResetTradingViewController",@"TXForgetTradingViewController"];
         }else{

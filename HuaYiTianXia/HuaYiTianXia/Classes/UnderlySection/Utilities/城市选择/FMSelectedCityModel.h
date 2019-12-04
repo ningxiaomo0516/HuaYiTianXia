@@ -55,4 +55,43 @@
 /// 城市首字母
 @property (nonatomic, copy) NSString *g;
 
+
+
+/// id
+@property (nonatomic, copy) NSString *kid;
+/// 机场码
+@property (nonatomic, copy) NSString *airportCode;
+/// 城市码
+@property (nonatomic, copy) NSString *cityCode;
+/// 是否热门
+@property (nonatomic, copy) NSString *isHot;
+/// D:国内 I:国外
+@property (nonatomic, copy) NSString *airportPosition;
+/// 机场英文名
+@property (nonatomic, copy) NSString *airportEName;
+/// 机场中文名
+@property (nonatomic, copy) NSString *airportCName;
+/// 城市中文名
+@property (nonatomic, copy) NSString *cityCName;
+/// 城市英文名
+@property (nonatomic, copy) NSString *cityEName;
+/// 城市首字母
+@property (nonatomic, copy) NSString *picPath;
+/// 区域码
+@property (nonatomic, copy) NSString *areaCode;
+/// 省码
+@property (nonatomic, copy) NSString *countryCode;
+/// 机场描述
+@property (nonatomic, copy) NSString *airportDes;
+
+@end
+
+
+@interface YKCityModel : NSObject
+/// 错误码
+@property (nonatomic, assign) NSInteger errorcode;
+/// 文字提示
+@property (nonatomic, copy) NSString *message;
+
+@property (nonatomic, strong) NSMutableArray<CityModel *> *list;
 @end

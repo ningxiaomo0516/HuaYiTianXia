@@ -50,7 +50,7 @@
     
     [self.protocolButton lz_handleControlEvent:UIControlEventTouchUpInside withBlock:^{
        TXWebViewController *vc = [[TXWebViewController alloc] init];
-        vc.title = @"华翼天下服务协议";
+        vc.title = @"天合成员服务协议";
         vc.webUrl = kAppendH5URL(DomainName, UserAgreeH5,@"");
         TTPushVC(vc);
     }];

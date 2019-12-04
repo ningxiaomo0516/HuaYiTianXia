@@ -7,16 +7,16 @@
         "controllerName":"TXMainViewController",
     },
     {
-        "title":"尊享",
+        "title":"出行",
         "imageName":"tab_honour_nor",
         "imageSelectName":"tab_honour_press",
-        "controllerName":"TXTicketQueryViewController",
+        "controllerName":"YKTicketQueryViewController",
     },
     {
         "title":"行程",
         "imageName":"tab_trip_nor",
         "imageSelectName":"tab_trip_press",
-        "controllerName":"TXTicketOrderViewController",
+        "controllerName":"YKTicketOrderViewController",
     },
     {
         "title":"我的",

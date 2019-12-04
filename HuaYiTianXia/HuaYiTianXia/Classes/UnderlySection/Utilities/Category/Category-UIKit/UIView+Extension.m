@@ -216,8 +216,7 @@
     return view;
 }
 
-- (BOOL)lz_isShowingOnKeyWindow
-{
+- (BOOL)lz_isShowingOnKeyWindow {
     // 主窗口
     UIWindow *keyWindow = [UIApplication sharedApplication].keyWindow;
     
@@ -267,7 +266,18 @@
     self.layer.borderColor = nil;
 }
 
-
+/// 添加阴影效果
+- (void)tt_addShadowToViewWithColor:(UIColor *)theColor {
+    self.layer.masksToBounds = NO;
+    // 阴影颜色
+    self.layer.shadowColor = theColor.CGColor;
+    // 阴影偏移，默认(0, -3)
+    self.layer.shadowOffset = CGSizeMake(0,2.0f);
+    // 阴影透明度，默认1.0
+    self.layer.shadowOpacity = 1.0f;
+    // 阴影半径，默认5
+    self.layer.shadowRadius = 5;
+}
 
 - (void)lz_createRectShadowWithOffset:(CGSize)offset opacity:(CGFloat)opacity radius:(CGFloat)radius {
     self.layer.shadowColor = [UIColor blackColor].CGColor;

@@ -102,6 +102,7 @@
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _tableView.delegate = self;
         _tableView.dataSource = self;
+        _tableView.scrollEnabled = NO;
         _tableView.backgroundColor = kViewColorNormal;
         _tableView.rowHeight = UITableViewAutomaticDimension;
     }

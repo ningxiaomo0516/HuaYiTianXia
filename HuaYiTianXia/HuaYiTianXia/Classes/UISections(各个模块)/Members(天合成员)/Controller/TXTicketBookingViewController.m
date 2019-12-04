@@ -43,11 +43,11 @@ static NSString* reuseIdentifierInfo = @"TXTicketInfoTableViewCell";
 - (id)initTicketModel:(TicketModel *)ticketModel{
     if ( self = [super init] ){
         self.ticketModel = ticketModel;
-        for (TicketPricesModel *model in ticketModel.prices) {
-            if ([model.discount isEqualToString:@"全价"]) {
-                [self.dataArray addObject:model];
-            }
-        }
+//        for (TicketPricesModel *model in ticketModel.prices) {
+//            if ([model.discount isEqualToString:@"全价"]) {
+//                [self.dataArray addObject:model];
+//            }
+//        }
         self.isSelected = NO;
     }
     return self;
@@ -65,62 +65,62 @@ static NSString* reuseIdentifierInfo = @"TXTicketInfoTableViewCell";
 - (void) dealwithNotice{
     [self dismissedButtonClicked];
     kShowMBProgressHUD(self.view);
-    NSString *URLString = kHttpURL(@"aircraftorder/AddAircraftorder");
-    NSMutableDictionary *parameter = [[NSMutableDictionary alloc] init];
-    [parameter setObject:self.ticketModel.dep_city forKey:@"origin"];
-    [parameter setObject:self.ticketModel.arv_city forKey:@"destination"];
-
-    /// 根据 / 分割字符串
-    NSArray *priceArray = [URLString componentsSeparatedByString:@"%:"];
-    NSString *priceText = priceArray.count>1 ? priceArray[1] : @"0";
-    /// 实际订票价格
-    [parameter setObject:priceText forKey:@"orderprice"];
-    /// APP提交价格(需支付价格)
-    [parameter setObject:priceText forKey:@"price"];
-    /// 备注
-    [parameter setObject:@"" forKey:@"remarks"];
-    /// 航班号
-    [parameter setObject:self.ticketModel.flight_number forKey:@"flightNumber"];
-    
-    NSString *formatDate = @"yyyy-MM-dd HH:mm:ss"; /// 年月日
-    /// 得到日期
-    NSString *arv_time= [Utils lz_timeWithTimeIntervalString:self.ticketModel.arv_time formatter:formatDate];
-    NSString *dep_time= [Utils lz_timeWithTimeIntervalString:self.ticketModel.dep_time formatter:formatDate];
-    /// 起飞时间
-    [parameter setObject:dep_time forKey:@"depTime"];
-    /// 到达时间
-    [parameter setObject:arv_time forKey:@"arvTime"];
-    /// 航空公司
-    [parameter setObject:self.ticketModel.airline forKey:@"airline"];
-    /// 飞机类型
-    [parameter setObject:self.ticketModel.model forKey:@"aircraft"];
-    /// 起飞机场
-    [parameter setObject:self.ticketModel.dep_airport forKey:@"depAirport"];
-    /// 到达机场
-    [parameter setObject:self.ticketModel.arv_airport forKey:@"arvAirport"];
-
-    /// 到达航站楼
-    [parameter setObject:self.ticketModel.arv_airport_term forKey:@"arvTerminal"];
-    /// 起飞航站楼
-    [parameter setObject:self.ticketModel.dep_airport_term forKey:@"depTerminal"];
-    /// 1:天合成员飞机订票 2:包机订票 3:拼机订票(默认1)
-    [parameter setObject:@(1) forKey:@"type"];
-    /// 支付方式 0:支付宝 1:微信 2:余额支付
-    [parameter setObject:@(2) forKey:@"payType"];
-
-    [SCHttpTools  postWithURLString:URLString parameter:parameter success:^(id responseObject) {
-        NSDictionary *result = responseObject;
-        TXTicketModel *model = [TXTicketModel mj_objectWithKeyValues:result];
-        if (model.errorcode==20000) {
-            TTLog(@" result --- %@",[Utils lz_dataWithJSONObject:result]);
-            [self.navigationController popViewControllerAnimated:YES];
-        }
-        Toast(model.message);
-        kHideMBProgressHUD(self.view);
-    } failure:^(NSError *error) {
-        TTLog(@"机票查询信息 -- %@", error);
-        kHideMBProgressHUD(self.view);
-    }];
+//    NSString *URLString = kHttpURL(@"aircraftorder/AddAircraftorder");
+//    NSMutableDictionary *parameter = [[NSMutableDictionary alloc] init];
+//    [parameter setObject:self.ticketModel.dep_city forKey:@"origin"];
+//    [parameter setObject:self.ticketModel.arv_city forKey:@"destination"];
+//
+//    /// 根据 / 分割字符串
+//    NSArray *priceArray = [URLString componentsSeparatedByString:@"%:"];
+//    NSString *priceText = priceArray.count>1 ? priceArray[1] : @"0";
+//    /// 实际订票价格
+//    [parameter setObject:priceText forKey:@"orderprice"];
+//    /// APP提交价格(需支付价格)
+//    [parameter setObject:priceText forKey:@"price"];
+//    /// 备注
+//    [parameter setObject:@"" forKey:@"remarks"];
+//    /// 航班号
+//    [parameter setObject:self.ticketModel.flight_number forKey:@"flightNumber"];
+//
+//    NSString *formatDate = @"yyyy-MM-dd HH:mm:ss"; /// 年月日
+//    /// 得到日期
+//    NSString *arv_time= [Utils lz_timeWithTimeIntervalString:self.ticketModel.arv_time formatter:formatDate];
+//    NSString *dep_time= [Utils lz_timeWithTimeIntervalString:self.ticketModel.dep_time formatter:formatDate];
+//    /// 起飞时间
+//    [parameter setObject:dep_time forKey:@"depTime"];
+//    /// 到达时间
+//    [parameter setObject:arv_time forKey:@"arvTime"];
+//    /// 航空公司
+//    [parameter setObject:self.ticketModel.airline forKey:@"airline"];
+//    /// 飞机类型
+//    [parameter setObject:self.ticketModel.model forKey:@"aircraft"];
+//    /// 起飞机场
+//    [parameter setObject:self.ticketModel.dep_airport forKey:@"depAirport"];
+//    /// 到达机场
+//    [parameter setObject:self.ticketModel.arv_airport forKey:@"arvAirport"];
+//
+//    /// 到达航站楼
+//    [parameter setObject:self.ticketModel.arv_airport_term forKey:@"arvTerminal"];
+//    /// 起飞航站楼
+//    [parameter setObject:self.ticketModel.dep_airport_term forKey:@"depTerminal"];
+//    /// 1:天合成员飞机订票 2:包机订票 3:拼机订票(默认1)
+//    [parameter setObject:@(1) forKey:@"type"];
+//    /// 支付方式 0:支付宝 1:微信 2:余额支付
+//    [parameter setObject:@(2) forKey:@"payType"];
+//
+//    [SCHttpTools  postWithURLString:URLString parameter:parameter success:^(id responseObject) {
+//        NSDictionary *result = responseObject;
+//        TXTicketModel *model = [TXTicketModel mj_objectWithKeyValues:result];
+//        if (model.errorcode==20000) {
+//            TTLog(@" result --- %@",[Utils lz_dataWithJSONObject:result]);
+//            [self.navigationController popViewControllerAnimated:YES];
+//        }
+//        Toast(model.message);
+//        kHideMBProgressHUD(self.view);
+//    } failure:^(NSError *error) {
+//        TTLog(@"机票查询信息 -- %@", error);
+//        kHideMBProgressHUD(self.view);
+//    }];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -229,15 +229,15 @@ static NSString* reuseIdentifierInfo = @"TXTicketInfoTableViewCell";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section<self.dataArray.count){
         TXTicketBookingTableViewCell *toolsTicket = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
-        toolsTicket.ticketModel = self.ticketModel;
-        TicketPricesModel *priceModel = self.dataArray[indexPath.section];
-        /// 文字颜色
-        UIColor *textColor = HexString(@"#FC7E4C");
-        NSInteger index,endIndex;
-        index = priceModel.type.length+1;
-        NSString *economyText = [NSString stringWithFormat:@"%@:￥%@",priceModel.type,priceModel.price];
-        endIndex = economyText.length-index;
-        toolsTicket.priceLabel.attributedText = [SCSmallTools setupTextColor:textColor currentText:economyText index:index endIndex:endIndex];
+//        toolsTicket.ticketModel = self.ticketModel;
+//        TicketPricesModel *priceModel = self.dataArray[indexPath.section];
+//        /// 文字颜色
+//        UIColor *textColor = HexString(@"#FC7E4C");
+//        NSInteger index,endIndex;
+//        index = priceModel.type.length+1;
+//        NSString *economyText = [NSString stringWithFormat:@"%@:￥%@",priceModel.type,priceModel.price];
+//        endIndex = economyText.length-index;
+//        toolsTicket.priceLabel.attributedText = [SCSmallTools setupTextColor:textColor currentText:economyText index:index endIndex:endIndex];
         
         toolsTicket.selectedIndexPath = indexPath;
         
@@ -280,9 +280,9 @@ static NSString* reuseIdentifierInfo = @"TXTicketInfoTableViewCell";
 -(void)selectRowStr:(NSString *)cellStr indexPath:(NSIndexPath *)selectedIndexPath{
 //    self.cellStr=cellStr;
     self.isSelected = YES;
-    TicketPricesModel *priceModel = self.dataArray[selectedIndexPath.section];
-    
-    [self setAttribute:priceModel.price];
+//    TicketPricesModel *priceModel = self.dataArray[selectedIndexPath.section];
+//
+//    [self setAttribute:priceModel.price];
     
     TXTicketBookingTableViewCell *toolsed = [self.tableView cellForRowAtIndexPath:_selectedIndexPath];
     toolsed.imagesSelected.image = [Utils lz_imageWithColor:kClearColor];

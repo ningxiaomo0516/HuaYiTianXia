@@ -58,7 +58,7 @@
         _textLabel = [[UILabel alloc] init];
         _textLabel.numberOfLines = 0;
         _textLabel.textAlignment = NSTextAlignmentLeft;
-        _textLabel.font = kFontSizeMedium15;
+        _textLabel.font = kFontSizeMedium16;
         _textLabel.textColor = kColorWithRGB(211, 0, 0);
     }
     return _textLabel;

@@ -45,7 +45,7 @@
         [[UIScrollView appearance] setContentInsetAdjustmentBehavior:UIScrollViewContentInsetAdjustmentNever];
     }
     // 启动图片延时: 1秒
-    [NSThread sleepForTimeInterval:2];
+    [NSThread sleepForTimeInterval:1];
     [self registLocalNotificationWithOptions:launchOptions];
     //配置键盘
 //    [IQKeyboardManager sharedManager];
@@ -147,10 +147,10 @@
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     //设置窗口颜色
     self.window.backgroundColor = kWhiteColor;
+//    [self setVersionVC];
+    [self jumpMainVC];
     //设置窗口为主窗口并且显示
-//    [self.window makeKeyAndVisible];
-    [self setVersionVC];
-//    [self jumpMainVC];
+    [self.window makeKeyAndVisible];
 }
 
 - (void) jumpMainVC{
@@ -252,6 +252,8 @@
                 strMsg = @"支付成功！";
             }else if (kUserInfo.topupType == 3) {
                 strMsg = @"充值成功！";
+            }else{
+                strMsg = @"订单支付成功！";
             }
             
             TTLog(@"支付成功－PaySuccess，retcode = %d", resp.errCode);

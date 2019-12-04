@@ -82,7 +82,11 @@ static NSString * const reuseIdentifiers = @"TXSystemTableViewCell";
         TXMessageChildViewController *vc = [[TXMessageChildViewController alloc] initPushMessageModel:messageModel];
         TTPushVC(vc);
     }else if(messageType==5){
-        TXMessageChildAdsViewController *vc = [[TXMessageChildAdsViewController alloc] initPushMessageModel:messageModel];
+//        TXMessageChildAdsViewController *vc = [[TXMessageChildAdsViewController alloc] initPushMessageModel:messageModel];
+        TXMessageChildAdsViewController *vc = [[TXMessageChildAdsViewController alloc] init];
+        vc.title = @"";
+        vc.titlelabel.text = messageModel.title;
+        vc.subtitlelabel.text = messageModel.content;
         TTPushVC(vc);
     }
 }

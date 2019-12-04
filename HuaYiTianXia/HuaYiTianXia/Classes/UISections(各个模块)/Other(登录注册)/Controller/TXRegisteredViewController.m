@@ -61,6 +61,7 @@ static NSString * const reuseIdentifiers = @"TXRegisteredTableViewCell";
     }];
     
     if (self.pageType==0) {
+        self.titlelabel.hidden = YES;
         [self.footerView addSubview:self.titlelabel];
         [self.titlelabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerX.equalTo(self.view);
@@ -264,6 +265,7 @@ static NSString * const reuseIdentifiers = @"TXRegisteredTableViewCell";
         tools.textField.tag = indexPath.row;
         if (indexPath.row==2||indexPath.row==3) {
             tools.textField.secureTextEntry = YES;
+            tools.textField.keyboardType = UIKeyboardTypeDefault;
         }
         [tools.textField addTarget:self action:@selector(textFieldWithText:) forControlEvents:UIControlEventEditingChanged];
         return tools;

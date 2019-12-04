@@ -36,8 +36,8 @@ static NSString * const PurchaseURL=@"https://buy.itunes.apple.com/verifyReceipt
 #define kQQAppKey @"eqb84UMcbFWN4JIZ"
 
 ////////// 微信分享/支付Key //////////
-#define kWechatAppId   @"wx29a93cd22437a735"
-#define kWechatAppSecret @"ce8e3f5ff911580c1b2c1b7dd14ce5d0"
+#define kWechatAppId   @"wx0ba719c1710e5353"
+#define kWechatAppSecret @"24c6a0de8b16b6b526b0df23d6c6a0ba"
 ////////// 微信请帖小程序 //////////
 #define kWechatInvitationId  @"wx9100746b25db0e25"
 

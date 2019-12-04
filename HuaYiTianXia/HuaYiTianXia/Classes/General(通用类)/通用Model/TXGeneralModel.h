@@ -60,4 +60,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property(nonatomic, copy)NSString *regionalagentMsg;
 @end
+
+
+@interface RealnameModel : NSObject
+/// 消息提示
+@property(nonatomic, copy)NSString* message;
+/// 错误Code
+@property(nonatomic, assign)NSInteger errorcode;
+
+@end
 NS_ASSUME_NONNULL_END

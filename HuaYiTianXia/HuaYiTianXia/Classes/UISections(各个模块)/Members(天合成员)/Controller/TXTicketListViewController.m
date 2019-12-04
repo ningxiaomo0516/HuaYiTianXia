@@ -9,7 +9,7 @@
 #import "TXTicketListViewController.h"
 #import "TXTicketModel.h"
 #import "TXTicketListTableViewCell.h"
-#import "TXTicketBookingViewController.h"
+#import "YKTicketBookingViewController.h"
 
 static NSString* reuseIdentifier = @"TXTicketListTableViewCell";
 
@@ -19,6 +19,8 @@ static NSString* reuseIdentifier = @"TXTicketListTableViewCell";
 @property (nonatomic, strong) NSMutableDictionary *parameter;
 @property (nonatomic, copy) NSString *URLString;
 @property (nonatomic, strong) NSMutableArray *dataArray;
+/// 无数据的情况
+@property (nonatomic, strong) SCNoDataView *emptyView;
 @end
 
 @implementation TXTicketListViewController
@@ -36,22 +38,28 @@ static NSString* reuseIdentifier = @"TXTicketListTableViewCell";
     [self initView];
     [self.view showLoadingViewWithText:@"加载中..."];
     [self GetTicketDataRequest];
+//    [self requestData];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
 }
 
-- (void) GetTicketDataRequest{
-    [SCHttpTools getTicketWithURLString:self.URLString parameter:self.parameter success:^(id responseObject) {
+- (void) requestData{
+    NSString *URLString = @"http://192.168.0.194:8080/hytx/TicketModel.json";
+    [SCHttpTools getTicketWithURLString:URLString parameter:nil success:^(id responseObject) {
         NSDictionary *result = responseObject;
         TXTicketModel *model = [TXTicketModel mj_objectWithKeyValues:result];
-        if (model.errorcode==0) {
+        if (model.errorcode==20000) {
             /// 查询列表
             for (TicketModel *ticketModel in model.data) {
-                for (TicketPricesModel *priceModel in ticketModel.prices) {
-                    if ([priceModel.discount isEqualToString:@"全价"]) {
-                        [self.dataArray addObject:ticketModel];
+                [self.dataArray addObject:ticketModel];
+                TTLog(@"航班号:%@ ----- 时间:%@",ticketModel.flightNo,ticketModel.depTime);
+                for (SeatItems *seatModel in ticketModel.seatItems) {
+                    TTLog(@"舱位说明:%@----%ld",seatModel.seatMsg,(long)seatModel.seatType);
+                    TTLog(@"备注:%@",seatModel.policys.comment);
+                    for (PricesModel *priceModel in seatModel.policys.priceDatas) {
+                        TTLog(@"价格 -- %@",priceModel.price);
                     }
                 }
             }
@@ -66,12 +74,65 @@ static NSString* reuseIdentifier = @"TXTicketListTableViewCell";
     }];
 }
 
+
+- (void) GetTicketDataRequest{
+    [SCHttpTools getWithURLString:self.URLString parameter:self.parameter success:^(id responseObject) {
+        NSDictionary *result = responseObject;
+        TXTicketModel *model = [TXTicketModel mj_objectWithKeyValues:result];
+        if (model.errorcode==20000) {
+            /// 查询列表
+            for (TicketModel *ticketModel in model.data) {
+                [self.dataArray addObject:ticketModel];
+                TTLog(@"航班号:%@ ----- 时间:%@",ticketModel.flightNo,ticketModel.depTime);
+                for (SeatItems *seatModel in ticketModel.seatItems) {
+                    TTLog(@"舱位说明:%@----%ld",seatModel.seatMsg,(long)seatModel.seatType);
+                    TTLog(@"备注:%@",seatModel.policys.comment);
+                    for (PricesModel *priceModel in seatModel.policys.priceDatas) {
+                        TTLog(@"价格 -- %@",priceModel.price);
+                    }
+                }
+            }
+            [self.tableView reloadData];
+        }else{
+            Toast(model.message);
+        }
+        [self analysisData];
+        [self.view dismissLoadingView];
+    } failure:^(NSError *error) {
+        TTLog(@"机票查询信息 -- %@", error);
+        [self.view dismissLoadingView];
+    }];
+}
+
+- (SCNoDataView *)emptyView {
+    if (!_emptyView) {
+        _emptyView = [[SCNoDataView alloc] initWithFrame:self.view.bounds
+                                               imageName:@"c12_live_nodata"
+                                           tipsLabelText:@"没有相应航班哦~"];
+        _emptyView.userInteractionEnabled = NO;
+        [self.view insertSubview:_emptyView atIndex:10];
+        [self.emptyView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.mas_offset(0);
+            make.centerY.mas_equalTo(self.view.mas_centerY);
+            make.height.mas_equalTo(150);
+        }];
+    }
+    return _emptyView;
+}
+
 - (void) initView{
     [Utils lz_setExtraCellLineHidden:self.tableView];
     [self.view addSubview:self.tableView];
     [self initViewConstraints];
 }
 
+- (void)analysisData {
+    if (self.dataArray.count == 0) {
+        self.emptyView.hidden = NO;
+    }else {
+        self.emptyView.hidden = YES;
+    }
+}
 
 #pragma mark ---- 约束布局
 - (void) initViewConstraints{
@@ -88,7 +149,7 @@ static NSString* reuseIdentifier = @"TXTicketListTableViewCell";
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return IPHONE6_W(90);
+    return 100;
 }
 
 // 多少个分组 section
@@ -108,9 +169,8 @@ static NSString* reuseIdentifier = @"TXTicketListTableViewCell";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     TicketModel *ticketModel = self.dataArray[indexPath.section];
-    ticketModel.dep_city = [self.parameter lz_objectForKey:@"fromCity"];
-    ticketModel.arv_city = [self.parameter lz_objectForKey:@"toCity"];
-    TXTicketBookingViewController *vc = [[TXTicketBookingViewController alloc] initTicketModel:ticketModel];
+    ticketModel.depDate = [self.parameter lz_objectForKey:@"depTime"];
+    YKTicketBookingViewController *vc = [[YKTicketBookingViewController alloc] initTicketModel:ticketModel];
     TTPushVC(vc);
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }

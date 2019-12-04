@@ -126,7 +126,7 @@
  *  @return 返回已经设置好的内容
  */
 + (UIButton *) lz_setButtonWithBGImage:(UIButton *)sender isRadius:(BOOL)isRadius{
-    sender.tintColor = kWhiteColor;
+    [sender setTitleColor:kWhiteColor forState:UIControlStateNormal];
     sender.titleLabel.font = kFontSizeMedium15;
     if (isRadius) {
         sender.layer.cornerRadius = 5.0;

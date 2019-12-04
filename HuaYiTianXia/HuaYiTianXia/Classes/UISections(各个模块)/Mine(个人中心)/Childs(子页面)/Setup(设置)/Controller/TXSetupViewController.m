@@ -137,9 +137,9 @@ static NSString * const reuseIdentifier = @"TXMineTableViewCell";
             TXWebViewController *vc = [[TXWebViewController alloc] init];
             vc.title = model.title;
             if (model.index==0) {
-                vc.webUrl = kAppendH5URL(DomainName, UserAgreeH5,@"");
+                vc.webUrl = kAppendH5URL(DomainName, @"appH5/disclaimer.html",@"");
             }else if(model.index==1){
-                vc.webUrl = kAppendH5URL(DomainName, UserAgreeH5,@"");
+                vc.webUrl = kAppendH5URL(DomainName, @"appH5/privacy.html",@"");
             }else if(model.index==4){
                 vc.webUrl = kAppendH5URL(DomainName, UserHelpH5,@"");
             }
@@ -197,10 +197,10 @@ static NSString * const reuseIdentifier = @"TXMineTableViewCell";
 - (NSMutableArray *)dataArray{
     if (!_dataArray) {
         _dataArray = [[NSMutableArray alloc] init];
-        NSArray* titleArr = @[@[@"用户使用协议",@"隐私政策",@"账户与安全",@"地址管理",@"操作手册"],@[@"当前版本"]];
-        NSArray* indexArr = @[@[@"0",@"1",@"2",@"3",@"4"],@[]];
+        NSArray* titleArr = @[@[@"免责声明",@"隐私政策",@"账户与安全",@"地址管理"],@[@"当前版本"]];
+        NSArray* indexArr = @[@[@"0",@"1",@"2",@"3"],@[]];
         NSArray* classArr = @[@[@"TXWebViewController",@"TXWebViewController",@"TXAccountSecurityViewController",
-                                @"TXAddressViewController",@"TXWebViewController"],@[]];
+                                @"TXAddressViewController"],@[]];
         for (int i=0; i<titleArr.count; i++) {
             NSArray *subTitlesArray = [titleArr lz_safeObjectAtIndex:i];
             NSArray *classArray     = [classArr lz_safeObjectAtIndex:i];

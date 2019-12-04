@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		7137FC69930FD658EE126BC7 /* Pods_HuaYiTianXia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C62B83054FB57102771D140E /* Pods_HuaYiTianXia.framework */; };
+		E706917323506C4800B54DE6 /* YKPassengersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E706917223506C4800B54DE6 /* YKPassengersViewController.m */; };
+		E706917623506EBC00B54DE6 /* YKPassengersTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E706917523506EBC00B54DE6 /* YKPassengersTableViewCell.m */; };
 		E70807B622A5244C002C57E6 /* TXCharterOrderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E70807B522A5244C002C57E6 /* TXCharterOrderModel.m */; };
 		E7089EF9225D7EFA00A7EF27 /* TXEppoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7089EF8225D7EFA00A7EF27 /* TXEppoTableViewCell.m */; };
 		E7089EFD225DB8E400A7EF27 /* TXChoosePayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7089EFC225DB8E400A7EF27 /* TXChoosePayViewController.m */; };
@@ -27,6 +29,9 @@
 		E719D15522CC8562003EAE0E /* TTChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = E719D15422CC8562003EAE0E /* TTChartView.m */; };
 		E719D15922CC88F1003EAE0E /* TXChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E719D15822CC88F1003EAE0E /* TXChartViewController.m */; };
 		E719F66722B24DD90023E539 /* TXMessagePopupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E719F66622B24DD90023E539 /* TXMessagePopupViewController.m */; };
+		E71A3E6323556087009DDC11 /* index2.html in Resources */ = {isa = PBXBuildFile; fileRef = E71A3E6123556086009DDC11 /* index2.html */; };
+		E7203EF3234B06F2003DD91E /* YKTicketBookingHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = E7203EF2234B06F2003DD91E /* YKTicketBookingHeaderView.m */; };
+		E7203EF6234B1FF5003DD91E /* YKBuyTicketViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7203EF5234B1FF5003DD91E /* YKBuyTicketViewController.m */; };
 		E72086CE22C0CAE800F2F78C /* TXClubExperienceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E72086A722C0CAE700F2F78C /* TXClubExperienceViewController.m */; };
 		E72086CF22C0CAE800F2F78C /* TXClubExperienceMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E72086A822C0CAE700F2F78C /* TXClubExperienceMainViewController.m */; };
 		E72086D022C0CAE800F2F78C /* TXClubExperienceChildViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E72086AE22C0CAE700F2F78C /* TXClubExperienceChildViewController.m */; };
@@ -46,6 +51,12 @@
 		E720A5CD22A8C44A00331846 /* TTCustomPhotoAlbum.m in Sources */ = {isa = PBXBuildFile; fileRef = E720A5CC22A8C44A00331846 /* TTCustomPhotoAlbum.m */; };
 		E72109F222C31AD800E38209 /* TXNewMultipleImageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E72109F122C31AD800E38209 /* TXNewMultipleImageTableViewCell.m */; };
 		E72109F522C3506B00E38209 /* TXMallHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = E72109F422C3506B00E38209 /* TXMallHeaderView.m */; };
+		E721C88C23501E83004DE06C /* YKAssuredServiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E721C88B23501E83004DE06C /* YKAssuredServiceViewController.m */; };
+		E721C88F235022BB004DE06C /* YKBaseNavigationView.m in Sources */ = {isa = PBXBuildFile; fileRef = E721C88D235022BB004DE06C /* YKBaseNavigationView.m */; };
+		E723A4F123517D2400EEBFA1 /* YKPlaceholderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E723A4F023517D2400EEBFA1 /* YKPlaceholderViewController.m */; };
+		E723A4F42351B43300EEBFA1 /* YKBuyTicketIntroduceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E723A4F32351B43300EEBFA1 /* YKBuyTicketIntroduceViewController.m */; };
+		E723A4F7235301BD00EEBFA1 /* YKPassengersCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E723A4F6235301BD00EEBFA1 /* YKPassengersCollectionViewCell.m */; };
+		E7250679235473BD007DF7A0 /* YKReceiveWineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7250678235473BD007DF7A0 /* YKReceiveWineViewController.m */; };
 		E725718922BCBACB006A787C /* TXClubCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E725718822BCBACB006A787C /* TXClubCollectionViewCell.m */; };
 		E725718C22BCBB56006A787C /* TXClubCollectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = E725718B22BCBB56006A787C /* TXClubCollectionHeaderView.m */; };
 		E725718F22BCBB73006A787C /* TXClubCollectionFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = E725718E22BCBB73006A787C /* TXClubCollectionFooterView.m */; };
@@ -130,9 +141,18 @@
 		E729F7BE22A1187D0029A335 /* TXCharterMachineDateView.m in Sources */ = {isa = PBXBuildFile; fileRef = E729F7BD22A1187D0029A335 /* TXCharterMachineDateView.m */; };
 		E729F7C122A12C9E0029A335 /* TXCharterMachineChildViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E729F7C022A12C9E0029A335 /* TXCharterMachineChildViewController.m */; };
 		E729F7C722A154010029A335 /* TXBaseFooterButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = E729F7C622A154010029A335 /* TXBaseFooterButtonView.m */; };
+		E72A5C31234F2A30005224D6 /* YKChoosePayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E72A5C30234F2A30005224D6 /* YKChoosePayViewController.m */; };
+		E72A5C34234F3A78005224D6 /* YKTicketOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E72A5C33234F3A78005224D6 /* YKTicketOrderViewController.m */; };
+		E72A5C37234F3B09005224D6 /* YXTicketOrderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E72A5C36234F3B09005224D6 /* YXTicketOrderTableViewCell.m */; };
+		E72A5C3A234F56D0005224D6 /* YKTicketOrderChildViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E72A5C39234F56D0005224D6 /* YKTicketOrderChildViewController.m */; };
+		E72A5C3D234F5DEC005224D6 /* YXTicketOrderChildTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E72A5C3C234F5DEC005224D6 /* YXTicketOrderChildTableViewCell.m */; };
+		E72A5C40234F6AF0005224D6 /* YKTicketOrderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E72A5C3F234F6AF0005224D6 /* YKTicketOrderModel.m */; };
 		E72AEE0122C4C9C90081F0AE /* TXChoosePaySingleView.m in Sources */ = {isa = PBXBuildFile; fileRef = E72AEE0022C4C9C90081F0AE /* TXChoosePaySingleView.m */; };
 		E72B09E422B102D100345C1B /* TXRedEnvelopeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E72B09E322B102D100345C1B /* TXRedEnvelopeViewController.m */; };
 		E72B09E722B1141900345C1B /* TXCountyGenerationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E72B09E622B1141900345C1B /* TXCountyGenerationViewController.m */; };
+		E7303D9E234C39DA00D03A4A /* YKTicketQueryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7303D9D234C39DA00D03A4A /* YKTicketQueryViewController.m */; };
+		E7303DA1234C3ADD00D03A4A /* YKTicketQueryBoxView.m in Sources */ = {isa = PBXBuildFile; fileRef = E7303DA0234C3ADD00D03A4A /* YKTicketQueryBoxView.m */; };
+		E7309A302345D9E400A1D98E /* 新建文本文档.txt in Resources */ = {isa = PBXBuildFile; fileRef = E7309A2F2345D9E400A1D98E /* 新建文本文档.txt */; };
 		E7354184231FAA97003B4D16 /* TXMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7354183231FAA97003B4D16 /* TXMainViewController.m */; };
 		E7354187231FABD6003B4D16 /* TXMainCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7354186231FABD6003B4D16 /* TXMainCollectionViewCell.m */; };
 		E735418A231FAC39003B4D16 /* TXMainToolsCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7354189231FAC39003B4D16 /* TXMainToolsCollectionViewCell.m */; };
@@ -316,7 +336,6 @@
 		E78DCAD22265760300252314 /* TTGuidePages.m in Sources */ = {isa = PBXBuildFile; fileRef = E78DCAD12265760300252314 /* TTGuidePages.m */; };
 		E78DCAD62265BC9200252314 /* TTBannerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E78DCAD52265BC9100252314 /* TTBannerModel.m */; };
 		E78DCAD92265BFEF00252314 /* TXMembersCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E78DCAD82265BFEF00252314 /* TXMembersCollectionViewCell.m */; };
-		E78DCADC2265C70D00252314 /* TXTicketScreeningViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E78DCADB2265C70D00252314 /* TXTicketScreeningViewController.m */; };
 		E78DCAE42265D12000252314 /* LZBasePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = E78DCADF2265D12000252314 /* LZBasePickerView.m */; };
 		E78DCAE52265D12000252314 /* LZDatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = E78DCAE12265D12000252314 /* LZDatePickerView.m */; };
 		E78DCAE62265D12000252314 /* NSDate+LZAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = E78DCAE32265D12000252314 /* NSDate+LZAdd.m */; };
@@ -329,6 +348,9 @@
 		E7923CA6225341C40094D0C3 /* SCUploadImageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E7923CA4225341C40094D0C3 /* SCUploadImageModel.m */; };
 		E7923CAA22535CF30094D0C3 /* SCTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = E7923CA922535CF30094D0C3 /* SCTextField.m */; };
 		E796277C22BB66DF00CA4E03 /* TXClubCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E796277B22BB66DF00CA4E03 /* TXClubCollectionViewController.m */; };
+		E7A215762349DACC007FD702 /* TicketModel.json in Resources */ = {isa = PBXBuildFile; fileRef = E7A215752349DACC007FD702 /* TicketModel.json */; };
+		E7A215792349E664007FD702 /* YKTicketBookingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7A215782349E664007FD702 /* YKTicketBookingViewController.m */; };
+		E7A2157C2349EDA1007FD702 /* YKTicketBookingTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7A2157B2349EDA1007FD702 /* YKTicketBookingTableViewCell.m */; };
 		E7AA9DAF2243353200C15483 /* TTBaseNavImagesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7AA9DAE2243353200C15483 /* TTBaseNavImagesTableViewController.m */; };
 		E7AA9DB7224338EA00C15483 /* TXWalletTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7AA9DB6224338EA00C15483 /* TXWalletTableViewCell.m */; };
 		E7AA9DBA22433A0200C15483 /* TXWalletCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7AA9DB922433A0200C15483 /* TXWalletCollectionViewCell.m */; };
@@ -406,6 +428,7 @@
 		E7DCD60F226DC8E100AE8DE8 /* TXBecomeVipViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7DCD60E226DC8E100AE8DE8 /* TXBecomeVipViewController.m */; };
 		E7DCD612226DCC2B00AE8DE8 /* TXBecomeVipHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = E7DCD611226DCC2B00AE8DE8 /* TXBecomeVipHeaderView.m */; };
 		E7DCD615226DCDD800AE8DE8 /* TXBecomeVipTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7DCD614226DCDD800AE8DE8 /* TXBecomeVipTableViewCell.m */; };
+		E7E1B703234DB36800714E84 /* TXPassengersTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7E1B702234DB36700714E84 /* TXPassengersTableViewCell.m */; };
 		E7F1A7002241EF16003FA216 /* TXProductViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7F1A6FF2241EF16003FA216 /* TXProductViewController.m */; };
 		E7F1A7032241EF37003FA216 /* TXEarningsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7F1A7022241EF37003FA216 /* TXEarningsViewController.m */; };
 		E7F1A7062241F1D2003FA216 /* TTBaseTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7F1A7052241F1D2003FA216 /* TTBaseTableViewController.m */; };
@@ -424,6 +447,10 @@
 		7BDC34BA99E71AF550F8F19E /* Pods-HuaYiTianXia.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HuaYiTianXia.release.xcconfig"; path = "Pods/Target Support Files/Pods-HuaYiTianXia/Pods-HuaYiTianXia.release.xcconfig"; sourceTree = "<group>"; };
 		C62B83054FB57102771D140E /* Pods_HuaYiTianXia.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HuaYiTianXia.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8A40D1AA3A1C66C50E33D9F /* Pods-HuaYiTianXia.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HuaYiTianXia.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HuaYiTianXia/Pods-HuaYiTianXia.debug.xcconfig"; sourceTree = "<group>"; };
+		E706917123506C4800B54DE6 /* YKPassengersViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YKPassengersViewController.h; sourceTree = "<group>"; };
+		E706917223506C4800B54DE6 /* YKPassengersViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YKPassengersViewController.m; sourceTree = "<group>"; };
+		E706917423506EBC00B54DE6 /* YKPassengersTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YKPassengersTableViewCell.h; sourceTree = "<group>"; };
+		E706917523506EBC00B54DE6 /* YKPassengersTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YKPassengersTableViewCell.m; sourceTree = "<group>"; };
 		E70807B422A5244C002C57E6 /* TXCharterOrderModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXCharterOrderModel.h; sourceTree = "<group>"; };
 		E70807B522A5244C002C57E6 /* TXCharterOrderModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXCharterOrderModel.m; sourceTree = "<group>"; };
 		E7089EF7225D7EFA00A7EF27 /* TXEppoTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXEppoTableViewCell.h; sourceTree = "<group>"; };
@@ -457,6 +484,11 @@
 		E719D15822CC88F1003EAE0E /* TXChartViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXChartViewController.m; sourceTree = "<group>"; };
 		E719F66522B24DD90023E539 /* TXMessagePopupViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXMessagePopupViewController.h; sourceTree = "<group>"; };
 		E719F66622B24DD90023E539 /* TXMessagePopupViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXMessagePopupViewController.m; sourceTree = "<group>"; };
+		E71A3E6123556086009DDC11 /* index2.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = index2.html; sourceTree = "<group>"; };
+		E7203EF1234B06F2003DD91E /* YKTicketBookingHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YKTicketBookingHeaderView.h; sourceTree = "<group>"; };
+		E7203EF2234B06F2003DD91E /* YKTicketBookingHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YKTicketBookingHeaderView.m; sourceTree = "<group>"; };
+		E7203EF4234B1FF5003DD91E /* YKBuyTicketViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YKBuyTicketViewController.h; sourceTree = "<group>"; };
+		E7203EF5234B1FF5003DD91E /* YKBuyTicketViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YKBuyTicketViewController.m; sourceTree = "<group>"; };
 		E72086A722C0CAE700F2F78C /* TXClubExperienceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TXClubExperienceViewController.m; sourceTree = "<group>"; };
 		E72086A822C0CAE700F2F78C /* TXClubExperienceMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TXClubExperienceMainViewController.m; sourceTree = "<group>"; };
 		E72086A922C0CAE700F2F78C /* TXClubExperienceMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXClubExperienceMainViewController.h; sourceTree = "<group>"; };
@@ -493,6 +525,18 @@
 		E72109F122C31AD800E38209 /* TXNewMultipleImageTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXNewMultipleImageTableViewCell.m; sourceTree = "<group>"; };
 		E72109F322C3506B00E38209 /* TXMallHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXMallHeaderView.h; sourceTree = "<group>"; };
 		E72109F422C3506B00E38209 /* TXMallHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXMallHeaderView.m; sourceTree = "<group>"; };
+		E721C88A23501E83004DE06C /* YKAssuredServiceViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YKAssuredServiceViewController.h; sourceTree = "<group>"; };
+		E721C88B23501E83004DE06C /* YKAssuredServiceViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YKAssuredServiceViewController.m; sourceTree = "<group>"; };
+		E721C88D235022BB004DE06C /* YKBaseNavigationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YKBaseNavigationView.m; sourceTree = "<group>"; };
+		E721C88E235022BB004DE06C /* YKBaseNavigationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YKBaseNavigationView.h; sourceTree = "<group>"; };
+		E723A4EF23517D2400EEBFA1 /* YKPlaceholderViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YKPlaceholderViewController.h; sourceTree = "<group>"; };
+		E723A4F023517D2400EEBFA1 /* YKPlaceholderViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YKPlaceholderViewController.m; sourceTree = "<group>"; };
+		E723A4F22351B43300EEBFA1 /* YKBuyTicketIntroduceViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YKBuyTicketIntroduceViewController.h; sourceTree = "<group>"; };
+		E723A4F32351B43300EEBFA1 /* YKBuyTicketIntroduceViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YKBuyTicketIntroduceViewController.m; sourceTree = "<group>"; };
+		E723A4F5235301BC00EEBFA1 /* YKPassengersCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YKPassengersCollectionViewCell.h; sourceTree = "<group>"; };
+		E723A4F6235301BD00EEBFA1 /* YKPassengersCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YKPassengersCollectionViewCell.m; sourceTree = "<group>"; };
+		E7250677235473BD007DF7A0 /* YKReceiveWineViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YKReceiveWineViewController.h; sourceTree = "<group>"; };
+		E7250678235473BD007DF7A0 /* YKReceiveWineViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YKReceiveWineViewController.m; sourceTree = "<group>"; };
 		E725718722BCBACB006A787C /* TXClubCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXClubCollectionViewCell.h; sourceTree = "<group>"; };
 		E725718822BCBACB006A787C /* TXClubCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXClubCollectionViewCell.m; sourceTree = "<group>"; };
 		E725718A22BCBB56006A787C /* TXClubCollectionHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXClubCollectionHeaderView.h; sourceTree = "<group>"; };
@@ -649,12 +693,29 @@
 		E729F7C022A12C9E0029A335 /* TXCharterMachineChildViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXCharterMachineChildViewController.m; sourceTree = "<group>"; };
 		E729F7C522A154010029A335 /* TXBaseFooterButtonView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXBaseFooterButtonView.h; sourceTree = "<group>"; };
 		E729F7C622A154010029A335 /* TXBaseFooterButtonView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXBaseFooterButtonView.m; sourceTree = "<group>"; };
+		E72A5C2F234F2A30005224D6 /* YKChoosePayViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YKChoosePayViewController.h; sourceTree = "<group>"; };
+		E72A5C30234F2A30005224D6 /* YKChoosePayViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YKChoosePayViewController.m; sourceTree = "<group>"; };
+		E72A5C32234F3A78005224D6 /* YKTicketOrderViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YKTicketOrderViewController.h; sourceTree = "<group>"; };
+		E72A5C33234F3A78005224D6 /* YKTicketOrderViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YKTicketOrderViewController.m; sourceTree = "<group>"; };
+		E72A5C35234F3B09005224D6 /* YXTicketOrderTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YXTicketOrderTableViewCell.h; sourceTree = "<group>"; };
+		E72A5C36234F3B09005224D6 /* YXTicketOrderTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YXTicketOrderTableViewCell.m; sourceTree = "<group>"; };
+		E72A5C38234F56D0005224D6 /* YKTicketOrderChildViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YKTicketOrderChildViewController.h; sourceTree = "<group>"; };
+		E72A5C39234F56D0005224D6 /* YKTicketOrderChildViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YKTicketOrderChildViewController.m; sourceTree = "<group>"; };
+		E72A5C3B234F5DEC005224D6 /* YXTicketOrderChildTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YXTicketOrderChildTableViewCell.h; sourceTree = "<group>"; };
+		E72A5C3C234F5DEC005224D6 /* YXTicketOrderChildTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YXTicketOrderChildTableViewCell.m; sourceTree = "<group>"; };
+		E72A5C3E234F6AF0005224D6 /* YKTicketOrderModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YKTicketOrderModel.h; sourceTree = "<group>"; };
+		E72A5C3F234F6AF0005224D6 /* YKTicketOrderModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YKTicketOrderModel.m; sourceTree = "<group>"; };
 		E72AEDFF22C4C9C90081F0AE /* TXChoosePaySingleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXChoosePaySingleView.h; sourceTree = "<group>"; };
 		E72AEE0022C4C9C90081F0AE /* TXChoosePaySingleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TXChoosePaySingleView.m; sourceTree = "<group>"; };
 		E72B09E222B102D100345C1B /* TXRedEnvelopeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXRedEnvelopeViewController.h; sourceTree = "<group>"; };
 		E72B09E322B102D100345C1B /* TXRedEnvelopeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXRedEnvelopeViewController.m; sourceTree = "<group>"; };
 		E72B09E522B1141900345C1B /* TXCountyGenerationViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXCountyGenerationViewController.h; sourceTree = "<group>"; };
 		E72B09E622B1141900345C1B /* TXCountyGenerationViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXCountyGenerationViewController.m; sourceTree = "<group>"; };
+		E7303D9C234C39DA00D03A4A /* YKTicketQueryViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YKTicketQueryViewController.h; sourceTree = "<group>"; };
+		E7303D9D234C39DA00D03A4A /* YKTicketQueryViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YKTicketQueryViewController.m; sourceTree = "<group>"; };
+		E7303D9F234C3ADD00D03A4A /* YKTicketQueryBoxView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YKTicketQueryBoxView.h; sourceTree = "<group>"; };
+		E7303DA0234C3ADD00D03A4A /* YKTicketQueryBoxView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YKTicketQueryBoxView.m; sourceTree = "<group>"; };
+		E7309A2F2345D9E400A1D98E /* 新建文本文档.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "新建文本文档.txt"; sourceTree = "<group>"; };
 		E7354182231FAA97003B4D16 /* TXMainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXMainViewController.h; sourceTree = "<group>"; };
 		E7354183231FAA97003B4D16 /* TXMainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXMainViewController.m; sourceTree = "<group>"; };
 		E7354185231FABD6003B4D16 /* TXMainCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXMainCollectionViewCell.h; sourceTree = "<group>"; };
@@ -1003,8 +1064,6 @@
 		E78DCAD52265BC9100252314 /* TTBannerModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TTBannerModel.m; sourceTree = "<group>"; };
 		E78DCAD72265BFEF00252314 /* TXMembersCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXMembersCollectionViewCell.h; sourceTree = "<group>"; };
 		E78DCAD82265BFEF00252314 /* TXMembersCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXMembersCollectionViewCell.m; sourceTree = "<group>"; };
-		E78DCADA2265C70D00252314 /* TXTicketScreeningViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXTicketScreeningViewController.h; sourceTree = "<group>"; };
-		E78DCADB2265C70D00252314 /* TXTicketScreeningViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXTicketScreeningViewController.m; sourceTree = "<group>"; };
 		E78DCADE2265D12000252314 /* LZBasePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LZBasePickerView.h; sourceTree = "<group>"; };
 		E78DCADF2265D12000252314 /* LZBasePickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LZBasePickerView.m; sourceTree = "<group>"; };
 		E78DCAE02265D12000252314 /* LZDatePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LZDatePickerView.h; sourceTree = "<group>"; };
@@ -1029,6 +1088,11 @@
 		E7923CA922535CF30094D0C3 /* SCTextField.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SCTextField.m; sourceTree = "<group>"; };
 		E796277A22BB66DF00CA4E03 /* TXClubCollectionViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXClubCollectionViewController.h; sourceTree = "<group>"; };
 		E796277B22BB66DF00CA4E03 /* TXClubCollectionViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXClubCollectionViewController.m; sourceTree = "<group>"; };
+		E7A215752349DACC007FD702 /* TicketModel.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = TicketModel.json; sourceTree = "<group>"; };
+		E7A215772349E664007FD702 /* YKTicketBookingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YKTicketBookingViewController.h; sourceTree = "<group>"; };
+		E7A215782349E664007FD702 /* YKTicketBookingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YKTicketBookingViewController.m; sourceTree = "<group>"; };
+		E7A2157A2349EDA1007FD702 /* YKTicketBookingTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YKTicketBookingTableViewCell.h; sourceTree = "<group>"; };
+		E7A2157B2349EDA1007FD702 /* YKTicketBookingTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YKTicketBookingTableViewCell.m; sourceTree = "<group>"; };
 		E7AA9DAD2243353200C15483 /* TTBaseNavImagesTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TTBaseNavImagesTableViewController.h; sourceTree = "<group>"; };
 		E7AA9DAE2243353200C15483 /* TTBaseNavImagesTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TTBaseNavImagesTableViewController.m; sourceTree = "<group>"; };
 		E7AA9DB5224338EA00C15483 /* TXWalletTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXWalletTableViewCell.h; sourceTree = "<group>"; };
@@ -1169,6 +1233,8 @@
 		E7DCD611226DCC2B00AE8DE8 /* TXBecomeVipHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXBecomeVipHeaderView.m; sourceTree = "<group>"; };
 		E7DCD613226DCDD800AE8DE8 /* TXBecomeVipTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXBecomeVipTableViewCell.h; sourceTree = "<group>"; };
 		E7DCD614226DCDD800AE8DE8 /* TXBecomeVipTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXBecomeVipTableViewCell.m; sourceTree = "<group>"; };
+		E7E1B701234DB36700714E84 /* TXPassengersTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXPassengersTableViewCell.h; sourceTree = "<group>"; };
+		E7E1B702234DB36700714E84 /* TXPassengersTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXPassengersTableViewCell.m; sourceTree = "<group>"; };
 		E7F1A6FE2241EF16003FA216 /* TXProductViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXProductViewController.h; sourceTree = "<group>"; };
 		E7F1A6FF2241EF16003FA216 /* TXProductViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXProductViewController.m; sourceTree = "<group>"; };
 		E7F1A7012241EF37003FA216 /* TXEarningsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXEarningsViewController.h; sourceTree = "<group>"; };
@@ -1249,6 +1315,17 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		E706917023506C1900B54DE6 /* 添加乘机人 */ = {
+			isa = PBXGroup;
+			children = (
+				E706917123506C4800B54DE6 /* YKPassengersViewController.h */,
+				E706917223506C4800B54DE6 /* YKPassengersViewController.m */,
+				E706917423506EBC00B54DE6 /* YKPassengersTableViewCell.h */,
+				E706917523506EBC00B54DE6 /* YKPassengersTableViewCell.m */,
+			);
+			path = "添加乘机人";
+			sourceTree = "<group>";
+		};
 		E7089EFA225DB89E00A7EF27 /* (支付选择) */ = {
 			isa = PBXGroup;
 			children = (
@@ -1256,6 +1333,8 @@
 				E7089EFC225DB8E400A7EF27 /* TXChoosePayViewController.m */,
 				E72AEDFF22C4C9C90081F0AE /* TXChoosePaySingleView.h */,
 				E72AEE0022C4C9C90081F0AE /* TXChoosePaySingleView.m */,
+				E72A5C2F234F2A30005224D6 /* YKChoosePayViewController.h */,
+				E72A5C30234F2A30005224D6 /* YKChoosePayViewController.m */,
 			);
 			path = "(支付选择)";
 			sourceTree = "<group>";
@@ -1445,6 +1524,29 @@
 			path = "保存相册";
 			sourceTree = "<group>";
 		};
+		E721C88923501E49004DE06C /* 放心服务 */ = {
+			isa = PBXGroup;
+			children = (
+				E721C88E235022BB004DE06C /* YKBaseNavigationView.h */,
+				E721C88D235022BB004DE06C /* YKBaseNavigationView.m */,
+				E721C88A23501E83004DE06C /* YKAssuredServiceViewController.h */,
+				E721C88B23501E83004DE06C /* YKAssuredServiceViewController.m */,
+				E723A4F22351B43300EEBFA1 /* YKBuyTicketIntroduceViewController.h */,
+				E723A4F32351B43300EEBFA1 /* YKBuyTicketIntroduceViewController.m */,
+			);
+			name = "放心服务";
+			path = "HuaYiTianXia/Classes/UISections(各个模块)/Members(天合成员)/放心服务";
+			sourceTree = SOURCE_ROOT;
+		};
+		E72506762354735A007DF7A0 /* 首单领酒 */ = {
+			isa = PBXGroup;
+			children = (
+				E7250677235473BD007DF7A0 /* YKReceiveWineViewController.h */,
+				E7250678235473BD007DF7A0 /* YKReceiveWineViewController.m */,
+			);
+			path = "首单领酒";
+			sourceTree = "<group>";
+		};
 		E725719022BCBF6E006A787C /* BannerView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1485,6 +1587,7 @@
 		E725D0D9225EF31300C233E7 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				E7309A2F2345D9E400A1D98E /* 新建文本文档.txt */,
 				E725D0DB225EF36300C233E7 /* c31_btn_wxzf@2x.png */,
 				E725D0DD225EF36300C233E7 /* c31_btn_wxzf@3x.png */,
 				E725D0DA225EF36300C233E7 /* c31_btn_zfb@2x.png */,
@@ -1728,6 +1831,9 @@
 		E72698E0223F737C003A5043 /* Members(天合成员) */ = {
 			isa = PBXGroup;
 			children = (
+				E72506762354735A007DF7A0 /* 首单领酒 */,
+				E721C88923501E49004DE06C /* 放心服务 */,
+				E706917023506C1900B54DE6 /* 添加乘机人 */,
 				E7C9FCEE22675A6A008FD260 /* Childs(子页面) */,
 				E72698E1223F737C003A5043 /* Controller */,
 				E78DCAD32265BC7900252314 /* Model */,
@@ -1744,12 +1850,16 @@
 				E76579EB2276D6F400AFAEFE /* TXTicketQueryViewController.h */,
 				E76579EC2276D6F400AFAEFE /* TXTicketQueryViewController.m */,
 				E76579ED2276D6F400AFAEFE /* TXTicketQueryViewController.xib */,
-				E78DCADA2265C70D00252314 /* TXTicketScreeningViewController.h */,
-				E78DCADB2265C70D00252314 /* TXTicketScreeningViewController.m */,
 				E78DCAEA2265E2A700252314 /* TXTicketListViewController.h */,
 				E78DCAEB2265E2A700252314 /* TXTicketListViewController.m */,
 				E7C9FCE522671023008FD260 /* TXTicketBookingViewController.h */,
 				E7C9FCE622671023008FD260 /* TXTicketBookingViewController.m */,
+				E7A215772349E664007FD702 /* YKTicketBookingViewController.h */,
+				E7A215782349E664007FD702 /* YKTicketBookingViewController.m */,
+				E7203EF4234B1FF5003DD91E /* YKBuyTicketViewController.h */,
+				E7203EF5234B1FF5003DD91E /* YKBuyTicketViewController.m */,
+				E7303D9C234C39DA00D03A4A /* YKTicketQueryViewController.h */,
+				E7303D9D234C39DA00D03A4A /* YKTicketQueryViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -2634,6 +2744,7 @@
 		E774DCDD2272D9ED001A95B8 /* H5 */ = {
 			isa = PBXGroup;
 			children = (
+				E71A3E6123556086009DDC11 /* index2.html */,
 				E774DCDE2272D9ED001A95B8 /* index.html */,
 			);
 			path = H5;
@@ -2761,6 +2872,16 @@
 				E7C9FCE922671329008FD260 /* TXTicketBookingTableViewCell.m */,
 				E7C9FCEB22673BC7008FD260 /* TXTicketInfoTableViewCell.h */,
 				E7C9FCEC22673BC7008FD260 /* TXTicketInfoTableViewCell.m */,
+				E7A2157A2349EDA1007FD702 /* YKTicketBookingTableViewCell.h */,
+				E7A2157B2349EDA1007FD702 /* YKTicketBookingTableViewCell.m */,
+				E7203EF1234B06F2003DD91E /* YKTicketBookingHeaderView.h */,
+				E7203EF2234B06F2003DD91E /* YKTicketBookingHeaderView.m */,
+				E7303D9F234C3ADD00D03A4A /* YKTicketQueryBoxView.h */,
+				E7303DA0234C3ADD00D03A4A /* YKTicketQueryBoxView.m */,
+				E7E1B701234DB36700714E84 /* TXPassengersTableViewCell.h */,
+				E7E1B702234DB36700714E84 /* TXPassengersTableViewCell.m */,
+				E723A4F5235301BC00EEBFA1 /* YKPassengersCollectionViewCell.h */,
+				E723A4F6235301BD00EEBFA1 /* YKPassengersCollectionViewCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2995,6 +3116,8 @@
 			children = (
 				E78583BD223F967D00BBEA41 /* SCTableViewSectionHeaderView.h */,
 				E78583BC223F967C00BBEA41 /* SCTableViewSectionHeaderView.m */,
+				E723A4EF23517D2400EEBFA1 /* YKPlaceholderViewController.h */,
+				E723A4F023517D2400EEBFA1 /* YKPlaceholderViewController.m */,
 			);
 			path = "Templet(模板)";
 			sourceTree = "<group>";
@@ -3184,10 +3307,13 @@
 		E78DCAD32265BC7900252314 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				E7A215752349DACC007FD702 /* TicketModel.json */,
 				E78DCAD42265BC9100252314 /* TTBannerModel.h */,
 				E78DCAD52265BC9100252314 /* TTBannerModel.m */,
 				E78DCAE72265DEA400252314 /* TXTicketModel.h */,
 				E78DCAE82265DEA400252314 /* TXTicketModel.m */,
+				E72A5C3E234F6AF0005224D6 /* YKTicketOrderModel.h */,
+				E72A5C3F234F6AF0005224D6 /* YKTicketOrderModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -3584,6 +3710,10 @@
 			children = (
 				E7C9FCF322675AA2008FD260 /* TXTicketOrderViewController.h */,
 				E7C9FCF422675AA2008FD260 /* TXTicketOrderViewController.m */,
+				E72A5C32234F3A78005224D6 /* YKTicketOrderViewController.h */,
+				E72A5C33234F3A78005224D6 /* YKTicketOrderViewController.m */,
+				E72A5C38234F56D0005224D6 /* YKTicketOrderChildViewController.h */,
+				E72A5C39234F56D0005224D6 /* YKTicketOrderChildViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -3602,6 +3732,10 @@
 			children = (
 				E7C9FCF622675C38008FD260 /* TXTicketOrderTableViewCell.h */,
 				E7C9FCF722675C38008FD260 /* TXTicketOrderTableViewCell.m */,
+				E72A5C35234F3B09005224D6 /* YXTicketOrderTableViewCell.h */,
+				E72A5C36234F3B09005224D6 /* YXTicketOrderTableViewCell.m */,
+				E72A5C3B234F5DEC005224D6 /* YXTicketOrderChildTableViewCell.h */,
+				E72A5C3C234F5DEC005224D6 /* YXTicketOrderChildTableViewCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -3919,6 +4053,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E7A215762349DACC007FD702 /* TicketModel.json in Resources */,
+				E7309A302345D9E400A1D98E /* 新建文本文档.txt in Resources */,
 				E725D0E9225F117A00C233E7 /* AlipaySDK.bundle in Resources */,
 				E7D732242268B21B006F171A /* WeiboSDK.bundle in Resources */,
 				E7269905223F754B003A5043 /* LZRootView.json in Resources */,
@@ -3926,6 +4062,7 @@
 				E74C9636226384A0000CBAF0 /* TTHUDManager_right@2x.png in Resources */,
 				E74C9639226384A0000CBAF0 /* TTHUDManager_error@2x.png in Resources */,
 				E74C9637226384A0000CBAF0 /* TTHUDManager_tip@2x.png in Resources */,
+				E71A3E6323556087009DDC11 /* index2.html in Resources */,
 				E74C954722638442000CBAF0 /* wildcat_gif_6@2x.png in Resources */,
 				E74C963B226384A0000CBAF0 /* TTHUDManager_error@3x.png in Resources */,
 				E7B4706B22803BBD00ADDC7A /* unicode_to_hanyu_pinyin.txt in Resources */,
@@ -4032,6 +4169,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E7759AD322449557007DA6CF /* TXAddressTableViewCell.m in Sources */,
+				E7A2157C2349EDA1007FD702 /* YKTicketBookingTableViewCell.m in Sources */,
 				E75F2EDD224DEE680091C52E /* TTTagView.m in Sources */,
 				E78584082240C68500BBEA41 /* TXMineBannerCollectionViewCell.m in Sources */,
 				E7625B23229E929E00A34EDF /* TXCharterSpellMachineCollectionViewCell.m in Sources */,
@@ -4051,6 +4189,7 @@
 				E756989D225202AE0022EC49 /* TXWebViewController.m in Sources */,
 				E7625B13229E1E3400A34EDF /* SCLoadFailedView.m in Sources */,
 				E74CFFB32289086B00576B86 /* TXMallBannerCollectionViewCell.m in Sources */,
+				E7303DA1234C3ADD00D03A4A /* YKTicketQueryBoxView.m in Sources */,
 				E7C42E7E224B770200F3FB1A /* SCHttpTools.m in Sources */,
 				E78333E0224884F1005CAB91 /* TXRegisteredViewController.m in Sources */,
 				E7AA9DE2224394A600C15483 /* TXRolloutTableViewCell.m in Sources */,
@@ -4085,6 +4224,7 @@
 				E72699FC223F8298003A5043 /* WMProgressView.m in Sources */,
 				E77F87512274316C004EB9C1 /* TTRollLabel.m in Sources */,
 				E74C964C226785FA000CBAF0 /* TXAdsModel.m in Sources */,
+				E72A5C3A234F56D0005224D6 /* YKTicketOrderChildViewController.m in Sources */,
 				E72699FA223F8298003A5043 /* WMScrollView.m in Sources */,
 				E7D731F02268AB47006F171A /* SCLoginTools.m in Sources */,
 				E7C42E82224B770200F3FB1A /* HttpModel.m in Sources */,
@@ -4123,6 +4263,7 @@
 				E714F2822271574200024FA3 /* TXBaseNavPageViewController.m in Sources */,
 				E7B57E8322AFA9F9001308CA /* SCDeleteLineLabel.m in Sources */,
 				E72086CE22C0CAE800F2F78C /* TXClubExperienceViewController.m in Sources */,
+				E7203EF6234B1FF5003DD91E /* YKBuyTicketViewController.m in Sources */,
 				E725718F22BCBB73006A787C /* TXClubCollectionFooterView.m in Sources */,
 				E7B4706222803BBD00ADDC7A /* LZChineseSort.m in Sources */,
 				E7269980223F7E4B003A5043 /* UIView+SCLoadingView.m in Sources */,
@@ -4135,6 +4276,7 @@
 				E72086DB22C0CAE800F2F78C /* TXClubChildRecommendedViewController.m in Sources */,
 				E78583C1223F98A800BBEA41 /* TXNewTemplateTableViewCell.m in Sources */,
 				E7ACCE2D227EDC1B00CFB662 /* TXEppoListViewController.m in Sources */,
+				E723A4F123517D2400EEBFA1 /* YKPlaceholderViewController.m in Sources */,
 				E7691EE72255E3E5006A94D9 /* TTPasswordView.m in Sources */,
 				E72699E9223F7F58003A5043 /* UIScrollView+Extension.m in Sources */,
 				E78DCAE42265D12000252314 /* LZBasePickerView.m in Sources */,
@@ -4148,8 +4290,10 @@
 				E7D07C682243CCBE00E3FFAF /* LZActionSheet.m in Sources */,
 				E7B4706722803BBD00ADDC7A /* LZPinYinForObjc.m in Sources */,
 				E72699D8223F7F58003A5043 /* UIButton+Extension.m in Sources */,
+				E7303D9E234C39DA00D03A4A /* YKTicketQueryViewController.m in Sources */,
 				E774DCF222730FC6001A95B8 /* TXReceiveGiftListViewController.m in Sources */,
 				E714F28B2271910600024FA3 /* TXPushTableViewCell.m in Sources */,
+				E72A5C3D234F5DEC005224D6 /* YXTicketOrderChildTableViewCell.m in Sources */,
 				E76C617A22A26FFA00997817 /* TXCharterFooterView.m in Sources */,
 				E74CFFC52289086B00576B86 /* TXSubmitOrderViewController.m in Sources */,
 				E7691EE42255DC4E006A94D9 /* UIView+SCValidation.m in Sources */,
@@ -4193,6 +4337,8 @@
 				E78DCAEF2265E5C700252314 /* TXTicketListTableViewCell.m in Sources */,
 				E769B2972277FD6C0049EF73 /* TXMessageChildViewController.m in Sources */,
 				E72699E3223F7F58003A5043 /* UITabBar+SCBadge.m in Sources */,
+				E721C88F235022BB004DE06C /* YKBaseNavigationView.m in Sources */,
+				E706917323506C4800B54DE6 /* YKPassengersViewController.m in Sources */,
 				E7354184231FAA97003B4D16 /* TXMainViewController.m in Sources */,
 				E78DCACF226575ED00252314 /* TTGuidePagesViewController.m in Sources */,
 				E7DCD612226DCC2B00AE8DE8 /* TXBecomeVipHeaderView.m in Sources */,
@@ -4218,6 +4364,7 @@
 				E74C964322678358000CBAF0 /* TXAdsViewController.m in Sources */,
 				E72699E2223F7F58003A5043 /* UIImage+Extension.m in Sources */,
 				E7F1A7092241F298003FA216 /* TXProductTableViewCell.m in Sources */,
+				E7250679235473BD007DF7A0 /* YKReceiveWineViewController.m in Sources */,
 				E74CFFC02289086B00576B86 /* TXGoodsH5TableViewCell.m in Sources */,
 				E76E681422818C5900B035B9 /* TTEmptyBaseView.m in Sources */,
 				E76C617122A2383100997817 /* TXCharterOrderViewController.m in Sources */,
@@ -4248,13 +4395,15 @@
 				E729F7C722A154010029A335 /* TXBaseFooterButtonView.m in Sources */,
 				E72086D222C0CAE800F2F78C /* TXCourseReservationView.m in Sources */,
 				E74C002B228AF13C00576B86 /* TXRecommendedModel.m in Sources */,
-				E78DCADC2265C70D00252314 /* TXTicketScreeningViewController.m in Sources */,
 				E7837851229680820020C823 /* TXMineTeamHeaderView.m in Sources */,
+				E72A5C34234F3A78005224D6 /* YKTicketOrderViewController.m in Sources */,
+				E7203EF3234B06F2003DD91E /* YKTicketBookingHeaderView.m in Sources */,
 				E7F1A72C22423F92003FA216 /* TXAccountSecurityViewController.m in Sources */,
 				E74CFFBD2289086B00576B86 /* TXShareViewController.m in Sources */,
 				E7B4EE192297D66300C93A6D /* TXTeamTableView.m in Sources */,
 				E769B2892277E4070049EF73 /* SCIndexPatch.m in Sources */,
 				E74C964922678575000CBAF0 /* TXVersionModel.m in Sources */,
+				E723A4F7235301BD00EEBFA1 /* YKPassengersCollectionViewCell.m in Sources */,
 				E78583EF2240C29300BBEA41 /* TXOrderViewController.m in Sources */,
 				E78334092248DE2F005CAB91 /* UIViewController+TTPopupViewController.m in Sources */,
 				E78583CA22409D5A00BBEA41 /* TXMineTableViewCell.m in Sources */,
@@ -4295,11 +4444,13 @@
 				E771EDE722B3D84900AC33CA /* TXLogisticTableViewCell.m in Sources */,
 				E74CFFFD228A719600576B86 /* TXCourseModel.m in Sources */,
 				E72086D622C0CAE800F2F78C /* TXClubExperienceTableViewCell.m in Sources */,
+				E72A5C31234F2A30005224D6 /* YKChoosePayViewController.m in Sources */,
 				E76579EE2276D6F400AFAEFE /* TXTicketQueryViewController.m in Sources */,
 				E72699F8223F8298003A5043 /* WMPageController.m in Sources */,
 				E72699E1223F7F58003A5043 /* UILabel+SCExtension.m in Sources */,
 				E7832229228DA40B0081F6E0 /* TXPurchaseAgreementViewController.m in Sources */,
 				E74C9532225CEA18000CBAF0 /* SCNoDataView.m in Sources */,
+				E72A5C37234F3B09005224D6 /* YXTicketOrderTableViewCell.m in Sources */,
 				E72B09E722B1141900345C1B /* TXCountyGenerationViewController.m in Sources */,
 				E7AA9DCD22436F4D00C15483 /* TXTransactionRecordsTableViewCell.m in Sources */,
 				E78DCAD22265760300252314 /* TTGuidePages.m in Sources */,
@@ -4308,13 +4459,16 @@
 				E78583F82240C2BE00BBEA41 /* TXSetupViewController.m in Sources */,
 				E73D9AEB22AD0F3D00034F5F /* TXInvoiceModel.m in Sources */,
 				E72699D6223F7F58003A5043 /* UIView+IBExtension.m in Sources */,
+				E723A4F42351B43300EEBFA1 /* YKBuyTicketIntroduceViewController.m in Sources */,
 				E78DCAEC2265E2A700252314 /* TXTicketListViewController.m in Sources */,
 				E77BC13F224F7321008440C9 /* TXOrderModel.m in Sources */,
 				E769B29A227807600049EF73 /* TXMessageChildTableViewCell.m in Sources */,
+				E72A5C40234F6AF0005224D6 /* YKTicketOrderModel.m in Sources */,
 				E796277C22BB66DF00CA4E03 /* TXClubCollectionViewController.m in Sources */,
 				E7CC89BA2264658C003D0EF7 /* TTImageButton.m in Sources */,
 				E7F1A72B22423F92003FA216 /* TXPersonalInfoViewController.m in Sources */,
 				E7CCDEE5228BC2F30017A684 /* TTSortButton.m in Sources */,
+				E721C88C23501E83004DE06C /* YKAssuredServiceViewController.m in Sources */,
 				E714F2882271904B00024FA3 /* TXSystemViewController.m in Sources */,
 				E7C9FCF822675C38008FD260 /* TXTicketOrderTableViewCell.m in Sources */,
 				E78584052240C54300BBEA41 /* TYCyclePagerTransformLayout.m in Sources */,
@@ -4347,6 +4501,7 @@
 				E72699D5223F7F58003A5043 /* UIButton+MVImagePosition.m in Sources */,
 				E74CFFC72289086B00576B86 /* TXReceiveAddressTableViewCell.m in Sources */,
 				E72086DC22C0CAE800F2F78C /* TXClubChildRecommendedTableViewCell.m in Sources */,
+				E7A215792349E664007FD702 /* YKTicketBookingViewController.m in Sources */,
 				E74CFFBC2289086B00576B86 /* TXMallGoodsDetailsViewController.m in Sources */,
 				E7B4704722803A3000ADDC7A /* FMHotsCityTableViewCell.m in Sources */,
 				E7AA9DD72243735A00C15483 /* TXEquityViewController.m in Sources */,
@@ -4363,7 +4518,9 @@
 				E74C001F228AC7BC00576B86 /* TXCourseChildModel.m in Sources */,
 				E72AEE0122C4C9C90081F0AE /* TXChoosePaySingleView.m in Sources */,
 				E7B57E8022AF9B62001308CA /* TXMallHotTableViewCell.m in Sources */,
+				E7E1B703234DB36800714E84 /* TXPassengersTableViewCell.m in Sources */,
 				E769B2922277EDB20049EF73 /* LZOptionSelectView.m in Sources */,
+				E706917623506EBC00B54DE6 /* YKPassengersTableViewCell.m in Sources */,
 				E719D15522CC8562003EAE0E /* TTChartView.m in Sources */,
 				E753D1F22249D3B200A2DD36 /* SCPresentationController.m in Sources */,
 				E727FEF822A765C8001C5E63 /* TXBezierPath.m in Sources */,

@@ -31,3 +31,17 @@
 @implementation CityModel
 
 @end
+
+
+@implementation YKCityModel
+
++ (NSDictionary *)replacedKeyFromPropertyName{
+    return @{@"list"        : @"obj",
+             @"errorcode"   : @"code",
+             @"message"     : @"msg"};
+}
++ (NSDictionary *)objectClassInArray{
+    return @{@"list" : [CityModel class]};
+}
+
+@end

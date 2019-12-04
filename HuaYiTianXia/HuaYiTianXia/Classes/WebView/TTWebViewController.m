@@ -72,6 +72,14 @@ UIApplicationDelegate,UIScrollViewDelegate,WKNavigationDelegate,WKUIDelegate>
 }
 
 #pragma mark -- 加载本地文件
+- (void) loadWebViewHtml:(NSString *)URLString{
+    NSString *urlStr = [[NSBundle mainBundle] pathForResource:URLString ofType:nil];
+    NSString *localHtml = [NSString stringWithContentsOfFile:urlStr encoding:NSUTF8StringEncoding error:nil];
+    NSURL *fileURL = [NSURL fileURLWithPath:urlStr];
+    [self.webView loadHTMLString:localHtml baseURL:fileURL];
+}
+
+#pragma mark -- 加载网络连接
 - (void) loadWebViewURLString:(NSString *)URLString{
     // 设置访问的URL
     self.url = [NSURL URLWithString:URLString];

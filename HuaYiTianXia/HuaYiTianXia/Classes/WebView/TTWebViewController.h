@@ -24,8 +24,10 @@ NS_ASSUME_NONNULL_BEGIN
 /// 用户Token
 @property (copy, nonatomic) NSString *userToken;
 
-/// 加载本地 Html
+/// 加载网络 Html
 - (void) loadWebViewURLString:(NSString *) URLString;
+/// 加载本地 Html
+- (void) loadWebViewHtml:(NSString *) URLString;
 /// 重新加载按钮
 @property(nonatomic, strong)UIButton* reminderBtn;
 ///调整按钮位置

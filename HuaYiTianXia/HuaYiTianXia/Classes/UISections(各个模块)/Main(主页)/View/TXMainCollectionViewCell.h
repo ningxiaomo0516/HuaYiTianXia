@@ -31,6 +31,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) UILabel *datetimeLabel;
 /// 折扣
 @property (nonatomic, strong) SCCustomMarginLabel *discountLabel;
+/// 分割线
+@property (nonatomic, strong) UIView *linerView;
 @end
 
 NS_ASSUME_NONNULL_END

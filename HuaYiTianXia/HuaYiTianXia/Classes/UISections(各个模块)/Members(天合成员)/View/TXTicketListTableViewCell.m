@@ -23,65 +23,40 @@
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
-        self.contentView.backgroundColor = [UIColor clearColor];
+        self.backgroundColor = [UIColor clearColor];
         [self initView];
-        self.taxPriceLabel.text = @"含税总价";
-        self.economyLabel.text = @"暂无";
-        self.businessleLabel.text = @"暂无";
-        self.luxuryLabel.text = @"暂无";
     }
     return self;
 }
 
 - (void)setTicketModel:(TicketModel *)ticketModel{
     _ticketModel = ticketModel;
-    
-    NSString *formatDate0 = @"yyyy-MM-dd HH:mm:ss"; /// 年月日
-    NSString *formatDate = @"HH:mm";                /// 时分
-    NSString *formatDate1 = @"MM-dd";               /// 月日
-    /// 出发时间
-    NSString * dep_time= [Utils lz_timeWithTimeIntervalString:ticketModel.dep_time formatter:formatDate];
-    NSString * dep_times= [Utils lz_timeWithTimeIntervalString:ticketModel.dep_time formatter:formatDate0];
-    /// 到达时间
-    NSString * arv_time= [Utils lz_timeWithTimeIntervalString:ticketModel.arv_time formatter:formatDate];
-    NSString * arv_times= [Utils lz_timeWithTimeIntervalString:ticketModel.arv_time formatter:formatDate0];
-
-    /// 出发日期
-    NSString * dep_date= [Utils lz_timeWithTimeIntervalString:ticketModel.arv_time formatter:formatDate1];
-
-    self.dep_timeLabel.text =  dep_time;//@"09:00";
-    self.dep_airportLabel.text = kStringFormat(ticketModel.dep_airport, ticketModel.dep_airport_term);//@"双流机场T2";
-    self.arv_timeLabel.text = arv_time;//@"11:10";
-    self.arv_airportLabel.text = kStringFormat(ticketModel.arv_airport, ticketModel.arv_airport_term);// @"旧金山机场";
-    self.airlineLabel.text = ticketModel.airline;//@"中国东方航空";
-    
-    self.timerLabel.text = [self pleaseInsertStarTimeo:dep_times andInsertEndTime:arv_times] ;;//@"约2时23分";
-    self.dateLabel.text = dep_date;
-    
-    /// 文字颜色
-    UIColor *textColor = HexString(@"#FC7E4C");
-    NSInteger index,endIndex;
-    for (TicketPricesModel *model in ticketModel.prices) {
-        index = model.type.length+1;
-        if ([model.discount isEqualToString:@"全价"] && [model.type isEqualToString:@"经济舱"]) {
-            self.allPriceLabel.text = model.discount;
-            NSString *economyText = [NSString stringWithFormat:@"%@:￥%@",model.type,model.price];
-            endIndex = economyText.length-index;
-            self.economyLabel.attributedText = [SCSmallTools setupTextColor:textColor currentText:economyText index:index endIndex:endIndex];
-        }
-        if ([model.discount isEqualToString:@"全价"] && [model.type isEqualToString:@"公务舱"]) {
-            self.allPriceLabel.text = model.discount;
-            NSString *businessleText = [NSString stringWithFormat:@"%@:￥%@",model.type,model.price];
-            endIndex = businessleText.length-index;
-            self.businessleLabel.attributedText = [SCSmallTools setupTextColor:textColor currentText:businessleText index:index endIndex:endIndex];
-        }
-        if ([model.discount isEqualToString:@"全价"] && [model.type isEqualToString:@"头等舱"]) {
-            self.allPriceLabel.text = model.discount;
-            NSString *luxuryText = [NSString stringWithFormat:@"%@:￥%@",model.type,model.price];
-            endIndex = luxuryText.length-index;
-            self.luxuryLabel.attributedText = [SCSmallTools setupTextColor:textColor currentText:luxuryText index:index endIndex:endIndex];
+    NSArray *depTime = [ticketModel.depTime componentsSeparatedByString:@" "];
+    NSArray *arrTime = [ticketModel.arrTime componentsSeparatedByString:@" "];
+    self.dep_timeLabel.text = depTime.count>1?depTime[1]:@"00:00";
+    self.arv_timeLabel.text = arrTime.count>1?arrTime[1]:@"00:00";
+    NSMutableArray *priceArray = [[NSMutableArray alloc] init];
+    for (SeatItems *seatItem in ticketModel.seatItems) {
+        for (PricesModel *priceModel in seatItem.policys.priceDatas) {
+            [priceArray addObject:priceModel.price];
         }
     }
+    
+//    CGFloat maxPrice = [[priceArray valueForKeyPath:@"@max.floatValue"] floatValue];
+    NSNumber *minPrice = [priceArray valueForKeyPath:@"@min.floatValue"];
+
+    NSString *text = @"￥";
+    NSString *amountText =  [NSString stringWithFormat:@"%@%@",text,minPrice];
+    NSMutableAttributedString *mutableAttr = [[NSMutableAttributedString alloc] initWithString:amountText];
+    /// 前面文字大小
+    [mutableAttr addAttribute:NSFontAttributeName value:kFontSizeMedium12 range:NSMakeRange(0, text.length)];
+    self.priceLabel.attributedText = mutableAttr;
+    
+    self.dep_airportLabel.text = [NSString stringWithFormat:@"%@%@",ticketModel.depName,ticketModel.depJetquay];
+    self.arv_airportLabel.text = [NSString stringWithFormat:@"%@%@",ticketModel.arrName,ticketModel.arrJetquay];
+    self.flightNoLabel.text = [NSString stringWithFormat:@"%@ |",ticketModel.flightNo];
+    self.planeTypeLabel.text = [NSString stringWithFormat:@"%@ |",ticketModel.planeType];
+    self.timelabel.text = [self pleaseInsertStarTimeo:ticketModel.depTime andInsertEndTime:ticketModel.arrTime];
 }
 
 
@@ -89,7 +64,7 @@
 - (NSString *)pleaseInsertStarTimeo:(NSString *)time1 andInsertEndTime:(NSString *)time2{
     // 1.将时间转换为date
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    formatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
+    formatter.dateFormat = @"yyyy-MM-dd HH:mm";
     NSDate *date1 = [formatter dateFromString:time1];
     NSDate *date2 = [formatter dateFromString:time2];
     // 2.创建日历
@@ -103,182 +78,145 @@
 }
 
 - (void) initView{
-    [self addSubview:self.dep_timeLabel];
-    [self addSubview:self.arv_timeLabel];
-    [self addSubview:self.imagesTo];
-    [self addSubview:self.dep_airportLabel];
-    [self addSubview:self.arv_airportLabel];
+    [self addSubview:self.boxView];
+    [self.boxView lz_setCornerRadius:10.0];
+    [self.boxView addSubview:self.dep_timeLabel];
+    [self.boxView addSubview:self.arv_timeLabel];
+    [self.boxView addSubview:self.imagesView];
+    [self.boxView addSubview:self.dep_airportLabel];
+    [self.boxView addSubview:self.arv_airportLabel];
     
-    [self addSubview:self.airlineLabel];
-    [self addSubview:self.imagesTime];
-    [self addSubview:self.timerLabel];
-
-    [self addSubview:self.dateLabel];
-    [self addSubview:self.allPriceLabel];
+    [self.boxView addSubview:self.priceLabel];
+    [self.boxView addSubview:self.planeTypeLabel];
+    [self.boxView addSubview:self.flightNoLabel];
+    [self.boxView addSubview:self.timelabel];
+    [self.boxView addSubview:self.imagesTime];
     
-    [self addSubview:self.economyLabel];
-    [self addSubview:self.businessleLabel];
-    [self addSubview:self.luxuryLabel];
-    
-    [self addSubview:self.taxPriceLabel];
+    [self.boxView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(@(10));
+        make.top.bottom.equalTo(self);
+        make.right.equalTo(self.mas_right).offset(-10);
+    }];
     
     [self.dep_timeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(@(IPHONE6_W(15)));
-        make.top.equalTo(@(IPHONE6_W(10)));
+        make.left.equalTo(self.boxView.mas_left).offset(15);
+        make.top.equalTo(@(10));
     }];
     [self.dep_airportLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.dep_timeLabel);
-        make.top.equalTo(self.dep_timeLabel.mas_bottom).offset(IPHONE6_W(2));
+        make.centerY.equalTo(self.boxView);
     }];
     [self.arv_timeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(@(IPHONE6_W(112)));
+        make.centerX.equalTo(self.boxView);
         make.centerY.equalTo(self.dep_timeLabel);
     }];
     [self.arv_airportLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.arv_timeLabel);
         make.centerY.equalTo(self.dep_airportLabel);
     }];
-    [self.imagesTo mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(@(IPHONE6_W(20)));
-        make.left.equalTo(self.dep_timeLabel.mas_right).offset(IPHONE6_W(15));
+    
+    [self.priceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(self.boxView.mas_right).offset(-15);
+        make.centerY.equalTo(self.dep_timeLabel);
     }];
     
-    [self.airlineLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.flightNoLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.dep_timeLabel);
-        make.bottom.equalTo(self.mas_bottom).offset(-(IPHONE6_W(12)));
+        make.bottom.equalTo(self.boxView.mas_bottom).offset(-10);
+    }];
+    
+    [self.planeTypeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.flightNoLabel.mas_right).offset(5);
+        make.centerY.equalTo(self.flightNoLabel);
     }];
     
     [self.imagesTime mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo(self.airlineLabel);
-        make.left.equalTo(self.airlineLabel.mas_right).offset(IPHONE6_W(3));
+        make.centerY.equalTo(self.flightNoLabel);
+        make.left.equalTo(self.planeTypeLabel.mas_right).offset(5);
     }];
-
-    [self.timerLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+    
+    [self.timelabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.imagesTime.mas_right).offset(5);
         make.centerY.equalTo(self.imagesTime);
-        make.left.equalTo(self.imagesTime.mas_right).offset(IPHONE6_W(3));
     }];
     
-    [self.allPriceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(@(IPHONE6_W(25)));
-        make.centerX.equalTo(self).offset(IPHONE6_W(30));
-    }];
-    
-    [self.dateLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.allPriceLabel);
-        make.bottom.equalTo(self.mas_bottom).offset((IPHONE6_W(-25)));
-    }];
-    
-    [self.economyLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(@(IPHONE6_W(14)));
-        make.left.equalTo(self.allPriceLabel.mas_right).offset(IPHONE6_W(55));
-    }];
-    [self.businessleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.economyLabel.mas_bottom);
-        make.left.equalTo(self.economyLabel);
-    }];
-    [self.luxuryLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.businessleLabel.mas_bottom);
-        make.left.equalTo(self.economyLabel);
-    }];
-    
-    [self.taxPriceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(self.mas_right).offset(IPHONE6_W((-15)));
-        make.centerY.equalTo(self.airlineLabel);
+    [self.imagesView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(self.dep_timeLabel);
+        CGFloat width = (kScreenWidth-20)/5;
+        make.centerX.equalTo(self.boxView).offset(-width);
     }];
 }
 
 
 - (UILabel *)dep_timeLabel{
     if (!_dep_timeLabel) {
-        _dep_timeLabel = [UILabel lz_labelWithTitle:@"" color:kTextColor51 font:kFontSizeMedium15];
+        _dep_timeLabel = [UILabel lz_labelWithTitle:@"" color:kTextColor51 font:kFontSizeMedium18];
     }
     return _dep_timeLabel;
 }
 
 - (UILabel *)arv_timeLabel{
     if (!_arv_timeLabel) {
-        _arv_timeLabel = [UILabel lz_labelWithTitle:@"" color:kTextColor51 font:kFontSizeMedium15];
+        _arv_timeLabel = [UILabel lz_labelWithTitle:@"" color:kTextColor51 font:kFontSizeMedium18];
     }
     return _arv_timeLabel;
 }
 
 - (UILabel *)dep_airportLabel{
     if (!_dep_airportLabel) {
-        _dep_airportLabel = [UILabel lz_labelWithTitle:@"" color:kTextColor153 font:kFontSizeMedium11];
+        _dep_airportLabel = [UILabel lz_labelWithTitle:@"" color:kTextColor153 font:kFontSizeRegular14];
     }
     return _dep_airportLabel;
 }
 
 - (UILabel *)arv_airportLabel{
     if (!_arv_airportLabel) {
-        _arv_airportLabel = [UILabel lz_labelWithTitle:@"" color:kTextColor153 font:kFontSizeMedium11];
+        _arv_airportLabel = [UILabel lz_labelWithTitle:@"" color:kTextColor153 font:kFontSizeRegular14];
     }
     return _arv_airportLabel;
 }
 
-- (UILabel *)allPriceLabel{
-    if (!_allPriceLabel) {
-        _allPriceLabel = [UILabel lz_labelWithTitle:@"" color:kTextColor51 font:kFontSizeMedium15];
+- (UILabel *)priceLabel{
+    if (!_priceLabel) {
+        _priceLabel = [UILabel lz_labelWithTitle:@"" color:kColorWithRGB(244, 78, 68) font:kFontSizeMedium18];
     }
-    return _allPriceLabel;
+    return _priceLabel;
 }
 
-- (UILabel *)airlineLabel{
-    if (!_airlineLabel) {
-        _airlineLabel = [UILabel lz_labelWithTitle:@"" color:kTextColor153 font:kFontSizeMedium11];
+- (UILabel *)flightNoLabel{
+    if (!_flightNoLabel) {
+        _flightNoLabel = [UILabel lz_labelWithTitle:@"" color:kTextColor153 font:kFontSizeRegular13];
     }
-    return _airlineLabel;
+    return _flightNoLabel;
 }
 
-- (UILabel *)dateLabel{
-    if (!_dateLabel) {
-        _dateLabel = [UILabel lz_labelWithTitle:@"" color:kTextColor153 font:kFontSizeMedium11];
+- (UILabel *)planeTypeLabel{
+    if (!_planeTypeLabel) {
+        _planeTypeLabel = [UILabel lz_labelWithTitle:@"" color:kTextColor153 font:kFontSizeRegular13];
     }
-    return _dateLabel;
+    return _planeTypeLabel;
 }
 
-- (UILabel *)timerLabel{
-    if (!_timerLabel) {
-        _timerLabel = [UILabel lz_labelWithTitle:@"" color:kTextColor153 font:kFontSizeMedium11];
+- (UIImageView *)imagesView{
+    if (!_imagesView) {
+        _imagesView = [[UIImageView alloc] init];
+        _imagesView.image = kGetImage(@"k98_转");
     }
-    return _timerLabel;
+    return _imagesView;
 }
 
-- (UILabel *)economyLabel{
-    if (!_economyLabel) {
-        _economyLabel = [UILabel lz_labelWithTitle:@"" color:kTextColor102 font:kFontSizeMedium11];
+- (UIView *)boxView{
+    if (!_boxView) {
+        _boxView = [UIView lz_viewWithColor:kWhiteColor];
     }
-    return _economyLabel;
+    return _boxView;
 }
 
-
-- (UILabel *)businessleLabel{
-    if (!_businessleLabel) {
-        _businessleLabel = [UILabel lz_labelWithTitle:@"" color:kTextColor102 font:kFontSizeMedium11];
+- (UILabel *)timelabel{
+    if (!_timelabel) {
+        _timelabel = [UILabel lz_labelWithTitle:@"" color:kTextColor153 font:kFontSizeRegular13];
     }
-    return _businessleLabel;
-}
-
-- (UILabel *)luxuryLabel{
-    if (!_luxuryLabel) {
-        _luxuryLabel = [UILabel lz_labelWithTitle:@"" color:kTextColor102 font:kFontSizeMedium11];
-    }
-    return _luxuryLabel;
-}
-
-- (UILabel *)taxPriceLabel{
-    if (!_taxPriceLabel) {
-        _taxPriceLabel = [UILabel lz_labelWithTitle:@"" color:kTextColor153 font:kFontSizeMedium11];
-    }
-    return _taxPriceLabel;
-}
-
-- (UIImageView *)imagesTo{
-    if (!_imagesTo) {
-        _imagesTo = [[UIImageView alloc] init];
-        _imagesTo.image = kGetImage(@"k98_转");
-    }
-    return _imagesTo;
+    return _timelabel;
 }
 
 - (UIImageView *)imagesTime{

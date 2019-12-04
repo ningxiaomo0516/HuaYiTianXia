@@ -13,12 +13,12 @@
 /// 支付是8081，其他是8082
 //NSString *const DynamicUrl = @"http://beta.api2.wed114.cn/?s=";
 //NSString *const DynamicUrl = @"http://192.168.1.14:8080/hytx/";
-//NSString *const DynamicUrl = @"http://192.168.1.14:8080/hytx/";
+//NSString *const DynamicUrl = @"http://192.168.0.194:80/hytx/";
 NSString *const DynamicUrl = @"http://47.107.179.43:80/hytx/";
 
 
 NSString *const DomainName = @"http://47.107.179.43:80/";
-//NSString *const DomainName = @"http://192.168.1.14:8080/";
+//NSString *const DomainName = @"http://192.168.0.194:80/";
 //NSString *const DomainName = @"http://192.168.1.14:8080/";
 
 NSString *const imageBaseUrl = @"//pic11.wed114.cn/";
@@ -45,9 +45,11 @@ NSString *const NewsDetailsH5           = @"yq/invation/newDetails.html?id=";
 /// 商品详情
 NSString *const GoodsDetailsH5          = @"yq/invation/goodsDetails.html?id=";
 /// 推荐邀请
-NSString *const InvataionH5             = @"yq/invation/invataion.html?id=";
+//NSString *const InvataionH5             = @"yq/invation/invataion.html?id=";
+NSString *const InvataionH5             = @"appH5/invitation.html?id=";
 /// 用户协议
-NSString *const UserAgreeH5             = @"userHelp/userAgree.html";
+//NSString *const UserAgreeH5             = @"userHelp/userAgree.html";
+NSString *const UserAgreeH5             = @"appH5/service.html";
 /// 操作手册
 NSString *const UserHelpH5              = @"userHelp";
 /// 一县一代理(农用植保)

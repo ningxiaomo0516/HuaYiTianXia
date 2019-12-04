@@ -14,20 +14,33 @@
             }
             
             setupWebViewJavascriptBridge(function(bridge) {
-                 bridge.registerHandler('testJSFunction', function(data, responseCallback) {
-                    alert('JS方法被调用:'+data);
-                    responseCallback('js执行过了');
+                 bridge.registerHandler('submitclickcallback', function(data, responseCallback) {
+
                  })
             })
 
             function locationClick() {
-                WebViewJavascriptBridge.callHandler('locationClick',null,function(response) {
+                WebViewJavascriptBridge.callHandler('locationClick',{"time":"2001-05-07 11:22:33 测试使用"},function(response) {
                     alert(response);
                     document.getElementById("returnValue").value = response;
+                    
+                WebViewJavascriptBridge.callHandler('locationCallBack',{"time":"2001-05-07 11:22:33 测试使用","content":response},function(response) {
+                                                    
+                                                    });
                 });
             }
             
+            function submitclickcallback(){
+                WebViewJavascriptBridge.callHandler('submitclickcallback','success',function(response) {
+                    alert('信息不完整111')
+                });
+            }
             
+            function submitclick(){
+                WebViewJavascriptBridge.callHandler('submitclick','success',function(response) {
+                    alert('信息不完整111')
+                });
+            }
             </script>
             </head>
     
@@ -38,5 +51,9 @@
         <textarea id ="returnValue" type="value" rows="5" cols="50">
         
         </textarea>
+        
+        
+        
+        <div class="btn" id="submit" type="button" onclick="submitclickcallback()">提交</div>
     </body>
 </html>

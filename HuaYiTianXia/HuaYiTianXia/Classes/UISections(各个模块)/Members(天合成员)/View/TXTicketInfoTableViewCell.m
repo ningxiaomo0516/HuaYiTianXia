@@ -35,20 +35,20 @@
     NSString *formatDate1 = @"MM-dd";               /// 月日
     NSString *formatDate = @"HH:mm";                /// 时分
     /// 出发日期
-    NSString * dep_date= [Utils lz_timeWithTimeIntervalString:ticketModel.arv_time formatter:formatDate1];
-    /// 出发时间
-    NSString * dep_time= [Utils lz_timeWithTimeIntervalString:ticketModel.dep_time formatter:formatDate];
-    /// 出发机场
-    NSString *dep_airpor = kStringFormat(ticketModel.dep_airport, ticketModel.dep_airport_term);//@"双流机场T2";
-    /// 到站机场
-    NSString *arv_airport = kStringFormat(ticketModel.arv_airport, ticketModel.arv_airport_term);// @"旧金山机场";
-    /// 星期几
-    NSString *whatDay = [SCSmallTools tt_dateWeekWithDateString:self.ticketModel.dep_time];
-    self.time_label.text = dep_time;
-    self.date_label.text = dep_date;
-    self.dep_arv_label.text = [NSString stringWithFormat:@"%@-%@",dep_airpor,arv_airport];
-    self.weekend_label.text = whatDay;
-    self.type_label.text = @"经济舱";
+//    NSString * dep_date= [Utils lz_timeWithTimeIntervalString:ticketModel.arv_time formatter:formatDate1];
+//    /// 出发时间
+//    NSString * dep_time= [Utils lz_timeWithTimeIntervalString:ticketModel.dep_time formatter:formatDate];
+//    /// 出发机场
+//    NSString *dep_airpor = kStringFormat(ticketModel.dep_airport, ticketModel.dep_airport_term);//@"双流机场T2";
+//    /// 到站机场
+//    NSString *arv_airport = kStringFormat(ticketModel.arv_airport, ticketModel.arv_airport_term);// @"旧金山机场";
+//    /// 星期几
+//    NSString *whatDay = [SCSmallTools tt_dateWeekWithDateString:self.ticketModel.dep_time];
+//    self.time_label.text = dep_time;
+//    self.date_label.text = dep_date;
+//    self.dep_arv_label.text = [NSString stringWithFormat:@"%@-%@",dep_airpor,arv_airport];
+//    self.weekend_label.text = whatDay;
+//    self.type_label.text = @"经济舱";
 }
 
 - (void) initView{

@@ -90,6 +90,9 @@
  */
 - (void)lz_removeBorders;
 
+/// 添加阴影效果
+- (void)tt_addShadowToViewWithColor:(UIColor *_Nullable)theColor;
+    
 /**
  *  设置当前view的阴影
  *

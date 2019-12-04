@@ -14,6 +14,7 @@
     if (self = [super initWithFrame:frame]) {
         [self initView];
         self.backgroundColor = kWhiteColor;
+        self.avatarView.image = kGetImage(@"我的_头像_背景");
         if (kiPhoneX) {
             self.imagesView_BG.image = kGetImage(@"c7_mine_背景_x");
         }else{
@@ -24,6 +25,8 @@
 }
 
 - (void) initView{
+    [self.imagesViewAvatar lz_setCornerRadius:(IPHONE6_W(70))/2.0];
+    self.titleLabel.hidden = YES;
     [self addSubview:self.imagesView_BG];
     [self addSubview:self.nicknameLabel];
     [self addSubview:self.images_level];
@@ -38,13 +41,12 @@
     
     [self.avatarView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self);
-        make.width.height.equalTo(@(IPHONE6_W(95)));
-        make.top.equalTo(@(IPHONE6_W(62)+kSafeAreaBottomHeight));
+        make.top.equalTo(@(kNavBarHeight));
     }];
     
     [self.imagesViewAvatar mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.centerX.equalTo(self.avatarView);
-        make.width.height.equalTo(@(IPHONE6_W(90)));
+        make.width.height.equalTo(@(IPHONE6_W(70)));
     }];
     
     [self.nicknameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -64,7 +66,7 @@
     
     [self.upgradeButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self);
-        make.top.equalTo(self.titleLabel.mas_bottom).offset(IPHONE6_W(4));
+        make.top.equalTo(self.nicknameLabel.mas_bottom).offset(IPHONE6_W(8));
     }];
     
 }
@@ -72,15 +74,13 @@
 - (UIImageView *)imagesViewAvatar{
     if (!_imagesViewAvatar) {
         _imagesViewAvatar = [[UIImageView alloc] init];
-        [_imagesViewAvatar lz_setCornerRadius:(IPHONE6_W(90))/2.0];
     }
     return _imagesViewAvatar;
 }
 
-- (UIView *)avatarView{
+- (UIImageView *)avatarView{
     if (!_avatarView) {
-        _avatarView = [UIView lz_viewWithColor:[kWhiteColor colorWithAlphaComponent:0.15]];
-        [_avatarView lz_setCornerRadius:(IPHONE6_W(95))/2.0];
+        _avatarView = [[UIImageView alloc] init];
     }
     return _avatarView;
 }

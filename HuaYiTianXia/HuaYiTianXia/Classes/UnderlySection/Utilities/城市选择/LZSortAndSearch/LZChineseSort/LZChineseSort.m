@@ -152,14 +152,12 @@
         if ([predicate evaluateWithObject:header]) {
             sortString.initial = [header capitalizedString];
         }else{
-            
             if (![sortString.string isEqualToString:@""]) {
                 //特殊处理的一个字
                 if ([header isEqualToString:@"长"]) {
                     sortString.initial = @"C";
                     sortString.englishString = [sortString.englishString stringByReplacingCharactersInRange:NSMakeRange(0, 1) withString:@"C"];
                 }else{
-                    
                     char initial = [sortString.englishString characterAtIndex:0];
                     if (initial >= 'A' && initial <= 'Z') {
                         sortString.initial = [NSString stringWithFormat:@"%c",initial];

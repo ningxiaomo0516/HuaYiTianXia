@@ -52,7 +52,7 @@ static NSString * const reuseIdentifier = @"TXChoosePayTableViewCell";
     NSInteger resultCode = [resultDic[@"resultStatus"] integerValue];
     if (resultCode == 9000) {
         Toast(@"订单支付成功!");
-        [kNotificationCenter postNotificationName:@"AlipaySuccessful" object:nil];
+//        [kNotificationCenter postNotificationName:@"AlipaySuccessful" object:nil];
     }else if (resultCode == 4000){
         Toast(@"订单支付失败!");
     }else if (resultCode == 5000){

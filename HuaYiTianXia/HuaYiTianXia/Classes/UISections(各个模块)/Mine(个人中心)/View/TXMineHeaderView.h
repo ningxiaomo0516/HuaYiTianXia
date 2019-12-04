@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// 头像
 @property (nonatomic, strong) UIImageView   *imagesViewAvatar;
 /// 头像背景
-@property (nonatomic, strong) UIView        *avatarView;
+@property (nonatomic, strong) UIImageView   *avatarView;
 /// 背景图
 @property (nonatomic, strong) UIImageView   *imagesView_BG;
 /// 用户昵称

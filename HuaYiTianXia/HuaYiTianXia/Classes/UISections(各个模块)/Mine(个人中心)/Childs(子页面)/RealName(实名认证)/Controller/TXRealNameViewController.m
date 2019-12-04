@@ -222,13 +222,10 @@
     [SCHttpTools postWithURLString:kHttpURL(@"customer/Certification") parameter:parameter success:^(id responseObject) {
         NSDictionary *result = responseObject;
         TTLog(@" ---- %@",[Utils lz_dataWithJSONObject:result]);
-        TXGeneralModel *model = [TXGeneralModel mj_objectWithKeyValues:result];
+        RealnameModel *model = [RealnameModel mj_objectWithKeyValues:result];
         Toast(model.message);
-        if (model.errorcode == 20000) {
-            /// 更新实名认证本地状态
-            [kNotificationCenter postNotificationName:@"reloadMineData" object:nil];
-            [self.navigationController popViewControllerAnimated:YES];
-        }
+        [kNotificationCenter postNotificationName:@"reloadMineData" object:nil];
+        [self.navigationController popViewControllerAnimated:YES];
         kHideMBProgressHUD(self.view);;
     } failure:^(NSError *error) {
         TTLog(@" -- error -- %@",error);

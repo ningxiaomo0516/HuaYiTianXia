@@ -46,9 +46,6 @@ static NSString * const reuseIdentifierBanner = @"TXMineBannerTableViewCell";
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self initView];
-    if (kUserInfo.isLogin) {
-        [self requestPersonalCenterData];
-    }
     
     // 下拉刷新
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
@@ -169,6 +166,7 @@ static NSString * const reuseIdentifierBanner = @"TXMineBannerTableViewCell";
     [super viewWillAppear:animated];
     self.navigationController.navigationBar.hidden = YES;
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+    [self reloadData];
     [self.tableView reloadData];
 }
 
@@ -225,11 +223,14 @@ static NSString * const reuseIdentifierBanner = @"TXMineBannerTableViewCell";
     TXGeneralModel* model = self.dataArray[indexPath.section][indexPath.row];
     NSString *className = model.showClass;
     if ([model.showClass isEqualToString:@"TXRealNameViewController"]) {
-        if (kUserInfo.isValidation==0) {
+        /// 0：未认证 1：认证中 2：已认证 3：认证失败
+        if (kUserInfo.isValidation==0||kUserInfo.isValidation==3) {
             TXRealNameViewController *vc = [[TXRealNameViewController alloc] init];
             vc.title = model.title;
             vc.typePage = 0;
             TTPushVC(vc);
+        }else if (kUserInfo.isValidation==1){
+            Toast(@"资料正在审核中,请耐心等待.");
         }
     }else if([model.showClass isEqualToString:@"TXWebViewController"]){
         TXWebViewController *vc = [[TXWebViewController alloc] init];
@@ -302,7 +303,7 @@ static NSString * const reuseIdentifierBanner = @"TXMineBannerTableViewCell";
 - (TXMineHeaderView *)headerView{
     if (!_headerView) {
         _headerView = [[TXMineHeaderView alloc] init];
-        CGFloat height = IPHONE6_W(240)+kSafeAreaBottomHeight;
+        CGFloat height = IPHONE6_W(220)+kSafeAreaBottomHeight;
         _headerView.frame = CGRectMake(0, 0, kScreenWidth, height);
     }
     return _headerView;
@@ -337,10 +338,12 @@ static NSString * const reuseIdentifierBanner = @"TXMineBannerTableViewCell";
         _dataArray = [[NSMutableArray alloc] init];
         NSArray* titleArr = @[
                               @[@"实名认证",@"订单中心"],
-                              @[@"我的团队",@"我的邀请",@"推荐邀请"],
+//                              @[@"我的团队",@"我的邀请",@"推荐邀请"],
+                              @[@"我的邀请",@"推荐邀请"],
                               @[@"设置"]];
         NSArray* classArr = @[@[@"TXRealNameViewController",@"TXProductViewController"],
-                              @[@"TXMineTeamViewController",@"TXInvitationViewController",@"TXWebViewController"],
+//                              @[@"TXMineTeamViewController",@"TXInvitationViewController",@"TXWebViewController"],
+                              @[@"TXInvitationViewController",@"TXWebViewController"],
                               @[@"TXSetupViewController"]];
         for (int i=0; i<titleArr.count; i++) {
             NSArray *subTitlesArray = [titleArr lz_safeObjectAtIndex:i];

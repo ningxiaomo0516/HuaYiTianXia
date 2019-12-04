@@ -7,12 +7,16 @@
 //
 
 #import "TTBaseViewController.h"
+#import "WebViewJavascriptBridge.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface TXWebViewController : TTBaseViewController
 
 @property (nonatomic, copy) NSString *webUrl;
+/// 插件
+@property WebViewJavascriptBridge *javascriptBridge;
+
 
 @end
 

@@ -26,11 +26,11 @@
     // Do any additional setup after loading the view.
     [self loadTabData];
     self.menuHeight = 40;
-    self.navigationItem.title = @"华翼天下";
+//    self.navigationItem.title = @"华翼天下";
     [self initView];
     /// 已登录才能获取红包
     if (kUserInfo.isLogin) {
-        [self get_hb_request];
+//        [self get_hb_request];
     }
 }
 

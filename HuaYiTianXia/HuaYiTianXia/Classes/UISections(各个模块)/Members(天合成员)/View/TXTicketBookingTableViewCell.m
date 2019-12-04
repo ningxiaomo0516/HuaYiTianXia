@@ -32,35 +32,35 @@
 
 - (void)selectAction:(UIButton *)sender {
     if ([self.delegate respondsToSelector:@selector(selectRowStr:indexPath:)]) {
-        [_delegate selectRowStr:self.ticketModel.airline indexPath:self.selectedIndexPath];
+//        [_delegate selectRowStr:self.ticketModel.airline indexPath:self.selectedIndexPath];
     }
 }
 
 - (void)setTicketModel:(TicketModel *)ticketModel{
     _ticketModel = ticketModel;
     
-    NSString *formatDate0 = @"yyyy-MM-dd HH:mm:ss"; /// 年月日
-    NSString *formatDate = @"HH:mm";                /// 时分
-    NSString *formatDate1 = @"MM-dd";               /// 月日
-    /// 出发时间
-    NSString * dep_time= [Utils lz_timeWithTimeIntervalString:ticketModel.dep_time formatter:formatDate];
-    NSString * dep_times= [Utils lz_timeWithTimeIntervalString:ticketModel.dep_time formatter:formatDate0];
-    /// 到达时间
-    NSString * arv_time= [Utils lz_timeWithTimeIntervalString:ticketModel.arv_time formatter:formatDate];
-    NSString * arv_times= [Utils lz_timeWithTimeIntervalString:ticketModel.arv_time formatter:formatDate0];
-    
-    /// 出发日期
-    NSString * dep_date= [Utils lz_timeWithTimeIntervalString:ticketModel.arv_time formatter:formatDate1];
-    
-    self.dep_timeLabel.text =  dep_time;//@"09:00";
-    self.dep_airportLabel.text = kStringFormat(ticketModel.dep_airport, ticketModel.dep_airport_term);//@"双流机场T2";
-    self.arv_timeLabel.text = arv_time;//@"11:10";
-    self.arv_airportLabel.text = kStringFormat(ticketModel.arv_airport, ticketModel.arv_airport_term);// @"旧金山机场";
-    self.airlineLabel.text = ticketModel.airline;//@"中国东方航空";
-    self.modelLabel.text = ticketModel.model;//@"空中客车 A320";
-
-    self.timerLabel.text = [self pleaseInsertStarTimeo:dep_times andInsertEndTime:arv_times] ;;//@"约2时23分";
-    self.dateLabel.text = dep_date;
+//    NSString *formatDate0 = @"yyyy-MM-dd HH:mm:ss"; /// 年月日
+//    NSString *formatDate = @"HH:mm";                /// 时分
+//    NSString *formatDate1 = @"MM-dd";               /// 月日
+//    /// 出发时间
+//    NSString * dep_time= [Utils lz_timeWithTimeIntervalString:ticketModel.dep_time formatter:formatDate];
+//    NSString * dep_times= [Utils lz_timeWithTimeIntervalString:ticketModel.dep_time formatter:formatDate0];
+//    /// 到达时间
+//    NSString * arv_time= [Utils lz_timeWithTimeIntervalString:ticketModel.arv_time formatter:formatDate];
+//    NSString * arv_times= [Utils lz_timeWithTimeIntervalString:ticketModel.arv_time formatter:formatDate0];
+//    
+//    /// 出发日期
+//    NSString * dep_date= [Utils lz_timeWithTimeIntervalString:ticketModel.arv_time formatter:formatDate1];
+//    
+//    self.dep_timeLabel.text =  dep_time;//@"09:00";
+//    self.dep_airportLabel.text = kStringFormat(ticketModel.dep_airport, ticketModel.dep_airport_term);//@"双流机场T2";
+//    self.arv_timeLabel.text = arv_time;//@"11:10";
+//    self.arv_airportLabel.text = kStringFormat(ticketModel.arv_airport, ticketModel.arv_airport_term);// @"旧金山机场";
+//    self.airlineLabel.text = ticketModel.airline;//@"中国东方航空";
+//    self.modelLabel.text = ticketModel.model;//@"空中客车 A320";
+//
+//    self.timerLabel.text = [self pleaseInsertStarTimeo:dep_times andInsertEndTime:arv_times] ;;//@"约2时23分";
+//    self.dateLabel.text = dep_date;
 }
 
 

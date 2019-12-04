@@ -21,6 +21,8 @@
 
 #import "TXOrderViewController.h"
 
+#import "YKPlaceholderViewController.h"
+
 
 @interface TXMainViewController ()<UICollectionViewDelegate, UICollectionViewDataSource>
 @property (nonatomic, strong)UICollectionView * collectionView;
@@ -34,7 +36,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.navigationItem.title = @"华翼天下";
+    self.navigationItem.title = @"天合成员";
     [self initView];
     
     [self requestMaintData];
@@ -43,6 +45,11 @@
     self.collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         [self requestMaintData];
     }];
+}
+
+- (void) viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBar.hidden = YES;
 }
 
 - (void) requestMaintData{
@@ -107,14 +114,17 @@
         TXGeneralModel *model = self.toolsArray[indexPath.row];
         tools.imagesView.image = kGetImage(model.imageText);
         return tools;
-
     }else{
         //获取cell视图，内部通过去缓存池中取，如果缓存池中没有，就自动创建一个新的cell
         TXMainCollectionViewCell *tools=[TXMainCollectionViewCell cellWithCollectionView:collectionView forIndexPath:indexPath];
         MainListModel *model = self.dataArray[indexPath.row];
+        if (indexPath.row==0) {
+            tools.linerView.hidden = YES;
+        }
         [tools.imagesView sd_setImageWithURL:kGetImageURL(model.aircraftImg) placeholderImage:kGetImage(VERTICALMAPBITMAP)];
         tools.depCityLabel.text = model.origin;
         tools.arvCityLabel.text = model.destination;
+        tools.discountLabel.hidden = YES;
         tools.priceLabel.text = [NSString stringWithFormat:@"￥%@",model.price];
         
         /// 月日 时分
@@ -142,17 +152,21 @@
             titleText = @"超值特惠";
             imageName = @"首页_商务_打折_劵";
             has_hidden = YES;
-            colorText = kColorWithRGB(176, 23, 23);
+            colorText = kTextColor51;
         }
         headerView.moreButton.tag = indexPath.section;
 //        MV(weakSelf)
         [headerView.moreButton lz_handleControlEvent:UIControlEventTouchUpInside withBlock:^{
 //            [weakSelf jumpMallChildsViewController_did:indexPath];
         }];
+        headerView.imagesView.hidden = has_hidden;
         headerView.moreButton.hidden = has_hidden;
         headerView.imagesView.image = kGetImage(imageName);
         headerView.textLabel.text = titleText;
         headerView.textLabel.textColor = colorText;
+        [headerView.textLabel mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(@(15));
+        }];
         return headerView;
     }else if ([kind isEqualToString:UICollectionElementKindSectionFooter]){
         //获取底部视图
@@ -166,32 +180,30 @@
 #pragma mark - UICollectionViewDelegateFlowLayout
 // 设置各个CollectionViewCell的大小尺寸
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
-    CGFloat space = 5;
+    CGFloat space = 10;
     CGFloat margin = 15*2;
-    CGFloat width = (kScreenWidth-space*2-margin)/2;
+    CGFloat width = kScreenWidth;
     CGFloat height = width;
     if (indexPath.section==0) {
         width = kScreenWidth;
-        height = IPHONE6_W(165);
+        height = IPHONE6_W(175);
     }else if(indexPath.section==1){
-        width = (kScreenWidth-margin)/3;
-        height = IPHONE6_W(60);
+        width = (kScreenWidth-margin-space*2)/3;
+        height = IPHONE6_W(65);
     }else if(indexPath.section==2){
-        height = IPHONE6_W(150);
+        height = IPHONE6_W(90);
     }
     return CGSizeMake(width, height);
 }
 
 /// Cell之间的列间距
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
-    if (section==0||section==1) return 0;
-    return 10;
+    return 0;
 }
 
 /// Cell之间的行间距
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section{
-    if (section==0||section==1) return 0;
-    return 10;
+    return 0;
 }
 
 // 设置每一组的上下左右间距
@@ -214,9 +226,15 @@
 // CollectionViewCell被选中会调用
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
 //    [self jumpProductDetails:indexPath];
-    if (indexPath.section==1&&indexPath.row==0) {
-        TXCharterSpellMachineViewController *vc = [[TXCharterSpellMachineViewController alloc] init];
-        TTPushVC(vc);
+    if (indexPath.section==1) {
+        if (indexPath.row==0) {
+            TXCharterSpellMachineViewController *vc = [[TXCharterSpellMachineViewController alloc] init];
+            TTPushVC(vc);
+        }else{
+            YKPlaceholderViewController *vc = [[YKPlaceholderViewController alloc] init];
+            vc.title = (indexPath.row==1) ? @"拼机" : @"空中巴士";
+            TTPushVC(vc);
+        }
     }else if (indexPath.section==2){
         CharterMachineModel *model = self.dataArray[indexPath.row];
         TXCharterMachineChildViewController *vc = [[TXCharterMachineChildViewController alloc] initTicketModel:model];
@@ -239,9 +257,9 @@
         //确定item的大小
         //        flowLayout.itemSize = CGSizeMake(100, 120);
         // 确定横向间距(设置行间距)
-        flowLayout.minimumLineSpacing = 10;
+        flowLayout.minimumLineSpacing = 0;
         // 确定纵向间距(设置列间距)
-        flowLayout.minimumInteritemSpacing = 10;
+        flowLayout.minimumInteritemSpacing = 0;
         // 确定距离上左下右的距离
         flowLayout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0);
         // 设置顶部视图和底部视图的大小，当滚动方向为垂直时，设置宽度无效，当滚动方向为水平时，设置高度无效

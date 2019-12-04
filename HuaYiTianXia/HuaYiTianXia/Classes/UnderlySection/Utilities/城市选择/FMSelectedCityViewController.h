@@ -7,9 +7,11 @@
 //
 
 #import "TTBaseViewController.h"
-typedef void(^ReturnCityName)(NSString *cityname);
+#import "FMSelectedCityModel.h"
+
+typedef void(^ReturnCityName)(CityModel *cityModel);
 
 @interface FMSelectedCityViewController : TTBaseViewController
-@property (nonatomic, copy) ReturnCityName returnBlock;
+@property (nonatomic, strong) ReturnCityName returnBlock;
 - (void)returnText:(ReturnCityName)block;
 @end

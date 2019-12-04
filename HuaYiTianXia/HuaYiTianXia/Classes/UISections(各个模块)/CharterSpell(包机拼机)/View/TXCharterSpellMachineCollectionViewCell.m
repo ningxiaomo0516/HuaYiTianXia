@@ -66,7 +66,7 @@
     
     [self.boxView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.top.right.equalTo(self);
-        make.height.equalTo(@(IPHONE6_W(100)));
+        make.height.equalTo(@(IPHONE6_W(150)));
     }];
     
     [self.imagesView mas_makeConstraints:^(MASConstraintMaker *make) {

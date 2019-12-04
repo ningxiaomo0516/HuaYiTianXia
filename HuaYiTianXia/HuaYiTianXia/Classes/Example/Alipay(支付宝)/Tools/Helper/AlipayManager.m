@@ -27,7 +27,7 @@
         if ([resultStatus isEqualToString:@"9000"]) {
             strMsg = @"订单支付成功!";
             // 发送支付成功通知
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"paySuccess:" object:nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"YKAlipaySuccessfull" object:nil];
         }else if ([resultStatus isEqualToString:@"4000"]) {
             
             strMsg = @"订单支付失败!";

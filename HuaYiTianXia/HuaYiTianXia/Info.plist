@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>zh_CN</string>
 	<key>CFBundleDisplayName</key>
-	<string>天合共享</string>
+	<string>华翼共享</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -17,7 +17,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0.2</string>
+	<string>1.0.5</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
@@ -29,7 +29,7 @@
 			<string>weixin</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>wx29a93cd22437a735</string>
+				<string>wx0ba719c1710e5353</string>
 			</array>
 		</dict>
 		<dict>
@@ -56,7 +56,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>4</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>sinaweibo</string>

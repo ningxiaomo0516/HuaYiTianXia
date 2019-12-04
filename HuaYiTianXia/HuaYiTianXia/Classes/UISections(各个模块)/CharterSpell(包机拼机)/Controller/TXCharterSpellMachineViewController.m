@@ -36,7 +36,7 @@ static NSString * const reuseIdentifier = @"TXCharterSpellMachineCollectionViewC
         TTPushVC(vc);
     }];
     [self.headerView.citylabel whenTapped:^{
-        Toast(@"城市选择");
+//        Toast(@"城市选择");
     }];
     [self.headerView.backButton lz_handleControlEvent:UIControlEventTouchUpInside withBlock:^{
         [self.navigationController popViewControllerAnimated:YES];
@@ -150,7 +150,7 @@ static NSString * const reuseIdentifier = @"TXCharterSpellMachineCollectionViewC
 #pragma mark - UICollectionViewDelegateFlowLayout
 /// 设置每个一个Item（cell）的大小
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
-    return CGSizeMake((kScreenWidth-30), IPHONE6_W(200));
+    return CGSizeMake((kScreenWidth-30), IPHONE6_W(250));
 }
 
 /// 设置所有的cell组成的视图与section 上、左、下、右的间隔

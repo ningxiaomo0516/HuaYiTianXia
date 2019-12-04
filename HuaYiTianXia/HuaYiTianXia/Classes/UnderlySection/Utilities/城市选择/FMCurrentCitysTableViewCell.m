@@ -82,11 +82,11 @@ static NSString* reuseIdentifier = @"FMCityCollectionViewCell";
     FMCityCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
     cell.isIcon = self.isIcon;
     if (self.isIcon) {
-        // 需要重新定位
+        // 需要重新定位 
         cell.currentCityStr = [kUserDefaults objectForKey:@"city"];
     }else{
         CityModel *model = self.hotsModel[indexPath.row];
-        cell.currentCityStr = model.site_name;
+        cell.currentCityStr = model.cityCName;
     }
     [self updateCollectionViewHeight:self.collectionView.collectionViewLayout.collectionViewContentSize.height];
     return cell;
@@ -95,19 +95,19 @@ static NSString* reuseIdentifier = @"FMCityCollectionViewCell";
 /// 点击collectionViewCell
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     NSString *didStr = @"";
+    CityModel *cityModel;
     if (self.isIcon) {
     }else{
         CityModel *model = self.hotsModel[indexPath.row];
-        didStr = model.site_name;
-        
-//        kUserInfo.cityName = model.site_name;
-//        kUserInfo.site_id = model.site_id;
-//        kUserInfo.city_id = model.city_id;
+        didStr = model.cityCName;
+        cityModel = model;
     }
     [kUserInfo dump];
-
-    if (self.delegate && [self.delegate respondsToSelector:@selector(didSelectItemAtIndexPath:withContent:)]) {
-        [self.delegate didSelectItemAtIndexPath:indexPath withContent:didStr];
+    if (cityModel.cityCode.length==0) {
+        return;
+    }
+    if (self.delegate && [self.delegate respondsToSelector:@selector(didSelectItemAtIndexPath:withModel:)]) {
+        [self.delegate didSelectItemAtIndexPath:indexPath withModel:cityModel];
     }
 }
 
@@ -116,25 +116,10 @@ static NSString* reuseIdentifier = @"FMCityCollectionViewCell";
     if (self.endHeight != height) {
         self.endHeight = height;
         self.collectionView.frame = CGRectMake(0, 0, self.collectionView.width, height);
-        
         if (_delegate && [_delegate respondsToSelector:@selector(updateTableViewCellHeight:andheight:andIndexPath:)]) {
             [self.delegate updateTableViewCellHeight:self andheight:height andIndexPath:self.indexPath];
         }
     }
-}
-
-// 布局协议对应的方法实现
-#pragma mark - UICollectionViewDelegateFlowLayout
-// 设置footer呈现的size, 如果布局是垂直方向的话，size只需设置高度，宽与collectionView一致
-// 设置section header大小
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section{
-    
-    return CGSizeMake(0,0);
-}
-
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section{
-    
-    return CGSizeMake(0,0);
 }
 
 - (UICollectionView *)collectionView{

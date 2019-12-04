@@ -21,7 +21,7 @@
 /**
  * 点击UICollectionViewCell的代理方法
  */
-- (void)didSelectItemAtIndexPath:(NSIndexPath *)indexPath withContent:(NSString *)content;
+- (void)didSelectItemAtIndexPath:(NSIndexPath *)indexPath withModel:(CityModel *)cityModel;
 @end
 
 

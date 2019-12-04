@@ -87,11 +87,11 @@
     MV(weakSelf)
     FMSelectedCityViewController *vc= [[FMSelectedCityViewController alloc] init];
     LZNavigationController *nav = [[LZNavigationController alloc] initWithRootViewController:vc];
-    [vc returnText:^(NSString *cityname) {
+    [vc returnText:^(CityModel *model) {
         if (sender.tag == 100) {
-            weakSelf.dep_city_label.text = cityname;
+            weakSelf.dep_city_label.text = model.cityCName;
         }else{
-            weakSelf.arv_city_label.text = cityname;
+            weakSelf.arv_city_label.text = model.cityCName;
         }
     }];
     [self.navigationController presentViewController:nav animated:YES completion:^{
@@ -127,7 +127,6 @@
 
 /** 保存 */
 - (void) searchBtnClick{
-    
     if (!kUserInfo.isLogin) {
         TXLoginViewController *vc = [[TXLoginViewController alloc] init];
         LZNavigationController *navigation = [[LZNavigationController alloc] initWithRootViewController:vc];
@@ -148,11 +147,17 @@
         Toast(@"请输入目的地");
         return;
     }
-    NSString *URLString = @"https://api.shenjian.io/?appid=7c0ec630c4f4bd5179c8978365d999da";
+//    NSString *URLString = @"https://api.shenjian.io/?appid=7c0ec630c4f4bd5179c8978365d999da";
+//    NSMutableDictionary *parameter = [[NSMutableDictionary alloc] init];
+//    [parameter setObject:self.dep_city_label.text forKey:@"fromCity"];
+//    [parameter setObject:self.arv_city_label.text forKey:@"toCity"];
+//    [parameter setObject:self.date_select_label.text forKey:@"date"];
+    
+    NSString *URLString = @"http://192.168.0.194:80/hytx/flight/getFlightList";
     NSMutableDictionary *parameter = [[NSMutableDictionary alloc] init];
-    [parameter setObject:self.dep_city_label.text forKey:@"fromCity"];
-    [parameter setObject:self.arv_city_label.text forKey:@"toCity"];
-    [parameter setObject:self.date_select_label.text forKey:@"date"];
+    [parameter setObject:@"CAN" forKey:@"arrCode"];
+    [parameter setObject:@"CTU" forKey:@"depCode"];
+    [parameter setObject:self.date_select_label.text forKey:@"depTime"];
     /// 机票查询接口
     TXTicketListViewController *vc = [[TXTicketListViewController alloc] initTicketListWithURLString:URLString parameter:parameter];
     TTPushVC(vc);

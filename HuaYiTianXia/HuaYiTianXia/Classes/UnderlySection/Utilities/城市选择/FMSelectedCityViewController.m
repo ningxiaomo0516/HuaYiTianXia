@@ -46,6 +46,7 @@ static NSString * const reuseIdentifierCurrent = @"FMCurrentCitysTableViewCell";
 // 被搜索的字符串
 @property (copy, nonatomic) NSString                *searchText;
 @property (strong, nonatomic) NSArray               *dataArray;
+@property (strong, nonatomic) NSMutableArray        *hotArray;
 @end
 
 @implementation FMSelectedCityViewController
@@ -56,7 +57,12 @@ static NSString * const reuseIdentifierCurrent = @"FMCurrentCitysTableViewCell";
     [self initView];
     
     self.title = @"城市选择";
-    [self setLeftNavBarItemWithImage:@"all_btn_back_grey"];
+//    [self setLeftNavBarItemWithImage:@"all_btn_back_grey"];
+    UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithImage:kGetImage(@"all_btn_close_grey")
+                                                                 style:UIBarButtonItemStylePlain
+                                                                target:self
+                                                                action:@selector(leftItemClick:)];
+    self.navigationItem.leftBarButtonItem = leftItem;
     [self loadCityDataModel];
 }
 
@@ -123,14 +129,17 @@ static NSString * const reuseIdentifierCurrent = @"FMCurrentCitysTableViewCell";
 #pragma mark -------- 加载城市数据Models --------
 - (void)loadCityDataModel {
     kShowMBProgressHUD(self.view);
-    NSString *URLString = [NSString stringWithFormat:@"%@CityData.json",DomainName];
+//    NSString *URLString = [NSString stringWithFormat:@"%@CityData.json",DomainName];
+//    NSString *URLString = [NSString stringWithFormat:@"%@city.json",DynamicUrl];
+    NSString *URLString = [NSString stringWithFormat:@"http://47.107.179.43:80/hytx/city.json"];
     [SCHttpTools getTicketWithURLString:URLString parameter:nil success:^(id responseObject) {
         NSDictionary *result = responseObject;
-        FMSelectedCityModel *model = [FMSelectedCityModel mj_objectWithKeyValues:result];
-        if (model.errcode == 0) {
-            self.cityModel = model.data;
+//        FMSelectedCityModel *model = [FMSelectedCityModel mj_objectWithKeyValues:result];
+        YKCityModel *model = [YKCityModel mj_objectWithKeyValues:result];
+        if (model.errorcode == 20000) {
+//            self.cityModel = model.data;
             [self.itemModelArray removeAllObjects];
-            [self initData];
+            [self initData:model.list];
         }else {
             Toast([result lz_objectForKey:@"message"]);
         }
@@ -145,17 +154,16 @@ static NSString * const reuseIdentifierCurrent = @"FMCurrentCitysTableViewCell";
 }
 
 /// 数据解析
-- (void) initData{
-    for (int i=0; i<self.cityModel.groups.count; i++) {
-        NSMutableArray *dataArray = self.cityModel.groups[i].list;
-        for (int j=0; j<dataArray.count; j++) {
-            CityModel *model = dataArray[j];
-            [self.itemModelArray addObject:model];
+- (void) initData:(NSMutableArray<CityModel *> *)model{
+    self.itemModelArray = model;
+    for (CityModel *cityModel in model) {
+        if ([cityModel.isHot boolValue]) {
+            [self.hotArray addObject:cityModel];
         }
     }
 
     //通讯录分组，乱序的
-    _letterResultDictionary = [LZChineseSort sortAndGroupForArray:self.itemModelArray PropertyName:@"site_name"];
+    _letterResultDictionary = [LZChineseSort sortAndGroupForArray:self.itemModelArray PropertyName:@"cityCName"];
     
     //抽取排序，A，B，C
     _indexArray = [LZChineseSort sortForStringAry:[_letterResultDictionary allKeys]];
@@ -179,7 +187,7 @@ static NSString * const reuseIdentifierCurrent = @"FMCurrentCitysTableViewCell";
         [_searchResultsArray addObjectsFromArray:searchArray];
         
         // 根据搜索结果中的数据进行name再次排序
-        _searchResultsDictionary = [LZChineseSort sortAndGroupForArray:_searchResultsArray PropertyName:@"site_name"];
+        _searchResultsDictionary = [LZChineseSort sortAndGroupForArray:_searchResultsArray PropertyName:@"cityCName"];
         _searchResultsIndexArray = [LZChineseSort sortForStringAry:[_searchResultsDictionary allKeys]];
     } else {
         // 被搜索的字符串
@@ -187,11 +195,11 @@ static NSString * const reuseIdentifierCurrent = @"FMCurrentCitysTableViewCell";
         // 根据姓名进行搜索(name)
         searchArray = [LZPinYinSearch searchWithOriginalArray:searchArray
                                                 andSearchText:self.searchText
-                                      andSearchByPropertyName:@"site_name"];
+                                      andSearchByPropertyName:@"cityCName"];
         // 将搜索的数据放到数组
         [_searchResultsArray addObjectsFromArray:searchArray];
         // 根据搜索结果中的数据进行name再次排序
-        _searchResultsDictionary = [LZChineseSort sortAndGroupForArray:_searchResultsArray PropertyName:@"site_name"];
+        _searchResultsDictionary = [LZChineseSort sortAndGroupForArray:_searchResultsArray PropertyName:@"cityCName"];
         _searchResultsIndexArray = [LZChineseSort sortForStringAry:[_searchResultsDictionary allKeys]];
     }
     [self.tableView reloadData];
@@ -209,9 +217,10 @@ static NSString * const reuseIdentifierCurrent = @"FMCurrentCitysTableViewCell";
             FMGroupsCityTableViewCell* tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierGroups forIndexPath:indexPath];
             NSArray *value = [self.letterResultDictionary objectForKey:[self.indexArray lz_safeObjectAtIndex:section]];
             CityModel *model = value[row];
-            tools.titleLabel.text = model.site_name;
+            tools.titleLabel.text = model.cityCName;
             return tools;
         }else{
+            /// 显示当前城市和热门城市
             FMCurrentCitysTableViewCell* tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierCurrent forIndexPath:indexPath];
             tools.delegate = self;
             tools.indexPath = indexPath;
@@ -220,7 +229,7 @@ static NSString * const reuseIdentifierCurrent = @"FMCurrentCitysTableViewCell";
                 tools.currentModel = self.cityModel.current;
             }else{
                 tools.isIcon = NO;
-                tools.hotsModel = self.cityModel.hots;
+                tools.hotsModel = self.hotArray;
             }
             return tools;
         }
@@ -228,24 +237,15 @@ static NSString * const reuseIdentifierCurrent = @"FMCurrentCitysTableViewCell";
         FMGroupsCityTableViewCell* tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierGroups forIndexPath:indexPath];
         NSArray *value = [self.searchResultsDictionary objectForKey:[self.searchResultsIndexArray lz_safeObjectAtIndex:section]];
         CityModel *model = [value lz_safeObjectAtIndex:row];
-        tools.titleLabel.text = model.site_name;
+        tools.titleLabel.text = model.cityCName;
         return tools;
     }
-//    if (idx>1) {
-//        FMGroupsCityTableViewCell* tools = [tableView dequeueReusableCellWithIdentifier:reuseIdentifierGroups forIndexPath:indexPath];
-////        CityModel *model = self.cityModel.groups[idx-2].city[indexPath.row];
-//        CityModel *model = self.
-//        tools.titleLabel.text = model.site_name;
-//    }else{
-//
-//    }
 }
 
 // 多少个分组 section
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     if (!self.searchController.active) {
         return self.indexArray.count;
-//        return self.letterResultDictionary.count+2;
     }else {
         return self.searchResultsIndexArray.count;
     }
@@ -253,14 +253,9 @@ static NSString * const reuseIdentifierCurrent = @"FMCurrentCitysTableViewCell";
 
 /// 返回多少行
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-//    if (section==0) return 1;
-//    if (section==1) return self.cityModel.hots.count>1?1:self.cityModel.hots.count;
-//    CityGroupsModel *model = self.cityModel.groups[section-2];
-//    return model.city.count;
-    
     if (!self.searchController.active) {
         if (section==0) return 1;
-        if (section==1) return self.cityModel.hots.count>1?1:self.cityModel.hots.count;
+        if (section==1) return self.hotArray.count>1?1:self.hotArray.count;
         NSArray *value = [self.letterResultDictionary objectForKey:[self.indexArray lz_safeObjectAtIndex:section]];
         return value.count;
     }else {
@@ -291,8 +286,8 @@ static NSString * const reuseIdentifierCurrent = @"FMCurrentCitysTableViewCell";
         NSArray *value = [_searchResultsDictionary objectForKey:[_searchResultsIndexArray lz_safeObjectAtIndex:section]];
         model = value[row];
     }
-    TTLog(@"value[row] --- %@",model.site_name);
-    [self popRootViewControllerWithName:model.site_name];
+    TTLog(@"value[row] --- %@",model.cityCName);
+    [self popRootViewControllerWithName:model];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
@@ -347,11 +342,13 @@ static NSString * const reuseIdentifierCurrent = @"FMCurrentCitysTableViewCell";
 }
 
 //点击UICollectionViewCell的代理方法
-- (void)didSelectItemAtIndexPath:(NSIndexPath *)indexPath withContent:(NSString *)content {
-    TTLog(@" 城市名字 -- - %ld\n---%@",(long)indexPath.row,content);
+- (void)didSelectItemAtIndexPath:(NSIndexPath *)indexPath withModel:(CityModel *)cityModel {
+//    - (void)didSelectItemAtIndexPath:(NSIndexPath *)indexPath withContent:(NSString *)content {
+
+    TTLog(@" 城市名字 -- - %ld\n---%@",(long)indexPath.row,cityModel.cityCName);
 //    NSDictionary *dataDic = [NSDictionary dictionaryWithObject:kUserInfo.cityName forKey:@"info"];
 //    [kNotificationCenter postNotificationName:@"NoticeCityHasUpdate" object:nil userInfo:dataDic];
-    [self popRootViewControllerWithName:content];
+    [self popRootViewControllerWithName:cityModel];
     [self cancelBtnClick];
 }
 
@@ -359,9 +356,9 @@ static NSString * const reuseIdentifierCurrent = @"FMCurrentCitysTableViewCell";
     self.returnBlock=block;
 }
 
-- (void)popRootViewControllerWithName:(NSString *)cityName{
+- (void)popRootViewControllerWithName:(CityModel *)cityModel{
 //    cityName = [cityName stringByReplacingOccurrencesOfString:@"市" withString:@""];
-    self.returnBlock(cityName);
+    self.returnBlock(cityModel);
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -413,6 +410,13 @@ static NSString * const reuseIdentifierCurrent = @"FMCurrentCitysTableViewCell";
         _itemModelArray = [[NSMutableArray alloc] init];
     }
     return _itemModelArray;
+}
+
+- (NSMutableArray *)hotArray{
+    if (!_hotArray) {
+        _hotArray = [[NSMutableArray alloc] init];
+    }
+    return _hotArray;
 }
 
 - (NSMutableDictionary *)heightAtIndexPath {

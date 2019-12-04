@@ -40,12 +40,12 @@
 - (void) initView{
     [self lz_setCornerRadius:3.0];
     self.backgroundColor = kWhiteColor;
-    self.layer.shadowColor = kColorWithRGB(210, 210, 210).CGColor;
-    self.layer.shadowOffset = CGSizeMake(0,2.0f);
-    self.layer.shadowRadius = 2.0f;
-    self.layer.shadowOpacity = 1.0f;
-    self.layer.masksToBounds = NO;
-    self.layer.shadowPath = [UIBezierPath bezierPathWithRoundedRect:self.bounds cornerRadius:self.contentView.layer.cornerRadius].CGPath;
+//    self.layer.shadowColor = kColorWithRGB(210, 210, 210).CGColor;
+//    self.layer.shadowOffset = CGSizeMake(0,2.0f);
+//    self.layer.shadowRadius = 2.0f;
+//    self.layer.shadowOpacity = 1.0f;
+//    self.layer.masksToBounds = NO;
+//    self.layer.shadowPath = [UIBezierPath bezierPathWithRoundedRect:self.bounds cornerRadius:self.contentView.layer.cornerRadius].CGPath;
     
     
     
@@ -57,38 +57,49 @@
     [self addSubview:self.priceLabel];
     [self addSubview:self.datetimeLabel];
     [self addSubview:self.discountLabel];
+    [self addSubview:self.linerView];
     
+    
+    [self.linerView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.depCityLabel);
+        make.top.equalTo(self);
+        make.height.equalTo(@(0.5));
+        make.right.equalTo(self.mas_right).offset(-15);
+    }];
     [self.imagesView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.top.right.equalTo(self);
-        make.height.equalTo(@(88));
+        make.left.equalTo(@(15));
+        make.height.equalTo(@(75));
+        make.width.equalTo(@(100));
+        make.centerY.equalTo(self);
     }];
     
     [self.discountLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.top.equalTo(@(5));
     }];
     
-    [self.imagesPlane mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self);
-        make.top.equalTo(self.imagesView.mas_bottom).offset(10);
+    [self.depCityLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.imagesView.mas_right).offset(10);
+        make.top.equalTo(self.imagesView).offset(5);
     }];
     
-    [self.depCityLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(self.imagesPlane.mas_left).offset(-10);
-        make.centerY.equalTo(self.imagesPlane);
+    [self.imagesPlane mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(self.depCityLabel);
+        make.left.equalTo(self.depCityLabel.mas_right).offset(20);
     }];
+    
     [self.arvCityLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.imagesPlane.mas_right).offset(10);
+        make.left.equalTo(self.imagesPlane.mas_right).offset(20);
         make.centerY.equalTo(self.imagesPlane);
     }];
     
     [self.priceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self);
-        make.top.equalTo(self.imagesPlane.mas_bottom).offset(2);
+        make.centerY.equalTo(self.depCityLabel);
+        make.right.equalTo(self.mas_right).offset(-15);
     }];
     
     [self.datetimeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self);
-        make.bottom.equalTo(self.mas_bottom).offset(-5);
+        make.centerY.equalTo(self);
+        make.left.equalTo(self.depCityLabel);
     }];
 }
 
@@ -138,7 +149,7 @@
     if (!_discountLabel) {
         _discountLabel = [[SCCustomMarginLabel alloc] init];
         _discountLabel.textAlignment = NSTextAlignmentCenter;
-        _discountLabel.backgroundColor = kThemeColorHex;
+        _discountLabel.backgroundColor = HexString(@"#c7a765");
         _discountLabel.textColor = kWhiteColor;
         _discountLabel.font = kFontSizeMedium9;
         _discountLabel.edgeInsets    = UIEdgeInsetsMake(2.f, 4.f, 2.f, 4.f); // 设置左内边距
@@ -146,5 +157,12 @@
         [_discountLabel sizeToFit]; // 重新计算尺寸
     }
     return _discountLabel;
+}
+
+- (UIView *)linerView{
+    if (!_linerView) {
+        _linerView = [UIView lz_viewWithColor:kLinerViewColor];
+    }
+    return _linerView;
 }
 @end

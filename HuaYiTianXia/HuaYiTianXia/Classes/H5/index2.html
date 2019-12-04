@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+        <meta name="viewport" content=" width=device-width, minimum-scale=1.0,initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="full-screen" content="yes">
+        <meta name="x5-fullscreen" content="true">
+        <title></title>
+        <link rel="stylesheet" href="css/style.css">
+    <script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="title">首次下单送豪礼</h1>
+        <h2 class="title-small">法国传统酿造</h2>
+        <span class="line"></span>
+        <div class="ds">
+            <p>
+                在阴凉的地下酒窖中发酵成柔和醇香的
+                汁液，复杂的内涵的红色原浆....
+            </p>
+        </div>
+        <img class="product-img" src="./images/product.png" alt="">
+        <h2 class="product-name">2017法国凯斯堡-金狮干红葡萄酒</h2>
+        <p class="product-price"><span>¥</span>238</p>
+        <p class="product-title02">< 收货信息 ></p>
+        <div class="address-box">
+            <input type="text" placeholder="收货人" class="address-input" name="name">
+            <input type="text" placeholder="手机号码" class="address-input" maxlength="11" name="phone">
+            <input type="text" placeholder="收货地址" class="address-input" name="address">
+            <div class="btn" id="submit" onclick="submitclickcallback()">提交</div>
+        </div>
+    </div>
+</body>
+<script type="text/javascript">
+
+
+                          function setupWebViewJavascriptBridge(callback) {
+                          if (window.WebViewJavascriptBridge) { return callback(WebViewJavascriptBridge); }
+                          if (window.WVJBCallbacks) { return window.WVJBCallbacks.push(callback); }
+                          window.WVJBCallbacks = [callback];
+                          var WVJBIframe = document.createElement('iframe');
+                          WVJBIframe.style.display = 'none';
+                          WVJBIframe.src = 'wvjbscheme://__BRIDGE_LOADED__';
+                          document.documentElement.appendChild(WVJBIframe);
+                          setTimeout(function() { document.documentElement.removeChild(WVJBIframe) }, 0)
+                          }
+                          
+                          setupWebViewJavascriptBridge(function(bridge) {
+                                                       bridge.registerHandler('submitclickcallback', function(data, responseCallback) {
+                                                                              
+                                                                              })
+                                                       })
+
+
+    function submitclickcallback(){
+        let name=$('input[name="name"]').val()
+        let phone=$('input[name="phone"]').val()
+        let address=$('input[name="address"]').val()
+
+        if(name&&phone&&address){
+            $.ajax({
+                url:'http://192.168.0.205:81/hytx/wineproduct/addwineproduct',
+                type:'post',
+                data:JSON.stringify({
+                    name:name,
+                    phone:phone,
+                    address:address,
+                    id:id
+                }),
+                contentType: "application/json",
+                success:function (data) {
+                    data=JSON.parse(data)
+                    alert(data.msg)
+                    if(data.code=='20000'){
+
+                        if(isAndroid){
+                            window.AndroidEvent.finish();
+                        }else if(isiOS){
+                            WebViewJavascriptBridge.callHandler('submitclickcallback','success',function(response) {
+
+                            });
+                        }
+                    }
+                }
+            })
+        }else {
+            alert('信息不完整')
+            return
+        }
+    }
+
+    function getQuery(key, url) {
+        url = url || window.location.href + '';
+        if (url.indexOf('#') !== -1) {
+            url = url.substring(0, url.indexOf('#'));
+        }
+        var rts = [], rt;
+        var queryReg = new RegExp('(^|\\?|&)' + key + '=([^&]*)(?=&|#|$)', 'g');
+        while ((rt = queryReg.exec(url)) != null) {
+            rts.push(decodeURIComponent(rt[2]));
+        }
+        if (rts.length == 0) return null;
+        if (rts.length == 1) return rts[0];
+        return rts;
+    }
+
+</script>
+</html>
